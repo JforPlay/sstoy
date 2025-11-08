@@ -1,0 +1,170 @@
+/* Discs Tab Styles */
+.discs-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.discs-info-banner {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    box-shadow: 0 8px 32px var(--shadow-primary-light);
+}
+
+.banner-icon {
+    font-size: 4rem;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.banner-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.banner-content p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.disc-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.disc-slot-card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid var(--border);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.disc-slot-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px var(--shadow);
+}
+
+.disc-slot-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.disc-slot-number {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.disc-slot-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.disc-slot-preview {
+    background: var(--surface-light);
+    border-radius: 12px;
+    padding: 40px 20px;
+    margin-bottom: 16px;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.disc-placeholder {
+    text-align: center;
+    opacity: 0.6;
+}
+
+.disc-placeholder-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.disc-placeholder p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.disc-slot-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.disc-stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: var(--surface-light);
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+.disc-stat-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.disc-stat-value {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.disc-set-bonuses {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px var(--shadow);
+}
+
+.disc-set-bonuses h3 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.disc-set-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.disc-set-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: var(--surface-light);
+    border-radius: 10px;
+    border: 2px solid var(--border);
+}
+
+.disc-set-name {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.disc-set-count {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스텔라 소라 도자기 굽기</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="utils.css">
+    <link rel="stylesheet" href="discs.css">
+    <link rel="stylesheet" href="summary.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <span class="navbar-logo">⭐</span>
+            <span class="navbar-title">스텔라 소라</span>
+        </a>
+        <div class="navbar-menu">
+            <div class="navbar-links">
+                <a href="index.html" class="navbar-link active">
+                    <span class="navbar-link-icon">🎖</span>
+                    <span class="navbar-link-text">도자기 공방</span>
+                </a>
+                <!-- Future pages - disabled for now -->
+                <!-- <a href="database.html" class="navbar-link">
+                    <span class="navbar-link-icon">📚</span>
+                    <span class="navbar-link-text">데이터베이스</span>
+                </a>
+                <a href="guide.html" class="navbar-link">
+                    <span class="navbar-link-icon">📖</span>
+                    <span class="navbar-link-text">가이드</span>
+                </a> -->
+            </div>
+            <button id="theme-toggle" class="theme-toggle" onclick="toggleTheme()">
+                <span class="theme-icon">☀️</span>
+                <span class="theme-toggle-text">라이트</span>
+            </button>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <header>
+            <h1>⭐ 스텔라 소라 도자기 굽기</h1>
+            <p class="subtitle">최고의 팀 구성을 만들어보세요</p>
+        </header>
+
+        <!-- Main Tab Navigation -->
+        <div class="main-tab-navigation">
+            <button class="main-tab-button active" data-tab="characters" onclick="switchMainTab('characters')">
+                <span class="main-tab-icon">👥</span>
+                <span class="main-tab-label">캐릭터</span>
+            </button>
+            <button class="main-tab-button" data-tab="discs" onclick="switchMainTab('discs')">
+                <span class="main-tab-icon">💿</span>
+                <span class="main-tab-label">음반</span>
+            </button>
+            <button class="main-tab-button" data-tab="summary" onclick="switchMainTab('summary')">
+                <span class="main-tab-icon">📋</span>
+                <span class="main-tab-label">요약</span>
+            </button>
+        </div>
+
+        <!-- Characters Tab Content -->
+        <div class="main-tab-content active" id="main-tab-characters">
+            <!-- Position Sub-tabs -->
+            <div class="tab-navigation">
+                <button class="tab-button active" onclick="switchTab('master')">
+                    <span class="tab-icon">👑</span>
+                    <span class="tab-label">메인</span>
+                </button>
+                <button class="tab-button" onclick="switchTab('assist1')">
+                    <span class="tab-icon">♟️</span>
+                    <span class="tab-label">지원 1</span>
+                </button>
+                <button class="tab-button" onclick="switchTab('assist2')">
+                    <span class="tab-icon">♟️</span>
+                    <span class="tab-label">지원 2</span>
+                </button>
+            </div>
+
+        <div class="party-builder">
+            <!-- Master Position -->
+            <div class="character-slot master-slot active-tab" id="tab-master">
+                <div class="slot-header">
+                    <h2>메인</h2>
+                    <button class="description-toggle" onclick="toggleDescriptionMode()">📝 간략히보기</button>
+                </div>
+                <div class="two-column-layout">
+                    <div class="character-column">
+                        <div class="character-card" id="master-card">
+                            <div class="empty-state" onclick="openCharacterSelect('master')">
+                                <div class="plus-icon">+</div>
+                                <p>메인캐릭터 선택</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="potentials-column">
+                        <div class="specific-potentials-section" id="master-specific-section"></div>
+                        <div class="other-potentials-section" id="master-potentials"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assist Position 1 -->
+            <div class="character-slot assist-slot" id="tab-assist1">
+                <div class="slot-header">
+                    <h2>지원 1</h2>
+                    <button class="description-toggle" onclick="toggleDescriptionMode()">📝 간략</button>
+                </div>
+                <div class="two-column-layout">
+                    <div class="character-column">
+                        <div class="character-card" id="assist1-card">
+                            <div class="empty-state" onclick="openCharacterSelect('assist1')">
+                                <div class="plus-icon">+</div>
+                                <p>지원캐릭터 선택</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="potentials-column">
+                        <div class="specific-potentials-section" id="assist1-specific-section"></div>
+                        <div class="other-potentials-section" id="assist1-potentials"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assist Position 2 -->
+            <div class="character-slot assist-slot" id="tab-assist2">
+                <div class="slot-header">
+                    <h2>지원2</h2>
+                    <button class="description-toggle" onclick="toggleDescriptionMode()">📝 간략</button>
+                </div>
+                <div class="two-column-layout">
+                    <div class="character-column">
+                        <div class="character-card" id="assist2-card">
+                            <div class="empty-state" onclick="openCharacterSelect('assist2')">
+                                <div class="plus-icon">+</div>
+                                <p>지원캐릭터 선택</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="potentials-column">
+                        <div class="specific-potentials-section" id="assist2-specific-section"></div>
+                        <div class="other-potentials-section" id="assist2-potentials"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- End of Characters Tab Content -->
+
+        <!-- Discs Tab Content -->
+        <div class="main-tab-content" id="main-tab-discs">
+            <!-- Discs content will be loaded by discs.js -->
+            <div id="discs-container"></div>
+        </div>
+
+        <!-- Summary Tab Content -->
+        <div class="main-tab-content" id="main-tab-summary">
+            <!-- Summary content will be loaded by summary.js -->
+            <div id="summary-container"></div>
+        </div>
+
+        <!-- Character Selection Modal -->
+        <div class="modal" id="character-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>캐릭터 선택</h2>
+                    <button class="close-btn" onclick="closeCharacterSelect()">&times;</button>
+                </div>
+                <div class="character-grid" id="character-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="utils.js"></script>
+    <script src="app.js"></script>
+    <script src="discs.js"></script>
+    <script src="summary.js"></script>
+</body>
+</html>
