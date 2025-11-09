@@ -1,0 +1,998 @@
+/* Summary Tab Styles */
+#summary-container {
+    min-height: 400px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.summary-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.summary-section {
+    background: var(--surface);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.25rem 1.25rem var(--shadow);
+}
+
+.summary-section-title {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.summary-header {
+    background: var(--surface);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0.25rem 1.25rem var(--shadow);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.summary-header h2 {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+}
+
+.summary-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.summary-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    border-radius: 0.625rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 0.5rem var(--shadow-primary-light);
+}
+
+.summary-action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.25rem 1rem var(--shadow-primary-strong);
+}
+
+.action-icon {
+    font-size: 1.2rem;
+}
+
+.summary-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.summary-card {
+    background: var(--surface);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.25rem 1.25rem var(--shadow);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0 0.5rem 28px var(--shadow);
+}
+
+.summary-card.master-summary {
+    border-color: var(--accent);
+}
+
+.summary-card.assist-summary {
+    border-color: var(--primary-color);
+}
+
+.summary-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border);
+}
+
+.summary-card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 14px;
+    border-radius: 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    width: fit-content;
+}
+
+.master-badge {
+    background: linear-gradient(135deg, var(--accent), #f97316);
+    color: white;
+}
+
+.assist-badge {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.summary-card-header h3 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+}
+
+.summary-card-body {
+    min-height: 12.5rem;
+}
+
+.summary-character-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.summary-empty-state {
+    text-align: center;
+    padding: 3.75rem 1.25rem;
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.summary-character-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.summary-char-basic {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--surface-light);
+    border-radius: 0.625rem;
+}
+
+.summary-char-image {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border);
+}
+
+.summary-char-name-section {
+    flex: 1;
+}
+
+.summary-char-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.summary-char-id {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.summary-skills, .summary-potentials {
+    background: var(--surface-light);
+    border-radius: 0.625rem;
+    padding: 1rem;
+}
+
+.summary-skills-title, .summary-potentials-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.summary-skills-title {
+    color: var(--accent);
+}
+
+.summary-potentials-title {
+    color: var(--primary-color);
+}
+
+.summary-potential-section {
+    margin-bottom: 0.75rem;
+}
+
+.summary-potential-section:last-child {
+    margin-bottom: 0;
+}
+
+.summary-potential-section-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 3px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+/* Special styling for specific potentials section title */
+.summary-potential-section:has(.specific-potentials) .summary-potential-section-title {
+    color: #8b5cf6;
+    border-left-color: #8b5cf6;
+    background: linear-gradient(90deg, rgba(139, 92, 246, 0.1), transparent);
+    padding: 0.375rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.summary-skill-list, .summary-potential-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Specific styling for specific potentials section */
+.summary-potential-list.specific-potentials {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(168, 85, 247, 0.08));
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+.summary-skill-item, .summary-potential-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    background: var(--surface);
+    border-radius: 0.375rem;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.summary-potential-item:hover {
+    transform: translateX(2px);
+    background: var(--surface-light);
+}
+
+/* Specific potential item styling */
+.summary-potential-item.specific {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.05));
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    box-shadow: 0 2px 4px rgba(139, 92, 246, 0.1);
+}
+
+.summary-potential-item.specific:hover {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(168, 85, 247, 0.1));
+    border-color: rgba(139, 92, 246, 0.5);
+}
+
+.summary-skill-name, .summary-potential-name {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.summary-skill-level {
+    color: var(--accent);
+    font-weight: 700;
+    background: var(--surface-light);
+    padding: 0.25rem 0.625rem;
+    border-radius: 0.75rem;
+}
+
+.summary-potential-level {
+    color: var(--success);
+    font-weight: 700;
+    background: var(--surface-light);
+    padding: 0.25rem 0.625rem;
+    border-radius: 0.75rem;
+}
+
+/* Skill level badge for specific potentials */
+.potential-level-compact.skill-level {
+    color: #8b5cf6;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(168, 85, 247, 0.1));
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    font-weight: 700;
+}
+
+.build-stats-panel {
+    background: var(--surface);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.25rem 1.25rem var(--shadow);
+}
+
+.build-stats-panel h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-primary);
+}
+
+.build-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+    gap: 1rem;
+}
+
+.build-stat-card {
+    background: var(--surface-light);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 2px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.build-stat-card:hover {
+    border-color: var(--primary-color);
+    transform: scale(1.02);
+}
+
+.build-stat-icon {
+    font-size: 2.5rem;
+}
+
+.build-stat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.build-stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.build-stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.build-notes-panel {
+    background: var(--surface);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.25rem 1.25rem var(--shadow);
+}
+
+.build-notes-panel h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.build-notes-textarea {
+    width: 100%;
+    min-height: 7.5rem;
+    padding: 1rem;
+    background: var(--surface-light);
+    border: 2px solid var(--border);
+    border-radius: 0.625rem;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.build-notes-textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.build-notes-textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+/* Compact Skill Grid (2 columns) */
+.summary-section-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+}
+
+.summary-skill-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.summary-skill-card {
+    background: var(--surface-light);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--border);
+}
+
+.skill-name-compact {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.skill-level-compact {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* Potential Marking System - Simplified */
+.summary-potential-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.625rem 0.75rem;
+    background: var(--surface-light);
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.summary-potential-item:hover {
+    background: var(--surface);
+    border-color: var(--primary-color);
+    transform: translateX(4px);
+}
+
+.potential-info-compact {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.potential-name-compact {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.potential-mark-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+}
+
+.potential-mark-badge.essential {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.potential-mark-badge.recommended {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.potential-mark-badge.level-one {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.potential-level-compact {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+}
+
+/* Disc Info Summary */
+.summary-discs {
+    margin-top: 1rem;
+}
+
+.summary-disc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Two-column disc layout */
+.summary-discs-two-column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .summary-discs-two-column {
+        grid-template-columns: 1fr;
+    }
+}
+
+.summary-disc-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.summary-disc-column-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 0.5rem;
+}
+
+.summary-disc-card {
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    border-left: 3px solid var(--primary-color);
+}
+
+.summary-disc-card.empty {
+    opacity: 0.5;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 1rem;
+}
+
+.disc-card-icon-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.disc-card-icon {
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 0.375rem;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    padding: 0.25rem;
+}
+
+.disc-card-icon-placeholder {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: var(--surface);
+    border-radius: 0.375rem;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+}
+
+.disc-card-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.disc-card-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.disc-card-lb {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.125rem;
+}
+
+.summary-disc-card {
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+}
+
+.disc-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.disc-slot-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.disc-name-compact {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.disc-lb-compact {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.disc-skills-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.disc-skill-compact {
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    padding: 0.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.disc-skill-compact.main {
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.skill-badge-mini {
+    display: inline-block;
+    padding: 0.125rem 0.375rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.disc-skill-compact.main .skill-badge-mini {
+    background: var(--accent);
+}
+
+/* Build Stats Highlight */
+.build-stat-card.highlight {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.build-stat-card.highlight .build-stat-icon,
+.build-stat-card.highlight .build-stat-label,
+.build-stat-card.highlight .build-stat-value {
+    color: white;
+}
+
+.build-stat-value.large {
+    font-size: 2rem;
+}
+
+/* Notes Summary Section */
+.summary-notes-section {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--surface-light);
+    border-radius: 0.625rem;
+}
+
+.summary-notes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.summary-discs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.summary-disc-subsection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.summary-disc-subsection-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.sub-disc-notes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-top: 0.5rem;
+}
+
+.sub-disc-note-item {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background: rgba(236, 72, 153, 0.1);
+    color: #ec4899;
+    border-radius: 0.25rem;
+    font-weight: 500;
+}
+
+.summary-disc-card.sub-disc {
+    border-left-color: #ec4899;
+}
+
+.notes-subsection {
+    margin-bottom: 1rem;
+}
+
+.notes-subsection:last-child {
+    margin-bottom: 0;
+}
+
+.notes-subsection-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.625rem;
+    padding: 0.375rem 0.625rem;
+    border-radius: 0.375rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.notes-subsection-title.used {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(22, 163, 74, 0.15));
+    color: #22c55e;
+    border-left: 3px solid #22c55e;
+}
+
+.notes-subsection-title.unused {
+    background: linear-gradient(135deg, rgba(156, 163, 175, 0.15), rgba(107, 114, 128, 0.15));
+    color: #9ca3af;
+    border-left: 3px solid #9ca3af;
+}
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.5rem;
+}
+
+.note-summary-card {
+    padding: 0.5rem 0.75rem;
+    background: var(--surface);
+    border-radius: 0.375rem;
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+}
+
+.note-summary-card.used {
+    border-left: 3px solid #22c55e;
+}
+
+.note-summary-card.unused {
+    border-left: 3px solid #9ca3af;
+    opacity: 0.7;
+}
+
+.note-summary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.note-summary-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.note-summary-levels {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+.note-level-part {
+    font-weight: 500;
+}
+
+.note-level-divider {
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+.note-level-total {
+    font-weight: 700;
+    color: var(--accent);
+    margin-left: 0.125rem;
+}
+
+/* Compact Notes Display */
+.summary-notes-compact-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.notes-compact-subsection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.notes-compact-title {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.375rem 0.625rem;
+    border-radius: 0.375rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    width: fit-content;
+}
+
+.notes-compact-title.used {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(22, 163, 74, 0.15));
+    color: #22c55e;
+    border-left: 3px solid #22c55e;
+}
+
+.notes-compact-title.unused {
+    background: linear-gradient(135deg, rgba(156, 163, 175, 0.15), rgba(107, 114, 128, 0.15));
+    color: #9ca3af;
+    border-left: 3px solid #9ca3af;
+}
+
+.notes-compact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr));
+    gap: 0.75rem;
+}
+
+.note-compact-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    background: var(--surface-light);
+    border-radius: 0.5rem;
+    border: 2px solid var(--border);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.note-compact-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.note-compact-card.used {
+    border-color: #22c55e;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(22, 163, 74, 0.05));
+}
+
+.note-compact-card.unused {
+    border-color: #9ca3af;
+    opacity: 0.7;
+}
+
+.note-compact-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: contain;
+    margin-bottom: 0.25rem;
+}
+
+.note-compact-icon-placeholder {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.note-compact-level {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--surface);
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.75rem;
+    min-width: 2rem;
+    text-align: center;
+}
+
+/* Build Level Icon */
+.build-level-card {
+    max-width: 18rem;
+}
+
+@media (max-width: 768px) {
+    .build-level-card {
+        max-width: none;
+    }
+}
+
+.build-level-icon-container {
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    flex-shrink: 0;
+}
+
+.build-level-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+

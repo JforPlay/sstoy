@@ -1,3 +1,6 @@
+// Constants
+const SKILL_LEVEL_BONUS = 3; // Added to skill's base MaxLevel
+
 // Global state
 let state = {
     characters: {},
@@ -40,27 +43,43 @@ let state = {
     }
 };
 
+// Make state accessible globally for saveload.js
+window.state = state;
+
+// Initialize character cards with click handlers
+function initializeCharacterCards() {
+    const positions = ['master', 'assist1', 'assist2'];
+    positions.forEach(position => {
+        const card = document.getElementById(`${position}-card`);
+        if (card && !state.party[position]) {
+            // Set up click handler for empty cards
+            card.style.cursor = 'pointer';
+            card.onclick = () => openCharacterSelect(position);
+        }
+    });
+}
+
 // Load data on page load
 async function loadData() {
     try {
         // Load all JSON files
         const [characters, characterNames, charPotentials, potentials, potentialNames, itemNames, items, gameEnums, skills, skillNames, effectValue, hitDamage, onceAdditionalAttributeValue, scriptParameterValue, buffValue, shieldValue] = await Promise.all([
-            fetch('dev/Character.json').then(r => r.json()),
-            fetch('dev/kr/Character.json').then(r => r.json()),
-            fetch('dev/CharPotential.json').then(r => r.json()),
-            fetch('dev/Potential.json').then(r => r.json()),
-            fetch('dev/kr/Potential.json').then(r => r.json()),
-            fetch('dev/kr/Item.json').then(r => r.json()),
-            fetch('dev/Item.json').then(r => r.json()),
-            fetch('dev/GameEnums.json').then(r => r.json()),
-            fetch('dev/Skill.json').then(r => r.json()),
-            fetch('dev/kr/Skill.json').then(r => r.json()),
-            fetch('dev/EffectValue.json').then(r => r.json()),
-            fetch('dev/HitDamage.json').then(r => r.json()),
-            fetch('dev/OnceAdditionalAttributeValue.json').then(r => r.json()),
-            fetch('dev/ScriptParameterValue.json').then(r => r.json()),
-            fetch('dev/BuffValue.json').then(r => r.json()),
-            fetch('dev/ShieldValue.json').then(r => r.json())
+            fetch('data/Character.json').then(r => r.json()),
+            fetch('data/kr/Character.json').then(r => r.json()),
+            fetch('data/CharPotential.json').then(r => r.json()),
+            fetch('data/Potential.json').then(r => r.json()),
+            fetch('data/kr/Potential.json').then(r => r.json()),
+            fetch('data/kr/Item.json').then(r => r.json()),
+            fetch('data/Item.json').then(r => r.json()),
+            fetch('data/GameEnums.json').then(r => r.json()),
+            fetch('data/Skill.json').then(r => r.json()),
+            fetch('data/kr/Skill.json').then(r => r.json()),
+            fetch('data/EffectValue.json').then(r => r.json()),
+            fetch('data/HitDamage.json').then(r => r.json()),
+            fetch('data/OnceAdditionalAttributeValue.json').then(r => r.json()),
+            fetch('data/ScriptParameterValue.json').then(r => r.json()),
+            fetch('data/BuffValue.json').then(r => r.json()),
+            fetch('data/ShieldValue.json').then(r => r.json())
         ]);
 
         state.characters = characters;
@@ -79,15 +98,16 @@ async function loadData() {
         state.scriptParameterValue = scriptParameterValue;
         state.buffValue = buffValue;
         state.shieldValue = shieldValue;
-
-        console.log('Data loaded successfully');
+        
+        // Initialize empty character cards with click handlers
+        initializeCharacterCards();
     } catch (error) {
         console.error('Error loading data:', error);
         // Use toast notification instead of alert
         if (typeof showError === 'function') {
-            showError('게임 데이터를 불러오는데 실패했습니다. dev/ 폴더에 모든 데이터 파일이 있는지 확인해주세요.');
+            showError('게임 데이터를 불러오는데 실패했습니다. data/ 폴더에 모든 데이터 파일이 있는지 확인해주세요.');
         } else {
-            alert('게임 데이터를 불러오는데 실패했습니다. dev/ 폴더에 모든 데이터 파일이 있는지 확인해주세요.');
+            alert('게임 데이터를 불러오는데 실패했습니다. data/ 폴더에 모든 데이터 파일이 있는지 확인해주세요.');
         }
     }
 }
@@ -129,7 +149,6 @@ function parseParamValue(paramString, level = 1, skillLevel = 1, position = null
     const elements = paramString.split(',').map(e => e.trim());
     
     if (elements.length < 3) {
-        console.warn('Invalid param format:', paramString);
         return paramString;
     }
     
@@ -139,7 +158,6 @@ function parseParamValue(paramString, level = 1, skillLevel = 1, position = null
     // Get the data source (case-insensitive lookup)
     const dataKey = FILE_TYPE_MAP[fileType.toLowerCase()];
     if (!dataKey || !state[dataKey]) {
-        console.warn(`Unknown or unavailable file type: ${fileType}`);
         return `[${fileType}]`; // Return placeholder
     }
     
@@ -156,7 +174,6 @@ function parseParamValue(paramString, level = 1, skillLevel = 1, position = null
         // Lookup the data
         const dataEntry = dataSource[lookupId];
         if (!dataEntry) {
-            console.warn(`Entry not found: ${lookupId} in ${fileType}`);
             return `[${fileType}:${lookupId}]`;
         }
         
@@ -164,7 +181,6 @@ function parseParamValue(paramString, level = 1, skillLevel = 1, position = null
         if (fieldKey && dataEntry[fieldKey] !== undefined) {
             value = dataEntry[fieldKey];
         } else {
-            console.warn(`Field ${fieldKey} not found in entry ${lookupId}`);
             return `[${fieldKey}]`;
         }
         
@@ -177,7 +193,6 @@ function parseParamValue(paramString, level = 1, skillLevel = 1, position = null
         // For NoLevel: use base ID directly
         const dataEntry = dataSource[lookupId];
         if (!dataEntry) {
-            console.warn(`Entry not found: ${lookupId} in ${fileType}`);
             return `[${fileType}:${lookupId}]`;
         }
         
@@ -185,7 +200,6 @@ function parseParamValue(paramString, level = 1, skillLevel = 1, position = null
         if (fieldKey && dataEntry[fieldKey] !== undefined) {
             value = dataEntry[fieldKey];
         } else {
-            console.warn(`Field ${fieldKey} not found in entry ${lookupId}`);
             return `[${fieldKey}]`;
         }
         
@@ -198,7 +212,6 @@ function parseParamValue(paramString, level = 1, skillLevel = 1, position = null
         // For DamageNum: fetch SkillPercentAmend and SkillAbsAmend fields
         const dataEntry = dataSource[lookupId];
         if (!dataEntry) {
-            console.warn(`Entry not found: ${lookupId} in ${fileType}`);
             return `[${fileType}:${lookupId}]`;
         }
         
@@ -255,7 +268,6 @@ function parseParamValue(paramString, level = 1, skillLevel = 1, position = null
             dataEntry.SkillAbsAmend.some(v => v !== 0);
         
         if (!hasNonZeroPercent && !hasNonZeroAbs) {
-            console.warn(`No non-zero values in SkillPercentAmend or SkillAbsAmend for entry ${lookupId}`);
             return `[DamageNum]`;
         }
         
@@ -277,7 +289,6 @@ function parseParamValue(paramString, level = 1, skillLevel = 1, position = null
         return displayParts.join(' + ');
         
     } else {
-        console.warn(`Unknown level type: ${levelType}`);
         return `[${levelType}]`;
     }
     
@@ -312,7 +323,6 @@ function formatValue(value, formatType, enumType = null, fileType = null) {
             return enumData[value].name || value;
         }
         
-        console.warn(`Enum value not found: ${value} in ${fullEnumName}`);
         return value;
     }
     
@@ -338,7 +348,6 @@ function formatValue(value, formatType, enumType = null, fileType = null) {
             if (state.skillNames && state.skillNames[value]) {
                 return state.skillNames[value];
             }
-            console.warn(`Text key not found in kr/Skill.json: ${value}`);
         }
         return value;
     }
@@ -470,11 +479,27 @@ function getCharacterSkills(character, position) {
 
 // Switch between main tabs (characters, discs, summary)
 function switchMainTab(tabName) {
-    // Update main tab buttons
+    // Update compact main tab buttons
+    document.querySelectorAll('.compact-main-tab').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelector(`.compact-main-tab[data-tab="${tabName}"]`)?.classList.add('active');
+    
+    // Also update old main tab buttons if they exist (for backwards compatibility)
     document.querySelectorAll('.main-tab-button').forEach(btn => {
         btn.classList.remove('active');
     });
     document.querySelector(`.main-tab-button[data-tab="${tabName}"]`)?.classList.add('active');
+    
+    // Show/hide position tabs inline based on active main tab
+    const positionTabsInline = document.getElementById('position-tabs-inline');
+    if (positionTabsInline) {
+        if (tabName === 'characters') {
+            positionTabsInline.classList.remove('hidden');
+        } else {
+            positionTabsInline.classList.add('hidden');
+        }
+    }
     
     // Hide all main tab content
     document.querySelectorAll('.main-tab-content').forEach(content => {
@@ -500,11 +525,20 @@ function switchTab(tabName) {
     // Update active tab in state
     state.activeTab = tabName;
     
-    // Update tab buttons
+    // Update position tab buttons (compact navigation)
+    document.querySelectorAll('.position-tab').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelector(`.position-tab[data-position="${tabName}"]`)?.classList.add('active');
+    
+    // Also update old tab buttons if they exist (for backwards compatibility)
     document.querySelectorAll('.tab-button').forEach(btn => {
         btn.classList.remove('active');
     });
-    event.target.closest('.tab-button').classList.add('active');
+    const clickedButton = event.target.closest('.tab-button');
+    if (clickedButton) {
+        clickedButton.classList.add('active');
+    }
     
     // Hide all character slots
     document.querySelectorAll('.character-slot').forEach(slot => {
@@ -524,12 +558,16 @@ function openCharacterSelect(position) {
     const modal = document.getElementById('character-modal');
     const grid = document.getElementById('character-grid');
     
+    // Clear existing content
     grid.innerHTML = '';
     
     // Filter only visible and available characters
     const availableCharacters = Object.entries(state.characters)
         .filter(([id, char]) => char.Visible && char.Available)
         .sort((a, b) => parseInt(a[0]) - parseInt(b[0]));
+    
+    // Use DocumentFragment for better performance
+    const fragment = document.createDocumentFragment();
     
     availableCharacters.forEach(([id, char]) => {
         const nameKey = char.Name;
@@ -542,6 +580,8 @@ function openCharacterSelect(position) {
         
         const item = document.createElement('div');
         item.className = 'character-item';
+        item.dataset.action = 'select-character';
+        item.dataset.characterId = id;
         item.innerHTML = `
             <div class="character-item-header">
                 <img src="${charImagePath}" alt="${name}" class="character-item-image" onerror="this.style.display='none'">
@@ -552,9 +592,11 @@ function openCharacterSelect(position) {
             </div>
             <div class="character-item-id">등급: ${'⭐'.repeat(stars)}</div>
         `;
-        item.onclick = () => selectCharacter(id);
-        grid.appendChild(item);
+        fragment.appendChild(item);
     });
+    
+    // Single DOM operation instead of multiple appendChild calls
+    grid.appendChild(fragment);
     
     modal.classList.add('active');
 }
@@ -562,6 +604,25 @@ function openCharacterSelect(position) {
 // Close character selection modal
 function closeCharacterSelect() {
     document.getElementById('character-modal').classList.remove('active');
+}
+
+// Remove a character from a position
+function removeCharacter(position) {
+    // Clear the character from the party
+    state.party[position] = null;
+    
+    // Clear selected potentials
+    state.selectedPotentials[position] = [];
+    
+    // Clear potential levels
+    state.potentialLevels[position] = {};
+    
+    // Clear skill levels
+    state.skillLevels[position] = {};
+    
+    // Update the display
+    updateCharacterCard(position);
+    updatePotentialsDisplay(position);
 }
 
 // Select a character
@@ -602,13 +663,20 @@ function updateCharacterCard(position) {
     
     if (!character) {
         card.innerHTML = `
-            <div class="empty-state" onclick="openCharacterSelect('${position}')">
+            <div class="empty-state">
                 <div class="plus-icon">+</div>
-                <p>${position === 'master' ? '마스터 선택' : '어시스트 선택'}</p>
+                <p>${position === 'master' ? '메인캐릭터 선택' : '지원캐릭터 선택'}</p>
             </div>
         `;
+        // Enable click on empty card to select character
+        card.style.cursor = 'pointer';
+        card.onclick = () => openCharacterSelect(position);
         return;
     }
+    
+    // Disable click on filled card (we have change/remove buttons instead)
+    card.style.cursor = 'default';
+    card.onclick = null;
     
     const charImagePath = `assets/avg1_${character.id}_002.png`;
     
@@ -643,10 +711,16 @@ function updateCharacterCard(position) {
     card.innerHTML = `
         <img src="${charImagePath}" alt="${character.name}" class="character-card-image" onerror="this.style.display='none'">
         <div class="character-info">
-            <button class="change-character-btn" onclick="openCharacterSelect('${position}')">
-                <span class="change-icon">🔄</span>
-                <span>캐릭터 변경</span>
-            </button>
+            <div class="character-action-buttons">
+                <button class="change-character-btn" data-action="open-character-select" data-position="${position}">
+                    <span class="change-icon">🔄</span>
+                    <span>변경</span>
+                </button>
+                <button class="remove-character-btn" data-action="remove-character" data-position="${position}">
+                    <span class="remove-icon">🗑️</span>
+                    <span>제거</span>
+                </button>
+            </div>
             <div class="character-info-header">
                 <div class="character-name">${character.name}</div>
                 <div class="character-id">ID: ${character.id}</div>
@@ -721,12 +795,24 @@ function updateCharacterCard(position) {
                                     <div class="skill-level-selector">
                                         <label class="skill-level-label">레벨:</label>
                                         <div class="skill-level-controls">
-                                            <button class="level-btn" onclick="updateSkillLevel('${position}', ${skill.id}, ${currentLevel - 1}, ${Math.min(skill.maxLevel, 13)})">−</button>
+                                            <button class="level-btn" 
+                                                    data-action="update-skill-level"
+                                                    data-position="${position}"
+                                                    data-skill-id="${skill.id}"
+                                                    data-max-level="${skill.maxLevel + SKILL_LEVEL_BONUS}"
+                                                    data-delta="-1">−</button>
                                             <input type="text" class="skill-level-input" 
                                                    value="${currentLevel}"
-                                                   oninput="this.value = validateNumericInput(this.value, 1, ${Math.min(skill.maxLevel, 13)})"
-                                                   onchange="updateSkillLevel('${position}', ${skill.id}, validateNumericInput(this.value, 1, ${Math.min(skill.maxLevel, 13)}), ${Math.min(skill.maxLevel, 13)})">
-                                            <button class="level-btn" onclick="updateSkillLevel('${position}', ${skill.id}, ${currentLevel + 1}, ${Math.min(skill.maxLevel, 13)})">+</button>
+                                                   data-action="update-skill-level"
+                                                   data-position="${position}"
+                                                   data-skill-id="${skill.id}"
+                                                   data-max-level="${skill.maxLevel + SKILL_LEVEL_BONUS}">
+                                            <button class="level-btn"
+                                                    data-action="update-skill-level"
+                                                    data-position="${position}"
+                                                    data-skill-id="${skill.id}"
+                                                    data-max-level="${skill.maxLevel + SKILL_LEVEL_BONUS}"
+                                                    data-delta="1">+</button>
                                         </div>
                                     </div>
                                     ` : ''}
@@ -742,8 +828,9 @@ function updateCharacterCard(position) {
 
 // Update skill level
 function updateSkillLevel(position, skillId, value, maxLevel) {
-    // Value is already validated and clamped by validateNumericInput
-    const level = parseInt(value) || 1;
+    // maxLevel already includes SKILL_LEVEL_BONUS from the HTML
+    const level = Math.max(1, Math.min(parseInt(value) || 1, maxLevel));
+    
     if (!state.skillLevels[position]) {
         state.skillLevels[position] = {};
     }
@@ -863,6 +950,66 @@ function validateNumericInput(value, min, max) {
     return Math.max(min, Math.min(max, numValue));
 }
 
+// Calculate score for a potential based on its level
+function calculatePotentialScore(potentialId, position) {
+    const potential = state.potentials[potentialId];
+    if (!potential || !potential.BuildScore) return 0;
+    
+    // Get item data to check if it's a specific potential
+    const itemData = state.items?.[potentialId];
+    const isSpecificPotential = itemData && itemData.Stype === 42;
+    
+    if (isSpecificPotential) {
+        // Specific potentials always give 180 points
+        return 180;
+    } else {
+        // Normal/common potentials: use level as index into BuildScore array
+        const level = state.potentialLevels[position]?.[potentialId] || 1;
+        const scoreIndex = level - 1; // Convert 1-based level to 0-based index
+        
+        // BuildScore array is indexed by level (0-based)
+        if (potential.BuildScore[scoreIndex] !== undefined) {
+            return potential.BuildScore[scoreIndex];
+        }
+        
+        // Fallback to first score if index is out of bounds
+        return potential.BuildScore[0] || 0;
+    }
+}
+
+// Calculate total character score for a position
+function calculateCharacterScore(position) {
+    const selectedPotentials = state.selectedPotentials[position] || [];
+    let totalScore = 0;
+    
+    selectedPotentials.forEach(potentialId => {
+        totalScore += calculatePotentialScore(potentialId, position);
+    });
+    
+    return totalScore;
+}
+
+// Update score display in the slot header
+function updateScoreDisplay(position) {
+    let scoreDisplay = document.getElementById(`${position}-score-display`);
+    
+    // Create score display if it doesn't exist
+    if (!scoreDisplay) {
+        const slotHeader = document.querySelector(`#tab-${position} .slot-header`);
+        if (slotHeader) {
+            scoreDisplay = document.createElement('div');
+            scoreDisplay.id = `${position}-score-display`;
+            scoreDisplay.className = 'character-score-display';
+            slotHeader.appendChild(scoreDisplay);
+        }
+    }
+    
+    if (scoreDisplay) {
+        const totalScore = calculateCharacterScore(position);
+        scoreDisplay.innerHTML = `<span class="score-label">총 점수:</span> <span class="score-value">${totalScore}</span>`;
+    }
+}
+
 // Create potential card HTML
 function createPotentialCard(potId, position) {
     const potential = state.potentials[potId];
@@ -972,10 +1119,17 @@ function createPotentialCard(potId, position) {
     
     const isSelected = state.selectedPotentials[position]?.includes(potId);
     
+    // Calculate score for this potential if selected
+    const score = isSelected ? calculatePotentialScore(potId, position) : 0;
+    
     return `
         <div class="potential-card ${isSelected ? 'selected' : ''}" data-build="${buildNumber}">
             ${buildLabel ? `<div class="build-badge">${buildLabel}</div>` : ''}
-            <div class="potential-card-header" onclick="togglePotential(${potId}, '${position}')">
+            ${isSelected ? `<div class="score-badge">점수: ${score}</div>` : ''}
+            <div class="potential-card-header" 
+                 data-action="toggle-potential" 
+                 data-potential-id="${potId}" 
+                 data-position="${position}">
                 <div class="potential-card-image">
                     ${backgroundImage ? `<img src="${backgroundImage}" alt="" class="potential-bg" onerror="this.style.display='none'">` : ''}
                     ${iconPath ? `<img src="${iconPath}" alt="${name}" class="potential-icon" onerror="this.style.display='none'">` : '<span class="potential-placeholder">🎯</span>'}
@@ -989,23 +1143,37 @@ function createPotentialCard(potId, position) {
                 </div>
             </div>
             ${isSelected && !isSpecificPotential && actualMaxLevel > 1 ? `
-                <div class="potential-level-selector" onclick="event.stopPropagation()">
-                    <label class="potential-level-label">레벨:</label>
+                <div class="potential-level-selector">
+                    <div class="potential-level-label">레벨:</div>
                     <div class="potential-level-controls">
-                        <button class="level-btn" onclick="updatePotentialLevel(${potId}, '${position}', ${currentLevel - 1})">−</button>
+                        <button class="level-btn" 
+                                data-action="update-potential-level"
+                                data-potential-id="${potId}"
+                                data-position="${position}"
+                                data-max-level="${actualMaxLevel}"
+                                data-delta="-1">−</button>
                         <input 
                             type="text" 
                             class="potential-level-input" 
-                            value="${currentLevel}" 
-                            oninput="this.value = validateNumericInput(this.value, 1, ${actualMaxLevel})"
-                            onchange="updatePotentialLevel(${potId}, '${position}', validateNumericInput(this.value, 1, ${actualMaxLevel}))"
-                            onclick="event.stopPropagation()"
+                            value="${currentLevel}"
+                            data-action="update-potential-level"
+                            data-potential-id="${potId}"
+                            data-position="${position}"
+                            data-max-level="${actualMaxLevel}"
                         >
-                        <button class="level-btn" onclick="updatePotentialLevel(${potId}, '${position}', ${currentLevel + 1})">+</button>
+                        <button class="level-btn"
+                                data-action="update-potential-level"
+                                data-potential-id="${potId}"
+                                data-position="${position}"
+                                data-max-level="${actualMaxLevel}"
+                                data-delta="1">+</button>
                     </div>
                 </div>
             ` : ''}
-            <div class="potential-card-body" onclick="togglePotential(${potId}, '${position}')">
+            <div class="potential-card-body"
+                 data-action="toggle-potential" 
+                 data-potential-id="${potId}" 
+                 data-position="${position}">
                 <div class="potential-card-desc">${desc}</div>
                 ${buffMetadata ? `
                     <div class="buff-metadata">
@@ -1017,7 +1185,7 @@ function createPotentialCard(potId, position) {
                         ` : ''}
                         ${buffMetadata.timeSuperposition !== undefined ? `
                             <span class="buff-meta-item">
-                                <span class="buff-meta-label">중첩 방식:</span>
+                                <span class="buff-meta-label">지속 갱신방식:</span>
                                 <span class="buff-meta-value">${state.gameEnums.timeSuperposition?.[buffMetadata.timeSuperposition]?.name || buffMetadata.timeSuperposition}</span>
                             </span>
                         ` : ''}
@@ -1059,6 +1227,9 @@ function updatePotentialsDisplay(position) {
     const otherContainer = document.getElementById(`${position}-potentials`);
     const specificSection = document.getElementById(`${position}-specific-section`);
     const character = state.party[position];
+    
+    // Update score display in the slot header
+    updateScoreDisplay(position);
     
     otherContainer.innerHTML = '';
     specificSection.innerHTML = '';
@@ -1118,10 +1289,161 @@ function updatePotentialsDisplay(position) {
         otherContainer.appendChild(section);
     }
 }
-window.onclick = function(event) {
+
+// Modal click handler with proper cleanup
+let characterModalClickHandler = null;
+
+function setupCharacterModalHandler() {
     const characterModal = document.getElementById('character-modal');
+    if (!characterModal) return;
     
-    if (event.target === characterModal) {
-        closeCharacterSelect();
+    // Remove old handler if exists
+    if (characterModalClickHandler) {
+        window.removeEventListener('click', characterModalClickHandler);
+    }
+    
+    // Create new handler
+    characterModalClickHandler = function(event) {
+        if (event.target === characterModal) {
+            closeCharacterSelect();
+        }
+    };
+    
+    window.addEventListener('click', characterModalClickHandler);
+}
+
+// Call setup when needed
+setupCharacterModalHandler();
+
+// ============================================================================
+// EVENT DELEGATION SYSTEM
+// ============================================================================
+
+/**
+ * Centralized event delegation to replace inline onclick handlers
+ * This prevents memory leaks and improves performance
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    // Delegate all clicks on the document
+    document.addEventListener('click', function(e) {
+        const target = e.target;
+        const action = target.dataset.action;
+        
+        if (!action) {
+            // Check if clicked element is inside a button with data-action
+            const button = target.closest('[data-action]');
+            if (button) {
+                handleDelegatedAction(button, e);
+            }
+            return;
+        }
+        
+        handleDelegatedAction(target, e);
+    });
+    
+    // Delegate input changes
+    document.addEventListener('change', function(e) {
+        const target = e.target;
+        const action = target.dataset.action;
+        
+        if (action) {
+            handleDelegatedAction(target, e);
+        }
+    });
+    
+    // Delegate input events for real-time updates
+    document.addEventListener('input', function(e) {
+        const target = e.target;
+        const action = target.dataset.action;
+        
+        if (action === 'update-potential-level' && target.classList.contains('potential-level-input')) {
+            const maxLevel = parseInt(target.dataset.maxLevel);
+            target.value = validateNumericInput(target.value, 1, maxLevel);
+        }
+        
+        if (action === 'update-skill-level' && target.classList.contains('skill-level-input')) {
+            const maxLevel = parseInt(target.dataset.maxLevel);
+            target.value = validateNumericInput(target.value, 1, maxLevel);
+        }
+    });
+});
+
+/**
+ * Handle delegated actions based on data-action attribute
+ */
+function handleDelegatedAction(element, event) {
+    const action = element.dataset.action;
+    if (!action) return;
+    
+    switch(action) {
+        // Character actions
+        case 'open-character-select':
+            openCharacterSelect(element.dataset.position);
+            break;
+            
+        case 'select-character':
+            selectCharacter(element.dataset.characterId);
+            break;
+            
+        case 'remove-character':
+            removeCharacter(element.dataset.position);
+            break;
+            
+        case 'close-character-select':
+            closeCharacterSelect();
+            break;
+            
+        // Skill level actions
+        case 'update-skill-level':
+            {
+                const position = element.dataset.position;
+                const skillId = parseInt(element.dataset.skillId);
+                const maxLevel = parseInt(element.dataset.maxLevel);
+                const delta = parseInt(element.dataset.delta || 0);
+                const currentLevel = state.skillLevels[position]?.[skillId] || 1;
+                
+                if (delta !== 0) {
+                    // Button click
+                    updateSkillLevel(position, skillId, currentLevel + delta, maxLevel);
+                } else {
+                    // Input change
+                    const value = validateNumericInput(element.value, 1, maxLevel);
+                    updateSkillLevel(position, skillId, value, maxLevel);
+                }
+            }
+            break;
+            
+        // Potential actions
+        case 'toggle-potential':
+            togglePotential(parseInt(element.dataset.potentialId), element.dataset.position);
+            break;
+            
+        case 'update-potential-level':
+            {
+                const potentialId = parseInt(element.dataset.potentialId);
+                const position = element.dataset.position;
+                const delta = parseInt(element.dataset.delta || 0);
+                const maxLevel = parseInt(element.dataset.maxLevel);
+                const currentLevel = state.potentialLevels[position]?.[potentialId] || 1;
+                
+                if (delta !== 0) {
+                    // Button click
+                    updatePotentialLevel(potentialId, position, currentLevel + delta);
+                } else {
+                    // Input change
+                    const value = validateNumericInput(element.value, 1, maxLevel);
+                    updatePotentialLevel(potentialId, position, value);
+                }
+            }
+            break;
+            
+        // Description toggle
+        case 'toggle-description':
+            toggleDescriptionMode();
+            break;
+            
+        default:
+            // Unknown action
+            break;
     }
 }

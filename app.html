@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스텔라 소라 도자기 굽기</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/utils.css">
+    <link rel="stylesheet" href="css/discs.css">
+    <link rel="stylesheet" href="css/summary.css">
+    <link rel="stylesheet" href="css/saveload.css">
+</head>
+<body>
+    <!-- Navigation Bar Placeholder -->
+    <div id="navbar-placeholder"></div>
+    
+    <div class="container">
+        <header>
+            <h1>⭐ 스텔라 소라 빌드 도우미</h1>
+            <p class="subtitle">최고의 도자기를 만들어보세요</p>
+        </header>
+
+        <!-- Combined Compact Tab Navigation -->
+        <div class="compact-tab-navigation">
+            <!-- Main Tabs with integrated character position tabs -->
+            <div class="main-tabs-group">
+                <button class="compact-main-tab active" data-tab="characters" onclick="switchMainTab('characters')">
+                    <span class="compact-tab-icon">🏺</span>
+                    <span class="compact-tab-label">캐릭터</span>
+                </button>
+                
+                <!-- Character Position Sub-tabs (only visible when characters tab is active) -->
+                <div class="position-tabs-inline" id="position-tabs-inline">
+                    <span class="position-separator">:</span>
+                    <button class="position-tab active" data-position="master" onclick="switchTab('master')">
+                        <span class="position-tab-icon">👑</span>
+                        <span class="position-tab-label">메인</span>
+                    </button>
+                    <span class="position-divider">|</span>
+                    <button class="position-tab" data-position="assist1" onclick="switchTab('assist1')">
+                        <span class="position-tab-icon">♟️</span>
+                        <span class="position-tab-label">지원1</span>
+                    </button>
+                    <span class="position-divider">|</span>
+                    <button class="position-tab" data-position="assist2" onclick="switchTab('assist2')">
+                        <span class="position-tab-icon">♟️</span>
+                        <span class="position-tab-label">지원2</span>
+                    </button>
+                </div>
+            </div>
+            
+            <button class="compact-main-tab" data-tab="discs" onclick="switchMainTab('discs')">
+                <span class="compact-tab-icon">💿</span>
+                <span class="compact-tab-label">레코드</span>
+            </button>
+            
+            <button class="compact-main-tab" data-tab="summary" onclick="switchMainTab('summary')">
+                <span class="compact-tab-icon">📋</span>
+                <span class="compact-tab-label">요약</span>
+            </button>
+        </div>
+
+        <!-- Characters Tab Content -->
+        <div class="main-tab-content active" id="main-tab-characters">
+            <!-- Master Position -->
+            <div class="character-slot master-slot active-tab" id="tab-master">
+                <div class="slot-header">
+                    <h2>메인</h2>
+                    <button class="description-toggle" onclick="toggleDescriptionMode()">📝 간략히보기</button>
+                </div>
+                <div class="two-column-layout">
+                    <div class="character-column">
+                        <div class="character-card" id="master-card">
+                            <div class="empty-state">
+                                <div class="plus-icon">+</div>
+                                <p>메인캐릭터 선택</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="potentials-column">
+                        <div class="specific-potentials-section" id="master-specific-section"></div>
+                        <div class="other-potentials-section" id="master-potentials"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assist Position 1 -->
+            <div class="character-slot assist-slot" id="tab-assist1">
+                <div class="slot-header">
+                    <h2>지원 1</h2>
+                    <button class="description-toggle" onclick="toggleDescriptionMode()">📝 간략히보기</button>
+                </div>
+                <div class="two-column-layout">
+                    <div class="character-column">
+                        <div class="character-card" id="assist1-card">
+                            <div class="empty-state">
+                                <div class="plus-icon">+</div>
+                                <p>지원캐릭터 선택</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="potentials-column">
+                        <div class="specific-potentials-section" id="assist1-specific-section"></div>
+                        <div class="other-potentials-section" id="assist1-potentials"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assist Position 2 -->
+            <div class="character-slot assist-slot" id="tab-assist2">
+                <div class="slot-header">
+                    <h2>지원 2</h2>
+                    <button class="description-toggle" onclick="toggleDescriptionMode()">📝 간략히보기</button>
+                </div>
+                <div class="two-column-layout">
+                    <div class="character-column">
+                        <div class="character-card" id="assist2-card">
+                            <div class="empty-state">
+                                <div class="plus-icon">+</div>
+                                <p>지원캐릭터 선택</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="potentials-column">
+                        <div class="specific-potentials-section" id="assist2-specific-section"></div>
+                        <div class="other-potentials-section" id="assist2-potentials"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Characters Tab Content -->
+
+        <!-- Discs Tab Content -->
+        <div class="main-tab-content" id="main-tab-discs">
+            <!-- Discs content will be loaded by discs.js -->
+            <div id="discs-container"></div>
+        </div>
+
+        <!-- Summary Tab Content -->
+        <div class="main-tab-content" id="main-tab-summary">
+            <!-- Summary content will be loaded by summary.js -->
+            <div id="summary-container"></div>
+        </div>
+
+        <!-- Character Selection Modal -->
+        <div class="modal" id="character-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>캐릭터 선택</h2>
+                    <button class="close-btn" onclick="closeCharacterSelect()">&times;</button>
+                </div>
+                <div class="character-grid" id="character-grid"></div>
+            </div>
+        </div>
+
+        <!-- Load Build Modal -->
+        <div id="load-modal">
+            <div class="load-modal-content">
+                <div class="load-modal-header">
+                    <h2>빌드 불러오기</h2>
+                    <button class="load-modal-close" onclick="closeLoadModal()">✕</button>
+                </div>
+                <div class="load-modal-body">
+                    <div id="load-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/discs.js"></script>
+    <script src="js/summary.js"></script>
+    <script src="js/saveload.js"></script>
+</body>
+</html>
