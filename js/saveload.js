@@ -406,83 +406,61 @@
     // ============================================================================
     
     /**
-     * Simple base64 encoding for URLs with URL-safe characters
+     * Base64 encoding for URLs with URL-safe characters
+     * Uses browser's built-in btoa with proper Unicode handling
      */
     function compressToBase64(input) {
         if (!input) return '';
-        
+
         try {
-            // URL-safe base64 characters
-            const keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
-            let output = "";
-            
-            // Encode to UTF-8 bytes
-            const utf8Input = unescape(encodeURIComponent(input));
-            
-            // Base64 encode
-            for (let i = 0; i < utf8Input.length; i += 3) {
-                const chr1 = utf8Input.charCodeAt(i);
-                const chr2 = utf8Input.charCodeAt(i + 1);
-                const chr3 = utf8Input.charCodeAt(i + 2);
-                
-                const enc1 = chr1 >> 2;
-                const enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-                const enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-                const enc4 = chr3 & 63;
-                
-                output += keyStr.charAt(enc1) + keyStr.charAt(enc2);
-                
-                if (isNaN(chr2)) {
-                    output += keyStr.charAt(64) + keyStr.charAt(64);
-                } else if (isNaN(chr3)) {
-                    output += keyStr.charAt(enc3) + keyStr.charAt(64);
-                } else {
-                    output += keyStr.charAt(enc3) + keyStr.charAt(enc4);
-                }
-            }
-            
-            return output;
+            // Convert string to UTF-8 bytes, then to base64
+            const utf8Bytes = new TextEncoder().encode(input);
+            let binary = '';
+            utf8Bytes.forEach(byte => {
+                binary += String.fromCharCode(byte);
+            });
+
+            // Use browser's btoa for base64 encoding
+            let base64 = btoa(binary);
+
+            // Convert to URL-safe base64
+            // Replace + with - and / with _, remove padding =
+            base64 = base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+            return base64;
         } catch (error) {
             console.error('Compression error:', error);
             return '';
         }
     }
-    
+
     /**
-     * Decompress from base64
+     * Decompress from URL-safe base64
+     * Uses browser's built-in atob with proper Unicode handling
      */
     function decompressFromBase64(input) {
         if (!input) return '';
-        
+
         try {
-            const keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
-            let output = "";
-            
-            // Base64 decode
-            for (let i = 0; i < input.length; i += 4) {
-                const enc1 = keyStr.indexOf(input.charAt(i));
-                const enc2 = keyStr.indexOf(input.charAt(i + 1));
-                const enc3 = keyStr.indexOf(input.charAt(i + 2));
-                const enc4 = keyStr.indexOf(input.charAt(i + 3));
-                
-                if (enc1 === -1 || enc2 === -1) continue;
-                
-                const chr1 = (enc1 << 2) | (enc2 >> 4);
-                const chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-                const chr3 = ((enc3 & 3) << 6) | enc4;
-                
-                output += String.fromCharCode(chr1);
-                
-                if (enc3 !== 64 && enc3 !== -1) {
-                    output += String.fromCharCode(chr2);
-                }
-                if (enc4 !== 64 && enc4 !== -1) {
-                    output += String.fromCharCode(chr3);
-                }
+            // Convert URL-safe base64 back to standard base64
+            let base64 = input.replace(/-/g, '+').replace(/_/g, '/');
+
+            // Add padding if needed
+            while (base64.length % 4) {
+                base64 += '=';
             }
-            
-            // Decode from UTF-8
-            return decodeURIComponent(escape(output));
+
+            // Use browser's atob for base64 decoding
+            const binary = atob(base64);
+
+            // Convert binary string to UTF-8 bytes
+            const bytes = new Uint8Array(binary.length);
+            for (let i = 0; i < binary.length; i++) {
+                bytes[i] = binary.charCodeAt(i);
+            }
+
+            // Decode UTF-8 bytes to string
+            return new TextDecoder().decode(bytes);
         } catch (error) {
             console.error('Decompression error:', error);
             return '';
