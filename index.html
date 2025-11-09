@@ -3,179 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>스텔라 소라 도자기 굽기</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="utils.css">
-    <link rel="stylesheet" href="discs.css">
-    <link rel="stylesheet" href="summary.css">
+    <title>스텔라 소라 도우미 | Stella Sora KR Tools</title>
+    <link rel="stylesheet" href="css/landing.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <a href="index.html" class="navbar-brand">
-            <span class="navbar-logo">⭐</span>
-            <span class="navbar-title">스텔라 소라</span>
-        </a>
-        <div class="navbar-menu">
-            <div class="navbar-links">
-                <a href="index.html" class="navbar-link active">
-                    <span class="navbar-link-icon">🎖</span>
-                    <span class="navbar-link-text">도자기 공방</span>
-                </a>
-                <!-- Future pages - disabled for now -->
-                <!-- <a href="database.html" class="navbar-link">
-                    <span class="navbar-link-icon">📚</span>
-                    <span class="navbar-link-text">데이터베이스</span>
-                </a>
-                <a href="guide.html" class="navbar-link">
-                    <span class="navbar-link-icon">📖</span>
-                    <span class="navbar-link-text">가이드</span>
-                </a> -->
+    <div class="background-image"></div>
+
+    <div class="landing-container">
+        <!-- Hero Section -->
+        <header class="hero-section">
+            <div class="hero-content">
+                <div class="logo-area">
+                    <h1 class="main-title">스텔라 소라 도우미</h1>
+                    <p class="tagline">Stella Sora KR Build Tools & Resources</p>
+                </div>
+                <p class="hero-description">
+                    스텔라 소라의 최적 빌드를 쉽고 빠르게 만들어보세요!<br>
+                    캐릭터, 잠재력, 레코드를 한 곳에서 관리하세요.
+                </p>
+                <div class="cta-buttons">
+                    <a href="app.html" class="btn btn-primary">
+                        <span class="btn-icon">🏺</span>
+                        도자기 공방
+                    </a>
+                    <a href="tasks.html" class="btn btn-secondary">
+                        <span class="btn-icon">📋</span>
+                        의뢰 도우미
+                    </a>
+                </div>
             </div>
-            <button id="theme-toggle" class="theme-toggle" onclick="toggleTheme()">
-                <span class="theme-icon">☀️</span>
-                <span class="theme-toggle-text">라이트</span>
-            </button>
-        </div>
-    </nav>
-    
-    <div class="container">
-        <header>
-            <h1>⭐ 스텔라 소라 도자기 굽기</h1>
-            <p class="subtitle">최고의 팀 구성을 만들어보세요</p>
         </header>
 
-        <!-- Main Tab Navigation -->
-        <div class="main-tab-navigation">
-            <button class="main-tab-button active" data-tab="characters" onclick="switchMainTab('characters')">
-                <span class="main-tab-icon">👥</span>
-                <span class="main-tab-label">캐릭터</span>
-            </button>
-            <button class="main-tab-button" data-tab="discs" onclick="switchMainTab('discs')">
-                <span class="main-tab-icon">💿</span>
-                <span class="main-tab-label">레코드</span>
-            </button>
-            <button class="main-tab-button" data-tab="summary" onclick="switchMainTab('summary')">
-                <span class="main-tab-icon">📋</span>
-                <span class="main-tab-label">요약</span>
-            </button>
-        </div>
-
-        <!-- Characters Tab Content -->
-        <div class="main-tab-content active" id="main-tab-characters">
-            <!-- Position Sub-tabs -->
-            <div class="tab-navigation">
-                <button class="tab-button active" onclick="switchTab('master')">
-                    <span class="tab-icon">👑</span>
-                    <span class="tab-label">메인</span>
-                </button>
-                <button class="tab-button" onclick="switchTab('assist1')">
-                    <span class="tab-icon">♟️</span>
-                    <span class="tab-label">지원 1</span>
-                </button>
-                <button class="tab-button" onclick="switchTab('assist2')">
-                    <span class="tab-icon">♟️</span>
-                    <span class="tab-label">지원 2</span>
-                </button>
-            </div>
-
-        <div class="party-builder">
-            <!-- Master Position -->
-            <div class="character-slot master-slot active-tab" id="tab-master">
-                <div class="slot-header">
-                    <h2>메인</h2>
-                    <button class="description-toggle" onclick="toggleDescriptionMode()">📝 간략히보기</button>
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2 class="section-title">주요 기능</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>캐릭터 관리</h3>
+                    <p>메인 캐릭터와 지원 캐릭터를 선택하고, 스킬 레벨과 잠재력을 설정하세요.</p>
                 </div>
-                <div class="two-column-layout">
-                    <div class="character-column">
-                        <div class="character-card" id="master-card">
-                            <div class="empty-state" onclick="openCharacterSelect('master')">
-                                <div class="plus-icon">+</div>
-                                <p>메인캐릭터 선택</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="potentials-column">
-                        <div class="specific-potentials-section" id="master-specific-section"></div>
-                        <div class="other-potentials-section" id="master-potentials"></div>
-                    </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💿</div>
+                    <h3>레코드 시스템</h3>
+                    <p>메인 레코드와 서브 레코드를 선택하고, 협주 스킬을 최적화하세요.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>빌드 요약 & 공유</h3>
+                    <p>완성된 빌드를 한눈에 확인하고, URL 링크로 다른 유저와 공유하세요.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>의뢰 도우미</h3>
+                    <p>레벨 70 의뢰에 최적의 캐릭터를 배치하고 태그를 완벽하게 충족시키세요.</p>
                 </div>
             </div>
+        </section>
 
-            <!-- Assist Position 1 -->
-            <div class="character-slot assist-slot" id="tab-assist1">
-                <div class="slot-header">
-                    <h2>지원 1</h2>
-                    <button class="description-toggle" onclick="toggleDescriptionMode()">📝 간략</button>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="disclaimer">
+                    <h3>Disclaimer</h3>
+                    <p>
+                        sstoy는 스텔라 소라의 비영리 팬 프로젝트입니다.<br>
+                        모든 에셋과 데이터는 Yostar Inc.의 저작물이며, 비상업적/정보/교육 목적으로만 사용됩니다.<br>
+                        이 프로젝트는 게임 개발사와 무관하며, 저작권자의 요청 시 언제든 중단될 수 있습니다.
+                    </p>
                 </div>
-                <div class="two-column-layout">
-                    <div class="character-column">
-                        <div class="character-card" id="assist1-card">
-                            <div class="empty-state" onclick="openCharacterSelect('assist1')">
-                                <div class="plus-icon">+</div>
-                                <p>지원캐릭터 선택</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="potentials-column">
-                        <div class="specific-potentials-section" id="assist1-specific-section"></div>
-                        <div class="other-potentials-section" id="assist1-potentials"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Assist Position 2 -->
-            <div class="character-slot assist-slot" id="tab-assist2">
-                <div class="slot-header">
-                    <h2>지원2</h2>
-                    <button class="description-toggle" onclick="toggleDescriptionMode()">📝 간략</button>
-                </div>
-                <div class="two-column-layout">
-                    <div class="character-column">
-                        <div class="character-card" id="assist2-card">
-                            <div class="empty-state" onclick="openCharacterSelect('assist2')">
-                                <div class="plus-icon">+</div>
-                                <p>지원캐릭터 선택</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="potentials-column">
-                        <div class="specific-potentials-section" id="assist2-specific-section"></div>
-                        <div class="other-potentials-section" id="assist2-potentials"></div>
-                    </div>
+                <div class="footer-links">
+                    <p>Last Updated: 2025.11.09</p>
+                    <p>
+                        <a href="https://github.com/JforPlay/sstoy" target="_blank" rel="noopener">
+                            GitHub Repository
+                        </a>
+                    </p>
                 </div>
             </div>
-        </div>
-        </div>
-        <!-- End of Characters Tab Content -->
-
-        <!-- Discs Tab Content -->
-        <div class="main-tab-content" id="main-tab-discs">
-            <!-- Discs content will be loaded by discs.js -->
-            <div id="discs-container"></div>
-        </div>
-
-        <!-- Summary Tab Content -->
-        <div class="main-tab-content" id="main-tab-summary">
-            <!-- Summary content will be loaded by summary.js -->
-            <div id="summary-container"></div>
-        </div>
-
-        <!-- Character Selection Modal -->
-        <div class="modal" id="character-modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>캐릭터 선택</h2>
-                    <button class="close-btn" onclick="closeCharacterSelect()">&times;</button>
-                </div>
-                <div class="character-grid" id="character-grid"></div>
-            </div>
-        </div>
+        </footer>
     </div>
-
-    <script src="utils.js"></script>
-    <script src="app.js"></script>
-    <script src="discs.js"></script>
-    <script src="summary.js"></script>
 </body>
 </html>

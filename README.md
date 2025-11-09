@@ -1,5 +1,5 @@
 # Stella Sora KR Toy (sstoy)
-- Last updated 2025/11/8
+- Last updated 2025/11/9
 - This repo is the source to build the github pages to view related tools for the game Stella Sora in KR.
 - sstoy is a non-profit fan project for the game Stella Sora.
 
