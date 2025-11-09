@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>의뢰 도우미</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/utils.css">
+    <link rel="stylesheet" href="css/tasks.css">
+</head>
+<body>
+    <!-- Navigation Bar Placeholder -->
+    <div id="navbar-placeholder"></div>
+    
+    <div class="container">
+        <header>
+            <h1>🎯 의뢰 도우미</h1>
+            <p class="subtitle">최대 4개의 의뢰를 선택하고 캐릭터로 태그를 채워보세요</p>
+        </header>
+
+        <!-- Task Selection Area -->
+        <div class="tasks-section">
+            <h2 class="section-title">
+                <span class="section-icon">📋</span>
+                의뢰 선택 (최대 4개)
+            </h2>
+            <div id="tasks-list" class="tasks-grid"></div>
+        </div>
+
+        <!-- Selected Tasks Area -->
+        <div class="selected-section">
+            <h2 class="section-title">
+                <span class="section-icon">✅</span>
+                선택된 의뢰 (눌러서 캐릭터 배정)
+                <span class="task-counter" id="task-counter">0/4</span>
+            </h2>
+            <div id="selected-tasks" class="selected-tasks-grid"></div>
+        </div>
+
+        <!-- Character Selection Area -->
+        <div class="characters-section">
+            <h2 class="section-title">
+                <span class="section-icon">👥</span>
+                캐릭터 선택
+            </h2>
+            <div id="characters-list" class="characters-grid"></div>
+        </div>
+
+        <!-- Character Modal -->
+        <div class="modal" id="character-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>캐릭터 선택</h2>
+                    <button class="close-btn" onclick="closeCharacterModal()">&times;</button>
+                </div>
+                <div class="character-grid" id="character-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/tasks.js"></script>
+</body>
+</html>
