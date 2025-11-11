@@ -406,7 +406,7 @@ function renderCharacters() {
     container.innerHTML = validCharacters.map(char => {
         const name = getTranslatedCharacterName(char);
         const tags = getCharacterTags(char.Id);
-        const imagePath = `assets/avg1_${char.Id}_002.png`;
+        const imagePath = `assets/char/avg1_${char.Id}_002.png`;
         
         // Check if character is assigned to the active task
         let isAssignedToActiveTask = false;
@@ -478,7 +478,7 @@ function renderAssignedCharacterPortraits(assignedChars) {
         if (!char) return '';
         
         const name = getTranslatedCharacterName(char);
-        const imagePath = `assets/avg1_${char.Id}_002.png`;
+        const imagePath = `assets/char/avg1_${char.Id}_002.png`;
         
         return `
             <div class="assigned-portrait" title="${name}">
@@ -509,7 +509,7 @@ function renderCharacterSlots(taskId, assignedChars) {
             const char = tasksState.characters.find(c => c.Id === charId);
             if (char) {
                 const name = getTranslatedCharacterName(char);
-                const imagePath = `assets/avg1_${char.Id}_002.png`;
+                const imagePath = `assets/char/avg1_${char.Id}_002.png`;
                 const charTags = getCharacterTags(char.Id);
                 
                 // Get task tags for matching

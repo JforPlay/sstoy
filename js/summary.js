@@ -172,7 +172,7 @@
                     <div class="summary-character-preview">
                         <div class="summary-character-info">
                             <div class="summary-char-basic">
-                                <img src="assets/avg1_${charId}_002.png" 
+                                <img src="assets/char/avg1_${charId}_002.png" 
                                      alt="${charName}" 
                                      class="summary-char-image"
                                      onerror="this.style.display='none'">
@@ -229,7 +229,7 @@
                 if (item && item.Icon) {
                     const parts = item.Icon.split('/');
                     const iconName = parts[parts.length - 1];
-                    iconPath = `assets/${iconName}.png`;
+                    iconPath = `assets/disc_icons/${iconName}.png`;
                 }
                 
                 // Get main skill
@@ -325,7 +325,7 @@
                 if (item && item.Icon) {
                     const parts = item.Icon.split('/');
                     const iconName = parts[parts.length - 1];
-                    iconPath = `assets/${iconName}.png`;
+                    iconPath = `assets/disc_icons/${iconName}.png`;
                 }
                 
                 // Get notes provided
@@ -771,7 +771,7 @@
         // Calculate build level
         const buildInfo = calculateBuildLevel(totalScore);
         const buildLevel = buildInfo.level;
-        const buildIconPath = `assets/BuildRank_${buildLevel}.png`;
+        const buildIconPath = `assets/buildrank/BuildRank_${buildLevel}.png`;
         
         // Calculate total potential levels across all characters
         let totalPotentialLevels = 0;

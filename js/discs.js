@@ -130,7 +130,7 @@
         
         const parts = item.Icon.split('/');
         const iconName = parts[parts.length - 1];
-        return `assets/${iconName}.png`;
+        return `assets/disc_icons/${iconName}.png`;
     }
     
     // Extract large image path from DiscBg
@@ -138,7 +138,7 @@
         if (!discBg) return '';
         const parts = discBg.split('/');
         const imageName = parts[parts.length - 1];
-        return `assets/${imageName}_B.png`;
+        return `assets/disc_icons/${imageName}_B.png`;
     }
     
     // Get element info for a disc
@@ -816,7 +816,7 @@
                 // Limit break control for main discs with visual indicator
                 // Map rarity stars to exceed icon number: SSR(5)→5, SR(4)→4, R(3)→3
                 const exceedIconNumber = rarityInfo.stars;
-                const exceedIconPath = `assets/rare_outfit_exceed_s_${exceedIconNumber}.png`;
+                const exceedIconPath = `assets/disc_icons/rare_outfit_exceed_s_${exceedIconNumber}.png`;
                 
                 // Generate exceed icons based on limitBreak value
                 let exceedIconsHtml = '';
@@ -915,7 +915,7 @@
         if (!iconPath) return null;
         const parts = iconPath.split('/');
         const filename = parts[parts.length - 1];
-        return `assets/${filename}.png`;
+        return `assets/skill_icons/${filename}.png`;
     }
     
     // Generate skills display HTML

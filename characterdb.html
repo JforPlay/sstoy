@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캐릭터 도감</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/utils.css">
+    <link rel="stylesheet" href="css/characterdb.css">
+</head>
+<body>
+    <!-- Navigation Bar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <div class="container">
+        <header>
+            <h1>📖 캐릭터DB</h1>
+            <p class="subtitle">캐릭터의 상세 정보, 아카이브 및 데이트 공략을 확인하세요</p>
+        </header>
+
+        <!-- Character Selection Section -->
+        <div class="character-select-section">
+            <h2 class="section-title">
+                <span class="section-icon">👥</span>
+                캐릭터 선택
+            </h2>
+            <div id="character-selector" class="character-selector-grid"></div>
+        </div>
+
+        <!-- Character Details Section (Hidden until character selected) -->
+        <div id="character-details" class="character-details-container" style="display: none;">
+            <!-- Character Info and Dating - Side by Side -->
+            <div class="character-info-dating-row">
+                <!-- Character Hero Section -->
+                <div class="character-hero-section">
+                    <!-- Character Portrait (Left Side - 60%) -->
+                    <div class="character-portrait-hero">
+                        <div class="portrait-background"></div>
+                        <img id="char-portrait" src="" alt="Character Portrait">
+                        <!-- Character Type Selector (Bottom of Portrait) -->
+                        <div class="char-type-selector-hero">
+                            <button class="char-type-btn active" onclick="changeCharacterType('01')">일반</button>
+                            <button class="char-type-btn" onclick="changeCharacterType('02')">각성</button>
+                            <button class="char-type-btn" onclick="changeCharacterType('03')">스킨</button>
+                        </div>
+                    </div>
+
+                    <!-- Character Info (Right Side - 40%) -->
+                    <div class="character-info-hero">
+                        <div class="char-name-section">
+                            <h2 id="char-name" class="character-name-hero">-</h2>
+                            <div class="character-meta-hero">
+                                <span id="char-element" class="meta-badge-hero element-badge">-</span>
+                                <span id="char-class" class="meta-badge-hero class-badge">-</span>
+                                <span id="char-grade" class="meta-badge-hero grade-badge">-</span>
+                            </div>
+                        </div>
+
+                        <!-- Character Tags & Info Card -->
+                        <div class="char-details-card">
+                            <div id="char-tags" class="character-tags-hero"></div>
+                            <div id="char-additional-info" class="character-additional-info-hero"></div>
+                        </div>
+
+                        <!-- Quick Stats Preview -->
+                        <div id="char-quick-stats" class="char-quick-stats"></div>
+                    </div>
+                </div>
+
+                <!-- Dating Section (Side by Side) -->
+                <div class="dating-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">💝</span>
+                            데이트 공략
+                        </h2>
+                    </div>
+                    <div id="dating-list" class="dating-list">
+                        <!-- Dating info will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Character Image Gallery -->
+            <div class="character-images-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">🖼️</span>
+                        캐릭터 이미지
+                    </h2>
+                </div>
+                <div id="char-image-gallery" class="char-image-gallery">
+                    <!-- Images will be populated by JS -->
+                </div>
+            </div>
+
+            <!-- Archive and Stats - 2 Column Layout -->
+            <div class="archive-stats-wrapper">
+                <!-- Archive Section -->
+                <div class="archive-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">📚</span>
+                            캐릭터 아카이브
+                        </h2>
+                    </div>
+                    <div id="archive-list" class="archive-list">
+                        <!-- Archive items will be populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Stats Section -->
+                <div class="stats-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">📊</span>
+                            캐릭터 스탯
+                        </h2>
+                    </div>
+
+                    <!-- Level Slider -->
+                    <div class="level-control">
+                        <label for="level-slider" class="level-label">
+                            레벨: <span id="current-level" class="level-display">1</span>
+                            <span id="limitbreak-badge" class="limitbreak-badge" style="display: none;">승급 <span id="current-limitbreak">0</span></span>
+                        </label>
+                        <input type="range" id="level-slider" class="level-slider" min="1" max="98" value="1">
+                    </div>
+
+                    <!-- Stats Grid -->
+                    <div id="stats-grid" class="stats-grid">
+                        <!-- Stats will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/characterdb.js"></script>
+</body>
+</html>

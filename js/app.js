@@ -572,7 +572,7 @@ function openCharacterSelect(position) {
     availableCharacters.forEach(([id, char]) => {
         const nameKey = char.Name;
         const name = state.characterNames[nameKey] || nameKey;
-        const charImagePath = `assets/avg1_${id}_002.png`;
+        const charImagePath = `assets/char/avg1_${id}_002.png`;
         
         // Get star rating from GameEnums
         const rarityInfo = state.gameEnums.itemRarity?.[char.Grade];
@@ -678,7 +678,7 @@ function updateCharacterCard(position) {
     card.style.cursor = 'default';
     card.onclick = null;
     
-    const charImagePath = `assets/avg1_${character.id}_002.png`;
+    const charImagePath = `assets/char/avg1_${character.id}_002.png`;
     
     // Get star rating from GameEnums
     const rarityInfo = state.gameEnums.itemRarity?.[character.data.Grade];
@@ -758,7 +758,7 @@ function updateCharacterCard(position) {
                     if (!skill) return '';
                     
                     const iconName = skill.icon ? skill.icon.split('/').pop() : '';
-                    const iconPath = iconName ? `assets/${iconName}.png` : '';
+                    const iconPath = iconName ? `assets/skill_icons/${iconName}.png` : '';
                     const currentLevel = state.skillLevels[position][skill.id] || 1;
                     
                     // Check if this skill should have a level selector
@@ -766,7 +766,7 @@ function updateCharacterCard(position) {
                     
                     // Get element background image
                     const elementId = character.data.EET;
-                    const elementBgPath = `assets/skill_btn_b_type_${elementId}.png`;
+                    const elementBgPath = `assets/skill_icons/skill_btn_b_type_${elementId}.png`;
                     
                     // Get title - use localized version or skill name
                     const titleKey = skill.title || '';
@@ -1028,19 +1028,19 @@ function createPotentialCard(potId, position) {
     if (itemData) {
         // Determine background based on Stype and Rarity
         if (itemData.Stype === 42) {
-            backgroundImage = 'assets/rare_vestige_card_s_7.png';
+            backgroundImage = 'assets/skill_icons/rare_vestige_card_s_7.png';
         } else if (itemData.Stype === 41) {
             if (itemData.Rarity === 1) {
-                backgroundImage = 'assets/rare_vestige_card_s_9.png';
+                backgroundImage = 'assets/skill_icons/rare_vestige_card_s_9.png';
             } else if (itemData.Rarity === 2) {
-                backgroundImage = 'assets/rare_vestige_card_s_8.png';
+                backgroundImage = 'assets/skill_icons/rare_vestige_card_s_8.png';
             }
         }
         
         // Get icon path
         if (itemData.Icon) {
             const iconName = itemData.Icon.split('/').pop();
-            iconPath = `assets/${iconName}_A.png`;
+            iconPath = `assets/skill_icons/${iconName}_A.png`;
         }
     }
     
