@@ -628,14 +628,18 @@ function calculateCharacterResources(characterId) {
             .filter(upgrade => upgrade.Group === skillGroup);
         
         // Calculate resources needed from current to target level
-        // Use ID-based approach: (Id % 10) - 1 gives the correct advance number
-        // This fixes the bug where AdvanceNum is 8 for both level 9 and 10
+        // Sort skill upgrades by ID to ensure correct order
+        skillUpgrades.sort((a, b) => a.Id - b.Id);
+        
         for (let level = currentSkillLevel; level < targetSkillLevel; level++) {
-            // Find upgrade by ID calculation instead of AdvanceNum
-            const upgrade = skillUpgrades.find(u => {
-                const calculatedAdvanceNum = (u.Id % 10) - 1;
-                return calculatedAdvanceNum === level || u.AdvanceNum === level;
-            });
+            // Data structure: 
+            // - Index 0: Base level (level 1), no AdvanceNum
+            // - Index 1: Upgrade 1→2 (AdvanceNum=1)
+            // - Index 2: Upgrade 2→3 (AdvanceNum=2)
+            // - ...
+            // - Index 9: Upgrade 9→10 (should be AdvanceNum=9, but data has AdvanceNum=8)
+            // To upgrade from level L to L+1, use skillUpgrades[L]
+            const upgrade = skillUpgrades[level];
             
             if (upgrade) {
                 // Add gold cost
