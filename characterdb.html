@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>캐릭터 도감</title>
+    <!-- Font Awesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/utils.css">
     <link rel="stylesheet" href="css/characterdb.css">
@@ -14,14 +16,14 @@
 
     <div class="container">
         <header>
-            <h1>📖 캐릭터DB</h1>
+            <h1><i class="fa-solid fa-book"></i> 캐릭터DB</h1>
             <p class="subtitle">캐릭터의 상세 정보, 아카이브 및 데이트 공략을 확인하세요</p>
         </header>
 
         <!-- Character Selection Section -->
         <div class="character-select-section">
             <h2 class="section-title">
-                <span class="section-icon">👥</span>
+                <span class="section-icon"><i class="fa-solid fa-users"></i></span>
                 캐릭터 선택
             </h2>
             <div id="character-selector" class="character-selector-grid"></div>
@@ -36,23 +38,22 @@
                     <!-- Character Portrait (Left Side - 60%) -->
                     <div class="character-portrait-hero">
                         <div class="portrait-background"></div>
-                        <img id="char-portrait" src="" alt="Character Portrait">
+                        <img id="char-portrait" src="" alt="Character Portrait" style="display:none;">
                         <!-- Character Type Selector (Bottom of Portrait) -->
                         <div class="char-type-selector-hero">
-                            <button class="char-type-btn active" onclick="changeCharacterType('01')">일반</button>
-                            <button class="char-type-btn" onclick="changeCharacterType('02')">각성</button>
-                            <button class="char-type-btn" onclick="changeCharacterType('03')">스킨</button>
+                            <button class="char-type-btn active" onclick="changeCharacterType('01', event)">일반</button>
+                            <button class="char-type-btn" onclick="changeCharacterType('02', event)">각성</button>
+                            <button class="char-type-btn" onclick="changeCharacterType('03', event)">스킨</button>
                         </div>
                     </div>
 
                     <!-- Character Info (Right Side - 40%) -->
                     <div class="character-info-hero">
                         <div class="char-name-section">
-                            <h2 id="char-name" class="character-name-hero">-</h2>
-                            <div class="character-meta-hero">
-                                <span id="char-element" class="meta-badge-hero element-badge">-</span>
-                                <span id="char-class" class="meta-badge-hero class-badge">-</span>
-                                <span id="char-grade" class="meta-badge-hero grade-badge">-</span>
+                            <div class="char-name-row">
+                                <h2 id="char-name" class="character-name-hero">-</h2>
+                                <img id="char-element-icon" class="char-element-icon-inline" src="" alt="" onerror="this.style.display='none'">
+                                <span id="char-grade" class="grade-badge-inline">-</span>
                             </div>
                         </div>
 
@@ -71,7 +72,7 @@
                 <div class="dating-section">
                     <div class="section-header">
                         <h2 class="section-title">
-                            <span class="section-icon">💝</span>
+                            <span class="section-icon"><i class="fa-solid fa-heart"></i></span>
                             데이트 공략
                         </h2>
                     </div>
@@ -85,8 +86,8 @@
             <div class="character-images-section">
                 <div class="section-header">
                     <h2 class="section-title">
-                        <span class="section-icon">🖼️</span>
-                        캐릭터 이미지
+                        <span class="section-icon"><i class="fa-solid fa-image"></i></span>
+                        캐릭터 이미지들
                     </h2>
                 </div>
                 <div id="char-image-gallery" class="char-image-gallery">
@@ -100,7 +101,7 @@
                 <div class="archive-section">
                     <div class="section-header">
                         <h2 class="section-title">
-                            <span class="section-icon">📚</span>
+                            <span class="section-icon"><i class="fa-solid fa-book-bookmark"></i></span>
                             캐릭터 아카이브
                         </h2>
                     </div>
@@ -113,7 +114,7 @@
                 <div class="stats-section">
                     <div class="section-header">
                         <h2 class="section-title">
-                            <span class="section-icon">📊</span>
+                            <span class="section-icon"><i class="fa-solid fa-chart-bar"></i></span>
                             캐릭터 스탯
                         </h2>
                     </div>
