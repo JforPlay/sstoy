@@ -302,7 +302,81 @@
             }
         }
         
+        // Parse element tag patterns
+        parsedDesc = parseElementTags(parsedDesc);
+        
         return parsedDesc;
+    }
+    
+    /**
+     * Parse element tag patterns in descriptions
+     * Format: ##ElementName 속성 표식#IconId#
+     * Example: ##빛 속성 표식#1015#
+     * 
+     * @param {string} description - The description with element tags
+     * @returns {string} - Description with formatted element tags
+     */
+    function parseElementTags(description) {
+        if (!description) return description;
+        
+        // Element color mapping
+        const elementColors = {
+            '빛': '#FFD700',    // Yellow/Gold for Light
+            '불': '#FF4444',    // Red for Fire
+            '바람': '#44FF44',  // Green for Wind
+            '물': '#4444FF',    // Blue for Water
+            '어둠': '#9944FF',  // Purple for Dark
+            '땅': '#8B4513'     // Brown for Earth
+        };
+        
+        // Element icon mapping (including new extended format icons)
+        const elementIcons = {
+            '1015': 'Icon_ElementTagTrigger_Light',
+            '1016': 'Icon_ElementTagTrigger_Fire',
+            '1017': 'Icon_ElementTagTrigger_Wind',
+            '1018': 'Icon_ElementTagTrigger_Water',
+            '1019': 'Icon_ElementTagTrigger_Dark',
+            '1020': 'Icon_ElementTagTrigger_Earth',
+            // Extended format icons (same icons, different IDs)
+            '2016': 'Icon_ElementTagTrigger_Light',  // 광명 (Light)
+            '2013': 'Icon_ElementTagTrigger_Fire',   // 성염 (Fire)
+            '2017': 'Icon_ElementTagTrigger_Wind',   // 풍식 (Wind)
+            '2008': 'Icon_ElementTagTrigger_Water',  // 수류 (Water)
+            '2018': 'Icon_ElementTagTrigger_Dark',   // 암영 (Dark)
+            '2029': 'Icon_ElementTagTrigger_Earth'   // 지맥 (Earth)
+        };
+        
+        // Pattern 1: ##ElementName 속성 표식: AdditionalName#IconId# (extended format)
+        const extendedPattern = /##([가-힣]+)\s*속성\s*표식:\s*([가-힣]+)#(\d+)#/g;
+        
+        // Pattern 2: ##ElementName 속성 표식#IconId# (basic format)
+        const basicPattern = /##([가-힣]+)\s*속성\s*표식#(\d+)#/g;
+        
+        // First, replace extended format
+        let result = description.replace(extendedPattern, (match, elementName, additionalName, iconId) => {
+            const color = elementColors[elementName] || '#FFFFFF';
+            const iconName = elementIcons[iconId];
+            const iconPath = iconName ? `assets/${iconName}.png` : '';
+            
+            return `<span class="element-tag" style="color: ${color}; font-weight: 600;">
+                ${elementName} 속성 표식: ${additionalName}
+                ${iconPath ? `<img src="${iconPath}" alt="${elementName}" class="element-tag-icon" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 4px;" onerror="this.style.display='none'">` : ''}
+            </span>`;
+        });
+        
+        // Then, replace basic format
+        result = result.replace(basicPattern, (match, elementName, iconId) => {
+            const color = elementColors[elementName] || '#FFFFFF';
+            const iconName = elementIcons[iconId];
+            const iconPath = iconName ? `assets/${iconName}.png` : '';
+            
+            return `<span class="element-tag" style="color: ${color}; font-weight: 600;">
+                ${elementName} 속성 표식
+                ${iconPath ? `<img src="${iconPath}" alt="${elementName}" class="element-tag-icon" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 4px;" onerror="this.style.display='none'">` : ''}
+            </span>`;
+        });
+        
+        return result;
     }
     
     // Get translated skill name and description
@@ -472,12 +546,16 @@
         }
         
         // Replace &Param2& with styled value
-        if (description.includes('&Param2&')) {
+        let parsedDesc = description;
+        if (parsedDesc.includes('&Param2&')) {
             const styledValue = `<span class="param-value">${value}</span>`;
-            return description.replaceAll('&Param2&', styledValue);
+            parsedDesc = parsedDesc.replaceAll('&Param2&', styledValue);
         }
         
-        return description;
+        // Parse element tag patterns
+        parsedDesc = parseElementTags(parsedDesc);
+        
+        return parsedDesc;
     }
     
     // Get note icon path
@@ -868,7 +946,7 @@
                             <img src="${iconPath}" alt="${discName}" class="disc-icon" 
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="disc-placeholder" style="display: none;">
-                                <span class="disc-placeholder-icon">💿</span>
+                                <span class="disc-placeholder-icon">${getIcon('disc')}</span>
                             </div>
                             <div class="disc-icon-overlay">
                                 <span class="zoom-icon">🔍</span>
@@ -901,7 +979,7 @@
                     </div>
                     <div class="disc-slot-preview">
                         <div class="disc-placeholder">
-                            <span class="disc-placeholder-icon">💿</span>
+                            <span class="disc-placeholder-icon">${getIcon('disc')}</span>
                             <p>레코드 선택</p>
                         </div>
                     </div>
@@ -1197,7 +1275,7 @@
                     <img src="${iconPath}" alt="${discName}"
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="disc-placeholder" style="display: none;">
-                        <span class="disc-placeholder-icon">💿</span>
+                        <span class="disc-placeholder-icon">${getIcon('disc')}</span>
                     </div>
                     ${isDisabled ? '<div class="disc-disabled-overlay"><span class="disc-disabled-text">이미 선택됨</span></div>' : ''}
                 </div>

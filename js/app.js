@@ -404,6 +404,7 @@ function extractBuffMetadata(params, level = 1) {
 /**
  * Parse and replace parameter placeholders in descriptions
  * Replaces &Param1& through &Param10& with parsed values
+ * Also parses element tag patterns like ##빛 속성 표식#1015#
  * 
  * @param {string} description - The description with placeholders
  * @param {object} params - Object containing Param1-Param10 fields
@@ -431,7 +432,81 @@ function parseDescriptionParams(description, params, level = 1, skillLevel = 1, 
         }
     }
     
+    // Parse element tag patterns: ##빛 속성 표식#1015#
+    parsedDesc = parseElementTags(parsedDesc);
+    
     return parsedDesc;
+}
+
+/**
+ * Parse element tag patterns in descriptions
+ * Format: ##ElementName 속성 표식#IconId#
+ * Example: ##빛 속성 표식#1015#
+ * 
+ * @param {string} description - The description with element tags
+ * @returns {string} - Description with formatted element tags
+ */
+function parseElementTags(description) {
+    if (!description) return description;
+    
+    // Element color mapping
+    const elementColors = {
+        '빛': '#FFD700',    // Yellow/Gold for Light
+        '불': '#FF4444',    // Red for Fire
+        '바람': '#44FF44',  // Green for Wind
+        '물': '#4444FF',    // Blue for Water
+        '어둠': '#9944FF',  // Purple for Dark
+        '땅': '#8B4513'     // Brown for Earth
+    };
+    
+    // Element icon mapping (including new extended format icons)
+    const elementIcons = {
+        '1015': 'Icon_ElementTagTrigger_Light',
+        '1016': 'Icon_ElementTagTrigger_Fire',
+        '1017': 'Icon_ElementTagTrigger_Wind',
+        '1018': 'Icon_ElementTagTrigger_Water',
+        '1019': 'Icon_ElementTagTrigger_Dark',
+        '1020': 'Icon_ElementTagTrigger_Earth',
+        // Extended format icons (same icons, different IDs)
+        '2016': 'Icon_ElementTagTrigger_Light',  // 광명 (Light)
+        '2013': 'Icon_ElementTagTrigger_Fire',   // 성염 (Fire)
+        '2017': 'Icon_ElementTagTrigger_Wind',   // 풍식 (Wind)
+        '2008': 'Icon_ElementTagTrigger_Water',  // 수류 (Water)
+        '2018': 'Icon_ElementTagTrigger_Dark',   // 암영 (Dark)
+        '2029': 'Icon_ElementTagTrigger_Earth'   // 지맥 (Earth)
+    };
+    
+    // Pattern 1: ##ElementName 속성 표식: AdditionalName#IconId# (extended format)
+    const extendedPattern = /##([가-힣]+)\s*속성\s*표식:\s*([가-힣]+)#(\d+)#/g;
+    
+    // Pattern 2: ##ElementName 속성 표식#IconId# (basic format)
+    const basicPattern = /##([가-힣]+)\s*속성\s*표식#(\d+)#/g;
+    
+    // First, replace extended format
+    let result = description.replace(extendedPattern, (match, elementName, additionalName, iconId) => {
+        const color = elementColors[elementName] || '#FFFFFF';
+        const iconName = elementIcons[iconId];
+        const iconPath = iconName ? `assets/${iconName}.png` : '';
+        
+        return `<span class="element-tag" style="color: ${color}; font-weight: 600;">
+            ${elementName} 속성 표식: ${additionalName}
+            ${iconPath ? `<img src="${iconPath}" alt="${elementName}" class="element-tag-icon" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 4px;" onerror="this.style.display='none'">` : ''}
+        </span>`;
+    });
+    
+    // Then, replace basic format
+    result = result.replace(basicPattern, (match, elementName, iconId) => {
+        const color = elementColors[elementName] || '#FFFFFF';
+        const iconName = elementIcons[iconId];
+        const iconPath = iconName ? `assets/${iconName}.png` : '';
+        
+        return `<span class="element-tag" style="color: ${color}; font-weight: 600;">
+            ${elementName} 속성 표식
+            ${iconPath ? `<img src="${iconPath}" alt="${elementName}" class="element-tag-icon" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 4px;" onerror="this.style.display='none'">` : ''}
+        </span>`;
+    });
+    
+    return result;
 }
 
 // Get skill information for a character
@@ -590,7 +665,7 @@ function openCharacterSelect(position) {
                     <div class="character-item-id">ID: ${id}</div>
                 </div>
             </div>
-            <div class="character-item-id">등급: ${'⭐'.repeat(stars)}</div>
+            <div class="character-item-id">등급: ${getIcon('star').repeat(stars)}</div>
         `;
         fragment.appendChild(item);
     });
@@ -717,7 +792,7 @@ function updateCharacterCard(position) {
                     <span>변경</span>
                 </button>
                 <button class="remove-character-btn" data-action="remove-character" data-position="${position}">
-                    <span class="remove-icon">🗑️</span>
+                    <span class="remove-icon">${getIcon('remove')}</span>
                     <span>제거</span>
                 </button>
             </div>
@@ -729,7 +804,7 @@ function updateCharacterCard(position) {
                 <div class="stat-card stat-grade">
                     <div class="stat-content">
                         <div class="stat-label"><strong>등급</strong></div>
-                        <div class="stat-value">${'⭐'.repeat(stars)}</div>
+                        <div class="stat-value">${getIcon('star').repeat(stars)}</div>
                     </div>
                 </div>
                 <div class="stat-card stat-class">
@@ -1132,7 +1207,7 @@ function createPotentialCard(potId, position) {
                  data-position="${position}">
                 <div class="potential-card-image">
                     ${backgroundImage ? `<img src="${backgroundImage}" alt="" class="potential-bg" onerror="this.style.display='none'">` : ''}
-                    ${iconPath ? `<img src="${iconPath}" alt="${name}" class="potential-icon" onerror="this.style.display='none'">` : '<span class="potential-placeholder">🎯</span>'}
+                    ${iconPath ? `<img src="${iconPath}" alt="${name}" class="potential-icon" onerror="this.style.display='none'">` : `<span class="potential-placeholder">${getIcon('target')}</span>`}
                 </div>
                 <div class="potential-card-info">
                     <div class="potential-card-name">${name}</div>
@@ -1202,9 +1277,9 @@ function toggleDescriptionMode() {
     
     // Update all toggle button texts
     const buttons = document.querySelectorAll('.description-toggle');
-    const buttonText = state.descriptionMode === 'brief' ? '📝 간략히보기' : '📋 상세보기';
+    const buttonText = state.descriptionMode === 'brief' ? `${getIcon('memo')} 간략히보기` : `${getIcon('summary')} 상세보기`;
     buttons.forEach(button => {
-        button.textContent = buttonText;
+        button.innerHTML = buttonText;
     });
     
     // Re-render all character cards and potential displays
