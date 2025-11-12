@@ -167,24 +167,24 @@
                 <div class="modal-body help-modal-body">
                     <div class="help-section">
                         <h3><i class="fa-solid fa-arrow-up-wide-short"></i> 승급 아이템 스태미나 계산</h3>
-                        <p><strong>일일 임무 보상:</strong> Math.ceil(85 + 17 × 0.5) = <strong>94 스태미나</strong> 상당</p>
-                        <p><strong>던전 드롭:</strong> Math.ceil(0.5×3×3 + 0.5×3 + 10) = <strong>16 스태미나</strong> 상당</p>
+                        <p><strong>일일 임무 보상:</strong> Math.ceil(85 + 17 × 0.5) = 하루치 획득량 가장 낮은 재료로 치환</p>
+                        <p><strong>던전 드롭:</strong> Math.ceil(0.5×3×3 + 0.5×3 + 10) = 스태 30당 획득량 가장 낮은 재료로 치환</p>
                         <p><strong>던전 1회 실행:</strong> 30 스태미나 소모</p>
-                        <p class="help-note">💡 하위 등급 소재는 3:1 비율로 상위 등급으로 합성됩니다</p>
+                        <p class="help-note">💡 하위 등급 소재는 3:1 비율로 상위 등급으로 합성되는걸로 일괄 치환</p>
                     </div>
                     
                     <div class="help-section">
                         <h3><i class="fa-solid fa-wand-magic-sparkles"></i> 스킬 강화 아이템 스태미나 계산</h3>
-                        <p><strong>일일 임무 보상:</strong> Math.ceil(29.5 + 7.5 × 0.5) = <strong>34 스태미나</strong> 상당</p>
-                        <p><strong>던전 드롭:</strong> Math.ceil(0.5×3×3 + 1.5×3 + 10) = <strong>19 스태미나</strong> 상당</p>
+                        <p><strong>일일 임무 보상:</strong> Math.ceil(29.5 + 7.5 × 0.5) = 하루치 획득량 가장 낮은 재료로 치환</p>
+                        <p><strong>던전 드롭:</strong> Math.ceil(0.5×3×3 + 1.5×3 + 10) = 스태 30당 획득량 가장 낮은 재료로 치환</p>
                         <p><strong>던전 1회 실행:</strong> 30 스태미나 소모</p>
-                        <p class="help-note">💡 하위 등급 소재는 3:1 비율로 상위 등급으로 합성됩니다</p>
+                        <p class="help-note">💡 하위 등급 소재는 3:1 비율로 상위 등급으로 합성되는걸로 일괄 치환</p>
                     </div>
                     
                     <div class="help-section">
-                        <h3><i class="fa-solid fa-calendar-days"></i> 예상 일수 계산</h3>
-                        <p>예상 일수 = Math.ceil(필요한 스태미나 ÷ (일일 보상 스태미나 + 던전 보상 스태미나))</p>
-                        <p class="help-note">⚠️ 이 계산은 예상치이며 실제 플레이 상황에 따라 달라질 수 있습니다</p>
+                        <h3><i class="fa-solid fa-calendar-days"></i> 예상 일수+스테 계산</h3>
+                        <p>일일 임무/던전의 보너스 드랍을 모두 50%로 가정, 각종 가변 드랍수치는 다 중간값 사용</p>
+                        <p class="help-note">⚠️ 이 계산은 예상치이며 실제 운빨에 따라 달라질 수 있습니다</p>
                     </div>
                 </div>
             </div>
@@ -200,16 +200,16 @@
                 <div class="modal-body help-modal-body">
                     <div class="help-section">
                         <h3><i class="fa-solid fa-arrow-up-wide-short"></i> 레코드 승급 아이템 스태미나 계산</h3>
-                        <p><strong>일일 임무 보상:</strong> Math.ceil(17 + 3.5 × 0.5) = <strong>19 스태미나</strong> 상당</p>
-                        <p><strong>던전 드롭:</strong> Math.ceil(0.5×3×3 + 0.5×3 + 10) = <strong>16 스태미나</strong> 상당</p>
+                        <p><strong>일일 임무 보상:</strong> Math.ceil(17 + 3.5 × 0.5) = 하루치 획득량 가장 낮은 재료로 치환</p>
+                        <p><strong>던전 드롭:</strong> Math.ceil(0.5×3×3 + 0.5×3 + 10) = 스태 30당 획득량 가장 낮은 재료로 치환</p>
                         <p><strong>던전 1회 실행:</strong> 30 스태미나 소모</p>
-                        <p class="help-note">💡 하위 등급 소재는 3:1 비율로 상위 등급으로 합성됩니다</p>
+                        <p class="help-note">💡 하위 등급 소재는 3:1 비율로 상위 등급으로 합성되는걸로 일괄 치환</p>
                     </div>
                     
                     <div class="help-section">
-                        <h3><i class="fa-solid fa-calendar-days"></i> 예상 일수 계산</h3>
-                        <p>예상 일수 = Math.ceil(필요한 스태미나 ÷ (일일 보상 스태미나 + 던전 보상 스태미나))</p>
-                        <p class="help-note">⚠️ 이 계산은 예상치이며 실제 플레이 상황에 따라 달라질 수 있습니다</p>
+                        <h3><i class="fa-solid fa-calendar-days"></i> 예상 일수+스테 계산</h3>
+                        <p>일일 임무/던전의 보너스 드랍을 모두 50%로 가정, 각종 가변 드랍수치는 다 중간값 사용</p>
+                        <p class="help-note">⚠️ 이 계산은 예상치이며 실제 운빨에 따라 달라질 수 있습니다</p>
                     </div>
                 </div>
             </div>
