@@ -1,3 +1,109 @@
+/**
+ * ================================
+ * Icon System (Font Awesome 6)
+ * ================================
+ * Centralized icon mapping for consistent usage across the entire application
+ * Requires Font Awesome 6 CDN to be loaded in HTML <head>
+ */
+
+const ICONS = {
+    // Navigation & Core
+    logo: 'fa-solid fa-star',
+    characterDB: 'fa-solid fa-book',
+    pottery: 'fa-solid fa-medal',
+    tasks: 'fa-solid fa-clipboard-list',
+    resources: 'fa-solid fa-box',
+    guide: 'fa-solid fa-book-open',
+
+    // Positions & Characters
+    people: 'fa-solid fa-users',
+    master: 'fa-solid fa-crown',
+    assist: 'fa-solid fa-chess-pawn',
+
+    // Features & Sections
+    dating: 'fa-solid fa-heart',
+    images: 'fa-solid fa-image',
+    archive: 'fa-solid fa-book-bookmark',
+    stats: 'fa-solid fa-chart-bar',
+    disc: 'fa-solid fa-compact-disc',
+    summary: 'fa-solid fa-list-check',
+    chat: 'fa-solid fa-message',
+    comments: 'fa-solid fa-comments',
+
+    // Actions
+    add: 'fa-solid fa-plus',
+    remove: 'fa-solid fa-trash-can',
+    edit: 'fa-solid fa-pen-to-square',
+    save: 'fa-solid fa-floppy-disk',
+    copy: 'fa-solid fa-copy',
+    share: 'fa-solid fa-share-nodes',
+    download: 'fa-solid fa-download',
+
+    // UI Elements
+    check: 'fa-solid fa-check',
+    close: 'fa-solid fa-xmark',
+    target: 'fa-solid fa-bullseye',
+    star: 'fa-solid fa-star',
+    memo: 'fa-solid fa-note-sticky',
+    construction: 'fa-solid fa-triangle-exclamation',
+
+    // Theme
+    sun: 'fa-solid fa-sun',
+    moon: 'fa-solid fa-moon',
+
+    // Stats Icons
+    attack: 'fa-solid fa-sword',
+    hp: 'fa-solid fa-heart',
+    defense: 'fa-solid fa-shield',
+    accuracy: 'fa-solid fa-bullseye',
+    critRate: 'fa-solid fa-burst',
+    critPower: 'fa-solid fa-bolt',
+    toughness: 'fa-solid fa-dumbbell',
+
+    // Misc
+    birthday: 'fa-solid fa-cake-candles',
+    heartBroken: 'fa-solid fa-heart-crack',
+
+    // Empty States
+    emptyClipboard: 'fa-regular fa-clipboard',
+    emptyChart: 'fa-solid fa-chart-simple',
+
+    // Status
+    success: 'fa-solid fa-circle-check',
+    error: 'fa-solid fa-circle-exclamation',
+    warning: 'fa-solid fa-triangle-exclamation',
+    info: 'fa-solid fa-circle-info'
+};
+
+/**
+ * Get icon HTML string
+ * @param {string} iconName - Key from ICONS object
+ * @param {string} additionalClasses - Additional CSS classes
+ * @returns {string} HTML string for icon
+ */
+function getIcon(iconName, additionalClasses = '') {
+    const iconClass = ICONS[iconName] || ICONS.star;
+    return `<i class="${iconClass} ${additionalClasses}"></i>`;
+}
+
+/**
+ * Create icon element
+ * @param {string} iconName - Key from ICONS object
+ * @param {string} additionalClasses - Additional CSS classes
+ * @returns {HTMLElement} Icon element
+ */
+function createIconElement(iconName, additionalClasses = '') {
+    const i = document.createElement('i');
+    const iconClass = ICONS[iconName] || ICONS.star;
+    i.className = `${iconClass} ${additionalClasses}`.trim();
+    return i;
+}
+
+// Make icon functions globally available
+window.ICONS = ICONS;
+window.getIcon = getIcon;
+window.createIconElement = createIconElement;
+
 // Load Navbar Component
 (function() {
     'use strict';
@@ -63,16 +169,18 @@
     function updateThemeToggle(theme) {
         const toggleBtn = document.getElementById('theme-toggle');
         if (!toggleBtn) return;
-        
+
         const icon = toggleBtn.querySelector('.theme-icon');
         const text = toggleBtn.querySelector('.theme-toggle-text');
-        
-        if (theme === 'light') {
-            icon.textContent = '🌙';
-            if (text) text.textContent = '다크';
-        } else {
-            icon.textContent = '☀️';
-            if (text) text.textContent = '라이트';
+
+        if (icon) {
+            if (theme === 'light') {
+                icon.className = `theme-icon ${ICONS.moon}`;
+                if (text) text.textContent = '다크';
+            } else {
+                icon.className = `theme-icon ${ICONS.sun}`;
+                if (text) text.textContent = '라이트';
+            }
         }
     }
     
@@ -127,15 +235,15 @@
         toast.className = `toast toast-${type}`;
         
         // Add icon based on type
-        const icons = {
-            error: '❌',
-            warning: '⚠️',
-            success: '✅',
-            info: 'ℹ️'
+        const iconMap = {
+            error: 'error',
+            warning: 'warning',
+            success: 'success',
+            info: 'info'
         };
-        
+
         toast.innerHTML = `
-            <span class="toast-icon">${icons[type] || icons.info}</span>
+            <span class="toast-icon">${getIcon(iconMap[type] || 'info')}</span>
             <span class="toast-message">${message}</span>
         `;
         

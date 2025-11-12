@@ -88,11 +88,11 @@
 
                 <!-- Party Overview Cards -->
                 <div class="summary-section">
-                    <h3 class="summary-section-title">👥 캐릭터</h3>
+                    <h3 class="summary-section-title">${getIcon('people')} 캐릭터</h3>
                     <div class="summary-cards-grid">
-                        ${generateSummaryCard('master', '👑 메인', 'master-badge')}
-                        ${generateSummaryCard('assist1', '♟️ 지원 1', 'assist-badge')}
-                        ${generateSummaryCard('assist2', '♟️ 지원 2', 'assist-badge')}
+                        ${generateSummaryCard('master', `${getIcon('master')} 메인`, 'master-badge')}
+                        ${generateSummaryCard('assist1', `${getIcon('assist')} 지원 1`, 'assist-badge')}
+                        ${generateSummaryCard('assist2', `${getIcon('assist')} 지원 2`, 'assist-badge')}
                     </div>
                 </div>
 
@@ -104,7 +104,7 @@
 
                 <!-- Discs Section -->
                 <div class="summary-section">
-                    <h3 class="summary-section-title">💿 레코드</h3>
+                    <h3 class="summary-section-title">${getIcon('disc')} 레코드</h3>
                     ${generateAllDiscsSection()}
                 </div>
 
@@ -283,7 +283,7 @@
                 html += `
                     <div class="summary-disc-card">
                         <div class="disc-card-icon-row">
-                            ${iconPath ? `<img src="${iconPath}" alt="${discName}" class="disc-card-icon" onerror="this.style.display='none'">` : '<div class="disc-card-icon-placeholder">💿</div>'}
+                            ${iconPath ? `<img src="${iconPath}" alt="${discName}" class="disc-card-icon" onerror="this.style.display='none'">` : `<div class="disc-card-icon-placeholder">${getIcon('disc')}</div>`}
                             <div class="disc-card-info">
                                 <div class="disc-card-name">${discName}</div>
                                 <div class="disc-card-lb">돌파 ${limitBreak}</div>
@@ -348,7 +348,7 @@
                 html += `
                     <div class="summary-disc-card sub-disc">
                         <div class="disc-card-icon-row">
-                            ${iconPath ? `<img src="${iconPath}" alt="${discName}" class="disc-card-icon" onerror="this.style.display='none'">` : '<div class="disc-card-icon-placeholder">💿</div>'}
+                            ${iconPath ? `<img src="${iconPath}" alt="${discName}" class="disc-card-icon" onerror="this.style.display='none'">` : `<div class="disc-card-icon-placeholder">${getIcon('disc')}</div>`}
                             <div class="disc-card-info">
                                 <div class="disc-card-name">${discName}</div>
                                 <div class="disc-card-lb">레벨 ${phaseLabel}</div>
@@ -658,7 +658,7 @@
         // Show specific potentials first
         if (specificPots.length > 0) {
             html += '<div class="summary-potential-section">';
-            html += '<div class="summary-potential-section-title">⭐ 전용 잠재력</div>';
+            html += `<div class="summary-potential-section-title">${getIcon('star')} 전용 잠재력</div>`;
             html += '<div class="summary-potential-list specific-potentials">';
             
             specificPots.forEach(potId => {
@@ -705,7 +705,7 @@
         // Show normal/common potentials
         if (normalCommonPots.length > 0) {
             html += '<div class="summary-potential-section">';
-            html += '<div class="summary-potential-section-title">📋 일반/공용 잠재력</div>';
+            html += `<div class="summary-potential-section-title">${getIcon('summary')} 일반/공용 잠재력</div>`;
             html += '<div class="summary-potential-list">';
             
             normalCommonPots.forEach(potId => {
@@ -808,14 +808,14 @@
                 </div>
             </div>
             <div class="build-stat-card highlight">
-                <div class="build-stat-icon">⭐</div>
+                <div class="build-stat-icon">${getIcon('star')}</div>
                 <div class="build-stat-info">
                     <span class="build-stat-label">총 점수</span>
                     <span class="build-stat-value large">${totalScore}</span>
                 </div>
             </div>
             <div class="build-stat-card">
-                <div class="build-stat-icon">⚡</div>
+                <div class="build-stat-icon">${getIcon('critPower')}</div>
                 <div class="build-stat-info">
                     <span class="build-stat-label">총 잠재력</span>
                     <span class="build-stat-value">${totalPotentialLevels}</span>

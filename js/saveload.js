@@ -688,7 +688,7 @@
                         <div class="load-item-title">${buildTitle}</div>
                         <div class="load-item-meta">
                             <span>저장 시간: ${dateStr}</span>
-                            ${buildMemo ? `<span class="has-memo">📝 메모 있음</span>` : ''}
+                            ${buildMemo ? `<span class="has-memo">${getIcon('memo')} 메모 있음</span>` : ''}
                         </div>
                     </div>
                     <div class="load-item-actions">

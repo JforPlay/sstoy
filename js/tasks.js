@@ -168,7 +168,7 @@ function renderTasks() {
     const container = document.getElementById('tasks-list');
     
     if (tasksState.allTasks.length === 0) {
-        container.innerHTML = '<div class="empty-state-tasks"><div class="empty-state-icon">📋</div><div class="empty-state-text">과제가 없습니다</div></div>';
+        container.innerHTML = `<div class="empty-state-tasks"><div class="empty-state-icon">${getIcon('tasks')}</div><div class="empty-state-text">과제가 없습니다</div></div>`;
         return;
     }
 
@@ -191,7 +191,7 @@ function renderTasks() {
                     <div class="task-tags">
                         ${(task.Tags || []).map(tag => {
                             const tagName = getTranslatedTagName(tag);
-                            return `<span class="task-tag required"><span class="tag-icon">⭐</span>${tagName}</span>`;
+                            return `<span class="task-tag required"><span class="tag-icon">${getIcon('star')}</span>${tagName}</span>`;
                         }).join('')}
                     </div>
                 </div>
@@ -255,7 +255,7 @@ function renderSelectedTasks() {
     if (tasksState.selectedTasks.length === 0) {
         container.innerHTML = `
             <div class="empty-state-tasks">
-                <div class="empty-state-icon">📝</div>
+                <div class="empty-state-icon">${getIcon('memo')}</div>
                 <div class="empty-state-text">선택된 과제가 없습니다</div>
                 <div class="empty-state-hint">위에서 과제를 선택해주세요</div>
             </div>
@@ -399,7 +399,7 @@ function renderCharacters() {
     }
     
     if (validCharacters.length === 0) {
-        container.innerHTML = '<div class="empty-state-tasks"><div class="empty-state-icon">👥</div><div class="empty-state-text">캐릭터가 없습니다</div></div>';
+        container.innerHTML = `<div class="empty-state-tasks"><div class="empty-state-icon">${getIcon('people')}</div><div class="empty-state-text">캐릭터가 없습니다</div></div>`;
         return;
     }
 

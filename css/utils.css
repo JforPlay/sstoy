@@ -1,4 +1,64 @@
 /* ================================
+   Font Awesome Icons
+   ================================ */
+/*
+   Font Awesome 6 Free CDN - Add this link to ALL HTML files in <head>:
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+*/
+
+/* Icon utility classes */
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-sm {
+    font-size: 0.875rem;
+    width: 1rem;
+    height: 1rem;
+}
+
+.icon-md {
+    font-size: 1.125rem;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.icon-lg {
+    font-size: 1.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.icon-xl {
+    font-size: 2rem;
+    width: 2.25rem;
+    height: 2.25rem;
+}
+
+.icon-2xl {
+    font-size: 3rem;
+    width: 3.25rem;
+    height: 3.25rem;
+}
+
+/* Star icon styling - golden yellow color */
+.fa-star {
+    color: #fbbf24;
+}
+
+/* Ensure star icons maintain color in different contexts */
+.grade-badge-inline .fa-star,
+.character-item-id .fa-star,
+.stat-value .fa-star,
+.task-tag .fa-star,
+.build-stat-icon .fa-star,
+.summary-potential-section-title .fa-star {
+    color: #fbbf24;
+}
+
+/* ================================
    Navigation Bar Styles
    ================================ */
 .navbar {
