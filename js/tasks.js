@@ -16,7 +16,13 @@ const tasksState = {
     // Track which tags each character is filling: taskId -> { charId: [tagIds] }
     characterFilledTag: {},
     // Currently selected task for character assignment
-    activeTaskId: null
+    activeTaskId: null,
+    // Character ownership tracking
+    ownedCharacters: new Set(),
+    // Character filter: 'all', 'owned', 'not-owned'
+    characterFilter: 'all',
+    // Insights panel state
+    insightsPanelCollapsed: true
 };
 
 // Lookup Caches (Priority 2: Performance)
@@ -131,6 +137,125 @@ function clearLookupCaches() {
     lookupCache.taskTagCounts.clear();
 }
 
+// Character Ownership Management
+function loadOwnership() {
+    try {
+        const saved = localStorage.getItem('tasksOwnedCharacters');
+        if (saved) {
+            const ownedArray = JSON.parse(saved);
+            tasksState.ownedCharacters = new Set(ownedArray);
+        }
+    } catch (error) {
+        console.error('Error loading ownership:', error);
+    }
+}
+
+function saveOwnership() {
+    try {
+        const ownedArray = Array.from(tasksState.ownedCharacters);
+        localStorage.setItem('tasksOwnedCharacters', JSON.stringify(ownedArray));
+    } catch (error) {
+        console.error('Error saving ownership:', error);
+    }
+}
+
+function toggleOwnership(charId) {
+    if (tasksState.ownedCharacters.has(charId)) {
+        tasksState.ownedCharacters.delete(charId);
+    } else {
+        tasksState.ownedCharacters.add(charId);
+    }
+    saveOwnership();
+}
+
+function selectAllOwned() {
+    const validCharacters = tasksState.characters.filter(char => {
+        const name = getTranslatedCharacterName(char);
+        return name !== '???';
+    });
+    validCharacters.forEach(char => tasksState.ownedCharacters.add(char.Id));
+    saveOwnership();
+    renderOwnershipGrid();
+    updateOwnershipCount();
+}
+
+function deselectAllOwned() {
+    tasksState.ownedCharacters.clear();
+    saveOwnership();
+    renderOwnershipGrid();
+    updateOwnershipCount();
+}
+
+function updateOwnershipCount() {
+    const total = tasksState.characters.filter(char => {
+        const name = getTranslatedCharacterName(char);
+        return name !== '???';
+    }).length;
+    const owned = tasksState.ownedCharacters.size;
+    const countElement = document.getElementById('ownership-count');
+    if (countElement) {
+        countElement.textContent = `소유: ${owned} / ${total}`;
+    }
+}
+
+// Ownership Modal Functions
+function openOwnershipModal() {
+    const modal = document.getElementById('ownership-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        renderOwnershipGrid();
+        updateOwnershipCount();
+    }
+}
+
+function closeOwnershipModal() {
+    const modal = document.getElementById('ownership-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        // Re-render characters to show ownership changes
+        renderCharacters();
+        renderInsights();
+    }
+}
+
+function renderOwnershipGrid() {
+    const container = document.getElementById('ownership-grid');
+    if (!container) return;
+
+    const validCharacters = tasksState.characters.filter(char => {
+        const name = getTranslatedCharacterName(char);
+        return name !== '???';
+    });
+
+    container.innerHTML = validCharacters.map(char => {
+        const name = getTranslatedCharacterName(char);
+        const imagePath = `assets/char/avg1_${char.Id}_002.png`;
+        const isOwned = tasksState.ownedCharacters.has(char.Id);
+
+        return `
+            <div class="ownership-card ${isOwned ? 'owned' : ''}" data-ownership-char-id="${char.Id}">
+                <img src="${imagePath}" alt="${name}" class="ownership-card-image" onerror="this.style.display='none'">
+                <div class="ownership-card-name">${name}</div>
+                <div class="ownership-card-id">ID: ${char.Id}</div>
+            </div>
+        `;
+    }).join('');
+}
+
+// Character Filter Functions
+function setCharacterFilter(filter) {
+    tasksState.characterFilter = filter;
+
+    // Update filter button states
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === filter);
+    });
+
+    renderCharacters();
+}
+
 // Load all required data
 async function loadTasksData() {
     try {
@@ -146,17 +271,21 @@ async function loadTasksData() {
         tasksState.allTasks = Object.values(agentData).filter(task => task.Level === 70);
         tasksState.taskStrings = agentKR;
         tasksState.tagStrings = characterTagKR;
-        
+
         // Prepare character data
         tasksState.characters = Object.values(characterData);
         tasksState.characterNames = await fetch('data/kr/Character.json').then(r => r.json());
         tasksState.characterTags = characterDesData;
-        
+
+        // Load ownership from localStorage
+        loadOwnership();
+
         // Clear caches on data reload
         clearLookupCaches();
 
         renderTasks();
         renderCharacters();
+        renderInsights();
     } catch (error) {
         console.error('Error loading tasks data:', error);
         showError('데이터를 불러오는데 실패했습니다.');
@@ -246,6 +375,7 @@ function toggleTaskSelection(taskId) {
     renderSelectedTasks();
     renderCharacters();
     updateTaskCounter();
+    renderInsights();
 }
 
 // Render selected tasks
@@ -358,13 +488,20 @@ function updateTaskCounter() {
 // Render characters
 function renderCharacters() {
     const container = document.getElementById('characters-list');
-    
+
     // Filter out characters with "???" as name
     let validCharacters = tasksState.characters.filter(char => {
         const name = getTranslatedCharacterName(char);
         return name !== '???';
     });
-    
+
+    // Apply ownership filter
+    if (tasksState.characterFilter === 'owned') {
+        validCharacters = validCharacters.filter(char => tasksState.ownedCharacters.has(char.Id));
+    } else if (tasksState.characterFilter === 'not-owned') {
+        validCharacters = validCharacters.filter(char => !tasksState.ownedCharacters.has(char.Id));
+    }
+
     // If a task is active, sort characters by tag matching
     if (tasksState.activeTaskId) {
         const activeTask = tasksState.selectedTasks.find(t => t.Id === tasksState.activeTaskId);
@@ -373,10 +510,11 @@ function renderCharacters() {
             const filledSlots = tasksState.filledTagSlots[tasksState.activeTaskId] || {};
             const tagCounts = getTagCounts(activeTask);
             const allTaskTags = [...(activeTask.Tags || []), ...(activeTask.ExtraTags || [])];
-            
+            const activeTaskChars = tasksState.assignedCharacters[tasksState.activeTaskId] || [];
+
             // Pre-calculate fillable counts for better performance
             const characterFillableScores = new Map();
-            
+
             validCharacters.forEach(char => {
                 const charTags = getCharacterTags(char.Id);
                 const canFillCount = charTags.filter(tag => {
@@ -389,13 +527,29 @@ function renderCharacters() {
                 }).length;
                 characterFillableScores.set(char.Id, canFillCount);
             });
-            
+
+            // Sort by: assigned to active task first, then ownership, then fillable score
             validCharacters.sort((a, b) => {
+                const aAssigned = activeTaskChars.includes(a.Id) ? 1 : 0;
+                const bAssigned = activeTaskChars.includes(b.Id) ? 1 : 0;
+                if (aAssigned !== bAssigned) return bAssigned - aAssigned;
+
+                const aOwned = tasksState.ownedCharacters.has(a.Id) ? 1 : 0;
+                const bOwned = tasksState.ownedCharacters.has(b.Id) ? 1 : 0;
+                if (aOwned !== bOwned) return bOwned - aOwned;
+
                 const aScore = characterFillableScores.get(a.Id) || 0;
                 const bScore = characterFillableScores.get(b.Id) || 0;
                 return bScore - aScore;
             });
         }
+    } else {
+        // No active task - just sort by ownership
+        validCharacters.sort((a, b) => {
+            const aOwned = tasksState.ownedCharacters.has(a.Id) ? 1 : 0;
+            const bOwned = tasksState.ownedCharacters.has(b.Id) ? 1 : 0;
+            return bOwned - aOwned;
+        });
     }
     
     if (validCharacters.length === 0) {
@@ -407,29 +561,30 @@ function renderCharacters() {
         const name = getTranslatedCharacterName(char);
         const tags = getCharacterTags(char.Id);
         const imagePath = `assets/char/avg1_${char.Id}_002.png`;
-        
+        const isOwned = tasksState.ownedCharacters.has(char.Id);
+
         // Check if character is assigned to the active task
         let isAssignedToActiveTask = false;
         if (tasksState.activeTaskId) {
             const activeTaskChars = tasksState.assignedCharacters[tasksState.activeTaskId] || [];
             isAssignedToActiveTask = activeTaskChars.includes(char.Id);
         }
-        
+
         // Check if character is assigned to any other task
         const isAssignedToOtherTask = Object.entries(tasksState.assignedCharacters).some(([taskId, chars]) => {
             return (!tasksState.activeTaskId || parseInt(taskId) !== tasksState.activeTaskId) && chars.includes(char.Id);
         });
-        
+
         // Check if character can fill remaining slots in active task
         let canFillRemainingSlots = false;
-        
+
         if (tasksState.activeTaskId && !isAssignedToActiveTask) {
             const activeTask = tasksState.selectedTasks.find(t => t.Id === tasksState.activeTaskId);
             if (activeTask) {
                 const allTaskTags = [...(activeTask.Tags || []), ...(activeTask.ExtraTags || [])];
                 const filledSlots = tasksState.filledTagSlots[tasksState.activeTaskId] || {};
                 const tagCounts = getTagCounts(activeTask);
-                
+
                 // Check if character can fill any remaining unfilled slots
                 canFillRemainingSlots = tags.some(charTag => {
                     if (allTaskTags.includes(charTag)) {
@@ -441,13 +596,13 @@ function renderCharacters() {
                 });
             }
         }
-        
+
         // Determine if card should be clickable
         const isClickable = tasksState.selectedTasks.length > 0 && tasksState.activeTaskId && !isAssignedToOtherTask;
         const cursorClass = !isClickable ? 'not-clickable' : '';
-        
+
         return `
-            <div class="character-card-small ${isAssignedToActiveTask ? 'selected' : ''} ${isAssignedToOtherTask ? 'disabled' : ''} ${canFillRemainingSlots ? 'highlighted' : ''} ${cursorClass}" data-character-id="${char.Id}">
+            <div class="character-card-small ${isOwned ? 'owned' : ''} ${isAssignedToActiveTask ? 'selected' : ''} ${isAssignedToOtherTask ? 'disabled' : ''} ${canFillRemainingSlots ? 'highlighted' : ''} ${cursorClass}" data-character-id="${char.Id}">
                 <img src="${imagePath}" alt="${name}" class="character-image-small" onerror="this.style.display='none'">
                 <div class="character-name-small">${name}</div>
                 <div class="character-id-small">ID: ${char.Id}</div>
@@ -498,6 +653,7 @@ function selectTask(taskId) {
     }
     renderSelectedTasks();
     renderCharacters();
+    renderInsights();
 }
 
 // Render character slots for a task
@@ -709,9 +865,10 @@ function assignCharacterToSlot(taskId, slotIndex, charId) {
     
     // Assign character to slot
     tasksState.assignedCharacters[taskId][slotIndex] = charId;
-    
+
     renderSelectedTasks();
     renderCharacters();
+    renderInsights();
 }
 
 // Remove character from task
@@ -743,15 +900,428 @@ function removeCharacterFromTask(taskId, slotIndex) {
         
         // Remove character from slot
         tasksState.assignedCharacters[taskId][slotIndex] = null;
-        
+
         // Remove null values from end
-        while (tasksState.assignedCharacters[taskId].length > 0 && 
+        while (tasksState.assignedCharacters[taskId].length > 0 &&
                !tasksState.assignedCharacters[taskId][tasksState.assignedCharacters[taskId].length - 1]) {
             tasksState.assignedCharacters[taskId].pop();
         }
     }
     renderSelectedTasks();
     renderCharacters();
+    renderInsights();
+}
+
+// Insights Panel Functions
+function toggleInsightsPanel() {
+    const panel = document.getElementById('insights-panel');
+    if (panel) {
+        tasksState.insightsPanelCollapsed = !tasksState.insightsPanelCollapsed;
+        panel.classList.toggle('collapsed', tasksState.insightsPanelCollapsed);
+    }
+}
+
+function initInsightsPanel() {
+    const panel = document.getElementById('insights-panel');
+    if (panel) {
+        // Start collapsed
+        panel.classList.add('collapsed');
+        tasksState.insightsPanelCollapsed = true;
+    }
+}
+
+function calculateInsights() {
+    if (tasksState.selectedTasks.length === 0) {
+        return null;
+    }
+
+    // 1. Completion Status
+    let totalRequiredTags = 0;
+    let totalFilledTags = 0;
+    let completedTasks = 0;
+
+    tasksState.selectedTasks.forEach(task => {
+        const tagCounts = getTagCounts(task);
+        const filledSlots = tasksState.filledTagSlots[task.Id] || {};
+
+        Object.entries(tagCounts.required).forEach(([tag, count]) => {
+            totalRequiredTags += count;
+            totalFilledTags += Math.min(filledSlots[tag] || 0, count);
+        });
+
+        // Check if all required tags are filled
+        const allRequiredFilled = Object.entries(tagCounts.required).every(([tag, count]) => {
+            return (filledSlots[tag] || 0) >= count;
+        });
+        if (allRequiredFilled) completedTasks++;
+    });
+
+    // 2. Missing Tag Fillers (owned characters that can fill gaps)
+    const missingTagFillers = [];
+    const allAssignedCharIds = new Set();
+    Object.values(tasksState.assignedCharacters).forEach(chars => {
+        chars.forEach(id => allAssignedCharIds.add(id));
+    });
+
+    // Build a map for each character: total tag satisfactions and unique tags
+    const characterFillScores = new Map();
+
+    const validCharacters = tasksState.characters.filter(char => {
+        const name = getTranslatedCharacterName(char);
+        return name !== '???' && tasksState.ownedCharacters.has(char.Id);
+    });
+
+    validCharacters.forEach(char => {
+        if (!allAssignedCharIds.has(char.Id)) {
+            const charTags = getCharacterTags(char.Id);
+            let totalTagSatisfactions = 0; // Count every tag match including duplicates
+            let extraTagSatisfactions = 0;
+            let uniqueTagsCount = 0;
+            const tasksMatched = [];
+            const uniqueTags = new Set();
+
+            tasksState.selectedTasks.forEach(task => {
+                const tagCounts = getTagCounts(task);
+                const filledSlots = tasksState.filledTagSlots[task.Id] || {};
+                const requiredTags = task.Tags || [];
+                const extraTags = task.ExtraTags || [];
+
+                const canFillRequired = [];
+                const canFillExtra = [];
+
+                // Check required tags
+                charTags.forEach(charTag => {
+                    const inRequired = requiredTags.filter(t => t === charTag).length;
+                    if (inRequired > 0) {
+                        const currentFilled = filledSlots[charTag] || 0;
+                        const totalRequired = tagCounts.required[charTag] || 0;
+                        if (currentFilled < totalRequired) {
+                            // Count each unfilled slot
+                            const unfilled = totalRequired - currentFilled;
+                            for (let i = 0; i < unfilled; i++) {
+                                canFillRequired.push(charTag);
+                                totalTagSatisfactions++;
+                            }
+                            uniqueTags.add(charTag);
+                        }
+                    }
+                });
+
+                // Check extra tags (higher priority)
+                charTags.forEach(charTag => {
+                    const inExtra = extraTags.filter(t => t === charTag).length;
+                    if (inExtra > 0) {
+                        const currentFilled = filledSlots[charTag] || 0;
+                        const totalRequired = (tagCounts.required[charTag] || 0);
+                        const totalExtra = (tagCounts.extra[charTag] || 0);
+                        const totalNeeded = totalRequired + totalExtra;
+                        if (currentFilled < totalNeeded) {
+                            // Count each unfilled extra slot
+                            const unfilled = totalNeeded - currentFilled;
+                            for (let i = 0; i < unfilled; i++) {
+                                canFillExtra.push(charTag);
+                                totalTagSatisfactions++;
+                                extraTagSatisfactions++;
+                            }
+                            uniqueTags.add(charTag);
+                        }
+                    }
+                });
+
+                if (canFillRequired.length > 0 || canFillExtra.length > 0) {
+                    tasksMatched.push({
+                        taskId: task.Id,
+                        task: task,
+                        requiredTags: canFillRequired,
+                        extraTags: canFillExtra
+                    });
+                }
+            });
+
+            uniqueTagsCount = uniqueTags.size;
+
+            if (totalTagSatisfactions > 0) {
+                characterFillScores.set(char.Id, {
+                    charId: char.Id,
+                    char: char,
+                    totalTagSatisfactions: totalTagSatisfactions,
+                    extraTagSatisfactions: extraTagSatisfactions,
+                    uniqueTagsCount: uniqueTagsCount,
+                    tasksMatched: tasksMatched
+                });
+            }
+        }
+    });
+
+    // Convert to array and sort by: extra tags first, then total satisfactions
+    characterFillScores.forEach(score => {
+        missingTagFillers.push(score);
+    });
+
+    missingTagFillers.sort((a, b) => {
+        // Prioritize extra tags
+        if (a.extraTagSatisfactions !== b.extraTagSatisfactions) {
+            return b.extraTagSatisfactions - a.extraTagSatisfactions;
+        }
+        // Then total satisfactions
+        return b.totalTagSatisfactions - a.totalTagSatisfactions;
+    });
+
+    // 3. MVP Characters (characters that can satisfy multiple tasks)
+    const mvpCharacters = [];
+    const mvpValidCharacters = tasksState.characters.filter(char => {
+        const name = getTranslatedCharacterName(char);
+        return name !== '???' && tasksState.ownedCharacters.has(char.Id);
+    });
+
+    mvpValidCharacters.forEach(char => {
+        if (!allAssignedCharIds.has(char.Id)) {
+            const charTags = getCharacterTags(char.Id);
+            let matchedTasksCount = 0;
+            let totalTagSatisfactions = 0;
+            let extraTagSatisfactions = 0;
+            const matchedTasks = [];
+            const uniqueTags = new Set();
+
+            tasksState.selectedTasks.forEach(task => {
+                const requiredTags = task.Tags || [];
+                const extraTags = task.ExtraTags || [];
+                let taskMatched = false;
+                let taskTagSatisfactions = 0;
+                let taskExtraTagSatisfactions = 0;
+
+                // Count required tags (all instances)
+                charTags.forEach(charTag => {
+                    const requiredMatches = requiredTags.filter(t => t === charTag).length;
+                    if (requiredMatches > 0) {
+                        taskTagSatisfactions += requiredMatches;
+                        totalTagSatisfactions += requiredMatches;
+                        taskMatched = true;
+                        uniqueTags.add(charTag);
+                    }
+                });
+
+                // Count extra tags (all instances, higher priority)
+                charTags.forEach(charTag => {
+                    const extraMatches = extraTags.filter(t => t === charTag).length;
+                    if (extraMatches > 0) {
+                        taskTagSatisfactions += extraMatches;
+                        taskExtraTagSatisfactions += extraMatches;
+                        totalTagSatisfactions += extraMatches;
+                        extraTagSatisfactions += extraMatches;
+                        taskMatched = true;
+                        uniqueTags.add(charTag);
+                    }
+                });
+
+                if (taskMatched) {
+                    matchedTasksCount++;
+                    matchedTasks.push({
+                        taskId: task.Id,
+                        task: task,
+                        tagSatisfactions: taskTagSatisfactions,
+                        extraTagSatisfactions: taskExtraTagSatisfactions
+                    });
+                }
+            });
+
+            if (matchedTasksCount >= 2) {
+                mvpCharacters.push({
+                    charId: char.Id,
+                    char: char,
+                    matchedTasksCount: matchedTasksCount,
+                    totalTagSatisfactions: totalTagSatisfactions,
+                    extraTagSatisfactions: extraTagSatisfactions,
+                    uniqueTagsCount: uniqueTags.size,
+                    tasks: matchedTasks
+                });
+            }
+        }
+    });
+
+    // Sort by: tasks matched first, then extra tags, then total satisfactions
+    mvpCharacters.sort((a, b) => {
+        if (a.matchedTasksCount !== b.matchedTasksCount) {
+            return b.matchedTasksCount - a.matchedTasksCount;
+        }
+        if (a.extraTagSatisfactions !== b.extraTagSatisfactions) {
+            return b.extraTagSatisfactions - a.extraTagSatisfactions;
+        }
+        return b.totalTagSatisfactions - a.totalTagSatisfactions;
+    });
+
+    // 4. Acquisition Priority (unowned characters that would be valuable)
+    const acquisitionPriority = [];
+    const unownedCharacters = tasksState.characters.filter(char => {
+        const name = getTranslatedCharacterName(char);
+        return name !== '???' && !tasksState.ownedCharacters.has(char.Id);
+    });
+
+    unownedCharacters.forEach(char => {
+        const charTags = getCharacterTags(char.Id);
+        let valueScore = 0;
+        const valueTasks = [];
+
+        tasksState.selectedTasks.forEach(task => {
+            const tagCounts = getTagCounts(task);
+            const filledSlots = tasksState.filledTagSlots[task.Id] || {};
+            const requiredTags = task.Tags || [];
+            const extraTags = task.ExtraTags || [];
+
+            // Separate required and extra tags this character can fill
+            const canFillRequiredTags = [];
+            const canFillExtraTags = [];
+
+            charTags.forEach(charTag => {
+                // Check required tags
+                const inRequired = requiredTags.filter(t => t === charTag).length;
+                if (inRequired > 0) {
+                    const currentFilled = filledSlots[charTag] || 0;
+                    const totalRequired = tagCounts.required[charTag] || 0;
+                    if (currentFilled < totalRequired) {
+                        canFillRequiredTags.push(charTag);
+                    }
+                }
+
+                // Check extra tags
+                const inExtra = extraTags.filter(t => t === charTag).length;
+                if (inExtra > 0) {
+                    const currentFilled = filledSlots[charTag] || 0;
+                    const totalNeeded = (tagCounts.required[charTag] || 0) + (tagCounts.extra[charTag] || 0);
+                    if (currentFilled < totalNeeded) {
+                        canFillExtraTags.push(charTag);
+                    }
+                }
+            });
+
+            const canFillCount = canFillRequiredTags.length + canFillExtraTags.length;
+
+            if (canFillCount > 0) {
+                // Weighted scoring: Extra tags × 3, Required tags × 1
+                const taskScore = (canFillExtraTags.length * 3) + (canFillRequiredTags.length * 1);
+                valueScore += taskScore;
+                valueTasks.push({
+                    taskId: task.Id,
+                    task: task,
+                    canFillTagsCount: canFillCount,
+                    requiredTagsCount: canFillRequiredTags.length,
+                    extraTagsCount: canFillExtraTags.length
+                });
+            }
+        });
+
+        if (valueScore > 0) {
+            acquisitionPriority.push({
+                charId: char.Id,
+                char: char,
+                valueScore: valueScore,
+                tasks: valueTasks
+            });
+        }
+    });
+
+    // Sort by value score
+    acquisitionPriority.sort((a, b) => b.valueScore - a.valueScore);
+
+    return {
+        completionStatus: {
+            totalRequiredTags,
+            totalFilledTags,
+            completedTasks,
+            totalTasks: tasksState.selectedTasks.length,
+            completionPercentage: totalRequiredTags > 0 ? Math.round((totalFilledTags / totalRequiredTags) * 100) : 0
+        },
+        missingTagFillers: missingTagFillers.slice(0, 10),
+        mvpCharacters: mvpCharacters.slice(0, 10),
+        acquisitionPriority: acquisitionPriority.slice(0, 10)
+    };
+}
+
+function renderInsights() {
+    const container = document.getElementById('insights-body');
+    if (!container) return;
+
+    const insights = calculateInsights();
+
+    if (!insights || tasksState.selectedTasks.length === 0) {
+        container.innerHTML = `
+            <div class="insight-empty">
+                과제를 선택하면 인사이트가 표시됩니다.
+            </div>
+        `;
+        return;
+    }
+
+    const { completionStatus, missingTagFillers, mvpCharacters, acquisitionPriority } = insights;
+
+    container.innerHTML = `
+        <!-- Completion Status -->
+        <div class="insight-section">
+            <div class="insight-title">
+                <i class="fa-solid fa-chart-pie"></i> 완료 상태
+            </div>
+            <div class="completion-stats">
+                <div class="stat-card">
+                    <div class="stat-value">${completionStatus.completedTasks}/${completionStatus.totalTasks}</div>
+                    <div class="stat-label">완료된 과제</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${completionStatus.totalFilledTags}/${completionStatus.totalRequiredTags}</div>
+                    <div class="stat-label">필수 태그</div>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: ${completionStatus.completionPercentage}%"></div>
+            </div>
+        </div>
+
+        <!-- MVP Characters -->
+        <div class="insight-section">
+            <div class="insight-title">
+                <i class="fa-solid fa-star"></i> MVP 캐릭터
+            </div>
+            ${mvpCharacters.length > 0 ? mvpCharacters.map(mvp => {
+                const char = mvp.char;
+                const name = getTranslatedCharacterName(char);
+                const imagePath = `assets/char/avg1_${char.Id}_002.png`;
+                const detailText = mvp.extraTagSatisfactions > 0
+                    ? `추가 ${mvp.extraTagSatisfactions}개 / 총 ${mvp.totalTagSatisfactions}개 태그`
+                    : `${mvp.totalTagSatisfactions}개 태그 만족`;
+                return `
+                    <div class="insight-item">
+                        <img src="${imagePath}" alt="${name}" class="insight-item-image" onerror="this.style.display='none'">
+                        <div class="insight-item-info">
+                            <div class="insight-item-name">${name}</div>
+                            <div class="insight-item-detail">${detailText}</div>
+                        </div>
+                        <div class="insight-item-badge">${mvp.matchedTasksCount}개 과제</div>
+                    </div>
+                `;
+            }).join('') : '<div class="insight-empty">해당 캐릭터가 없습니다</div>'}
+        </div>
+
+        <!-- Acquisition Priority -->
+        <div class="insight-section">
+            <div class="insight-title">
+                <i class="fa-solid fa-shopping-cart"></i> 획득/육성 추천
+            </div>
+            ${acquisitionPriority.length > 0 ? acquisitionPriority.map(acq => {
+                const char = acq.char;
+                const name = getTranslatedCharacterName(char);
+                const imagePath = `assets/char/avg1_${char.Id}_002.png`;
+                return `
+                    <div class="insight-item">
+                        <img src="${imagePath}" alt="${name}" class="insight-item-image" onerror="this.style.display='none'">
+                        <div class="insight-item-info">
+                            <div class="insight-item-name">${name}</div>
+                            <div class="insight-item-detail">${acq.tasks.length}개 과제에 필요</div>
+                        </div>
+                        <div class="insight-item-badge">가치 ${acq.valueScore}</div>
+                    </div>
+                `;
+            }).join('') : '<div class="insight-empty">모든 태그가 채워졌습니다</div>'}
+        </div>
+    `;
 }
 
 // Helper functions for notifications
@@ -794,7 +1364,7 @@ function setupEventDelegation() {
             }
         });
     }
-    
+
     // Delegation for selected tasks
     const selectedContainer = document.getElementById('selected-tasks');
     if (selectedContainer) {
@@ -809,7 +1379,7 @@ function setupEventDelegation() {
                 }
                 return;
             }
-            
+
             // Handle remove character button
             const removeCharBtn = e.target.closest('.remove-character-btn');
             if (removeCharBtn) {
@@ -821,14 +1391,14 @@ function setupEventDelegation() {
                 }
                 return;
             }
-            
+
             // Handle empty slot click
             const emptySlot = e.target.closest('.character-slot:not(.filled)');
             if (emptySlot) {
                 const taskId = parseInt(emptySlot.dataset.addCharTask);
                 const task = tasksState.selectedTasks.find(t => t.Id === taskId);
                 const taskTitle = getTranslatedTaskTitle(task);
-                
+
                 if (tasksState.activeTaskId !== taskId) {
                     showWarning(`이 과제 카드를 먼저 선택한 후, 아래 캐릭터 목록에서 캐릭터를 클릭하세요.`);
                 } else {
@@ -836,7 +1406,7 @@ function setupEventDelegation() {
                 }
                 return;
             }
-            
+
             // Handle task card selection
             const taskCard = e.target.closest('.selected-task-card');
             if (taskCard) {
@@ -847,7 +1417,7 @@ function setupEventDelegation() {
             }
         });
     }
-    
+
     // Delegation for characters list
     const charactersContainer = document.getElementById('characters-list');
     if (charactersContainer) {
@@ -861,6 +1431,69 @@ function setupEventDelegation() {
             }
         });
     }
+
+    // Ownership Modal Controls
+    const manageOwnershipBtn = document.getElementById('manage-ownership-btn');
+    if (manageOwnershipBtn) {
+        manageOwnershipBtn.addEventListener('click', openOwnershipModal);
+    }
+
+    const closeOwnershipBtn = document.getElementById('close-ownership-modal');
+    if (closeOwnershipBtn) {
+        closeOwnershipBtn.addEventListener('click', closeOwnershipModal);
+    }
+
+    const selectAllBtn = document.getElementById('select-all-owned');
+    if (selectAllBtn) {
+        selectAllBtn.addEventListener('click', selectAllOwned);
+    }
+
+    const deselectAllBtn = document.getElementById('deselect-all-owned');
+    if (deselectAllBtn) {
+        deselectAllBtn.addEventListener('click', deselectAllOwned);
+    }
+
+    // Ownership grid delegation
+    const ownershipGrid = document.getElementById('ownership-grid');
+    if (ownershipGrid) {
+        ownershipGrid.addEventListener('click', (e) => {
+            const card = e.target.closest('.ownership-card');
+            if (card) {
+                const charId = parseInt(card.dataset.ownershipCharId);
+                if (!isNaN(charId)) {
+                    toggleOwnership(charId);
+                    renderOwnershipGrid();
+                    updateOwnershipCount();
+                }
+            }
+        });
+    }
+
+    // Click outside ownership modal to close
+    const ownershipModal = document.getElementById('ownership-modal');
+    if (ownershipModal) {
+        ownershipModal.addEventListener('click', (e) => {
+            if (e.target === ownershipModal) {
+                closeOwnershipModal();
+            }
+        });
+    }
+
+    // Filter Buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.dataset.filter;
+            if (filter) {
+                setCharacterFilter(filter);
+            }
+        });
+    });
+
+    // Insights Panel Toggle
+    const insightsToggle = document.getElementById('insights-toggle');
+    if (insightsToggle) {
+        insightsToggle.addEventListener('click', toggleInsightsPanel);
+    }
 }
 
 // Initialize page
@@ -868,4 +1501,5 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTasksData();
     updateTaskCounter();
     setupEventDelegation();
+    initInsightsPanel();
 });

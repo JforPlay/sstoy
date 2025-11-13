@@ -41,21 +41,58 @@
 
         <!-- Character Selection Area -->
         <div class="characters-section">
-            <h2 class="section-title">
-                <span class="section-icon"><i class="fa-solid fa-users"></i></span>
-                캐릭터 선택
-            </h2>
+            <div class="characters-header">
+                <h2 class="section-title">
+                    <span class="section-icon"><i class="fa-solid fa-users"></i></span>
+                    캐릭터 선택
+                </h2>
+                <div class="characters-controls">
+                    <button class="control-btn manage-ownership-btn" id="manage-ownership-btn">
+                        <i class="fa-solid fa-heart"></i> 소유 표시
+                    </button>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">전체</button>
+                        <button class="filter-btn" data-filter="owned">소유</button>
+                        <button class="filter-btn" data-filter="not-owned">미소유</button>
+                    </div>
+                </div>
+            </div>
             <div id="characters-list" class="characters-grid"></div>
         </div>
 
-        <!-- Character Modal -->
-        <div class="modal" id="character-modal">
+        <!-- Ownership Modal -->
+        <div class="modal ownership-modal" id="ownership-modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>캐릭터 선택</h2>
-                    <button class="close-btn" onclick="closeCharacterModal()">&times;</button>
+                    <h2><i class="fa-solid fa-heart"></i> 캐릭터 소유 관리</h2>
+                    <button class="close-btn" id="close-ownership-modal">&times;</button>
                 </div>
-                <div class="character-grid" id="character-grid"></div>
+                <div class="modal-controls">
+                    <button class="control-btn" id="select-all-owned">
+                        <i class="fa-solid fa-check-double"></i> 전체 선택
+                    </button>
+                    <button class="control-btn" id="deselect-all-owned">
+                        <i class="fa-solid fa-xmark"></i> 전체 해제
+                    </button>
+                    <div class="ownership-count" id="ownership-count">소유: 0 / 0</div>
+                </div>
+                <div class="ownership-grid" id="ownership-grid"></div>
+            </div>
+        </div>
+
+        <!-- Insights Panel -->
+        <div class="insights-panel" id="insights-panel">
+            <button class="insights-toggle" id="insights-toggle">
+                <i class="fa-solid fa-chart-line"></i>
+                <span class="toggle-text">인사이트</span>
+            </button>
+            <div class="insights-content" id="insights-content">
+                <div class="insights-header">
+                    <h3><i class="fa-solid fa-lightbulb"></i> 분석</h3>
+                </div>
+                <div class="insights-body" id="insights-body">
+                    <!-- Insights will be rendered here -->
+                </div>
             </div>
         </div>
     </div>
