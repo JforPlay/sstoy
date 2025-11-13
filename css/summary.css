@@ -814,15 +814,15 @@
 
 .summary-potential-icons-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.625rem;
-    min-height: 70px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    min-height: 90px;
 }
 
 .summary-potential-icons-grid.specific-pots-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     margin-bottom: 0.75rem;
-    max-width: 50%;
+    max-width: 100%;
 }
 
 .potential-icon-wrapper {
@@ -900,7 +900,7 @@
 .pot-name-label {
     background: var(--surface);
     color: var(--text-primary);
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     font-weight: 600;
     text-align: center;
     padding: 0.375rem 0.25rem;
@@ -920,13 +920,13 @@
 /* Level Badge */
 .pot-level-badge {
     position: absolute;
-    bottom: 8px;
+    bottom: 12px;
     right: 4px;
     background: rgba(0, 0, 0, 0.8);
     color: white;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    padding: 2px 5px;
+    padding: 3px 6px;
     border-radius: 0.375rem;
     z-index: 2;
     pointer-events: none;
@@ -937,9 +937,9 @@
     position: absolute;
     top: 2px;
     left: 2px;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    padding: 2px 5px;
+    padding: 3px 6px;
     border-radius: 0.375rem;
     z-index: 2;
     pointer-events: none;
@@ -1038,8 +1038,8 @@
     }
 
     .summary-potential-icons-grid.specific-pots-grid {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 66%;
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 100%;
     }
 
     .potential-hint {
