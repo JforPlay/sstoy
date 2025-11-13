@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/utils.css">
     <link rel="stylesheet" href="css/discs.css">
     <link rel="stylesheet" href="css/summary.css">
+    <link rel="stylesheet" href="css/preset.css">
     <link rel="stylesheet" href="css/saveload.css">
 </head>
 <body>
@@ -59,6 +60,11 @@
             <button class="compact-main-tab" data-tab="summary" onclick="switchMainTab('summary')">
                 <span class="compact-tab-icon"><i class="fa-solid fa-list-check"></i></span>
                 <span class="compact-tab-label">요약</span>
+            </button>
+
+            <button class="compact-main-tab" data-tab="preset" onclick="switchMainTab('preset')">
+                <span class="compact-tab-icon"><i class="fa-solid fa-star"></i></span>
+                <span class="compact-tab-label">프리셋 빌드</span>
             </button>
         </div>
 
@@ -144,6 +150,12 @@
             <div id="summary-container"></div>
         </div>
 
+        <!-- Preset Tab Content -->
+        <div class="main-tab-content" id="main-tab-preset">
+            <!-- Preset content will be loaded by preset.js -->
+            <div id="preset-container"></div>
+        </div>
+
         <!-- Character Selection Modal -->
         <div class="modal" id="character-modal">
             <div class="modal-content">
@@ -169,10 +181,14 @@
         </div>
     </div>
 
+    <!-- LZ-String Compression Library -->
+    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
+
     <script src="js/utils.js"></script>
     <script src="js/app.js"></script>
     <script src="js/discs.js"></script>
     <script src="js/summary.js"></script>
+    <script src="js/preset.js"></script>
     <script src="js/saveload.js"></script>
 </body>
 </html>

@@ -1620,6 +1620,7 @@
     window.toggleNotesSidebar = toggleNotesSidebar;
     window.calculateNotesFromSubDiscs = calculateNotesFromSubDiscs;
     window.calculateDiscScore = calculateDiscScore;
+    window.updateRequiredNotes = updateRequiredNotes; // Expose for saveload.js
     window.discsState = discsState;
     
     // Auto-load and render on page load if discs tab exists

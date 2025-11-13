@@ -1,0 +1,323 @@
+/* ============================================================================
+   PRESET BUILDS TAB - Dedicated Styles
+   ============================================================================ */
+
+/* Container Layout */
+.preset-layout {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.preset-header {
+    margin-bottom: 2rem;
+}
+
+.preset-main-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Empty/Error States */
+.preset-empty-state,
+.preset-error-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-secondary);
+}
+
+.preset-empty-state .empty-icon,
+.preset-error-state .error-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.preset-empty-state h3,
+.preset-error-state h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.preset-empty-state p,
+.preset-error-state p {
+    font-size: 1rem;
+}
+
+/* ============================================================================
+   ELEMENT FILTERS - Pill-style Buttons
+   ============================================================================ */
+
+.preset-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.element-filter-btn {
+    padding: 0.5rem 1.25rem;
+    border: 2px solid var(--border);
+    border-radius: 2rem;
+    background: var(--background);
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.element-filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.element-filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+/* Element Filter Icon */
+.element-filter-icon {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    margin-right: 0.25rem;
+}
+
+/* ============================================================================
+   PRESET CARDS - With Character Thumbnails (UPDATED)
+   ============================================================================ */
+
+.preset-builds-section .preset-builds-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 1.5rem;
+}
+
+.preset-builds-section .preset-card {
+    background: var(--background);
+    border: 2px solid var(--border);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    min-height: 220px;
+    transition: all 0.3s ease;
+}
+
+.preset-builds-section .preset-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent);
+}
+
+/* Character Thumbnail (Left Side) - Fixed for tall images */
+.preset-builds-section .preset-thumbnail {
+    width: 70px;
+    min-width: 70px;
+    max-width: 70px;
+    min-height: 220px;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--background) 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.preset-builds-section .preset-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+/* Preset Info (Right Side) */
+.preset-builds-section .preset-info {
+    flex: 1;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+}
+
+.preset-builds-section .preset-header-inline {
+    margin-bottom: 0.75rem;
+}
+
+.preset-builds-section .preset-element-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: white;
+}
+
+/* Element Tag Icon */
+.preset-builds-section .element-tag-icon {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+.preset-builds-section .preset-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+.preset-builds-section .preset-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0 0 0.75rem 0;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.preset-builds-section .preset-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.preset-builds-section .preset-tag {
+    padding: 0.25rem 0.625rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.preset-builds-section .preset-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+}
+
+/* Author Link Styling */
+.preset-builds-section .preset-author {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.preset-builds-section .preset-author-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.85rem;
+    color: #3498db;
+    text-decoration: underline;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.preset-builds-section .preset-author-link:hover {
+    background: var(--surface);
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+.preset-builds-section .author-icon {
+    font-size: 1rem;
+}
+
+.preset-builds-section .external-icon {
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+.preset-builds-section .preset-load-btn {
+    padding: 0.625rem 1.25rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 0.625rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+}
+
+.preset-builds-section .preset-load-btn:hover {
+    background: #2980b9;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.preset-builds-section .preset-load-btn:active {
+    transform: scale(0.98);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .preset-builds-section .preset-builds-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .preset-builds-section .preset-card {
+        flex-direction: column;
+    }
+
+    .preset-builds-section .preset-thumbnail {
+        width: 100%;
+        height: 200px;
+    }
+
+    .preset-builds-section .preset-element-badge {
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+
+    .element-filter-btn {
+        font-size: 0.85rem;
+        padding: 0.4rem 1rem;
+    }
+}
+
+/* ============================================================================
+   LOADING STATES & ANIMATIONS
+   ============================================================================ */
+
+.loading-spinner {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.preset-load-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}

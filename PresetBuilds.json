@@ -1,0 +1,83 @@
+{
+  "version": "1.0",
+  "presets": [
+    {
+      "id": "preset-build",
+      "title": "등사 평캔 치토세",
+      "description": "최신판 평캔 치토세 빌드입니다.",
+      "author": "속성별 메타 빌드 모음",
+      "authorLink": "https://arca.live/b/stellasora/153536269",
+      "element": "Water",
+      "characterId": 144,
+      "tags": ["평타", "치토세"],
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokI8tgagYASCTy4ClzegGnOAFi4ByDgMn2A7LSiAMZSgC2LIAlpjACy8MADlADaAVj68EMZBP4IATLMkIA7Mv4wAzBt4wZcqQDZdCMQF1UggDYdDZqCZD2jj1PdVvnk-V8PbHAF8rdkhQezFMQBjawFLxhhdouPcVT2hAEVXADCH4nxhMTOzNLTyswOCQAENcsK4eBU8rUQk6hQMYZp0m1QUxZWaATl7VLQ621T1BhQAOQa0YSxAbO1Huv2XJ1f6NoaLIJ069IJCl5sj0rOTm12gAGTA4XIuu9ehY7M2zt6GkG7uH7zrZphbvdPsNip8Dh9SqhygoONxoG1Ig1IOIkS1emIFEommJhpjupjZvNFtVcStdhc8VUdP88TsjGVBKFwujTiB8lTAS8knSwVDoSAACYcADOHFY5U4aCqLSkCickulcMgcoQZlQSrQOzVs1QooArgAjWV8BBaaYgQ1GlW69RW406s1aRmlIA"
+    },
+    {
+      "id": "preset-build",
+      "title": "평캔 시아",
+      "description": "최신판 평캔 시아 빌드입니다.",
+      "author": "속성별 메타 빌드 모음",
+      "authorLink": "https://arca.live/b/stellasora/153536269",
+      "element": "Light",
+      "characterId": 155,
+      "tags": ["평타", "시아"],
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokJPLgUuYASA7Q4CKjgMn2A7LSiAMZSgC2tIAlpjAKxuUAOUA2m+zYIYyARwQAmUYIQA2aeLYKhAdmUwAzOqli2AFg0BdVFwA2jXQk6R5IS7Ki3LKx6l2bHAXxMNIoS9YggCKrgBhDlPaYoeEyLtBRboIwEpiAMbWApePRHB5xYQkcBpgAMmBwMCCe3iAAhmV+zKwaySZ8Ao0SetJtOpoSGgidvVqtEhIAHMYgZhY9fa52MxpePtNto0UlZQmNsznR24u7FahVyXUs0DAILs2Q-JcqEiICVyPSL0rPD6NvD-KfEgBOH4SFQTKZ1f7WJz3CQOGwJF5reHzF4ApaTXz+GGBeIo36RXJ4kGpDIIr4E6KoknlCqeIA"
+    }
+  ],
+  "elements": {
+    "Water": {
+      "name": "물 속성",
+      "iconPath": "assets/icon_common_property_1.png",
+      "color": "#3498db"
+    },
+    "Fire": {
+      "name": "불 속성",
+      "iconPath": "assets/icon_common_property_2.png",
+      "color": "#e74c3c"
+    },
+    "Earth": {
+      "name": "땅 속성",
+      "iconPath": "assets/icon_common_property_3.png",
+      "color": "#27ae60"
+    },
+    "Wind": {
+      "name": "바람 속성",
+      "iconPath": "assets/icon_common_property_4.png",
+      "color": "#1abc9c"
+    },
+    "Light": {
+      "name": "빛 속성",
+      "iconPath": "assets/icon_common_property_5.png",
+      "color": "#f39c12"
+    },
+    "Dark": {
+      "name": "어둠 속성",
+      "iconPath": "assets/icon_common_property_6.png",
+      "color": "#8e44ad"
+    },
+    "Normal": {
+      "name": "무속성",
+      "iconPath": "assets/icon_common_property_7.png",
+      "color": "#95a5a6"
+    }
+  },
+  "_instructions": {
+    "how_to_add_preset": [
+      "1. 앱에서 빌드 생성",
+      "2. 요약 탭에서 'URL 공유' 클릭",
+      "3. URL에서 '#build=' 뒤의 해시 부분만 복사",
+      "4. 아래 형식으로 presets 배열에 추가:",
+      "{",
+      "  \"id\": \"unique-id\",",
+      "  \"title\": \"빌드 제목\",",
+      "  \"description\": \"빌드 설명 (전략, 강점 등)\",",
+      "  \"author\": \"작성자 이름\",",
+      "  \"authorLink\": \"https://source-url.com\" (optional),",
+      "  \"element\": \"Fire\" (Water/Fire/Earth/Wind/Light/Dark/Normal),",
+      "  \"characterId\": 100 (3-digit character ID, e.g., 100, 101, 102),",
+      "  \"tags\": [\"태그1\", \"태그2\"],",
+      "  \"buildHash\": \"복사한_해시_여기에\"",
+      "}"
+    ]
+  }
+}

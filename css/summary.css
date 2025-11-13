@@ -8,74 +8,26 @@
 .summary-layout {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     width: 100%;
 }
 
 .summary-section {
     background: var(--surface);
-    border-radius: 1rem;
-    padding: 1.5rem;
+    border-radius: 0.75rem;
+    padding: 1rem;
     box-shadow: 0 0.25rem 1.25rem var(--shadow);
 }
 
 .summary-section-title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: var(--text-primary);
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.75rem;
+    margin-bottom: 0.875rem;
+    padding-bottom: 0.5rem;
     border-bottom: 2px solid var(--border);
     display: flex;
     align-items: center;
     gap: 0.5rem;
-}
-
-.summary-header {
-    background: var(--surface);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 0.25rem 1.25rem var(--shadow);
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.summary-header h2 {
-    font-size: 1.8rem;
-    color: var(--text-primary);
-}
-
-.summary-actions {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-}
-
-.summary-action-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    border: none;
-    border-radius: 0.625rem;
-    font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 0.5rem var(--shadow-primary-light);
-}
-
-.summary-action-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0.25rem 1rem var(--shadow-primary-strong);
-}
-
-.action-icon {
-    font-size: 1.2rem;
 }
 
 .summary-cards-grid {
@@ -107,15 +59,6 @@
     border-color: var(--primary-color);
 }
 
-.summary-card-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1.25rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--border);
-}
-
 .summary-card-badge {
     display: inline-flex;
     align-items: center;
@@ -135,11 +78,6 @@
 .assist-badge {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
-}
-
-.summary-card-header h3 {
-    font-size: 1.3rem;
-    color: var(--text-primary);
 }
 
 .summary-card-body {
@@ -193,123 +131,10 @@
     margin-bottom: 0.25rem;
 }
 
-.summary-char-id {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-}
-
 .summary-skills, .summary-potentials {
     background: var(--surface-light);
     border-radius: 0.625rem;
     padding: 1rem;
-}
-
-.summary-skills-title, .summary-potentials-title {
-    font-size: 0.9rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.summary-skills-title {
-    color: var(--accent);
-}
-
-.summary-potentials-title {
-    color: var(--primary-color);
-}
-
-.summary-potential-section {
-    margin-bottom: 0.75rem;
-}
-
-.summary-potential-section:last-child {
-    margin-bottom: 0;
-}
-
-.summary-potential-section-title {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
-    padding-left: 0.5rem;
-    border-left: 3px solid var(--accent);
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-}
-
-/* Special styling for specific potentials section title */
-.summary-potential-section:has(.specific-potentials) .summary-potential-section-title {
-    color: #8b5cf6;
-    border-left-color: #8b5cf6;
-    background: linear-gradient(90deg, rgba(139, 92, 246, 0.1), transparent);
-    padding: 0.375rem 0.5rem;
-    border-radius: 0.25rem;
-}
-
-.summary-skill-list, .summary-potential-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-/* Specific styling for specific potentials section */
-.summary-potential-list.specific-potentials {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(168, 85, 247, 0.08));
-    border: 1px solid rgba(139, 92, 246, 0.2);
-    border-radius: 0.5rem;
-    padding: 0.5rem;
-}
-
-.summary-skill-item, .summary-potential-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 0.75rem;
-    background: var(--surface);
-    border-radius: 0.375rem;
-    font-size: 0.85rem;
-    transition: all 0.2s ease;
-}
-
-.summary-potential-item:hover {
-    transform: translateX(2px);
-    background: var(--surface-light);
-}
-
-/* Specific potential item styling */
-.summary-potential-item.specific {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.05));
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    box-shadow: 0 2px 4px rgba(139, 92, 246, 0.1);
-}
-
-.summary-potential-item.specific:hover {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(168, 85, 247, 0.1));
-    border-color: rgba(139, 92, 246, 0.5);
-}
-
-.summary-skill-name, .summary-potential-name {
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-.summary-skill-level {
-    color: var(--accent);
-    font-weight: 700;
-    background: var(--surface-light);
-    padding: 0.25rem 0.625rem;
-    border-radius: 0.75rem;
-}
-
-.summary-potential-level {
-    color: var(--success);
-    font-weight: 700;
-    background: var(--surface-light);
-    padding: 0.25rem 0.625rem;
-    border-radius: 0.75rem;
 }
 
 /* Skill level badge for specific potentials */
@@ -508,7 +333,7 @@
 }
 
 .potential-mark-badge.recommended {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
+    background: linear-gradient(135deg, #078a0d, #025302);
 }
 
 .potential-mark-badge.level-one {
@@ -534,32 +359,10 @@
     gap: 0.5rem;
 }
 
-/* Two-column disc layout */
-.summary-discs-two-column {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-}
-
-@media (max-width: 768px) {
-    .summary-discs-two-column {
-        grid-template-columns: 1fr;
-    }
-}
-
 .summary-disc-column {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-}
-
-.summary-disc-column-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--border);
-    margin-bottom: 0.5rem;
 }
 
 .summary-disc-card {
@@ -568,6 +371,8 @@
     border-radius: 0.5rem;
     padding: 0.75rem;
     border-left: 3px solid var(--primary-color);
+    margin-bottom: 0.625rem;
+    min-height: 120px;
 }
 
 .summary-disc-card.empty {
@@ -627,13 +432,6 @@
     font-size: 0.75rem;
     color: var(--text-secondary);
     margin-top: 0.125rem;
-}
-
-.summary-disc-card {
-    background: var(--surface-light);
-    border: 1px solid var(--border);
-    border-radius: 0.5rem;
-    padding: 0.75rem;
 }
 
 .disc-card-header {
@@ -766,7 +564,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.375rem;
-    margin-top: 0.5rem;
+    margin-top: 0.625rem;
 }
 
 .sub-disc-note-item {
@@ -994,5 +792,406 @@
     object-fit: contain;
 }
 
+/* ============================================================================
+   POTENTIAL ICON GRID DISPLAY (Compact Summary View)
+   ============================================================================ */
 
+.summary-section-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
 
+.potential-hint {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.summary-potential-icons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.625rem;
+    min-height: 70px;
+}
+
+.summary-potential-icons-grid.specific-pots-grid {
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 0.75rem;
+    max-width: 50%;
+}
+
+.potential-icon-wrapper {
+    position: relative;
+}
+
+.potential-icon-wrapper > [data-action] {
+    cursor: pointer;
+}
+
+/* Potential Icon Card (contains icon + name below) */
+.potential-icon-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    transition: transform 0.2s ease;
+}
+
+/* Potential Icon Compact Styles */
+.potential-icon-compact {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 0.7;
+    border-radius: 0.625rem 0.625rem 0 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 0.5rem;
+    cursor: grab;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.potential-icon-compact:active {
+    cursor: grabbing;
+}
+
+.potential-icon-card:hover {
+    transform: translateY(-2px);
+}
+
+.potential-icon-card:hover .potential-icon-compact {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Background image */
+.pot-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.pot-icon-img {
+    position: relative;
+    width: 70%;
+    /* height: auto; */
+    height: 70%;
+    object-fit: contain;
+    z-index: 1;
+}
+
+.pot-icon-placeholder {
+    font-size: 2.25rem;
+    color: white;
+    z-index: 1;
+}
+
+/* Potential name label (below card) */
+.pot-name-label {
+    background: var(--surface);
+    color: var(--text-primary);
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0.375rem 0.25rem;
+    margin: 0;
+    border-radius: 0 0 0.375rem 0.375rem;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: keep-all;
+    min-height: 2rem;
+    border: 1px solid var(--border);
+    border-top: none;
+}
+
+/* Level Badge */
+.pot-level-badge {
+    position: absolute;
+    bottom: 8px;
+    right: 4px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 5px;
+    border-radius: 0.375rem;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Mark Badges */
+.pot-mark-badge {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 5px;
+    border-radius: 0.375rem;
+    z-index: 2;
+    pointer-events: none;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.pot-mark-badge.essential {
+    background: #eb1717;
+    color: white;
+}
+
+.pot-mark-badge.recommended {
+    background: #9b1294;
+    color: white;
+}
+
+.pot-mark-badge.level-one {
+    background: #0ea371;
+    color: white;
+}
+
+/* Drag and Drop States */
+.potential-icon-wrapper.dragging {
+    opacity: 0.4;
+}
+
+.potential-icon-wrapper.dragging .potential-icon-compact {
+    transform: scale(0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Drop Placeholder - matches potential-icon-card exactly */
+.potential-drop-placeholder {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transition: transform 0.2s ease;
+    pointer-events: none; /* Allow events to pass through to underlying elements */
+}
+
+.potential-drop-placeholder::before {
+    content: '';
+    width: 100%;
+    aspect-ratio: 0.7;
+    border: 2px dashed var(--accent);
+    border-radius: 0.625rem 0.625rem 0 0;
+    background: linear-gradient(135deg,
+        rgba(236, 72, 153, 0.08),
+        rgba(124, 58, 237, 0.08));
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: pulse-placeholder 1.5s ease-in-out infinite;
+}
+
+.potential-drop-placeholder::after {
+    content: '여기에 놓기';
+    background: var(--surface);
+    color: var(--accent);
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0.375rem 0.25rem;
+    margin: 0;
+    border-radius: 0 0 0.375rem 0.375rem;
+    line-height: 1.3;
+    min-height: 2rem;
+    border: 1px solid var(--accent);
+    border-top: none;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes pulse-placeholder {
+    0%, 100% {
+        background: linear-gradient(135deg,
+            rgba(236, 72, 153, 0.08),
+            rgba(124, 58, 237, 0.08));
+    }
+    50% {
+        background: linear-gradient(135deg,
+            rgba(236, 72, 153, 0.15),
+            rgba(124, 58, 237, 0.15));
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .summary-potential-icons-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .summary-potential-icons-grid.specific-pots-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 66%;
+    }
+
+    .potential-hint {
+        display: none;
+    }
+}
+
+/* ============================================================================
+   CHARACTER CARD COMPACT LAYOUT
+   ============================================================================ */
+
+.summary-char-basic {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: var(--surface);
+    border-radius: 0.625rem;
+    border: 1px solid var(--border);
+    margin-bottom: 0.75rem;
+}
+
+.summary-char-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+}
+
+.summary-char-name-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+.summary-card-badge {
+    display: inline-block;
+    padding: 0.25rem 0.625rem;
+    border-radius: 0.375rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: white;
+    width: fit-content;
+}
+
+.master-badge {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.assist-badge {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.summary-char-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Skills Inline */
+.summary-skills-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+}
+
+.skill-badge-inline {
+    background: var(--background);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* ============================================================================
+   DISC SKILLS BADGES LAYOUT
+   ============================================================================ */
+
+.disc-skills-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-top: 0.625rem;
+}
+
+.disc-skill-badge {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.625rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: help;
+    transition: all 0.2s ease;
+}
+
+.disc-skill-badge:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary-color);
+}
+
+.disc-skill-badge.main {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border-color: #fbbf24;
+    color: #92400e;
+}
+
+.disc-skill-badge.main:hover {
+    border-color: #f59e0b;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
+}
+
+.disc-skill-badge.secondary {
+    background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+    border-color: #818cf8;
+    color: #3730a3;
+}
+
+.disc-skill-badge.secondary:hover {
+    border-color: #6366f1;
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
+}
+
+/* ============================================================================
+   DISCS AND NOTES 3-COLUMN LAYOUT
+   ============================================================================ */
+
+.discs-notes-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.summary-disc-column {
+    min-width: 0;
+}
+
+.summary-disc-column .summary-section-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .discs-notes-container {
+        grid-template-columns: 1fr;
+    }
+}

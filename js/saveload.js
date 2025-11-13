@@ -58,13 +58,44 @@
     function collectCharacterData(position) {
         const character = window.state?.party?.[position];
         if (!character) return null;
-        
+
+        // Filter out default level-1 skills (keep only non-default levels)
+        const skillLevels = {};
+        const rawSkillLevels = window.state.skillLevels[position] || {};
+        Object.keys(rawSkillLevels).forEach(skillId => {
+            const level = rawSkillLevels[skillId];
+            if (level && level !== 1) {
+                skillLevels[skillId] = level;
+            }
+        });
+
+        // Filter out default level-1 potentials (keep only non-default levels)
+        // Note: We keep the potential ID in 'p' array, just don't save level if it's 1
+        const potentialLevels = {};
+        const rawPotentialLevels = window.state.potentialLevels[position] || {};
+        Object.keys(rawPotentialLevels).forEach(potId => {
+            const level = rawPotentialLevels[potId];
+            if (level && level !== 1) {
+                potentialLevels[potId] = level;
+            }
+        });
+
+        // Filter out empty potential marks
+        const potentialMarks = {};
+        const rawPotentialMarks = window.state.potentialMarks?.[position] || {};
+        Object.keys(rawPotentialMarks).forEach(potId => {
+            const mark = rawPotentialMarks[potId];
+            if (mark && mark !== '') {
+                potentialMarks[potId] = mark;
+            }
+        });
+
         return {
             i: character.id, // id (shortened)
             p: window.state.selectedPotentials[position] || [], // potentials (shortened)
-            pl: window.state.potentialLevels[position] || {}, // potential levels (shortened)
-            sl: window.state.skillLevels[position] || {}, // skill levels (shortened)
-            pm: window.state.potentialMarks?.[position] || {} // potential marks (shortened)
+            pl: potentialLevels, // potential levels (only non-1)
+            sl: skillLevels, // skill levels (only non-1)
+            pm: potentialMarks // potential marks (only non-empty)
         };
     }
     
@@ -75,14 +106,45 @@
     function collectDiscData() {
         const discsState = window.discsState;
         if (!discsState) return null;
-        
+
+        // Extract only disc IDs (not full disc objects!)
+        // This is a MAJOR size optimization - we were saving entire objects with 10+ properties
+        const selectedDiscIds = {};
+        const rawSelectedDiscs = discsState.selectedDiscs || {};
+        Object.keys(rawSelectedDiscs).forEach(slotId => {
+            const disc = rawSelectedDiscs[slotId];
+            if (disc && disc.Id) {
+                selectedDiscIds[slotId] = disc.Id; // Save ONLY the ID, not the whole object
+            }
+        });
+
+        // Filter out default limit breaks (level 1)
+        const limitBreaks = {};
+        const rawLimitBreaks = discsState.discLimitBreaks || {};
+        Object.keys(rawLimitBreaks).forEach(slotId => {
+            const level = rawLimitBreaks[slotId];
+            if (level && level !== 1) {
+                limitBreaks[slotId] = level;
+            }
+        });
+
+        // Filter out default sub disc levels (level 0)
+        const subDiscLevels = {};
+        const rawSubLevels = discsState.subDiscLevels || {};
+        Object.keys(rawSubLevels).forEach(slotId => {
+            const level = rawSubLevels[slotId];
+            if (level && level !== 0) {
+                subDiscLevels[slotId] = level;
+            }
+        });
+
         return {
-            s: discsState.selectedDiscs || {}, // selected (shortened)
-            l: discsState.discLimitBreaks || {}, // limitbreaks (shortened)
-            g: discsState.subDiscLevels || {} // growth (shortened)
+            s: selectedDiscIds, // selected disc IDs ONLY (not full objects!)
+            l: limitBreaks, // limitbreaks (only non-1)
+            g: subDiscLevels // growth (only non-0)
         };
     }
-    
+
     /**
      * Collect notes data
      * @returns {Object} Notes data including required and acquired notes
@@ -90,13 +152,23 @@
     function collectNotesData() {
         const discsState = window.discsState;
         if (!discsState) return null;
-        
+
         // Convert Set to Array for serialization
         const requiredNotes = Array.from(discsState.requiredNotes || []);
-        
+
+        // Filter out zero-count acquired notes
+        const acquiredNotes = {};
+        const rawAcquiredNotes = discsState.acquiredNotes || {};
+        Object.keys(rawAcquiredNotes).forEach(noteId => {
+            const count = rawAcquiredNotes[noteId];
+            if (count && count > 0) {
+                acquiredNotes[noteId] = count;
+            }
+        });
+
         return {
             r: requiredNotes, // required (shortened)
-            a: discsState.acquiredNotes || {} // acquired (shortened)
+            a: acquiredNotes // acquired (only non-zero)
         };
     }
     
@@ -126,25 +198,28 @@
             buildState.buildTitle = buildTitle;
             buildState.buildMemo = buildMemo;
             updateBuildTitleDisplay();
-            
+
+            // Log what data is being restored
+            const hasSkills = charactersData && (charactersData.m?.sl || charactersData.a1?.sl || charactersData.a2?.sl);
+            const hasNotes = !!notesData;
+            console.log(`[Restore] Build "${buildTitle}" - Skills: ${hasSkills ? 'Included' : 'Defaults to Lv.1'}, Notes: ${hasNotes ? 'Included' : 'Recalculated'}`);
+
             // Restore characters
             if (charactersData) {
                 await restoreCharactersData(charactersData);
             }
-            
+
             // Restore discs
             if (discsData) {
                 restoreDiscsData(discsData);
             }
-            
-            // Restore notes
-            if (notesData) {
-                restoreNotesData(notesData);
-            }
-            
+
+            // Restore notes (or clear if not included)
+            restoreNotesData(notesData);
+
             // Update all displays
             refreshAllDisplays();
-            
+
             showToast('빌드를 성공적으로 불러왔습니다!', 'success');
         } catch (error) {
             console.error('Error restoring build data:', error);
@@ -182,12 +257,41 @@
                             name: name,
                             data: character
                         };
-                        
-                        // Restore with shortened keys
-                        window.state.selectedPotentials[position] = charData.p || [];
-                        window.state.potentialLevels[position] = charData.pl || {};
-                        window.state.skillLevels[position] = charData.sl || {};
-                        
+
+                        // Restore selected potentials
+                        const selectedPotentials = charData.p || [];
+                        window.state.selectedPotentials[position] = selectedPotentials;
+
+                        // Restore potential levels (fill missing with level 1)
+                        const savedPotentialLevels = charData.pl || {};
+                        const potentialLevels = {};
+                        selectedPotentials.forEach(potId => {
+                            // If level was saved, use it; otherwise default to 1
+                            potentialLevels[potId] = savedPotentialLevels[potId] || 1;
+                        });
+                        window.state.potentialLevels[position] = potentialLevels;
+
+                        // Restore skill levels (fill missing with level 1)
+                        // Note: URL shares don't include skill levels (to save space)
+                        // so they default to 1 and can be adjusted manually
+                        const savedSkillLevels = charData.sl || {};
+                        const skillLevels = {};
+
+                        // Get all skill IDs for this character
+                        const isMaster = position === 'master';
+                        const skillKeys = isMaster
+                            ? ['NormalAtkId', 'SkillId', 'UltimateId', 'DodgeId', 'SpecialSkillId']
+                            : ['AssistSkillId'];
+
+                        skillKeys.forEach(key => {
+                            const skillId = character[key];
+                            if (skillId) {
+                                // If level was saved, use it; otherwise default to 1
+                                skillLevels[skillId] = savedSkillLevels[skillId] || 1;
+                            }
+                        });
+                        window.state.skillLevels[position] = skillLevels;
+
                         // Restore potential marks
                         if (!window.state.potentialMarks) {
                             window.state.potentialMarks = {};
@@ -216,38 +320,88 @@
     function restoreDiscsData(discsData) {
         const discsState = window.discsState;
         if (!discsState) return;
-        
-        // Restore with shortened keys
-        const selectedDiscs = discsData.s;
-        if (selectedDiscs) {
-            discsState.selectedDiscs = { ...selectedDiscs };
-        }
-        
-        const limitBreaks = discsData.l;
-        if (limitBreaks) {
-            discsState.discLimitBreaks = { ...limitBreaks };
-        }
-        
-        const subLevels = discsData.g;
-        if (subLevels) {
-            discsState.subDiscLevels = { ...subLevels };
-        }
+
+        // Restore selected discs by looking up full disc objects from IDs
+        const savedData = discsData.s || {};
+        const selectedDiscs = {};
+
+        Object.keys(savedData).forEach(slotId => {
+            const data = savedData[slotId];
+
+            if (!data) return;
+
+            // Handle both old format (full object) and new format (ID only)
+            let discId;
+            if (typeof data === 'number') {
+                // New format: just the ID
+                discId = data;
+            } else if (typeof data === 'object' && data.Id) {
+                // Old format: full disc object (backward compatibility)
+                console.log(`[Restore] Converting old format disc object to ID for ${slotId}`);
+                discId = data.Id;
+            } else {
+                console.warn(`[Restore] Invalid disc data for ${slotId}:`, data);
+                return;
+            }
+
+            // Look up the full disc object from allDiscs array using the ID
+            // allDiscs is an array, not an object, so we need to use .find()
+            const fullDiscObject = discsState.allDiscs?.find(d => d.Id === discId);
+            if (fullDiscObject) {
+                selectedDiscs[slotId] = fullDiscObject;
+            } else {
+                console.warn(`[Restore] Disc ID ${discId} not found in allDiscs array (total discs: ${discsState.allDiscs?.length || 0})`);
+            }
+        });
+
+        discsState.selectedDiscs = selectedDiscs;
+
+        // Restore limit breaks (fill missing with default level 1)
+        const savedLimitBreaks = discsData.l || {};
+        const limitBreaks = {};
+        Object.keys(selectedDiscs).forEach(slotId => {
+            // Main discs default to limit break 1
+            if (slotId.startsWith('main')) {
+                limitBreaks[slotId] = savedLimitBreaks[slotId] || 1;
+            }
+        });
+        discsState.discLimitBreaks = limitBreaks;
+
+        // Restore sub disc levels (fill missing with default level 0)
+        const savedSubLevels = discsData.g || {};
+        const subLevels = {};
+        Object.keys(selectedDiscs).forEach(slotId => {
+            // Sub discs default to level 0
+            if (slotId.startsWith('sub')) {
+                subLevels[slotId] = savedSubLevels[slotId] || 0;
+            }
+        });
+        discsState.subDiscLevels = subLevels;
     }
     
     /**
      * Restore notes data
-     * @param {Object} notesData - Notes data
+     * Notes may be missing from URL shares (to save space)
+     * @param {Object} notesData - Notes data (may be undefined for URL shares)
      */
     function restoreNotesData(notesData) {
         const discsState = window.discsState;
         if (!discsState) return;
-        
+
+        if (!notesData) {
+            // Notes not included in URL (to save space)
+            // Clear any existing notes - they will be recalculated from discs
+            discsState.requiredNotes = new Set();
+            discsState.acquiredNotes = {};
+            return;
+        }
+
         // Restore with shortened keys
         const requiredNotes = notesData.r;
         if (requiredNotes) {
             discsState.requiredNotes = new Set(requiredNotes);
         }
-        
+
         const acquiredNotes = notesData.a;
         if (acquiredNotes) {
             discsState.acquiredNotes = { ...acquiredNotes };
@@ -268,17 +422,24 @@
                 window.updatePotentialsDisplay(position);
             }
         });
-        
+
+        // Recalculate required notes from selected main discs
+        // This must be done before rendering discs/summary
+        if (typeof window.updateRequiredNotes === 'function') {
+            window.updateRequiredNotes();
+            console.log('[Restore] Recalculated required notes from main discs');
+        }
+
         // Refresh disc tab
         if (typeof window.renderDiscs === 'function') {
             window.renderDiscs();
         }
-        
+
         // Switch to summary tab and refresh it
         if (typeof window.switchMainTab === 'function') {
             window.switchMainTab('summary');
         }
-        
+
         // Refresh summary tab
         if (typeof window.renderSummary === 'function') {
             // Use setTimeout to ensure tab switch completes first
@@ -293,7 +454,8 @@
     // ============================================================================
     
     /**
-     * Save current build to local storage (without compression for reliability)
+     * Save current build to local storage (with LZ-String compression)
+     * Local storage keeps ALL data: skills, notes, timestamps, memos
      */
     function saveToLocalStorage() {
         // Check cooldown
@@ -303,25 +465,30 @@
             showToast(`${remaining}초 후에 다시 시도해주세요.`, 'info');
             return;
         }
-        
+
         try {
             const buildData = collectBuildData();
-            
+
             // Get existing builds
             let builds = getLocalStorageBuilds();
-            
+
             // Add new build at the beginning
             builds.unshift(buildData);
-            
+
             // Limit to MAX_SAVED_BUILDS
             if (builds.length > MAX_SAVED_BUILDS) {
                 builds = builds.slice(0, MAX_SAVED_BUILDS);
             }
-            
-            // Save the entire builds array as plain JSON to localStorage
+
+            // Compress and save the entire builds array to localStorage
             const json = JSON.stringify(builds);
-            localStorage.setItem(LOCALSTORAGE_KEY, json);
-            
+            const compressed = LZString.compress(json);
+            localStorage.setItem(LOCALSTORAGE_KEY, compressed);
+
+            // Log compression stats
+            const compressionRatio = ((1 - compressed.length / json.length) * 100).toFixed(1);
+            console.log(`[LocalStorage] Saved ${builds.length} builds: ${json.length} → ${compressed.length} chars (${compressionRatio}% reduction)`);
+
             // Use shortened key for display
             const displayTitle = buildData.n || '새로운 빌드';
             showToast(`빌드 "${displayTitle}"을(를) 저장했습니다!`, 'success');
@@ -342,14 +509,26 @@
     
     /**
      * Get all saved builds from local storage
+     * Handles both compressed (new) and uncompressed (old) formats
      * @returns {Array} Array of saved builds
      */
     function getLocalStorageBuilds() {
         try {
-            const json = localStorage.getItem(LOCALSTORAGE_KEY);
-            if (!json) return [];
-            
-            return JSON.parse(json);
+            const data = localStorage.getItem(LOCALSTORAGE_KEY);
+            if (!data) return [];
+
+            // Try to decompress first (new format)
+            try {
+                const decompressed = LZString.decompress(data);
+                if (decompressed) {
+                    return JSON.parse(decompressed);
+                }
+            } catch (e) {
+                // Not compressed, try as plain JSON
+            }
+
+            // Fallback to plain JSON (old format - backward compatibility)
+            return JSON.parse(data);
         } catch (error) {
             console.error('Error reading from localStorage:', error);
             return [];
@@ -387,11 +566,12 @@
                 // Use shortened key (v2 format)
                 const deletedTitle = builds[index].n || '제목 없음';
                 builds.splice(index, 1);
-                
-                // Save as plain JSON
+
+                // Save compressed
                 const json = JSON.stringify(builds);
-                localStorage.setItem(LOCALSTORAGE_KEY, json);
-                
+                const compressed = LZString.compress(json);
+                localStorage.setItem(LOCALSTORAGE_KEY, compressed);
+
                 showToast(`빌드 "${deletedTitle}"을(를) 삭제했습니다.`, 'success');
                 renderLoadList();
             }
@@ -404,83 +584,55 @@
     // ============================================================================
     // URL SHARING OPERATIONS
     // ============================================================================
-    
+
     /**
-     * Base64 encoding for URLs with URL-safe characters
-     * Uses browser's built-in btoa with proper Unicode handling
+     * Compress string using LZ-String with URL-safe encoding
+     * This provides much better compression than base64 (60-80% size reduction)
+     * @param {string} input - String to compress
+     * @returns {string} Compressed and URL-safe string
      */
     function compressToBase64(input) {
         if (!input) return '';
-
-        try {
-            // Convert string to UTF-8 bytes, then to base64
-            const utf8Bytes = new TextEncoder().encode(input);
-            let binary = '';
-            utf8Bytes.forEach(byte => {
-                binary += String.fromCharCode(byte);
-            });
-
-            // Use browser's btoa for base64 encoding
-            let base64 = btoa(binary);
-
-            // Convert to URL-safe base64
-            // Replace + with - and / with _, remove padding =
-            base64 = base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-
-            return base64;
-        } catch (error) {
-            console.error('Compression error:', error);
-            return '';
-        }
+        return LZString.compressToEncodedURIComponent(input);
     }
 
     /**
-     * Decompress from URL-safe base64
-     * Uses browser's built-in atob with proper Unicode handling
+     * Decompress URL-safe LZ-String compressed data
+     * @param {string} input - Compressed string
+     * @returns {string} Decompressed original string
      */
     function decompressFromBase64(input) {
         if (!input) return '';
-
-        try {
-            // Convert URL-safe base64 back to standard base64
-            let base64 = input.replace(/-/g, '+').replace(/_/g, '/');
-
-            // Add padding if needed
-            while (base64.length % 4) {
-                base64 += '=';
-            }
-
-            // Use browser's atob for base64 decoding
-            const binary = atob(base64);
-
-            // Convert binary string to UTF-8 bytes
-            const bytes = new Uint8Array(binary.length);
-            for (let i = 0; i < binary.length; i++) {
-                bytes[i] = binary.charCodeAt(i);
-            }
-
-            // Decode UTF-8 bytes to string
-            return new TextDecoder().decode(bytes);
-        } catch (error) {
-            console.error('Decompression error:', error);
-            return '';
-        }
+        return LZString.decompressFromEncodedURIComponent(input) || '';
     }
     
     /**
      * Encode build data to URL parameter
+     * For URL sharing, we only keep: character IDs, potentials, discs, and build metadata
+     * Skills and notes are excluded to reduce URL size (can be set manually after loading)
      * @returns {string} Encoded URL parameter
      */
     function encodeBuildToURL() {
         try {
             const buildData = collectBuildData();
-            
-            // Remove memo and timestamp (not needed in URL)
+
+            // Remove metadata not needed in URL (only for local storage)
+            // Keep build title (n) for sharing
             delete buildData.m; // memo (shortened key)
             delete buildData.buildMemo; // old format
             delete buildData.t; // timestamp (shortened key)
             delete buildData.timestamp; // old format
-            
+
+            // Remove skill levels (not needed in URL - defaults to 1 on load)
+            if (buildData.c) {
+                if (buildData.c.m) delete buildData.c.m.sl;
+                if (buildData.c.a1) delete buildData.c.a1.sl;
+                if (buildData.c.a2) delete buildData.c.a2.sl;
+            }
+
+            // Remove notes data (can be recalculated from discs)
+            delete buildData.nt;
+
             // Remove empty/null values to reduce size
             function cleanObject(obj) {
                 if (obj === null || obj === undefined) return null;
@@ -504,13 +656,18 @@
             }
             
             const cleanedData = cleanObject(buildData) || {};
-            
+
             // Convert to JSON with minimal spacing
             const json = JSON.stringify(cleanedData);
-            
+
             // Use our compression
             const compressed = compressToBase64(json);
-            
+
+            // Log compression stats with detailed breakdown
+            const compressionRatio = ((1 - compressed.length / json.length) * 100).toFixed(1);
+            console.log(`[Compression] Original JSON: ${json.length} chars → Compressed: ${compressed.length} chars (${compressionRatio}% reduction)`);
+            console.log(`[Data saved] Characters: ${cleanedData.c ? 'Yes' : 'No'}, Discs: ${cleanedData.d ? Object.keys(cleanedData.d.s || {}).length : 0}, Potentials: ${cleanedData.c?.m?.p?.length || 0}+${cleanedData.c?.a1?.p?.length || 0}+${cleanedData.c?.a2?.p?.length || 0}`);
+
             return compressed;
         } catch (error) {
             console.error('Error encoding build to URL:', error);
@@ -554,18 +711,22 @@
             // Use hash fragment (#) instead of query parameter (?)
             // Hash fragments are not sent to server and browsers are more lenient with length
             const url = `${window.location.origin}${window.location.pathname}#build=${encoded}`;
-            
+
             // Check URL length (browsers typically support longer URLs with hash fragments)
+            // With LZ-String compression + excluding skills/notes, URLs should be very short
+            console.log(`[Share] URL length: ${url.length} characters (includes: characters, potentials, discs)`);
+            console.log(`[Share] Excluded to save space: skill levels (default to Lv.1), notes (recalculated)`);
+
             if (url.length > 4000) {
                 showToast(`⚠️ URL이 너무 깁니다 (${url.length}자). 일부 브라우저에서 작동하지 않을 수 있습니다. 로컬 저장을 권장합니다.`, 'warning');
             }
-            
+
             // Copy to clipboard
             navigator.clipboard.writeText(url).then(() => {
                 if (url.length <= 4000) {
-                    showToast('공유 링크가 클립보드에 복사되었습니다!', 'success');
+                    showToast('공유 링크가 클립보드에 복사되었습니다! (스킬은 Lv.1로 설정됩니다)', 'success');
                 }
-                
+
                 // Set cooldown
                 shareCooldownEnd = now + COOLDOWN_MS;
                 updateButtonCooldown('share-btn', shareCooldownEnd);
@@ -773,7 +934,49 @@
             alert(message);
         }
     }
-    
+
+    // ============================================================================
+    // PRESET BUILDS
+    // ============================================================================
+
+    /**
+     * Load preset builds from JSON file
+     * @returns {Promise<Object>} Preset builds data
+     */
+    async function loadPresetBuilds() {
+        try {
+            const response = await fetch('PresetBuilds.json');
+            const presetData = await response.json();
+            return presetData;
+        } catch (error) {
+            console.error('Error loading preset builds:', error);
+            return { presets: [], categories: {} };
+        }
+    }
+
+    /**
+     * Load a preset build by hash
+     * @param {string} buildHash - The compressed build hash from URL
+     * @param {string} presetTitle - Title of the preset (for display)
+     */
+    function loadPresetBuild(buildHash, presetTitle) {
+        try {
+            if (!buildHash) {
+                showToast('프리셋 빌드 데이터가 없습니다.', 'error');
+                return;
+            }
+
+            // Decode the build from hash (same as URL loading)
+            const buildData = decodeBuildFromURL(buildHash);
+            restoreBuildData(buildData);
+
+            showToast(`프리셋 "${presetTitle}"을(를) 불러왔습니다!`, 'success');
+        } catch (error) {
+            console.error('Error loading preset build:', error);
+            showToast('프리셋 불러오기에 실패했습니다.', 'error');
+        }
+    }
+
     // ============================================================================
     // INITIALIZATION
     // ============================================================================
@@ -784,32 +987,32 @@
     function initSaveLoadSystem() {
         // Check for URL hash on page load
         const hasBuildParam = window.location.hash && window.location.hash.includes('build=');
-        
+
         if (hasBuildParam) {
             // Wait for all game data to be loaded before restoring
             const checkDataLoaded = setInterval(() => {
                 // Check if essential data structures exist
-                if (window.state && 
-                    window.state.characters && 
+                if (window.state &&
+                    window.state.characters &&
                     Object.keys(window.state.characters).length > 0 &&
                     window.discsState &&
                     window.discsState.allDiscs) {
-                    
+
                     clearInterval(checkDataLoaded);
-                    
+
                     // Small delay to ensure all modules are initialized
                     setTimeout(() => {
                         loadFromURL();
                     }, 500);
                 }
             }, 100); // Check every 100ms
-            
+
             // Timeout after 10 seconds
             setTimeout(() => {
                 clearInterval(checkDataLoaded);
             }, 10000);
         }
-        
+
         // Initialize build title display
         updateBuildTitleDisplay();
     }
@@ -897,6 +1100,8 @@
     window.closeLoadModal = closeLoadModal;
     window.handleBuildTitleChange = handleBuildTitleChange;
     window.handleBuildMemoChange = handleBuildMemoChange;
+    window.loadPresetBuilds = loadPresetBuilds;
+    window.loadPresetBuild = loadPresetBuild;
     window.buildState = buildState;
     
     // Initialize when DOM is ready

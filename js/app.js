@@ -591,6 +591,8 @@ function switchMainTab(tabName) {
             renderDiscs();
         } else if (tabName === 'summary' && typeof updateSummary === 'function') {
             updateSummary();
+        } else if (tabName === 'preset' && typeof window.renderPresets === 'function') {
+            window.renderPresets();
         }
     }
 }

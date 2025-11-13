@@ -288,27 +288,112 @@ window.createIconElement = createIconElement;
 // Main Tab Switching
 function switchMainTab(tabName) {
     // Update tab buttons
-    document.querySelectorAll('.main-tab-button').forEach(btn => {
+    document.querySelectorAll('.compact-main-tab').forEach(btn => {
         btn.classList.remove('active');
     });
     document.querySelector(`[data-tab="${tabName}"]`)?.classList.add('active');
-    
+
     // Update tab content
     document.querySelectorAll('.main-tab-content').forEach(content => {
         content.classList.remove('active');
     });
     document.getElementById(`main-tab-${tabName}`)?.classList.add('active');
-    
+
+    // Show/hide position tabs based on whether characters tab is active
+    const positionTabs = document.getElementById('position-tabs-inline');
+    if (positionTabs) {
+        if (tabName === 'characters') {
+            positionTabs.classList.remove('hidden');
+        } else {
+            positionTabs.classList.add('hidden');
+        }
+    }
+
     // Update summary when switching to summary tab
     if (tabName === 'summary' && typeof updateSummary === 'function') {
         updateSummary();
     }
-    
+
     // Render discs when switching to discs tab
     if (tabName === 'discs' && typeof renderDiscs === 'function') {
         renderDiscs();
+    }
+
+    // Render presets when switching to preset tab
+    if (tabName === 'preset' && typeof window.renderPresets === 'function') {
+        window.renderPresets();
     }
 }
 
 // Make globally available
 window.switchMainTab = switchMainTab;
+
+// ============================================================================
+// POTENTIAL ICON UTILITIES
+// ============================================================================
+
+/**
+ * Generate potential icon HTML for compact display (summary tab)
+ * @param {number} potId - Potential ID
+ * @param {string} position - Character position (master/assist1/assist2)
+ * @param {number} level - Potential level
+ * @param {string} mark - Optional mark badge (필수/권장/Lv.1)
+ * @returns {string} HTML string for potential icon
+ */
+window.generatePotentialIconHTML = function(potId, position, level, mark = '') {
+    if (!window.state?.potentials?.[potId]) return '';
+
+    const potential = window.state.potentials[potId];
+    const itemData = window.state.items?.[potId];
+
+    // Get potential name
+    const briefDescKey = potential.BriefDesc;
+    const itemKey = briefDescKey ? briefDescKey.replace('Potential.', 'Item.') : null;
+    const name = itemKey ? (window.state.itemNames?.[itemKey] || `Potential ${potId}`) : `Potential ${potId}`;
+
+    // Get icon path
+    let iconPath = '';
+    if (itemData?.Icon) {
+        const iconName = itemData.Icon.split('/').pop();
+        iconPath = `assets/skill_icons/${iconName}_A.png`;
+    }
+
+    // Determine background image based on Stype
+    let backgroundImage = '';
+    if (itemData) {
+        if (itemData.Stype === 42) {
+            backgroundImage = 'assets/skill_icons/rare_vestige_card_s_7.png';
+        } else if (itemData.Stype === 41) {
+            if (itemData.Rarity === 1) {
+                backgroundImage = 'assets/skill_icons/rare_vestige_card_s_9.png';
+            } else if (itemData.Rarity === 2) {
+                backgroundImage = 'assets/skill_icons/rare_vestige_card_s_8.png';
+            }
+        }
+    }
+
+    // Generate mark badge HTML
+    let markBadgeHTML = '';
+    if (mark === '필수') {
+        markBadgeHTML = '<span class="pot-mark-badge essential">필수</span>';
+    } else if (mark === '권장') {
+        markBadgeHTML = '<span class="pot-mark-badge recommended">권장</span>';
+    } else if (mark === 'Lv.1') {
+        markBadgeHTML = '<span class="pot-mark-badge level-one">Lv.1</span>';
+    }
+
+    return `
+        <div class="potential-icon-card">
+            <div class="potential-icon-compact"
+                 draggable="true"
+                 data-potential-id="${potId}"
+                 data-position="${position}">
+                ${backgroundImage ? `<img src="${backgroundImage}" alt="" class="pot-bg-img" onerror="this.style.display='none'">` : ''}
+                ${iconPath ? `<img src="${iconPath}" alt="${name}" class="pot-icon-img" onerror="this.style.display='none'">` : '<span class="pot-icon-placeholder">✦</span>'}
+                <div class="pot-level-badge">Lv.${level}</div>
+                ${markBadgeHTML}
+            </div>
+            <div class="pot-name-label">${name}</div>
+        </div>
+    `;
+};

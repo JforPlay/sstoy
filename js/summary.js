@@ -82,9 +82,7 @@
                     </div>
                 </div>
 
-                <div class="summary-header">
-                    <h2>빌드 요약</h2>
-                </div>
+                <!-- Build Summary Section -->
 
                 <!-- Party Overview Cards -->
                 <div class="summary-section">
@@ -96,16 +94,11 @@
                     </div>
                 </div>
 
-                <!-- Notes Section -->
+                <!-- Discs and Notes Section (3 Columns) -->
                 <div class="summary-section">
-                    <h3 class="summary-section-title">🎼 음표</h3>
-                    ${generateNotesSummary()}
-                </div>
-
-                <!-- Discs Section -->
-                <div class="summary-section">
-                    <h3 class="summary-section-title">${getIcon('disc')} 레코드</h3>
-                    ${generateAllDiscsSection()}
+                    <div class="discs-notes-container">
+                        ${generateAllDiscsSection()}
+                    </div>
                 </div>
 
                 <!-- Build Stats Summary -->
@@ -129,24 +122,20 @@
                 </div>
             </div>
         `;
-        
+
         container.innerHTML = htmlContent;
-        
+
         // Load saved notes
         loadBuildNotes();
     }
-    
+
     // Generate summary card for each position
     function generateSummaryCard(position, title, badgeClass) {
         const character = window.state?.party?.[position];
-        
+
         if (!character) {
             return `
                 <div class="summary-card ${position === 'master' ? 'master-summary' : 'assist-summary'}">
-                    <div class="summary-card-header">
-                        <div class="summary-card-badge ${badgeClass}">${title}</div>
-                        <h3>캐릭터 미선택</h3>
-                    </div>
                     <div class="summary-card-body">
                         <div class="summary-character-preview">
                             <div class="summary-empty-state">
@@ -157,31 +146,27 @@
                 </div>
             `;
         }
-        
+
         const charId = character.id;
         const charName = character.name;
         const charData = character.data;
-        
+
         return `
             <div class="summary-card ${position === 'master' ? 'master-summary' : 'assist-summary'}">
-                <div class="summary-card-header">
-                    <div class="summary-card-badge ${badgeClass}">${title}</div>
-                    <h3>${charName}</h3>
-                </div>
                 <div class="summary-card-body">
                     <div class="summary-character-preview">
                         <div class="summary-character-info">
                             <div class="summary-char-basic">
-                                <img src="assets/char/avg1_${charId}_002.png" 
-                                     alt="${charName}" 
+                                <img src="assets/char/avg1_${charId}_002.png"
+                                     alt="${charName}"
                                      class="summary-char-image"
                                      onerror="this.style.display='none'">
                                 <div class="summary-char-name-section">
+                                    <div class="summary-card-badge ${badgeClass}">${title}</div>
                                     <div class="summary-char-name">${charName}</div>
-                                    <div class="summary-char-id">ID: ${charId}</div>
+                                    ${generateSkillsSummaryCompact(charData, position)}
                                 </div>
                             </div>
-                            ${generateSkillsSummary(charData, position)}
                             ${generatePotentialsSummary(position)}
                         </div>
                     </div>
@@ -190,7 +175,7 @@
         `;
     }
     
-    // Generate ALL discs section (main + sub)
+    // Generate ALL discs section (main + sub + notes in 3 columns)
     function generateAllDiscsSection() {
         if (!window.discsState) {
             return '<p style="color: var(--text-secondary); padding: 1rem;">레코드 데이터를 불러오는 중...</p>';
@@ -202,15 +187,11 @@
         const hasMainDiscs = mainSlots.some(slotId => window.discsState.selectedDiscs?.[slotId]);
         const hasSubDiscs = subSlots.some(slotId => window.discsState.selectedDiscs?.[slotId]);
         
-        if (!hasMainDiscs && !hasSubDiscs) {
-            return '<p style="color: var(--text-secondary); padding: 1rem;">선택된 레코드 없음</p>';
-        }
+        let html = '';
         
-        let html = '<div class="summary-discs-two-column">';
-        
-        // Left column: Main Discs
+        // Column 1: Main Discs
         html += '<div class="summary-disc-column">';
-        html += '<h4 class="summary-disc-column-title">🎵 메인 레코드</h4>';
+        html += '<h3 class="summary-section-title">🎵 메인 레코드</h3>';
         
         if (hasMainDiscs) {
             mainSlots.forEach((slotId, index) => {
@@ -289,9 +270,9 @@
                                 <div class="disc-card-lb">돌파 ${limitBreak}</div>
                             </div>
                         </div>
-                        <div class="disc-skills-compact">
-                            ${mainSkillName ? `<div class="disc-skill-compact main"><span class="skill-badge-mini">멜로디</span>${mainSkillName} Lv.${limitBreak}</div>` : ''}
-                            ${secondarySkills.map(s => `<div class="disc-skill-compact"><span class="skill-badge-mini">협주</span>${s.name} Lv.${s.level}</div>`).join('')}
+                        <div class="disc-skills-badges">
+                            ${mainSkillName ? `<span class="disc-skill-badge main" title="${mainSkillName}">멜로디 Lv.${limitBreak}</span>` : ''}
+                            ${secondarySkills.map(s => `<span class="disc-skill-badge secondary" title="${s.name}">협주 Lv.${s.level}</span>`).join('')}
                         </div>
                     </div>
                 `;
@@ -300,11 +281,11 @@
             html += '<p style="color: var(--text-secondary); padding: 1rem;">선택된 메인 레코드 없음</p>';
         }
         
-        html += '</div>'; // End left column
+        html += '</div>'; // End main discs column
         
-        // Right column: Sub Discs
+        // Column 2: Sub Discs
         html += '<div class="summary-disc-column">';
-        html += '<h4 class="summary-disc-column-title">🎶 보조 레코드</h4>';
+        html += '<h3 class="summary-section-title">🎶 보조 레코드</h3>';
         
         if (hasSubDiscs) {
             subSlots.forEach((slotId, index) => {
@@ -362,112 +343,19 @@
             html += '<p style="color: var(--text-secondary); padding: 1rem;">선택된 보조 레코드 없음</p>';
         }
         
-        html += '</div>'; // End right column
-        html += '</div>'; // End two-column container
+        html += '</div>'; // End sub discs column
+        
+        // Column 3: Notes
+        html += '<div class="summary-disc-column notes-column">';
+        html += '<h3 class="summary-section-title">🎼 음표</h3>';
+        html += generateNotesSummary();
+        html += '</div>'; // End notes column
         
         return html;
     }
     
-    // Generate disc info summary for each position
-    function generateDiscInfoSummary(position) {
-        // Get discs for this position from discsState
-        if (!window.discsState) return '';
-        
-        // Disc slots are just main1, main2, main3 (not position-prefixed)
-        const mainSlots = ['main1', 'main2', 'main3'];
-        
-        // Check if any discs are selected
-        const hasDiscs = mainSlots.some(slotId => window.discsState.selectedDiscs?.[slotId]);
-        
-        if (!hasDiscs) {
-            return `<div class="summary-discs">
-                <div class="summary-section-label">레코드</div>
-                <p style="color: var(--text-secondary); font-size: 0.85rem; padding: 8px;">선택된 레코드 없음</p>
-            </div>`;
-        }
-        
-        let html = `<div class="summary-discs">
-            <div class="summary-section-label">레코드</div>
-            <div class="summary-disc-list">`;
-        
-        mainSlots.forEach((slotId, index) => {
-            const disc = window.discsState.selectedDiscs?.[slotId];
-            if (!disc) return;
-            
-            const discName = window.discsState.discNames?.[disc.Id] || '레코드';
-            const limitBreak = window.discsState.discLimitBreaks?.[slotId] || 1;
-            
-            // Get main skill
-            const mainSkillId = disc.MainSkillGroupId ? `${disc.MainSkillGroupId}${String(limitBreak).padStart(2, '0')}` : null;
-            const mainSkill = mainSkillId ? window.discsState.mainSkillData?.[mainSkillId] : null;
-            const mainSkillName = mainSkill ? (window.discsState.mainSkillKRData?.[mainSkill.Name] || mainSkill.Name || '멜로디') : '';
-            
-            // Get secondary skills
-            const secondarySkills = [];
-            if (disc.SecondarySkillGroupId1 || disc.SecondarySkillGroupId2) {
-                const noteLevels = {}; // Calculate note levels
-                const notesFromDiscs = window.calculateNotesFromSubDiscs ? window.calculateNotesFromSubDiscs() : {};
-                const acquiredNotes = window.discsState.acquiredNotes || {};
-                
-                Object.keys({...notesFromDiscs, ...acquiredNotes}).forEach(noteId => {
-                    noteLevels[noteId] = (notesFromDiscs[noteId] || 0) + (acquiredNotes[noteId] || 0);
-                });
-                
-                [disc.SecondarySkillGroupId1, disc.SecondarySkillGroupId2].forEach(groupId => {
-                    if (!groupId) return;
-                    
-                    // Find highest achievable skill level
-                    for (let level = 9; level >= 1; level--) {
-                        const skillId = String(groupId) + String(level).padStart(2, '0');
-                        const skill = window.discsState.secondarySkillData?.[skillId];
-                        
-                        if (skill) {
-                            if (skill.NeedSubNoteSkills) {
-                                try {
-                                    const requirements = JSON.parse(skill.NeedSubNoteSkills);
-                                    const requirementsMet = Object.entries(requirements).every(([noteId, requiredLevel]) => {
-                                        const currentLevel = noteLevels[noteId] || 0;
-                                        return currentLevel >= requiredLevel;
-                                    });
-                                    
-                                    if (requirementsMet) {
-                                        const skillName = window.discsState.secondarySkillKRData?.[skill.Name] || skill.Name || '협주';
-                                        secondarySkills.push({ name: skillName, level: skill.Level || level });
-                                        break;
-                                    }
-                                } catch (e) {}
-                            } else if (level === 1) {
-                                const skillName = window.discsState.secondarySkillKRData?.[skill.Name] || skill.Name || '협주';
-                                secondarySkills.push({ name: skillName, level: 1 });
-                                break;
-                            }
-                        }
-                    }
-                });
-            }
-            
-            html += `
-                <div class="summary-disc-card">
-                    <div class="disc-card-header">
-                        <span class="disc-slot-num">${index + 1}</span>
-                        <span class="disc-name-compact">${discName}</span>
-                        <span class="disc-lb-compact">돌파 ${limitBreak}</span>
-                    </div>
-                    <div class="disc-skills-compact">
-                        ${mainSkillName ? `<div class="disc-skill-compact main"><span class="skill-badge-mini">멜로디</span>${mainSkillName} Lv.${limitBreak}</div>` : ''}
-                        ${secondarySkills.map(s => `<div class="disc-skill-compact"><span class="skill-badge-mini">협주</span>${s.name} Lv.${s.level}</div>`).join('')}
-                    </div>
-                </div>
-            `;
-        });
-        
-        html += '</div></div>';
-        
-        // Add notes section
-        html += generateNotesSummary();
-        
-        return html;
-    }
+    // NOTE: generateDiscInfoSummary was removed as it's never called
+    // Disc information is now shown via generateAllDiscsSection() in the main summary
     
     // Generate notes summary section
     function generateNotesSummary() {
@@ -564,59 +452,49 @@
         return html;
     }
     
-    // Generate skills summary (2 columns, compact)
-    function generateSkillsSummary(charData, position) {
+    // Generate compact skills summary with generic labels inside character box
+    function generateSkillsSummaryCompact(charData, position) {
         const isMaster = position === 'master';
-        
-        // Map of skill type labels and their ID keys in charData
+
+        // Map of skill types with generic labels
         const skillMapping = isMaster ? [
-            { key: 'NormalAtkId', label: '일반공격' },
+            { key: 'NormalAtkId', label: '평타' },
             { key: 'SkillId', label: '스킬' },
-            { key: 'UltimateId', label: '필살기' },
-            { key: 'DodgeId', label: '회피' },
-            { key: 'SpecialSkillId', label: '특수스킬' }
+            { key: 'UltimateId', label: '필살기' }
         ] : [
-            { key: 'AssistSkillId', label: '어시스트' }
+            { key: 'AssistSkillId', label: '지원' }
         ];
-        
-        let html = '<div class="summary-skills"><div class="summary-section-label">스킬 레벨</div><div class="summary-skill-grid">';
-        
+
+        let html = '<div class="summary-skills-inline">';
+
         skillMapping.forEach(({ key, label }) => {
             const skillId = charData[key];
             if (skillId && window.state?.skills?.[skillId]) {
-                const skillData = window.state.skills[skillId];
-                const titleKey = skillData.Title;
-                const skillName = window.state?.skillNames?.[titleKey] || label;
                 const level = window.state?.skillLevels?.[position]?.[skillId] || 1;
-                
-                html += `
-                    <div class="summary-skill-card">
-                        <span class="skill-name-compact">${skillName}</span>
-                        <span class="skill-level-compact">Lv.${level}</span>
-                    </div>
-                `;
+
+                html += `<div class="skill-badge-inline">${label} Lv.${level}</div>`;
             }
         });
-        
-        html += '</div></div>';
+
+        html += '</div>';
         return html;
     }
     
-    // Generate potentials summary with marking functionality
+    // Generate potentials summary with icon-based display and marking functionality
     function generatePotentialsSummary(position) {
         const selectedPotentials = window.state?.selectedPotentials?.[position] || [];
-        
+
         if (selectedPotentials.length === 0) {
             return `<div class="summary-potentials">
                 <div class="summary-section-label">잠재력: 0</div>
                 <p style="color: var(--text-secondary); font-size: 0.85rem; padding: 8px;">선택된 잠재력 없음</p>
             </div>`;
         }
-        
+
         // Separate specific potentials from normal/common
         const specificPots = [];
         const normalCommonPots = [];
-        
+
         selectedPotentials.forEach(potId => {
             const itemData = window.state?.items?.[potId];
             if (itemData && itemData.Stype === 42) {
@@ -625,13 +503,13 @@
                 normalCommonPots.push(potId);
             }
         });
-        
+
         // Calculate total potential levels
         let totalPotentialLevels = 0;
         selectedPotentials.forEach(potId => {
             const itemData = window.state?.items?.[potId];
             const isSpecificPotential = itemData && itemData.Stype === 42;
-            
+
             if (isSpecificPotential) {
                 const character = window.state?.party?.[position];
                 const isMaster = position === 'master';
@@ -643,7 +521,7 @@
                 totalPotentialLevels += level;
             }
         });
-        
+
         // Initialize potential marks if not exists
         if (!window.state.potentialMarks) {
             window.state.potentialMarks = {};
@@ -651,100 +529,66 @@
         if (!window.state.potentialMarks[position]) {
             window.state.potentialMarks[position] = {};
         }
-        
+
         let html = `<div class="summary-potentials">
-            <div class="summary-section-label">잠재력: ${totalPotentialLevels}</div>`;
-        
-        // Show specific potentials first
+            <div class="summary-section-label-row">
+                <span>잠재력: ${totalPotentialLevels}</span>
+                <span class="potential-hint">클릭: 마크 변경 | 드래그: 순서 변경</span>
+            </div>`;
+
+        // Render specific potentials first (top row, max 2)
         if (specificPots.length > 0) {
-            html += '<div class="summary-potential-section">';
-            html += `<div class="summary-potential-section-title">${getIcon('star')} 전용 잠재력</div>`;
-            html += '<div class="summary-potential-list specific-potentials">';
-            
+            html += '<div class="summary-potential-icons-grid specific-pots-grid" data-position="' + position + '" data-section="specific">';
+
             specificPots.forEach(potId => {
-                const potential = window.state?.potentials?.[potId];
-                if (!potential) return;
-                
-                const briefDescKey = potential.BriefDesc;
-                const itemKey = briefDescKey ? briefDescKey.replace('Potential.', 'Item.') : null;
-                const potName = itemKey ? (window.state?.itemNames?.[itemKey] || `Potential ${potId}`) : `Potential ${potId}`;
-                
+                const itemData = window.state?.items?.[potId];
                 const character = window.state?.party?.[position];
                 const isMaster = position === 'master';
                 const skillId = isMaster ? character?.data.UltimateId : character?.data.AssistSkillId;
                 const level = skillId ? (window.state?.skillLevels?.[position]?.[skillId] || 1) : 1;
-                
                 const mark = window.state.potentialMarks[position][potId] || '';
-                
-                let markBadge = '';
-                if (mark === '필수') {
-                    markBadge = '<span class="potential-mark-badge essential">필수</span>';
-                } else if (mark === '권장') {
-                    markBadge = '<span class="potential-mark-badge recommended">권장</span>';
-                } else if (mark === 'Lv.1') {
-                    markBadge = '<span class="potential-mark-badge level-one">Lv.1</span>';
-                }
-                
-                html += `
-                    <div class="summary-potential-item specific" 
-                         data-action="summary-cycle-potential-mark"
+
+                html += `<div class="potential-icon-wrapper"
+                              data-section="specific">
+                    <div data-action="summary-cycle-potential-mark"
                          data-position="${position}"
-                         data-potential-id="${potId}">
-                        <div class="potential-info-compact">
-                            <span class="potential-name-compact">${potName}</span>
-                            ${markBadge}
-                        </div>
-                        <span class="potential-level-compact skill-level">Lv.${level}</span>
-                    </div>
-                `;
+                         data-potential-id="${potId}">`;
+
+                if (typeof window.generatePotentialIconHTML === 'function') {
+                    html += window.generatePotentialIconHTML(potId, position, level, mark);
+                }
+
+                html += `</div></div>`;
             });
-            
-            html += '</div></div>';
+
+            html += '</div>';
         }
-        
-        // Show normal/common potentials
+
+        // Render normal/common potentials (4 per row grid)
         if (normalCommonPots.length > 0) {
-            html += '<div class="summary-potential-section">';
-            html += `<div class="summary-potential-section-title">${getIcon('summary')} 일반/공용 잠재력</div>`;
-            html += '<div class="summary-potential-list">';
-            
+            html += '<div class="summary-potential-icons-grid" data-position="' + position + '" data-section="normal">';
+
             normalCommonPots.forEach(potId => {
-                const potential = window.state?.potentials?.[potId];
-                if (!potential) return;
-                
-                const briefDescKey = potential.BriefDesc;
-                const itemKey = briefDescKey ? briefDescKey.replace('Potential.', 'Item.') : null;
-                const potName = itemKey ? (window.state?.itemNames?.[itemKey] || `Potential ${potId}`) : `Potential ${potId}`;
-                
+                const itemData = window.state?.items?.[potId];
                 const level = window.state?.potentialLevels?.[position]?.[potId] || 1;
                 const mark = window.state.potentialMarks[position][potId] || '';
-                
-                let markBadge = '';
-                if (mark === '필수') {
-                    markBadge = '<span class="potential-mark-badge essential">필수</span>';
-                } else if (mark === '권장') {
-                    markBadge = '<span class="potential-mark-badge recommended">권장</span>';
-                } else if (mark === 'Lv.1') {
-                    markBadge = '<span class="potential-mark-badge level-one">Lv.1</span>';
-                }
-                
-                html += `
-                    <div class="summary-potential-item"
-                         data-action="summary-cycle-potential-mark"
+
+                html += `<div class="potential-icon-wrapper"
+                              data-section="normal">
+                    <div data-action="summary-cycle-potential-mark"
                          data-position="${position}"
-                         data-potential-id="${potId}">
-                        <div class="potential-info-compact">
-                            <span class="potential-name-compact">${potName}</span>
-                            ${markBadge}
-                        </div>
-                        <span class="potential-level-compact">Lv.${level}</span>
-                    </div>
-                `;
+                         data-potential-id="${potId}">`;
+
+                if (typeof window.generatePotentialIconHTML === 'function') {
+                    html += window.generatePotentialIconHTML(potId, position, level, mark);
+                }
+
+                html += `</div></div>`;
             });
-            
-            html += '</div></div>';
+
+            html += '</div>';
         }
-        
+
         html += '</div>';
         return html;
     }
@@ -987,17 +831,211 @@
     function setupSummaryEventDelegation() {
         const summaryContainer = document.getElementById('main-tab-summary');
         if (!summaryContainer) return;
-        
+
         summaryContainer.addEventListener('click', function(e) {
             const target = e.target;
             const button = target.closest('[data-action]');
-            
+
             if (!button) return;
-            
+
             const action = button.dataset.action;
             handleSummaryAction(button, action);
         });
+
+        // Drag-and-drop for potential reordering
+        setupPotentialDragAndDrop(summaryContainer);
     }
+
+    /**
+     * Setup drag-and-drop for potential icon reordering with visual placeholder
+     */
+    function setupPotentialDragAndDrop(container) {
+        let draggedElement = null;
+        let sourcePosition = null;
+        let sourcePotentialId = null;
+        let sourceSection = null;
+        let placeholder = null;
+        let lastTargetWrapper = null;
+        let lastInsertBefore = false;
+
+        container.addEventListener('dragstart', function(e) {
+            const potIcon = e.target.closest('.potential-icon-compact');
+            if (!potIcon) return;
+
+            draggedElement = e.target.closest('.potential-icon-wrapper');
+            if (!draggedElement) return;
+
+            sourcePotentialId = parseInt(potIcon.dataset.potentialId);
+            sourcePosition = potIcon.dataset.position;
+            sourceSection = draggedElement.dataset.section;
+
+            // Add dragging class
+            draggedElement.classList.add('dragging');
+
+            // Create placeholder
+            placeholder = document.createElement('div');
+            placeholder.className = 'potential-drop-placeholder';
+            placeholder.dataset.placeholder = 'true';
+
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', draggedElement.innerHTML);
+        });
+
+        container.addEventListener('dragend', function(e) {
+            if (draggedElement) {
+                draggedElement.classList.remove('dragging');
+            }
+
+            // Remove placeholder
+            if (placeholder && placeholder.parentNode) {
+                placeholder.parentNode.removeChild(placeholder);
+            }
+            placeholder = null;
+            lastTargetWrapper = null;
+        });
+
+        container.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            if (!draggedElement || !placeholder) return;
+
+            const targetWrapper = e.target.closest('.potential-icon-wrapper');
+            if (!targetWrapper) return;
+
+            const targetSection = targetWrapper.dataset.section;
+
+            // Only show placeholder if same section
+            if (sourceSection !== targetSection) {
+                if (placeholder.parentNode) {
+                    placeholder.parentNode.removeChild(placeholder);
+                }
+                lastTargetWrapper = null;
+                return;
+            }
+
+            const targetGrid = targetWrapper.closest('.summary-potential-icons-grid');
+            if (!targetGrid) return;
+
+            // Don't show placeholder on the dragged element itself
+            if (targetWrapper === draggedElement) return;
+
+            // Determine if we should insert before or after based on mouse position
+            const rect = targetWrapper.getBoundingClientRect();
+            const midpoint = rect.left + rect.width / 2;
+            const insertBefore = e.clientX < midpoint;
+
+            // Store the last valid target position
+            lastTargetWrapper = targetWrapper;
+            lastInsertBefore = insertBefore;
+
+            // Insert placeholder
+            if (insertBefore) {
+                targetWrapper.parentNode.insertBefore(placeholder, targetWrapper);
+            } else {
+                targetWrapper.parentNode.insertBefore(placeholder, targetWrapper.nextSibling);
+            }
+
+            e.dataTransfer.dropEffect = 'move';
+        });
+
+        container.addEventListener('drop', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Remove placeholder
+            if (placeholder && placeholder.parentNode) {
+                placeholder.parentNode.removeChild(placeholder);
+            }
+
+            if (!draggedElement) return;
+
+            // Try to get target from event, or use last known target position
+            let targetWrapper = e.target.closest('.potential-icon-wrapper');
+            let insertBefore = lastInsertBefore;
+
+            // If we didn't find a target (e.g., dropped on placeholder), use last target
+            if (!targetWrapper && lastTargetWrapper) {
+                targetWrapper = lastTargetWrapper;
+            }
+
+            if (!targetWrapper || targetWrapper === draggedElement) {
+                // Reset and return
+                draggedElement = null;
+                sourcePotentialId = null;
+                sourcePosition = null;
+                sourceSection = null;
+                lastTargetWrapper = null;
+                return;
+            }
+
+            // Get target potential info from the icon element
+            const targetPotIcon = targetWrapper.querySelector('.potential-icon-compact');
+            if (!targetPotIcon) {
+                // Reset and return
+                draggedElement = null;
+                sourcePotentialId = null;
+                sourcePosition = null;
+                sourceSection = null;
+                lastTargetWrapper = null;
+                return;
+            }
+
+            const targetPosition = targetPotIcon.dataset.position;
+            const targetPotentialId = parseInt(targetPotIcon.dataset.potentialId);
+            const targetSection = targetWrapper.dataset.section;
+
+            // Only allow reordering within the same character position AND section
+            if (sourcePosition !== targetPosition || sourceSection !== targetSection) {
+                // Reset and return
+                draggedElement = null;
+                sourcePotentialId = null;
+                sourcePosition = null;
+                sourceSection = null;
+                lastTargetWrapper = null;
+                return;
+            }
+
+            // Reorder the potentials array
+            reorderPotentialsWithDirection(sourcePosition, sourcePotentialId, targetPotentialId, insertBefore);
+
+            // Reset
+            draggedElement = null;
+            sourcePotentialId = null;
+            sourcePosition = null;
+            sourceSection = null;
+            lastTargetWrapper = null;
+        });
+    }
+
+    /**
+     * Reorder potentials array with specific insert direction
+     */
+    function reorderPotentialsWithDirection(position, sourcePotId, targetPotId, insertBefore) {
+        if (!window.state?.selectedPotentials?.[position]) return;
+
+        const potentials = window.state.selectedPotentials[position];
+        const sourceIndex = potentials.indexOf(sourcePotId);
+        const targetIndex = potentials.indexOf(targetPotId);
+
+        if (sourceIndex === -1 || targetIndex === -1) return;
+
+        // Remove source
+        potentials.splice(sourceIndex, 1);
+
+        // Recalculate target index after removal
+        const newTargetIndex = potentials.indexOf(targetPotId);
+
+        // Insert at appropriate position
+        if (insertBefore) {
+            potentials.splice(newTargetIndex, 0, sourcePotId);
+        } else {
+            potentials.splice(newTargetIndex + 1, 0, sourcePotId);
+        }
+
+        // Re-render summary to show new order
+        updateSummary();
+    }
+
+    // NOTE: Old reorderPotentials() function removed - superseded by reorderPotentialsWithDirection()
     
     /**
      * Handle delegated summary actions
@@ -1019,7 +1057,9 @@
     
     // Setup event delegation when DOM is ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupSummaryEventDelegation);
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSummaryEventDelegation();
+        });
     } else {
         setupSummaryEventDelegation();
     }
@@ -1042,9 +1082,6 @@
     // Make functions globally available
     window.renderSummary = renderSummary;
     window.updateSummary = updateSummary;
-    window.exportBuild = exportBuild;
-    window.shareBuild = shareBuild;
-    window.copyBuild = copyBuild;
     window.saveBuildNotes = saveBuildNotes;
     window.cyclePotentialMark = cyclePotentialMark;
     
