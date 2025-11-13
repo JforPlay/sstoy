@@ -533,7 +533,7 @@
         let html = `<div class="summary-potentials">
             <div class="summary-section-label-row">
                 <span>잠재력: ${totalPotentialLevels}</span>
-                <span class="potential-hint">클릭: 마크 변경 | 드래그: 순서 변경</span>
+                <span class="potential-hint">클릭: 우선도 변경 | 드래그: 순서 변경</span>
             </div>`;
 
         // Render specific potentials first (top row, max 2)
