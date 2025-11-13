@@ -944,12 +944,145 @@
     }
 }
 
+/* Badge Requirements Styling */
+.badge-requirements-section {
+    margin-top: 1.5rem;
+}
+
+.badge-requirements-container {
+    padding: 1rem;
+}
+
+.badge-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.badge-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0 1rem;
+    position: relative;
+}
+
+.badge-column:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -0.75rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+    opacity: 0.6;
+}
+
+.badge-column-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: center;
+    padding: 0.5rem;
+    background: var(--bg-secondary);
+    border-radius: 0.5rem;
+}
+
+.badge-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.badge-item {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+    background: var(--bg-secondary);
+    transition: all 0.2s ease;
+}
+
+.badge-item:hover {
+    transform: scale(1.05);
+    border-color: var(--primary);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.badge-item-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.badge-item-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.badge-item-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    z-index: 2;
+}
+
+.badge-item-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.badge-character-icons-container {
+    position: absolute;
+    bottom: 0.25rem;
+    right: 0.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    max-width: calc(100% - 0.5rem);
+    justify-content: flex-end;
+    z-index: 3;
+}
+
+.badge-character-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--bg-primary);
+    background: var(--bg-secondary);
+    flex-shrink: 0;
+}
+
+.badge-character-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .badge-columns {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
 @media (max-width: 480px) {
     .character-resource-header {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .character-resource-actions {
         width: 100%;
         justify-content: center;

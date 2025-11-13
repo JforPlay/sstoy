@@ -52,6 +52,7 @@ let resourcesState = {
     characterSkillUpgrade: {},
     characterAdvance: {},
     charItemExp: {},
+    charGem: {},
     discs: {},
     discStrengthen: {},
     discPromote: {},
@@ -309,16 +310,19 @@ async function initResourcesPage() {
         
         // Load all required data
         await loadResourcesData();
-        
+
         // Load saved state from localStorage
         loadResourcesState();
-        
+
+        // Build item usage index after loading state
+        buildItemUsageIndex();
+
         // Initialize event delegation
         initEventDelegation();
-        
+
         // Initialize keyboard navigation
         initKeyboardNavigation();
-        
+
         // Initialize UI
         renderSelectedCharactersList();
         renderResourceSummary();
@@ -343,6 +347,7 @@ async function loadResourcesData() {
             characterSkillUpgradeData,
             characterAdvanceData,
             charItemExpData,
+            charGemData,
             discsData,
             discStrengthenData,
             discPromoteData,
@@ -359,6 +364,7 @@ async function loadResourcesData() {
             fetch('data/CharacterSkillUpgrade.json').then(r => r.json()),
             fetch('data/CharacterAdvance.json').then(r => r.json()),
             fetch('data/CharItemExp.json').then(r => r.json()),
+            fetch('data/CharGem.json').then(r => r.json()),
             fetch('data/Disc.json').then(r => r.json()),
             fetch('data/DiscStrengthen.json').then(r => r.json()),
             fetch('data/DiscPromote.json').then(r => r.json()),
@@ -376,6 +382,7 @@ async function loadResourcesData() {
         resourcesState.characterSkillUpgrade = characterSkillUpgradeData;
         resourcesState.characterAdvance = characterAdvanceData;
         resourcesState.charItemExp = charItemExpData;
+        resourcesState.charGem = charGemData;
         resourcesState.discs = discsData;
         resourcesState.discStrengthen = discStrengthenData;
         resourcesState.discPromote = discPromoteData;
@@ -556,13 +563,14 @@ function calculateCharacterResources(characterId) {
         expItems: {},
         skillItems: {},
         advanceItems: {},
-        gold: 0
+        gold: 0,
+        levelupGold: 0 // Gold for levelup (150 per 1000 EXP)
     };
-    
+
     // Calculate EXP required for leveling
     const currentLevel = selectedChar.currentLevel;
     const targetLevel = selectedChar.targetLevel;
-    
+
     for (let level = currentLevel + 1; level <= targetLevel; level++) {
         const levelId = 10000 + level;
         const levelData = resourcesState.characterUpgrade[levelId];
@@ -570,6 +578,9 @@ function calculateCharacterResources(characterId) {
             resources.exp += levelData.Exp;
         }
     }
+
+    // Calculate gold for levelup (150 gold per 1000 EXP)
+    resources.levelupGold = Math.round((resources.exp / 1000) * 150);
     
     // Calculate advance materials needed
     // Advance happens at levels 10, 20, 30, 40, 50, 60, 70, 80
@@ -949,20 +960,22 @@ function renderResourceSummary() {
         exp: 0,
         advanceItems: {},
         skillItems: {},
-        gold: 0
+        gold: 0,
+        levelupGold: 0
     };
     
     Object.values(resourcesState.characterResources).forEach(resources => {
         totalResources.exp += resources.exp;
         totalResources.gold += resources.gold;
-        
+        totalResources.levelupGold += resources.levelupGold || 0;
+
         Object.entries(resources.advanceItems || {}).forEach(([itemId, qty]) => {
             if (!totalResources.advanceItems[itemId]) {
                 totalResources.advanceItems[itemId] = 0;
             }
             totalResources.advanceItems[itemId] += qty;
         });
-        
+
         Object.entries(resources.skillItems).forEach(([itemId, qty]) => {
             if (!totalResources.skillItems[itemId]) {
                 totalResources.skillItems[itemId] = 0;
@@ -1034,14 +1047,15 @@ function renderResourceSummary() {
     }
     
     // Render EXP and Gold side by side at the bottom
-    if (totalResources.exp > 0 || totalResources.gold > 0) {
+    const totalGold = totalResources.gold + totalResources.levelupGold;
+    if (totalResources.exp > 0 || totalGold > 0) {
         const bottomSection = document.createElement('div');
         bottomSection.className = 'resource-bottom-section';
         bottomSection.innerHTML = '<div class="resource-bottom-grid" id="bottom-resources-grid"></div>';
         container.appendChild(bottomSection);
-        
+
         const bottomGrid = document.getElementById('bottom-resources-grid');
-        
+
         // Add EXP
         if (totalResources.exp > 0) {
             const expCard = document.createElement('div');
@@ -1052,31 +1066,34 @@ function renderResourceSummary() {
             `;
             bottomGrid.appendChild(expCard);
         }
-        
-        // Add Gold (도라)
-        if (totalResources.gold > 0) {
+
+        // Add Total Gold (도라)
+        if (totalGold > 0) {
             const goldCard = document.createElement('div');
             goldCard.className = 'resource-bottom-card';
             goldCard.innerHTML = `
-                <div class="resource-category-title">도라</div>
+                <div class="resource-category-title">도라 (총합)</div>
                 <div class="resource-items-grid">
                     <div class="resource-item">
                         <div class="resource-item-icon-wrapper">
                             <img src="assets/items/item_1.png" class="resource-item-icon" alt="도라" onerror="this.style.display='none'">
                         </div>
                         <div class="resource-item-name">도라</div>
-                        <div class="resource-item-qty">${totalResources.gold.toLocaleString()}</div>
+                        <div class="resource-item-qty">${totalGold.toLocaleString()}</div>
                     </div>
                 </div>
             `;
             bottomGrid.appendChild(goldCard);
         }
-        
+
         // Render exp items after DOM is ready
         if (totalResources.exp > 0) {
             renderExpItems(totalResources.exp);
         }
     }
+
+    // Render badge requirements section
+    renderBadgeRequirements();
 }
 
 // Render EXP items needed
@@ -1103,9 +1120,122 @@ function renderExpItems(totalExp) {
     Object.entries(itemCounts).forEach(([itemId, count]) => {
         const item = resourcesState.items[itemId];
         if (!item) return;
-        
+
         const itemElement = createResourceItemElement(item, count);
         grid.appendChild(itemElement);
+    });
+}
+
+// Render badge requirements
+function renderBadgeRequirements() {
+    const container = document.getElementById('resource-summary-content');
+    if (!container || resourcesState.selectedCharacters.length === 0) return;
+
+    // Collect all badges needed by level (70, 80, 90)
+    const badgesByLevel = {
+        70: [],
+        80: [],
+        90: []
+    };
+
+    resourcesState.selectedCharacters.forEach(charData => {
+        const character = resourcesState.characters[charData.id];
+
+        if (!character || !character.GemSlots || character.GemSlots.length !== 3) {
+            return;
+        }
+
+        // Only include badges for target level >= badge level
+        const targetLevel = charData.targetLevel;
+
+        // GemSlots array has 3 items in order: 70, 80, 90
+        const levels = [70, 80, 90];
+        levels.forEach((level, index) => {
+            if (targetLevel >= level) {
+                const gemSlotId = character.GemSlots[index];
+                const charGemData = resourcesState.charGem[gemSlotId];
+
+                if (charGemData && charGemData.GenerateCostTid) {
+                    const itemId = charGemData.GenerateCostTid;
+
+                    // Find existing badge for this itemId
+                    let badgeEntry = badgesByLevel[level].find(b => b.itemId === itemId);
+
+                    if (!badgeEntry) {
+                        // Create new badge entry
+                        badgeEntry = {
+                            itemId: itemId,
+                            characters: []
+                        };
+                        badgesByLevel[level].push(badgeEntry);
+                    }
+
+                    // Add character to this badge
+                    badgeEntry.characters.push(character);
+                }
+            }
+        });
+    });
+
+    // Check if any badges are needed
+    const hasBadges = Object.values(badgesByLevel).some(badges => badges.length > 0);
+    if (!hasBadges) return;
+
+    // Create badge section
+    const badgeSection = document.createElement('div');
+    badgeSection.className = 'resource-category badge-requirements-section';
+    badgeSection.innerHTML = `
+        <div class="resource-category-header">
+            <div class="resource-category-title">뱃지 요구사항</div>
+        </div>
+        <div class="badge-requirements-container">
+            <div class="badge-columns">
+                <div class="badge-column">
+                    <div class="badge-column-title">70 Lv</div>
+                    <div class="badge-items" id="badge-70"></div>
+                </div>
+                <div class="badge-column">
+                    <div class="badge-column-title">80 Lv</div>
+                    <div class="badge-items" id="badge-80"></div>
+                </div>
+                <div class="badge-column">
+                    <div class="badge-column-title">90 Lv</div>
+                    <div class="badge-items" id="badge-90"></div>
+                </div>
+            </div>
+        </div>
+    `;
+    container.appendChild(badgeSection);
+
+    // Render badges for each level
+    [70, 80, 90].forEach(level => {
+        const badgeContainer = document.getElementById(`badge-${level}`);
+        if (!badgeContainer) return;
+
+        badgesByLevel[level].forEach(badgeData => {
+            const badgeElement = document.createElement('div');
+            badgeElement.className = 'badge-item';
+
+            // Build character icons HTML
+            const characterIconsHTML = badgeData.characters.map(character => `
+                <div class="badge-character-icon">
+                    <img src="assets/char/avg1_${character.Id}_002.png" alt="${character.NameKR || character.Name}" onerror="this.style.display='none'">
+                </div>
+            `).join('');
+
+            badgeElement.innerHTML = `
+                <div class="badge-item-background">
+                    <img src="assets/items/rare_item_a_3.png" alt="Badge Background" onerror="this.style.display='none'">
+                </div>
+                <div class="badge-item-icon">
+                    <img src="assets/items/item_${badgeData.itemId}.png" alt="Badge Item" onerror="this.style.display='none'">
+                </div>
+                <div class="badge-character-icons-container">
+                    ${characterIconsHTML}
+                </div>
+            `;
+            badgeContainer.appendChild(badgeElement);
+        });
     });
 }
 
@@ -1465,11 +1595,15 @@ function calculateDiscResources(discId) {
         }
     });
     
+    // Calculate gold for levelup (250 gold per 1000 EXP)
+    const levelupGold = Math.round((totalExp / 1000) * 250);
+
     // Store in state
     resourcesState.discResources[discId] = {
         exp: totalExp,
         advanceItems: advanceItems,
-        gold: 0 // Gold calculation can be added if needed
+        gold: 0, // Gold calculation can be added if needed
+        levelupGold: levelupGold
     };
 }
 
@@ -1616,13 +1750,15 @@ function renderDiscResourceSummary() {
     const totalResources = {
         exp: 0,
         advanceItems: {},
-        gold: 0
+        gold: 0,
+        levelupGold: 0
     };
-    
+
     Object.values(resourcesState.discResources).forEach(resources => {
         totalResources.exp += resources.exp;
         totalResources.gold += resources.gold;
-        
+        totalResources.levelupGold += resources.levelupGold || 0;
+
         Object.entries(resources.advanceItems || {}).forEach(([itemId, qty]) => {
             if (!totalResources.advanceItems[itemId]) {
                 totalResources.advanceItems[itemId] = 0;
@@ -1665,50 +1801,76 @@ function renderDiscResourceSummary() {
         renderDiscAdvanceItems(totalResources.advanceItems);
     }
     
-    // Render EXP
-    if (totalResources.exp > 0) {
+    // Render EXP and Gold
+    const totalGold = totalResources.gold + totalResources.levelupGold;
+    if (totalResources.exp > 0 || totalGold > 0) {
         const expSection = document.createElement('div');
         expSection.className = 'resource-bottom-section';
-        expSection.innerHTML = `
-            <div class="resource-bottom-grid">
-                <div class="resource-bottom-card">
-                    <div class="resource-category-title">경험치 (${totalResources.exp.toLocaleString()})</div>
-                    <div class="resource-items-grid" id="disc-exp-items-grid"></div>
-                </div>
-            </div>
-        `;
+        expSection.innerHTML = '<div class="resource-bottom-grid" id="disc-bottom-grid"></div>';
         container.appendChild(expSection);
-        
-        // Calculate disc exp items needed
-        const expItems = {};
-        let remainingExp = totalResources.exp;
-        
-        // Use disc exp items from DiscItemExp.json
-        const discExpItems = [
-            { itemId: 50004, exp: 20000 },
-            { itemId: 50003, exp: 10000 },
-            { itemId: 50002, exp: 5000 },
-            { itemId: 50001, exp: 1000 }
-        ];
-        
-        discExpItems.forEach(({ itemId, exp }) => {
-            const count = Math.floor(remainingExp / exp);
-            if (count > 0) {
-                expItems[itemId] = count;
-                remainingExp -= count * exp;
-            }
-        });
-        
-        // Render exp items
-        const expGrid = document.getElementById('disc-exp-items-grid');
-        if (expGrid) {
-            Object.entries(expItems).forEach(([itemId, qty]) => {
-                const item = resourcesState.items[itemId];
-                if (item) {
-                    const itemElement = createResourceItemElement(item, qty, itemId);
-                    expGrid.appendChild(itemElement);
+
+        const bottomGrid = document.getElementById('disc-bottom-grid');
+
+        // Add EXP card
+        if (totalResources.exp > 0) {
+            const expCard = document.createElement('div');
+            expCard.className = 'resource-bottom-card';
+            expCard.innerHTML = `
+                <div class="resource-category-title">경험치 (${totalResources.exp.toLocaleString()})</div>
+                <div class="resource-items-grid" id="disc-exp-items-grid"></div>
+            `;
+            bottomGrid.appendChild(expCard);
+
+            // Calculate disc exp items needed
+            const expItems = {};
+            let remainingExp = totalResources.exp;
+
+            // Use disc exp items from DiscItemExp.json
+            const discExpItems = [
+                { itemId: 50004, exp: 20000 },
+                { itemId: 50003, exp: 10000 },
+                { itemId: 50002, exp: 5000 },
+                { itemId: 50001, exp: 1000 }
+            ];
+
+            discExpItems.forEach(({ itemId, exp }) => {
+                const count = Math.floor(remainingExp / exp);
+                if (count > 0) {
+                    expItems[itemId] = count;
+                    remainingExp -= count * exp;
                 }
             });
+
+            // Render exp items
+            const expGrid = document.getElementById('disc-exp-items-grid');
+            if (expGrid) {
+                Object.entries(expItems).forEach(([itemId, qty]) => {
+                    const item = resourcesState.items[itemId];
+                    if (item) {
+                        const itemElement = createResourceItemElement(item, qty, itemId);
+                        expGrid.appendChild(itemElement);
+                    }
+                });
+            }
+        }
+
+        // Add Total Gold card
+        if (totalGold > 0) {
+            const goldCard = document.createElement('div');
+            goldCard.className = 'resource-bottom-card';
+            goldCard.innerHTML = `
+                <div class="resource-category-title">도라 (총합)</div>
+                <div class="resource-items-grid">
+                    <div class="resource-item">
+                        <div class="resource-item-icon-wrapper">
+                            <img src="assets/items/item_1.png" class="resource-item-icon" alt="도라" onerror="this.style.display='none'">
+                        </div>
+                        <div class="resource-item-name">도라</div>
+                        <div class="resource-item-qty">${totalGold.toLocaleString()}</div>
+                    </div>
+                </div>
+            `;
+            bottomGrid.appendChild(goldCard);
         }
     }
 }
