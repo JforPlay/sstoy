@@ -17,7 +17,28 @@
         buildTitle: '새로운 빌드',
         buildMemo: ''
     };
-    
+
+    /**
+     * Migrate old potential mark values to new ones
+     * @param {string} position - Character position (master/assist1/assist2)
+     */
+    function migratePotentialMarks(position) {
+        if (!window.state.potentialMarks || !window.state.potentialMarks[position]) {
+            return;
+        }
+
+        const marks = window.state.potentialMarks[position];
+        for (const potId in marks) {
+            const mark = marks[potId];
+            // Migrate old values to new ones
+            if (mark === '권장') {
+                marks[potId] = '다다익선';
+            } else if (mark === 'Lv.1') {
+                marks[potId] = '명함만';
+            }
+        }
+    }
+
     // ============================================================================
     // DATA COLLECTION
     // ============================================================================
@@ -297,6 +318,9 @@
                             window.state.potentialMarks = {};
                         }
                         window.state.potentialMarks[position] = charData.pm || {};
+
+                        // Migrate old mark values to new ones
+                        migratePotentialMarks(position);
                     }
                 }
             } else {

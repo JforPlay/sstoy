@@ -668,7 +668,7 @@
         `;
     }
     
-    // Set potential mark (필수, 권장, Lv.1) - cycles through options
+    // Set potential mark (필수, 다다익선, 명함만, 후순위) - cycles through options
     function cyclePotentialMark(position, potId) {
         if (!window.state.potentialMarks) {
             window.state.potentialMarks = {};
@@ -676,20 +676,27 @@
         if (!window.state.potentialMarks[position]) {
             window.state.potentialMarks[position] = {};
         }
-        
+
         const currentMark = window.state.potentialMarks[position][potId] || '';
-        
-        // Cycle through: '' -> '필수' -> '권장' -> 'Lv.1' -> ''
-        if (currentMark === '') {
+
+        // Migrate old values to new ones
+        let migratedMark = currentMark;
+        if (currentMark === '권장') migratedMark = '다다익선';
+        if (currentMark === 'Lv.1') migratedMark = '명함만';
+
+        // Cycle through: '' -> '필수' -> '다다익선' -> '명함만' -> '후순위' -> ''
+        if (migratedMark === '') {
             window.state.potentialMarks[position][potId] = '필수';
-        } else if (currentMark === '필수') {
-            window.state.potentialMarks[position][potId] = '권장';
-        } else if (currentMark === '권장') {
-            window.state.potentialMarks[position][potId] = 'Lv.1';
+        } else if (migratedMark === '필수') {
+            window.state.potentialMarks[position][potId] = '다다익선';
+        } else if (migratedMark === '다다익선') {
+            window.state.potentialMarks[position][potId] = '명함만';
+        } else if (migratedMark === '명함만') {
+            window.state.potentialMarks[position][potId] = '후순위';
         } else {
             window.state.potentialMarks[position][potId] = '';
         }
-        
+
         updateSummary();
     }
     

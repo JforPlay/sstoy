@@ -337,7 +337,7 @@ window.switchMainTab = switchMainTab;
  * @param {number} potId - Potential ID
  * @param {string} position - Character position (master/assist1/assist2)
  * @param {number} level - Potential level
- * @param {string} mark - Optional mark badge (필수/권장/Lv.1)
+ * @param {string} mark - Optional mark badge (필수/다다익선/명함만/후순위)
  * @returns {string} HTML string for potential icon
  */
 window.generatePotentialIconHTML = function(potId, position, level, mark = '') {
@@ -372,14 +372,21 @@ window.generatePotentialIconHTML = function(potId, position, level, mark = '') {
         }
     }
 
+    // Migrate old mark values to new ones
+    let migratedMark = mark;
+    if (mark === '권장') migratedMark = '다다익선';
+    if (mark === 'Lv.1') migratedMark = '명함만';
+
     // Generate mark badge HTML
     let markBadgeHTML = '';
-    if (mark === '필수') {
+    if (migratedMark === '필수') {
         markBadgeHTML = '<span class="pot-mark-badge essential">필수</span>';
-    } else if (mark === '권장') {
-        markBadgeHTML = '<span class="pot-mark-badge recommended">권장</span>';
-    } else if (mark === 'Lv.1') {
-        markBadgeHTML = '<span class="pot-mark-badge level-one">Lv.1</span>';
+    } else if (migratedMark === '다다익선') {
+        markBadgeHTML = '<span class="pot-mark-badge recommended">다다익선</span>';
+    } else if (migratedMark === '명함만') {
+        markBadgeHTML = '<span class="pot-mark-badge level-one">명함만</span>';
+    } else if (migratedMark === '후순위') {
+        markBadgeHTML = '<span class="pot-mark-badge low-priority">후순위</span>';
     }
 
     return `

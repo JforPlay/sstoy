@@ -340,6 +340,10 @@
     background: linear-gradient(135deg, #8b5cf6, #7c3aed);
 }
 
+.potential-mark-badge.low-priority {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+}
+
 .potential-level-compact {
     font-size: 0.85rem;
     color: var(--accent);
@@ -958,6 +962,11 @@
 
 .pot-mark-badge.level-one {
     background: #0ea371;
+    color: white;
+}
+
+.pot-mark-badge.low-priority {
+    background: #6b7280;
     color: white;
 }
 
