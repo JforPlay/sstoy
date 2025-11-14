@@ -22,6 +22,39 @@
       "characterId": 155,
       "tags": ["평타", "시아"],
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokJPLgUuYASA7Q4CKjgMn2A7LSiAMZSgC2tIAlpjAKxuUAOUA2m+zYIYyARwQAmUYIQA2aeLYKhAdmUwAzOqli2AFg0BdVFwA2jXQk6R5IS7Ki3LKx6l2bHAXxMNIoS9YggCKrgBhDlPaYoeEyLtBRboIwEpgAMmBwMNEcHnFhnt4gAIaZfsysGskmfAIVEnrStTqaEhoIDS1aNRISABzGIGYWza2udsMaUGwFXL7+zb2p6ZkJFSO50asT0IAxtYCl4yD5qIXJpSzQMAguVZD8FyoSIgKX3dLPSk-3Pa-38h8SAJzfCQqfqDUp-axOO4SByQJRjZ49SYJZ7-SbTWYI+6BeJYmGYPbRZ6xEBpDJEz4E-Yo+5onb7fIFAAmjAAzow6IUmGgSg89AgNF8QJzuSc+QhLqgRWgtuKJG0QKyAK4AI15MH5rVQypVYo1AsBitVsv1F0ZQA"
+    },
+    {
+      "id": "preset-build",
+      "title": "표식 메인 나즈나",
+      "description": "나즈나를 메인으로 쓰는 표식딜 빌드입니다.",
+      "author": "메인 나즈나 표식덱에 대한 소개",
+      "authorLink": "https://arca.live/b/stellasora/152946680",
+      "element": "Earth",
+      "characterId": 156,
+      "tags": ["표식", "나즈나"],
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBkNgIyawAkB0VwXaHBHZpRAGMpQBbGkAS0xgFYA2CgBygG1W27BAGZkAjggAsYwTABMMiQA5F7GKPFD2qmAlWSY+jbJgBdVFwA2DTQk6RtITbqiPnMKKKey5r1M+E-bw4DT39BSUDIYQBfC3pIUFt7EEARVcAMIYpbJUxAUK7AC1XAGc6s2SRoDJKOGA9oQBOm2sBXccACQcq1X3LM8KqotM7g9lC6xpaugZ765pAYuJAAQxrQZmgYSQBObj4BNblDLdW5YzXhXZXV4QU94T1Lw9XI8xArG1PjoMv2txeorz3IzxmuAkki8yiACsVwkcar0Skd2jDIWdxsNYXdkZNpqhZu1FiwEAB2DaQfi6fFyC6knYyAlybQCGmran4+4WayJbw0+yfBlhDnM74AoF82mYCrhHlDSbi-mYCYtabTIA"
+    },
+    {
+      "id": "preset-build",
+      "title": "미스티 지원 어둠덱",
+      "description": "기억하세요 미스티는 초흉쌍그, 캐러멜은 최대한 피할 것",
+      "author": "순수 영포티 어둠덱 ver 2 공략",
+      "authorLink": "https://arca.live/b/stellasora/153229177",
+      "element": "Dark",
+      "characterId": 135,
+      "tags": ["캐러멜", "미스티"],
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokB-dgSocA9LABIAOTgC2MGAto4AYtgjs0ogDGUoAtkyAJaYwAsA7HQAdWkUAFYYogGwJJmQCKrgDCG64qQgAcmQKFdgC1XAM53KJkmEmiKDUmDEyATpuuBXccAEg+aMAmeUtQqjAZnfPuVtC2jv6+QfZOAL6RqACGgaCc0DDeooJQANriqS4uyNmiLjD5KYWiJTmSFYW81S4AnAC6qAIANmwFLmmQVSCdsj2epS78g33D9VCSMSBCHTz13iYgOvpD3IuBIGbri26mHuMb3mEgwU673KfnINFx+4lc3G4tmeLPLt4lH9zfLs9-Lp-E6AtSAyTNWbtERHXLdXrvT5hBE8f77aYtYRiYy8FwDbaHcQIXGTcIhIbEq42CIGD7dAm03L41aMlwaaAs9ZI6nk2HPPzRaJAA"
+    },
+    {
+      "id": "preset-build",
+      "title": "치토세 여울빛 빌드",
+      "description": "스킬 위주의 치토세 빌드입니다.",
+      "author": "쉽게 이해하는 치토세 물덱 - 2. 여울빛 빌드",
+      "authorLink": "https://arca.live/b/stellasora/151288616",
+      "element": "Water",
+      "characterId": 144,
+      "tags": ["스킬", "치토세"],
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBpzgCxcByDABICVDgNQsGAyfYDstKIAxlKALYMgCWmMALJzQA5QBtAKxdOCAMzIR3BJymiYCedxiTpYgBzKxATm0wY+gEzbOh9ZxMXxAXVS8ANi3UINUAGyoXOj14VJITxB1AyhJYIUjML8VcQ8AX3tmSFAXN2hAE6aMwFdxwAJBmm9MLLyC-0xAEVXADCHSlRginPyYsyjMhpqzOOgq9rNMQBG1wBwhwBBxnpaQQZGmzk7x4ZB4xJAAQzqUtg5Q+0ERAyNzAxgjKwOjAHZ5XaELw88dw6078SU76evxW3snNbuz3wjd9LhR4BIEHaZhRa8ZKpE5CTCAUK7ABargBnO0q7dwIlFow6nCrVPwA+olAmqAIgYqNf6qGYTbHg1olBaoJYtUDsaA4vjbHF7eRnI5807vQVGK4iM7ifb89x2ECOZw8uGBPwS1ZBcVCzruSHQiL8pXktoq05GDHQJGo42SomUjXvPHzJkgAAmLAAzixGEtWGhVnsnopUF6fS1-QgYBoFvEgA"
     }
   ],
   "elements": {
