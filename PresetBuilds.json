@@ -39,6 +39,30 @@
     },
     {
       "id": "preset-build",
+      "title": "(대체) 등사 평캔 치토세",
+      "description": "(종언용) 프리지아-->안즈 대체 빌드입니다.",
+      "author": "프없찐들을 위한 종언 치토세안즈덱",
+      "authorLink": "https://arca.live/b/stellasora/153681506",
+      "element": "Water",
+      "characterId": 144,
+      "tags": ["평타", "치토세", "안즈"],
+      "meta": true,
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBpzgCxcByDgEqOARkyiAMZSgC2lIAlpjACxOkAOUA2gKzNMIxkvFggBMQvggDsEljEHCmMAMyz+3NQgBsAXVRsANrUUJuULahNbzlyVJshF8h0+XmAvvpqRQJs9EATpoDAV3HAAkHSK0wgsIi7TEARVcAMIdi5GATk2zk3aCTY7m5TdLyC6xyMxxh86SLbfJhRKJDw2t5skFz3TxAAQzSfekZRN30uXiHRBXrlUXEx6Ys50Rk56YlxgE49EENjKdFSiwrx+0hDlYbTrrZvXz3S9vLFk4fYjcxAUK7AC1XAGc7X5WmakctPsPj9XsDnrlbPtRAAOIqdVDdC6gBjQer2EaQHgYiZrKRDfGidZEjRjKT-Imw-HKSZLfZbHb9cmifxnXHw07QgnrFwY-4eLy7aSswG8EX3L6-Wwi57RZoVEWcl4ynmNGKq2nqhUs-wqo4EyVg7lw7WvNVlc1awJNK1tDqddxAA"
+    },
+    {
+      "id": "preset-build",
+      "title": "평캔 시아 + 플로라",
+      "description": "(종언용) 미네르바 말고 플로라를 쓰는 빌드입니다.",
+      "author": "종언 플로라시아덱",
+      "authorLink": "https://arca.live/b/stellasora/153639677",
+      "element": "Light",
+      "characterId": 155,
+      "tags": ["평타", "시아", "플로라"],
+      "meta": true,
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokDCrgdDsD7tgO0OAioyiAMZSgC2lIAlpjAKxOkAOUA2k80wgEzIeLBDCG8EANnEiA7DL5MFMAMzL+AXVRsANrWGKo0kAalHUp2eZO9VRgL7aakUKdbRAIquAMIdKnJmb18JK08fC1t+TEATpqjAV3HAAkGgljtQkHtHEABDGFoGaBh+f20uHkL+NVLJfjFK-nlagA5xMsktEF19AqqQ40aHJ06WzEBQrsALVcAZzqCykJBA8LKGgJ901EzIl3pGBCtiyG4YberxQ8EeQ6Uz2X4my-4ATmOr+oPZFRqXwraOjdv3Xo+euFDotIP9DndrJc3v12s5XB93LMwjZDv5oGNJkCntE4oksdclkFwTiEkTXjloDFSel0kA"
+    },
+    {
+      "id": "preset-build",
       "title": "미스티 지원 어둠덱",
       "description": "기억하세요 미스티는 초흉쌍그, 캐러멜은 최대한 피할 것",
       "author": "순수 영포티 어둠덱 ver 2 공략",
