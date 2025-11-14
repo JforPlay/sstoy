@@ -1564,25 +1564,31 @@ function calculateDiscResources(discId) {
     
     // Calculate advance materials (승급)
     const advanceItems = {};
+    let advanceGold = 0;
     const advanceLevels = [10, 20, 30, 40, 50, 60, 70, 80];
-    
+
     advanceLevels.forEach((advLevel, index) => {
         if (currentLevel < advLevel && targetLevel >= advLevel) {
             const promoteGroupId = disc.data.PromoteGroupId;
             const advanceNum = index + 1; // 1-based (1-8)
             const promoteId = `${promoteGroupId}${String(advanceNum).padStart(3, '0')}`; // Changed to 3 digits: 001-008
             const promoteData = resourcesState.discPromote[promoteId];
-            
+
             if (promoteData) {
+                // Add gold cost from ExpenseGold
+                if (promoteData.ExpenseGold) {
+                    advanceGold += promoteData.ExpenseGold;
+                }
+
                 // Add ItemId1~ItemId3 and their quantities
                 for (let i = 1; i <= 3; i++) {
                     const itemIdKey = `ItemId${i}`;
                     const numKey = `Num${i}`;
-                    
+
                     if (promoteData[itemIdKey]) {
                         const itemId = promoteData[itemIdKey];
                         const qty = promoteData[numKey] || 0;
-                        
+
                         if (qty > 0) {
                             if (!advanceItems[itemId]) {
                                 advanceItems[itemId] = 0;
@@ -1594,7 +1600,7 @@ function calculateDiscResources(discId) {
             }
         }
     });
-    
+
     // Calculate gold for levelup (250 gold per 1000 EXP)
     const levelupGold = Math.round((totalExp / 1000) * 250);
 
@@ -1602,7 +1608,7 @@ function calculateDiscResources(discId) {
     resourcesState.discResources[discId] = {
         exp: totalExp,
         advanceItems: advanceItems,
-        gold: 0, // Gold calculation can be added if needed
+        gold: advanceGold,
         levelupGold: levelupGold
     };
 }
