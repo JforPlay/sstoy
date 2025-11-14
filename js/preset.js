@@ -192,6 +192,7 @@
                                     <img src="${element.iconPath}" class="element-tag-icon" alt="${element.name}" onerror="this.style.display='none'" />
                                     ${element.name}
                                 </span>
+                                ${preset.meta ? '<span class="preset-meta-badge">메타</span>' : ''}
                             </div>
                             <h4 class="preset-title">${preset.title}</h4>
                             <p class="preset-description">${preset.description || ''}</p>

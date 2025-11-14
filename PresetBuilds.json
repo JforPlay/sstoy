@@ -10,6 +10,7 @@
       "element": "Water",
       "characterId": 144,
       "tags": ["평타", "치토세"],
+      "meta": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokI8tgagYASCTy4ClzegGnOAFi4ByDgMn2A7LSiAMZSgC2LIAlpjACy8MADlADaAVj68EMZBP4IATLMkIA7Mv4wAzBt4wZcqQDZdCMQF1UggDYdDCI1CUh7qqCZeT9UHZ81b3AF8rdkhQezFMABkwOBgGe0doGLiElTdoQBFVwAwhtM146EAY2sBS8by9AKzcwOCQAEMC0G5oGAU3K1EJVoUDFtUFHU6+gE5lVq0B3oUxUdU9GYUADhmtGEsQGztJyMhpzy6Fn1RBhSH3I97xs73ZgqMawVDwrcwStK6kkBT48-2X0p-hpgcm9VFokMlYt9rpciv9rnogVUarUFBwmrApkIOi0xN1RrilJ0xON8VN8Ss1hswntcdsPESVocaTC7iFNlNMZU3sSCiBXj9iRUQMDqjUACYcADOHFYtU4aAK3SkCg8svlqMgSoQZlQarQFS1eJAkoArgAjRV8BArVCms0arX6W3mg1WrR3apAA"
     },
     {
@@ -21,6 +22,7 @@
       "element": "Light",
       "characterId": 155,
       "tags": ["평타", "시아"],
+      "meta": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokJPLgUuYASA7Q4CKjgMn2A7LSiAMZSgC2tIAlpjAKxuUAOUA2m+zYIYyARwQAmUYIQA2aeLYKhAdmUwAzOqli2AFg0BdVFwA2jXQk6R5IS7Ki3LKx6l2bHAXxMNIoS9YggCKrgBhDlPaYoeEyLtBRboIwEpgAMmBwMNEcHnFhnt4gAIaZfsysGskmfAIVEnrStTqaEhoIDS1aNRISABzGIGYWza2udsMaUGwFXL7+zb2p6ZkJFSO50asT0IAxtYCl4yD5qIXJpSzQMAguVZD8FyoSIgKX3dLPSk-3Pa-38h8SAJzfCQqfqDUp-axOO4SByQJRjZ49SYJZ7-SbTWYI+6BeJYmGYPbRZ6xEBpDJEz4E-Yo+5onb7fIFAAmjAAzow6IUmGgSg89AgNF8QJzuSc+QhLqgRWgtuKJG0QKyAK4AI15MH5rVQypVYo1AsBitVsv1F0ZQA"
     },
     {
@@ -32,6 +34,7 @@
       "element": "Earth",
       "characterId": 156,
       "tags": ["표식", "나즈나"],
+      "meta": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBkNgIyawAkB0VwXaHBHZpRAGMpQBbGkAS0xgFYA2CgBygG1W27BAGZkAjggAsYwTABMMiQA5F7GKPFD2qmAlWSY+jbJgBdVFwA2DTQk6RtITbqiPnMKKKey5r1M+E-bw4DT39BSUDIYQBfC3pIUFt7EEARVcAMIYpbJUxAUK7AC1XAGc6s2SRoDJKOGA9oQBOm2sBXccACQcq1X3LM8KqotM7g9lC6xpaugZ765pAYuJAAQxrQZmgYSQBObj4BNblDLdW5YzXhXZXV4QU94T1Lw9XI8xArG1PjoMv2txeorz3IzxmuAkki8yiACsVwkcar0Skd2jDIWdxsNYXdkZNpqhZu1FiwEAB2DaQfi6fFyC6knYyAlybQCGmran4+4WayJbw0+yfBlhDnM74AoF82mYCrhHlDSbi-mYCYtabTIA"
     },
     {
@@ -55,6 +58,17 @@
       "characterId": 144,
       "tags": ["스킬", "치토세"],
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBpzgCxcByDABICVDgNQsGAyfYDstKIAxlKALYMgCWmMALJzQA5QBtAKxdOCAMzIR3BJymiYCedxiTpYgBzKxATm0wY+gEzbOh9ZxMXxAXVS8ANi3UINUAGyoXOj14VJITxB1AyhJYIUjML8VcQ8AX3tmSFAXN2hAE6aMwFdxwAJBmm9MLLyC-0xAEVXADCHSlRginPyYsyjMhpqzOOgq9rNMQBG1wBwhwBBxnpaQQZGmzk7x4ZB4xJAAQzqUtg5Q+0ERAyNzAxgjKwOjAHZ5XaELw88dw6078SU76evxW3snNbuz3wjd9LhR4BIEHaZhRa8ZKpE5CTCAUK7ABargBnO0q7dwIlFow6nCrVPwA+olAmqAIgYqNf6qGYTbHg1olBaoJYtUDsaA4vjbHF7eRnI5807vQVGK4iM7ifb89x2ECOZw8uGBPwS1ZBcVCzruSHQiL8pXktoq05GDHQJGo42SomUjXvPHzJkgAAmLAAzixGEtWGhVnsnopUF6fS1-QgYBoFvEgA"
+    },
+    {
+      "id": "preset-build",
+      "title": "나노하 스킬 빌드",
+      "description": "스킬 위주의 나노하 빌드입니다. 안즈는 바람 장벽 제외 전부 취향껏",
+      "author": "섭종기념 나노하 빌드 공략",
+      "authorLink": "https://arca.live/b/stellasora/151940574",
+      "element": "Wind",
+      "characterId": 119,
+      "tags": ["스킬", "나노하"],
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBMDgdDsC1jABIDJ9gOy0ogDGUoAttSAJaYwwCc5ADlANoCsLrFsn5sYCYQIQBmCWwQAWWawQAOJQlZL5AJi0yRg7QF1UHADb0DqqADZUV9pDsgDY2-YEtbAX1N1IoFYqmIAiq4AYQ+QOoREeokjQ4ZGeMNFJotqYgCNrgDhDgCDjaaw6mIChXYAWq4AznQXyUiUVIN6+IACGKQGMzNo1pjz8ndo2JiDmljB9Nj5+I2OpDahNGW1M0KNI3ZB8K50S2gjair27mgfaagdSCIMc-oGbwdCAJ033gK7jgASDSTvajiCPr+-S8d9nm8Gg0gA"
     }
   ],
   "elements": {
@@ -109,6 +123,7 @@
       "  \"element\": \"Fire\" (Water/Fire/Earth/Wind/Light/Dark/Normal),",
       "  \"characterId\": 100 (3-digit character ID, e.g., 100, 101, 102),",
       "  \"tags\": [\"태그1\", \"태그2\"],",
+      "  \"meta\": true (optional, displays '메타' badge if true),",
       "  \"buildHash\": \"복사한_해시_여기에\"",
       "}"
     ]
