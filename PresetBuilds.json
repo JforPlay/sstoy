@@ -82,7 +82,7 @@
       "element": "Dark",
       "characterId": 142,
       "tags": ["코제트", "미스티"],
-      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBMDgdDsC1jABIDJ9gOy0ogDGUoAttSAJaYwAsATOQA5QDaArKzYIWyAewQxRghAA4p7dvKF8lCAOwBdVJwA29McqgA2VAdnHTg9sYC+2upFBm+mQCdNrwK7jgAkHyZtZkBQrsALVcAZzt9pGUxAEVXADCHwhQ5oWJAbOxAAQxh6JmgYAGYXbV4BArY2KVLJEr42FWq2E3q1CpqATi0QXX18mpdIExB6owtBnrZ-fstS1tt7btK+kGSpmuGkuJXx6I3R6e2UtPTE0BzYGEiiyH4Yc7Yqm5kyqXO8vOeZPIR3tnbtPUdRi8kJNAR88rNOg4nA8foFQuEgftLC9wesDqkgA"
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBMDgdDsC1jABIDJ9gOy0ogDGUoAttSAJaYwAsATOQA5QDaArKzYIWyAewQxRghHyniAHHLbslCAOwBdVJwA29MUL5QAbKgMJ5Js4PYmAvtrqRQ5o9EAiq4Awh8ubWZAoV2AFquAM50+0pbQgCdNkYCu44AEg2Hsth7edg4gAIYw9EzQMADMRtq8AoVsbFJlkqV8bLI1bKYNapW1AJxaILr6BbVupiANxlaDvWx+kAMNbfaOPWVuIF5hZcMpK7UTS97WZTPraagZHM6MzDCWxZD8MBds1bfy5VIX+fkv8vkIH2wd2nqnASvJCTayvfKzLpOFyPX4BEJhYGYZZgz4Qg5pOxAA"
     },
     {
       "id": "preset-build",
@@ -115,7 +115,7 @@
       "element": "Wind",
       "characterId": 119,
       "tags": ["스킬", "나노하", "틸리아"],
-      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBMDgdDsC1jABIDJ9gOy0ogDGUoAttSAJaYwwCc5ADlANoCsLrBL2T82CABwiBCVlLEBmOYIAsAXVQcANvVGDeUAGypdEw8entIBgL4a6kUCf3RAIquAMIfInxmd54s+Pa1sQAEMYeiZoGAAmeU4efljomCkkxUT5aKMM+QRU+QL86PF1EC0dGMyDMxAM4qhFWsrcmpy4q2COe0dKrIC-JO9oQBOm4cBXccACQYGCpFcPc1iC-qDUEOiI5gQAdnjIPhht6OipQ-SDreKTi9ZS8ocmw6GjB+vDTu6X+pHxqfNDyxAo0mICCQSAA"
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBMDgdDsC1jABIDJ9gOy0ogDGUoAttSAJaYwwCc5ADlANoCsLrBL2T82CABwiBCVlLEBmOYIAsAXVQcANvVGDeUAGypdEw8entIBgL4a6kUCf3RAIquAMIfInxmd54s+Pa1sQAEMYeiZoGAAmeU4efljomCkkxUT5aKMM+QRU+QL86PF1EC0dGMyDMxAM4qhFWsrcmpy4q2COe0dKrIC-JO9XD3NYluGBgvaQXyDUEOiI5gQAdnjIPhhV6OipbfStleK9o9ZS8ocm7aGjK9PDTu67+uhAE6bXwFdxwAJBv23LEHe3xAQSCQA"
     },
     {
       "id": "preset-build",
