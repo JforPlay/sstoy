@@ -3,7 +3,7 @@
   "presets": [
     {
       "id": "preset-build",
-      "title": "등사 평캔 치토세",
+      "title": "(11/14) 등사 평캔 치토세",
       "description": "최신판 평캔 치토세 빌드입니다.",
       "author": "속성별 메타 빌드 모음",
       "authorLink": "https://arca.live/b/stellasora/153536269",
@@ -15,7 +15,7 @@
     },
     {
       "id": "preset-build",
-      "title": "평캔 시아",
+      "title": "(11/14) 평캔 시아",
       "description": "최신판 평캔 시아 빌드입니다.",
       "author": "속성별 메타 빌드 모음",
       "authorLink": "https://arca.live/b/stellasora/153536269",
@@ -27,7 +27,7 @@
     },
     {
       "id": "preset-build",
-      "title": "표식 메인 나즈나",
+      "title": "(11/6) 표식 메인 나즈나",
       "description": "나즈나를 메인으로 쓰는 표식딜 빌드입니다.",
       "author": "메인 나즈나 표식덱에 대한 소개",
       "authorLink": "https://arca.live/b/stellasora/152946680",
@@ -39,7 +39,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(대체) 등사 평캔 치토세",
+      "title": "(11/13, 대체) 등사 평캔 치토세",
       "description": "(종언용) 프리지아-->안즈 대체 빌드입니다.",
       "author": "프없찐들을 위한 종언 치토세안즈덱",
       "authorLink": "https://arca.live/b/stellasora/153681506",
@@ -51,7 +51,7 @@
     },
     {
       "id": "preset-build",
-      "title": "평캔 시아 + 플로라",
+      "title": "(11/14) 평캔 시아 + 플로라",
       "description": "(종언용) 미네르바 말고 플로라를 쓰는 빌드입니다.",
       "author": "종언 플로라시아덱",
       "authorLink": "https://arca.live/b/stellasora/153639677",
@@ -63,7 +63,30 @@
     },
     {
       "id": "preset-build",
-      "title": "미스티 지원 어둠덱",
+      "title": "(11/15) 평캔 시아 + 코제트",
+      "description": "(종언용) 일섭랭커의 코제트를 쓰는 빌드입니다.",
+      "author": "종언 코제트시아덱",
+      "authorLink": "https://arca.live/b/stellasora/153828865",
+      "element": "Light",
+      "characterId": 155,
+      "tags": ["평타", "시아", "코제트"],
+      "meta": true,
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokCrzgcCcB1LgO0OAioyiAMZSgC2lIAlpjAKxOkAOUA2k80wjMh4sEAJkG8EANnHCmMvgHZ5MAMzKRAXVRsANrSF9WkaSANSoJswouoDqiwF9tNSKDNGQgEVXAGEOkzkzB8-CWtoINteGBFMQFCuwAtVwBnO4JZ7aEATprTAV3HAAkGQBycQAEMYWgZoGAAWaO0uHiqRNTqREQrxeoAONubpJpUBJpEATi0QXX1K7ptTCZF2qd6S4wK2FzcZgLDfCI7Aren6wdjE4Kq+3byCwujXekYEaxrIbhh7kX6XhWbxV7keV86-p9Bt9PkpAX0QSJJCMxjdASIjJYPrN5sjDktnOMfucIq8NiB4klcaDMBkcsF-jjpq90SAybliWd0llcvl8kA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(11/15) 코제트 메인 어둠덱",
+      "description": "기억하세요 미스티는 초흉쌍그, 모든 필수 잠재 6 필수",
+      "author": "뉴 코제트메인 어둠덱 공략 최종본 v.1.0.6",
+      "authorLink": "https://arca.live/b/stellasora/153848414",
+      "element": "Dark",
+      "characterId": 142,
+      "tags": ["코제트", "미스티"],
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBMDgdDsC1jABIDJ9gOy0ogDGUoAttSAJaYwAsATOQA5QDaArKzYIWyAewQxRghAA4p7dvKF8lCAOwBdVJwA29McqgA2VAdnHTg9sYC+2upFBm+mQCdNrwK7jgAkHyZtZkBQrsALVcAZzt9pGUxAEVXADCHwhQ5oWJAbOxAAQxh6JmgYAGYXbV4BArY2KVLJEr42FWq2E3q1CpqATi0QXX18mpdIExB6owtBnrZ-fstS1tt7btK+kGSpmuGkuJXx6I3R6e2UtPTE0BzYGEiiyH4Yc7Yqm5kyqXO8vOeZPIR3tnbtPUdRi8kJNAR88rNOg4nA8foFQuEgftLC9wesDqkgA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(11/9) 미스티 지원 어둠덱",
       "description": "기억하세요 미스티는 초흉쌍그, 캐러멜은 최대한 피할 것",
       "author": "순수 영포티 어둠덱 ver 2 공략",
       "authorLink": "https://arca.live/b/stellasora/153229177",
@@ -74,7 +97,7 @@
     },
     {
       "id": "preset-build",
-      "title": "치토세 여울빛 빌드",
+      "title": "(10/27) 치토세 여울빛 빌드",
       "description": "스킬 위주의 치토세 빌드입니다.",
       "author": "쉽게 이해하는 치토세 물덱 - 2. 여울빛 빌드",
       "authorLink": "https://arca.live/b/stellasora/151288616",
@@ -85,7 +108,18 @@
     },
     {
       "id": "preset-build",
-      "title": "나노하 스킬 빌드",
+      "title": "(11/14) 뉴네오 나노하 스킬 빌드",
+      "description": "스킬 위주의 나노하 빌드입니다. 자세한 운영법은 링크 참조",
+      "author": "뉴네오 나노하덱",
+      "authorLink": "https://arca.live/b/stellasora/153751072",
+      "element": "Wind",
+      "characterId": 119,
+      "tags": ["스킬", "나노하", "틸리아"],
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBMDgdDsC1jABIDJ9gOy0ogDGUoAttSAJaYwwCc5ADlANoCsLrBL2T82CABwiBCVlLEBmOYIAsAXVQcANvVGDeUAGypdEw8entIBgL4a6kUCf3RAIquAMIfInxmd54s+Pa1sQAEMYeiZoGAAmeU4efljomCkkxUT5aKMM+QRU+QL86PF1EC0dGMyDMxAM4qhFWsrcmpy4q2COe0dKrIC-JO9oQBOm4cBXccACQYGCpFcPc1iC-qDUEOiI5gQAdnjIPhht6OipQ-SDreKTi9ZS8ocmw6GjB+vDTu6X+pHxqfNDyxAo0mICCQSAA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(11/2) 나노하 스킬 빌드",
       "description": "스킬 위주의 나노하 빌드입니다. 안즈는 바람 장벽 제외 전부 취향껏",
       "author": "섭종기념 나노하 빌드 공략",
       "authorLink": "https://arca.live/b/stellasora/151940574",
