@@ -40,11 +40,47 @@ let state = {
         master: {},
         assist1: {},
         assist2: {}
+    },
+    characterLevelPhase: {
+        master: 8,  // Default to 80+ (index 8)
+        assist1: 8,
+        assist2: 8
+    },
+    // Character selector state
+    characterSelector: {
+        allCharacters: [],
+        fuse: null,
+        selectedElement: 'all'
     }
 };
 
+// Description cache for performance optimization
+const descriptionCache = new Map();
+let cacheHits = 0;
+let cacheMisses = 0;
+
+// Clear cache when data changes
+function clearDescriptionCache() {
+    console.log(`[Cache Stats] Hits: ${cacheHits}, Misses: ${cacheMisses}, Hit Rate: ${cacheHits > 0 ? ((cacheHits / (cacheHits + cacheMisses)) * 100).toFixed(1) : 0}%`);
+    descriptionCache.clear();
+    cacheHits = 0;
+    cacheMisses = 0;
+}
+
+// Get cache statistics
+function getCacheStats() {
+    return {
+        size: descriptionCache.size,
+        hits: cacheHits,
+        misses: cacheMisses,
+        hitRate: cacheHits > 0 ? ((cacheHits / (cacheHits + cacheMisses)) * 100).toFixed(1) : 0
+    };
+}
+
 // Make state accessible globally for saveload.js
 window.state = state;
+window.clearDescriptionCache = clearDescriptionCache;
+window.getCacheStats = getCacheStats;
 
 // Initialize character cards with click handlers
 function initializeCharacterCards() {
@@ -134,22 +170,23 @@ const FILE_TYPE_MAP = {
 /**
  * Parse a single parameter value string
  * Format: "FileType,LevelType,BaseId[,FieldKey][,FormatType]"
- * 
+ *
  * @param {string} paramString - The parameter string to parse
  * @param {number} level - The level to use for LevelUp calculations (default: 1)
  * @param {number} skillLevel - The skill level to use for DamageNum calculations (default: 1)
  * @param {string} position - The character position (master/assist1/assist2) for HitDamage DamageType lookup
  * @param {boolean} isSpecificPotential - Whether this is a specific potential (Stype 42)
- * @returns {string|number} - The parsed value
+ * @param {number} characterLevelPhase - The character level phase (0-8) for levelTypeData = 4 (default: 8 for 80+)
+ * @returns {object} - Object with {value, levelType, useRedColor} for styling purposes
  */
-function parseParamValue(paramString, level = 1, skillLevel = 1, position = null, isSpecificPotential = false) {
-    if (!paramString || typeof paramString !== 'string') return paramString;
-    
+function parseParamValue(paramString, level = 1, skillLevel = 1, position = null, isSpecificPotential = false, characterLevelPhase = 8) {
+    if (!paramString || typeof paramString !== 'string') return { value: paramString, levelType: null, useRedColor: false };
+
     // Split by comma to get elements
     const elements = paramString.split(',').map(e => e.trim());
-    
+
     if (elements.length < 3) {
-        return paramString;
+        return { value: paramString, levelType: null, useRedColor: false };
     }
     
     // Extract all elements (can be more than 5)
@@ -158,7 +195,7 @@ function parseParamValue(paramString, level = 1, skillLevel = 1, position = null
     // Get the data source (case-insensitive lookup)
     const dataKey = FILE_TYPE_MAP[fileType.toLowerCase()];
     if (!dataKey || !state[dataKey]) {
-        return `[${fileType}]`; // Return placeholder
+        return { value: `[${fileType}]`, levelType: null, useRedColor: false }; // Return placeholder
     }
     
     const dataSource = state[dataKey];
@@ -167,132 +204,193 @@ function parseParamValue(paramString, level = 1, skillLevel = 1, position = null
     
     // Handle different level types
     if (levelType === 'LevelUp') {
-        // For LevelUp: add (level * 10) to the base ID
-        const adjustedId = parseInt(baseId) + (level * 10);
-        lookupId = adjustedId.toString();
+        // For Buff, check the tens digit (second digit from right)
+        if (fileType.toLowerCase() === 'buff') {
+            const baseIdNum = parseInt(baseId);
+            const lastTwoDigits = baseIdNum % 100;
+            const tensDigit = Math.floor(lastTwoDigits / 10);
+
+            if (tensDigit === 0) {
+                // Tens digit is 0 (ID ends in 00-09): apply level adjustment
+                const adjustedId = baseIdNum + (level * 10);
+                lookupId = adjustedId.toString();
+            } else {
+                // Tens digit is not 0: use base ID directly
+                lookupId = baseId;
+            }
+        } else {
+            // For other types: add (level * 10) to the base ID
+            const adjustedId = parseInt(baseId) + (level * 10);
+            lookupId = adjustedId.toString();
+        }
         
         // Lookup the data
         const dataEntry = dataSource[lookupId];
         if (!dataEntry) {
-            return `[${fileType}:${lookupId}]`;
+            return { value: `[${fileType}:${lookupId}]`, levelType, useRedColor: false };
         }
-        
+
         // Extract value using field key
         if (fieldKey && dataEntry[fieldKey] !== undefined) {
             value = dataEntry[fieldKey];
         } else {
-            return `[${fieldKey}]`;
+            return { value: `[${fieldKey}]`, levelType, useRedColor: false };
         }
-        
+
         // Handle format type (5th element) with optional enum type (6th element)
         if (formatType) {
-            return formatValue(value, formatType, enumType, fileType);
+            return { value: formatValue(value, formatType, enumType, fileType), levelType, useRedColor: false };
         }
         
     } else if (levelType === 'NoLevel') {
         // For NoLevel: use base ID directly
         const dataEntry = dataSource[lookupId];
         if (!dataEntry) {
-            return `[${fileType}:${lookupId}]`;
+            return { value: `[${fileType}:${lookupId}]`, levelType, useRedColor: false };
         }
-        
+
         // Extract value using field key
         if (fieldKey && dataEntry[fieldKey] !== undefined) {
             value = dataEntry[fieldKey];
         } else {
-            return `[${fieldKey}]`;
+            return { value: `[${fieldKey}]`, levelType, useRedColor: false };
         }
-        
+
         // Handle format type (5th element) with optional enum type (6th element)
         if (formatType) {
-            return formatValue(value, formatType, enumType, fileType);
+            return { value: formatValue(value, formatType, enumType, fileType), levelType, useRedColor: false };
         }
         
     } else if (levelType === 'DamageNum') {
         // For DamageNum: fetch SkillPercentAmend and SkillAbsAmend fields
         const dataEntry = dataSource[lookupId];
         if (!dataEntry) {
-            return `[${fileType}:${lookupId}]`;
+            return { value: `[${fileType}:${lookupId}]`, levelType, useRedColor: false };
         }
-        
-        // For specific potentials with HitDamage, use skill level based on DamageType
-        let effectiveSkillLevel = skillLevel;
-        if (isSpecificPotential && position && dataEntry.DamageType && fileType.toLowerCase() === 'hitdamage') {
-            const character = state.party[position];
-            if (character) {
+
+        // Check if this is levelTypeData = 4 (character level phase based)
+        let index;
+        let useRedColor = false;
+
+        if (dataEntry.levelTypeData === 4) {
+            // Use character level phase directly as index (0-8)
+            index = Math.min(Math.max(0, characterLevelPhase),
+                Math.max(dataEntry.SkillPercentAmend?.length || 0, dataEntry.SkillAbsAmend?.length || 0) - 1);
+        } else if (dataEntry.levelTypeData === 3 && fileType.toLowerCase() === 'hitdamage') {
+            // For levelTypeData = 3 with HitDamage, use LevelData to determine which skill level to use
+            let effectiveSkillLevel = skillLevel;
+
+            if (position && state.party[position]) {
+                const character = state.party[position];
                 const isMaster = position === 'master';
-                const damageType = dataEntry.DamageType;
-                
-                // Get the damageType key from GameEnums
-                const damageTypeInfo = state.gameEnums.damageType?.[damageType];
-                const damageTypeKey = damageTypeInfo?.key;
-                
+                const levelData = dataEntry.LevelData;
+
                 let skillId = null;
-                
-                // For assist: always use AssistSkillId (the 'skill' slot)
-                // For master: map DamageType key to corresponding skill
-                if (!isMaster) {
-                    skillId = character.data.AssistSkillId;
+
+                if (levelData === 5) {
+                    // Use normal attack skill level
+                    skillId = isMaster ? character.data.NormalAtkId : character.data.AssistNormalAtkId;
+                } else if (levelData === 2) {
+                    // Use main skill level (SkillId for both master and assist - not AssistSkillId)
+                    skillId = character.data.SkillId;
                 } else {
-                    // Map DamageType key to skill ID for master
-                    switch(damageTypeKey) {
-                        case 'NORMAL': // Normal Attack
-                            skillId = character.data.NormalAtkId;
-                            break;
-                        case 'SKILL': // Skill
-                            skillId = character.data.SkillId;
-                            break;
-                        case 'ULTIMATE': // Ultimate
-                            skillId = character.data.UltimateId;
-                            break;
-                    }
+                    // Other LevelData values - use last index and mark for red color
+                    useRedColor = true;
+                    const arrayLength = Math.max(dataEntry.SkillPercentAmend?.length || 0, dataEntry.SkillAbsAmend?.length || 0);
+                    index = Math.max(0, arrayLength - 1);
+                    effectiveSkillLevel = null; // Skip normal indexing
                 }
-                
-                if (skillId) {
+
+                if (skillId && effectiveSkillLevel !== null) {
                     effectiveSkillLevel = state.skillLevels[position]?.[skillId] || 1;
                 }
             }
+
+            // Use skill level - 1 as index (only if not using red color logic)
+            if (effectiveSkillLevel !== null) {
+                index = Math.min(Math.max(0, effectiveSkillLevel - 1),
+                    Math.max(dataEntry.SkillPercentAmend?.length || 0, dataEntry.SkillAbsAmend?.length || 0) - 1);
+            }
+        } else {
+            // For specific potentials with HitDamage, use skill level based on DamageType
+            let effectiveSkillLevel = skillLevel;
+            if (isSpecificPotential && position && dataEntry.DamageType && fileType.toLowerCase() === 'hitdamage') {
+                const character = state.party[position];
+                if (character) {
+                    const isMaster = position === 'master';
+                    const damageType = dataEntry.DamageType;
+
+                    // Get the damageType key from GameEnums
+                    const damageTypeInfo = state.gameEnums.damageType?.[damageType];
+                    const damageTypeKey = damageTypeInfo?.key;
+
+                    let skillId = null;
+
+                    // For assist: always use AssistSkillId (the 'skill' slot)
+                    // For master: map DamageType key to corresponding skill
+                    if (!isMaster) {
+                        skillId = character.data.AssistSkillId;
+                    } else {
+                        // Map DamageType key to skill ID for master
+                        switch(damageTypeKey) {
+                            case 'NORMAL': // Normal Attack
+                                skillId = character.data.NormalAtkId;
+                                break;
+                            case 'SKILL': // Skill
+                                skillId = character.data.SkillId;
+                                break;
+                            case 'ULTIMATE': // Ultimate
+                                skillId = character.data.UltimateId;
+                                break;
+                        }
+                    }
+
+                    if (skillId) {
+                        effectiveSkillLevel = state.skillLevels[position]?.[skillId] || 1;
+                    }
+                }
+            }
+
+            // Use skill level - 1 as index
+            index = Math.min(Math.max(0, effectiveSkillLevel - 1),
+                Math.max(dataEntry.SkillPercentAmend?.length || 0, dataEntry.SkillAbsAmend?.length || 0) - 1);
         }
-        
-        // Use skill level - 1 as index
-        const index = Math.min(Math.max(0, effectiveSkillLevel - 1), 
-            Math.max(dataEntry.SkillPercentAmend?.length || 0, dataEntry.SkillAbsAmend?.length || 0) - 1);
         
         // Check if arrays have non-zero elements
         const hasNonZeroPercent = dataEntry.SkillPercentAmend && 
             Array.isArray(dataEntry.SkillPercentAmend) && 
             dataEntry.SkillPercentAmend.some(v => v !== 0);
         
-        const hasNonZeroAbs = dataEntry.SkillAbsAmend && 
-            Array.isArray(dataEntry.SkillAbsAmend) && 
+        const hasNonZeroAbs = dataEntry.SkillAbsAmend &&
+            Array.isArray(dataEntry.SkillAbsAmend) &&
             dataEntry.SkillAbsAmend.some(v => v !== 0);
-        
+
         if (!hasNonZeroPercent && !hasNonZeroAbs) {
-            return `[DamageNum]`;
+            return { value: `[DamageNum]`, levelType, useRedColor };
         }
-        
+
         // Build the display string based on which fields have values
         let displayParts = [];
-        
+
         if (hasNonZeroPercent) {
             const percentValue = dataEntry.SkillPercentAmend[index];
             // Divide by 10000 and format as percentage
             const percentDisplay = (percentValue / 10000).toFixed(1) + '%';
             displayParts.push(percentDisplay);
         }
-        
+
         if (hasNonZeroAbs) {
             const absValue = dataEntry.SkillAbsAmend[index];
             displayParts.push(absValue.toString());
         }
-        
-        return displayParts.join(' + ');
-        
+
+        return { value: displayParts.join(' + '), levelType, useRedColor };
+
     } else {
-        return `[${levelType}]`;
+        return { value: `[${levelType}]`, levelType, useRedColor: false };
     }
-    
-    return value !== null ? value : paramString;
+
+    return { value: value !== null ? value : paramString, levelType, useRedColor: false };
 }
 
 /**
@@ -405,36 +503,63 @@ function extractBuffMetadata(params, level = 1) {
  * Parse and replace parameter placeholders in descriptions
  * Replaces &Param1& through &Param10& with parsed values
  * Also parses element tag patterns like ##빛 속성 표식#1015#
- * 
+ *
  * @param {string} description - The description with placeholders
  * @param {object} params - Object containing Param1-Param10 fields
  * @param {number} level - Level for LevelUp calculations (default: 1)
  * @param {number} skillLevel - Skill level for DamageNum calculations (default: 1)
  * @param {string} position - The character position (master/assist1/assist2) for HitDamage DamageType lookup
  * @param {boolean} isSpecificPotential - Whether this is a specific potential (Stype 42)
+ * @param {number} characterLevelPhase - The character level phase (0-8) for levelTypeData = 4
  * @returns {string} - Description with replaced parameters
  */
-function parseDescriptionParams(description, params, level = 1, skillLevel = 1, position = null, isSpecificPotential = false) {
+function parseDescriptionParams(description, params, level = 1, skillLevel = 1, position = null, isSpecificPotential = false, characterLevelPhase = 8) {
     if (!description || !params) return description;
-    
+
+    // Create cache key from all parameters that affect output
+    const paramsHash = Object.keys(params).filter(k => k.startsWith('Param')).map(k => params[k]).join('|');
+
+    // Include actual skill levels from state for accurate caching
+    const skillLevelsHash = position && state.skillLevels[position]
+        ? JSON.stringify(state.skillLevels[position])
+        : '';
+
+    const cacheKey = `${description}_${paramsHash}_${level}_${skillLevel}_${position}_${isSpecificPotential}_${characterLevelPhase}_${state.descriptionMode}_${skillLevelsHash}`;
+
+    // Check cache first
+    if (descriptionCache.has(cacheKey)) {
+        cacheHits++;
+        return descriptionCache.get(cacheKey);
+    }
+
+    cacheMisses++;
     let parsedDesc = description;
-    
+
     // Replace &Param1& through &Param10& with parsed values
     for (let i = 1; i <= 10; i++) {
         const placeholder = `&Param${i}&`;
         const paramString = params[`Param${i}`];
-        
+
         if (parsedDesc.includes(placeholder) && paramString) {
-            const parsedValue = parseParamValue(paramString, level, skillLevel, position, isSpecificPotential);
-            // Wrap the parsed value in a span with styling
-            const styledValue = `<span class="param-value">${parsedValue}</span>`;
+            const parsed = parseParamValue(paramString, level, skillLevel, position, isSpecificPotential, characterLevelPhase);
+            // Wrap the parsed value in a span with styling based on level type and red color flag
+            let className = 'param-value';
+            if (parsed.useRedColor) {
+                className += ' param-red';
+            } else if (parsed.levelType === 'NoLevel') {
+                className += ' param-no-level';
+            }
+            const styledValue = `<span class="${className}">${parsed.value}</span>`;
             parsedDesc = parsedDesc.replace(new RegExp(placeholder.replace(/&/g, '&'), 'g'), styledValue);
         }
     }
-    
+
     // Parse element tag patterns: ##빛 속성 표식#1015#
     parsedDesc = parseElementTags(parsedDesc);
-    
+
+    // Store in cache before returning
+    descriptionCache.set(cacheKey, parsedDesc);
+
     return parsedDesc;
 }
 
@@ -512,15 +637,18 @@ function parseElementTags(description) {
 // Get skill information for a character
 function getCharacterSkills(character, position) {
     const isMaster = position === 'master';
-    
+
     // Select appropriate skill IDs based on position
     const skillIds = {
         normalAtk: isMaster ? character.data.NormalAtkId : character.data.AssistNormalAtkId,
-        dodge: isMaster ? character.data.DodgeId : character.data.AssistDodgeId,
         skill: isMaster ? character.data.SkillId : character.data.AssistSkillId,
-        specialSkill: isMaster ? character.data.SpecialSkillId : character.data.AssistSpecialSkillId,
         ultimate: isMaster ? character.data.UltimateId : character.data.AssistUltimateId
     };
+
+    // For assist characters, also add the master skill (SkillId)
+    if (!isMaster && character.data.SkillId) {
+        skillIds.masterSkill = character.data.SkillId;
+    }
     
     // Get skill details from Skill.json
     const skills = {};
@@ -633,49 +761,144 @@ function switchTab(tabName) {
 function openCharacterSelect(position) {
     state.currentPosition = position;
     const modal = document.getElementById('character-modal');
+    const searchInput = document.getElementById('character-search');
+
+    // Filter only visible and available characters
+    state.characterSelector.allCharacters = Object.entries(state.characters)
+        .filter(([id, char]) => char.Visible && char.Available)
+        .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
+        .map(([id, char]) => ({
+            id,
+            char,
+            name: state.characterNames[char.Name] || char.Name
+        }));
+
+    // Initialize Fuse.js for fuzzy search
+    if (typeof Fuse !== 'undefined') {
+        state.characterSelector.fuse = new Fuse(state.characterSelector.allCharacters, {
+            keys: ['name', 'id'],
+            threshold: 0.4,
+            includeScore: true
+        });
+    }
+
+    // Reset filters
+    state.characterSelector.selectedElement = 'all';
+    if (searchInput) {
+        searchInput.value = '';
+    }
+
+    // Reset element filter buttons
+    document.querySelectorAll('.element-filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.element === 'all');
+    });
+
+    // Setup search input handler
+    if (searchInput) {
+        // Remove old event listener if exists
+        const newSearchInput = searchInput.cloneNode(true);
+        searchInput.parentNode.replaceChild(newSearchInput, searchInput);
+
+        newSearchInput.addEventListener('input', (e) => {
+            renderCharacterGrid(e.target.value);
+        });
+    }
+
+    // Render initial grid
+    renderCharacterGrid('');
+
+    modal.classList.add('active');
+}
+
+// Render character grid based on search and filter
+function renderCharacterGrid(searchQuery = '') {
     const grid = document.getElementById('character-grid');
-    
+    if (!grid) return;
+
     // Clear existing content
     grid.innerHTML = '';
-    
-    // Filter only visible and available characters
-    const availableCharacters = Object.entries(state.characters)
-        .filter(([id, char]) => char.Visible && char.Available)
-        .sort((a, b) => parseInt(a[0]) - parseInt(b[0]));
-    
+
+    let charactersToDisplay = state.characterSelector.allCharacters;
+
+    // Apply element filter
+    if (state.characterSelector.selectedElement !== 'all') {
+        charactersToDisplay = charactersToDisplay.filter(item =>
+            String(item.char.EET) === state.characterSelector.selectedElement
+        );
+    }
+
+    // Apply search filter
+    if (searchQuery && searchQuery.trim() !== '') {
+        if (state.characterSelector.fuse) {
+            const results = state.characterSelector.fuse.search(searchQuery);
+            const searchIds = new Set(results.map(r => r.item.id));
+            charactersToDisplay = charactersToDisplay.filter(item => searchIds.has(item.id));
+        } else {
+            // Fallback to simple string matching
+            const query = searchQuery.toLowerCase();
+            charactersToDisplay = charactersToDisplay.filter(item =>
+                item.name.toLowerCase().includes(query) || item.id.includes(query)
+            );
+        }
+    }
+
     // Use DocumentFragment for better performance
     const fragment = document.createDocumentFragment();
-    
-    availableCharacters.forEach(([id, char]) => {
-        const nameKey = char.Name;
-        const name = state.characterNames[nameKey] || nameKey;
-        const charImagePath = `assets/char/avg1_${id}_002.png`;
-        
-        // Get star rating from GameEnums
-        const rarityInfo = state.gameEnums.itemRarity?.[char.Grade];
-        const stars = rarityInfo?.stars || char.Grade;
-        
-        const item = document.createElement('div');
-        item.className = 'character-item';
-        item.dataset.action = 'select-character';
-        item.dataset.characterId = id;
-        item.innerHTML = `
-            <div class="character-item-header">
-                <img src="${charImagePath}" alt="${name}" class="character-item-image" onerror="this.style.display='none'">
-                <div class="character-item-info">
-                    <div class="character-item-name">${name}</div>
-                    <div class="character-item-id">ID: ${id}</div>
+
+    if (charactersToDisplay.length === 0) {
+        const emptyState = document.createElement('div');
+        emptyState.className = 'empty-search-state';
+        emptyState.innerHTML = '<p>검색 결과가 없습니다</p>';
+        fragment.appendChild(emptyState);
+    } else {
+        charactersToDisplay.forEach(({ id, char, name }) => {
+            const charImagePath = `assets/char/avg1_${id}_002.png`;
+
+            // Get star rating from GameEnums
+            const rarityInfo = state.gameEnums.itemRarity?.[char.Grade];
+            const stars = rarityInfo?.stars || char.Grade;
+
+            // Get element info
+            const elementInfo = state.gameEnums.elementType?.[char.EET] || {};
+
+            const item = document.createElement('div');
+            item.className = 'character-item';
+            item.dataset.action = 'select-character';
+            item.dataset.characterId = id;
+            item.innerHTML = `
+                <div class="character-item-header">
+                    <img src="${charImagePath}" alt="${name}" class="character-item-image" onerror="this.style.display='none'">
+                    ${elementInfo.icon ? `<img src="${elementInfo.icon}" alt="${elementInfo.name}" class="character-element-badge" onerror="this.style.display='none'">` : ''}
+                    <div class="character-item-info">
+                        <div class="character-item-name">${name}</div>
+                        <div class="character-item-id">ID: ${id}</div>
+                    </div>
                 </div>
-            </div>
-            <div class="character-item-id">등급: ${getIcon('star').repeat(stars)}</div>
-        `;
-        fragment.appendChild(item);
-    });
-    
+                <div class="character-item-id">등급: ${getIcon('star').repeat(stars)}</div>
+            `;
+            fragment.appendChild(item);
+        });
+    }
+
     // Single DOM operation instead of multiple appendChild calls
     grid.appendChild(fragment);
-    
-    modal.classList.add('active');
+}
+
+// Filter characters by element
+function filterCharactersByElement(element) {
+    state.characterSelector.selectedElement = element;
+
+    // Update button states
+    document.querySelectorAll('.element-filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.element === element);
+    });
+
+    // Get current search query
+    const searchInput = document.getElementById('character-search');
+    const searchQuery = searchInput ? searchInput.value : '';
+
+    // Re-render grid
+    renderCharacterGrid(searchQuery);
 }
 
 // Close character selection modal
@@ -687,16 +910,19 @@ function closeCharacterSelect() {
 function removeCharacter(position) {
     // Clear the character from the party
     state.party[position] = null;
-    
+
     // Clear selected potentials
     state.selectedPotentials[position] = [];
-    
+
     // Clear potential levels
     state.potentialLevels[position] = {};
-    
+
     // Clear skill levels
     state.skillLevels[position] = {};
-    
+
+    // Reset character level phase to default
+    state.characterLevelPhase[position] = 8;
+
     // Update the display
     updateCharacterCard(position);
     updatePotentialsDisplay(position);
@@ -772,12 +998,12 @@ function updateCharacterCard(position) {
     
     // Get skill information
     const skills = getCharacterSkills(character, position);
+    const isMaster = position === 'master';
     const skillLabels = {
         normalAtk: '일반공격',
-        dodge: '회피',
-        skill: '스킬',
-        specialSkill: '특수스킬',
-        ultimate: '필살기'
+        skill: isMaster ? '스킬' : '지원',
+        ultimate: '필살기',
+        masterSkill: '스킬'  // For assist characters showing their master skill
     };
     
     // Initialize skill levels if not set
@@ -785,6 +1011,9 @@ function updateCharacterCard(position) {
         state.skillLevels[position] = {};
     }
     
+    // Get current character level phase
+    const currentLevelPhase = state.characterLevelPhase[position] || 8;
+
     card.innerHTML = `
         <img src="${charImagePath}" alt="${character.name}" class="character-card-image" onerror="this.style.display='none'">
         <div class="character-info">
@@ -801,6 +1030,20 @@ function updateCharacterCard(position) {
             <div class="character-info-header">
                 <div class="character-name">${character.name}</div>
                 <div class="character-id">ID: ${character.id}</div>
+            </div>
+            <div class="character-level-phase-selector">
+                <label class="level-phase-label">캐릭터 레벨:</label>
+                <select class="level-phase-select" data-action="update-character-level-phase" data-position="${position}">
+                    <option value="0" ${currentLevelPhase === 0 ? 'selected' : ''}>1+</option>
+                    <option value="1" ${currentLevelPhase === 1 ? 'selected' : ''}>10+</option>
+                    <option value="2" ${currentLevelPhase === 2 ? 'selected' : ''}>20+</option>
+                    <option value="3" ${currentLevelPhase === 3 ? 'selected' : ''}>30+</option>
+                    <option value="4" ${currentLevelPhase === 4 ? 'selected' : ''}>40+</option>
+                    <option value="5" ${currentLevelPhase === 5 ? 'selected' : ''}>50+</option>
+                    <option value="6" ${currentLevelPhase === 6 ? 'selected' : ''}>60+</option>
+                    <option value="7" ${currentLevelPhase === 7 ? 'selected' : ''}>70+</option>
+                    <option value="8" ${currentLevelPhase === 8 ? 'selected' : ''}>80+</option>
+                </select>
             </div>
             <div class="character-stats-enhanced">
                 <div class="stat-card stat-grade">
@@ -830,7 +1073,7 @@ function updateCharacterCard(position) {
             </div>
             <div class="character-skills">
                 <div class="skills-title">스킬 정보</div>
-                ${['normalAtk', 'skill', 'ultimate', 'dodge', 'specialSkill'].map(key => {
+                ${(isMaster ? ['normalAtk', 'skill', 'ultimate'] : ['normalAtk', 'masterSkill', 'skill', 'ultimate']).map(key => {
                     const skill = skills[key];
                     if (!skill) return '';
                     
@@ -852,12 +1095,15 @@ function updateCharacterCard(position) {
                     // Get description based on mode
                     const descKey = state.descriptionMode === 'brief' ? skill.briefDesc : skill.desc;
                     let description = state.skillNames[descKey] || '';
-                    
+
+                    // Get character level phase for this position
+                    const charLevelPhase = state.characterLevelPhase[position] || 8;
+
                     // Parse parameter placeholders in description with skill level
-                    description = parseDescriptionParams(description, skill.data, currentLevel, currentLevel, position, false);
+                    description = parseDescriptionParams(description, skill.data, currentLevel, currentLevel, position, false, charLevelPhase);
                     
                     return `
-                        <div class="skill-item">
+                        <div class="skill-item" data-skill-id="${skill.id}">
                             <div class="skill-icon-wrapper">
                                 <img src="${elementBgPath}" alt="" class="skill-icon-bg" onerror="this.style.display='none'">
                                 ${iconPath ? `<img src="${iconPath}" alt="${skill.name}" class="skill-icon" onerror="this.style.display='none'">` : ''}
@@ -907,28 +1153,81 @@ function updateCharacterCard(position) {
 function updateSkillLevel(position, skillId, value, maxLevel) {
     // maxLevel already includes SKILL_LEVEL_BONUS from the HTML
     const level = Math.max(1, Math.min(parseInt(value) || 1, maxLevel));
-    
+
     if (!state.skillLevels[position]) {
         state.skillLevels[position] = {};
     }
     state.skillLevels[position][skillId] = level;
-    
+
     // Re-render to update skill descriptions with new level
     updateCharacterCard(position);
-    
+
     // Also update potentials display since specific potentials use skill levels
     updatePotentialsDisplay(position);
 }
 
-// Remove character
+// Update character level phase
+function updateCharacterLevelPhase(position, phase) {
+    // Validate phase (0-8)
+    const validPhase = Math.max(0, Math.min(8, parseInt(phase) || 8));
+
+    if (!state.characterLevelPhase) {
+        state.characterLevelPhase = { master: 8, assist1: 8, assist2: 8 };
+    }
+    state.characterLevelPhase[position] = validPhase;
+
+    // Only update if character exists
+    if (!state.party[position]) return;
+
+    // Update skill descriptions without re-rendering the entire card
+    updateSkillDescriptions(position);
+
+    // Also update potentials display since they may use character level phase
+    updatePotentialsDisplay(position);
+}
+
+// Update skill descriptions only (without re-rendering entire card)
+function updateSkillDescriptions(position) {
+    const character = state.party[position];
+    if (!character) return;
+
+    const skills = getCharacterSkills(character, position);
+    const isMaster = position === 'master';
+    const charLevelPhase = state.characterLevelPhase[position] || 8;
+
+    const skillKeys = isMaster ? ['normalAtk', 'skill', 'ultimate'] : ['normalAtk', 'masterSkill', 'skill', 'ultimate'];
+
+    skillKeys.forEach(key => {
+        const skill = skills[key];
+        if (!skill) return;
+
+        const currentLevel = state.skillLevels[position]?.[skill.id] || 1;
+        const descKey = state.descriptionMode === 'brief' ? skill.briefDesc : skill.desc;
+        let description = state.skillNames[descKey] || '';
+
+        // Parse parameter placeholders in description with skill level and character level phase
+        description = parseDescriptionParams(description, skill.data, currentLevel, currentLevel, position, false, charLevelPhase);
+
+        // Find the skill description element and update it
+        const skillDescElement = document.querySelector(`#${position}-card .skill-item[data-skill-id="${skill.id}"] .skill-desc`);
+        if (skillDescElement && description) {
+            skillDescElement.innerHTML = description;
+        }
+    });
+}
+
+// Remove character (duplicate - will be called via event delegation)
 function removeCharacter(position) {
     state.party[position] = null;
-    
+
     // Clear all associated data
     state.selectedPotentials[position] = [];
     state.potentialLevels[position] = {};
     state.skillLevels[position] = {};
-    
+
+    // Reset character level phase to default
+    state.characterLevelPhase[position] = 8;
+
     updateCharacterCard(position);
     updatePotentialsDisplay(position);
 }
@@ -1179,9 +1478,12 @@ function createPotentialCard(potId, position) {
         skillLevelForParams = currentLevel;
     }
     
+    // Get character level phase for this position
+    const charLevelPhase = state.characterLevelPhase[position] || 8;
+
     // Parse parameter placeholders in descriptions with current level
-    briefDesc = parseDescriptionParams(briefDesc, potential, currentLevel, skillLevelForParams, position, isSpecificPotential);
-    detailedDesc = parseDescriptionParams(detailedDesc, potential, currentLevel, skillLevelForParams, position, isSpecificPotential);
+    briefDesc = parseDescriptionParams(briefDesc, potential, currentLevel, skillLevelForParams, position, isSpecificPotential, charLevelPhase);
+    detailedDesc = parseDescriptionParams(detailedDesc, potential, currentLevel, skillLevelForParams, position, isSpecificPotential, charLevelPhase);
     
     // Use the current description mode
     const desc = state.descriptionMode === 'brief' ? briefDesc : detailedDesc;
@@ -1276,14 +1578,17 @@ function createPotentialCard(potId, position) {
 // Toggle description mode
 function toggleDescriptionMode() {
     state.descriptionMode = state.descriptionMode === 'brief' ? 'detailed' : 'brief';
-    
+
+    // Clear description cache since mode changed
+    clearDescriptionCache();
+
     // Update all toggle button texts
     const buttons = document.querySelectorAll('.description-toggle');
     const buttonText = state.descriptionMode === 'brief' ? `${getIcon('memo')} 간략히보기` : `${getIcon('summary')} 상세보기`;
     buttons.forEach(button => {
         button.innerHTML = buttonText;
     });
-    
+
     // Re-render all character cards and potential displays
     if (state.party.master) {
         updateCharacterCard('master');
@@ -1518,9 +1823,21 @@ function handleDelegatedAction(element, event) {
         case 'toggle-description':
             toggleDescriptionMode();
             break;
-            
+
+        // Character level phase
+        case 'update-character-level-phase':
+            {
+                const position = element.dataset.position;
+                const phase = parseInt(element.value);
+                updateCharacterLevelPhase(position, phase);
+            }
+            break;
+
         default:
             // Unknown action
             break;
     }
 }
+
+// Expose functions for inline handlers (until fully migrated to event delegation)
+window.filterCharactersByElement = filterCharactersByElement;

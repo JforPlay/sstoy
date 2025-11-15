@@ -163,6 +163,44 @@
                     <h2>캐릭터 선택</h2>
                     <button class="close-btn" onclick="closeCharacterSelect()">&times;</button>
                 </div>
+
+                <!-- Search and Filter Section -->
+                <div class="selector-controls">
+                    <!-- Search Input -->
+                    <div class="search-container">
+                        <input type="text" id="character-search" placeholder="캐릭터 이름 검색..." class="search-input">
+                        <i class="fa-solid fa-search search-icon"></i>
+                    </div>
+
+                    <!-- Element Filter Buttons -->
+                    <div class="element-filters">
+                        <button class="element-filter-btn active" data-element="all" onclick="filterCharactersByElement('all')">
+                            <i class="fa-solid fa-border-all"></i> 전체
+                        </button>
+                        <button class="element-filter-btn" data-element="1" onclick="filterCharactersByElement('1')">
+                            <img src="assets/icon_common_property_1.png" alt="물 속성" class="element-icon" onerror="this.style.display='none'"> 물 속성
+                        </button>
+                        <button class="element-filter-btn" data-element="2" onclick="filterCharactersByElement('2')">
+                            <img src="assets/icon_common_property_2.png" alt="불 속성" class="element-icon" onerror="this.style.display='none'"> 불 속성
+                        </button>
+                        <button class="element-filter-btn" data-element="3" onclick="filterCharactersByElement('3')">
+                            <img src="assets/icon_common_property_3.png" alt="땅 속성" class="element-icon" onerror="this.style.display='none'"> 땅 속성
+                        </button>
+                        <button class="element-filter-btn" data-element="4" onclick="filterCharactersByElement('4')">
+                            <img src="assets/icon_common_property_4.png" alt="바람 속성" class="element-icon" onerror="this.style.display='none'"> 바람 속성
+                        </button>
+                        <button class="element-filter-btn" data-element="5" onclick="filterCharactersByElement('5')">
+                            <img src="assets/icon_common_property_5.png" alt="빛 속성" class="element-icon" onerror="this.style.display='none'"> 빛 속성
+                        </button>
+                        <button class="element-filter-btn" data-element="6" onclick="filterCharactersByElement('6')">
+                            <img src="assets/icon_common_property_6.png" alt="어둠 속성" class="element-icon" onerror="this.style.display='none'"> 어둠 속성
+                        </button>
+                        <button class="element-filter-btn" data-element="7" onclick="filterCharactersByElement('7')">
+                            <img src="assets/icon_common_property_7.png" alt="무속성" class="element-icon" onerror="this.style.display='none'"> 무속성
+                        </button>
+                    </div>
+                </div>
+
                 <div class="character-grid" id="character-grid"></div>
             </div>
         </div>
@@ -183,6 +221,9 @@
 
     <!-- LZ-String Compression Library -->
     <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
+
+    <!-- Fuse.js for fuzzy search -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 
     <script src="js/utils.js"></script>
     <script src="js/app.js"></script>

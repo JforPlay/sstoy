@@ -234,7 +234,7 @@
     max-width: 60rem;
     width: 100%;
     max-height: 90vh;
-    overflow-y: auto;
+    overflow: hidden; /* Changed from overflow-y: auto to prevent double scrollbar */
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
 }
 
@@ -276,6 +276,9 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
     gap: 1rem;
+    padding: 1.5rem;
+    max-height: calc(90vh - 320px); /* Account for modal header + selector-controls + extra padding */
+    overflow-y: auto;
 }
 
 .disc-option {
@@ -946,7 +949,14 @@
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 
+.disc-action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
 .change-disc-btn {
+    flex: 1;
     padding: 0.5rem 1rem;
     background: var(--primary-color);
     color: white;
@@ -962,6 +972,25 @@
     background: var(--secondary-color);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px var(--shadow);
+}
+
+.remove-disc-btn {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    background: var(--danger);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.remove-disc-btn:hover {
+    background: #b91c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 38, 38, 0.4);
 }
 
 /* Large Image Viewer Modal */

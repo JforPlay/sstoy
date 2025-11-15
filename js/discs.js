@@ -46,7 +46,13 @@
         },
         currentSlot: null,
         // Track unique notes required by all main disc secondary skills
-        requiredNotes: new Set() // Set of note IDs required by main discs
+        requiredNotes: new Set(), // Set of note IDs required by main discs
+        // Disc selector state
+        discSelector: {
+            allDiscsWithNames: [],
+            fuse: null,
+            selectedElement: 'all'
+        }
     };
     
     // Load disc data
@@ -775,6 +781,44 @@
                         <h2>레코드 선택 - <span id="modal-slot-type"></span> <span id="modal-slot-number"></span></h2>
                         <button class="close-btn" data-action="disc-close-selector">&times;</button>
                     </div>
+
+                    <!-- Search and Filter Section -->
+                    <div class="selector-controls">
+                        <!-- Search Input -->
+                        <div class="search-container">
+                            <input type="text" id="disc-search" placeholder="레코드 이름 검색..." class="search-input">
+                            <i class="fa-solid fa-search search-icon"></i>
+                        </div>
+
+                        <!-- Element Filter Buttons -->
+                        <div class="element-filters">
+                            <button class="element-filter-btn active" data-element="all" data-action="disc-filter-element">
+                                <i class="fa-solid fa-border-all"></i> 전체
+                            </button>
+                            <button class="element-filter-btn" data-element="1" data-action="disc-filter-element">
+                                <img src="assets/icon_common_property_1.png" alt="물 속성" class="element-icon" onerror="this.style.display='none'"> 물 속성
+                            </button>
+                            <button class="element-filter-btn" data-element="2" data-action="disc-filter-element">
+                                <img src="assets/icon_common_property_2.png" alt="불 속성" class="element-icon" onerror="this.style.display='none'"> 불 속성
+                            </button>
+                            <button class="element-filter-btn" data-element="3" data-action="disc-filter-element">
+                                <img src="assets/icon_common_property_3.png" alt="땅 속성" class="element-icon" onerror="this.style.display='none'"> 땅 속성
+                            </button>
+                            <button class="element-filter-btn" data-element="4" data-action="disc-filter-element">
+                                <img src="assets/icon_common_property_4.png" alt="바람 속성" class="element-icon" onerror="this.style.display='none'"> 바람 속성
+                            </button>
+                            <button class="element-filter-btn" data-element="5" data-action="disc-filter-element">
+                                <img src="assets/icon_common_property_5.png" alt="빛 속성" class="element-icon" onerror="this.style.display='none'"> 빛 속성
+                            </button>
+                            <button class="element-filter-btn" data-element="6" data-action="disc-filter-element">
+                                <img src="assets/icon_common_property_6.png" alt="어둠 속성" class="element-icon" onerror="this.style.display='none'"> 어둠 속성
+                            </button>
+                            <button class="element-filter-btn" data-element="7" data-action="disc-filter-element">
+                                <img src="assets/icon_common_property_7.png" alt="무속성" class="element-icon" onerror="this.style.display='none'"> 무속성
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="disc-selector-grid" id="disc-selector-grid"></div>
                 </div>
             </div>
@@ -952,11 +996,18 @@
                                 <span class="zoom-icon">🔍</span>
                             </div>
                         </div>
-                        <button class="change-disc-btn" 
-                                data-action="disc-open-selector"
-                                data-slot-id="${slotId}">
-                            레코드 변경
-                        </button>
+                        <div class="disc-action-buttons">
+                            <button class="change-disc-btn" 
+                                    data-action="disc-open-selector"
+                                    data-slot-id="${slotId}">
+                                레코드 변경
+                            </button>
+                            <button class="remove-disc-btn" 
+                                    data-action="disc-remove"
+                                    data-slot-id="${slotId}">
+                                레코드 제거
+                            </button>
+                        </div>
                     </div>
 
                     ${levelControlHtml}
@@ -1180,9 +1231,9 @@
         const modal = document.getElementById('disc-modal');
         const slotType = document.getElementById('modal-slot-type');
         const slotNumber = document.getElementById('modal-slot-number');
-        const grid = document.getElementById('disc-selector-grid');
+        const searchInput = document.getElementById('disc-search');
 
-        if (!modal || !slotType || !slotNumber || !grid) return;
+        if (!modal || !slotType || !slotNumber) return;
 
         // Determine slot type and number
         const isMain = slotId.startsWith('main');
@@ -1190,6 +1241,77 @@
 
         slotType.textContent = isMain ? '메인' : '보조';
         slotNumber.textContent = num;
+
+        // Prepare all discs with names for search
+        discsState.discSelector.allDiscsWithNames = discsState.allDiscs.map(disc => ({
+            disc,
+            name: discsState.discNames[disc.Id] || '알 수 없는 레코드',
+            id: String(disc.Id)
+        }));
+
+        // Initialize Fuse.js for fuzzy search
+        if (typeof Fuse !== 'undefined') {
+            discsState.discSelector.fuse = new Fuse(discsState.discSelector.allDiscsWithNames, {
+                keys: ['name', 'id'],
+                threshold: 0.4,
+                includeScore: true
+            });
+        }
+
+        // Reset filters
+        discsState.discSelector.selectedElement = 'all';
+        if (searchInput) {
+            searchInput.value = '';
+        }
+
+        // Reset element filter buttons
+        const modal_elem = document.getElementById('disc-modal');
+        if (modal_elem) {
+            modal_elem.querySelectorAll('.element-filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.element === 'all');
+            });
+        }
+
+        // Setup search input handler
+        if (searchInput) {
+            // Remove old event listener if exists
+            const newSearchInput = searchInput.cloneNode(true);
+            searchInput.parentNode.replaceChild(newSearchInput, searchInput);
+
+            newSearchInput.addEventListener('input', (e) => {
+                renderDiscGrid(e.target.value, slotId);
+            });
+        }
+
+        // Render initial grid
+        renderDiscGrid('', slotId);
+
+        modal.style.display = 'flex';
+
+        // Add click outside to close (use addEventListener to prevent memory leak)
+        const handleDiscModalClick = (e) => {
+            if (e.target === modal) {
+                closeDiscSelector();
+            }
+        };
+
+        // Store handler reference for cleanup
+        modal._discModalClickHandler = handleDiscModalClick;
+
+        setTimeout(() => {
+            modal.addEventListener('click', handleDiscModalClick);
+        }, 0);
+    }
+
+    // Render disc grid based on search and filter
+    function renderDiscGrid(searchQuery = '', slotId) {
+        const grid = document.getElementById('disc-selector-grid');
+        if (!grid) return;
+
+        // Clear existing content
+        grid.innerHTML = '';
+
+        const isMain = slotId.startsWith('main');
 
         // Get all currently selected disc IDs (excluding the current slot being edited)
         const selectedDiscIds = new Set();
@@ -1199,31 +1321,62 @@
             }
         });
 
-        // Use DocumentFragment for better performance
-        const fragment = document.createDocumentFragment();
+        let discsToDisplay = discsState.discSelector.allDiscsWithNames.map(item => item.disc);
+
+        // Apply element filter
+        if (discsState.discSelector.selectedElement !== 'all') {
+            discsToDisplay = discsToDisplay.filter(disc =>
+                String(disc.EET) === discsState.discSelector.selectedElement
+            );
+        }
+
+        // Apply search filter
+        if (searchQuery && searchQuery.trim() !== '') {
+            if (discsState.discSelector.fuse) {
+                const results = discsState.discSelector.fuse.search(searchQuery);
+                const searchIds = new Set(results.map(r => r.item.disc.Id));
+                discsToDisplay = discsToDisplay.filter(disc => searchIds.has(disc.Id));
+            } else {
+                // Fallback to simple string matching
+                const query = searchQuery.toLowerCase();
+                discsToDisplay = discsToDisplay.filter(disc => {
+                    const discName = discsState.discNames[disc.Id] || '';
+                    return discName.toLowerCase().includes(query) || String(disc.Id).includes(query);
+                });
+            }
+        }
 
         // Sort discs
         let sortedDiscs;
         if (isMain) {
             // Main discs: sort by ID in descending order (high to low)
-            sortedDiscs = [...discsState.allDiscs].sort((a, b) => b.Id - a.Id);
+            sortedDiscs = [...discsToDisplay].sort((a, b) => b.Id - a.Id);
         } else {
             // Sub discs: sort by required note matches first, then by ID
-            sortedDiscs = [...discsState.allDiscs].sort((a, b) => {
+            sortedDiscs = [...discsToDisplay].sort((a, b) => {
                 const overlapA = calculateNoteOverlap(a);
                 const overlapB = calculateNoteOverlap(b);
-                
+
                 // First, sort by number of required note matches (descending)
                 if (overlapB !== overlapA) {
                     return overlapB - overlapA;
                 }
-                
+
                 // Then, sort by ID (descending)
                 return b.Id - a.Id;
             });
         }
 
-        sortedDiscs.forEach(disc => {
+        // Use DocumentFragment for better performance
+        const fragment = document.createDocumentFragment();
+
+        if (sortedDiscs.length === 0) {
+            const emptyState = document.createElement('div');
+            emptyState.className = 'empty-search-state';
+            emptyState.innerHTML = '<p>검색 결과가 없습니다</p>';
+            fragment.appendChild(emptyState);
+        } else {
+            sortedDiscs.forEach(disc => {
             const discName = discsState.discNames[disc.Id] || '알 수 없는 레코드';
             const iconPath = getDiscIconPath(disc);
             const isSelected = discsState.selectedDiscs[slotId]?.Id === disc.Id;
@@ -1290,26 +1443,33 @@
             `;
             
             fragment.appendChild(discOption);
-        });
-        
-        // Clear and append all at once
-        grid.innerHTML = '';
+            });
+        }
+
+        // Append fragment to grid
         grid.appendChild(fragment);
-        modal.style.display = 'flex';
-        
-        // Add click outside to close (use addEventListener to prevent memory leak)
-        const handleDiscModalClick = (e) => {
-            if (e.target === modal) {
-                closeDiscSelector();
-            }
-        };
-        
-        // Store handler reference for cleanup
-        modal._discModalClickHandler = handleDiscModalClick;
-        
-        setTimeout(() => {
-            modal.addEventListener('click', handleDiscModalClick);
-        }, 0);
+    }
+
+    // Filter discs by element
+    function filterDiscsByElement(element) {
+        discsState.discSelector.selectedElement = element;
+
+        // Update button states
+        const modal = document.getElementById('disc-modal');
+        if (modal) {
+            modal.querySelectorAll('.element-filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.element === element);
+            });
+        }
+
+        // Get current search query
+        const searchInput = document.getElementById('disc-search');
+        const searchQuery = searchInput ? searchInput.value : '';
+
+        // Re-render grid
+        if (discsState.currentSlot) {
+            renderDiscGrid(searchQuery, discsState.currentSlot);
+        }
     }
     
     // Select a disc from the modal
@@ -1335,6 +1495,42 @@
         const num = currentSlot.replace(/\D/g, '');
         const slotType = isMain ? '메인' : '보조';
         showToast(`${slotType} 슬롯 ${num}에 ${discName}을(를) 선택했습니다.`, 'success');
+    }
+    
+    // Remove a disc from a slot
+    function removeDisc(slotId) {
+        if (!slotId || !discsState.selectedDiscs[slotId]) {
+            return;
+        }
+        
+        const disc = discsState.selectedDiscs[slotId];
+        const discName = discsState.discNames[disc.Id] || '레코드';
+        const isMain = slotId.startsWith('main');
+        const num = slotId.replace(/\D/g, '');
+        const slotType = isMain ? '메인' : '보조';
+        
+        // Clear the disc data
+        delete discsState.selectedDiscs[slotId];
+        
+        // Reset limit break to 1 (default)
+        if (isMain || slotId.startsWith('sub')) {
+            discsState.discLimitBreaks[slotId] = 1;
+        }
+        
+        // Reset sub disc level to 0 (Phase 0)
+        if (slotId.startsWith('sub') && discsState.subDiscLevels[slotId] !== undefined) {
+            discsState.subDiscLevels[slotId] = 0;
+        }
+        
+        // Update required notes if a main disc was removed
+        if (isMain) {
+            updateRequiredNotes();
+        }
+        
+        // Re-render the discs view
+        renderDiscs();
+        
+        showToast(`${slotType} 슬롯 ${num}에서 ${discName}을(를) 제거했습니다.`, 'info');
     }
     
     // Close disc selector modal
@@ -1536,6 +1732,10 @@
             case 'disc-open-selector':
                 openDiscSelector(element.dataset.slotId);
                 break;
+            
+            case 'disc-remove':
+                removeDisc(element.dataset.slotId);
+                break;
                 
             case 'disc-select-option':
                 selectDiscOption(element.dataset.discId);
@@ -1544,7 +1744,12 @@
             case 'disc-close-selector':
                 closeDiscSelector();
                 break;
-                
+
+            // Filter discs by element
+            case 'disc-filter-element':
+                filterDiscsByElement(element.dataset.element);
+                break;
+
             // Image viewer
             case 'disc-open-image-viewer':
                 event.stopPropagation();
