@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레코드 도감</title>
+    <!-- Font Awesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/utils.css">
+    <link rel="stylesheet" href="css/discdb.css">
+</head>
+<body>
+    <!-- Navigation Bar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <div class="container">
+        <header>
+            <h1><i class="fa-solid fa-compact-disc"></i> 레코드DB</h1>
+            <p class="subtitle">레코드의 상세 정보, 스킬 및 스토리를 확인하세요</p>
+        </header>
+
+        <!-- Disc Selection Section -->
+        <div class="disc-select-section">
+            <h2 class="section-title">
+                <span class="section-icon"><i class="fa-solid fa-compact-disc"></i></span>
+                레코드 선택
+            </h2>
+
+            <!-- Search and Filter Controls -->
+            <div class="selector-controls">
+                <!-- Search Input -->
+                <div class="search-container">
+                    <input type="text" id="disc-search" placeholder="레코드 이름 검색..." class="search-input">
+                    <i class="fa-solid fa-search search-icon"></i>
+                </div>
+
+                <!-- Element Filter Buttons -->
+                <div class="element-filters">
+                    <button class="element-filter-btn active" data-element="all" onclick="filterDiscsByElement('all')">
+                        <i class="fa-solid fa-border-all"></i> 전체
+                    </button>
+                    <button class="element-filter-btn" data-element="1" onclick="filterDiscsByElement('1')">
+                        <img src="assets/icon_common_property_1.png" alt="물 속성" class="element-icon" onerror="this.style.display='none'"> 물 속성
+                    </button>
+                    <button class="element-filter-btn" data-element="2" onclick="filterDiscsByElement('2')">
+                        <img src="assets/icon_common_property_2.png" alt="불 속성" class="element-icon" onerror="this.style.display='none'"> 불 속성
+                    </button>
+                    <button class="element-filter-btn" data-element="3" onclick="filterDiscsByElement('3')">
+                        <img src="assets/icon_common_property_3.png" alt="땅 속성" class="element-icon" onerror="this.style.display='none'"> 땅 속성
+                    </button>
+                    <button class="element-filter-btn" data-element="4" onclick="filterDiscsByElement('4')">
+                        <img src="assets/icon_common_property_4.png" alt="바람 속성" class="element-icon" onerror="this.style.display='none'"> 바람 속성
+                    </button>
+                    <button class="element-filter-btn" data-element="5" onclick="filterDiscsByElement('5')">
+                        <img src="assets/icon_common_property_5.png" alt="빛 속성" class="element-icon" onerror="this.style.display='none'"> 빛 속성
+                    </button>
+                    <button class="element-filter-btn" data-element="6" onclick="filterDiscsByElement('6')">
+                        <img src="assets/icon_common_property_6.png" alt="어둠 속성" class="element-icon" onerror="this.style.display='none'"> 어둠 속성
+                    </button>
+                    <button class="element-filter-btn" data-element="7" onclick="filterDiscsByElement('7')">
+                        <img src="assets/icon_common_property_7.png" alt="무속성" class="element-icon" onerror="this.style.display='none'"> 무속성
+                    </button>
+                </div>
+            </div>
+
+            <!-- Disc Selector Grid -->
+            <div id="disc-selector" class="disc-selector-scroll"></div>
+        </div>
+
+        <!-- Disc Details Section (Hidden until disc selected) -->
+        <div id="disc-details" class="disc-details-container" style="display: none;">
+            <!-- Disc Hero Section -->
+            <div class="disc-hero-section">
+                <!-- Disc Image (Left Side) -->
+                <div class="disc-portrait-hero">
+                    <div class="portrait-background"></div>
+                    <div id="disc-image-container" class="disc-image-wrapper">
+                        <img id="disc-portrait" src="" alt="Disc Image">
+                    </div>
+                </div>
+
+                <!-- Disc Info (Right Side) -->
+                <div class="disc-info-hero">
+                    <div class="disc-name-section">
+                        <div class="disc-name-row">
+                            <h2 id="disc-name" class="disc-name-hero">-</h2>
+                            <img id="disc-element-icon" class="disc-element-icon-inline" src="" alt="" onerror="this.style.display='none'">
+                        </div>
+                        <div class="disc-id-row">
+                            <span id="disc-id" class="disc-id-badge">-</span>
+                            <span id="disc-rarity-stars" class="disc-rarity-stars"></span>
+                        </div>
+                        <div id="disc-tags" class="disc-tags-row">
+                            <!-- Tags will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Disc Quick Info -->
+                    <div class="disc-details-card">
+                        <div id="disc-description" class="disc-description"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disc Attributes Section -->
+            <div class="disc-attributes-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon"><i class="fa-solid fa-chart-line"></i></span>
+                        레코드 속성
+                    </h2>
+                </div>
+
+                <!-- Level Slider -->
+                <div class="disc-level-control">
+                    <label for="disc-level-slider" class="level-label">
+                        레벨: <span id="disc-current-level" class="level-display">1</span>
+                        <span id="disc-limitbreak-badge" class="limitbreak-badge" style="display: none;">승급 <span id="disc-current-limitbreak">0</span></span>
+                    </label>
+                    <input type="range" id="disc-level-slider" class="level-slider" min="1" max="90" value="1" oninput="adjustDiscLevelSlider()">
+                </div>
+
+                <!-- Stats Grid -->
+                <div id="disc-stats-grid" class="disc-stats-grid">
+                    <!-- Stats will be populated by JS -->
+                </div>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="skills-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                        스킬 정보
+                    </h2>
+                </div>
+                
+                <!-- Skill Level Control -->
+                <div class="skill-level-control">
+                    <label class="level-label">
+                        <i class="fa-solid fa-star"></i> 스킬 레벨
+                    </label>
+                    <div class="level-adjuster">
+                        <button class="level-btn" onclick="adjustSkillLevel(-1)">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <span id="skill-level-display" class="level-display">5</span>
+                        <button class="level-btn" onclick="adjustSkillLevel(1)">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="skills-container" class="skills-container">
+                    <!-- Main and Secondary Skills will be populated by JS -->
+                </div>
+            </div>
+
+            <!-- Archive Section -->
+            <div class="archive-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon"><i class="fa-solid fa-book-bookmark"></i></span>
+                        레코드 스토리
+                    </h2>
+                </div>
+                <div id="archive-container" class="archive-container">
+                    <!-- Story will be populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fuse.js for fuzzy search -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+
+    <script src="js/utils.js"></script>
+    <script src="js/discdb.js"></script>
+</body>
+</html>
