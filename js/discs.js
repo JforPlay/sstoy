@@ -579,7 +579,7 @@
         const allNoteTypes = Object.keys(discsState.subNoteSkillData).sort();
 
         if (allNoteTypes.length === 0) {
-            return '<p class="no-notes">음표 데이터를 불러오는 중...</p>';
+            return '<p class="no-notes">소리 데이터를 불러오는 중...</p>';
         }
 
         // Separate used (required by main discs) and unused notes
@@ -650,7 +650,7 @@
                         </div>
                     ` : `
                         <div class="note-effect inactive">
-                            <div class="note-desc">음표 레벨이 0입니다</div>
+                            <div class="note-desc">소리 레벨이 0입니다</div>
                         </div>
                     `}
                 </div>
@@ -661,12 +661,12 @@
         let html = '';
 
         if (usedNotes.length > 0) {
-            html += '<div class="notes-section-header used">📌 사용 중인 음표</div>';
+            html += '<div class="notes-section-header used">📌 사용 중인 소리</div>';
             html += usedNotes.map(noteId => generateNoteCard(noteId, true)).join('');
         }
 
         if (unusedNotes.length > 0) {
-            html += '<div class="notes-section-header unused">💤 미사용 음표</div>';
+            html += '<div class="notes-section-header unused">💤 미사용 소리</div>';
             html += unusedNotes.map(noteId => generateNoteCard(noteId, false)).join('');
         }
 
@@ -704,7 +704,7 @@
                         <div class="disc-score-breakdown">
                             <span class="disc-score-detail">협주: ${secondarySkillScore}</span>
                             <span class="disc-score-separator">|</span>
-                            <span class="disc-score-detail">음표: ${notesScore}</span>
+                            <span class="disc-score-detail">소리: ${notesScore}</span>
                         </div>
                     </div>
                     
@@ -746,7 +746,7 @@
                         <div class="notes-sidebar-header">
                             <h3 class="notes-sidebar-title">
                                 <span class="section-icon">🎼</span>
-                                음표 레벨
+                                소리 레벨
                             </h3>
                             <button class="notes-sidebar-close" 
                                     data-action="disc-close-notes-sidebar" 
@@ -755,7 +755,7 @@
                             </button>
                         </div>
                         <div class="disc-notes-info">
-                            <p class="notes-explanation">보조 레코드가 자동으로 음표를 제공합니다. 추가 획득한 음표를 설정하세요.</p>
+                            <p class="notes-explanation">보조 레코드가 자동으로 소리를 제공합니다. 추가 획득한 소리를 설정하세요.</p>
                         </div>
                         <div class="disc-notes-grid" id="disc-notes-grid">
                             ${generateNotesDisplay()}
@@ -767,9 +767,9 @@
                 <button class="notes-sidebar-toggle ${sidebarOpen ? 'hidden' : ''}"
                         id="notes-sidebar-toggle"
                         data-action="disc-toggle-notes-sidebar"
-                        title="음표 레벨 보기">
+                        title="소리 레벨 보기">
                     <span class="toggle-icon">🎼</span>
-                    <span class="toggle-text">음표</span>
+                    <span class="toggle-text">소리</span>
                     ${activeNotesCount > 0 ? `<span class="toggle-badge">${activeNotesCount}</span>` : ''}
                 </button>
             </div>
@@ -867,7 +867,7 @@
             if (noteItems) {
                 return `
                     <div class="disc-card-notes-section">
-                        <div class="disc-card-notes-header">🎵 제공 음표</div>
+                        <div class="disc-card-notes-header">🎵 제공 소리</div>
                         <div class="disc-card-notes-grid">
                             ${noteItems}
                         </div>
@@ -1116,7 +1116,7 @@
                                     <span class="skill-level-badge secondary-level inactive">Lv.0</span>
                                     <span class="skill-name">요구 조건 미충족</span>
                                 </div>
-                                <div class="skill-desc">필요한 음표 레벨을 충족하지 못했습니다.</div>
+                                <div class="skill-desc">필요한 소리 레벨을 충족하지 못했습니다.</div>
                             </div>
                         </div>
                     `;
@@ -1216,7 +1216,7 @@
 
         return `
             <div class="note-requirements-section">
-                <div class="note-requirements-header">🎵 필요 음표</div>
+                <div class="note-requirements-header">🎵 필요 소리</div>
                 <div class="note-requirements-grid">
                     ${noteItems}
                 </div>
