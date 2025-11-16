@@ -293,6 +293,9 @@ function parseParamValue(paramString, level = 1, skillLevel = 1, position = null
                 } else if (levelData === 2) {
                     // Use main skill level (SkillId for both master and assist - not AssistSkillId)
                     skillId = character.data.SkillId;
+                } else if (levelData === 4) {
+                    // Use ultimate skill level
+                    skillId = isMaster ? character.data.UltimateId : character.data.AssistUltimateId;
                 } else {
                     // Other LevelData values - use last index and mark for red color
                     useRedColor = true;

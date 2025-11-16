@@ -8,7 +8,8 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <!-- Font Awesome 6 Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="css/mainpage.css">
+    <script src="js/mainpage.js"></script>
 </head>
 
 <body>
@@ -29,11 +30,11 @@
                 <div class="cta-buttons">
                     <a href="characterdb.html" class="btn btn-secondary">
                         <span class="btn-icon"><i class="fa-solid fa-book"></i></span>
-                        캐릭터DB
+                        캐릭터 DB
                     </a>
                     <a href="discdb.html" class="btn btn-secondary">
                         <span class="btn-icon"><i class="fa-solid fa-compact-disc"></i></span>
-                        레코드DB
+                        레코드 DB
                     </a>
                     <a href="app.html" class="btn btn-primary">
                         <span class="btn-icon"><i class="fa-solid fa-medal"></i></span>
@@ -57,20 +58,20 @@
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fa-solid fa-book"></i></div>
-                    <h3>캐릭터 도감</h3>
+                    <h3>캐릭터 DB</h3>
                     <p>캐릭터의 상세 스탯, 아카이브, 데이트 공략 정보를 한눈에 확인하세요.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fa-solid fa-compact-disc"></i></div>
-                    <h3>레코드 도감</h3>
+                    <h3>레코드 DB</h3>
                     <p>레코드의 상세 정보, 스킬 효과, 소리, 스토리를 확인하세요.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fa-solid fa-list-check"></i></div>
-                    <h3>빌드 요약 & 공유</h3>
-                    <p>완성된 빌드를 한눈에 확인하고, URL 링크로 다른 유저와 공유하세요.</p>
+                    <h3>빌드 도우미</h3>
+                    <p>직접 빌드를 짜보고, 요약보기를 통해 한 눈에 빌드를 확인해보세요. URL 공유 기능으로 다른 유저와 빌드 공유도 할 수 있어요.</p>
                 </div>
 
                 <div class="feature-card">
@@ -89,24 +90,80 @@
             </div>
         </section>
 
+        <!-- Community & Links Section -->
+        <section class="community-section">
+            <h2 class="section-title">기타 링크</h2>
+            <div class="community-grid">
+                <a href="https://github.com/JforPlay/sstoy" target="_blank" rel="noopener" class="community-card">
+                    <div class="community-icon"><i class="fa-brands fa-github"></i></div>
+                    <h3>GitHub Repo</h3>
+                    <p>원본 소스코드가 궁금하다면 
+                        <br>여기서 확인해주세요</p>
+                    <div class="card-link">
+                        <span>저장소 방문</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </a>
+
+                <a href="https://arca.live/b/stellasora/153236033" target="_blank" rel="noopener" class="community-card">
+                    <div class="community-icon"><i class="fa-solid fa-bug"></i></div>
+                    <h3>버그 리포트 & 피드백</h3>
+                    <p>버그/건의사항이 있으신가요?
+                        <br>여기를 눌러 피드백을 남겨주세요!
+                    </p>
+                    <div class="card-link">
+                        <span>피드백 남기기</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </a>
+
+                <div class="community-card" onclick="openPatchNotesModal()" style="cursor: pointer;">
+                    <div class="community-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                    <h3>패치 노트</h3>
+                    <p>최근 업데이트 내역과
+                        <br>변경 사항을 확인하세요
+                    </p>
+                    <div class="card-link">
+                        <span>패치 노트 보기</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Patch Notes Modal -->
+        <div id="patch-notes-modal" class="patch-modal">
+            <div class="patch-modal-content">
+                <div class="patch-modal-header">
+                    <h2><i class="fa-solid fa-clipboard-list"></i> 패치 노트</h2>
+                    <button class="patch-modal-close" onclick="closePatchNotesModal()">&times;</button>
+                </div>
+                <div class="patch-modal-body">
+                    <!-- Patch notes will be loaded dynamically from data/patchnotes.json -->
+                    <p style="color: var(--text-secondary); padding: 2rem; text-align: center;">로딩 중...</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-content">
                 <div class="disclaimer">
-                    <h3>Disclaimer</h3>
+                    <h3><i class="fa-solid fa-triangle-exclamation"></i> Disclaimer</h3>
                     <p>
-                        sstoy는 스텔라 소라의 비영리 팬 프로젝트입니다.<br>
-                        모든 에셋과 데이터는 Yostar Inc.의 저작물이며, 비상업적/정보/교육 목적으로만 사용됩니다.<br>
-                        이 프로젝트는 게임 개발사와 무관하며, 저작권자의 요청 시 언제든 중단될 수 있습니다.
+                        본 프로젝트(<strong>sstoy</strong>)는 스텔라 소라(Stella Sora)의 <strong>비영리 팬 메이드 도구</strong>입니다.<br>
+                        모든 게임 에셋, 데이터, 이미지 및 텍스트는 <strong>Yostar Inc.</strong>의 저작물이며,
+                        비상업적 정보 제공 및 교육 목적으로만 사용됩니다.<br>
+                        본 프로젝트는 공식 게임 개발사 및 퍼블리셔와 무관하며,
+                        저작권자의 요청이 있을 경우 언제든 프로젝트를 중단할 수 있습니다.
+                    </p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                        © Yostar Inc. All rights reserved. <strong>Stella Sora</strong> 및 관련 상표는 Yostar Inc.의 등록 상표입니다.
                     </p>
                 </div>
                 <div class="footer-links">
-                    <p>Last Updated: 2025.11.15</p>
-                    <p>
-                        <a href="https://github.com/JforPlay/sstoy" target="_blank" rel="noopener">
-                            GitHub Repository
-                        </a>
-                    </p>
+                    <p>최종 업데이트: 2025.11.15</p>
+                    <p style="opacity: 0.6; font-size: 0.85rem; margin-top: 0.5rem;">Hope you enjoy the tool :)</p>
                 </div>
             </div>
         </footer>

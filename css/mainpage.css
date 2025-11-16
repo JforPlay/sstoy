@@ -153,65 +153,66 @@ body {
 
 /* Section Title */
 .section-title {
-    font-size: 2.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     color: var(--text-primary);
 }
 
 .section-title::after {
     content: '';
     display: block;
-    width: 80px;
-    height: 4px;
+    width: 60px;
+    height: 3px;
     background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    margin: 1rem auto 0;
+    margin: 0.75rem auto 0;
     border-radius: 2px;
 }
 
 /* Features Section */
 .features-section {
-    padding: 4rem 0;
-    margin-bottom: 4rem;
+    padding: 3rem 0;
+    margin-bottom: 3rem;
 }
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
 }
 
 .feature-card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 2rem;
+    border-radius: 12px;
+    padding: 1.5rem;
     transition: all 0.3s ease;
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
     border-color: var(--primary-color);
 }
 
 .feature-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 2.25rem;
+    margin-bottom: 0.75rem;
     display: block;
 }
 
 .feature-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
     color: var(--text-primary);
 }
 
 .feature-card > p {
     color: var(--text-secondary);
-    margin-bottom: 1rem;
-    line-height: 1.6;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+    font-size: 0.9rem;
 }
 
 .feature-list {
@@ -233,6 +234,87 @@ body {
     left: 0;
     color: var(--accent-color);
     font-weight: bold;
+}
+
+/* Community Section */
+.community-section {
+    padding: 2.5rem 0;
+    margin-bottom: 2.5rem;
+}
+
+.community-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.community-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.community-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+}
+
+.community-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    display: block;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.community-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.community-card p {
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+    flex-grow: 1;
+    font-size: 0.85rem;
+}
+
+.card-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.8rem;
+    transition: gap 0.3s ease;
+}
+
+.community-card:hover .card-link {
+    gap: 0.75rem;
+}
+
+.card-link i {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.community-card:hover .card-link i {
+    transform: translateX(4px);
 }
 
 /* Updates Section */
@@ -313,6 +395,152 @@ body {
     font-size: 1.2rem;
 }
 
+/* Patch Notes Modal */
+.patch-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.patch-modal-content {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-lg);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.patch-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.patch-modal-header h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+}
+
+.patch-modal-header i {
+    color: var(--primary-color);
+}
+
+.patch-modal-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.patch-modal-close:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.patch-modal-body {
+    padding: 2rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.patch-entry {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.patch-entry:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.patch-version {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.patch-date {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.patch-changes h4 {
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.patch-changes ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.patch-changes li {
+    color: var(--text-secondary);
+    padding: 0.4rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+.patch-changes li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
 /* Footer */
 .footer {
     background-color: rgba(30, 41, 59, 0.8);
@@ -387,12 +615,17 @@ body {
     }
 
     .section-title {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     .features-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1.25rem;
+    }
+
+    .community-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .cta-buttons {
@@ -417,9 +650,40 @@ body {
         font-size: 2rem;
     }
 
-    .feature-card,
+    .section-title {
+        font-size: 1.35rem;
+    }
+
+    .feature-card {
+        padding: 1.25rem;
+    }
+
+    .community-card {
+        padding: 1.25rem;
+    }
+
     .update-card {
         padding: 1.5rem;
+    }
+
+    .patch-modal {
+        padding: 1rem;
+    }
+
+    .patch-modal-content {
+        max-height: 90vh;
+    }
+
+    .patch-modal-header {
+        padding: 1rem 1.25rem;
+    }
+
+    .patch-modal-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .patch-modal-body {
+        padding: 1.25rem;
     }
 }
 
@@ -437,15 +701,18 @@ body {
 
 .hero-content,
 .feature-card,
+.community-card,
 .update-card {
     animation: fadeInUp 0.6s ease-out;
 }
 
-.feature-card:nth-child(2) {
+.feature-card:nth-child(2),
+.community-card:nth-child(1) {
     animation-delay: 0.1s;
 }
 
-.feature-card:nth-child(3) {
+.feature-card:nth-child(3),
+.community-card:nth-child(2) {
     animation-delay: 0.2s;
 }
 
