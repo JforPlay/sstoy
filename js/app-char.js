@@ -291,8 +291,15 @@ function parseParamValue(paramString, level = 1, skillLevel = 1, position = null
                     // Use normal attack skill level
                     skillId = isMaster ? character.data.NormalAtkId : character.data.AssistNormalAtkId;
                 } else if (levelData === 2) {
-                    // Use main skill level (SkillId for both master and assist - not AssistSkillId)
-                    skillId = character.data.SkillId;
+                    // Use main skill level (SkillId) or assist skill level (AssistSkillId) based on MainOrSupport
+                    const mainOrSupport = dataEntry.MainOrSupport;
+                    if (mainOrSupport === 2) {
+                        // MainOrSupport = 2 means use assist skill level
+                        skillId = character.data.AssistSkillId;
+                    } else {
+                        // Default: use main skill level for both master and assist positions
+                        skillId = character.data.SkillId;
+                    }
                 } else if (levelData === 4) {
                     // Use ultimate skill level
                     skillId = isMaster ? character.data.UltimateId : character.data.AssistUltimateId;
