@@ -511,11 +511,8 @@
             const isSpecificPotential = itemData && itemData.Stype === 42;
 
             if (isSpecificPotential) {
-                const character = window.state?.party?.[position];
-                const isMaster = position === 'master';
-                const skillId = isMaster ? character?.data.UltimateId : character?.data.AssistSkillId;
-                const level = skillId ? (window.state?.skillLevels?.[position]?.[skillId] || 1) : 1;
-                totalPotentialLevels += level;
+                // In summary tab, specific potentials are always counted as level 1
+                totalPotentialLevels += 1;
             } else {
                 const level = window.state?.potentialLevels?.[position]?.[potId] || 1;
                 totalPotentialLevels += level;
@@ -542,10 +539,8 @@
 
             specificPots.forEach(potId => {
                 const itemData = window.state?.items?.[potId];
-                const character = window.state?.party?.[position];
-                const isMaster = position === 'master';
-                const skillId = isMaster ? character?.data.UltimateId : character?.data.AssistSkillId;
-                const level = skillId ? (window.state?.skillLevels?.[position]?.[skillId] || 1) : 1;
+                // In summary tab, specific potentials are always displayed as level 1
+                const level = 1;
                 const mark = window.state.potentialMarks[position][potId] || '';
 
                 html += `<div class="potential-icon-wrapper"
@@ -626,13 +621,10 @@
             selectedPotentials.forEach(potId => {
                 const itemData = window.state?.items?.[potId];
                 const isSpecificPotential = itemData && itemData.Stype === 42;
-                
+
                 if (isSpecificPotential) {
-                    // For specific potentials, use skill level
-                    const isMaster = pos === 'master';
-                    const skillId = isMaster ? character?.data.UltimateId : character?.data.AssistSkillId;
-                    const level = skillId ? (window.state?.skillLevels?.[pos]?.[skillId] || 1) : 1;
-                    totalPotentialLevels += level;
+                    // In summary tab, specific potentials are always counted as level 1
+                    totalPotentialLevels += 1;
                 } else {
                     // For normal potentials, use potential level
                     const level = window.state?.potentialLevels?.[pos]?.[potId] || 1;
