@@ -230,10 +230,8 @@
                 await restoreCharactersData(charactersData);
             }
 
-            // Restore discs
-            if (discsData) {
-                restoreDiscsData(discsData);
-            }
+            // Restore discs (always call to clear old state even if no discs)
+            restoreDiscsData(discsData);
 
             // Restore notes (or clear if not included)
             restoreNotesData(notesData);
@@ -339,15 +337,25 @@
     
     /**
      * Restore disc data
-     * @param {Object} discsData - Discs data
+     * @param {Object} discsData - Discs data (can be null/undefined to clear all discs)
      */
     function restoreDiscsData(discsData) {
         const discsState = window.discsState;
         if (!discsState) return;
 
+        // Initialize with all expected slots set to null (important for proper overwrites)
+        const selectedDiscs = {
+            main1: null,
+            main2: null,
+            main3: null,
+            sub1: null,
+            sub2: null,
+            sub3: null
+        };
+
         // Restore selected discs by looking up full disc objects from IDs
-        const savedData = discsData.s || {};
-        const selectedDiscs = {};
+        // If discsData is null/undefined, savedData will be empty and all slots remain null
+        const savedData = discsData?.s || {};
 
         Object.keys(savedData).forEach(slotId => {
             const data = savedData[slotId];
@@ -380,22 +388,36 @@
 
         discsState.selectedDiscs = selectedDiscs;
 
-        // Restore limit breaks (fill missing with default level 1)
-        const savedLimitBreaks = discsData.l || {};
-        const limitBreaks = {};
+        // Initialize limit breaks with all slots (important for proper overwrites)
+        const limitBreaks = {
+            main1: 1,
+            main2: 1,
+            main3: 1
+        };
+
+        // Restore limit breaks from saved data
+        // If discsData is null/undefined, savedLimitBreaks will be empty and defaults are used
+        const savedLimitBreaks = discsData?.l || {};
         Object.keys(selectedDiscs).forEach(slotId => {
-            // Main discs default to limit break 1
+            // Main discs: use saved value or default to 1
             if (slotId.startsWith('main')) {
                 limitBreaks[slotId] = savedLimitBreaks[slotId] || 1;
             }
         });
         discsState.discLimitBreaks = limitBreaks;
 
-        // Restore sub disc levels (fill missing with default level 0)
-        const savedSubLevels = discsData.g || {};
-        const subLevels = {};
+        // Initialize sub disc levels with all slots (important for proper overwrites)
+        const subLevels = {
+            sub1: 0,
+            sub2: 0,
+            sub3: 0
+        };
+
+        // Restore sub disc levels from saved data
+        // If discsData is null/undefined, savedSubLevels will be empty and defaults are used
+        const savedSubLevels = discsData?.g || {};
         Object.keys(selectedDiscs).forEach(slotId => {
-            // Sub discs default to level 0
+            // Sub discs: use saved value or default to 0
             if (slotId.startsWith('sub')) {
                 subLevels[slotId] = savedSubLevels[slotId] || 0;
             }
