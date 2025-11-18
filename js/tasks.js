@@ -1095,10 +1095,48 @@ function removeCharacterFromTask(taskId, slotIndex) {
 // ============================================================================
 
 /**
+ * Calculate tag rarity across all selected tasks
+ * Returns a map of tag -> rarity score (lower = rarer, higher priority)
+ * @param {Array} tasks - Selected tasks
+ * @param {Array} availableChars - Available characters
+ * @returns {Object} Map of tag to { count, rarity }
+ */
+function calculateTagRarity(tasks, availableChars) {
+    const tagRarity = {};
+
+    // Collect all tags (required + extra) from all tasks
+    const allTags = new Set();
+    tasks.forEach(task => {
+        (task.Tags || []).forEach(tag => allTags.add(tag));
+        (task.ExtraTags || []).forEach(tag => allTags.add(tag));
+    });
+
+    // For each tag, count how many characters can fill it
+    allTags.forEach(tag => {
+        const charCount = availableChars.filter(char => {
+            const charTags = getCharacterTags(char.Id);
+            return charTags.includes(tag);
+        }).length;
+
+        // Rarity score: lower count = higher rarity (inverse)
+        // Use 1000 / (count + 1) to avoid division by zero
+        // Rare tags (1-2 chars) get high scores (500-1000)
+        // Common tags (10+ chars) get low scores (< 100)
+        tagRarity[tag] = {
+            count: charCount,
+            rarity: charCount > 0 ? 1000 / charCount : 0
+        };
+    });
+
+    return tagRarity;
+}
+
+/**
  * Auto-fill algorithm that assigns owned characters to selected tasks
  * Priority:
- * 1. Fill as many tasks completely (all required tags)
- * 2. Try to fill extra tags (all-or-nothing - must fill ALL extra tags for bonus)
+ * 1. Fill rare tags first (tags that few characters can satisfy)
+ * 2. Fill as many tasks completely (all required tags)
+ * 3. Try to fill extra tags (all-or-nothing - must fill ALL extra tags for bonus)
  */
 function autoFillCharacters() {
     if (tasksState.selectedTasks.length === 0) {
@@ -1134,20 +1172,29 @@ function autoFillCharacters() {
         return;
     }
 
+    // Calculate tag rarity across all tasks
+    const tagRarity = calculateTagRarity(tasksState.selectedTasks, availableChars);
+
     // Track which characters have been assigned
     const assignedCharIds = new Set();
 
     // Score and sort tasks by completability
     const tasksWithScores = tasksState.selectedTasks.map(task => {
-        const score = scoreTaskCompletability(task, availableChars, assignedCharIds);
+        const score = scoreTaskCompletability(task, availableChars, assignedCharIds, tagRarity);
         return { task, score };
     });
 
-    // Sort by: completability score (desc), then extra tag potential (desc)
+    // Sort by: rare tag priority (desc), completability (desc), then extra tag potential (desc)
     tasksWithScores.sort((a, b) => {
+        // First priority: tasks with rare tags
+        if (Math.abs(a.score.rareTagScore - b.score.rareTagScore) > 0.01) {
+            return b.score.rareTagScore - a.score.rareTagScore;
+        }
+        // Second priority: completability
         if (a.score.completable !== b.score.completable) {
             return b.score.completable - a.score.completable;
         }
+        // Third priority: extra tag potential
         return b.score.extraTagPotential - a.score.extraTagPotential;
     });
 
@@ -1156,7 +1203,7 @@ function autoFillCharacters() {
     let extraTagsCompleted = 0;
 
     tasksWithScores.forEach(({ task, score }) => {
-        const result = assignBestCharactersToTask(task, availableChars, assignedCharIds);
+        const result = assignBestCharactersToTask(task, availableChars, assignedCharIds, tagRarity);
 
         if (result.success) {
             if (result.allRequiredFilled) tasksCompleted++;
@@ -1185,8 +1232,9 @@ function autoFillCharacters() {
 
 /**
  * Score how completable a task is with available characters
+ * Now considers tag rarity to prioritize tasks with rare tags
  */
-function scoreTaskCompletability(task, availableChars, assignedCharIds) {
+function scoreTaskCompletability(task, availableChars, assignedCharIds, tagRarity) {
     const tagCounts = getTagCounts(task);
     const requiredTags = task.Tags || [];
     const extraTags = task.ExtraTags || [];
@@ -1225,9 +1273,27 @@ function scoreTaskCompletability(task, availableChars, assignedCharIds) {
         return sum + (extraTagFillability[tag] || 0);
     }, 0);
 
+    // Calculate rare tag score - higher for tasks with rarer tags
+    let rareTagScore = 0;
+
+    // Required tags contribute more to rare tag score
+    uniqueRequiredTags.forEach(tag => {
+        const rarity = (tagRarity[tag] && tagRarity[tag].rarity) || 0;
+        const count = tagCounts.required[tag] || 0;
+        rareTagScore += rarity * count * 2; // Multiply by 2 for required tags
+    });
+
+    // Extra tags contribute less but still matter
+    uniqueExtraTags.forEach(tag => {
+        const rarity = (tagRarity[tag] && tagRarity[tag].rarity) || 0;
+        const count = tagCounts.extra[tag] || 0;
+        rareTagScore += rarity * count;
+    });
+
     return {
         completable: allRequiredFillable ? 1 : 0,
         extraTagPotential: extraTagScore,
+        rareTagScore: rareTagScore,
         requiredTagFillability,
         extraTagFillability
     };
@@ -1235,8 +1301,9 @@ function scoreTaskCompletability(task, availableChars, assignedCharIds) {
 
 /**
  * Assign best characters to a task using greedy algorithm
+ * Now considers tag rarity when scoring characters
  */
-function assignBestCharactersToTask(task, availableChars, assignedCharIds) {
+function assignBestCharactersToTask(task, availableChars, assignedCharIds, tagRarity) {
     const taskId = task.Id;
     const tagCounts = getTagCounts(task);
     const requiredTagsSet = new Set(task.Tags || []);
@@ -1260,7 +1327,11 @@ function assignBestCharactersToTask(task, availableChars, assignedCharIds) {
     const taskAvailableChars = availableChars.filter(char => !assignedCharIds.has(char.Id));
 
     // Greedy selection: pick characters that fill the most needed tags
-    // STRICT PRIORITY: Fill ALL required tags first, then consider extra tags
+    // PRIORITY ORDER:
+    // 1. Characters that can fill RARE required tags (highest priority)
+    // 2. Characters that can fill required tags
+    // 3. Characters that can fill RARE extra tags
+    // 4. Characters that can fill extra tags
     const selectedChars = [];
     const filledTags = {};
 
@@ -1307,17 +1378,29 @@ function assignBestCharactersToTask(task, availableChars, assignedCharIds) {
                 }
             });
 
-            // Calculate score:
+            // Calculate score with rarity bonuses:
+            // Base scores:
             // - Required tags: 100 points each (must fill these first)
-            // - Extra tags: 10 points each, but ONLY if:
-            //   1. Character can also fill required tags, OR
-            //   2. All required tags are already complete
-            score += canFillRequiredTags.length * 100;
+            // - Extra tags: 10 points each (but only if conditions met)
+            // Rarity bonuses:
+            // - Rare required tags: +rarity score (can be 100-1000 for very rare tags)
+            // - Rare extra tags: +rarity score / 10
+
+            // Score required tags with rarity bonuses
+            canFillRequiredTags.forEach(tag => {
+                score += 100; // Base score
+                const rarity = (tagRarity[tag] && tagRarity[tag].rarity) || 0;
+                score += rarity; // Add rarity bonus (prioritizes rare tags)
+            });
 
             // Only count extra tags in score if appropriate
             const shouldCountExtraTags = canFillRequiredTags.length > 0 || requiredAreComplete;
             if (shouldCountExtraTags) {
-                score += canFillExtraTags.length * 10;
+                canFillExtraTags.forEach(tag => {
+                    score += 10; // Base score
+                    const rarity = (tagRarity[tag] && tagRarity[tag].rarity) || 0;
+                    score += rarity / 10; // Add smaller rarity bonus for extra tags
+                });
             }
 
             // Only include extra tags in canFillTags if they should be counted
