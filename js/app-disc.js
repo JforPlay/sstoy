@@ -58,53 +58,59 @@
     // Load disc data
     async function loadDiscData() {
         try {
+            // Get current language from i18n
+            const gameLang = window.i18n?.currentLang || 'KR';
+            const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
+
+            console.log(`[App-Disc] Loading data for language: ${gameLang}`);
+
             // Load Disc.json
             const discResponse = await fetch('data/Disc.json');
             const discData = await discResponse.json();
-            
+
             // Load DiscIP.json for StoryName keys
             const discIPResponse = await fetch('data/DiscIP.json');
             const discIPData = await discIPResponse.json();
-            
-            // Load Korean translations
-            const discKRResponse = await fetch('data/kr/DiscIP.json');
+
+            // Load language-specific translations
+            const discKRResponse = await fetch(`${dataPath}/DiscIP.json`);
             const discKRData = await discKRResponse.json();
-            
+
             // Load Item.json for icons
             const itemResponse = await fetch('data/Item.json');
             discsState.itemData = await itemResponse.json();
-            
+
             // Load MainSkill.json
             const mainSkillResponse = await fetch('data/MainSkill.json');
             discsState.mainSkillData = await mainSkillResponse.json();
-            
+
             // Load SecondarySkill.json
             const secondarySkillResponse = await fetch('data/SecondarySkill.json');
             discsState.secondarySkillData = await secondarySkillResponse.json();
-            
-            // Load Korean translations for skills
-            const mainSkillKRResponse = await fetch('data/kr/MainSkill.json');
+
+            // Load language-specific translations for skills
+            const mainSkillKRResponse = await fetch(`${dataPath}/MainSkill.json`);
             discsState.mainSkillKRData = await mainSkillKRResponse.json();
-            
-            const secondarySkillKRResponse = await fetch('data/kr/SecondarySkill.json');
+
+            const secondarySkillKRResponse = await fetch(`${dataPath}/SecondarySkill.json`);
             discsState.secondarySkillKRData = await secondarySkillKRResponse.json();
-            
+
             // Load SubNoteSkillPromoteGroup.json (maps GroupId to note types)
             const subNotePromoteResponse = await fetch('data/SubNoteSkillPromoteGroup.json');
             discsState.subNoteSkillPromoteData = await subNotePromoteResponse.json();
-            
+
             // Load SubNoteSkill.json (note definitions)
             const subNoteSkillResponse = await fetch('data/SubNoteSkill.json');
             discsState.subNoteSkillData = await subNoteSkillResponse.json();
-            
-            // Load Korean translations for notes
-            const subNoteSkillKRResponse = await fetch('data/kr/SubNoteSkill.json');
+
+            // Load language-specific translations for notes
+            const subNoteSkillKRResponse = await fetch(`${dataPath}/SubNoteSkill.json`);
             discsState.subNoteSkillKRData = await subNoteSkillKRResponse.json();
-            
+
             // Load EffectValue.json for proper parameter calculation
             const effectValueResponse = await fetch('data/EffectValue.json');
             discsState.effectValueData = await effectValueResponse.json();
-            
+
             // Load GameEnums.json for element types
             const gameEnumsResponse = await fetch('data/GameEnums.json');
             discsState.gameEnums = await gameEnumsResponse.json();
@@ -1827,7 +1833,15 @@
     window.calculateDiscScore = calculateDiscScore;
     window.updateRequiredNotes = updateRequiredNotes; // Expose for saveload.js
     window.discsState = discsState;
-    
+
+    // Listen for language changes
+    window.addEventListener('languageChanged', async (event) => {
+        console.log('[App-Disc] Language changed, reloading data');
+        if (document.getElementById('discs-container')) {
+            await loadDiscData();
+        }
+    });
+
     // Auto-load and render on page load if discs tab exists
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {

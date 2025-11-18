@@ -61,7 +61,6 @@ let cacheMisses = 0;
 
 // Clear cache when data changes
 function clearDescriptionCache() {
-    console.log(`[Cache Stats] Hits: ${cacheHits}, Misses: ${cacheMisses}, Hit Rate: ${cacheHits > 0 ? ((cacheHits / (cacheHits + cacheMisses)) * 100).toFixed(1) : 0}%`);
     descriptionCache.clear();
     cacheHits = 0;
     cacheMisses = 0;
@@ -98,18 +97,24 @@ function initializeCharacterCards() {
 // Load data on page load
 async function loadData() {
     try {
+        // Get current language from i18n
+        const gameLang = window.i18n?.currentLang || 'KR';
+        const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
+
+        console.log(`[App-Char] Loading data for language: ${gameLang}`);
+
         // Load all JSON files
         const [characters, characterNames, charPotentials, potentials, potentialNames, itemNames, items, gameEnums, skills, skillNames, effectValue, hitDamage, onceAdditionalAttributeValue, scriptParameterValue, buffValue, shieldValue] = await Promise.all([
             fetch('data/Character.json').then(r => r.json()),
-            fetch('data/kr/Character.json').then(r => r.json()),
+            fetch(`${dataPath}/Character.json`).then(r => r.json()),
             fetch('data/CharPotential.json').then(r => r.json()),
             fetch('data/Potential.json').then(r => r.json()),
-            fetch('data/kr/Potential.json').then(r => r.json()),
-            fetch('data/kr/Item.json').then(r => r.json()),
+            fetch(`${dataPath}/Potential.json`).then(r => r.json()),
+            fetch(`${dataPath}/Item.json`).then(r => r.json()),
             fetch('data/Item.json').then(r => r.json()),
             fetch('data/GameEnums.json').then(r => r.json()),
             fetch('data/Skill.json').then(r => r.json()),
-            fetch('data/kr/Skill.json').then(r => r.json()),
+            fetch(`${dataPath}/Skill.json`).then(r => r.json()),
             fetch('data/EffectValue.json').then(r => r.json()),
             fetch('data/HitDamage.json').then(r => r.json()),
             fetch('data/OnceAdditionalAttributeValue.json').then(r => r.json()),
@@ -149,7 +154,26 @@ async function loadData() {
 }
 
 // Initialize the app
-loadData();
+(async function initApp() {
+    // Initialize i18n first
+    await window.i18n.init();
+
+    // Listen for language changes
+    window.addEventListener('languageChanged', async (event) => {
+        console.log('[App-Char] Language changed, reloading data');
+        await loadData();
+        // Re-render character cards if any are selected
+        ['master', 'assist1', 'assist2'].forEach(position => {
+            if (state.party[position]) {
+                renderCharacterCard(position);
+                renderPotentials(position);
+            }
+        });
+    });
+
+    // Load data
+    await loadData();
+})();
 
 // Map of file type keywords to actual data references
 const FILE_TYPE_MAP = {
@@ -451,7 +475,7 @@ function formatValue(value, formatType, enumType = null, fileType = null) {
         // Return the value as-is without decimal processing
         return value;
     } else if (formatType === 'Text') {
-        // Fetch text from kr/Skill.json only if fileType is "Skill"
+        // Fetch text from KR/Skill.json only if fileType is "Skill"
         if (fileType && fileType.toLowerCase() === 'skill') {
             if (state.skillNames && state.skillNames[value]) {
                 return state.skillNames[value];
@@ -1430,7 +1454,7 @@ function createPotentialCard(potId, position) {
         }
     }
     
-    // Get descriptions from Potential.json (kr)
+    // Get descriptions from Potential.json (KR)
     const briefKey = `Potential.${potId}.1`;
     const detailedKey = `Potential.${potId}.2`;
     

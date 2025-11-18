@@ -107,39 +107,90 @@ window.createIconElement = createIconElement;
 // Load Navbar Component
 (function() {
     'use strict';
-    
+
+    // Initialize hamburger menu for mobile navigation
+    function initHamburgerMenu() {
+        const hamburger = document.getElementById('navbar-hamburger');
+        const menu = document.getElementById('navbar-menu');
+
+        if (!hamburger || !menu) {
+            console.log('[Navbar] Hamburger menu elements not found');
+            return;
+        }
+
+        // Toggle menu on hamburger click
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('open');
+
+            // Toggle icon between bars and X
+            const icon = hamburger.querySelector('i');
+            if (menu.classList.contains('open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = menu.querySelectorAll('.navbar-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.remove('open');
+                const icon = hamburger.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('open');
+                const icon = hamburger.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+    }
+
     async function loadNavbar() {
         try {
+            // Only load navbar if there's a placeholder for it
+            const navbarPlaceholder = document.getElementById('navbar-placeholder');
+            if (!navbarPlaceholder) {
+                console.log('[Navbar] No placeholder found, skipping navbar load');
+                return;
+            }
+
             const response = await fetch('navbar.html');
             if (!response.ok) throw new Error('Failed to load navbar');
             const html = await response.text();
-            
-            // Insert navbar at the beginning of body
-            const navbarPlaceholder = document.getElementById('navbar-placeholder');
-            if (navbarPlaceholder) {
-                navbarPlaceholder.innerHTML = html;
-            } else {
-                // If no placeholder, insert at the beginning of body
-                document.body.insertAdjacentHTML('afterbegin', html);
-            }
-            
+
+            // Insert navbar into placeholder
+            navbarPlaceholder.innerHTML = html;
+
             // Wait a bit for DOM to update, then initialize
             setTimeout(() => {
                 // Initialize theme after navbar is loaded
                 if (typeof window.initTheme === 'function') {
                     window.initTheme();
                 }
-                
+
                 // Set active nav link after navbar is loaded
                 if (typeof window.setActiveNavLink === 'function') {
                     window.setActiveNavLink();
                 }
+
+                // Initialize hamburger menu toggle
+                initHamburgerMenu();
             }, 0);
         } catch (error) {
             console.error('Error loading navbar:', error);
         }
     }
-    
+
     // Load navbar when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', loadNavbar);
@@ -176,10 +227,16 @@ window.createIconElement = createIconElement;
         if (icon) {
             if (theme === 'light') {
                 icon.className = `theme-icon ${ICONS.moon}`;
-                if (text) text.textContent = '다크';
+                if (text) {
+                    text.setAttribute('data-i18n', 'nav.themeDark');
+                    text.textContent = window.i18n ? window.i18n.t('nav.themeDark') : '다크';
+                }
             } else {
                 icon.className = `theme-icon ${ICONS.sun}`;
-                if (text) text.textContent = '라이트';
+                if (text) {
+                    text.setAttribute('data-i18n', 'nav.themeLight');
+                    text.textContent = window.i18n ? window.i18n.t('nav.themeLight') : '라이트';
+                }
             }
         }
     }

@@ -340,6 +340,12 @@ async function initResourcesPage() {
 // Load all required data files
 async function loadResourcesData() {
     try {
+        // Get current language from i18n
+        const gameLang = window.i18n?.currentLang || 'KR';
+        const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
+
+        console.log(`[Resources] Loading data for language: ${gameLang}`);
+
         const [
             charactersData,
             characterNamesData,
@@ -359,7 +365,7 @@ async function loadResourcesData() {
             itemNamesData
         ] = await Promise.all([
             fetch('data/Character.json').then(r => r.json()),
-            fetch('data/kr/Character.json').then(r => r.json()),
+            fetch(`${dataPath}/Character.json`).then(r => r.json()),
             fetch('data/CharacterUpgrade.json').then(r => r.json()),
             fetch('data/CharacterSkillUpgrade.json').then(r => r.json()),
             fetch('data/CharacterAdvance.json').then(r => r.json()),
@@ -370,10 +376,10 @@ async function loadResourcesData() {
             fetch('data/DiscPromote.json').then(r => r.json()),
             fetch('data/DiscItemExp.json').then(r => r.json()),
             fetch('data/DiscIP.json').then(r => r.json()),
-            fetch('data/kr/DiscIP.json').then(r => r.json()),
+            fetch(`${dataPath}/DiscIP.json`).then(r => r.json()),
             fetch('data/GameEnums.json').then(r => r.json()),
             fetch('data/Item.json').then(r => r.json()),
-            fetch('data/kr/Item.json').then(r => r.json())
+            fetch(`${dataPath}/Item.json`).then(r => r.json())
         ]);
 
         resourcesState.characters = charactersData;
@@ -1971,7 +1977,22 @@ function closeDiscResourceHelp() {
 }
 
 // Initialize page when DOM is loaded
-document.addEventListener('DOMContentLoaded', initResourcesPage);
+document.addEventListener('DOMContentLoaded', async () => {
+    // Initialize i18n first
+    await window.i18n.init();
+
+    // Listen for language changes
+    window.addEventListener('languageChanged', async (event) => {
+        console.log('[Resources] Language changed, reloading data');
+        await loadResourcesData();
+        renderSelectedCharactersList();
+        renderResourceSummary();
+        renderSelectedDiscsList();
+        renderDiscResourceSummary();
+    });
+
+    await initResourcesPage();
+});
 
 // Modal click handler to close when clicking outside
 document.addEventListener('click', function(event) {

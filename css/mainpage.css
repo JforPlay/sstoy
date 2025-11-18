@@ -1,6 +1,8 @@
 /* Landing Page Styles */
 
-:root {
+/* Dark Theme Variables (Default) */
+:root,
+:root[data-theme="dark"] {
     --primary-color: #6366f1;
     --primary-hover: #4f46e5;
     --secondary-color: #8b5cf6;
@@ -17,6 +19,24 @@
     --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
+/* Light Theme Variables */
+:root[data-theme="light"] {
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --secondary-color: #8b5cf6;
+    --accent-color: #f59e0b;
+    --bg-dark: #f8f9fa;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f1f3f5;
+    --text-primary: #1a1a1a;
+    --text-secondary: #495057;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -29,6 +49,83 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+/* Page Controls */
+.page-controls {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 1000;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.page-controls .language-select {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 0.625rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    outline: none;
+    box-shadow: var(--shadow-md);
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+}
+
+.page-controls .language-select:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.page-controls .language-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.page-controls .language-select option {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    padding: 0.5rem;
+}
+
+.page-controls .theme-toggle {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 0.625rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    box-shadow: var(--shadow-md);
+    min-width: 48px;
+    min-height: 48px;
+}
+
+.page-controls .theme-toggle:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px) rotate(20deg);
+    box-shadow: var(--shadow-lg);
+}
+
+.page-controls .theme-toggle:active {
+    transform: translateY(0) rotate(0deg);
+}
+
+.page-controls .theme-icon {
+    transition: transform 0.3s ease;
+    font-size: 1.25rem;
 }
 
 /* Background Image */
@@ -592,8 +689,72 @@ body {
     text-decoration: underline;
 }
 
+/* Light Theme Overrides */
+[data-theme="light"] .background-image {
+    opacity: 0.25;
+}
+
+[data-theme="light"] .background-image::after {
+    background: linear-gradient(180deg,
+        rgba(248, 249, 250, 0.5) 0%,
+        rgba(248, 249, 250, 0.7) 100%);
+}
+
+[data-theme="light"] .feature-card,
+[data-theme="light"] .community-card,
+[data-theme="light"] .update-card {
+    box-shadow: var(--shadow-sm);
+    border-color: var(--border-color);
+}
+
+[data-theme="light"] .feature-card:hover,
+[data-theme="light"] .community-card:hover,
+[data-theme="light"] .update-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-color);
+}
+
+[data-theme="light"] .btn {
+    box-shadow: var(--shadow-md);
+}
+
+[data-theme="light"] .btn:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+[data-theme="light"] .footer {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-top: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .patch-modal {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="light"] .patch-modal-content {
+    box-shadow: var(--shadow-lg);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
+    .page-controls {
+        top: 1rem;
+        right: 1rem;
+        gap: 0.5rem;
+    }
+
+    .page-controls .language-select {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+        min-height: 42px;
+    }
+
+    .page-controls .theme-toggle {
+        padding: 0.5rem;
+        min-width: 42px;
+        min-height: 42px;
+    }
+
     .landing-container {
         padding: 1rem;
     }

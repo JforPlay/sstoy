@@ -1,0 +1,162 @@
+{
+  "nav": {
+    "title": "SS Tools",
+    "home": "Home",
+    "builder": "Party Builder",
+    "characterdb": "Trekker DB",
+    "discdb": "Disc DB",
+    "resources": "Resource Calculator",
+    "tasks": "Task Helper",
+    "theme": "Toggle Theme",
+    "themeLight": "Light",
+    "themeDark": "Dark"
+  },
+  "common": {
+    "level": "Level",
+    "select": "Select",
+    "save": "Save",
+    "load": "Load",
+    "share": "Share",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "close": "Close",
+    "search": "Search",
+    "filter": "Filter",
+    "all": "All",
+    "reset": "Reset",
+    "apply": "Apply"
+  },
+  "characterdb": {
+    "title": "Trekker DB",
+    "selectCharacter": "View detailed character information, archives, and dating guides",
+    "characterInfo": "Trekker Info",
+    "potentials": "Trekker Potentials",
+    "potentialType": {
+      "main": "Main Potentials",
+      "assist": "Assist Potentials"
+    },
+    "potentialCategory": {
+      "specific": "Specific Potentials",
+      "normal": "Normal Potentials"
+    },
+    "levelControl": "Global Level",
+    "levelNote": "(Specific potentials max level 13)",
+    "stats": "Trekker Stats",
+    "archive": "Trekker Archive",
+    "dating": "Dating Guide",
+    "images": "Trekker Images",
+    "archiveStats": "Archive & Stats",
+    "limitbreak": "Limit Break",
+    "skills": "Skills Info",
+    "talents": "Breakthrough Info",
+    "skillLevel": "Skill Level",
+    "characterType": {
+      "normal": "Normal",
+      "awakened": "Awakened",
+      "skin": "Skin"
+    }
+  },
+  "discdb": {
+    "title": "Disc DB",
+    "selectDisc": "Select a disc",
+    "discInfo": "Disc Info",
+    "mainDisc": "Main Disc",
+    "subDisc": "Sub Disc",
+    "story": "Story",
+    "skills": "Skills"
+  },
+  "resources": {
+    "title": "Resource Calculator",
+    "characters": "Trekkers",
+    "discs": "Discs",
+    "materials": "Materials",
+    "stamina": "Stamina",
+    "days": "Days"
+  },
+  "tasks": {
+    "title": "Task Helper",
+    "selectTasks": "Select Tasks",
+    "assignTrekkers": "Assign Trekkers",
+    "requiredTags": "Required Tags",
+    "extraTags": "Extra Tags"
+  },
+  "builder": {
+    "title": "Stella Sora Build Helper",
+    "subtitle": "Create the best build",
+    "master": "Master",
+    "assist1": "Assist 1",
+    "assist2": "Assist 2",
+    "characters": "Trekkers",
+    "records": "Records",
+    "summary": "Summary",
+    "presets": "Preset Builds",
+    "buildNotes": "Build Notes"
+  },
+  "messages": {
+    "saved": "Saved successfully",
+    "loaded": "Loaded successfully",
+    "deleted": "Deleted successfully",
+    "copied": "Copied to clipboard",
+    "error": "An error occurred",
+    "noData": "No data available",
+    "loading": "Loading..."
+  },
+  "landing": {
+    "title": "Stella Sora Tools",
+    "tagline": "Language : limited support for UI text & full support for in-game text.",
+    "heroDesc1": "Create optimal Stella Sora builds quickly and easily!",
+    "heroDesc2": "Manage characters, potentials, and records all in one place.",
+    "btnCharDB": "Trekker DB",
+    "btnDiscDB": "Disc DB",
+    "btnBuilder": "Trekker Builder",
+    "btnTasks": "Task Helper",
+    "btnResources": "Resource Calculator",
+    "featuresTitle": "Key Features",
+    "featureCharDB": {
+      "title": "Trekker DB",
+      "desc": "View detailed character stats, archives, and dating guides at a glance."
+    },
+    "featureDiscDB": {
+      "title": "Disc DB",
+      "desc": "Check disc details, skill effects, sounds, and stories."
+    },
+    "featureBuilder": {
+      "title": "Build Helper",
+      "desc": "Create your own builds and view them at a glance with the summary feature. Share builds with other players using URL sharing."
+    },
+    "featureTasks": {
+      "title": "Task Helper",
+      "desc": "Assign optimal characters to level 70 missions and optimize tags."
+    },
+    "featureResources": {
+      "title": "Resource Calculator",
+      "desc": "Select characters/discs to upgrade and check required resources."
+    },
+    "linksTitle": "Other Links",
+    "linkGithub": {
+      "title": "GitHub Repo",
+      "desc": "Check out the source code here",
+      "action": "Visit Repository"
+    },
+    "linkFeedback": {
+      "title": "Bug Reports & Feedback",
+      "desc": "Found a bug or have suggestions? Leave your feedback here!",
+      "action": "Leave Feedback"
+    },
+    "linkPatchNotes": {
+      "title": "Patch Notes",
+      "desc": "Check recent updates and changes",
+      "action": "View Patch Notes"
+    },
+    "patchNotesModal": "Patch Notes",
+    "patchNotesLoading": "Loading...",
+    "disclaimerTitle": "Disclaimer",
+    "disclaimerText1": "This project (sstoy) is a non-profit fan-made tool for Stella Sora.",
+    "disclaimerText2": "All game assets, data, images, and text are property of Yostar Inc., and are used for non-commercial information and educational purposes only.",
+    "disclaimerText3": "This project is not affiliated with the official game developers or publishers, and may be discontinued at any time upon request from the copyright holder.",
+    "disclaimerCopyright": "© Yostar Inc. All rights reserved. Stella Sora and related trademarks are registered trademarks of Yostar Inc.",
+    "lastUpdated": "Last Updated: 2025.11.15",
+    "footerNote": "Hope you enjoy the tool :)"
+  }
+}

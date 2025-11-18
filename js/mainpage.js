@@ -1,5 +1,16 @@
 let patchNotesLoaded = false;
 
+// Initialize i18n and theme when page loads
+document.addEventListener('DOMContentLoaded', async () => {
+    // Initialize theme first
+    if (typeof window.initTheme === 'function') {
+        window.initTheme();
+    }
+
+    // Then initialize i18n
+    await window.i18n.init();
+});
+
 async function loadPatchNotes() {
     if (patchNotesLoaded) return;
 
