@@ -52,8 +52,8 @@
     {
       "id": "preset-build",
       "title": "(11/18) 플로라 평캔시아",
-      "description": "(종언용) 미네르바, 징린 대신 플로라를 쓰는 빌드입니다.",
-      "author": "플로라시아 (종언에선 미네대체, 평소 징린대체)",
+      "description": "종언에선 미네르바, 평소엔 징린 대신 플로라를 쓰는 빌드입니다.",
+      "author": "플로라시아 (링크 설명 읽어보기 권장)",
       "authorLink": "https://arca.live/b/stellasora/153639677",
       "element": "Light",
       "characterId": 155,
@@ -63,15 +63,15 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/15) 평캔 시아 + 코제트",
-      "description": "(종언용) 일섭랭커의 코제트를 쓰는 빌드입니다.",
-      "author": "종언 코제트시아덱",
+      "title": "(11/18) 코제트 평캔시아",
+      "description": "종언에선 미네르바, 평소엔 징린 대신 코제트를 쓰는 빌드입니다.",
+      "author": "코제트시아 (링크 설명 읽어보기 권장)",
       "authorLink": "https://arca.live/b/stellasora/153828865",
       "element": "Light",
       "characterId": 155,
       "tags": ["평타", "시아", "코제트"],
       "meta": true,
-      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokCrzgcCcB1LgO0OAioyiAMZSgC2lIAlpjAKxOkAOUA2k80wjMh4sEAJkG8EANnHCmMvgHZ5MAMzKRAXVRsANrSF9WkaSANSoJswouoDqiwF9tNSKDNGQgEVXAGEOkzkzB8-CWtoINteGBFMQFCuwAtVwBnO4JZ7aEATprTAV3HAAkGQBycQAEMYWgZoGAAWaO0uHiqRNTqREQrxeoAONubpJpUBJpEATi0QXX1K7ptTCZF2qd6S4wK2FzcZgLDfCI7Aren6wdjE4Kq+3byCwujXekYEaxrIbhh7kX6XhWbxV7keV86-p9Bt9PkpAX0QSJJCMxjdASIjJYPrN5sjDktnOMfucIq8NiB4klcaDMBkcsF-jjpq90SAybliWd0llcvl8kA"
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokCrzgcCcB1LgO0OAioyiAMZSgC2lIAlpjAKxOkAOUA2k80wjMh4sEAJkG8EANnHCmMvgHZ5MAMzKxQpgBYVAXVRsANrU0JWkaSFOSol0wtupNq2wF8DNSKFPmQgEVXADCHSa0xA4IkHaDCnXhgRTEBQrsALVcAZzvCWFyigmJYdTEARtcAcIcAQcZBXdxAAQxhaBmgYLXiDLh5GkTVWkREtcTaADl6u6U6VGH0QIxMGoccraZE+2ZGaiwq2T295myzw-tDsucbR-bKKyvivekYEB2bIbhgbkQEeJ41HhRE5V8+Bn5EAJziJ7DD4iJQ-UbjSaXf7mOxgxYWGJPAFuDxTJ6+aJzEGYQAnTfjAK7jgAJB8JPSIgZJpFG-E60wEE4lk2nHaBFUrlcpAA"
     },
     {
       "id": "preset-build",
