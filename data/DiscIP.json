@@ -823,6 +823,7 @@
     "VoBegin2": 6.545,
     "VoLoop2": 17.455,
     "VoName2": "DiscIP.214015.2",
+    "AvgId": "CG_disc4015",
     "StoryName": "DiscIP.214015.3",
     "StoryDesc": "DiscIP.214015.4",
     "CharId": [
@@ -853,6 +854,7 @@
     "VoBegin2": 8.727,
     "VoLoop2": 15.273,
     "VoName2": "DiscIP.214017.2",
+    "AvgId": "CG_disc4017",
     "StoryName": "DiscIP.214017.3",
     "StoryDesc": "DiscIP.214017.4",
     "CharId": [
@@ -1174,5 +1176,16 @@
     "VoName2": "DiscIP.214039.2",
     "StoryName": "DiscIP.214039.3",
     "StoryDesc": "DiscIP.214039.4"
+  },
+  "214040": {
+    "Id": 214040,
+    "VoFile": "outfit_4040",
+    "VoLoop1": 80.0,
+    "VoName1": "DiscIP.214040.1",
+    "VoBegin2": 16.0,
+    "VoLoop2": 15.0,
+    "VoName2": "DiscIP.214040.2",
+    "StoryName": "DiscIP.214040.3",
+    "StoryDesc": "DiscIP.214040.4"
   }
 }

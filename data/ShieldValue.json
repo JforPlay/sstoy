@@ -91,7 +91,7 @@
   },
   "4009020": {
     "Id": 4009020,
-    "Name": "???",
+    "Name": "风系旅人对决护盾",
     "ReferenceTarget": 2,
     "ReferenceAttrib": 4,
     "ReferenceScale": 1500,
@@ -101,7 +101,7 @@
   },
   "4010020": {
     "Id": 4010020,
-    "Name": "???",
+    "Name": "光系旅人对决护盾",
     "ReferenceTarget": 2,
     "ReferenceAttrib": 4,
     "ReferenceScale": 1500,
@@ -111,7 +111,7 @@
   },
   "4011020": {
     "Id": 4011020,
-    "Name": "???",
+    "Name": "水系旅人对决护盾",
     "ReferenceTarget": 2,
     "ReferenceAttrib": 4,
     "ReferenceScale": 1500,
@@ -121,7 +121,7 @@
   },
   "4012020": {
     "Id": 4012020,
-    "Name": "???",
+    "Name": "暗系旅人对决护盾",
     "ReferenceTarget": 2,
     "ReferenceAttrib": 4,
     "ReferenceScale": 1500,
@@ -131,7 +131,7 @@
   },
   "4013020": {
     "Id": 4013020,
-    "Name": "???",
+    "Name": "火系旅人对决护盾",
     "ReferenceTarget": 2,
     "ReferenceAttrib": 4,
     "ReferenceScale": 1500,
@@ -141,7 +141,7 @@
   },
   "4014020": {
     "Id": 4014020,
-    "Name": "???",
+    "Name": "地系旅人对决护盾",
     "ReferenceTarget": 2,
     "ReferenceAttrib": 4,
     "ReferenceScale": 1500,
@@ -181,7 +181,7 @@
   },
   "981041": {
     "Id": 981041,
-    "Name": "???",
+    "Name": "【命运卡981041】10%最大生命盾",
     "ReferenceTarget": 2,
     "ReferenceAttrib": 4,
     "ReferenceScale": 1000,
@@ -192,7 +192,7 @@
   },
   "981231": {
     "Id": 981231,
-    "Name": "???",
+    "Name": "【命运卡981231】10%最大生命盾",
     "ReferenceTarget": 2,
     "ReferenceAttrib": 4,
     "ReferenceScale": 2000,
@@ -202,7 +202,7 @@
   },
   "987631": {
     "Id": 987631,
-    "Name": "???",
+    "Name": "【命运卡987631】10%最大生命盾",
     "ReferenceTarget": 2,
     "ReferenceAttrib": 4,
     "ReferenceScale": 1000,
@@ -213,7 +213,7 @@
   },
   "988571": {
     "Id": 988571,
-    "Name": "???",
+    "Name": "【命运卡988571】10%最大生命盾",
     "ReferenceTarget": 2,
     "ReferenceAttrib": 4,
     "ReferenceScale": 1500,

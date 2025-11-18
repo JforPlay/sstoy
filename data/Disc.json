@@ -1682,32 +1682,6 @@
     "SecondarySkillGroupId2": 40162,
     "SubNoteSkillGroupId": 4016
   },
-  "214017": {
-    "Id": 214017,
-    "EET": 2,
-    "DiscBg": "Disc/4017/4017",
-    "StrengthenGroupId": 41,
-    "AttrBaseGroupId": 21001,
-    "AttrExtraGroupId": 301,
-    "PromoteGroupId": 402,
-    "TransformItemId": 224017,
-    "MaxStarTransformItem": [
-      24,
-      200
-    ],
-    "ReadReward": [
-      2,
-      30
-    ],
-    "AVGReadReward": [
-      2,
-      30
-    ],
-    "MainSkillGroupId": 4017,
-    "SecondarySkillGroupId1": 40171,
-    "SecondarySkillGroupId2": 40172,
-    "SubNoteSkillGroupId": 4017
-  },
   "214018": {
     "Id": 214018,
     "EET": 4,
@@ -2351,5 +2325,69 @@
     "SecondarySkillGroupId2": 40392,
     "SubNoteSkillGroupId": 4039,
     "SkillScript": "AIScript.Disc.Disc_214039"
+  },
+  "214017": {
+    "Id": 214017,
+    "EET": 2,
+    "Tags": [
+      807,
+      802,
+      803
+    ],
+    "Visible": true,
+    "Available": true,
+    "DiscBg": "Disc/4017/4017",
+    "StrengthenGroupId": 41,
+    "AttrBaseGroupId": 21071,
+    "AttrExtraGroupId": 301,
+    "PromoteGroupId": 402,
+    "TransformItemId": 224017,
+    "MaxStarTransformItem": [
+      24,
+      200
+    ],
+    "ReadReward": [
+      2,
+      30
+    ],
+    "AVGReadReward": [
+      2,
+      30
+    ],
+    "MainSkillGroupId": 4017,
+    "SecondarySkillGroupId1": 40171,
+    "SecondarySkillGroupId2": 40172,
+    "SubNoteSkillGroupId": 4017,
+    "SkillScript": "AIScript.Disc.Disc_214017"
+  },
+  "214040": {
+    "Id": 214040,
+    "EET": 2,
+    "Tags": [
+      804,
+      803,
+      818
+    ],
+    "Visible": true,
+    "Available": true,
+    "DiscBg": "Disc/4040/4040",
+    "StrengthenGroupId": 41,
+    "AttrBaseGroupId": 21101,
+    "AttrExtraGroupId": 301,
+    "PromoteGroupId": 403,
+    "TransformItemId": 224040,
+    "MaxStarTransformItem": [
+      24,
+      200
+    ],
+    "ReadReward": [
+      2,
+      30
+    ],
+    "MainSkillGroupId": 4040,
+    "SecondarySkillGroupId1": 40401,
+    "SecondarySkillGroupId2": 40402,
+    "SubNoteSkillGroupId": 4040,
+    "SkillScript": "AIScript.Disc.Disc_214040"
   }
 }

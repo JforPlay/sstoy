@@ -14,12 +14,13 @@
   "DiscTag.812.1": "Crit",
   "DiscTag.813.1": "Mark",
   "DiscTag.814.1": "Resilience Break",
-  "DiscTag.815.1": "Movement Speed",
+  "DiscTag.815.1": "Movement SPD",
   "DiscTag.816.1": "Healing",
   "DiscTag.817.1": "HP",
   "DiscTag.818.1": "DEF",
   "DiscTag.819.1": "DMG Boost",
   "DiscTag.820.1": "Pentration",
   "DiscTag.821.1": "DEF Reduction",
-  "DiscTag.822.1": "RES Reduction"
+  "DiscTag.822.1": "RES Reduction",
+  "DiscTag.823.1": "Crit DMG"
 }

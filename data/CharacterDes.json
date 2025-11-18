@@ -681,8 +681,8 @@
     "CharDes": "CharacterDes.133.3",
     "Tag": [
       102,
-      201,
-      301
+      202,
+      316
     ],
     "Force": 12,
     "PreferTags": [
@@ -713,8 +713,8 @@
     "CharDes": "CharacterDes.134.3",
     "Tag": [
       101,
-      204,
-      301
+      205,
+      316
     ],
     "Force": 12,
     "PreferTags": [
@@ -1120,7 +1120,7 @@
     "CharSkillColor": "#c5bbb5",
     "CharDes": "CharacterDes.158.3",
     "Tag": [
-      101,
+      102,
       203,
       315
     ],

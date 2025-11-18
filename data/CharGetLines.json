@@ -573,6 +573,34 @@
     "SkinId": 13203,
     "Lines": "CharGetLines.13205.1"
   },
+  "13301": {
+    "Id": 13301,
+    "Character": 133,
+    "Type": 1,
+    "voResource": "vo_133_ui_gachaNew_001",
+    "Lines": "CharGetLines.13301.1"
+  },
+  "13302": {
+    "Id": 13302,
+    "Character": 133,
+    "Type": 2,
+    "voResource": "vo_133_ui_gacha_001",
+    "Lines": "CharGetLines.13302.1"
+  },
+  "13303": {
+    "Id": 13303,
+    "Character": 133,
+    "Type": 3,
+    "voResource": "vo_133_ui_unlockLook_001",
+    "Lines": "CharGetLines.13303.1"
+  },
+  "13304": {
+    "Id": 13304,
+    "Character": 133,
+    "Type": 4,
+    "voResource": "vo_133_ui_unlockCG_001",
+    "Lines": "CharGetLines.13304.1"
+  },
   "13401": {
     "Id": 13401,
     "Character": 134,
