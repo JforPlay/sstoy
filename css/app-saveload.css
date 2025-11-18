@@ -112,49 +112,27 @@
     font-weight: 600;
 }
 
-/* Load Modal */
+/* Load Modal - specific styles and overrides only */
 #load-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     background: rgba(0, 0, 0, 0.85);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
     backdrop-filter: blur(8px);
-}
-
-#load-modal.active {
-    display: flex;
 }
 
 .load-modal-content {
     background: #1f2937;
-    border-radius: 1rem;
     width: 90%;
     max-width: 50rem;
     max-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     border: 2px solid #374151;
-    overflow: hidden;
 }
 
 .load-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 1.5rem;
     border-bottom: 2px solid #374151;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .load-modal-header h2 {
-    font-size: 1.5rem;
     color: white;
     margin: 0;
     font-weight: 700;
@@ -163,12 +141,8 @@
 .load-modal-close {
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.3);
-    font-size: 1.5rem;
     color: white;
-    cursor: pointer;
     padding: 0.25rem 0.75rem;
-    border-radius: 0.5rem;
-    transition: all 0.2s;
     font-weight: bold;
     line-height: 1;
 }

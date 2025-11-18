@@ -1398,6 +1398,7 @@ h1 {
     overflow-y: auto;
 }
 
+/* Character item extends card-base pattern (components/cards.css) */
 .character-item {
     background: var(--surface-light);
     padding: 1rem;
@@ -1410,6 +1411,7 @@ h1 {
 .character-item:hover {
     border-color: var(--primary-color);
     transform: translateY(-4px);
+    box-shadow: 0 0.5rem 1.5rem var(--shadow);
 }
 
 .character-item-header {
@@ -1456,25 +1458,6 @@ h1 {
     font-size: 0.85rem;
 }
 
-
-
-/* Scrollbar Styles */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--surface);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--surface-light);
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--border);
-}
 
 @media (max-width: 1200px) {
     .compact-tab-navigation {
@@ -1665,78 +1648,10 @@ h1 {
     gap: 1rem;
 }
 
-.search-container {
-    position: relative;
-    width: 100%;
-}
-
-.search-input {
-    width: 100%;
-    padding: 0.75rem 2.5rem 0.75rem 1rem;
-    background: var(--surface-light);
-    border: 2px solid var(--border);
-    border-radius: 0.5rem;
-    color: var(--text-primary);
-    font-size: 0.95rem;
-    font-family: inherit;
-    transition: all 0.3s ease;
-}
-
-.search-input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-}
-
-.search-input::placeholder {
-    color: var(--text-secondary);
-    opacity: 0.6;
-}
-
-.search-icon {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-secondary);
-    pointer-events: none;
-}
-
-.element-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-}
-
+/* Search and Filter Controls - extends components/filters.css */
+/* Element filter button icon sizes and whitespace (unique to this page) */
 .element-filter-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding: 0.5rem 0.875rem;
-    background: var(--surface-light);
-    border: 2px solid var(--border);
-    border-radius: 0.5rem;
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.2s ease;
     white-space: nowrap;
-}
-
-.element-filter-btn:hover {
-    background: var(--surface);
-    border-color: var(--primary-color);
-    color: var(--text-primary);
-    transform: translateY(-1px);
-}
-
-.element-filter-btn.active {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    border-color: var(--primary-color);
-    color: white;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .element-filter-btn .element-icon {
