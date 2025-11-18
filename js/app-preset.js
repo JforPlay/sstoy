@@ -281,6 +281,16 @@
         initPresetTab();
     }
 
+    // Listen for language changes
+    window.addEventListener('languageChanged', async (event) => {
+        console.log('[App-Preset] Language changed, re-rendering presets');
+        // Re-render presets if container exists and has been rendered
+        const presetContainer = document.getElementById('preset-container');
+        if (presetContainer && presetContainer.innerHTML) {
+            await renderPresets();
+        }
+    });
+
     // Export functions
     window.renderPresets = renderPresets;
 

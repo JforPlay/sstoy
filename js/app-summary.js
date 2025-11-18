@@ -1078,12 +1078,22 @@
         }
     }
     
+    // Listen for language changes
+    window.addEventListener('languageChanged', async (event) => {
+        console.log('[App-Summary] Language changed, re-rendering summary');
+        // Re-render summary if it's currently visible or has been rendered
+        const summaryContainer = document.getElementById('summary-container');
+        if (summaryContainer && summaryContainer.innerHTML) {
+            await renderSummary();
+        }
+    });
+
     // Make functions globally available
     window.renderSummary = renderSummary;
     window.updateSummary = updateSummary;
     window.saveBuildNotes = saveBuildNotes;
     window.cyclePotentialMark = cyclePotentialMark;
-    
+
     // Don't auto-render on page load - wait for tab switch
     // renderSummary will be called by switchMainTab() when user clicks summary tab
 })();

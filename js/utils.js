@@ -146,6 +146,11 @@ window.createIconElement = createIconElement;
 
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
+            // Don't close if clicking on language selector or theme toggle
+            if (e.target.closest('.language-select') || e.target.closest('.theme-toggle')) {
+                return;
+            }
+
             if (!hamburger.contains(e.target) && !menu.contains(e.target)) {
                 menu.classList.remove('open');
                 const icon = hamburger.querySelector('i');
@@ -181,6 +186,11 @@ window.createIconElement = createIconElement;
                 // Set active nav link after navbar is loaded
                 if (typeof window.setActiveNavLink === 'function') {
                     window.setActiveNavLink();
+                }
+
+                // Update language selector to match current i18n language
+                if (window.i18n && typeof window.i18n.updatePage === 'function') {
+                    window.i18n.updatePage();
                 }
 
                 // Initialize hamburger menu toggle
