@@ -47,19 +47,19 @@
       "characterId": 144,
       "tags": ["평타", "치토세", "안즈"],
       "meta": true,
-      "buildHash": "https://jforplay.github.io/sstoy/app.html#build=N4IgbiBcIIwHQAYQBoQDsokBpzgCxcByDgEqOARkyiAMZSgC2lIAlpjACxOkAOUA2gKzNMIxkvFggBMQvggDsEljADMspjEHD+ANiUJuAXVRsANrTXaomkCfVnUJqdYt8V9tQrMBffTUigT3TIFCuwAtVwBnO0ktMQBOmiMBXccACQbDJO2hAEVXADCGEuRhImPibR3lsuITublMU9LyShCty4tKkkDS6mFFC3IcS11q3DxAAQyzvekZRAv0uXlHRVRb5UXFJuc1F0RlFuYkpgE49EENjWdEa8xWkk9m5908DqZrGiocphqa87YCQhNHL2tf1I-fQr9VpgXo8-gAOEHpHqoPqtIYMaAtOzjSA8ZHTTZSUZY0RbXHcLHyRSTbHgokwXb7Iak0R+SDnVaiSEM17YrbOZHEq57Lw+GDSOlQhKCu5BQEOQUNKJFPKCln3EXstpK+SDEAy9q0+kanKfbFij5s5kq40cn6PKRq02W7nQTUgHo9IA"
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBpzgCxcByDgEqOARkyiAMZSgC2lIAlpjACxOkAOUA2gKzNMIxkvFggBMQvggDsEljADMspjEHD+ANiUJuAXVRsANrTXaomkCfVnUJqdYt8V9tQrMBffTUigT3TIFCuwAtVwBnO0ktMQBOmiMBXccACQbDJO2hAEVXADCGEuRhImPibR3lsuITublMU9LyShCty4tKkkDS6mFFC3IcS11q3DxAAQyzvekZRAv0uXlHRVRb5UXFJuc1F0RlFuYkpgE49EENjWdEa8xWkk9m5908DqZrGiocphqa87YCQhNHL2tf1I-fQr9VpgXo8-gAOEHpHqoPqtIYMaAtOzjSA8ZHTTZSUZY0RbXHcLHyRSTbHgokwXb7Iak0R+SDnVaiSEM17YrbOZHEq57Lw+GDSOlQhKCu5BQEOQUNKJFPKCln3EXstpK+SDEAy9q0+kanKfbFij5s5kq40cn6PKRq02W7nQTUgHo9IA"
     },
     {
       "id": "preset-build",
-      "title": "(11/14) 평캔 시아 + 플로라",
-      "description": "(종언용) 미네르바 말고 플로라를 쓰는 빌드입니다.",
-      "author": "종언 플로라시아덱",
+      "title": "(11/18) 플로라 평캔시아",
+      "description": "(종언용) 미네르바, 징린 대신 플로라를 쓰는 빌드입니다.",
+      "author": "플로라시아 (종언에선 미네대체, 평소 징린대체)",
       "authorLink": "https://arca.live/b/stellasora/153639677",
       "element": "Light",
       "characterId": 155,
       "tags": ["평타", "시아", "플로라"],
       "meta": true,
-      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokDCrgdDsD7tgO0OAioyiAMZSgC2lIAlpjAKxOkAOUA2k80wgEzIeLBDCG8EANnEiA7DL5MFMAMzL+AXVRsANrWGKo0kAalHUp2eZO9VRgL7aakUKdbRAIquAMIdKnJmb18JK08fC1t+TEATpqjAV3HAAkGgljtQkHtHEABDGFoGaBh+f20uHkL+NVLJfjFK-nlagA5xMsktEF19AqqQ40aHJ06WzEBQrsALVcAZzqCykJBA8LKGgJ901EzIl3pGBCtiyG4YberxQ8EeQ6Uz2X4my-4ATmOr+oPZFRqXwraOjdv3Xo+euFDotIP9DndrJc3v12s5XB93LMwjZDv5oGNJkCntE4oksdclkFwTiEkTXjloDFSel0kA"
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokDCrgdDsD7tgO0OAioyiAMZSgC2lIAlpjAKxOkAOUA2k80wgEzIeLBDCG8EANnEiA7DL5MFMAMzLBwpgBYVAXVRsANrU0JWkaSFOSol07NupNq2wF8DNSKFPmQgEVXADCHSa0xA4IkHaDCnXhh+TEBQrsALVcAZzvCWFyigmJYdTEARtcAcIcAQcZBXdxAAQxhaBmg4mwMuHn5JfjUWtrFO-nkegA5xVtb9ECMTBt7HK0n+tw8J4ZtoZLSY4cj-bJnhuayyisr4r3pGBAcmyG4Yc-5um9l+DQf+JR5bwffHgE5xW76XtIvioYKNxicvq9ppDInYXns4bdvtCHiD5mNPN4Xr5ojNbssQIATpsJgFdxwAEg+F-phieTKY89ls6fxkdAaRSYuc0dAiqVyuUgA"
     },
     {
       "id": "preset-build",
