@@ -25,6 +25,21 @@ const tasksState = {
     insightsPanelCollapsed: true
 };
 
+/**
+ * Debounce utility function for performance optimization
+ */
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 // Lookup Caches (Priority 2: Performance)
 const lookupCache = {
     taskTitles: new Map(),
@@ -194,7 +209,7 @@ function updateOwnershipCount() {
     const owned = tasksState.ownedCharacters.size;
     const countElement = document.getElementById('ownership-count');
     if (countElement) {
-        countElement.textContent = `소유: ${owned} / ${total}`;
+        countElement.textContent = `보유: ${owned} / ${total}`;
     }
 }
 
@@ -216,7 +231,8 @@ function closeOwnershipModal() {
         modal.style.display = 'none';
         // Re-render characters to show ownership changes
         renderCharacters();
-        renderInsights();
+        updateHeaderStats();
+        updateRecommendations();
     }
 }
 
@@ -238,7 +254,6 @@ function renderOwnershipGrid() {
             <div class="ownership-card ${isOwned ? 'owned' : ''}" data-ownership-char-id="${char.Id}">
                 <img src="${imagePath}" alt="${name}" class="ownership-card-image" onerror="this.style.display='none'">
                 <div class="ownership-card-name">${name}</div>
-                <div class="ownership-card-id">ID: ${char.Id}</div>
             </div>
         `;
     }).join('');
@@ -259,12 +274,18 @@ function setCharacterFilter(filter) {
 // Load all required data
 async function loadTasksData() {
     try {
+        // Get current language from i18n
+        const gameLang = window.i18n?.currentLang || 'KR';
+        const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
+
+        console.log(`[Tasks] Loading data for language: ${gameLang}`);
+
         const [agentData, agentKR, characterData, characterDesData, characterTagKR] = await Promise.all([
             fetch('data/Agent.json').then(r => r.json()),
-            fetch('data/kr/Agent.json').then(r => r.json()),
+            fetch(`${dataPath}/Agent.json`).then(r => r.json()),
             fetch('data/Character.json').then(r => r.json()),
             fetch('data/CharacterDes.json').then(r => r.json()),
-            fetch('data/kr/CharacterTag.json').then(r => r.json())
+            fetch(`${dataPath}/CharacterTag.json`).then(r => r.json())
         ]);
 
         // Filter tasks with Level 70
@@ -274,7 +295,7 @@ async function loadTasksData() {
 
         // Prepare character data
         tasksState.characters = Object.values(characterData);
-        tasksState.characterNames = await fetch('data/kr/Character.json').then(r => r.json());
+        tasksState.characterNames = await fetch(`${dataPath}/Character.json`).then(r => r.json());
         tasksState.characterTags = characterDesData;
 
         // Load ownership from localStorage
@@ -284,12 +305,191 @@ async function loadTasksData() {
         clearLookupCaches();
 
         renderTasks();
+        renderSelectedTasks();
         renderCharacters();
-        renderInsights();
+        updateHeaderStats();
+        updateTaskPoolCount();
+        updateRecommendations();
     } catch (error) {
         console.error('Error loading tasks data:', error);
         showError('데이터를 불러오는데 실패했습니다.');
     }
+}
+
+// Update header statistics
+function updateHeaderStats() {
+    // Update ownership count
+    const ownedCountElement = document.getElementById('header-owned-count');
+    if (ownedCountElement) {
+        const totalChars = tasksState.characters.filter(char => {
+            const name = getTranslatedCharacterName(char);
+            return name !== '???';
+        }).length;
+        const ownedChars = tasksState.ownedCharacters.size;
+        ownedCountElement.textContent = `보유: ${ownedChars}/${totalChars}`;
+    }
+
+    // Update completion count
+    const completionElement = document.getElementById('header-completion');
+    if (completionElement) {
+        let completedTasks = 0;
+        tasksState.selectedTasks.forEach(task => {
+            const tagCounts = getTagCounts(task);
+            const filledSlots = tasksState.filledTagSlots[task.Id] || {};
+            const allRequiredFilled = Object.entries(tagCounts.required).every(([tag, count]) => {
+                return (filledSlots[tag] || 0) >= count;
+            });
+            if (allRequiredFilled) completedTasks++;
+        });
+        completionElement.textContent = `완료: ${completedTasks}/${tasksState.selectedTasks.length}`;
+    }
+}
+
+// Update task pool count
+function updateTaskPoolCount() {
+    const countElement = document.getElementById('task-pool-count');
+    if (countElement) {
+        countElement.textContent = `${tasksState.allTasks.length}개`;
+    }
+}
+
+// Setup task search functionality
+function setupTaskSearch() {
+    const searchInput = document.getElementById('task-search');
+    if (!searchInput) return;
+
+    // Debounced search function (300ms delay to reduce DOM queries during typing)
+    const debouncedSearch = debounce((searchTerm) => {
+        const taskCards = document.querySelectorAll('.task-pool-list .task-card');
+
+        taskCards.forEach(card => {
+            const title = card.querySelector('.task-title')?.textContent.toLowerCase() || '';
+            const subtitle = card.querySelector('.task-subtitle')?.textContent.toLowerCase() || '';
+            const matches = title.includes(searchTerm) || subtitle.includes(searchTerm);
+            card.style.display = matches ? '' : 'none';
+        });
+    }, 300);
+
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase().trim();
+        debouncedSearch(searchTerm);
+    });
+}
+
+// Show modern confirmation modal
+let confirmCallback = null;
+
+function showConfirm(title, message, onConfirm) {
+    const modal = document.getElementById('confirm-modal');
+    const titleEl = document.getElementById('confirm-modal-title');
+    const messageEl = document.getElementById('confirm-modal-message');
+
+    if (!modal || !titleEl || !messageEl) return;
+
+    titleEl.textContent = title;
+    messageEl.textContent = message;
+    modal.style.display = 'flex';
+
+    // Store callback for button handlers
+    confirmCallback = onConfirm;
+}
+
+// Clear all character assignments (keep tasks)
+function clearAllAssignments() {
+    if (tasksState.selectedTasks.length === 0) return;
+
+    // Count assigned characters
+    const assignedCount = Object.values(tasksState.assignedCharacters)
+        .flat()
+        .filter(id => id).length;
+
+    if (assignedCount === 0) {
+        showWarning('배정된 캐릭터가 없습니다.');
+        return;
+    }
+
+    showConfirm(
+        '캐릭터 초기화',
+        '모든 캐릭터 배정을 제거하시겠습니까?\n(선택된 의뢰는 유지됩니다)',
+        () => {
+            // Clear only character assignments, keep tasks
+            tasksState.assignedCharacters = {};
+            tasksState.filledTagSlots = {};
+            tasksState.characterFilledTag = {};
+
+            // Re-initialize for existing tasks
+            tasksState.selectedTasks.forEach(task => {
+                tasksState.assignedCharacters[task.Id] = [];
+                tasksState.filledTagSlots[task.Id] = {};
+                tasksState.characterFilledTag[task.Id] = {};
+            });
+
+            renderSelectedTasks();
+            renderCharacters();
+            updateHeaderStats();
+            updateRecommendations();
+            showSuccess('모든 캐릭터 배정이 초기화되었습니다.');
+        }
+    );
+}
+
+// Update action buttons visibility (clear all + auto-fill)
+function updateClearAllButton() {
+    const clearBtn = document.getElementById('clear-all-btn');
+    const autoFillBtn = document.getElementById('auto-fill-btn');
+
+    const shouldShow = tasksState.selectedTasks.length > 0;
+
+    if (clearBtn) {
+        clearBtn.style.display = shouldShow ? '' : 'none';
+    }
+    if (autoFillBtn) {
+        autoFillBtn.style.display = shouldShow ? '' : 'none';
+    }
+}
+
+// Update recommendations section
+function updateRecommendations() {
+    const section = document.getElementById('recommendations-section');
+    const content = document.getElementById('recommendations-content');
+
+    if (!section || !content) return;
+
+    if (tasksState.selectedTasks.length === 0) {
+        section.style.display = 'none';
+        return;
+    }
+
+    const insights = calculateInsights();
+    if (!insights) {
+        section.style.display = 'none';
+        return;
+    }
+
+    const { acquisitionPriority } = insights;
+
+    if (acquisitionPriority.length === 0) {
+        section.style.display = 'none';
+        return;
+    }
+
+    section.style.display = 'block';
+
+    // Show top 5 recommendations for unowned characters
+    const topRecommendations = acquisitionPriority.slice(0, 5);
+    content.innerHTML = topRecommendations.map(priority => {
+        const char = priority.char;
+        const name = getTranslatedCharacterName(char);
+        const taskCount = priority.tasks.length;
+        const totalTags = priority.tasks.reduce((sum, t) => sum + t.canFillTagsCount, 0);
+
+        return `
+            <div class="recommendation-item">
+                <i class="fa-solid fa-star"></i>
+                <strong>${name}</strong>: ${taskCount}개 의뢰에 유용 (${totalTags}개 태그 충족)
+            </div>
+        `;
+    }).join('');
 }
 
 // Render tasks list
@@ -375,7 +575,9 @@ function toggleTaskSelection(taskId) {
     renderSelectedTasks();
     renderCharacters();
     updateTaskCounter();
-    renderInsights();
+    updateHeaderStats();
+    updateClearAllButton();
+    updateRecommendations();
 }
 
 // Render selected tasks
@@ -387,7 +589,7 @@ function renderSelectedTasks() {
             <div class="empty-state-tasks">
                 <div class="empty-state-icon">${getIcon('memo')}</div>
                 <div class="empty-state-text">선택된 과제가 없습니다</div>
-                <div class="empty-state-hint">위에서 과제를 선택해주세요</div>
+                <div class="empty-state-hint">옆에서 과제를 선택해주세요</div>
             </div>
         `;
         return;
@@ -431,11 +633,7 @@ function renderSelectedTasks() {
                         ×
                     </button>
                 </div>
-                
-                <div class="assigned-characters-portraits">
-                    ${renderAssignedCharacterPortraits(assignedChars)}
-                </div>
-                
+
                 <div class="assigned-characters" data-task-slots="${task.Id}">
                     ${renderCharacterSlots(task.Id, assignedChars)}
                 </div>
@@ -605,9 +803,8 @@ function renderCharacters() {
             <div class="character-card-small ${isOwned ? 'owned' : ''} ${isAssignedToActiveTask ? 'selected' : ''} ${isAssignedToOtherTask ? 'disabled' : ''} ${canFillRemainingSlots ? 'highlighted' : ''} ${cursorClass}" data-character-id="${char.Id}">
                 <img src="${imagePath}" alt="${name}" class="character-image-small" onerror="this.style.display='none'">
                 <div class="character-name-small">${name}</div>
-                <div class="character-id-small">ID: ${char.Id}</div>
                 <div class="character-tags-small">
-                    ${tags.map(tag => {
+                    ${tags.slice(0, 2).map(tag => {
                         const tagName = getTranslatedTagName(tag);
                         // Highlight tags that can fill remaining slots
                         let isMatching = false;
@@ -617,27 +814,6 @@ function renderCharacters() {
                         return `<span class="character-tag-badge ${isMatching ? 'matching' : ''}">${tagName}</span>`;
                     }).join('')}
                 </div>
-            </div>
-        `;
-    }).join('');
-}
-
-// Render assigned character portraits (small version in task card header area)
-function renderAssignedCharacterPortraits(assignedChars) {
-    if (!assignedChars || assignedChars.length === 0 || assignedChars.every(c => !c)) {
-        return '<div class="portraits-empty">할당된 캐릭터 없음</div>';
-    }
-    
-    return assignedChars.filter(c => c).map(charId => {
-        const char = tasksState.characters.find(c => c.Id === charId);
-        if (!char) return '';
-        
-        const name = getTranslatedCharacterName(char);
-        const imagePath = `assets/char/avg1_${char.Id}_002.png`;
-        
-        return `
-            <div class="assigned-portrait" title="${name}">
-                <img src="${imagePath}" alt="${name}" onerror="this.style.display='none'">
             </div>
         `;
     }).join('');
@@ -653,7 +829,6 @@ function selectTask(taskId) {
     }
     renderSelectedTasks();
     renderCharacters();
-    renderInsights();
 }
 
 // Render character slots for a task
@@ -676,14 +851,15 @@ function renderCharacterSlots(taskId, assignedChars) {
                     <div class="character-slot filled">
                         <button class="remove-character-btn" data-remove-char-task="${taskId}" data-remove-char-slot="${i}">×</button>
                         <img src="${imagePath}" alt="${name}" class="slot-image" onerror="this.style.display='none'">
-                        <div class="slot-name">${name}</div>
-                        <div class="slot-id">ID: ${char.Id}</div>
-                        <div class="character-slot-tags">
-                            ${charTags.map(tag => {
-                                const matches = taskTags.has(tag);
-                                const tagName = getTranslatedTagName(tag);
-                                return `<span class="slot-tag ${matches ? 'matches' : ''}">${tagName}</span>`;
-                            }).join('')}
+                        <div class="slot-info">
+                            <div class="slot-name">${name}</div>
+                            <div class="character-slot-tags">
+                                ${charTags.slice(0, 2).map(tag => {
+                                    const matches = taskTags.has(tag);
+                                    const tagName = getTranslatedTagName(tag);
+                                    return `<span class="slot-tag ${matches ? 'matches' : ''}">${tagName}</span>`;
+                                }).join('')}
+                            </div>
                         </div>
                     </div>
                 `);
@@ -793,7 +969,7 @@ function onCharacterClick(charId) {
     assignCharacterToSlot(tasksState.activeTaskId, slotIndex, charId);
 }
 
-// Assign character to slot (internal function)
+// Assign character to slot
 function assignCharacterToSlot(taskId, slotIndex, charId) {
     // Check if character is already assigned to this task
     const assignedChars = tasksState.assignedCharacters[taskId] || [];
@@ -868,7 +1044,8 @@ function assignCharacterToSlot(taskId, slotIndex, charId) {
 
     renderSelectedTasks();
     renderCharacters();
-    renderInsights();
+    updateHeaderStats();
+    updateRecommendations();
 }
 
 // Remove character from task
@@ -909,248 +1086,330 @@ function removeCharacterFromTask(taskId, slotIndex) {
     }
     renderSelectedTasks();
     renderCharacters();
-    renderInsights();
+    updateHeaderStats();
+    updateRecommendations();
 }
 
-// Insights Panel Functions
-function toggleInsightsPanel() {
-    const panel = document.getElementById('insights-panel');
-    if (panel) {
-        tasksState.insightsPanelCollapsed = !tasksState.insightsPanelCollapsed;
-        panel.classList.toggle('collapsed', tasksState.insightsPanelCollapsed);
+// ============================================================================
+// AUTO-FILL ALGORITHM
+// ============================================================================
+
+/**
+ * Auto-fill algorithm that assigns owned characters to selected tasks
+ * Priority:
+ * 1. Fill as many tasks completely (all required tags)
+ * 2. Try to fill extra tags (all-or-nothing - must fill ALL extra tags for bonus)
+ */
+function autoFillCharacters() {
+    if (tasksState.selectedTasks.length === 0) {
+        showWarning('먼저 의뢰를 선택해주세요.');
+        return;
     }
-}
 
-function initInsightsPanel() {
-    const panel = document.getElementById('insights-panel');
-    if (panel) {
-        // Start collapsed
-        panel.classList.add('collapsed');
-        tasksState.insightsPanelCollapsed = true;
+    if (tasksState.ownedCharacters.size === 0) {
+        showWarning('먼저 보유한 캐릭터를 설정해주세요.');
+        return;
     }
+
+    // Clear existing assignments
+    tasksState.assignedCharacters = {};
+    tasksState.filledTagSlots = {};
+    tasksState.characterFilledTag = {};
+
+    // Initialize for all tasks
+    tasksState.selectedTasks.forEach(task => {
+        tasksState.assignedCharacters[task.Id] = [];
+        tasksState.filledTagSlots[task.Id] = {};
+        tasksState.characterFilledTag[task.Id] = {};
+    });
+
+    // Get available owned characters
+    const availableChars = tasksState.characters.filter(char => {
+        const name = getTranslatedCharacterName(char);
+        return name !== '???' && tasksState.ownedCharacters.has(char.Id);
+    });
+
+    if (availableChars.length === 0) {
+        showWarning('사용 가능한 보유 캐릭터가 없습니다.');
+        return;
+    }
+
+    // Track which characters have been assigned
+    const assignedCharIds = new Set();
+
+    // Score and sort tasks by completability
+    const tasksWithScores = tasksState.selectedTasks.map(task => {
+        const score = scoreTaskCompletability(task, availableChars, assignedCharIds);
+        return { task, score };
+    });
+
+    // Sort by: completability score (desc), then extra tag potential (desc)
+    tasksWithScores.sort((a, b) => {
+        if (a.score.completable !== b.score.completable) {
+            return b.score.completable - a.score.completable;
+        }
+        return b.score.extraTagPotential - a.score.extraTagPotential;
+    });
+
+    // Assign characters to each task in priority order
+    let tasksCompleted = 0;
+    let extraTagsCompleted = 0;
+
+    tasksWithScores.forEach(({ task, score }) => {
+        const result = assignBestCharactersToTask(task, availableChars, assignedCharIds);
+
+        if (result.success) {
+            if (result.allRequiredFilled) tasksCompleted++;
+            if (result.allExtraFilled) extraTagsCompleted++;
+        }
+    });
+
+    // Re-render
+    renderSelectedTasks();
+    renderCharacters();
+    updateHeaderStats();
+    updateClearAllButton();
+    updateRecommendations();
+
+    // Show summary
+    const totalTasks = tasksState.selectedTasks.length;
+    const assignedCount = Array.from(assignedCharIds).length;
+
+    showSuccess(
+        `자동 배정 완료!\n` +
+        `- 완료된 의뢰: ${tasksCompleted}/${totalTasks}\n` +
+        `- 추가 태그 완료: ${extraTagsCompleted}/${totalTasks}\n` +
+        `- 배정된 캐릭터: ${assignedCount}명`
+    );
 }
 
+/**
+ * Score how completable a task is with available characters
+ */
+function scoreTaskCompletability(task, availableChars, assignedCharIds) {
+    const tagCounts = getTagCounts(task);
+    const requiredTags = task.Tags || [];
+    const extraTags = task.ExtraTags || [];
+
+    // Count how many characters can fill each required tag
+    const requiredTagFillability = {};
+    const extraTagFillability = {};
+
+    requiredTags.forEach(tag => {
+        requiredTagFillability[tag] = availableChars.filter(char => {
+            if (assignedCharIds.has(char.Id)) return false;
+            const charTags = getCharacterTags(char.Id);
+            return charTags.includes(tag);
+        }).length;
+    });
+
+    extraTags.forEach(tag => {
+        extraTagFillability[tag] = availableChars.filter(char => {
+            if (assignedCharIds.has(char.Id)) return false;
+            const charTags = getCharacterTags(char.Id);
+            return charTags.includes(tag);
+        }).length;
+    });
+
+    // Check if all required tags can be filled
+    const uniqueRequiredTags = [...new Set(requiredTags)];
+    const allRequiredFillable = uniqueRequiredTags.every(tag => {
+        const needed = tagCounts.required[tag] || 0;
+        const available = requiredTagFillability[tag] || 0;
+        return available >= needed;
+    });
+
+    // Calculate extra tag potential
+    const uniqueExtraTags = [...new Set(extraTags)];
+    const extraTagScore = uniqueExtraTags.reduce((sum, tag) => {
+        return sum + (extraTagFillability[tag] || 0);
+    }, 0);
+
+    return {
+        completable: allRequiredFillable ? 1 : 0,
+        extraTagPotential: extraTagScore,
+        requiredTagFillability,
+        extraTagFillability
+    };
+}
+
+/**
+ * Assign best characters to a task using greedy algorithm
+ */
+function assignBestCharactersToTask(task, availableChars, assignedCharIds) {
+    const taskId = task.Id;
+    const tagCounts = getTagCounts(task);
+    const requiredTagsSet = new Set(task.Tags || []);
+    const extraTagsSet = new Set(task.ExtraTags || []);
+    const allTagsSet = new Set([...requiredTagsSet, ...extraTagsSet]);
+
+    // Keep array versions for iteration where needed
+    const requiredTags = [...requiredTagsSet];
+    const extraTags = [...extraTagsSet];
+
+    // Track what needs to be filled
+    const neededTags = {};
+    requiredTags.forEach(tag => {
+        neededTags[tag] = tagCounts.required[tag] || 0;
+    });
+    extraTags.forEach(tag => {
+        neededTags[tag] = (neededTags[tag] || 0) + (tagCounts.extra[tag] || 0);
+    });
+
+    // Get available characters (not yet assigned)
+    const taskAvailableChars = availableChars.filter(char => !assignedCharIds.has(char.Id));
+
+    // Greedy selection: pick characters that fill the most needed tags
+    // STRICT PRIORITY: Fill ALL required tags first, then consider extra tags
+    const selectedChars = [];
+    const filledTags = {};
+
+    // Check if all required tags are filled
+    const allRequiredFilled = () => {
+        return requiredTags.every(tag => {
+            const needed = tagCounts.required[tag] || 0;
+            const filled = filledTags[tag] || 0;
+            return filled >= needed;
+        });
+    };
+
+    for (let i = 0; i < tasksState.maxCharactersPerTask; i++) {
+        if (taskAvailableChars.length === 0) break;
+
+        const requiredAreComplete = allRequiredFilled();
+
+        // Score each character by how many needed tags they can fill
+        const charScores = taskAvailableChars.map(char => {
+            const charTags = getCharacterTags(char.Id);
+            let score = 0;
+            let canFillRequiredTags = [];
+            let canFillExtraTags = [];
+
+            // First pass: identify which required tags this character can fill
+            charTags.forEach(charTag => {
+                if (requiredTagsSet.has(charTag)) {
+                    const currentFilled = filledTags[charTag] || 0;
+                    const requiredNeeded = tagCounts.required[charTag] || 0;
+                    if (currentFilled < requiredNeeded) {
+                        canFillRequiredTags.push(charTag);
+                    }
+                }
+            });
+
+            // Second pass: identify extra tags
+            charTags.forEach(charTag => {
+                if (extraTagsSet.has(charTag)) {
+                    const currentFilled = filledTags[charTag] || 0;
+                    const totalNeeded = neededTags[charTag] || 0;
+                    if (currentFilled < totalNeeded) {
+                        canFillExtraTags.push(charTag);
+                    }
+                }
+            });
+
+            // Calculate score:
+            // - Required tags: 100 points each (must fill these first)
+            // - Extra tags: 10 points each, but ONLY if:
+            //   1. Character can also fill required tags, OR
+            //   2. All required tags are already complete
+            score += canFillRequiredTags.length * 100;
+
+            // Only count extra tags in score if appropriate
+            const shouldCountExtraTags = canFillRequiredTags.length > 0 || requiredAreComplete;
+            if (shouldCountExtraTags) {
+                score += canFillExtraTags.length * 10;
+            }
+
+            // Only include extra tags in canFillTags if they should be counted
+            const canFillTags = shouldCountExtraTags
+                ? [...canFillRequiredTags, ...canFillExtraTags]
+                : canFillRequiredTags;
+
+            return { char, score, canFillTags, canFillRequiredTags, canFillExtraTags };
+        });
+
+        // Sort by score descending
+        charScores.sort((a, b) => b.score - a.score);
+
+        // If no character can fill any needed tags, stop
+        if (charScores[0].score === 0) break;
+
+        // If required tags are not complete yet, only accept characters that can fill required tags
+        if (!requiredAreComplete && charScores[0].canFillRequiredTags.length === 0) {
+            break; // Stop if no characters can fill required tags
+        }
+
+        // Select the best character
+        const selected = charScores[0];
+        selectedChars.push(selected.char);
+
+        // Update filled tags
+        selected.canFillTags.forEach(tag => {
+            filledTags[tag] = (filledTags[tag] || 0) + 1;
+        });
+
+        // Remove from available
+        const index = taskAvailableChars.indexOf(selected.char);
+        if (index > -1) taskAvailableChars.splice(index, 1);
+    }
+
+    // Final check if all required tags are filled
+    const finalRequiredFilled = requiredTags.every(tag => {
+        const needed = tagCounts.required[tag] || 0;
+        const filled = Math.min(filledTags[tag] || 0, needed);
+        return filled >= needed;
+    });
+
+    // Check if all extra tags are filled (all-or-nothing)
+    const allExtraFilled = extraTags.length > 0 && extraTags.every(tag => {
+        const requiredCount = tagCounts.required[tag] || 0;
+        const extraCount = tagCounts.extra[tag] || 0;
+        const totalNeeded = requiredCount + extraCount;
+        const filled = filledTags[tag] || 0;
+        return filled >= totalNeeded;
+    });
+
+    // Assign characters to the task
+    if (selectedChars.length > 0) {
+        selectedChars.forEach((char, slotIndex) => {
+            assignedCharIds.add(char.Id);
+            tasksState.assignedCharacters[taskId][slotIndex] = char.Id;
+
+            // Calculate which tags this character fills
+            const charTags = getCharacterTags(char.Id);
+            const filledTagsList = [];
+
+            charTags.forEach(charTag => {
+                if (allTagsSet.has(charTag)) {
+                    const currentFilled = tasksState.filledTagSlots[taskId][charTag] || 0;
+                    const totalNeeded = neededTags[charTag] || 0;
+
+                    if (currentFilled < totalNeeded) {
+                        tasksState.filledTagSlots[taskId][charTag] = currentFilled + 1;
+                        filledTagsList.push(charTag);
+                    }
+                }
+            });
+
+            tasksState.characterFilledTag[taskId][char.Id] = filledTagsList;
+        });
+    }
+
+    return {
+        success: selectedChars.length > 0,
+        allRequiredFilled: finalRequiredFilled,
+        allExtraFilled,
+        assignedCount: selectedChars.length
+    };
+}
+
+// Calculate acquisition priority (unowned characters worth getting)
 function calculateInsights() {
     if (tasksState.selectedTasks.length === 0) {
         return null;
     }
 
-    // 1. Completion Status
-    let totalRequiredTags = 0;
-    let totalFilledTags = 0;
-    let completedTasks = 0;
-
-    tasksState.selectedTasks.forEach(task => {
-        const tagCounts = getTagCounts(task);
-        const filledSlots = tasksState.filledTagSlots[task.Id] || {};
-
-        Object.entries(tagCounts.required).forEach(([tag, count]) => {
-            totalRequiredTags += count;
-            totalFilledTags += Math.min(filledSlots[tag] || 0, count);
-        });
-
-        // Check if all required tags are filled
-        const allRequiredFilled = Object.entries(tagCounts.required).every(([tag, count]) => {
-            return (filledSlots[tag] || 0) >= count;
-        });
-        if (allRequiredFilled) completedTasks++;
-    });
-
-    // 2. Missing Tag Fillers (owned characters that can fill gaps)
-    const missingTagFillers = [];
-    const allAssignedCharIds = new Set();
-    Object.values(tasksState.assignedCharacters).forEach(chars => {
-        chars.forEach(id => allAssignedCharIds.add(id));
-    });
-
-    // Build a map for each character: total tag satisfactions and unique tags
-    const characterFillScores = new Map();
-
-    const validCharacters = tasksState.characters.filter(char => {
-        const name = getTranslatedCharacterName(char);
-        return name !== '???' && tasksState.ownedCharacters.has(char.Id);
-    });
-
-    validCharacters.forEach(char => {
-        if (!allAssignedCharIds.has(char.Id)) {
-            const charTags = getCharacterTags(char.Id);
-            let totalTagSatisfactions = 0; // Count every tag match including duplicates
-            let extraTagSatisfactions = 0;
-            let uniqueTagsCount = 0;
-            const tasksMatched = [];
-            const uniqueTags = new Set();
-
-            tasksState.selectedTasks.forEach(task => {
-                const tagCounts = getTagCounts(task);
-                const filledSlots = tasksState.filledTagSlots[task.Id] || {};
-                const requiredTags = task.Tags || [];
-                const extraTags = task.ExtraTags || [];
-
-                const canFillRequired = [];
-                const canFillExtra = [];
-
-                // Check required tags
-                charTags.forEach(charTag => {
-                    const inRequired = requiredTags.filter(t => t === charTag).length;
-                    if (inRequired > 0) {
-                        const currentFilled = filledSlots[charTag] || 0;
-                        const totalRequired = tagCounts.required[charTag] || 0;
-                        if (currentFilled < totalRequired) {
-                            // Count each unfilled slot
-                            const unfilled = totalRequired - currentFilled;
-                            for (let i = 0; i < unfilled; i++) {
-                                canFillRequired.push(charTag);
-                                totalTagSatisfactions++;
-                            }
-                            uniqueTags.add(charTag);
-                        }
-                    }
-                });
-
-                // Check extra tags (higher priority)
-                charTags.forEach(charTag => {
-                    const inExtra = extraTags.filter(t => t === charTag).length;
-                    if (inExtra > 0) {
-                        const currentFilled = filledSlots[charTag] || 0;
-                        const totalRequired = (tagCounts.required[charTag] || 0);
-                        const totalExtra = (tagCounts.extra[charTag] || 0);
-                        const totalNeeded = totalRequired + totalExtra;
-                        if (currentFilled < totalNeeded) {
-                            // Count each unfilled extra slot
-                            const unfilled = totalNeeded - currentFilled;
-                            for (let i = 0; i < unfilled; i++) {
-                                canFillExtra.push(charTag);
-                                totalTagSatisfactions++;
-                                extraTagSatisfactions++;
-                            }
-                            uniqueTags.add(charTag);
-                        }
-                    }
-                });
-
-                if (canFillRequired.length > 0 || canFillExtra.length > 0) {
-                    tasksMatched.push({
-                        taskId: task.Id,
-                        task: task,
-                        requiredTags: canFillRequired,
-                        extraTags: canFillExtra
-                    });
-                }
-            });
-
-            uniqueTagsCount = uniqueTags.size;
-
-            if (totalTagSatisfactions > 0) {
-                characterFillScores.set(char.Id, {
-                    charId: char.Id,
-                    char: char,
-                    totalTagSatisfactions: totalTagSatisfactions,
-                    extraTagSatisfactions: extraTagSatisfactions,
-                    uniqueTagsCount: uniqueTagsCount,
-                    tasksMatched: tasksMatched
-                });
-            }
-        }
-    });
-
-    // Convert to array and sort by: extra tags first, then total satisfactions
-    characterFillScores.forEach(score => {
-        missingTagFillers.push(score);
-    });
-
-    missingTagFillers.sort((a, b) => {
-        // Prioritize extra tags
-        if (a.extraTagSatisfactions !== b.extraTagSatisfactions) {
-            return b.extraTagSatisfactions - a.extraTagSatisfactions;
-        }
-        // Then total satisfactions
-        return b.totalTagSatisfactions - a.totalTagSatisfactions;
-    });
-
-    // 3. MVP Characters (characters that can satisfy multiple tasks)
-    const mvpCharacters = [];
-    const mvpValidCharacters = tasksState.characters.filter(char => {
-        const name = getTranslatedCharacterName(char);
-        return name !== '???' && tasksState.ownedCharacters.has(char.Id);
-    });
-
-    mvpValidCharacters.forEach(char => {
-        if (!allAssignedCharIds.has(char.Id)) {
-            const charTags = getCharacterTags(char.Id);
-            let matchedTasksCount = 0;
-            let totalTagSatisfactions = 0;
-            let extraTagSatisfactions = 0;
-            const matchedTasks = [];
-            const uniqueTags = new Set();
-
-            tasksState.selectedTasks.forEach(task => {
-                const requiredTags = task.Tags || [];
-                const extraTags = task.ExtraTags || [];
-                let taskMatched = false;
-                let taskTagSatisfactions = 0;
-                let taskExtraTagSatisfactions = 0;
-
-                // Count required tags (all instances)
-                charTags.forEach(charTag => {
-                    const requiredMatches = requiredTags.filter(t => t === charTag).length;
-                    if (requiredMatches > 0) {
-                        taskTagSatisfactions += requiredMatches;
-                        totalTagSatisfactions += requiredMatches;
-                        taskMatched = true;
-                        uniqueTags.add(charTag);
-                    }
-                });
-
-                // Count extra tags (all instances, higher priority)
-                charTags.forEach(charTag => {
-                    const extraMatches = extraTags.filter(t => t === charTag).length;
-                    if (extraMatches > 0) {
-                        taskTagSatisfactions += extraMatches;
-                        taskExtraTagSatisfactions += extraMatches;
-                        totalTagSatisfactions += extraMatches;
-                        extraTagSatisfactions += extraMatches;
-                        taskMatched = true;
-                        uniqueTags.add(charTag);
-                    }
-                });
-
-                if (taskMatched) {
-                    matchedTasksCount++;
-                    matchedTasks.push({
-                        taskId: task.Id,
-                        task: task,
-                        tagSatisfactions: taskTagSatisfactions,
-                        extraTagSatisfactions: taskExtraTagSatisfactions
-                    });
-                }
-            });
-
-            if (matchedTasksCount >= 2) {
-                mvpCharacters.push({
-                    charId: char.Id,
-                    char: char,
-                    matchedTasksCount: matchedTasksCount,
-                    totalTagSatisfactions: totalTagSatisfactions,
-                    extraTagSatisfactions: extraTagSatisfactions,
-                    uniqueTagsCount: uniqueTags.size,
-                    tasks: matchedTasks
-                });
-            }
-        }
-    });
-
-    // Sort by: tasks matched first, then extra tags, then total satisfactions
-    mvpCharacters.sort((a, b) => {
-        if (a.matchedTasksCount !== b.matchedTasksCount) {
-            return b.matchedTasksCount - a.matchedTasksCount;
-        }
-        if (a.extraTagSatisfactions !== b.extraTagSatisfactions) {
-            return b.extraTagSatisfactions - a.extraTagSatisfactions;
-        }
-        return b.totalTagSatisfactions - a.totalTagSatisfactions;
-    });
-
-    // 4. Acquisition Priority (unowned characters that would be valuable)
+    // Calculate acquisition priority for unowned characters
     const acquisitionPriority = [];
     const unownedCharacters = tasksState.characters.filter(char => {
         const name = getTranslatedCharacterName(char);
@@ -1224,105 +1483,11 @@ function calculateInsights() {
     acquisitionPriority.sort((a, b) => b.valueScore - a.valueScore);
 
     return {
-        completionStatus: {
-            totalRequiredTags,
-            totalFilledTags,
-            completedTasks,
-            totalTasks: tasksState.selectedTasks.length,
-            completionPercentage: totalRequiredTags > 0 ? Math.round((totalFilledTags / totalRequiredTags) * 100) : 0
-        },
-        missingTagFillers: missingTagFillers.slice(0, 10),
-        mvpCharacters: mvpCharacters.slice(0, 10),
         acquisitionPriority: acquisitionPriority.slice(0, 10)
     };
 }
 
-function renderInsights() {
-    const container = document.getElementById('insights-body');
-    if (!container) return;
-
-    const insights = calculateInsights();
-
-    if (!insights || tasksState.selectedTasks.length === 0) {
-        container.innerHTML = `
-            <div class="insight-empty">
-                과제를 선택하면 인사이트가 표시됩니다.
-            </div>
-        `;
-        return;
-    }
-
-    const { completionStatus, missingTagFillers, mvpCharacters, acquisitionPriority } = insights;
-
-    container.innerHTML = `
-        <!-- Completion Status -->
-        <div class="insight-section">
-            <div class="insight-title">
-                <i class="fa-solid fa-chart-pie"></i> 완료 상태
-            </div>
-            <div class="completion-stats">
-                <div class="stat-card">
-                    <div class="stat-value">${completionStatus.completedTasks}/${completionStatus.totalTasks}</div>
-                    <div class="stat-label">완료된 과제</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">${completionStatus.totalFilledTags}/${completionStatus.totalRequiredTags}</div>
-                    <div class="stat-label">필수 태그</div>
-                </div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: ${completionStatus.completionPercentage}%"></div>
-            </div>
-        </div>
-
-        <!-- MVP Characters -->
-        <div class="insight-section">
-            <div class="insight-title">
-                <i class="fa-solid fa-star"></i> MVP 캐릭터
-            </div>
-            ${mvpCharacters.length > 0 ? mvpCharacters.map(mvp => {
-                const char = mvp.char;
-                const name = getTranslatedCharacterName(char);
-                const imagePath = `assets/char/avg1_${char.Id}_002.png`;
-                const detailText = mvp.extraTagSatisfactions > 0
-                    ? `추가 ${mvp.extraTagSatisfactions}개 / 총 ${mvp.totalTagSatisfactions}개 태그`
-                    : `${mvp.totalTagSatisfactions}개 태그 만족`;
-                return `
-                    <div class="insight-item">
-                        <img src="${imagePath}" alt="${name}" class="insight-item-image" onerror="this.style.display='none'">
-                        <div class="insight-item-info">
-                            <div class="insight-item-name">${name}</div>
-                            <div class="insight-item-detail">${detailText}</div>
-                        </div>
-                        <div class="insight-item-badge">${mvp.matchedTasksCount}개 과제</div>
-                    </div>
-                `;
-            }).join('') : '<div class="insight-empty">해당 캐릭터가 없습니다</div>'}
-        </div>
-
-        <!-- Acquisition Priority -->
-        <div class="insight-section">
-            <div class="insight-title">
-                <i class="fa-solid fa-shopping-cart"></i> 획득/육성 추천
-            </div>
-            ${acquisitionPriority.length > 0 ? acquisitionPriority.map(acq => {
-                const char = acq.char;
-                const name = getTranslatedCharacterName(char);
-                const imagePath = `assets/char/avg1_${char.Id}_002.png`;
-                return `
-                    <div class="insight-item">
-                        <img src="${imagePath}" alt="${name}" class="insight-item-image" onerror="this.style.display='none'">
-                        <div class="insight-item-info">
-                            <div class="insight-item-name">${name}</div>
-                            <div class="insight-item-detail">${acq.tasks.length}개 과제에 필요</div>
-                        </div>
-                        <div class="insight-item-badge">가치 ${acq.valueScore}</div>
-                    </div>
-                `;
-            }).join('') : '<div class="insight-empty">모든 태그가 채워졌습니다</div>'}
-        </div>
-    `;
-}
+// (Old renderInsights function removed - replaced with updateRecommendations)
 
 // Helper functions for notifications
 function showWarning(message) {
@@ -1489,17 +1654,104 @@ function setupEventDelegation() {
         });
     });
 
-    // Insights Panel Toggle
-    const insightsToggle = document.getElementById('insights-toggle');
-    if (insightsToggle) {
-        insightsToggle.addEventListener('click', toggleInsightsPanel);
+    // Clear All Button
+    const clearAllBtn = document.getElementById('clear-all-btn');
+    if (clearAllBtn) {
+        clearAllBtn.addEventListener('click', clearAllAssignments);
+    }
+
+    // Auto-Fill Button
+    const autoFillBtn = document.getElementById('auto-fill-btn');
+    if (autoFillBtn) {
+        autoFillBtn.addEventListener('click', autoFillCharacters);
+    }
+
+    // Confirmation Modal (set up once to avoid memory leaks)
+    const confirmModal = document.getElementById('confirm-modal');
+    const confirmModalConfirm = document.getElementById('confirm-modal-confirm');
+    const confirmModalCancel = document.getElementById('confirm-modal-cancel');
+
+    if (confirmModalConfirm) {
+        confirmModalConfirm.addEventListener('click', () => {
+            confirmModal.style.display = 'none';
+            if (confirmCallback) {
+                confirmCallback();
+                confirmCallback = null;
+            }
+        });
+    }
+
+    if (confirmModalCancel) {
+        confirmModalCancel.addEventListener('click', () => {
+            confirmModal.style.display = 'none';
+            confirmCallback = null;
+        });
+    }
+
+    // Close modal on backdrop click
+    if (confirmModal) {
+        confirmModal.addEventListener('click', (e) => {
+            if (e.target === confirmModal) {
+                confirmModal.style.display = 'none';
+                confirmCallback = null;
+            }
+        });
     }
 }
 
 // Initialize page
-document.addEventListener('DOMContentLoaded', () => {
-    loadTasksData();
+document.addEventListener('DOMContentLoaded', async () => {
+    // Initialize i18n first
+    await window.i18n.init();
+
+    // Listen for language changes
+    window.addEventListener('languageChanged', async (event) => {
+        console.log('[Tasks] Language changed, reloading data');
+        clearLookupCaches();  // Clear cached translations
+        await loadTasksData();
+        updateTaskCounter();
+    });
+
+    await loadTasksData();
     updateTaskCounter();
     setupEventDelegation();
-    initInsightsPanel();
+    setupTaskSearch();
+    setupKeyboardShortcuts();
 });
+
+// Keyboard shortcuts for accessibility
+function setupKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+        // Escape key - close modals
+        if (e.key === 'Escape') {
+            // Close ownership modal
+            const ownershipModal = document.getElementById('ownership-modal');
+            if (ownershipModal && ownershipModal.style.display === 'flex') {
+                ownershipModal.style.display = 'none';
+                return;
+            }
+
+            // Close confirmation modal
+            const confirmModal = document.getElementById('confirm-modal');
+            if (confirmModal && confirmModal.style.display === 'flex') {
+                confirmModal.style.display = 'none';
+                confirmCallback = null;
+                return;
+            }
+        }
+
+        // Enter key - confirm in confirmation modal
+        if (e.key === 'Enter') {
+            const confirmModal = document.getElementById('confirm-modal');
+            if (confirmModal && confirmModal.style.display === 'flex') {
+                confirmModal.style.display = 'none';
+                if (confirmCallback) {
+                    confirmCallback();
+                    confirmCallback = null;
+                }
+                e.preventDefault();
+                return;
+            }
+        }
+    });
+}
