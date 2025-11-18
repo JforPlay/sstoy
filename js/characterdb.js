@@ -74,7 +74,7 @@ const STAT_ICONS = {
 const MAIN_STATS = ['Atk', 'Hp', 'Def', 'HitRate', 'CritRate', 'CritPower', 'ToughnessDamageAdjust'];
 
 // Data version for cache invalidation
-const DATA_VERSION = '1.1.9'; // Fixed floating point display formatting
+const DATA_VERSION = '1.1.=10'; // update 11/18
 
 /**
  * Debounce utility function
@@ -1216,7 +1216,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         await loadData();
         // Re-render current character if any
         if (dbState.selectedCharacterId) {
-            renderCharacterInfo(dbState.selectedCharacterId, dbState.selectedCharacterType);
+            const charId = dbState.selectedCharacterId;
+            // Re-render all sections that are always visible
+            renderCharacterSelector(); // Update character names in selector
+            renderCharacterHeader(charId);
+            renderStats(charId, dbState.currentLevel, dbState.currentLimitBreak);
+            renderArchive(charId);
+            renderDating(charId);
+            renderPotentials(charId);
+            // Re-render tab-specific content (skills and talents)
+            renderSkills(charId);
+            renderTalents(charId);
+        } else {
+            // If no character selected, just update the selector
+            renderCharacterSelector();
         }
     });
 
