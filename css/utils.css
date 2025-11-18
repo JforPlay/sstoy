@@ -153,6 +153,7 @@
     color: var(--text-primary);
     font-size: 0.9rem;
     font-weight: 500;
+    height: 2.5rem;
 }
 
 .theme-toggle:hover {
@@ -174,35 +175,139 @@
     transform: rotate(20deg);
 }
 
+/* Language Selector */
+.language-select {
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    outline: none;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.language-select:hover {
+    background: var(--surface);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.language-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.language-select option {
+    background: var(--surface);
+    color: var(--text-primary);
+    padding: 0.5rem;
+}
+
+/* Hamburger Menu Button (Hidden on Desktop) */
+.navbar-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.navbar-hamburger:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.navbar-hamburger:active {
+    transform: scale(0.95);
+}
+
 /* Responsive Navbar */
 @media (max-width: 48rem) {
     .navbar {
-        padding: 0.625rem 1rem;
+        padding: 0.75rem 1rem;
+        position: relative;
     }
-    
+
     .navbar-title {
         font-size: 1rem;
     }
-    
+
+    /* Show hamburger button on mobile */
+    .navbar-hamburger {
+        display: block;
+        margin-left: auto;
+    }
+
+    /* Hide menu by default on mobile */
+    .navbar-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        border-bottom: 2px solid var(--border);
+        flex-direction: column;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: none;
+    }
+
+    /* Show menu when open */
+    .navbar-menu.open {
+        max-height: 500px;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+    /* Stack links vertically */
     .navbar-links {
-        gap: 0.75rem;
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
     }
-    
+
     .navbar-link {
-        padding: 0.375rem 0.75rem;
-        font-size: 0.85rem;
+        width: 100%;
+        padding: 1rem 1.5rem;
+        border-radius: 0;
+        border-bottom: 1px solid var(--border);
+        justify-content: flex-start;
     }
-    
+
+    .navbar-link:last-child {
+        border-bottom: none;
+    }
+
     .navbar-link-text {
-        display: none;
+        display: inline;
+        margin-left: 0.75rem;
     }
-    
-    .theme-toggle {
-        padding: 0.5rem 0.75rem;
+
+    .navbar-link-icon {
+        font-size: 1.2rem;
     }
-    
+
+    /* Theme and language controls in menu */
+    .theme-toggle,
+    .language-select {
+        width: 100%;
+        margin: 0.5rem 1rem;
+        width: calc(100% - 2rem);
+        justify-content: center;
+    }
+
     .theme-toggle-text {
-        display: none;
+        display: inline;
     }
 }
 
@@ -210,10 +315,33 @@
     .navbar-logo {
         font-size: 1.2rem;
     }
-    
-    .navbar-menu {
-        gap: 0.75rem;
-    }
+}
+
+/* ================================
+   Scrollbar Styles (Global)
+   ================================ */
+::-webkit-scrollbar {
+    width: 0.625rem;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--surface-light);
+    border-radius: 0.3125rem;
+    border: 1px solid var(--border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface-light) var(--surface);
 }
 
 /* ================================
