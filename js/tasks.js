@@ -1368,6 +1368,97 @@ function chooseBestTeams(taskInfos, taskTeams) {
     };
 }
 
+/**
+ * Assign best partial team for tasks that couldn't be fully completed.
+ * Only assigns characters if they can fill remaining required tag slots.
+ * Prioritizes rarest tags first.
+ */
+function assignBestPartialTeam(taskInfo, availableChars, tagRarity) {
+    const { requiredTags, tagCounts } = taskInfo;
+    const maxSize = tasksState.maxCharactersPerTask;
+
+    // Track how many slots filled for each tag
+    const filledSlots = {};
+    const selectedChars = [];
+
+    // Sort required tags by rarity (rarest first)
+    const sortedRequiredTags = requiredTags
+        .map(tag => ({ tag, rarity: tagRarity[tag]?.rarity || 0 }))
+        .sort((a, b) => b.rarity - a.rarity);
+
+    // Greedily assign characters, filling rarest tags first
+    for (const { tag } of sortedRequiredTags) {
+        const needed = tagCounts.required[tag] || 0;
+        const filled = filledSlots[tag] || 0;
+
+        // Fill this tag until we have enough or run out of characters
+        for (let i = filled; i < needed; i++) {
+            if (selectedChars.length >= maxSize) break;
+
+            // Find best available character that has this tag
+            const candidates = availableChars.filter(char => {
+                // Skip if already selected
+                if (selectedChars.some(sc => sc.Id === char.Id)) return false;
+
+                // Check if character has this tag
+                const charTags = getCharacterTags(char.Id);
+                return charTags.includes(tag);
+            });
+
+            if (candidates.length === 0) break; // No more characters for this tag
+
+            // Pick character that fills most OTHER unfilled required tags (greedy optimization)
+            const best = candidates.reduce((best, char) => {
+                const charTags = getCharacterTags(char.Id);
+                const bonusTags = charTags.filter(ct => {
+                    if (ct === tag) return false; // Don't count current tag
+                    if (!requiredTags.includes(ct)) return false;
+                    const needed = tagCounts.required[ct] || 0;
+                    const filled = filledSlots[ct] || 0;
+                    return filled < needed; // Only count if slot still needed
+                }).length;
+
+                const bestBonusTags = getCharacterTags(best.Id).filter(ct => {
+                    if (ct === tag) return false;
+                    if (!requiredTags.includes(ct)) return false;
+                    const needed = tagCounts.required[ct] || 0;
+                    const filled = filledSlots[ct] || 0;
+                    return filled < needed;
+                }).length;
+
+                return bonusTags > bestBonusTags ? char : best;
+            }, candidates[0]);
+
+            // Add this character
+            selectedChars.push(best);
+
+            // Update filled slots for all tags this character provides
+            const charTags = getCharacterTags(best.Id);
+            charTags.forEach(ct => {
+                if (requiredTags.includes(ct)) {
+                    const needed = tagCounts.required[ct] || 0;
+                    const filled = filledSlots[ct] || 0;
+                    if (filled < needed) {
+                        filledSlots[ct] = (filledSlots[ct] || 0) + 1;
+                    }
+                }
+            });
+        }
+    }
+
+    if (selectedChars.length === 0) return null;
+
+    // Return in team format compatible with applyAutoAssignmentForTask
+    return {
+        chars: selectedChars,
+        charIds: selectedChars.map(c => c.Id),
+        extrasFull: false,
+        extraSlotsCovered: 0,
+        size: selectedChars.length,
+        rarityBonus: 0
+    };
+}
+
 // Apply a chosen team for a single task (compatible with manual state)
 function applyAutoAssignmentForTask(taskInfo, team) {
     const { id: taskId, tagCounts, requiredTags, extraTags } = taskInfo;
@@ -1514,6 +1605,24 @@ function autoFillCharacters() {
         team.charIds.forEach(id => usedCharIds.add(id));
     });
 
+    // Fallback: Partially fill tasks that couldn't be completed
+    let partiallyFilledCount = 0;
+    result.assignment.forEach((team, idx) => {
+        if (team) return; // Skip tasks that were fully assigned
+
+        const taskInfo = taskInfos[idx];
+        const availableChars = allOwnedChars.filter(char => !usedCharIds.has(char.Id));
+
+        if (availableChars.length > 0) {
+            const partialTeam = assignBestPartialTeam(taskInfo, availableChars, tagRarity);
+            if (partialTeam && partialTeam.chars.length > 0) {
+                applyAutoAssignmentForTask(taskInfo, partialTeam);
+                partialTeam.charIds.forEach(id => usedCharIds.add(id));
+                partiallyFilledCount++;
+            }
+        }
+    });
+
     // Update UI
     renderSelectedTasks();
     renderCharacters();
@@ -1526,12 +1635,17 @@ function autoFillCharacters() {
     const tasksCompleted = result.tasksCompleted;
     const extraTasksCompleted = result.extrasFullTasks;
 
-    showSuccess(
-        `자동 배정 완료!\n` +
-        `- 필수 태그 완전 충족 의뢰: ${tasksCompleted}/${totalTasks}\n` +
-        `- 추가 태그 완전 충족 의뢰: ${extraTasksCompleted}/${totalTasks}\n` +
-        `- 배정된 캐릭터: ${assignedCount}명`
-    );
+    let message = '자동 배정 완료!\n';
+    message += `- 필수 태그 완전 충족 의뢰: ${tasksCompleted}/${totalTasks}\n`;
+    message += `- 추가 태그 완전 충족 의뢰: ${extraTasksCompleted}/${totalTasks}\n`;
+
+    if (partiallyFilledCount > 0) {
+        message += `- 부분 배정 의뢰: ${partiallyFilledCount}개 (필수 태그 미충족)\n`;
+    }
+
+    message += `- 배정된 캐릭터: ${assignedCount}명`;
+
+    showSuccess(message);
 }
 
 // Calculate acquisition priority (unowned characters worth getting)
