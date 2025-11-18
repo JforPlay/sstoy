@@ -3,7 +3,7 @@
   "presets": [
     {
       "id": "preset-build",
-      "title": "(11/16) 등사 평캔 치토세",
+      "title": "(11/16) 등사평캔 치토세",
       "description": "최신판 평캔 치토세 빌드입니다.",
       "author": "속성별 메타 빌드 모음",
       "authorLink": "https://arca.live/b/stellasora/153956280",
@@ -39,15 +39,15 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/13, 대체) 등사 평캔 치토세",
-      "description": "(종언용) 프리지아-->안즈 대체 빌드입니다.",
+      "title": "(11/18) 안즈 채용 등사평캔 치토세",
+      "description": "프리지아-->안즈 대체 빌드입니다.",
       "author": "프없찐들을 위한 종언 치토세안즈덱",
       "authorLink": "https://arca.live/b/stellasora/153681506",
       "element": "Water",
       "characterId": 144,
       "tags": ["평타", "치토세", "안즈"],
       "meta": true,
-      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBpzgCxcByDgEqOARkyiAMZSgC2lIAlpjACxOkAOUA2gKzNMIxkvFggBMQvggDsEljEHCmMAMyz+3NQgBsAXVRsANrUUJuULahNbzlyVJshF8h0+XmAvvpqRQJs9EATpoDAV3HAAkHSK0wgsIi7TEARVcAMIdi5GATk2zk3aCTY7m5TdLyC6xyMxxh86SLbfJhRKJDw2t5skFz3TxAAQzSfekZRN30uXiHRBXrlUXEx6Ys50Rk56YlxgE49EENjKdFSiwrx+0hDlYbTrrZvXz3S9vLFk4fYjcxAUK7AC1XAGc7X5WmakctPsPj9XsDnrlbPtRAAOIqdVDdC6gBjQer2EaQHgYiZrKRDfGidZEjRjKT-Imw-HKSZLfZbHb9cmifxnXHw07QgnrFwY-4eLy7aSswG8EX3L6-Wwi57RZoVEWcl4ynmNGKq2nqhUs-wqo4EyVg7lw7WvNVlc1awJNK1tDqddxAA"
+      "buildHash": "https://jforplay.github.io/sstoy/app.html#build=N4IgbiBcIIwHQAYQBoQDsokBpzgCxcByDgEqOARkyiAMZSgC2lIAlpjACxOkAOUA2gKzNMIxkvFggBMQvggDsEljADMspjEHD+ANiUJuAXVRsANrTXaomkCfVnUJqdYt8V9tQrMBffTUigT3TIFCuwAtVwBnO0ktMQBOmiMBXccACQbDJO2hAEVXADCGEuRhImPibR3lsuITublMU9LyShCty4tKkkDS6mFFC3IcS11q3DxAAQyzvekZRAv0uXlHRVRb5UXFJuc1F0RlFuYkpgE49EENjWdEa8xWkk9m5908DqZrGiocphqa87YCQhNHL2tf1I-fQr9VpgXo8-gAOEHpHqoPqtIYMaAtOzjSA8ZHTTZSUZY0RbXHcLHyRSTbHgokwXb7Iak0R+SDnVaiSEM17YrbOZHEq57Lw+GDSOlQhKCu5BQEOQUNKJFPKCln3EXstpK+SDEAy9q0+kanKfbFij5s5kq40cn6PKRq02W7nQTUgHo9IA"
     },
     {
       "id": "preset-build",
