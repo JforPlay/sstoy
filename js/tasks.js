@@ -247,7 +247,8 @@ function renderOwnershipGrid() {
 
     container.innerHTML = validCharacters.map(char => {
         const name = getTranslatedCharacterName(char);
-        const imagePath = `assets/char/avg1_${char.Id}_002.png`;
+        const charIdStr = String(char.Id);
+        const imagePath = `assets/char/avg1_${charIdStr}_002.png`;
         const isOwned = tasksState.ownedCharacters.has(char.Id);
 
         return `
@@ -293,8 +294,9 @@ async function loadTasksData() {
         tasksState.taskStrings = agentKR;
         tasksState.tagStrings = characterTagKR;
 
-        // Prepare character data
-        tasksState.characters = Object.values(characterData);
+        // Prepare character data - filter only visible and available characters
+        tasksState.characters = Object.values(characterData)
+            .filter(char => char.Visible && char.Available);
         tasksState.characterNames = await fetch(`${dataPath}/Character.json`).then(r => r.json());
         tasksState.characterTags = characterDesData;
 
@@ -755,44 +757,55 @@ function renderCharacters() {
         return;
     }
 
+    // Pre-calculate values that are same for all characters (PERFORMANCE OPTIMIZATION)
+    const activeTaskChars = tasksState.activeTaskId
+        ? (tasksState.assignedCharacters[tasksState.activeTaskId] || [])
+        : [];
+
+    const activeTask = tasksState.activeTaskId
+        ? tasksState.selectedTasks.find(t => t.Id === tasksState.activeTaskId)
+        : null;
+
+    const activeTaskData = activeTask ? {
+        allTaskTags: [...(activeTask.Tags || []), ...(activeTask.ExtraTags || [])],
+        filledSlots: tasksState.filledTagSlots[tasksState.activeTaskId] || {},
+        tagCounts: getTagCounts(activeTask)
+    } : null;
+
+    // Pre-calculate which characters are assigned to other tasks
+    const charsAssignedToOtherTasks = new Set();
+    Object.entries(tasksState.assignedCharacters).forEach(([taskId, chars]) => {
+        if (!tasksState.activeTaskId || parseInt(taskId) !== tasksState.activeTaskId) {
+            chars.forEach(charId => charsAssignedToOtherTasks.add(charId));
+        }
+    });
+
     container.innerHTML = validCharacters.map(char => {
         const name = getTranslatedCharacterName(char);
         const tags = getCharacterTags(char.Id);
-        const imagePath = `assets/char/avg1_${char.Id}_002.png`;
+        const charIdStr = String(char.Id);
+        const imagePath = `assets/char/avg1_${charIdStr}_002.png`;
         const isOwned = tasksState.ownedCharacters.has(char.Id);
 
         // Check if character is assigned to the active task
-        let isAssignedToActiveTask = false;
-        if (tasksState.activeTaskId) {
-            const activeTaskChars = tasksState.assignedCharacters[tasksState.activeTaskId] || [];
-            isAssignedToActiveTask = activeTaskChars.includes(char.Id);
-        }
+        const isAssignedToActiveTask = activeTaskChars.includes(char.Id);
 
-        // Check if character is assigned to any other task
-        const isAssignedToOtherTask = Object.entries(tasksState.assignedCharacters).some(([taskId, chars]) => {
-            return (!tasksState.activeTaskId || parseInt(taskId) !== tasksState.activeTaskId) && chars.includes(char.Id);
-        });
+        // Check if character is assigned to any other task (now O(1) lookup)
+        const isAssignedToOtherTask = charsAssignedToOtherTasks.has(char.Id);
 
         // Check if character can fill remaining slots in active task
         let canFillRemainingSlots = false;
 
-        if (tasksState.activeTaskId && !isAssignedToActiveTask) {
-            const activeTask = tasksState.selectedTasks.find(t => t.Id === tasksState.activeTaskId);
-            if (activeTask) {
-                const allTaskTags = [...(activeTask.Tags || []), ...(activeTask.ExtraTags || [])];
-                const filledSlots = tasksState.filledTagSlots[tasksState.activeTaskId] || {};
-                const tagCounts = getTagCounts(activeTask);
-
-                // Check if character can fill any remaining unfilled slots
-                canFillRemainingSlots = tags.some(charTag => {
-                    if (allTaskTags.includes(charTag)) {
-                        const currentFilled = filledSlots[charTag] || 0;
-                        const totalRequired = (tagCounts.required[charTag] || 0) + (tagCounts.extra[charTag] || 0);
-                        return currentFilled < totalRequired;
-                    }
-                    return false;
-                });
-            }
+        if (activeTaskData && !isAssignedToActiveTask) {
+            // Check if character can fill any remaining unfilled slots
+            canFillRemainingSlots = tags.some(charTag => {
+                if (activeTaskData.allTaskTags.includes(charTag)) {
+                    const currentFilled = activeTaskData.filledSlots[charTag] || 0;
+                    const totalRequired = (activeTaskData.tagCounts.required[charTag] || 0) + (activeTaskData.tagCounts.extra[charTag] || 0);
+                    return currentFilled < totalRequired;
+                }
+                return false;
+            });
         }
 
         // Determine if card should be clickable
@@ -840,7 +853,8 @@ function renderCharacterSlots(taskId, assignedChars) {
             const char = tasksState.characters.find(c => c.Id === charId);
             if (char) {
                 const name = getTranslatedCharacterName(char);
-                const imagePath = `assets/char/avg1_${char.Id}_002.png`;
+                const charIdStr = String(char.Id);
+                const imagePath = `assets/char/avg1_${charIdStr}_002.png`;
                 const charTags = getCharacterTags(char.Id);
                 
                 // Get task tags for matching
@@ -1091,40 +1105,31 @@ function removeCharacterFromTask(taskId, slotIndex) {
 }
 
 // ============================================================================
-// AUTO-FILL ALGORITHM
+// AUTO-FILL ALGORITHM (global optimizer, 4 tasks x 3 chars)
 // ============================================================================
 
 /**
- * Calculate tag rarity across all selected tasks
- * Returns a map of tag -> rarity score (lower = rarer, higher priority)
- * @param {Array} tasks - Selected tasks
- * @param {Array} availableChars - Available characters
- * @returns {Object} Map of tag to { count, rarity }
+ * Calculate tag rarity across all selected tasks.
+ * Rarer tags (fewer characters can cover them) get higher rarity scores.
  */
 function calculateTagRarity(tasks, availableChars) {
     const tagRarity = {};
 
-    // Collect all tags (required + extra) from all tasks
     const allTags = new Set();
     tasks.forEach(task => {
         (task.Tags || []).forEach(tag => allTags.add(tag));
         (task.ExtraTags || []).forEach(tag => allTags.add(tag));
     });
 
-    // For each tag, count how many characters can fill it
     allTags.forEach(tag => {
         const charCount = availableChars.filter(char => {
             const charTags = getCharacterTags(char.Id);
             return charTags.includes(tag);
         }).length;
 
-        // Rarity score: lower count = higher rarity (inverse)
-        // Use 1000 / (count + 1) to avoid division by zero
-        // Rare tags (1-2 chars) get high scores (500-1000)
-        // Common tags (10+ chars) get low scores (< 100)
         tagRarity[tag] = {
             count: charCount,
-            rarity: charCount > 0 ? 1000 / charCount : 0
+            rarity: charCount > 0 ? 1 / charCount : 0
         };
     });
 
@@ -1132,11 +1137,328 @@ function calculateTagRarity(tasks, availableChars) {
 }
 
 /**
- * Auto-fill algorithm that assigns owned characters to selected tasks
- * Priority:
- * 1. Fill rare tags first (tags that few characters can satisfy)
- * 2. Fill as many tasks completely (all required tags)
- * 3. Try to fill extra tags (all-or-nothing - must fill ALL extra tags for bonus)
+ * Pre-computed info for a task used by the optimizer.
+ */
+function buildTaskInfo(task) {
+    const tagCounts = getTagCounts(task);
+    // Convert string keys back to numbers to match character tag format
+    const requiredTags = Object.keys(tagCounts.required).map(k => parseInt(k, 10));
+    const extraTags = Object.keys(tagCounts.extra).map(k => parseInt(k, 10));
+    const allTags = Array.from(new Set([...requiredTags, ...extraTags]));
+
+    return {
+        task,
+        id: task.Id,
+        tagCounts,
+        requiredTags,
+        extraTags,
+        allTags
+    };
+}
+
+/**
+ * For a single task, enumerate candidate teams (1~maxCharactersPerTask)
+ * of characters that can:
+ *  - fully satisfy all required tags
+ *  - possibly satisfy all extra tags (extrasFull flag)
+ */
+// Enumerate good teams (1..maxCharactersPerTask) for a single task
+function generateTaskTeams(taskInfo, availableChars, tagRarity) {
+    const maxTeamSize = tasksState.maxCharactersPerTask;
+    const { task, requiredTags, extraTags, tagCounts } = taskInfo;
+    const allTags = [...new Set([...requiredTags, ...extraTags])];
+
+    // Only characters that can help this task at all
+    const scoredChars = availableChars
+        .map(char => {
+            const charTags = getCharacterTags(char.Id);
+            const hits = charTags.filter(t => allTags.includes(t));
+            if (hits.length === 0) return null;
+
+            // score: more task tags + rarer tags
+            const score = hits.reduce((s, tag) => {
+                const rarity = tagRarity[tag]?.rarity || 0;
+                return s + 1 + rarity;
+            }, 0);
+
+            return { char, score };
+        })
+        .filter(x => x !== null)
+        .sort((a, b) => b.score - a.score);
+
+    // Limit to top N to keep combinations manageable
+    const MAX_POOL = 12;
+    const relevantChars = scoredChars.slice(0, MAX_POOL).map(x => x.char);
+    const n = relevantChars.length;
+    if (n === 0) {
+        return [];
+    }
+
+    const teams = [];
+    const idxs = [];
+
+    function evaluateTeam(indexes) {
+        const team = indexes.map(i => relevantChars[i]);
+        const coverage = {};
+        const extraCoverage = {};
+
+        team.forEach(char => {
+            const charTags = getCharacterTags(char.Id);
+            charTags.forEach(tag => {
+                if (!allTags.includes(tag)) return;
+
+                const reqNeeded = tagCounts.required[tag] || 0;
+                const extraNeeded = tagCounts.extra[tag] || 0;
+
+                if (reqNeeded > 0) {
+                    coverage[tag] = (coverage[tag] || 0) + 1;
+                } else if (extraNeeded > 0) {
+                    extraCoverage[tag] = (extraCoverage[tag] || 0) + 1;
+                }
+            });
+        });
+
+        // Must fully cover all required tags
+        for (const tag of requiredTags) {
+            const needed = tagCounts.required[tag] || 0;
+            const have = coverage[tag] || 0;
+            if (have < needed) {
+                // Team rejected: can't cover required tag
+                return null;
+            }
+        }
+
+        // Check extras (all-or-nothing per tag)
+        let extrasFull = true;
+        let extraSlotsCovered = 0;
+
+        for (const tag of extraTags) {
+            const extraNeeded = tagCounts.extra[tag] || 0;
+            if (!extraNeeded) continue;
+
+            const reqNeeded = tagCounts.required[tag] || 0;
+            const totalNeeded = reqNeeded + extraNeeded;
+            const have = (coverage[tag] || 0) + (extraCoverage[tag] || 0);
+
+            if (have >= totalNeeded) {
+                extraSlotsCovered += extraNeeded;
+            } else {
+                extrasFull = false;
+            }
+        }
+
+        // Rarity bonus: rarer required tags covered by this team
+        const rarityBonus = requiredTags.reduce((sum, tag) => {
+            const rarity = tagRarity[tag]?.rarity || 0;
+            return sum + rarity * (tagCounts.required[tag] || 0);
+        }, 0);
+
+        return {
+            chars: team,
+            charIds: team.map(c => c.Id),
+            extrasFull,
+            extraSlotsCovered,
+            size: team.length,
+            rarityBonus
+        };
+    }
+
+    function dfs(start, left, k) {
+        if (left === 0) {
+            const team = evaluateTeam(idxs);
+            if (team) teams.push(team);
+            return;
+        }
+        for (let i = start; i <= n - left; i++) {
+            idxs.push(i);
+            dfs(i + 1, left - 1, k);
+            idxs.pop();
+        }
+    }
+
+    const limitSize = Math.min(maxTeamSize, n);
+    for (let size = 1; size <= limitSize; size++) {
+        dfs(0, size, size);
+    }
+
+    // best teams first
+    teams.sort((a, b) => {
+        if (a.extrasFull !== b.extrasFull) return (b.extrasFull ? 1 : 0) - (a.extrasFull ? 1 : 0);
+        if (a.extraSlotsCovered !== b.extraSlotsCovered) return b.extraSlotsCovered - a.extraSlotsCovered;
+        if (a.rarityBonus !== b.rarityBonus) return b.rarityBonus - a.rarityBonus;
+        return a.size - b.size; // prefer smaller teams
+    });
+
+    const MAX_TEAMS_PER_TASK = 40;
+    return teams.slice(0, MAX_TEAMS_PER_TASK);
+}
+
+// Global search over tasks -> team choices
+function chooseBestTeams(taskInfos, taskTeams) {
+    const taskCount = taskInfos.length;
+    const usedCharIds = new Set();
+
+    let bestAssignment = new Array(taskCount).fill(null);
+    let bestTasksCompleted = -1;
+    let bestExtrasFullTasks = -1;
+    let bestTotalExtraSlots = -1;
+
+    function dfs(idx, currentAssignment, tasksCompleted, extrasFullTasks, totalExtraSlots) {
+        if (idx === taskCount) {
+            if (
+                tasksCompleted > bestTasksCompleted ||
+                (
+                    tasksCompleted === bestTasksCompleted &&
+                    (
+                        extrasFullTasks > bestExtrasFullTasks ||
+                        (
+                            extrasFullTasks === bestExtrasFullTasks &&
+                            totalExtraSlots > bestTotalExtraSlots
+                        )
+                    )
+                )
+            ) {
+                bestAssignment = currentAssignment.slice();
+                bestTasksCompleted = tasksCompleted;
+                bestExtrasFullTasks = extrasFullTasks;
+                bestTotalExtraSlots = totalExtraSlots;
+            }
+            return;
+        }
+
+        const teams = taskTeams[idx] || [];
+
+        // Option 1: skip this task
+        currentAssignment[idx] = null;
+        dfs(idx + 1, currentAssignment, tasksCompleted, extrasFullTasks, totalExtraSlots);
+
+        // Option 2: assign one team
+        for (const team of teams) {
+            let conflict = false;
+            for (const id of team.charIds) {
+                if (usedCharIds.has(id)) {
+                    conflict = true;
+                    break;
+                }
+            }
+            if (conflict) continue;
+
+            team.charIds.forEach(id => usedCharIds.add(id));
+            currentAssignment[idx] = team;
+
+            dfs(
+                idx + 1,
+                currentAssignment,
+                tasksCompleted + 1,
+                extrasFullTasks + (team.extrasFull ? 1 : 0),
+                totalExtraSlots + team.extraSlotsCovered
+            );
+
+            team.charIds.forEach(id => usedCharIds.delete(id));
+        }
+    }
+
+    dfs(0, new Array(taskCount).fill(null), 0, 0, 0);
+
+    return {
+        assignment: bestAssignment,
+        tasksCompleted: Math.max(0, bestTasksCompleted),
+        extrasFullTasks: Math.max(0, bestExtrasFullTasks),
+        totalExtraSlots: Math.max(0, bestTotalExtraSlots)
+    };
+}
+
+// Apply a chosen team for a single task (compatible with manual state)
+function applyAutoAssignmentForTask(taskInfo, team) {
+    const { id: taskId, tagCounts, requiredTags, extraTags } = taskInfo;
+
+    if (!tasksState.assignedCharacters[taskId]) {
+        tasksState.assignedCharacters[taskId] = [];
+    }
+    if (!tasksState.filledTagSlots[taskId]) {
+        tasksState.filledTagSlots[taskId] = {};
+    }
+    if (!tasksState.characterFilledTag[taskId]) {
+        tasksState.characterFilledTag[taskId] = {};
+    }
+
+    const filledSlots = tasksState.filledTagSlots[taskId];
+    const tagsFilledByChar = {};
+
+    // 1) Fill required tags first
+    requiredTags.forEach(tag => {
+        const needed = tagCounts.required[tag] || 0;
+        let remaining = needed - (filledSlots[tag] || 0);
+        if (remaining <= 0) return;
+
+        for (const char of team.chars) {
+            if (remaining <= 0) break;
+            const charTags = getCharacterTags(char.Id);
+            if (!charTags.includes(tag)) continue;
+
+            const charId = char.Id;
+            if (!tagsFilledByChar[charId]) tagsFilledByChar[charId] = [];
+            tagsFilledByChar[charId].push(tag);
+            filledSlots[tag] = (filledSlots[tag] || 0) + 1;
+            remaining--;
+        }
+    });
+
+    // 2) Then extras, but only if we can fully satisfy that tag
+    extraTags.forEach(tag => {
+        const extraNeeded = tagCounts.extra[tag] || 0;
+        if (!extraNeeded) return;
+
+        const requiredNeeded = tagCounts.required[tag] || 0;
+        const totalNeeded = requiredNeeded + extraNeeded;
+        let remaining = totalNeeded - (filledSlots[tag] || 0);
+        if (remaining <= 0) return;
+
+        // Check if this team *can* reach totalNeeded
+        let potential = 0;
+        team.chars.forEach(char => {
+            const charTags = getCharacterTags(char.Id);
+            if (charTags.includes(tag)) potential++;
+        });
+        if (potential < remaining) return; // can't fully fill -> skip this extra tag
+
+        for (const char of team.chars) {
+            if (remaining <= 0) break;
+            const charTags = getCharacterTags(char.Id);
+            if (!charTags.includes(tag)) continue;
+
+            const charId = char.Id;
+            if (!tagsFilledByChar[charId]) tagsFilledByChar[charId] = [];
+            tagsFilledByChar[charId].push(tag);
+            filledSlots[tag] = (filledSlots[tag] || 0) + 1;
+            remaining--;
+        }
+    });
+
+    // 3) Place characters into slots and record which tags they fill
+    const slots = tasksState.assignedCharacters[taskId];
+
+    team.chars.forEach(char => {
+        const charId = char.Id;
+        const tags = tagsFilledByChar[charId] || [];
+
+        if (tags.length > 0) {
+            tasksState.characterFilledTag[taskId][charId] = tags;
+        }
+
+        let idx = slots.findIndex(c => !c);
+        if (idx === -1) idx = slots.length;
+        if (idx < tasksState.maxCharactersPerTask) {
+            slots[idx] = charId;
+        }
+    });
+}
+
+/**
+ * Auto-fill: global optimization over all selected tasks.
+ * - maximizes fully completed tasks
+ * - then maximizes tasks with all extras
+ * - then maximizes total extra slots
  */
 function autoFillCharacters() {
     if (tasksState.selectedTasks.length === 0) {
@@ -1149,341 +1471,67 @@ function autoFillCharacters() {
         return;
     }
 
-    // Clear existing assignments
+    // Reset assignments
     tasksState.assignedCharacters = {};
     tasksState.filledTagSlots = {};
     tasksState.characterFilledTag = {};
 
-    // Initialize for all tasks
+    // Initialize per-task state
     tasksState.selectedTasks.forEach(task => {
         tasksState.assignedCharacters[task.Id] = [];
         tasksState.filledTagSlots[task.Id] = {};
         tasksState.characterFilledTag[task.Id] = {};
     });
 
-    // Get available owned characters
-    const availableChars = tasksState.characters.filter(char => {
+    const allOwnedChars = tasksState.characters.filter(char => {
         const name = getTranslatedCharacterName(char);
         return name !== '???' && tasksState.ownedCharacters.has(char.Id);
     });
 
-    if (availableChars.length === 0) {
+    if (allOwnedChars.length === 0) {
         showWarning('사용 가능한 보유 캐릭터가 없습니다.');
         return;
     }
 
-    // Calculate tag rarity across all tasks
-    const tagRarity = calculateTagRarity(tasksState.selectedTasks, availableChars);
+    // Build task info and rarity
+    const taskInfos = tasksState.selectedTasks.map(buildTaskInfo);
+    const tagRarity = calculateTagRarity(tasksState.selectedTasks, allOwnedChars);
 
-    // Track which characters have been assigned
-    const assignedCharIds = new Set();
+    // For each task, get candidate teams
+    const taskTeams = taskInfos.map(info =>
+        generateTaskTeams(info, allOwnedChars, tagRarity)
+    );
 
-    // Score and sort tasks by completability
-    const tasksWithScores = tasksState.selectedTasks.map(task => {
-        const score = scoreTaskCompletability(task, availableChars, assignedCharIds, tagRarity);
-        return { task, score };
+    // Global search for best overall combination
+    const result = chooseBestTeams(taskInfos, taskTeams);
+
+    const usedCharIds = new Set();
+
+    result.assignment.forEach((team, idx) => {
+        if (!team) return;
+        const taskInfo = taskInfos[idx];
+        applyAutoAssignmentForTask(taskInfo, team);
+        team.charIds.forEach(id => usedCharIds.add(id));
     });
 
-    // Sort by: rare tag priority (desc), completability (desc), then extra tag potential (desc)
-    tasksWithScores.sort((a, b) => {
-        // First priority: tasks with rare tags
-        if (Math.abs(a.score.rareTagScore - b.score.rareTagScore) > 0.01) {
-            return b.score.rareTagScore - a.score.rareTagScore;
-        }
-        // Second priority: completability
-        if (a.score.completable !== b.score.completable) {
-            return b.score.completable - a.score.completable;
-        }
-        // Third priority: extra tag potential
-        return b.score.extraTagPotential - a.score.extraTagPotential;
-    });
-
-    // Assign characters to each task in priority order
-    let tasksCompleted = 0;
-    let extraTagsCompleted = 0;
-
-    tasksWithScores.forEach(({ task, score }) => {
-        const result = assignBestCharactersToTask(task, availableChars, assignedCharIds, tagRarity);
-
-        if (result.success) {
-            if (result.allRequiredFilled) tasksCompleted++;
-            if (result.allExtraFilled) extraTagsCompleted++;
-        }
-    });
-
-    // Re-render
+    // Update UI
     renderSelectedTasks();
     renderCharacters();
     updateHeaderStats();
     updateClearAllButton();
     updateRecommendations();
 
-    // Show summary
     const totalTasks = tasksState.selectedTasks.length;
-    const assignedCount = Array.from(assignedCharIds).length;
+    const assignedCount = usedCharIds.size;
+    const tasksCompleted = result.tasksCompleted;
+    const extraTasksCompleted = result.extrasFullTasks;
 
     showSuccess(
         `자동 배정 완료!\n` +
-        `- 완료된 의뢰: ${tasksCompleted}/${totalTasks}\n` +
-        `- 추가 태그 완료: ${extraTagsCompleted}/${totalTasks}\n` +
+        `- 필수 태그 완전 충족 의뢰: ${tasksCompleted}/${totalTasks}\n` +
+        `- 추가 태그 완전 충족 의뢰: ${extraTasksCompleted}/${totalTasks}\n` +
         `- 배정된 캐릭터: ${assignedCount}명`
     );
-}
-
-/**
- * Score how completable a task is with available characters
- * Now considers tag rarity to prioritize tasks with rare tags
- */
-function scoreTaskCompletability(task, availableChars, assignedCharIds, tagRarity) {
-    const tagCounts = getTagCounts(task);
-    const requiredTags = task.Tags || [];
-    const extraTags = task.ExtraTags || [];
-
-    // Count how many characters can fill each required tag
-    const requiredTagFillability = {};
-    const extraTagFillability = {};
-
-    requiredTags.forEach(tag => {
-        requiredTagFillability[tag] = availableChars.filter(char => {
-            if (assignedCharIds.has(char.Id)) return false;
-            const charTags = getCharacterTags(char.Id);
-            return charTags.includes(tag);
-        }).length;
-    });
-
-    extraTags.forEach(tag => {
-        extraTagFillability[tag] = availableChars.filter(char => {
-            if (assignedCharIds.has(char.Id)) return false;
-            const charTags = getCharacterTags(char.Id);
-            return charTags.includes(tag);
-        }).length;
-    });
-
-    // Check if all required tags can be filled
-    const uniqueRequiredTags = [...new Set(requiredTags)];
-    const allRequiredFillable = uniqueRequiredTags.every(tag => {
-        const needed = tagCounts.required[tag] || 0;
-        const available = requiredTagFillability[tag] || 0;
-        return available >= needed;
-    });
-
-    // Calculate extra tag potential
-    const uniqueExtraTags = [...new Set(extraTags)];
-    const extraTagScore = uniqueExtraTags.reduce((sum, tag) => {
-        return sum + (extraTagFillability[tag] || 0);
-    }, 0);
-
-    // Calculate rare tag score - higher for tasks with rarer tags
-    let rareTagScore = 0;
-
-    // Required tags contribute more to rare tag score
-    uniqueRequiredTags.forEach(tag => {
-        const rarity = (tagRarity[tag] && tagRarity[tag].rarity) || 0;
-        const count = tagCounts.required[tag] || 0;
-        rareTagScore += rarity * count * 2; // Multiply by 2 for required tags
-    });
-
-    // Extra tags contribute less but still matter
-    uniqueExtraTags.forEach(tag => {
-        const rarity = (tagRarity[tag] && tagRarity[tag].rarity) || 0;
-        const count = tagCounts.extra[tag] || 0;
-        rareTagScore += rarity * count;
-    });
-
-    return {
-        completable: allRequiredFillable ? 1 : 0,
-        extraTagPotential: extraTagScore,
-        rareTagScore: rareTagScore,
-        requiredTagFillability,
-        extraTagFillability
-    };
-}
-
-/**
- * Assign best characters to a task using greedy algorithm
- * Now considers tag rarity when scoring characters
- */
-function assignBestCharactersToTask(task, availableChars, assignedCharIds, tagRarity) {
-    const taskId = task.Id;
-    const tagCounts = getTagCounts(task);
-    const requiredTagsSet = new Set(task.Tags || []);
-    const extraTagsSet = new Set(task.ExtraTags || []);
-    const allTagsSet = new Set([...requiredTagsSet, ...extraTagsSet]);
-
-    // Keep array versions for iteration where needed
-    const requiredTags = [...requiredTagsSet];
-    const extraTags = [...extraTagsSet];
-
-    // Track what needs to be filled
-    const neededTags = {};
-    requiredTags.forEach(tag => {
-        neededTags[tag] = tagCounts.required[tag] || 0;
-    });
-    extraTags.forEach(tag => {
-        neededTags[tag] = (neededTags[tag] || 0) + (tagCounts.extra[tag] || 0);
-    });
-
-    // Get available characters (not yet assigned)
-    const taskAvailableChars = availableChars.filter(char => !assignedCharIds.has(char.Id));
-
-    // Greedy selection: pick characters that fill the most needed tags
-    // PRIORITY ORDER:
-    // 1. Characters that can fill RARE required tags (highest priority)
-    // 2. Characters that can fill required tags
-    // 3. Characters that can fill RARE extra tags
-    // 4. Characters that can fill extra tags
-    const selectedChars = [];
-    const filledTags = {};
-
-    // Check if all required tags are filled
-    const allRequiredFilled = () => {
-        return requiredTags.every(tag => {
-            const needed = tagCounts.required[tag] || 0;
-            const filled = filledTags[tag] || 0;
-            return filled >= needed;
-        });
-    };
-
-    for (let i = 0; i < tasksState.maxCharactersPerTask; i++) {
-        if (taskAvailableChars.length === 0) break;
-
-        const requiredAreComplete = allRequiredFilled();
-
-        // Score each character by how many needed tags they can fill
-        const charScores = taskAvailableChars.map(char => {
-            const charTags = getCharacterTags(char.Id);
-            let score = 0;
-            let canFillRequiredTags = [];
-            let canFillExtraTags = [];
-
-            // First pass: identify which required tags this character can fill
-            charTags.forEach(charTag => {
-                if (requiredTagsSet.has(charTag)) {
-                    const currentFilled = filledTags[charTag] || 0;
-                    const requiredNeeded = tagCounts.required[charTag] || 0;
-                    if (currentFilled < requiredNeeded) {
-                        canFillRequiredTags.push(charTag);
-                    }
-                }
-            });
-
-            // Second pass: identify extra tags
-            charTags.forEach(charTag => {
-                if (extraTagsSet.has(charTag)) {
-                    const currentFilled = filledTags[charTag] || 0;
-                    const totalNeeded = neededTags[charTag] || 0;
-                    if (currentFilled < totalNeeded) {
-                        canFillExtraTags.push(charTag);
-                    }
-                }
-            });
-
-            // Calculate score with rarity bonuses:
-            // Base scores:
-            // - Required tags: 100 points each (must fill these first)
-            // - Extra tags: 10 points each (but only if conditions met)
-            // Rarity bonuses:
-            // - Rare required tags: +rarity score (can be 100-1000 for very rare tags)
-            // - Rare extra tags: +rarity score / 10
-
-            // Score required tags with rarity bonuses
-            canFillRequiredTags.forEach(tag => {
-                score += 100; // Base score
-                const rarity = (tagRarity[tag] && tagRarity[tag].rarity) || 0;
-                score += rarity; // Add rarity bonus (prioritizes rare tags)
-            });
-
-            // Only count extra tags in score if appropriate
-            const shouldCountExtraTags = canFillRequiredTags.length > 0 || requiredAreComplete;
-            if (shouldCountExtraTags) {
-                canFillExtraTags.forEach(tag => {
-                    score += 10; // Base score
-                    const rarity = (tagRarity[tag] && tagRarity[tag].rarity) || 0;
-                    score += rarity / 10; // Add smaller rarity bonus for extra tags
-                });
-            }
-
-            // Only include extra tags in canFillTags if they should be counted
-            const canFillTags = shouldCountExtraTags
-                ? [...canFillRequiredTags, ...canFillExtraTags]
-                : canFillRequiredTags;
-
-            return { char, score, canFillTags, canFillRequiredTags, canFillExtraTags };
-        });
-
-        // Sort by score descending
-        charScores.sort((a, b) => b.score - a.score);
-
-        // If no character can fill any needed tags, stop
-        if (charScores[0].score === 0) break;
-
-        // If required tags are not complete yet, only accept characters that can fill required tags
-        if (!requiredAreComplete && charScores[0].canFillRequiredTags.length === 0) {
-            break; // Stop if no characters can fill required tags
-        }
-
-        // Select the best character
-        const selected = charScores[0];
-        selectedChars.push(selected.char);
-
-        // Update filled tags
-        selected.canFillTags.forEach(tag => {
-            filledTags[tag] = (filledTags[tag] || 0) + 1;
-        });
-
-        // Remove from available
-        const index = taskAvailableChars.indexOf(selected.char);
-        if (index > -1) taskAvailableChars.splice(index, 1);
-    }
-
-    // Final check if all required tags are filled
-    const finalRequiredFilled = requiredTags.every(tag => {
-        const needed = tagCounts.required[tag] || 0;
-        const filled = Math.min(filledTags[tag] || 0, needed);
-        return filled >= needed;
-    });
-
-    // Check if all extra tags are filled (all-or-nothing)
-    const allExtraFilled = extraTags.length > 0 && extraTags.every(tag => {
-        const requiredCount = tagCounts.required[tag] || 0;
-        const extraCount = tagCounts.extra[tag] || 0;
-        const totalNeeded = requiredCount + extraCount;
-        const filled = filledTags[tag] || 0;
-        return filled >= totalNeeded;
-    });
-
-    // Assign characters to the task
-    if (selectedChars.length > 0) {
-        selectedChars.forEach((char, slotIndex) => {
-            assignedCharIds.add(char.Id);
-            tasksState.assignedCharacters[taskId][slotIndex] = char.Id;
-
-            // Calculate which tags this character fills
-            const charTags = getCharacterTags(char.Id);
-            const filledTagsList = [];
-
-            charTags.forEach(charTag => {
-                if (allTagsSet.has(charTag)) {
-                    const currentFilled = tasksState.filledTagSlots[taskId][charTag] || 0;
-                    const totalNeeded = neededTags[charTag] || 0;
-
-                    if (currentFilled < totalNeeded) {
-                        tasksState.filledTagSlots[taskId][charTag] = currentFilled + 1;
-                        filledTagsList.push(charTag);
-                    }
-                }
-            });
-
-            tasksState.characterFilledTag[taskId][char.Id] = filledTagsList;
-        });
-    }
-
-    return {
-        success: selectedChars.length > 0,
-        allRequiredFilled: finalRequiredFilled,
-        allExtraFilled,
-        assignedCount: selectedChars.length
-    };
 }
 
 // Calculate acquisition priority (unowned characters worth getting)
@@ -1569,8 +1617,6 @@ function calculateInsights() {
         acquisitionPriority: acquisitionPriority.slice(0, 10)
     };
 }
-
-// (Old renderInsights function removed - replaced with updateRecommendations)
 
 // Helper functions for notifications
 function showWarning(message) {
@@ -1793,6 +1839,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         clearLookupCaches();  // Clear cached translations
         await loadTasksData();
         updateTaskCounter();
+        // Re-render all UI components with new translations
+        renderTasks();
+        renderSelectedTasks();
+        renderCharacters();
     });
 
     await loadTasksData();
