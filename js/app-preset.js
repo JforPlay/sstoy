@@ -8,6 +8,29 @@
     let currentElementFilter = 'all';
 
     /**
+     * Extract build hash from full URL
+     * @param {string} urlOrHash - Full URL or just hash string
+     * @returns {string} - Extracted hash
+     */
+    function extractHashFromUrl(urlOrHash) {
+        if (!urlOrHash) return '';
+
+        // Check if it's already just a hash (backwards compatibility)
+        if (!urlOrHash.includes('://') && !urlOrHash.includes('#')) {
+            return urlOrHash;
+        }
+
+        // Extract hash from full URL (after #build=)
+        const match = urlOrHash.match(/[#&]build=([^&]+)/);
+        if (match && match[1]) {
+            return match[1];
+        }
+
+        // Fallback: return as-is
+        return urlOrHash;
+    }
+
+    /**
      * Filter presets by element
      */
     window.filterPresetsByElement = function(element) {
@@ -40,7 +63,7 @@
             if (!btn) return;
 
             const confirmState = btn.dataset.confirmState;
-            const buildHash = btn.dataset.buildHash;
+            const buildUrl = btn.dataset.buildUrl;
             const buildTitle = btn.dataset.buildTitle;
 
             if (confirmState === 'initial') {
@@ -74,6 +97,8 @@
                 // Load the preset after brief delay
                 setTimeout(() => {
                     try {
+                        // Extract hash from full URL
+                        const buildHash = extractHashFromUrl(buildUrl);
                         window.loadPresetBuild(buildHash, buildTitle);
 
                         // Fade back in
@@ -216,7 +241,7 @@
                                 `}
                                 <button
                                     class="preset-load-btn"
-                                    data-build-hash="${preset.buildHash}"
+                                    data-build-url="${preset.buildUrl || preset.buildHash || ''}"
                                     data-build-title="${preset.title}"
                                     data-confirm-state="initial"
                                 >
