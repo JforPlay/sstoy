@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>캐릭터 도감</title>
-    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="icon" type="image/png" href="assets/others/favicon.png">
     <!-- Font Awesome 6 Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/utils.css">
+    <!-- Shared Components -->
+    <link rel="stylesheet" href="css/components/modals.css">
+    <link rel="stylesheet" href="css/components/cards.css">
+    <link rel="stylesheet" href="css/components/filters.css">
+    <!-- Page-Specific Styles -->
     <link rel="stylesheet" href="css/app-char.css">
     <link rel="stylesheet" href="css/characterdb.css">
 </head>
@@ -17,8 +22,8 @@
 
     <div class="container">
         <header>
-            <h1><i class="fa-solid fa-book"></i> 캐릭터DB</h1>
-            <p class="subtitle">캐릭터의 상세 정보, 아카이브 및 데이트 공략을 확인하세요</p>
+            <h1><i class="fa-solid fa-book"></i> <span data-i18n="characterdb.title">캐릭터DB</span></h1>
+            <p class="subtitle" data-i18n="characterdb.selectCharacter">여행가의 상세 정보, 아카이브 및 데이트 공략을 확인하세요</p>
         </header>
 
         <!-- Character Selection Section -->
@@ -32,7 +37,7 @@
 
         <!-- Character Details Section (Hidden until character selected) -->
         <div id="character-details" class="character-details-container" style="display: none;">
-            <!-- Character Info and Dating - Side by Side -->
+            <!-- Character Info and Dating - Always Visible -->
             <div class="character-info-dating-row">
                 <!-- Character Hero Section -->
                 <div class="character-hero-section">
@@ -42,9 +47,9 @@
                         <img id="char-portrait" src="" alt="Character Portrait" style="display:none;">
                         <!-- Character Type Selector (Bottom of Portrait) -->
                         <div class="char-type-selector-hero">
-                            <button class="char-type-btn active" onclick="changeCharacterType('01', event)">일반</button>
-                            <button class="char-type-btn" onclick="changeCharacterType('02', event)">각성</button>
-                            <button class="char-type-btn" onclick="changeCharacterType('03', event)">스킨</button>
+                            <button class="char-type-btn active" onclick="changeCharacterType('01', event)" data-i18n="characterdb.characterType.normal">일반</button>
+                            <button class="char-type-btn" onclick="changeCharacterType('02', event)" data-i18n="characterdb.characterType.awakened">각성</button>
+                            <button class="char-type-btn" onclick="changeCharacterType('03', event)" data-i18n="characterdb.characterType.skin">스킨</button>
                         </div>
                     </div>
 
@@ -69,12 +74,12 @@
                     </div>
                 </div>
 
-                <!-- Dating Section (Side by Side) -->
+                <!-- Dating Section -->
                 <div class="dating-section">
                     <div class="section-header">
                         <h2 class="section-title">
                             <span class="section-icon"><i class="fa-solid fa-heart"></i></span>
-                            데이트 공략
+                            <span data-i18n="characterdb.dating">데이트 공략</span>
                         </h2>
                     </div>
                     <div id="dating-list" class="dating-list">
@@ -83,55 +88,144 @@
                 </div>
             </div>
 
-            <!-- Character Image Gallery -->
-            <div class="character-images-section">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <span class="section-icon"><i class="fa-solid fa-image"></i></span>
-                        캐릭터 이미지들
-                    </h2>
-                </div>
-                <div id="char-image-gallery" class="char-image-gallery">
-                    <!-- Images will be populated by JS -->
-                </div>
+            <!-- Tab Navigation -->
+            <div class="chardb-tabs">
+                <button class="chardb-tab-btn active" onclick="switchCharDbTab('images')">
+                    <i class="fa-solid fa-images"></i>
+                    <span data-i18n="characterdb.images">여행가 이미지들</span>
+                </button>
+                <button class="chardb-tab-btn" onclick="switchCharDbTab('archive-stats')">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                    <span data-i18n="characterdb.archiveStats">아카이브 & 스탯</span>
+                </button>
+                <button class="chardb-tab-btn" onclick="switchCharDbTab('potentials')">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span data-i18n="characterdb.potentials">여행가 잠재력</span>
+                </button>
+                <button class="chardb-tab-btn" onclick="switchCharDbTab('skills')">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span data-i18n="characterdb.skills">스킬 정보</span>
+                </button>
+                <button class="chardb-tab-btn" onclick="switchCharDbTab('talents')">
+                    <i class="fa-solid fa-sitemap"></i>
+                    <span data-i18n="characterdb.talents">승급 정보</span>
+                </button>
             </div>
 
-            <!-- Archive and Stats - 2 Column Layout -->
-            <div class="archive-stats-wrapper">
-                <!-- Archive Section -->
-                <div class="archive-section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <span class="section-icon"><i class="fa-solid fa-book-bookmark"></i></span>
-                            캐릭터 아카이브
-                        </h2>
-                    </div>
-                    <div id="archive-list" class="archive-list">
-                        <!-- Archive items will be populated by JS -->
+            <!-- Tab Content -->
+            <div class="chardb-tab-content">
+                <!-- Images Tab -->
+                <div id="tab-images" class="chardb-tab-panel active">
+                    <div id="char-image-gallery" class="char-image-gallery">
+                        <!-- Images will be populated by JS -->
                     </div>
                 </div>
 
-                <!-- Stats Section -->
-                <div class="stats-section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <span class="section-icon"><i class="fa-solid fa-chart-bar"></i></span>
-                            캐릭터 스탯
-                        </h2>
-                    </div>
+                <!-- Archive & Stats Tab -->
+                <div id="tab-archive-stats" class="chardb-tab-panel">
+                    <div class="archive-stats-wrapper">
+                        <!-- Archive Section -->
+                        <div class="archive-section">
+                            <div class="section-header">
+                                <h2 class="section-title">
+                                    <span class="section-icon"><i class="fa-solid fa-book-bookmark"></i></span>
+                                    <span data-i18n="characterdb.archive">캐릭터 아카이브</span>
+                                </h2>
+                            </div>
+                            <div id="archive-list" class="archive-list">
+                                <!-- Archive items will be populated by JS -->
+                            </div>
+                        </div>
 
-                    <!-- Level Slider -->
-                    <div class="level-control">
-                        <label for="level-slider" class="level-label">
-                            레벨: <span id="current-level" class="level-display">1</span>
-                            <span id="limitbreak-badge" class="limitbreak-badge" style="display: none;">승급 <span id="current-limitbreak">0</span></span>
-                        </label>
-                        <input type="range" id="level-slider" class="level-slider" min="1" max="98" value="1">
-                    </div>
+                        <!-- Stats Section -->
+                        <div class="stats-section">
+                            <div class="section-header">
+                                <h2 class="section-title">
+                                    <span class="section-icon"><i class="fa-solid fa-chart-bar"></i></span>
+                                    <span data-i18n="characterdb.stats">캐릭터 스탯</span>
+                                </h2>
+                            </div>
 
-                    <!-- Stats Grid -->
-                    <div id="stats-grid" class="stats-grid">
-                        <!-- Stats will be populated by JS -->
+                            <!-- Level Slider -->
+                            <div class="level-control">
+                                <label for="level-slider" class="level-label">
+                                    <span data-i18n="common.level">레벨</span>: <span id="current-level" class="level-display">1</span>
+                                    <span id="limitbreak-badge" class="limitbreak-badge" style="display: none;"><span data-i18n="characterdb.limitbreak">승급</span> <span id="current-limitbreak">0</span></span>
+                                </label>
+                                <input type="range" id="level-slider" class="level-slider" min="1" max="98" value="1">
+                            </div>
+
+                            <!-- Stats Grid -->
+                            <div id="stats-grid" class="stats-grid">
+                                <!-- Stats will be populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Potentials Tab -->
+                <div id="tab-potentials" class="chardb-tab-panel">
+                    <div class="character-potentials-section" id="character-potentials-section">
+                        <!-- Potential Type Toggle and Level Control -->
+                        <div class="potential-controls">
+                            <div class="potential-type-toggle">
+                                <button class="potential-type-btn active" data-type="main" onclick="switchPotentialType('main', event)">
+                                    <i class="fa-solid fa-star"></i> <span data-i18n="characterdb.potentialType.main">메인 잠재력</span>
+                                </button>
+                                <button class="potential-type-btn" data-type="assist" onclick="switchPotentialType('assist', event)">
+                                    <i class="fa-solid fa-hands-helping"></i> <span data-i18n="characterdb.potentialType.assist">지원 잠재력</span>
+                                </button>
+                            </div>
+
+                            <div class="potential-level-control">
+                                <label for="potential-level-slider" class="potential-level-label">
+                                    <span data-i18n="characterdb.levelControl">전체 레벨</span>: <span id="potential-level-display" class="potential-level-display">1</span>
+                                    <span class="potential-level-note" data-i18n="characterdb.levelNote">(전용잠재는 캐릭터 스킬 레벨에 따라 13레벨까지 올라가는 수치도 있음 --> 빌드 도우미 참고)</span>
+                                </label>
+                                <div class="potential-level-slider-wrapper">
+                                    <button class="potential-level-btn" onclick="adjustPotentialLevel(-1)">−</button>
+                                    <input type="range" id="potential-level-slider" class="potential-level-slider" min="1" max="9" value="1" oninput="updatePotentialLevel(parseInt(this.value))">
+                                    <button class="potential-level-btn" onclick="adjustPotentialLevel(1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Potentials Display -->
+                        <div id="potentials-display" class="potentials-display">
+                            <!-- Potentials will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Tab -->
+                <div id="tab-skills" class="chardb-tab-panel">
+                    <div class="character-skills-section">
+                        <!-- Skill Level Control -->
+                        <div class="skill-level-control">
+                            <label for="skill-level-slider" class="skill-level-label">
+                                <span data-i18n="characterdb.skillLevel">스킬 레벨</span>: <span id="skill-level-display" class="skill-level-display">1</span>
+                            </label>
+                            <div class="skill-level-slider-wrapper">
+                                <button class="skill-level-btn" onclick="adjustSkillLevel(-1)">−</button>
+                                <input type="range" id="skill-level-slider" class="skill-level-slider" min="1" max="13" value="1" oninput="updateSkillLevel(parseInt(this.value))">
+                                <button class="skill-level-btn" onclick="adjustSkillLevel(1)">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Skills Display -->
+                        <div id="skills-display" class="skills-display">
+                            <!-- Skills will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Talents Tab -->
+                <div id="tab-talents" class="chardb-tab-panel">
+                    <div class="character-talents-section">
+                        <!-- Talents Display -->
+                        <div id="talents-display" class="talents-display">
+                            <!-- Talents will be populated by JS -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -139,6 +233,7 @@
     </div>
 
     <script src="js/utils.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/characterdb.js"></script>
 </body>
 </html>

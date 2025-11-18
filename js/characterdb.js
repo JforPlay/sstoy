@@ -21,6 +21,11 @@ const dbState = {
     currentLevel: 1,
     currentLimitBreak: 0,
     selectedCharacterType: '01', // 01=일반, 02=각성, 03=스킨
+    skillLevel: 1, // Global skill level (1-13)
+    talentGroups: {},
+    talentGroupsKR: {},
+    talents: {},
+    talentsKR: {},
     // Cached DOM elements
     domCache: {},
     // Pre-computed tag to gifts map for performance
@@ -69,7 +74,7 @@ const STAT_ICONS = {
 const MAIN_STATS = ['Atk', 'Hp', 'Def', 'HitRate', 'CritRate', 'CritPower', 'ToughnessDamageAdjust'];
 
 // Data version for cache invalidation
-const DATA_VERSION = '1.1.1'; // Updated for charGetLines support
+const DATA_VERSION = '1.1.9'; // Fixed floating point display formatting
 
 /**
  * Debounce utility function
@@ -115,7 +120,10 @@ function cacheDOMElements() {
         currentLevel: document.getElementById('current-level'),
         currentLimitbreak: document.getElementById('current-limitbreak'),
         limitbreakBadge: document.getElementById('limitbreak-badge'),
-        heroSection: document.querySelector('.character-hero-section')
+        heroSection: document.querySelector('.character-hero-section'),
+        potentialsDisplay: document.getElementById('potentials-display'),
+        skillsDisplay: document.getElementById('skills-display'),
+        talentsDisplay: document.getElementById('talents-display')
     };
 }
 
@@ -184,21 +192,27 @@ function loadDataFromCache() {
  * Load all required data files
  */
 async function loadData() {
-    // Try to load from cache first
+    // Try to load from cache first (but only if language hasn't changed)
     const cachedData = loadDataFromCache();
-    if (cachedData) {
-        console.log('Loading data from cache');
+    const currentLang = window.i18n?.currentLang || 'KR';
+    if (cachedData && cachedData.language === currentLang) {
         Object.assign(dbState, cachedData);
         cacheDOMElements();
         buildTagToGiftsMap();
         renderCharacterSelector();
+        loadPotentialData();
         return;
     }
     try {
+        // Get current language from i18n
+        const gameLang = window.i18n?.currentLang || 'KR';
+        const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
+
         const [
             charactersData,
             charactersKRData,
             characterDesData,
+            characterDesKRData,
             characterTagKRData,
             affinityGiftsData,
             itemsData,
@@ -212,30 +226,40 @@ async function loadData() {
             datingBranchData,
             charGetLinesData,
             charGetLinesKRData,
-            enumsData
+            enumsData,
+            talentGroupsData,
+            talentGroupsKRData,
+            talentsData,
+            talentsKRData
         ] = await Promise.all([
             fetch('data/Character.json').then(r => r.json()),
-            fetch('data/kr/Character.json').then(r => r.json()),
+            fetch(`${dataPath}/Character.json`).then(r => r.json()),
             fetch('data/CharacterDes.json').then(r => r.json()),
-            fetch('data/kr/CharacterTag.json').then(r => r.json()),
+            fetch(`${dataPath}/CharacterDes.json`).then(r => r.json()),
+            fetch(`${dataPath}/CharacterTag.json`).then(r => r.json()),
             fetch('data/AffinityGift.json').then(r => r.json()),
             fetch('data/Item.json').then(r => r.json()),
-            fetch('data/kr/Item.json').then(r => r.json()),
+            fetch(`${dataPath}/Item.json`).then(r => r.json()),
             fetch('data/Attribute.json').then(r => r.json()),
             fetch('data/CharacterArchive.json').then(r => r.json()),
             fetch('data/CharacterArchiveContent.json').then(r => r.json()),
-            fetch('data/kr/CharacterArchiveContent.json').then(r => r.json()),
+            fetch(`${dataPath}/CharacterArchiveContent.json`).then(r => r.json()),
             fetch('data/DatingCharacterEvent.json').then(r => r.json()),
-            fetch('data/kr/DatingLandmark.json').then(r => r.json()),
-            fetch('data/kr/DatingBranch.json').then(r => r.json()),
+            fetch(`${dataPath}/DatingLandmark.json`).then(r => r.json()),
+            fetch(`${dataPath}/DatingBranch.json`).then(r => r.json()),
             fetch('data/CharGetLines.json').then(r => r.json()),
-            fetch('data/kr/CharGetLines.json').then(r => r.json()),
-            fetch('data/GameEnums.json').then(r => r.json())
+            fetch(`${dataPath}/CharGetLines.json`).then(r => r.json()),
+            fetch('data/GameEnums.json').then(r => r.json()),
+            fetch('data/TalentGroup.json').then(r => r.json()),
+            fetch(`${dataPath}/TalentGroup.json`).then(r => r.json()),
+            fetch('data/Talent.json').then(r => r.json()),
+            fetch(`${dataPath}/Talent.json`).then(r => r.json())
         ]);
 
         dbState.characters = charactersData;
         dbState.charactersKR = charactersKRData;
         dbState.characterDes = characterDesData;
+        dbState.characterDesKR = characterDesKRData;
         dbState.characterTagKR = characterTagKRData;
         dbState.affinityGifts = affinityGiftsData;
         dbState.items = itemsData;
@@ -250,14 +274,18 @@ async function loadData() {
         dbState.charGetLines = charGetLinesData;
         dbState.charGetLinesKR = charGetLinesKRData;
         dbState.gameEnums = enumsData;
+        dbState.talentGroups = talentGroupsData;
+        dbState.talentGroupsKR = talentGroupsKRData;
+        dbState.talents = talentsData;
+        dbState.talentsKR = talentsKRData;
 
-        console.log('Data loaded successfully from server');
-
-        // Save to cache
+        // Save to cache with language info
         const dataToCache = {
+            language: gameLang,
             characters: dbState.characters,
             charactersKR: dbState.charactersKR,
             characterDes: dbState.characterDes,
+            characterDesKR: dbState.characterDesKR,
             characterTagKR: dbState.characterTagKR,
             affinityGifts: dbState.affinityGifts,
             items: dbState.items,
@@ -271,7 +299,11 @@ async function loadData() {
             datingBranchKR: dbState.datingBranchKR,
             charGetLines: dbState.charGetLines,
             charGetLinesKR: dbState.charGetLinesKR,
-            gameEnums: dbState.gameEnums
+            gameEnums: dbState.gameEnums,
+            talentGroups: dbState.talentGroups,
+            talentGroupsKR: dbState.talentGroupsKR,
+            talents: dbState.talents,
+            talentsKR: dbState.talentsKR
         };
         saveDataToCache(dataToCache);
 
@@ -280,6 +312,9 @@ async function loadData() {
         buildTagToGiftsMap();
 
         renderCharacterSelector();
+
+        // Load potential data
+        loadPotentialData();
     } catch (error) {
         console.error('Error loading data:', error);
         showError('데이터를 불러오는 중 오류가 발생했습니다. 페이지를 새로고침해주세요.');
@@ -386,6 +421,18 @@ function selectCharacter(charId, event) {
     renderStats(charId, 1, 0);
     renderArchive(charId);
     renderDating(charId);
+    renderPotentials(charId);
+
+    // Check which tab is currently active and render it
+    const activeTab = document.querySelector('.chardb-tab-panel.active');
+    if (activeTab) {
+        const tabId = activeTab.id;
+        if (tabId === 'tab-skills') {
+            renderSkills(charId);
+        } else if (tabId === 'tab-talents') {
+            renderTalents(charId);
+        }
+    }
 
     // Scroll to details
     detailsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -642,8 +689,9 @@ function renderCharacterImageGallery(charId) {
     const charIdStr = String(charId);
     const type = dbState.selectedCharacterType;
 
-    // Image types to display (SK is now in header, so exclude it)
+    // Image types to display (CG first, then others)
     const imageTypes = [
+        { suffix: '_CG', label: 'CG', className: 'char-img-cg', badgeColor: '#f43f5e', baseOnly: true },
         { suffix: '_GC', label: '배너', className: 'char-img-banner', badgeColor: '#ec4899' },
         { suffix: '_GD', label: '얼굴', className: 'char-img-head', badgeColor: '#8b5cf6' },
         { suffix: '_GOODS', label: 'SD', className: 'char-img-sd', badgeColor: '#10b981' },
@@ -651,6 +699,11 @@ function renderCharacterImageGallery(charId) {
     ];
 
     imageTypes.forEach(imgType => {
+        // Skip CG image if not base type (CG only available for base characters)
+        if (imgType.baseOnly && type !== '01') {
+            return;
+        }
+
         const imgWrapper = document.createElement('div');
         imgWrapper.className = 'char-img-wrapper-new';
 
@@ -662,7 +715,12 @@ function renderCharacterImageGallery(charId) {
 
         const img = document.createElement('img');
         img.className = `char-img-new ${imgType.className}`;
-        img.src = `assets/char/head_${charIdStr}${type}${imgType.suffix}.png`;
+        // Use different path format for CG images
+        if (imgType.suffix === '_CG') {
+            img.src = `assets/char/${charIdStr}${type}${imgType.suffix}.png`;
+        } else {
+            img.src = `assets/char/head_${charIdStr}${type}${imgType.suffix}.png`;
+        }
         img.alt = `${imgType.label}`;
         img.dataset.fullSrc = img.src; // Store for lightbox
         img.onerror = function() {
@@ -1110,7 +1168,10 @@ function getStatsFromSlider(sliderValue) {
 /**
  * Handle level slider changes
  */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Initialize i18n first
+    await window.i18n.init();
+
     const levelSlider = document.getElementById('level-slider');
     const currentLevelDisplay = document.getElementById('current-level');
     const currentLimitBreakDisplay = document.getElementById('current-limitbreak');
@@ -1146,6 +1207,1003 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Listen for language changes
+    window.addEventListener('languageChanged', async (event) => {
+        console.log('[CharacterDB] Language changed, reloading data');
+        // Clear cache when language changes
+        localStorage.removeItem('characterdb_data');
+        // Reload all data
+        await loadData();
+        // Re-render current character if any
+        if (dbState.selectedCharacterId) {
+            renderCharacterInfo(dbState.selectedCharacterId, dbState.selectedCharacterType);
+        }
+    });
+
     // Load data when page loads
-    loadData();
+    await loadData();
 });
+
+// ========================================
+// POTENTIALS SECTION
+// ========================================
+
+// Add potential data to dbState
+dbState.charPotentials = {};
+dbState.potentials = {};
+dbState.potentialsKR = {};
+dbState.items = {};
+dbState.itemsKR = {};
+dbState.skills = {};
+dbState.skillsKR = {};
+dbState.effectValue = {};
+dbState.hitDamage = {};
+dbState.onceAdditionalAttributeValue = {};
+dbState.scriptParameterValue = {};
+dbState.buffValue = {};
+dbState.shieldValue = {};
+dbState.currentPotentialType = 'main'; // 'main' or 'assist'
+dbState.potentialLevel = 1; // Global potential level (1-9)
+
+// Debounced render function for potentials (150ms delay)
+const debouncedRenderPotentials = debounce((charId) => {
+    renderPotentials(charId);
+}, 150);
+
+// Load potential data (called after main data is loaded)
+async function loadPotentialData() {
+    try {
+        // Get current language from i18n
+        const gameLang = window.i18n?.currentLang || 'KR';
+        const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
+
+        const [
+            charPotentials,
+            potentials,
+            potentialsKR,
+            skills,
+            skillsKR,
+            effectValue,
+            hitDamage,
+            onceAdditionalAttributeValue,
+            scriptParameterValue,
+            buffValue,
+            shieldValue
+        ] = await Promise.all([
+            fetch('data/CharPotential.json').then(r => r.json()),
+            fetch('data/Potential.json').then(r => r.json()),
+            fetch(`${dataPath}/Potential.json`).then(r => r.json()),
+            fetch('data/Skill.json').then(r => r.json()),
+            fetch(`${dataPath}/Skill.json`).then(r => r.json()),
+            fetch('data/EffectValue.json').then(r => r.json()),
+            fetch('data/HitDamage.json').then(r => r.json()),
+            fetch('data/OnceAdditionalAttributeValue.json').then(r => r.json()),
+            fetch('data/ScriptParameterValue.json').then(r => r.json()),
+            fetch('data/BuffValue.json').then(r => r.json()),
+            fetch('data/ShieldValue.json').then(r => r.json())
+        ]);
+
+        dbState.charPotentials = charPotentials;
+        dbState.potentials = potentials;
+        dbState.potentialsKR = potentialsKR;
+        dbState.skills = skills;
+        dbState.skillsKR = skillsKR;
+        dbState.effectValue = effectValue;
+        dbState.hitDamage = hitDamage;
+        dbState.onceAdditionalAttributeValue = onceAdditionalAttributeValue;
+        dbState.scriptParameterValue = scriptParameterValue;
+        dbState.buffValue = buffValue;
+        dbState.shieldValue = shieldValue;
+
+        console.log('Potential data loaded successfully');
+    } catch (error) {
+        console.error('Error loading potential data:', error);
+        showError('잠재력 데이터를 불러오는 중 오류가 발생했습니다.');
+    }
+}
+
+// File type map for parameter parsing
+const FILE_TYPE_MAP = {
+    'effect': 'effectValue',
+    'effectvalue': 'effectValue',
+    'hitdamage': 'hitDamage',
+    'onceadditionalattribute': 'onceAdditionalAttributeValue',
+    'onceadditionalattributevalue': 'onceAdditionalAttributeValue',
+    'scriptparameter': 'scriptParameterValue',
+    'scriptparametervalue': 'scriptParameterValue',
+    'shield': 'shieldValue',
+    'shieldvalue': 'shieldValue',
+    'buff': 'buffValue',
+    'buffvalue': 'buffValue',
+    'skill': 'skills'
+};
+
+/**
+ * Parse parameter value (complete version from app-char.js)
+ */
+function parseParamValue(paramString, level = 1, skillLevel = 1) {
+    if (!paramString || typeof paramString !== 'string') return { value: paramString, levelType: null };
+
+    const elements = paramString.split(',').map(e => e.trim());
+    if (elements.length < 3) return { value: paramString, levelType: null };
+
+    const [fileType, levelType, baseId, fieldKey = null, formatType = null, enumType = null] = elements;
+
+    const dataKey = FILE_TYPE_MAP[fileType.toLowerCase()];
+    if (!dataKey || !dbState[dataKey]) {
+        return { value: `[${fileType}]`, levelType: null };
+    }
+
+    const dataSource = dbState[dataKey];
+    let lookupId = baseId;
+    let value = null;
+
+    if (levelType === 'LevelUp') {
+        if (fileType.toLowerCase() === 'buff') {
+            const baseIdNum = parseInt(baseId);
+            const lastTwoDigits = baseIdNum % 100;
+            const tensDigit = Math.floor(lastTwoDigits / 10);
+
+            if (tensDigit === 0) {
+                const adjustedId = baseIdNum + (level * 10);
+                lookupId = adjustedId.toString();
+            } else {
+                lookupId = baseId;
+            }
+        } else {
+            const adjustedId = parseInt(baseId) + (level * 10);
+            lookupId = adjustedId.toString();
+        }
+
+        const dataEntry = dataSource[lookupId];
+        if (!dataEntry) return { value: `[${fileType}:${lookupId}]`, levelType };
+
+        if (fieldKey && dataEntry[fieldKey] !== undefined) {
+            value = dataEntry[fieldKey];
+        } else {
+            return { value: `[${fieldKey}]`, levelType };
+        }
+
+        if (formatType) {
+            return { value: formatValue(value, formatType, enumType, fileType), levelType };
+        }
+
+    } else if (levelType === 'NoLevel') {
+        const dataEntry = dataSource[lookupId];
+        if (!dataEntry) return { value: `[${fileType}:${lookupId}]`, levelType };
+
+        if (fieldKey && dataEntry[fieldKey] !== undefined) {
+            value = dataEntry[fieldKey];
+        } else {
+            return { value: `[${fieldKey}]`, levelType };
+        }
+
+        if (formatType) {
+            return { value: formatValue(value, formatType, enumType, fileType), levelType };
+        }
+
+    } else if (levelType === 'DamageNum') {
+        // For DamageNum: fetch SkillPercentAmend and SkillAbsAmend fields
+        const dataEntry = dataSource[lookupId];
+        if (!dataEntry) return { value: `[${fileType}:${lookupId}]`, levelType };
+
+        // Use level - 1 as index (always use the global level slider)
+        const index = Math.min(Math.max(0, level - 1),
+            Math.max(dataEntry.SkillPercentAmend?.length || 0, dataEntry.SkillAbsAmend?.length || 0) - 1);
+
+        // Check if arrays have non-zero elements
+        const hasNonZeroPercent = dataEntry.SkillPercentAmend &&
+            Array.isArray(dataEntry.SkillPercentAmend) &&
+            dataEntry.SkillPercentAmend.some(v => v !== 0);
+
+        const hasNonZeroAbs = dataEntry.SkillAbsAmend &&
+            Array.isArray(dataEntry.SkillAbsAmend) &&
+            dataEntry.SkillAbsAmend.some(v => v !== 0);
+
+        if (!hasNonZeroPercent && !hasNonZeroAbs) {
+            return { value: `[DamageNum]`, levelType };
+        }
+
+        // Build the display string based on which fields have values
+        let displayParts = [];
+
+        if (hasNonZeroPercent) {
+            const percentValue = dataEntry.SkillPercentAmend[index];
+            // Divide by 10000 and format as percentage
+            const percentDisplay = (percentValue / 10000).toFixed(1) + '%';
+            displayParts.push(percentDisplay);
+        }
+
+        if (hasNonZeroAbs) {
+            const absValue = dataEntry.SkillAbsAmend[index];
+            displayParts.push(absValue.toString());
+        }
+
+        return { value: displayParts.join(' + '), levelType };
+    }
+
+    return { value: value !== null ? value : paramString, levelType };
+}
+
+/**
+ * Format value based on format type
+ */
+function formatValue(value, formatType, enumType = null, fileType = null) {
+    // Handle Enum type - convert using GameEnums
+    if (formatType === 'Enum' && enumType && value !== null && value !== undefined) {
+        // Map common abbreviations to full enum names
+        const enumMap = {
+            'EAT': 'effectAttributeType',
+            'SAT': 'stateAttributeType',
+            'ET': 'effectType',
+            'PAT': 'playerAttributeType',
+            'PT': 'parameterType',
+            // Add more mappings as needed
+        };
+
+        const fullEnumName = enumMap[enumType] || enumType;
+        const enumData = dbState.gameEnums?.[fullEnumName];
+
+        if (enumData && enumData[value]) {
+            return enumData[value].name || value;
+        }
+
+        return value;
+    }
+
+    // Handle percentage formats
+    if (formatType === 'HdPct') {
+        return (parseFloat(value) * 100).toFixed(2) + '%';
+    } else if (formatType === '10KHdPct') {
+        return (parseFloat(value) / 100).toFixed(2) + '%';
+    } else if (formatType === '10K') {
+        return (parseFloat(value) / 10000).toFixed(1);
+    } else if (formatType === '10KPct') {
+        return (parseFloat(value) / 10000).toFixed(1) + '%';
+    } else if (formatType === 'Fixed') {
+        return value;
+    } else if (formatType === 'Text') {
+        if (fileType && fileType.toLowerCase() === 'skill') {
+            if (dbState.skillsKR && dbState.skillsKR[value]) {
+                return dbState.skillsKR[value];
+            }
+        }
+        return value;
+    }
+
+    return value;
+}
+
+/**
+ * Process description with parameter parsing and color styling
+ */
+function processDescription(desc, level, skillLevel = 1) {
+    if (!desc) return '';
+
+    // Strip out color tags like <color=#0abec5> and </color>
+    let parsedDesc = desc.replace(/<color=[^>]+>/g, '').replace(/<\/color>/g, '');
+
+    // Replace &Param1& through &Param10& with parsed and styled values (same format as app-char.js)
+    for (let i = 1; i <= 10; i++) {
+        const placeholder = `&Param${i}&`;
+        if (parsedDesc.includes(placeholder)) {
+            const paramKey = `Param${i}`;
+            const potential = currentPotentialData;
+
+            if (potential && potential[paramKey]) {
+                const paramString = potential[paramKey];
+                const parsed = parseParamValue(paramString, level, skillLevel);
+
+                // Wrap the parsed value in a span with styling based on level type
+                let className = 'param-value';
+                if (parsed.useRedColor) {
+                    className += ' param-red';
+                } else if (parsed.levelType === 'NoLevel') {
+                    className += ' param-no-level';
+                }
+                const styledValue = `<span class="${className}">${parsed.value}</span>`;
+                parsedDesc = parsedDesc.replace(new RegExp(placeholder.replace(/&/g, '&'), 'g'), styledValue);
+            }
+        }
+    }
+
+    // Parse element tag patterns: ##빛 속성 표식#1015#
+    parsedDesc = parseElementTags(parsedDesc);
+
+    return parsedDesc;
+}
+
+/**
+ * Parse element tag patterns in descriptions
+ * Format: ##ElementName 속성 표식#IconId#
+ * Example: ##빛 속성 표식#1015#
+ *
+ * @param {string} description - The description with element tags
+ * @returns {string} - Description with formatted element tags
+ */
+function parseElementTags(description) {
+    if (!description) return description;
+
+    // Element color mapping
+    const elementColors = {
+        '빛': '#FFD700',    // Yellow/Gold for Light
+        '불': '#FF4444',    // Red for Fire
+        '바람': '#44FF44',  // Green for Wind
+        '물': '#4444FF',    // Blue for Water
+        '어둠': '#9944FF',  // Purple for Dark
+        '땅': '#8B4513'     // Brown for Earth
+    };
+
+    // Element icon mapping (including new extended format icons)
+    const elementIcons = {
+        '1015': 'Icon_ElementTagTrigger_Light',
+        '1016': 'Icon_ElementTagTrigger_Fire',
+        '1017': 'Icon_ElementTagTrigger_Wind',
+        '1018': 'Icon_ElementTagTrigger_Water',
+        '1019': 'Icon_ElementTagTrigger_Dark',
+        '1020': 'Icon_ElementTagTrigger_Earth',
+        // Extended format icons (same icons, different IDs)
+        '2016': 'Icon_ElementTagTrigger_Light',  // 광명 (Light)
+        '2013': 'Icon_ElementTagTrigger_Fire',   // 성염 (Fire)
+        '2017': 'Icon_ElementTagTrigger_Wind',   // 풍식 (Wind)
+        '2008': 'Icon_ElementTagTrigger_Water',  // 수류 (Water)
+        '2018': 'Icon_ElementTagTrigger_Dark',   // 암영 (Dark)
+        '2029': 'Icon_ElementTagTrigger_Earth'   // 지맥 (Earth)
+    };
+
+    // Pattern 1: ##ElementName 속성 표식: AdditionalName#IconId# (extended format)
+    const extendedPattern = /##([가-힣]+)\s*속성\s*표식:\s*([가-힣]+)#(\d+)#/g;
+
+    // Pattern 2: ##ElementName 속성 표식#IconId# (basic format)
+    const basicPattern = /##([가-힣]+)\s*속성\s*표식#(\d+)#/g;
+
+    // First, replace extended format
+    let result = description.replace(extendedPattern, (match, elementName, additionalName, iconId) => {
+        const color = elementColors[elementName] || '#FFFFFF';
+        const iconName = elementIcons[iconId];
+        const iconPath = iconName ? `assets/${iconName}.png` : '';
+
+        return `<span class="element-tag" style="color: ${color}; font-weight: 600;">
+            ${elementName} 속성 표식: ${additionalName}
+            ${iconPath ? `<img src="${iconPath}" alt="${elementName}" class="element-tag-icon" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 4px;" onerror="this.style.display='none'">` : ''}
+        </span>`;
+    });
+
+    // Then, replace basic format
+    result = result.replace(basicPattern, (match, elementName, iconId) => {
+        const color = elementColors[elementName] || '#FFFFFF';
+        const iconName = elementIcons[iconId];
+        const iconPath = iconName ? `assets/${iconName}.png` : '';
+
+        return `<span class="element-tag" style="color: ${color}; font-weight: 600;">
+            ${elementName} 속성 표식
+            ${iconPath ? `<img src="${iconPath}" alt="${elementName}" class="element-tag-icon" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 4px;" onerror="this.style.display='none'">` : ''}
+        </span>`;
+    });
+
+    return result;
+}
+
+let currentPotentialData = null; // Store current potential for description processing
+
+/**
+ * Create a potential card element
+ */
+function createPotentialCard(potId, level) {
+    const potential = dbState.potentials[potId];
+    if (!potential) {
+        console.log('[Potentials] Potential not found:', potId);
+        return null;
+    }
+
+    const item = dbState.items[potId];
+    if (!item) {
+        console.log('[Potentials] Item not found:', potId);
+        return null;
+    }
+
+    // Check if this is a specific potential (Stype 42)
+    const isSpecificPotential = item.Stype === 42;
+
+    // All potentials now follow the global level slider (1-9)
+    // The level parameter is already clamped to 1-9 from the global slider
+    const currentLevel = level;
+
+    // Get Korean name
+    const nameKey = item.Title;
+    const name = dbState.potentialsKR[nameKey] || dbState.itemsKR[nameKey] || nameKey;
+
+    // Get icon path
+    const iconName = item.Icon?.split('/')?.pop();
+    const iconPath = iconName ? `assets/skill_icons/${iconName}_A.png` : null;
+
+    // Get rarity background
+    const rarity = item.Rarity;
+    let backgroundImage = null;
+    if (item.Stype === 42) {
+        backgroundImage = 'assets/skill_icons/rare_vestige_card_s_7.png';
+    } else if (item.Stype === 41) {
+        if (rarity === 1) {
+            backgroundImage = 'assets/skill_icons/rare_vestige_card_s_9.png';
+        } else if (rarity === 2) {
+            backgroundImage = 'assets/skill_icons/rare_vestige_card_s_8.png';
+        }
+    }
+
+    // Get DETAILED description (always use .2 suffix for detailed)
+    currentPotentialData = potential;
+    const detailedKey = `Potential.${potId}.2`;
+    const detailedDesc = dbState.potentialsKR[detailedKey] || `Potential ${potId} detailed description not found`;
+    const processedDesc = processDescription(detailedDesc, currentLevel);
+
+    // Create card
+    const card = document.createElement('div');
+    card.className = 'potential-card';
+
+    card.innerHTML = `
+        <div class="potential-card-header">
+            <div class="potential-card-image">
+                ${backgroundImage ? `<img src="${backgroundImage}" class="potential-bg" onerror="this.style.display='none'">` : ''}
+                ${iconPath ? `<img src="${iconPath}" class="potential-icon" onerror="this.style.display='none'">` : '<span class="potential-placeholder">✨</span>'}
+            </div>
+            <div class="potential-card-info">
+                <div class="potential-card-name">${name}</div>
+                <div class="potential-card-meta">ID: ${potId} | Lv.${currentLevel}</div>
+            </div>
+        </div>
+        <div class="potential-card-body">
+            <div class="potential-card-desc">${processedDesc}</div>
+        </div>
+    `;
+
+    return card;
+}
+
+/**
+ * Render potentials for the selected character
+ */
+function renderPotentials(charId) {
+    const container = dbState.domCache.potentialsDisplay || document.getElementById('potentials-display');
+    if (!container) return;
+
+    // Check if potential data is loaded
+    if (!dbState.charPotentials || Object.keys(dbState.charPotentials).length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⏳</div><div class="empty-state-text">잠재력 데이터를 불러오는 중...</div></div>';
+        container.classList.add('empty');
+        return;
+    }
+
+    const type = dbState.currentPotentialType;
+    const level = dbState.potentialLevel;
+
+    // Get character potentials
+    const charPotentials = dbState.charPotentials[charId];
+    if (!charPotentials) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">✨</div><div class="empty-state-text">잠재력 정보가 없습니다.</div></div>';
+        container.classList.add('empty');
+        return;
+    }
+
+    // Get potential lists based on type
+    // Main potentials = MasterSpecificPotentialIds + MasterNormalPotentialIds + CommonPotentialIds
+    // Assist potentials = AssistSpecificPotentialIds + AssistNormalPotentialIds + CommonPotentialIds
+    let potentialList = [];
+    if (type === 'main') {
+        potentialList = [
+            ...(charPotentials.MasterSpecificPotentialIds || []),
+            ...(charPotentials.MasterNormalPotentialIds || []),
+            ...(charPotentials.CommonPotentialIds || [])
+        ];
+    } else {
+        potentialList = [
+            ...(charPotentials.AssistSpecificPotentialIds || []),
+            ...(charPotentials.AssistNormalPotentialIds || []),
+            ...(charPotentials.CommonPotentialIds || [])
+        ];
+    }
+
+    if (!potentialList || potentialList.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">✨</div><div class="empty-state-text">이 타입의 잠재력 정보가 없습니다.</div></div>';
+        container.classList.add('empty');
+        return;
+    }
+
+    container.classList.remove('empty');
+    container.innerHTML = '';
+
+    // Group potentials by Build (유파)
+    const potentialsByBuild = {};
+    potentialList.forEach(potId => {
+        const potential = dbState.potentials[potId];
+        if (!potential) return;
+
+        const buildId = potential.Build || 3; // Default to 3 (공용) if not specified
+        if (!potentialsByBuild[buildId]) {
+            potentialsByBuild[buildId] = [];
+        }
+        potentialsByBuild[buildId].push(potId);
+    });
+
+    // Sort build IDs (1, 2, 3)
+    const buildIds = Object.keys(potentialsByBuild).sort((a, b) => parseInt(a) - parseInt(b));
+
+    // Get character description for build titles and descriptions
+    const charDesBase = dbState.characterDes?.[charId];
+    const charDesTranslated = dbState.characterDesKR;
+
+    // Render each 유파 group
+    let renderedCount = 0;
+    buildIds.forEach(buildId => {
+        let buildTitle = '';
+        let buildDescription = '';
+
+        // Get build title and description based on type and build ID
+        if (type === 'main') {
+            if (buildId === '1') {
+                const titleKey = charDesBase?.PotentialMain1;
+                const descKey = charDesBase?.PotentialMainContent1;
+                buildTitle = titleKey ? (charDesTranslated?.[titleKey] || '유파1') : '유파1';
+                buildDescription = descKey ? (charDesTranslated?.[descKey] || '') : '';
+            } else if (buildId === '2') {
+                const titleKey = charDesBase?.PotentialMain2;
+                const descKey = charDesBase?.PotentialMainContent2;
+                buildTitle = titleKey ? (charDesTranslated?.[titleKey] || '유파2') : '유파2';
+                buildDescription = descKey ? (charDesTranslated?.[descKey] || '') : '';
+            } else {
+                buildTitle = '공용';
+                buildDescription = '';
+            }
+        } else {
+            if (buildId === '1') {
+                const titleKey = charDesBase?.PotentialAssistant1;
+                const descKey = charDesBase?.PotentialAssistantContent1;
+                buildTitle = titleKey ? (charDesTranslated?.[titleKey] || '유파1') : '유파1';
+                buildDescription = descKey ? (charDesTranslated?.[descKey] || '') : '';
+            } else if (buildId === '2') {
+                const titleKey = charDesBase?.PotentialAssistant2;
+                const descKey = charDesBase?.PotentialAssistantContent2;
+                buildTitle = titleKey ? (charDesTranslated?.[titleKey] || '유파2') : '유파2';
+                buildDescription = descKey ? (charDesTranslated?.[descKey] || '') : '';
+            } else {
+                buildTitle = '공용';
+                buildDescription = '';
+            }
+        }
+
+        // Create section header for this 유파
+        const sectionHeader = document.createElement('div');
+        sectionHeader.className = 'potential-build-header';
+        sectionHeader.innerHTML = `
+            <div class="potential-build-title-wrapper">
+                <div class="potential-build-title">
+                    <span class="potential-build-icon">✦</span>
+                    ${buildTitle}
+                </div>
+                <div class="potential-build-count">${potentialsByBuild[buildId].length}개</div>
+            </div>
+            ${buildDescription ? `<div class="potential-build-description">${buildDescription}</div>` : ''}
+        `;
+        container.appendChild(sectionHeader);
+
+        // Separate specific potentials from normal/common potentials
+        const specificPots = [];
+        const normalCommonPots = [];
+
+        potentialsByBuild[buildId].forEach(potId => {
+            const item = dbState.items[potId];
+            if (item && item.Stype === 42) {
+                specificPots.push(potId);
+            } else {
+                normalCommonPots.push(potId);
+            }
+        });
+
+        // Render specific potentials first
+        if (specificPots.length > 0) {
+            const specificGroup = document.createElement('div');
+            specificGroup.className = 'potential-group';
+            specificPots.forEach(potId => {
+                const card = createPotentialCard(potId, level);
+                if (card) {
+                    specificGroup.appendChild(card);
+                    renderedCount++;
+                }
+            });
+            container.appendChild(specificGroup);
+        }
+
+        // Render normal/common potentials
+        if (normalCommonPots.length > 0) {
+            const normalGroup = document.createElement('div');
+            normalGroup.className = 'potential-group';
+            normalCommonPots.forEach(potId => {
+                const card = createPotentialCard(potId, level);
+                if (card) {
+                    normalGroup.appendChild(card);
+                    renderedCount++;
+                }
+            });
+            container.appendChild(normalGroup);
+        }
+    });
+}
+
+/**
+ * Switch between main and assist potentials
+ */
+function switchPotentialType(type, event) {
+    dbState.currentPotentialType = type;
+
+    // Update button states
+    document.querySelectorAll('.potential-type-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+    }
+
+    // Re-render potentials
+    if (dbState.selectedCharacterId) {
+        renderPotentials(dbState.selectedCharacterId);
+    }
+}
+
+/**
+ * Update global potential level
+ */
+function updatePotentialLevel(newLevel) {
+    dbState.potentialLevel = Math.max(1, Math.min(9, newLevel));
+
+    // Update display immediately (no lag for UI feedback)
+    const display = document.getElementById('potential-level-display');
+    if (display) {
+        display.textContent = dbState.potentialLevel;
+    }
+
+    // Update slider
+    const slider = document.getElementById('potential-level-slider');
+    if (slider) {
+        slider.value = dbState.potentialLevel;
+    }
+
+    // Re-render potentials with debouncing (reduces DOM updates during dragging)
+    if (dbState.selectedCharacterId) {
+        debouncedRenderPotentials(dbState.selectedCharacterId);
+    }
+}
+
+/**
+ * Adjust potential level by delta
+ */
+function adjustPotentialLevel(delta) {
+    const newLevel = dbState.potentialLevel + delta;
+    updatePotentialLevel(newLevel);
+}
+
+/**
+ * Switch between character database tabs
+ */
+function switchCharDbTab(tabName) {
+    // Update tab buttons
+    document.querySelectorAll('.chardb-tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.closest('.chardb-tab-btn').classList.add('active');
+
+    // Update tab panels
+    document.querySelectorAll('.chardb-tab-panel').forEach(panel => {
+        panel.classList.remove('active');
+    });
+    document.getElementById(`tab-${tabName}`).classList.add('active');
+
+    // Render content for tabs that haven't been rendered yet
+    if (tabName === 'skills' && dbState.selectedCharacterId) {
+        renderSkills(dbState.selectedCharacterId);
+    } else if (tabName === 'talents' && dbState.selectedCharacterId) {
+        renderTalents(dbState.selectedCharacterId);
+    }
+}
+
+// ========================================
+// SKILLS SECTION
+// ========================================
+
+/**
+ * Render character skills
+ */
+function renderSkills(charId) {
+    const container = dbState.domCache.skillsDisplay || document.getElementById('skills-display');
+    if (!container) return;
+
+    const char = dbState.characters[charId];
+    if (!char) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⚡</div><div class="empty-state-text">스킬 정보를 찾을 수 없습니다.</div></div>';
+        return;
+    }
+
+    // Check if skill data is loaded
+    if (!dbState.skills || Object.keys(dbState.skills).length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⏳</div><div class="empty-state-text">스킬 데이터를 불러오는 중...</div></div>';
+        return;
+    }
+
+    const skillLevel = dbState.skillLevel;
+
+    // Get skill IDs
+    const skillIds = [
+        { id: char.NormalAtkId, label: '일반 공격', key: 'normalAtk' },
+        { id: char.SkillId, label: '스킬', key: 'skill' },
+        { id: char.AssistSkillId, label: '지원 스킬', key: 'assistSkill' },
+        { id: char.UltimateId, label: '필살기', key: 'ultimate' }
+    ];
+
+    container.innerHTML = '';
+
+    skillIds.forEach(({ id, label, key }) => {
+        if (!id) return;
+
+        const skill = dbState.skills[id];
+        if (!skill) return;
+
+        const iconName = skill.Icon ? skill.Icon.split('/').pop() : '';
+        const iconPath = iconName ? `assets/skill_icons/${iconName}.png` : '';
+
+        // Get element background
+        const elementId = char.EET;
+        const elementBgPath = `assets/skill_icons/skill_btn_b_type_${elementId}.png`;
+
+        // Get title
+        const titleKey = skill.Title;
+        const title = dbState.skillsKR[titleKey] || label;
+
+        // Get description (use detailed description .2)
+        const descKey = skill.Desc;
+        let description = dbState.skillsKR[descKey] || '';
+
+        // Parse parameters in description
+        currentPotentialData = skill; // Temporarily use skill as the data source for params
+        description = processDescription(description, skillLevel, skillLevel);
+
+        // Create skill card
+        const card = document.createElement('div');
+        card.className = 'skill-card';
+
+        card.innerHTML = `
+            <div class="skill-card-header">
+                <div class="skill-card-icon-wrapper">
+                    <img src="${elementBgPath}" alt="" class="skill-icon-bg" onerror="this.style.display='none'">
+                    ${iconPath ? `<img src="${iconPath}" alt="${title}" class="skill-icon" onerror="this.style.display='none'">` : '<span class="skill-placeholder">⚡</span>'}
+                </div>
+                <div class="skill-card-info">
+                    <div class="skill-card-title">${title}</div>
+                    <div class="skill-card-meta">
+                        <span class="skill-label">${label}</span>
+                        ${skill.SkillCD > 0 ? `<span class="skill-label">CD: ${(skill.SkillCD / 10000).toFixed(1)}초</span>` : ''}
+                    </div>
+                </div>
+            </div>
+            <div class="skill-card-body">
+                <div class="skill-card-desc">${description}</div>
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+
+    if (container.children.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⚡</div><div class="empty-state-text">스킬 정보가 없습니다.</div></div>';
+    }
+}
+
+/**
+ * Update global skill level
+ */
+function updateSkillLevelDB(newLevel) {
+    dbState.skillLevel = Math.max(1, Math.min(13, newLevel));
+
+    // Update display
+    const display = document.getElementById('skill-level-display');
+    if (display) {
+        display.textContent = dbState.skillLevel;
+    }
+
+    // Update slider
+    const slider = document.getElementById('skill-level-slider');
+    if (slider) {
+        slider.value = dbState.skillLevel;
+    }
+
+    // Re-render skills
+    if (dbState.selectedCharacterId) {
+        renderSkills(dbState.selectedCharacterId);
+    }
+}
+
+/**
+ * Adjust skill level by delta
+ */
+function adjustSkillLevel(delta) {
+    const newLevel = dbState.skillLevel + delta;
+    updateSkillLevelDB(newLevel);
+}
+
+// ========================================
+// TALENTS SECTION
+// ========================================
+
+/**
+ * Render character talents (limit break progression)
+ */
+function renderTalents(charId) {
+    const container = dbState.domCache.talentsDisplay || document.getElementById('talents-display');
+    if (!container) return;
+
+    // Check if talent data is loaded
+    if (!dbState.talentGroups || Object.keys(dbState.talentGroups).length === 0 ||
+        !dbState.talents || Object.keys(dbState.talents).length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⏳</div><div class="empty-state-text">돌파 데이터를 불러오는 중...</div></div>';
+        return;
+    }
+
+    // Find all talent groups for this character (Background 1-5 for limit breaks)
+    const talentGroups = Object.values(dbState.talentGroups)
+        .filter(group => group.CharId === charId)
+        .sort((a, b) => a.Background - b.Background);
+
+    if (talentGroups.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">✨</div><div class="empty-state-text">돌파 정보가 없습니다.</div></div>';
+        return;
+    }
+
+    container.innerHTML = '';
+
+    talentGroups.forEach(group => {
+        // Get title for this limit break phase
+        const titleKey = group.Title;
+        const title = dbState.talentGroupsKR[titleKey] || `돌파 ${group.Background}`;
+
+        // Create section for this limit break
+        const section = document.createElement('div');
+        section.className = 'talent-section';
+
+        // Section header
+        const header = document.createElement('div');
+        header.className = 'talent-section-header';
+        header.innerHTML = `
+            <div class="talent-section-title">
+                <span class="talent-section-icon">🌟</span>
+                ${title}
+            </div>
+            <div class="talent-section-badge">돌파 ${group.Background}</div>
+        `;
+        section.appendChild(header);
+
+        // Get all talents for this group
+        const talents = Object.values(dbState.talents)
+            .filter(talent => talent.GroupId === group.Id)
+            .sort((a, b) => a.Sort - b.Sort);
+
+        // Separate sub nodes (Type 2) and main node (Type 1)
+        const subNodes = talents.filter(t => t.Type === 2);
+        const mainNode = talents.find(t => t.Type === 1);
+
+        // Render sub nodes (stat increases) - aggregate them
+        if (subNodes.length > 0) {
+            const subNodesContainer = document.createElement('div');
+            subNodesContainer.className = 'talent-subnodes';
+
+            const subNodesTitle = document.createElement('div');
+            subNodesTitle.className = 'talent-subnodes-title';
+            subNodesTitle.textContent = '스탯 증가';
+            subNodesContainer.appendChild(subNodesTitle);
+
+            // Aggregate stats by effectAttributeType (the actual stat ID)
+            const statAggregation = {};
+
+            subNodes.forEach(talent => {
+                if (talent.Param1) {
+                    // Parse the param to get the actual value
+                    const parsed = parseParamValue(talent.Param1, 1, 1);
+
+                    // Extract info from Param1
+                    const paramParts = talent.Param1.split(',');
+                    if (paramParts.length >= 3) {
+                        const effectId = paramParts[2];
+                        const formatType = paramParts[4] || 'Fixed';
+
+                        // Get the effect data
+                        const effectData = dbState.effectValue[effectId];
+                        if (effectData) {
+                            // Get the actual stat type ID from EffectTypeFirstSubtype
+                            const statTypeId = effectData.EffectTypeFirstSubtype;
+
+                            // Get the raw value from EffectTypeParam1
+                            const rawValue = parseFloat(effectData.EffectTypeParam1);
+
+                            if (statTypeId !== undefined && !isNaN(rawValue)) {
+                                // Use statTypeId as the key for aggregation
+                                if (!statAggregation[statTypeId]) {
+                                    statAggregation[statTypeId] = {
+                                        value: 0,
+                                        formatType: formatType,
+                                        count: 0
+                                    };
+                                }
+
+                                // Add the raw value (rounded to avoid floating point errors)
+                                statAggregation[statTypeId].value = Math.round((statAggregation[statTypeId].value + rawValue) * 1000000) / 1000000;
+                                statAggregation[statTypeId].count++;
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Render aggregated stats
+            const statsList = document.createElement('div');
+            statsList.className = 'talent-stats-list';
+
+            for (const [statTypeId, data] of Object.entries(statAggregation)) {
+                const statItem = document.createElement('div');
+                statItem.className = 'talent-stat-item';
+
+                // Get stat name from GameEnums effectAttributeType
+                const statEnum = dbState.gameEnums?.effectAttributeType?.[statTypeId];
+                const statName = statEnum?.name || `Stat ${statTypeId}`;
+
+                // Format the value
+                let displayValue = data.value;
+                if (data.formatType === 'HdPct') {
+                    displayValue = (Math.round(data.value * 10000) / 100).toFixed(2) + '%';
+                } else if (data.formatType === '10KHdPct') {
+                    displayValue = (Math.round(data.value) / 100).toFixed(2) + '%';
+                } else if (data.formatType === '10K') {
+                    displayValue = (Math.round(data.value) / 10000).toFixed(1);
+                } else if (data.formatType === '10KPct') {
+                    displayValue = (Math.round(data.value) / 10000).toFixed(1) + '%';
+                } else {
+                    // For Fixed format, round to nearest integer
+                    displayValue = Math.round(data.value).toLocaleString();
+                }
+
+                statItem.innerHTML = `
+                    <span class="talent-stat-name">${statName}</span>
+                    <span class="talent-stat-value">+${displayValue}</span>
+                `;
+                statsList.appendChild(statItem);
+            }
+
+            subNodesContainer.appendChild(statsList);
+            section.appendChild(subNodesContainer);
+        }
+
+        // Render main node (main effect)
+        if (mainNode) {
+            const descKey = mainNode.Desc;
+            let mainDesc = dbState.talentsKR[descKey] || '';
+
+            // Parse parameters
+            currentPotentialData = mainNode;
+            mainDesc = processDescription(mainDesc, 1, 1);
+
+            const mainNodeCard = document.createElement('div');
+            mainNodeCard.className = 'talent-mainnode';
+
+            mainNodeCard.innerHTML = `
+                <div class="talent-mainnode-desc">${mainDesc}</div>
+            `;
+
+            section.appendChild(mainNodeCard);
+        }
+
+        container.appendChild(section);
+    });
+}
+
+// Make functions globally accessible
+window.switchPotentialType = switchPotentialType;
+window.updatePotentialLevel = updatePotentialLevel;
+window.adjustPotentialLevel = adjustPotentialLevel;
+window.switchCharDbTab = switchCharDbTab;
+window.updateSkillLevel = updateSkillLevelDB;
+window.adjustSkillLevel = adjustSkillLevel;
