@@ -127,8 +127,20 @@
       "characterId": 119,
       "tags": ["스킬", "나노하"],
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBMDgdDsC1jABIDJ9gOy0ogDGUoAttSAJaYwwCc5ADlANoCsLrFsn5sYCYQIQBmCWwQAWWawQAOJQlZL5AJi0yRg7QF1UHADb0DqqADZUV9pDsgDY2-YEtbAX1N1IoFYqmIAiq4AYQ+QOoREeokjQ4ZGeMNFJotqYgCNrgDhDgCDjaaw6mIChXYAWq4AznQXyUiUVIN6+IACGKQGMzNo1pjz8ndo2JiDmljB9Nj5+I2OpDahNGW1M0KNI3ZB8K50S2gjair27mgfaagdSCIMc-oGbwdCAJ033gK7jgASDSTvajiCPr+-S8d9nm8Gg0gA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(11/18) 시아 하이브리드 빌드",
+      "description": "평타, 스킬을 합친 하이브리드 시아 빌드입니다.",
+      "author": "뉴비용) 조합별 빌드, 잠재력 카드 컨닝 페이퍼",
+      "authorLink": "https://arca.live/b/stellasora/152244437",
+      "element": "Light",
+      "characterId": 155,
+      "tags": ["하이브리드", "시"],
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBqrgXccDB9gNZ2A7LYDtDgIqMogDGUoAtrSAJaYwCsblADlANpvs2CAEzIBHBABYxghADYZHGAkVCA7KpgBmVZJ3i2k0QZjCAuqi4AbRgflQFIO2oeoTSSI5NaHAX0sMkKB2nNCAIquAGEOUdnKYkdGyLuFRbrIAnHEpToLKmQlKwpiAoV2AFquAM535Aj7QgCdNNYCu44AEg5VGxeUt1SClFb7+IACGMIws0NqFlnxVwtMyWsJa+mPCAByz09JTWiqbMBYg1rZLy67Zc1snm9VyfVyBwUux0N0JcyttFalnHiDxn-NDT3afwWeV6qH6hSCzFYCBcE0g-GUanmMlhwg2SOEbFRyIUAjRq3xyLSOK0u0sNihRKxF0xjy8mOOnlSaIyzOysLJfgChzRoR+WWpjwFCTRSRAdSaouRTIlDWaLOJmElCo5ai5tXlIF6vSAA"
     }
   ],
+  
   "elements": {
     "Water": {
       "name": "물 속성",
