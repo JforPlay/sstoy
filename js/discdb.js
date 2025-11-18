@@ -73,6 +73,12 @@
     // Load all disc data
     async function loadDiscData() {
         try {
+            // Get current language from i18n
+            const gameLang = window.i18n?.currentLang || 'KR';
+            const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
+
+            console.log(`[DiscDB] Loading data for language: ${gameLang}`);
+
             const [
                 discData,
                 discIPData,
@@ -93,18 +99,18 @@
             ] = await Promise.all([
                 fetch('data/Disc.json').then(r => r.json()),
                 fetch('data/DiscIP.json').then(r => r.json()),
-                fetch('data/kr/DiscIP.json').then(r => r.json()),
+                fetch(`${dataPath}/DiscIP.json`).then(r => r.json()),
                 fetch('data/Item.json').then(r => r.json()),
-                fetch('data/kr/Item.json').then(r => r.json()),
+                fetch(`${dataPath}/Item.json`).then(r => r.json()),
                 fetch('data/GameEnums.json').then(r => r.json()),
                 fetch('data/MainSkill.json').then(r => r.json()),
                 fetch('data/SecondarySkill.json').then(r => r.json()),
-                fetch('data/kr/MainSkill.json').then(r => r.json()),
-                fetch('data/kr/SecondarySkill.json').then(r => r.json()),
+                fetch(`${dataPath}/MainSkill.json`).then(r => r.json()),
+                fetch(`${dataPath}/SecondarySkill.json`).then(r => r.json()),
                 fetch('data/SubNoteSkill.json').then(r => r.json()),
-                fetch('data/kr/SubNoteSkill.json').then(r => r.json()),
+                fetch(`${dataPath}/SubNoteSkill.json`).then(r => r.json()),
                 fetch('data/SubNoteSkillPromoteGroup.json').then(r => r.json()),
-                fetch('data/kr/DiscTag.json').then(r => r.json()),
+                fetch(`${dataPath}/DiscTag.json`).then(r => r.json()),
                 fetch('data/Attribute.json').then(r => r.json()),
                 fetch('data/DiscExtraAttribute.json').then(r => r.json())
             ]);
@@ -657,6 +663,35 @@
         container.innerHTML = skillsHTML.join('');
     }
 
+    // Get required notes for a disc's secondary skills (same as app-disc.js)
+    function getSecondarySkillNoteRequirements(disc) {
+        if (!disc) return [];
+
+        const uniqueNotes = new Set();
+
+        // Check both secondary skill groups
+        [disc.SecondarySkillGroupId1, disc.SecondarySkillGroupId2].forEach(groupId => {
+            if (!groupId) return;
+
+            // Check all levels (01-09) for this group
+            for (let level = 1; level <= 9; level++) {
+                const skillId = String(groupId) + String(level).padStart(2, '0');
+                const skill = discDBState.secondarySkillData[skillId];
+
+                if (skill && skill.NeedSubNoteSkills) {
+                    try {
+                        const requirements = JSON.parse(skill.NeedSubNoteSkills);
+                        Object.keys(requirements).forEach(noteId => uniqueNotes.add(noteId));
+                    } catch (e) {
+                        // Silent fail
+                    }
+                }
+            }
+        });
+
+        return Array.from(uniqueNotes);
+    }
+
     // Generate notes display
     function generateNotesDisplay(disc) {
         if (!disc || !disc.SubNoteSkillGroupId) return '';
@@ -670,7 +705,12 @@
 
         try {
             const noteContributions = JSON.parse(phaseData.SubNoteSkills);
-            const noteItems = Object.entries(noteContributions).map(([noteId, count]) => {
+
+            // Get required notes for this disc
+            const requiredNotes = getSecondarySkillNoteRequirements(disc);
+
+            // Generate provided notes display
+            const providedNoteItems = Object.entries(noteContributions).map(([noteId, count]) => {
                 const noteData = discDBState.subNoteSkillData[noteId];
                 if (!noteData) return '';
 
@@ -688,34 +728,72 @@
                 `;
             }).filter(i => i).join('');
 
-            if (noteItems) {
+            // Generate required notes display (unique notes only)
+            const requiredNoteItems = requiredNotes.map(noteId => {
+                const noteData = discDBState.subNoteSkillData[noteId];
+                if (!noteData) return '';
+
+                const noteIconPath = getNoteIconPath(noteData);
+                const noteName = discDBState.subNoteSkillKRData[noteData.Name] || noteData.Name || '';
+
+                return `
+                    <div class="note-item">
+                        ${noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="note-icon" onerror="this.style.display='none'">` : ''}
+                        <div class="note-info">
+                            <div class="note-name">${noteName}</div>
+                        </div>
+                    </div>
+                `;
+            }).filter(i => i).join('');
+
+            if (providedNoteItems || requiredNoteItems) {
                 return `
                     <div class="notes-section">
-                        <div class="section-header">
-                            <h3 class="section-title">
-                                <span class="section-icon"><i class="fa-solid fa-music"></i></span>
-                                제공 소리
-                            </h3>
-                        </div>
-                        
-                        <!-- Note Phase Control -->
-                        <div class="note-level-control">
-                            <label class="level-label">
-                                <i class="fa-solid fa-music"></i> 소리 단계
-                            </label>
-                            <div class="level-adjuster">
-                                <button class="level-btn" onclick="adjustPhaseLevel(-1)">
-                                    <i class="fa-solid fa-minus"></i>
-                                </button>
-                                <span id="phase-level-display" class="level-display">1+</span>
-                                <button class="level-btn" onclick="adjustPhaseLevel(1)">
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="notes-grid">
-                            ${noteItems}
+                        <!-- Two-column layout for notes -->
+                        <div class="notes-container">
+                            ${requiredNoteItems ? `
+                                <div class="notes-column">
+                                    <div class="section-header">
+                                        <h3 class="section-title">
+                                            <span class="section-icon"><i class="fa-solid fa-star"></i></span>
+                                            필요 소리
+                                        </h3>
+                                    </div>
+                                    <div class="notes-grid required-notes">
+                                        ${requiredNoteItems}
+                                    </div>
+                                </div>
+                            ` : ''}
+
+                            ${providedNoteItems ? `
+                                <div class="notes-column">
+                                    <div class="section-header">
+                                        <h3 class="section-title">
+                                            <span class="section-icon"><i class="fa-solid fa-music"></i></span>
+                                            제공 소리
+                                        </h3>
+                                    </div>
+                                    <div class="notes-grid">
+                                        ${providedNoteItems}
+                                    </div>
+
+                                    <!-- Note Phase Control (inside provided notes column) -->
+                                    <div class="note-level-control">
+                                        <label class="level-label">
+                                            <i class="fa-solid fa-music"></i> 소리 단계
+                                        </label>
+                                        <div class="level-adjuster">
+                                            <button class="level-btn" onclick="adjustPhaseLevel(-1)">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </button>
+                                            <span id="phase-level-display" class="level-display">1+</span>
+                                            <button class="level-btn" onclick="adjustPhaseLevel(1)">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ` : ''}
                         </div>
                     </div>
                 `;
@@ -909,13 +987,41 @@
 
     // Initialize on page load
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            loadDiscData();
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Initialize i18n first
+            await window.i18n.init();
+
+            // Listen for language changes
+            window.addEventListener('languageChanged', async (event) => {
+                console.log('[DiscDB] Language changed, reloading data');
+                await loadDiscData();
+                // Re-render current disc if any
+                if (discDBState.selectedDiscId) {
+                    renderDiscDetails(discDBState.selectedDiscId);
+                }
+            });
+
+            await loadDiscData();
             setupSearchHandler();
         });
     } else {
-        loadDiscData();
-        setupSearchHandler();
+        (async () => {
+            // Initialize i18n first
+            await window.i18n.init();
+
+            // Listen for language changes
+            window.addEventListener('languageChanged', async (event) => {
+                console.log('[DiscDB] Language changed, reloading data');
+                await loadDiscData();
+                // Re-render current disc if any
+                if (discDBState.selectedDiscId) {
+                    renderDiscDetails(discDBState.selectedDiscId);
+                }
+            });
+
+            await loadDiscData();
+            setupSearchHandler();
+        })();
     }
 
 })();
