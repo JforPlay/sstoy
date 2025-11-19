@@ -786,7 +786,7 @@
                                             <button class="level-btn" onclick="adjustPhaseLevel(-1)">
                                                 <i class="fa-solid fa-minus"></i>
                                             </button>
-                                            <span id="phase-level-display" class="level-display">1+</span>
+                                            <span id="phase-level-display" class="level-display">${['1+', '10+', '20+', '30+', '40+', '50+', '60+', '70+', '80+'][discDBState.phaseLevel]}</span>
                                             <button class="level-btn" onclick="adjustPhaseLevel(1)">
                                                 <i class="fa-solid fa-plus"></i>
                                             </button>
