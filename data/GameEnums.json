@@ -345,7 +345,7 @@
     "5": { "key": "NO_DAMAGE", "name": "피해없음" },
     "6": { "key": "NO_DAMAGE_APPLY_FEATHER_NO_ANI", "name": "피해 없음 (피격 모션 X)" },
     "7": { "key": "NO_DAMAGE_APPLY_FEATHER", "name": "피해 없음 (피격 모션 O)" },
-    "8": { "key": "NONE", "name": "무" }
+    "8": { "key": "NONE", "name": "없음" }
   },
   "skillSlotType": {
     "0": { "key": "NONE", "name": "없음" },
