@@ -1,12 +1,12 @@
 {
   "elementType": {
     "0": { "key": "INHERIT", "name": "계승 속성", "icon": "assets/icon_common_property_0.png" },
-    "1": { "key": "WE", "name": "물속성", "icon": "assets/icon_common_property_1.png" },
-    "2": { "key": "FE", "name": "불속성", "icon": "assets/icon_common_property_2.png" },
-    "3": { "key": "SE", "name": "땅속성", "icon": "assets/icon_common_property_3.png" },
-    "4": { "key": "AE", "name": "바람속성", "icon": "assets/icon_common_property_4.png" },
-    "5": { "key": "LE", "name": "빛속성", "icon": "assets/icon_common_property_5.png" },
-    "6": { "key": "DE", "name": "어둠속성", "icon": "assets/icon_common_property_6.png" },
+    "1": { "key": "WE", "name": "물 속성", "icon": "assets/icon_common_property_1.png" },
+    "2": { "key": "FE", "name": "불 속성", "icon": "assets/icon_common_property_2.png" },
+    "3": { "key": "SE", "name": "땅 속성", "icon": "assets/icon_common_property_3.png" },
+    "4": { "key": "AE", "name": "바람 속성", "icon": "assets/icon_common_property_4.png" },
+    "5": { "key": "LE", "name": "빛 속성", "icon": "assets/icon_common_property_5.png" },
+    "6": { "key": "DE", "name": "어둠 속성", "icon": "assets/icon_common_property_6.png" },
     "7": { "key": "NONE", "name": "없음", "icon": "assets/icon_common_property_7.png" }
   },
   "itemRarity": {
@@ -57,9 +57,9 @@
     "37": { "key": "SEERCD", "name": "받는 땅 속성 피해"},
     "38": { "key": "AEERCD", "name": "받는 바람 속성 피해"},
     "39": { "key": "LEERCD", "name": "받는 빛 속성 피해"},
-    "40": {	"key":	"DEERCD",	"name":	"받는 어둠 속성 피해"},
-    "41": {	"key":"WEIGHT","name":"중량"},
-    "42": {	"key":"TOUGHNESS_MAX","name":"최대 강인도"},
+    "40": {	"key": "DEERCD", "name": "받는 어둠 속성 피해"},
+    "41": {	"key": "WEIGHT", "name":"중량"},
+    "42": {	"key": "TOUGHNESS_MAX", "name":"최대 강인도"},
     "43": { "key": "TOUGHNESS_DAMAGE_ADJUST", "name": "방해 내성 무시 효율" },
     "44": { "key": "SHIELD_MAX", "name": "실드 상한" },
     "46": { "key": "MOVESPEED", "name": "이동 속도" },
