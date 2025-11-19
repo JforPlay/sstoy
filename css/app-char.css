@@ -36,6 +36,7 @@ html {
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-display: swap; /* Prevent FOIT (Flash of Invisible Text) */
     background: linear-gradient(135deg, var(--background) 0%, #1a1f35 100%);
     color: var(--text-primary);
     min-height: 100vh;

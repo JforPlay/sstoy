@@ -80,6 +80,9 @@ const i18n = {
         if (selector) {
             selector.value = this.currentLang;
         }
+
+        // Remove loading class to show translated content with smooth fade-in
+        document.documentElement.classList.remove('i18n-loading');
     },
 
     async setLanguage(gameLang) {

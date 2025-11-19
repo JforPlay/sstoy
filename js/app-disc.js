@@ -4,6 +4,13 @@
 (function() {
     'use strict';
     
+    // Image dimension constants to prevent CLS
+    const IMAGE_SIZES = {
+        DISC_ICON: { width: 80, height: 80 },
+        DISC_PORTRAIT: { width: 200, height: 200 },
+        NOTE_ICON: { width: 48, height: 48 }
+    };
+
     // State management
     const discsState = {
         allDiscs: [],
@@ -372,7 +379,7 @@
             
             return `<span class="element-tag" style="color: ${color}; font-weight: 600;">
                 ${elementName} 속성 표식: ${additionalName}
-                ${iconPath ? `<img src="${iconPath}" alt="${elementName}" class="element-tag-icon" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 4px;" onerror="this.style.display='none'">` : ''}
+                ${iconPath ? `<img src="${iconPath}" alt="${elementName}" class="element-tag-icon" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 4px;" width="20" height="20" loading="lazy" onerror="this.style.display='none'">` : ''}
             </span>`;
         });
         
@@ -381,10 +388,10 @@
             const color = elementColors[elementName] || '#FFFFFF';
             const iconName = elementIcons[iconId];
             const iconPath = iconName ? `assets/${iconName}.png` : '';
-            
+
             return `<span class="element-tag" style="color: ${color}; font-weight: 600;">
                 ${elementName} 속성 표식
-                ${iconPath ? `<img src="${iconPath}" alt="${elementName}" class="element-tag-icon" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 4px;" onerror="this.style.display='none'">` : ''}
+                ${iconPath ? `<img src="${iconPath}" alt="${elementName}" class="element-tag-icon" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 4px;" width="20" height="20" loading="lazy" onerror="this.style.display='none'">` : ''}
             </span>`;
         });
         
@@ -614,7 +621,7 @@
             return `
                 <div class="disc-note-card ${isUsed ? 'used-note' : 'unused-note'}">
                     <div class="note-header">
-                        ${iconPath ? `<img src="${iconPath}" alt="${krName}" class="note-icon" onerror="this.style.display='none'">` : ''}
+                        ${iconPath ? `<img src="${iconPath}" alt="${krName}" class="note-icon" width="${IMAGE_SIZES.NOTE_ICON.width}" height="${IMAGE_SIZES.NOTE_ICON.height}" loading="lazy" onerror="this.style.display='none'">` : ''}
                         <div class="note-title">
                             <h4>${krName}</h4>
                             <p class="note-brief">${krBriefDesc}</p>
@@ -802,25 +809,25 @@
                                 <i class="fa-solid fa-border-all"></i> 전체
                             </button>
                             <button class="element-filter-btn" data-element="1" data-action="disc-filter-element">
-                                <img src="assets/icon_common_property_1.png" alt="물 속성" class="element-icon" onerror="this.style.display='none'"> 물 속성
+                                <img src="assets/icon_common_property_1.png" alt="물 속성" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> 물 속성
                             </button>
                             <button class="element-filter-btn" data-element="2" data-action="disc-filter-element">
-                                <img src="assets/icon_common_property_2.png" alt="불 속성" class="element-icon" onerror="this.style.display='none'"> 불 속성
+                                <img src="assets/icon_common_property_2.png" alt="불 속성" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> 불 속성
                             </button>
                             <button class="element-filter-btn" data-element="3" data-action="disc-filter-element">
-                                <img src="assets/icon_common_property_3.png" alt="땅 속성" class="element-icon" onerror="this.style.display='none'"> 땅 속성
+                                <img src="assets/icon_common_property_3.png" alt="땅 속성" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> 땅 속성
                             </button>
                             <button class="element-filter-btn" data-element="4" data-action="disc-filter-element">
-                                <img src="assets/icon_common_property_4.png" alt="바람 속성" class="element-icon" onerror="this.style.display='none'"> 바람 속성
+                                <img src="assets/icon_common_property_4.png" alt="바람 속성" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> 바람 속성
                             </button>
                             <button class="element-filter-btn" data-element="5" data-action="disc-filter-element">
-                                <img src="assets/icon_common_property_5.png" alt="빛 속성" class="element-icon" onerror="this.style.display='none'"> 빛 속성
+                                <img src="assets/icon_common_property_5.png" alt="빛 속성" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> 빛 속성
                             </button>
                             <button class="element-filter-btn" data-element="6" data-action="disc-filter-element">
-                                <img src="assets/icon_common_property_6.png" alt="어둠 속성" class="element-icon" onerror="this.style.display='none'"> 어둠 속성
+                                <img src="assets/icon_common_property_6.png" alt="어둠 속성" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> 어둠 속성
                             </button>
                             <button class="element-filter-btn" data-element="7" data-action="disc-filter-element">
-                                <img src="assets/icon_common_property_7.png" alt="무속성" class="element-icon" onerror="this.style.display='none'"> 무속성
+                                <img src="assets/icon_common_property_7.png" alt="무속성" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> 무속성
                             </button>
                         </div>
                     </div>
@@ -833,7 +840,7 @@
             <div class="modal" id="disc-image-viewer">
                 <div class="image-viewer-content">
                     <button class="close-btn" data-action="disc-close-image-viewer">&times;</button>
-                    <img id="viewer-image" src="" alt="Disc Image">
+                    <img id="viewer-image" src="" alt="Disc Image" width="${IMAGE_SIZES.DISC_PORTRAIT.width}" height="${IMAGE_SIZES.DISC_PORTRAIT.height}" loading="lazy">
                     <div class="viewer-title" id="viewer-title"></div>
                 </div>
             </div>
@@ -861,7 +868,7 @@
 
                 return `
                     <div class="disc-card-note-item">
-                        ${noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="disc-card-note-icon" onerror="this.style.display='none'">` : ''}
+                        ${noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="disc-card-note-icon" width="${IMAGE_SIZES.NOTE_ICON.width}" height="${IMAGE_SIZES.NOTE_ICON.height}" loading="lazy" onerror="this.style.display='none'">` : ''}
                         <div class="disc-card-note-info">
                             <div class="disc-card-note-name">${noteName}</div>
                             <div class="disc-card-note-count">+${count}</div>
@@ -949,7 +956,7 @@
                 // Generate exceed icons based on limitBreak value
                 let exceedIconsHtml = '';
                 for (let i = 0; i < limitBreak; i++) {
-                    exceedIconsHtml += `<img src="${exceedIconPath}" alt="돌파" class="exceed-icon" onerror="this.style.display='none'">`;
+                    exceedIconsHtml += `<img src="${exceedIconPath}" alt="돌파" class="exceed-icon" width="32" height="32" loading="lazy" onerror="this.style.display='none'">`;
                 }
                 
                 levelControlHtml = `
@@ -982,18 +989,18 @@
                         <div class="disc-slot-name-group">
                             <div class="disc-name-with-element">
                                 <span class="disc-slot-name">${discName}</span>
-                                ${elementInfo.icon ? `<img src="${elementInfo.icon}" alt="${elementInfo.name}" class="disc-element-icon" title="${elementInfo.name}" onerror="this.style.display='none'">` : `<span class="disc-element-name">${elementInfo.name}</span>`}
+                                ${elementInfo.icon ? `<img src="${elementInfo.icon}" alt="${elementInfo.name}" class="disc-element-icon" title="${elementInfo.name}" width="20" height="20" loading="lazy" onerror="this.style.display='none'">` : `<span class="disc-element-name">${elementInfo.name}</span>`}
                             </div>
                             <span class="disc-slot-id">ID: ${selectedDisc.Id}</span>
                         </div>
                     </div>
                     <div class="disc-slot-preview">
-                        <div class="disc-icon-container ${rarityInfo.borderClass}" 
+                        <div class="disc-icon-container ${rarityInfo.borderClass}"
                              data-action="disc-open-image-viewer"
                              data-image-path="${largePath}"
                              data-disc-name="${discName}"
                              title="클릭하여 크게 보기">
-                            <img src="${iconPath}" alt="${discName}" class="disc-icon" 
+                            <img src="${iconPath}" alt="${discName}" class="disc-icon" width="${IMAGE_SIZES.DISC_ICON.width}" height="${IMAGE_SIZES.DISC_ICON.height}" loading="lazy"
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="disc-placeholder" style="display: none;">
                                 <span class="disc-placeholder-icon">${getIcon('disc')}</span>
@@ -1067,8 +1074,8 @@
             html += `
                 <div class="disc-skill-item main-skill">
                     <div class="skill-icon-container">
-                        ${iconBgPath ? `<img src="${iconBgPath}" alt="skill bg" class="skill-icon-bg" onerror="this.style.display='none'">` : ''}
-                        ${iconPath ? `<img src="${iconPath}" alt="${translation.name}" class="skill-icon" onerror="this.style.display='none'">` : ''}
+                        ${iconBgPath ? `<img src="${iconBgPath}" alt="skill bg" class="skill-icon-bg" width="80" height="80" loading="lazy" onerror="this.style.display='none'">` : ''}
+                        ${iconPath ? `<img src="${iconPath}" alt="${translation.name}" class="skill-icon" width="60" height="60" loading="lazy" onerror="this.style.display='none'">` : ''}
                     </div>
                     <div class="skill-content">
                         <div class="skill-header">
@@ -1099,8 +1106,8 @@
                     html += `
                         <div class="disc-skill-item secondary-skill">
                             <div class="skill-icon-container">
-                                ${iconBgPath ? `<img src="${iconBgPath}" alt="skill bg" class="skill-icon-bg" onerror="this.style.display='none'">` : ''}
-                                ${iconPath ? `<img src="${iconPath}" alt="${translation.name}" class="skill-icon" onerror="this.style.display='none'">` : ''}
+                                ${iconBgPath ? `<img src="${iconBgPath}" alt="skill bg" class="skill-icon-bg" width="80" height="80" loading="lazy" onerror="this.style.display='none'">` : ''}
+                                ${iconPath ? `<img src="${iconPath}" alt="${translation.name}" class="skill-icon" width="60" height="60" loading="lazy" onerror="this.style.display='none'">` : ''}
                             </div>
                             <div class="skill-content">
                                 <div class="skill-header">
@@ -1212,7 +1219,7 @@
 
             return `
                 <div class="required-note-item">
-                    ${noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="required-note-icon" onerror="this.style.display='none'">` : ''}
+                    ${noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="required-note-icon" width="${IMAGE_SIZES.NOTE_ICON.width}" height="${IMAGE_SIZES.NOTE_ICON.height}" loading="lazy" onerror="this.style.display='none'">` : ''}
                     <span class="required-note-name">${noteName}</span>
                 </div>
             `;
@@ -1409,7 +1416,7 @@
                             const noteName = discsState.subNoteSkillKRData[noteData.Name] || noteData.Name || '';
                             // Add 'required-match' class if this note is required by main discs
                             const isRequired = discsState.requiredNotes.has(noteId);
-                            return noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="disc-note-preview-icon ${isRequired ? 'required-match' : ''}" title="${noteName} +${noteContributions[noteId]}" onerror="this.style.display='none'">` : '';
+                            return noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="disc-note-preview-icon ${isRequired ? 'required-match' : ''}" title="${noteName} +${noteContributions[noteId]}" width="${IMAGE_SIZES.NOTE_ICON.width}" height="${IMAGE_SIZES.NOTE_ICON.height}" loading="lazy" onerror="this.style.display='none'">` : '';
                         }).filter(i => i).join('');
 
                         if (noteIcons) {
@@ -1431,7 +1438,7 @@
             
             discOption.innerHTML = `
                 <div class="disc-option-image ${rarityInfo.borderClass}">
-                    <img src="${iconPath}" alt="${discName}"
+                    <img src="${iconPath}" alt="${discName}" width="${IMAGE_SIZES.DISC_ICON.width}" height="${IMAGE_SIZES.DISC_ICON.height}" loading="lazy"
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="disc-placeholder" style="display: none;">
                         <span class="disc-placeholder-icon">${getIcon('disc')}</span>
@@ -1442,7 +1449,7 @@
                     <div class="disc-option-name">${discName}</div>
                     <div class="disc-option-details">
                         <span class="disc-option-id">ID: ${disc.Id}</span>
-                        ${elementInfo.icon ? `<img src="${elementInfo.icon}" alt="${elementInfo.name}" class="disc-option-element-icon" title="${elementInfo.name}" onerror="this.style.display='none'">` : `<span class="disc-option-element">${elementInfo.name}</span>`}
+                        ${elementInfo.icon ? `<img src="${elementInfo.icon}" alt="${elementInfo.name}" class="disc-option-element-icon" title="${elementInfo.name}" width="20" height="20" loading="lazy" onerror="this.style.display='none'">` : `<span class="disc-option-element">${elementInfo.name}</span>`}
                     </div>
                     ${notesInfo}
                 </div>

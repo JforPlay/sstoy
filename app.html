@@ -2,6 +2,7 @@
 layout: default
 title: "스텔라 소라 도자기 굽기"
 css:
+  - css/components/skeleton.css
   - css/components/modals.css
   - css/components/cards.css
   - css/components/filters.css
@@ -20,6 +21,20 @@ scripts_footer:
   - js/app-preset.js
   - js/app-saveload.js
 ---
+
+<!-- Skeleton Loading UI -->
+<div class="skeleton-container hidden" id="skeleton-loading">
+    <div class="skeleton skeleton-header"></div>
+    <div class="skeleton skeleton-tabs"></div>
+    <div class="skeleton-grid">
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+    </div>
+</div>
 
 <div class="container">
     <header>

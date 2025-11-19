@@ -1,6 +1,15 @@
 // Constants
 const SKILL_LEVEL_BONUS = 3; // Added to skill's base MaxLevel
 
+// Image dimension constants to prevent CLS (Cumulative Layout Shift)
+const IMAGE_SIZES = {
+    CHARACTER_PORTRAIT: { width: 200, height: 200 },
+    CHARACTER_GRID_ITEM: { width: 120, height: 120 },
+    SKILL_ICON: { width: 48, height: 48 },
+    POTENTIAL_ICON: { width: 64, height: 64 },
+    ITEM_ICON: { width: 40, height: 40 }
+};
+
 // Global state
 let state = {
     characters: {},
@@ -54,8 +63,51 @@ let state = {
     }
 };
 
-// Description cache for performance optimization
-const descriptionCache = new Map();
+// LRU Cache implementation for description parsing (prevents memory leaks)
+class LRUCache {
+    constructor(limit = 500) {
+        this.limit = limit;
+        this.cache = new Map();
+    }
+
+    get(key) {
+        if (!this.cache.has(key)) return undefined;
+
+        // Move to end (most recently used)
+        const value = this.cache.get(key);
+        this.cache.delete(key);
+        this.cache.set(key, value);
+        return value;
+    }
+
+    set(key, value) {
+        // Remove if exists (to re-add at end)
+        if (this.cache.has(key)) {
+            this.cache.delete(key);
+        } else if (this.cache.size >= this.limit) {
+            // Delete least recently used (first item)
+            const firstKey = this.cache.keys().next().value;
+            this.cache.delete(firstKey);
+        }
+
+        this.cache.set(key, value);
+    }
+
+    has(key) {
+        return this.cache.has(key);
+    }
+
+    clear() {
+        this.cache.clear();
+    }
+
+    get size() {
+        return this.cache.size;
+    }
+}
+
+// Description cache with automatic size limiting
+const descriptionCache = new LRUCache(500);
 let cacheHits = 0;
 let cacheMisses = 0;
 
@@ -81,6 +133,39 @@ window.state = state;
 window.clearDescriptionCache = clearDescriptionCache;
 window.getCacheStats = getCacheStats;
 
+// Debounce helper function
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Search input listener (set up once at initialization)
+let searchInputListener = null;
+
+function setupSearchInput() {
+    const searchInput = document.getElementById('character-search');
+    if (!searchInput || searchInputListener) {
+        // Already set up or element doesn't exist yet
+        return;
+    }
+
+    // Create debounced search handler
+    searchInputListener = debounce((e) => {
+        renderCharacterGrid(e.target.value);
+    }, 150); // 150ms debounce for better performance
+
+    // Set up listener once
+    searchInput.addEventListener('input', searchInputListener);
+    console.log('[App-Char] Search input listener initialized');
+}
+
 // Initialize character cards with click handlers
 function initializeCharacterCards() {
     const positions = ['master', 'assist1', 'assist2'];
@@ -94,54 +179,124 @@ function initializeCharacterCards() {
     });
 }
 
+// Skeleton UI functions
+function showSkeletonUI() {
+    const skeleton = document.getElementById('skeleton-loading');
+    if (skeleton) {
+        skeleton.classList.remove('hidden');
+        console.log('[App-Char] Showing skeleton UI');
+    }
+}
+
+function hideSkeletonUI() {
+    const skeleton = document.getElementById('skeleton-loading');
+    if (skeleton) {
+        skeleton.classList.add('hidden');
+        console.log('[App-Char] Hiding skeleton UI');
+    }
+}
+
+// Progressive data loading - Phase 1: Critical data (characters only)
+async function loadCriticalData() {
+    const gameLang = window.i18n?.currentLang || 'KR';
+    const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
+
+    console.log('[App-Char] Phase 1: Loading critical data...');
+    const [characters, characterNames] = await Promise.all([
+        fetch('data/Character.json').then(r => r.json()),
+        fetch(`${dataPath}/Character.json`).then(r => r.json())
+    ]);
+
+    state.characters = characters;
+    state.characterNames = characterNames;
+    console.log('[App-Char] Phase 1 complete');
+    return true;
+}
+
+// Progressive data loading - Phase 2: Interactive data
+async function loadInteractiveData() {
+    const gameLang = window.i18n?.currentLang || 'KR';
+    const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
+
+    console.log('[App-Char] Phase 2: Loading interactive data...');
+    const [charPotentials, potentials, potentialNames, itemNames, items, gameEnums] = await Promise.all([
+        fetch('data/CharPotential.json').then(r => r.json()),
+        fetch('data/Potential.json').then(r => r.json()),
+        fetch(`${dataPath}/Potential.json`).then(r => r.json()),
+        fetch(`${dataPath}/Item.json`).then(r => r.json()),
+        fetch('data/Item.json').then(r => r.json()),
+        fetch('data/GameEnums.json').then(r => r.json())
+    ]);
+
+    state.charPotentials = charPotentials;
+    state.potentials = potentials;
+    state.potentialNames = potentialNames;
+    state.itemNames = itemNames;
+    state.items = items;
+    state.gameEnums = gameEnums;
+    console.log('[App-Char] Phase 2 complete');
+    return true;
+}
+
+// Progressive data loading - Phase 3: Full data
+async function loadFullData() {
+    const gameLang = window.i18n?.currentLang || 'KR';
+    const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
+
+    console.log('[App-Char] Phase 3: Loading full data...');
+    const [skills, skillNames, effectValue, hitDamage, onceAdditionalAttributeValue, scriptParameterValue, buffValue, shieldValue] = await Promise.all([
+        fetch('data/Skill.json').then(r => r.json()),
+        fetch(`${dataPath}/Skill.json`).then(r => r.json()),
+        fetch('data/EffectValue.json').then(r => r.json()),
+        fetch('data/HitDamage.json').then(r => r.json()),
+        fetch('data/OnceAdditionalAttributeValue.json').then(r => r.json()),
+        fetch('data/ScriptParameterValue.json').then(r => r.json()),
+        fetch('data/BuffValue.json').then(r => r.json()),
+        fetch('data/ShieldValue.json').then(r => r.json())
+    ]);
+
+    state.skills = skills;
+    state.skillNames = skillNames;
+    state.effectValue = effectValue;
+    state.hitDamage = hitDamage;
+    state.onceAdditionalAttributeValue = onceAdditionalAttributeValue;
+    state.scriptParameterValue = scriptParameterValue;
+    state.buffValue = buffValue;
+    state.shieldValue = shieldValue;
+    console.log('[App-Char] Phase 3 complete');
+    return true;
+}
+
 // Load data on page load
 async function loadData() {
     try {
         // Get current language from i18n
         const gameLang = window.i18n?.currentLang || 'KR';
-        const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
+        console.log(`[App-Char] Starting progressive data load for language: ${gameLang}`);
 
-        console.log(`[App-Char] Loading data for language: ${gameLang}`);
+        // Show skeleton UI while loading Phase 1
+        showSkeletonUI();
 
-        // Load all JSON files
-        const [characters, characterNames, charPotentials, potentials, potentialNames, itemNames, items, gameEnums, skills, skillNames, effectValue, hitDamage, onceAdditionalAttributeValue, scriptParameterValue, buffValue, shieldValue] = await Promise.all([
-            fetch('data/Character.json').then(r => r.json()),
-            fetch(`${dataPath}/Character.json`).then(r => r.json()),
-            fetch('data/CharPotential.json').then(r => r.json()),
-            fetch('data/Potential.json').then(r => r.json()),
-            fetch(`${dataPath}/Potential.json`).then(r => r.json()),
-            fetch(`${dataPath}/Item.json`).then(r => r.json()),
-            fetch('data/Item.json').then(r => r.json()),
-            fetch('data/GameEnums.json').then(r => r.json()),
-            fetch('data/Skill.json').then(r => r.json()),
-            fetch(`${dataPath}/Skill.json`).then(r => r.json()),
-            fetch('data/EffectValue.json').then(r => r.json()),
-            fetch('data/HitDamage.json').then(r => r.json()),
-            fetch('data/OnceAdditionalAttributeValue.json').then(r => r.json()),
-            fetch('data/ScriptParameterValue.json').then(r => r.json()),
-            fetch('data/BuffValue.json').then(r => r.json()),
-            fetch('data/ShieldValue.json').then(r => r.json())
-        ]);
+        // Phase 1: Critical data - blocks initial render
+        await loadCriticalData();
 
-        state.characters = characters;
-        state.characterNames = characterNames;
-        state.charPotentials = charPotentials;
-        state.potentials = potentials;
-        state.potentialNames = potentialNames;
-        state.itemNames = itemNames;
-        state.items = items;
-        state.gameEnums = gameEnums;
-        state.skills = skills;
-        state.skillNames = skillNames;
-        state.effectValue = effectValue;
-        state.hitDamage = hitDamage;
-        state.onceAdditionalAttributeValue = onceAdditionalAttributeValue;
-        state.scriptParameterValue = scriptParameterValue;
-        state.buffValue = buffValue;
-        state.shieldValue = shieldValue;
-        
-        // Initialize empty character cards with click handlers
+        // Hide skeleton and show actual UI
+        hideSkeletonUI();
+
+        // Initialize character cards immediately after Phase 1
         initializeCharacterCards();
+
+        // Phase 2 & 3: Load in background, don't block
+        Promise.all([
+            loadInteractiveData(),
+            loadFullData()
+        ]).catch(error => {
+            console.error('[App-Char] Background loading error:', error);
+            if (typeof showError === 'function') {
+                showError('일부 데이터 로드에 실패했습니다.');
+            }
+        });
+
     } catch (error) {
         console.error('Error loading data:', error);
         // Use toast notification instead of alert
@@ -553,12 +708,12 @@ function parseDescriptionParams(description, params, level = 1, skillLevel = 1, 
     // Create cache key from all parameters that affect output
     const paramsHash = Object.keys(params).filter(k => k.startsWith('Param')).map(k => params[k]).join('|');
 
-    // Include actual skill levels from state for accurate caching
-    const skillLevelsHash = position && state.skillLevels[position]
-        ? JSON.stringify(state.skillLevels[position])
+    // Create efficient cache key (avoid expensive JSON.stringify)
+    const skillLevelsKey = position && state.skillLevels[position]
+        ? Object.values(state.skillLevels[position]).join(',')
         : '';
 
-    const cacheKey = `${description}_${paramsHash}_${level}_${skillLevel}_${position}_${isSpecificPotential}_${characterLevelPhase}_${state.descriptionMode}_${skillLevelsHash}`;
+    const cacheKey = `${description}_${paramsHash}_${level}_${skillLevel}_${position}_${isSpecificPotential}_${characterLevelPhase}_${state.descriptionMode}_${skillLevelsKey}`;
 
     // Check cache first
     if (descriptionCache.has(cacheKey)) {
@@ -827,16 +982,9 @@ function openCharacterSelect(position) {
         btn.classList.toggle('active', btn.dataset.element === 'all');
     });
 
-    // Setup search input handler
-    if (searchInput) {
-        // Remove old event listener if exists
-        const newSearchInput = searchInput.cloneNode(true);
-        searchInput.parentNode.replaceChild(newSearchInput, searchInput);
-
-        newSearchInput.addEventListener('input', (e) => {
-            renderCharacterGrid(e.target.value);
-        });
-    }
+    // Set up search input listener if not already done
+    // (This happens once, not every time the modal opens)
+    setupSearchInput();
 
     // Render initial grid
     renderCharacterGrid('');
@@ -901,8 +1049,14 @@ function renderCharacterGrid(searchQuery = '') {
             item.dataset.characterId = id;
             item.innerHTML = `
                 <div class="character-item-header">
-                    <img src="${charImagePath}" alt="${name}" class="character-item-image" onerror="this.style.display='none'">
-                    ${elementInfo.icon ? `<img src="${elementInfo.icon}" alt="${elementInfo.name}" class="character-element-badge" onerror="this.style.display='none'">` : ''}
+                    <img src="${charImagePath}"
+                         alt="${name}"
+                         class="character-item-image"
+                         width="${IMAGE_SIZES.CHARACTER_GRID_ITEM.width}"
+                         height="${IMAGE_SIZES.CHARACTER_GRID_ITEM.height}"
+                         loading="lazy"
+                         onerror="this.style.display='none'">
+                    ${elementInfo.icon ? `<img src="${elementInfo.icon}" alt="${elementInfo.name}" class="character-element-badge" width="24" height="24" loading="lazy" onerror="this.style.display='none'">` : ''}
                     <div class="character-item-info">
                         <div class="character-item-name">${name}</div>
                         <div class="character-item-id">ID: ${id}</div>
@@ -1049,7 +1203,13 @@ function updateCharacterCard(position) {
     const currentLevelPhase = state.characterLevelPhase[position] || 8;
 
     card.innerHTML = `
-        <img src="${charImagePath}" alt="${character.name}" class="character-card-image" onerror="this.style.display='none'">
+        <img src="${charImagePath}"
+             alt="${character.name}"
+             class="character-card-image"
+             width="${IMAGE_SIZES.CHARACTER_PORTRAIT.width}"
+             height="${IMAGE_SIZES.CHARACTER_PORTRAIT.height}"
+             loading="lazy"
+             onerror="this.style.display='none'">
         <div class="character-info">
             <div class="character-action-buttons">
                 <button class="change-character-btn" data-action="open-character-select" data-position="${position}">
@@ -1139,8 +1299,14 @@ function updateCharacterCard(position) {
                     return `
                         <div class="skill-item" data-skill-id="${skill.id}">
                             <div class="skill-icon-wrapper">
-                                <img src="${elementBgPath}" alt="" class="skill-icon-bg" onerror="this.style.display='none'">
-                                ${iconPath ? `<img src="${iconPath}" alt="${skill.name}" class="skill-icon" onerror="this.style.display='none'">` : ''}
+                                <img src="${elementBgPath}"
+                                     alt=""
+                                     class="skill-icon-bg"
+                                     width="${IMAGE_SIZES.SKILL_ICON.width}"
+                                     height="${IMAGE_SIZES.SKILL_ICON.height}"
+                                     loading="lazy"
+                                     onerror="this.style.display='none'">
+                                ${iconPath ? `<img src="${iconPath}" alt="${skill.name}" class="skill-icon" width="${IMAGE_SIZES.SKILL_ICON.width}" height="${IMAGE_SIZES.SKILL_ICON.height}" loading="lazy" onerror="this.style.display='none'">` : ''}
                             </div>
                             <div class="skill-info">
                                 <div class="skill-title">${title}</div>
@@ -1544,8 +1710,8 @@ function createPotentialCard(potId, position) {
                  data-potential-id="${potId}" 
                  data-position="${position}">
                 <div class="potential-card-image">
-                    ${backgroundImage ? `<img src="${backgroundImage}" alt="" class="potential-bg" onerror="this.style.display='none'">` : ''}
-                    ${iconPath ? `<img src="${iconPath}" alt="${name}" class="potential-icon" onerror="this.style.display='none'">` : `<span class="potential-placeholder">${getIcon('target')}</span>`}
+                    ${backgroundImage ? `<img src="${backgroundImage}" alt="" class="potential-bg" width="${IMAGE_SIZES.POTENTIAL_ICON.width}" height="${IMAGE_SIZES.POTENTIAL_ICON.height}" loading="lazy" onerror="this.style.display='none'">` : ''}
+                    ${iconPath ? `<img src="${iconPath}" alt="${name}" class="potential-icon" width="${IMAGE_SIZES.POTENTIAL_ICON.width}" height="${IMAGE_SIZES.POTENTIAL_ICON.height}" loading="lazy" onerror="this.style.display='none'">` : `<span class="potential-placeholder">${getIcon('target')}</span>`}
                 </div>
                 <div class="potential-card-info">
                     <div class="potential-card-name">${name}</div>
@@ -1771,17 +1937,21 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('input', function(e) {
         const target = e.target;
         const action = target.dataset.action;
-        
+
         if (action === 'update-potential-level' && target.classList.contains('potential-level-input')) {
             const maxLevel = parseInt(target.dataset.maxLevel);
             target.value = validateNumericInput(target.value, 1, maxLevel);
         }
-        
+
         if (action === 'update-skill-level' && target.classList.contains('skill-level-input')) {
             const maxLevel = parseInt(target.dataset.maxLevel);
             target.value = validateNumericInput(target.value, 1, maxLevel);
         }
     });
+
+    // Set up search input listener once at initialization
+    // The modal HTML is already in the DOM, so we can set this up now
+    setupSearchInput();
 });
 
 /**
