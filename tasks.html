@@ -1,149 +1,139 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>의뢰 도우미</title>
-    <link rel="icon" type="image/png" href="assets/others/favicon.png">
-    <!-- Font Awesome 6 Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/utils.css">
-    <link rel="stylesheet" href="css/app-char.css">
-    <link rel="stylesheet" href="css/tasks.css">
-</head>
-<body>
-    <!-- Navigation Bar Placeholder -->
-    <div id="navbar-placeholder"></div>
+---
+layout: default
+title: "의뢰 도우미"
+css:
+  - css/components/modals.css
+  - css/components/cards.css
+  - css/components/filters.css
+  - css/app-char.css
+  - css/tasks.css
+scripts_footer:
+  - js/tasks.js
+---
 
-    <div class="tasks-app">
-        <!-- Page Header with Stats -->
-        <header class="page-header">
-            <div class="header-title">
-                <h1><i class="fa-solid fa-bullseye"></i> 의뢰 도우미</h1>
-                <p class="subtitle">최대 4개의 의뢰를 선택하고 캐릭터로 태그를 채워보세요</p>
+<div class="tasks-app">
+    <!-- Page Header with Stats -->
+    <header class="page-header">
+        <div class="header-title">
+            <h1><i class="fa-solid fa-bullseye"></i> 의뢰 도우미</h1>
+            <p class="subtitle">최대 4개의 의뢰를 선택하고 캐릭터로 태그를 채워보세요</p>
+        </div>
+        <div class="header-stats">
+            <div class="stat-badge">
+                <i class="fa-solid fa-heart"></i>
+                <span id="header-owned-count">보유: 0/0</span>
             </div>
-            <div class="header-stats">
-                <div class="stat-badge">
-                    <i class="fa-solid fa-heart"></i>
-                    <span id="header-owned-count">보유: 0/0</span>
+            <div class="stat-badge">
+                <i class="fa-solid fa-check-circle"></i>
+                <span id="header-completion">완료: 0/4</span>
+            </div>
+            <button class="control-btn manage-ownership-btn" id="manage-ownership-btn">
+                <i class="fa-solid fa-heart"></i> 보유 여행가 관리
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Layout: Sidebar + Content -->
+    <div class="tasks-layout">
+        <!-- Left Sidebar: Task Pool -->
+        <aside class="task-pool">
+            <div class="task-pool-header">
+                <h2><i class="fa-solid fa-clipboard-list"></i> 의뢰 목록</h2>
+                <span class="task-pool-count" id="task-pool-count">70개</span>
+            </div>
+            <div class="task-pool-search">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="task-search" placeholder="의뢰 검색...">
+            </div>
+            <div class="task-pool-list" id="tasks-list">
+                <!-- Task cards will be rendered here -->
+            </div>
+        </aside>
+
+        <!-- Right Content: Assignments + Characters -->
+        <main class="tasks-content">
+            <!-- Active Assignments Section -->
+            <section class="assignments-section">
+                <div class="assignments-header">
+                    <h2>
+                        <i class="fa-solid fa-check"></i> 선택된 의뢰
+                        <span class="task-counter" id="task-counter">0/4</span>
+                    </h2>
+                    <div class="assignments-actions">
+                        <button class="action-btn auto-fill-btn" id="auto-fill-btn" style="display:none;">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> 자동 배정
+                        </button>
+                        <button class="action-btn clear-btn" id="clear-all-btn" style="display:none;">
+                            <i class="fa-solid fa-user-xmark"></i> 캐릭터 초기화
+                        </button>
+                    </div>
                 </div>
-                <div class="stat-badge">
-                    <i class="fa-solid fa-check-circle"></i>
-                    <span id="header-completion">완료: 0/4</span>
+                <div id="selected-tasks" class="assignments-grid">
+                    <!-- Selected tasks will be rendered here -->
                 </div>
-                <button class="control-btn manage-ownership-btn" id="manage-ownership-btn">
-                    <i class="fa-solid fa-heart"></i> 보유 여행가 관리
+            </section>
+
+            <!-- Recommendations Section -->
+            <section class="recommendations-section" id="recommendations-section" style="display:none;">
+                <div class="recommendations-header">
+                    <h3><i class="fa-solid fa-lightbulb"></i> 획득/육성 추천 (앞에 올수록 추천)</h3>
+                </div>
+                <div id="recommendations-content" class="recommendations-content">
+                    <!-- Recommendations will be rendered here -->
+                </div>
+            </section>
+
+            <!-- Character Pool Section -->
+            <section class="character-pool-section">
+                <div class="character-pool-header">
+                    <h2><i class="fa-solid fa-users"></i> 여행가 풀</h2>
+                    <div class="character-pool-controls">
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="all">전체</button>
+                            <button class="filter-btn" data-filter="owned">보유</button>
+                            <button class="filter-btn" data-filter="not-owned">미보유</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="characters-list" class="character-pool-grid">
+                    <!-- Characters will be rendered here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Ownership Modal -->
+    <div class="modal ownership-modal" id="ownership-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-heart"></i> 여행가 보유 관리</h2>
+                <button class="close-btn" id="close-ownership-modal">&times;</button>
+            </div>
+            <div class="modal-controls">
+                <button class="control-btn" id="select-all-owned">
+                    <i class="fa-solid fa-check-double"></i> 전체 선택
                 </button>
+                <button class="control-btn" id="deselect-all-owned">
+                    <i class="fa-solid fa-xmark"></i> 전체 해제
+                </button>
+                <div class="ownership-count" id="ownership-count">보유: 0 / 0</div>
             </div>
-        </header>
-
-        <!-- Main Layout: Sidebar + Content -->
-        <div class="tasks-layout">
-            <!-- Left Sidebar: Task Pool -->
-            <aside class="task-pool">
-                <div class="task-pool-header">
-                    <h2><i class="fa-solid fa-clipboard-list"></i> 의뢰 목록</h2>
-                    <span class="task-pool-count" id="task-pool-count">70개</span>
-                </div>
-                <div class="task-pool-search">
-                    <i class="fa-solid fa-search"></i>
-                    <input type="text" id="task-search" placeholder="의뢰 검색...">
-                </div>
-                <div class="task-pool-list" id="tasks-list">
-                    <!-- Task cards will be rendered here -->
-                </div>
-            </aside>
-
-            <!-- Right Content: Assignments + Characters -->
-            <main class="tasks-content">
-                <!-- Active Assignments Section -->
-                <section class="assignments-section">
-                    <div class="assignments-header">
-                        <h2>
-                            <i class="fa-solid fa-check"></i> 선택된 의뢰
-                            <span class="task-counter" id="task-counter">0/4</span>
-                        </h2>
-                        <div class="assignments-actions">
-                            <button class="action-btn auto-fill-btn" id="auto-fill-btn" style="display:none;">
-                                <i class="fa-solid fa-wand-magic-sparkles"></i> 자동 배정
-                            </button>
-                            <button class="action-btn clear-btn" id="clear-all-btn" style="display:none;">
-                                <i class="fa-solid fa-user-xmark"></i> 캐릭터 초기화
-                            </button>
-                        </div>
-                    </div>
-                    <div id="selected-tasks" class="assignments-grid">
-                        <!-- Selected tasks will be rendered here -->
-                    </div>
-                </section>
-
-                <!-- Recommendations Section -->
-                <section class="recommendations-section" id="recommendations-section" style="display:none;">
-                    <div class="recommendations-header">
-                        <h3><i class="fa-solid fa-lightbulb"></i> 획득/육성 추천 (앞에 올수록 추천)</h3>
-                    </div>
-                    <div id="recommendations-content" class="recommendations-content">
-                        <!-- Recommendations will be rendered here -->
-                    </div>
-                </section>
-
-                <!-- Character Pool Section -->
-                <section class="character-pool-section">
-                    <div class="character-pool-header">
-                        <h2><i class="fa-solid fa-users"></i> 여행가 풀</h2>
-                        <div class="character-pool-controls">
-                            <div class="filter-buttons">
-                                <button class="filter-btn active" data-filter="all">전체</button>
-                                <button class="filter-btn" data-filter="owned">보유</button>
-                                <button class="filter-btn" data-filter="not-owned">미보유</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="characters-list" class="character-pool-grid">
-                        <!-- Characters will be rendered here -->
-                    </div>
-                </section>
-            </main>
-        </div>
-
-        <!-- Ownership Modal -->
-        <div class="modal ownership-modal" id="ownership-modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2><i class="fa-solid fa-heart"></i> 여행가 보유 관리</h2>
-                    <button class="close-btn" id="close-ownership-modal">&times;</button>
-                </div>
-                <div class="modal-controls">
-                    <button class="control-btn" id="select-all-owned">
-                        <i class="fa-solid fa-check-double"></i> 전체 선택
-                    </button>
-                    <button class="control-btn" id="deselect-all-owned">
-                        <i class="fa-solid fa-xmark"></i> 전체 해제
-                    </button>
-                    <div class="ownership-count" id="ownership-count">보유: 0 / 0</div>
-                </div>
-                <div class="ownership-grid" id="ownership-grid"></div>
-            </div>
-        </div>
-
-        <!-- Confirmation Modal -->
-        <div class="modal confirm-modal" id="confirm-modal" style="display:none;">
-            <div class="confirm-modal-content">
-                <div class="confirm-modal-icon">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                </div>
-                <h3 class="confirm-modal-title" id="confirm-modal-title">확인</h3>
-                <p class="confirm-modal-message" id="confirm-modal-message">작업을 진행하시겠습니까?</p>
-                <div class="confirm-modal-actions">
-                    <button class="confirm-modal-btn cancel-btn" id="confirm-modal-cancel">취소</button>
-                    <button class="confirm-modal-btn confirm-btn" id="confirm-modal-confirm">확인</button>
-                </div>
-            </div>
+            <div class="ownership-grid" id="ownership-grid"></div>
         </div>
     </div>
 
-    <script src="js/utils.js"></script>
-    <script src="js/i18n.js"></script>
-    <script src="js/tasks.js"></script>
-</body>
-</html>
+    <!-- Confirmation Modal -->
+    <div class="modal confirm-modal" id="confirm-modal" style="display:none;">
+        <div class="confirm-modal-content">
+            <div class="confirm-modal-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3 class="confirm-modal-title" id="confirm-modal-title">확인</h3>
+            <p class="confirm-modal-message" id="confirm-modal-message">작업을 진행하시겠습니까?</p>
+            <div class="confirm-modal-actions">
+                <button class="confirm-modal-btn cancel-btn" id="confirm-modal-cancel">취소</button>
+                <button class="confirm-modal-btn confirm-btn" id="confirm-modal-confirm">확인</button>
+            </div>
+        </div>
+    </div>
+</div>

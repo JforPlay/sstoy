@@ -1,5 +1,18 @@
 [
     {
+        "version": "v1.1.1",
+        "date": "2025.11.19",
+        "changes": [
+            {
+                "category": "✨ Minor Improvements",
+                "items": [
+                    "의뢰 도우미 : 자동 배치 알고리즘 개선",
+                    "11/18 data update"
+                ]
+            }
+        ]
+    },
+    {
         "version": "v1.1.0",
         "date": "2025.11.18",
         "changes": [

@@ -1,242 +1,224 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>스텔라 소라 도자기 굽기</title>
-    <link rel="icon" type="image/png" href="assets/others/favicon.png">
-    <!-- Font Awesome 6 Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/utils.css">
-    <!-- Shared Components -->
-    <link rel="stylesheet" href="css/components/modals.css">
-    <link rel="stylesheet" href="css/components/cards.css">
-    <link rel="stylesheet" href="css/components/filters.css">
-    <!-- Page-Specific Styles -->
-    <link rel="stylesheet" href="css/app-char.css">
-    <link rel="stylesheet" href="css/app-disc.css">
-    <link rel="stylesheet" href="css/app-summary.css">
-    <link rel="stylesheet" href="css/app-preset.css">
-    <link rel="stylesheet" href="css/app-saveload.css">
-</head>
-<body>
-    <!-- Navigation Bar Placeholder -->
-    <div id="navbar-placeholder"></div>
-    
-    <div class="container">
-        <header>
-            <h1><i class="fa-solid fa-star"></i> <span data-i18n="builder.title">스텔라 소라 빌드 도우미</span></h1>
-            <p class="subtitle" data-i18n="builder.subtitle">최고의 도자기를 만들어보세요</p>
-        </header>
+---
+layout: default
+title: "스텔라 소라 도자기 굽기"
+css:
+  - css/components/modals.css
+  - css/components/cards.css
+  - css/components/filters.css
+  - css/app-char.css
+  - css/app-disc.css
+  - css/app-summary.css
+  - css/app-preset.css
+  - css/app-saveload.css
+cdn_scripts:
+  - https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js
+  - https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js
+scripts_footer:
+  - js/app-char.js
+  - js/app-disc.js
+  - js/app-summary.js
+  - js/app-preset.js
+  - js/app-saveload.js
+---
 
-        <!-- Combined Compact Tab Navigation -->
-        <div class="compact-tab-navigation">
-            <!-- Main Tabs with integrated character position tabs -->
-            <div class="main-tabs-group">
-                <button class="compact-main-tab active" data-tab="characters" onclick="switchMainTab('characters')">
-                    <span class="compact-tab-icon"><i class="fa-solid fa-medal"></i></span>
-                    <span class="compact-tab-label" data-i18n="builder.characters">캐릭터</span>
+<div class="container">
+    <header>
+        <h1><i class="fa-solid fa-star"></i> <span data-i18n="builder.title">스텔라 소라 빌드 도우미</span></h1>
+        <p class="subtitle" data-i18n="builder.subtitle">최고의 도자기를 만들어보세요</p>
+    </header>
+
+    <!-- Combined Compact Tab Navigation -->
+    <div class="compact-tab-navigation">
+        <!-- Main Tabs with integrated character position tabs -->
+        <div class="main-tabs-group">
+            <button class="compact-main-tab active" data-tab="characters" onclick="switchMainTab('characters')">
+                <span class="compact-tab-icon"><i class="fa-solid fa-medal"></i></span>
+                <span class="compact-tab-label" data-i18n="builder.characters">캐릭터</span>
+            </button>
+
+            <!-- Character Position Sub-tabs (only visible when characters tab is active) -->
+            <div class="position-tabs-inline" id="position-tabs-inline">
+                <span class="position-separator">:</span>
+                <button class="position-tab active" data-position="master" onclick="switchTab('master')">
+                    <span class="position-tab-icon"><i class="fa-solid fa-crown"></i></span>
+                    <span class="position-tab-label" data-i18n="builder.master">메인</span>
                 </button>
-
-                <!-- Character Position Sub-tabs (only visible when characters tab is active) -->
-                <div class="position-tabs-inline" id="position-tabs-inline">
-                    <span class="position-separator">:</span>
-                    <button class="position-tab active" data-position="master" onclick="switchTab('master')">
-                        <span class="position-tab-icon"><i class="fa-solid fa-crown"></i></span>
-                        <span class="position-tab-label" data-i18n="builder.master">메인</span>
-                    </button>
-                    <span class="position-divider">|</span>
-                    <button class="position-tab" data-position="assist1" onclick="switchTab('assist1')">
-                        <span class="position-tab-icon"><i class="fa-solid fa-chess-pawn"></i></span>
-                        <span class="position-tab-label" data-i18n="builder.assist1">지원1</span>
-                    </button>
-                    <span class="position-divider">|</span>
-                    <button class="position-tab" data-position="assist2" onclick="switchTab('assist2')">
-                        <span class="position-tab-icon"><i class="fa-solid fa-chess-pawn"></i></span>
-                        <span class="position-tab-label" data-i18n="builder.assist2">지원2</span>
-                    </button>
-                </div>
+                <span class="position-divider">|</span>
+                <button class="position-tab" data-position="assist1" onclick="switchTab('assist1')">
+                    <span class="position-tab-icon"><i class="fa-solid fa-chess-pawn"></i></span>
+                    <span class="position-tab-label" data-i18n="builder.assist1">지원1</span>
+                </button>
+                <span class="position-divider">|</span>
+                <button class="position-tab" data-position="assist2" onclick="switchTab('assist2')">
+                    <span class="position-tab-icon"><i class="fa-solid fa-chess-pawn"></i></span>
+                    <span class="position-tab-label" data-i18n="builder.assist2">지원2</span>
+                </button>
             </div>
-
-            <button class="compact-main-tab" data-tab="discs" onclick="switchMainTab('discs')">
-                <span class="compact-tab-icon"><i class="fa-solid fa-compact-disc"></i></span>
-                <span class="compact-tab-label" data-i18n="builder.records">레코드</span>
-            </button>
-
-            <button class="compact-main-tab" data-tab="summary" onclick="switchMainTab('summary')">
-                <span class="compact-tab-icon"><i class="fa-solid fa-list-check"></i></span>
-                <span class="compact-tab-label" data-i18n="builder.summary">요약</span>
-            </button>
-
-            <button class="compact-main-tab" data-tab="preset" onclick="switchMainTab('preset')">
-                <span class="compact-tab-icon"><i class="fa-solid fa-star"></i></span>
-                <span class="compact-tab-label" data-i18n="builder.presets">추천 빌드</span>
-            </button>
         </div>
 
-        <!-- Characters Tab Content -->
-        <div class="main-tab-content active" id="main-tab-characters">
-            <!-- Master Position -->
-            <div class="character-slot master-slot active-tab" id="tab-master">
-                <div class="slot-header">
-                    <h2>메인</h2>
-                    <button class="description-toggle" onclick="toggleDescriptionMode()"><i class="fa-solid fa-note-sticky"></i> 간략히보기</button>
-                </div>
-                <div class="two-column-layout">
-                    <div class="character-column">
-                        <div class="character-card" id="master-card">
-                            <div class="empty-state">
-                                <div class="plus-icon">+</div>
-                                <p>메인캐릭터 선택</p>
-                            </div>
+        <button class="compact-main-tab" data-tab="discs" onclick="switchMainTab('discs')">
+            <span class="compact-tab-icon"><i class="fa-solid fa-compact-disc"></i></span>
+            <span class="compact-tab-label" data-i18n="builder.records">레코드</span>
+        </button>
+
+        <button class="compact-main-tab" data-tab="summary" onclick="switchMainTab('summary')">
+            <span class="compact-tab-icon"><i class="fa-solid fa-list-check"></i></span>
+            <span class="compact-tab-label" data-i18n="builder.summary">요약</span>
+        </button>
+
+        <button class="compact-main-tab" data-tab="preset" onclick="switchMainTab('preset')">
+            <span class="compact-tab-icon"><i class="fa-solid fa-star"></i></span>
+            <span class="compact-tab-label" data-i18n="builder.presets">추천 빌드</span>
+        </button>
+    </div>
+
+    <!-- Characters Tab Content -->
+    <div class="main-tab-content active" id="main-tab-characters">
+        <!-- Master Position -->
+        <div class="character-slot master-slot active-tab" id="tab-master">
+            <div class="slot-header">
+                <h2>메인</h2>
+                <button class="description-toggle" onclick="toggleDescriptionMode()"><i class="fa-solid fa-note-sticky"></i> 간략히보기</button>
+            </div>
+            <div class="two-column-layout">
+                <div class="character-column">
+                    <div class="character-card" id="master-card">
+                        <div class="empty-state">
+                            <div class="plus-icon">+</div>
+                            <p>메인캐릭터 선택</p>
                         </div>
                     </div>
-                    <div class="potentials-column">
-                        <div class="specific-potentials-section" id="master-specific-section"></div>
-                        <div class="other-potentials-section" id="master-potentials"></div>
-                    </div>
+                </div>
+                <div class="potentials-column">
+                    <div class="specific-potentials-section" id="master-specific-section"></div>
+                    <div class="other-potentials-section" id="master-potentials"></div>
                 </div>
             </div>
+        </div>
 
-            <!-- Assist Position 1 -->
-            <div class="character-slot assist-slot" id="tab-assist1">
-                <div class="slot-header">
-                    <h2>지원 1</h2>
-                    <button class="description-toggle" onclick="toggleDescriptionMode()"><i class="fa-solid fa-note-sticky"></i> 간략히보기</button>
-                </div>
-                <div class="two-column-layout">
-                    <div class="character-column">
-                        <div class="character-card" id="assist1-card">
-                            <div class="empty-state">
-                                <div class="plus-icon">+</div>
-                                <p>지원캐릭터 선택</p>
-                            </div>
+        <!-- Assist Position 1 -->
+        <div class="character-slot assist-slot" id="tab-assist1">
+            <div class="slot-header">
+                <h2>지원 1</h2>
+                <button class="description-toggle" onclick="toggleDescriptionMode()"><i class="fa-solid fa-note-sticky"></i> 간략히보기</button>
+            </div>
+            <div class="two-column-layout">
+                <div class="character-column">
+                    <div class="character-card" id="assist1-card">
+                        <div class="empty-state">
+                            <div class="plus-icon">+</div>
+                            <p>지원캐릭터 선택</p>
                         </div>
                     </div>
-                    <div class="potentials-column">
-                        <div class="specific-potentials-section" id="assist1-specific-section"></div>
-                        <div class="other-potentials-section" id="assist1-potentials"></div>
-                    </div>
+                </div>
+                <div class="potentials-column">
+                    <div class="specific-potentials-section" id="assist1-specific-section"></div>
+                    <div class="other-potentials-section" id="assist1-potentials"></div>
                 </div>
             </div>
+        </div>
 
-            <!-- Assist Position 2 -->
-            <div class="character-slot assist-slot" id="tab-assist2">
-                <div class="slot-header">
-                    <h2>지원 2</h2>
-                    <button class="description-toggle" onclick="toggleDescriptionMode()"><i class="fa-solid fa-note-sticky"></i> 간략히보기</button>
-                </div>
-                <div class="two-column-layout">
-                    <div class="character-column">
-                        <div class="character-card" id="assist2-card">
-                            <div class="empty-state">
-                                <div class="plus-icon">+</div>
-                                <p>지원캐릭터 선택</p>
-                            </div>
+        <!-- Assist Position 2 -->
+        <div class="character-slot assist-slot" id="tab-assist2">
+            <div class="slot-header">
+                <h2>지원 2</h2>
+                <button class="description-toggle" onclick="toggleDescriptionMode()"><i class="fa-solid fa-note-sticky"></i> 간략히보기</button>
+            </div>
+            <div class="two-column-layout">
+                <div class="character-column">
+                    <div class="character-card" id="assist2-card">
+                        <div class="empty-state">
+                            <div class="plus-icon">+</div>
+                            <p>지원캐릭터 선택</p>
                         </div>
                     </div>
-                    <div class="potentials-column">
-                        <div class="specific-potentials-section" id="assist2-specific-section"></div>
-                        <div class="other-potentials-section" id="assist2-potentials"></div>
-                    </div>
                 </div>
-            </div>
-        </div>
-        <!-- End of Characters Tab Content -->
-
-        <!-- Discs Tab Content -->
-        <div class="main-tab-content" id="main-tab-discs">
-            <!-- Discs content will be loaded by discs.js -->
-            <div id="discs-container"></div>
-        </div>
-
-        <!-- Summary Tab Content -->
-        <div class="main-tab-content" id="main-tab-summary">
-            <!-- Summary content will be loaded by summary.js -->
-            <div id="summary-container"></div>
-        </div>
-
-        <!-- Preset Tab Content -->
-        <div class="main-tab-content" id="main-tab-preset">
-            <!-- Preset content will be loaded by preset.js -->
-            <div id="preset-container"></div>
-        </div>
-
-        <!-- Character Selection Modal -->
-        <div class="modal" id="character-modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>캐릭터 선택</h2>
-                    <button class="close-btn" onclick="closeCharacterSelect()">&times;</button>
-                </div>
-
-                <!-- Search and Filter Section -->
-                <div class="selector-controls">
-                    <!-- Search Input -->
-                    <div class="search-container">
-                        <input type="text" id="character-search" placeholder="캐릭터 이름 검색..." class="search-input">
-                        <i class="fa-solid fa-search search-icon"></i>
-                    </div>
-
-                    <!-- Element Filter Buttons -->
-                    <div class="element-filters">
-                        <button class="element-filter-btn active" data-element="all" onclick="filterCharactersByElement('all')">
-                            <i class="fa-solid fa-border-all"></i> 전체
-                        </button>
-                        <button class="element-filter-btn" data-element="1" onclick="filterCharactersByElement('1')">
-                            <img src="assets/icon_common_property_1.png" alt="물 속성" class="element-icon" onerror="this.style.display='none'"> 물 속성
-                        </button>
-                        <button class="element-filter-btn" data-element="2" onclick="filterCharactersByElement('2')">
-                            <img src="assets/icon_common_property_2.png" alt="불 속성" class="element-icon" onerror="this.style.display='none'"> 불 속성
-                        </button>
-                        <button class="element-filter-btn" data-element="3" onclick="filterCharactersByElement('3')">
-                            <img src="assets/icon_common_property_3.png" alt="땅 속성" class="element-icon" onerror="this.style.display='none'"> 땅 속성
-                        </button>
-                        <button class="element-filter-btn" data-element="4" onclick="filterCharactersByElement('4')">
-                            <img src="assets/icon_common_property_4.png" alt="바람 속성" class="element-icon" onerror="this.style.display='none'"> 바람 속성
-                        </button>
-                        <button class="element-filter-btn" data-element="5" onclick="filterCharactersByElement('5')">
-                            <img src="assets/icon_common_property_5.png" alt="빛 속성" class="element-icon" onerror="this.style.display='none'"> 빛 속성
-                        </button>
-                        <button class="element-filter-btn" data-element="6" onclick="filterCharactersByElement('6')">
-                            <img src="assets/icon_common_property_6.png" alt="어둠 속성" class="element-icon" onerror="this.style.display='none'"> 어둠 속성
-                        </button>
-                        <button class="element-filter-btn" data-element="7" onclick="filterCharactersByElement('7')">
-                            <img src="assets/icon_common_property_7.png" alt="무속성" class="element-icon" onerror="this.style.display='none'"> 무속성
-                        </button>
-                    </div>
-                </div>
-
-                <div class="character-grid" id="character-grid"></div>
-            </div>
-        </div>
-
-        <!-- Load Build Modal -->
-        <div id="load-modal">
-            <div class="load-modal-content">
-                <div class="load-modal-header">
-                    <h2>빌드 불러오기</h2>
-                    <button class="load-modal-close" onclick="closeLoadModal()">✕</button>
-                </div>
-                <div class="load-modal-body">
-                    <div id="load-list"></div>
+                <div class="potentials-column">
+                    <div class="specific-potentials-section" id="assist2-specific-section"></div>
+                    <div class="other-potentials-section" id="assist2-potentials"></div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- End of Characters Tab Content -->
 
-    <!-- LZ-String Compression Library -->
-    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
+    <!-- Discs Tab Content -->
+    <div class="main-tab-content" id="main-tab-discs">
+        <!-- Discs content will be loaded by discs.js -->
+        <div id="discs-container"></div>
+    </div>
 
-    <!-- Fuse.js for fuzzy search -->
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+    <!-- Summary Tab Content -->
+    <div class="main-tab-content" id="main-tab-summary">
+        <!-- Summary content will be loaded by summary.js -->
+        <div id="summary-container"></div>
+    </div>
 
-    <script src="js/utils.js"></script>
-    <script src="js/i18n.js"></script>
-    <script src="js/app-char.js"></script>
-    <script src="js/app-disc.js"></script>
-    <script src="js/app-summary.js"></script>
-    <script src="js/app-preset.js"></script>
-    <script src="js/app-saveload.js"></script>
-</body>
-</html>
+    <!-- Preset Tab Content -->
+    <div class="main-tab-content" id="main-tab-preset">
+        <!-- Preset content will be loaded by preset.js -->
+        <div id="preset-container"></div>
+    </div>
+
+    <!-- Character Selection Modal -->
+    <div class="modal" id="character-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>캐릭터 선택</h2>
+                <button class="close-btn" onclick="closeCharacterSelect()">&times;</button>
+            </div>
+
+            <!-- Search and Filter Section -->
+            <div class="selector-controls">
+                <!-- Search Input -->
+                <div class="search-container">
+                    <input type="text" id="character-search" placeholder="캐릭터 이름 검색..." class="search-input">
+                    <i class="fa-solid fa-search search-icon"></i>
+                </div>
+
+                <!-- Element Filter Buttons -->
+                <div class="element-filters">
+                    <button class="element-filter-btn active" data-element="all" onclick="filterCharactersByElement('all')">
+                        <i class="fa-solid fa-border-all"></i> 전체
+                    </button>
+                    <button class="element-filter-btn" data-element="1" onclick="filterCharactersByElement('1')">
+                        <img src="assets/icon_common_property_1.png" alt="물 속성" class="element-icon" onerror="this.style.display='none'"> 물 속성
+                    </button>
+                    <button class="element-filter-btn" data-element="2" onclick="filterCharactersByElement('2')">
+                        <img src="assets/icon_common_property_2.png" alt="불 속성" class="element-icon" onerror="this.style.display='none'"> 불 속성
+                    </button>
+                    <button class="element-filter-btn" data-element="3" onclick="filterCharactersByElement('3')">
+                        <img src="assets/icon_common_property_3.png" alt="땅 속성" class="element-icon" onerror="this.style.display='none'"> 땅 속성
+                    </button>
+                    <button class="element-filter-btn" data-element="4" onclick="filterCharactersByElement('4')">
+                        <img src="assets/icon_common_property_4.png" alt="바람 속성" class="element-icon" onerror="this.style.display='none'"> 바람 속성
+                    </button>
+                    <button class="element-filter-btn" data-element="5" onclick="filterCharactersByElement('5')">
+                        <img src="assets/icon_common_property_5.png" alt="빛 속성" class="element-icon" onerror="this.style.display='none'"> 빛 속성
+                    </button>
+                    <button class="element-filter-btn" data-element="6" onclick="filterCharactersByElement('6')">
+                        <img src="assets/icon_common_property_6.png" alt="어둠 속성" class="element-icon" onerror="this.style.display='none'"> 어둠 속성
+                    </button>
+                    <button class="element-filter-btn" data-element="7" onclick="filterCharactersByElement('7')">
+                        <img src="assets/icon_common_property_7.png" alt="무속성" class="element-icon" onerror="this.style.display='none'"> 무속성
+                    </button>
+                </div>
+            </div>
+
+            <div class="character-grid" id="character-grid"></div>
+        </div>
+    </div>
+
+    <!-- Load Build Modal -->
+    <div id="load-modal">
+        <div class="load-modal-content">
+            <div class="load-modal-header">
+                <h2>빌드 불러오기</h2>
+                <button class="load-modal-close" onclick="closeLoadModal()">✕</button>
+            </div>
+            <div class="load-modal-body">
+                <div id="load-list"></div>
+            </div>
+        </div>
+    </div>
+</div>

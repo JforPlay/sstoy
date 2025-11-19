@@ -160,52 +160,32 @@ window.createIconElement = createIconElement;
         });
     }
 
-    async function loadNavbar() {
-        try {
-            // Only load navbar if there's a placeholder for it
-            const navbarPlaceholder = document.getElementById('navbar-placeholder');
-            if (!navbarPlaceholder) {
-                console.log('[Navbar] No placeholder found, skipping navbar load');
-                return;
-            }
-
-            const response = await fetch('navbar.html');
-            if (!response.ok) throw new Error('Failed to load navbar');
-            const html = await response.text();
-
-            // Insert navbar into placeholder
-            navbarPlaceholder.innerHTML = html;
-
-            // Wait a bit for DOM to update, then initialize
-            setTimeout(() => {
-                // Initialize theme after navbar is loaded
-                if (typeof window.initTheme === 'function') {
-                    window.initTheme();
-                }
-
-                // Set active nav link after navbar is loaded
-                if (typeof window.setActiveNavLink === 'function') {
-                    window.setActiveNavLink();
-                }
-
-                // Update language selector to match current i18n language
-                if (window.i18n && typeof window.i18n.updatePage === 'function') {
-                    window.i18n.updatePage();
-                }
-
-                // Initialize hamburger menu toggle
-                initHamburgerMenu();
-            }, 0);
-        } catch (error) {
-            console.error('Error loading navbar:', error);
+    // Initialize navbar components (Jekyll includes navbar at build time)
+    function initNavbar() {
+        // Initialize theme
+        if (typeof window.initTheme === 'function') {
+            window.initTheme();
         }
+
+        // Set active nav link
+        if (typeof window.setActiveNavLink === 'function') {
+            window.setActiveNavLink();
+        }
+
+        // Update language selector to match current i18n language
+        if (window.i18n && typeof window.i18n.updatePage === 'function') {
+            window.i18n.updatePage();
+        }
+
+        // Initialize hamburger menu toggle
+        initHamburgerMenu();
     }
 
-    // Load navbar when DOM is ready
+    // Initialize when DOM is ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadNavbar);
+        document.addEventListener('DOMContentLoaded', initNavbar);
     } else {
-        loadNavbar();
+        initNavbar();
     }
 })();
 
@@ -263,12 +243,17 @@ window.createIconElement = createIconElement;
     
     // Navigation functionality
     window.setActiveNavLink = function setActiveNavLink() {
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        // Get current page filename without extension
+        const pathname = window.location.pathname;
+        const currentPage = pathname.split('/').pop().replace('.html', '') || 'index';
         const navLinks = document.querySelectorAll('.navbar-link');
-        
+
         navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+            const pageName = link.getAttribute('data-page');
+
+            // Match based on data-page attribute
+            // For index page, currentPage will be 'index' or empty
+            if (pageName === currentPage || (currentPage === 'index' && !pageName)) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');

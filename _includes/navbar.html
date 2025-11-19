@@ -1,5 +1,5 @@
 <nav class="navbar">
-    <a href="index.html" class="navbar-brand">
+    <a href="{{ '/' | relative_url }}" class="navbar-brand">
         <span class="navbar-logo"><i class="fa-solid fa-star"></i></span>
         <span class="navbar-title" data-i18n="nav.title">스소 도우미</span>
     </a>
@@ -11,23 +11,23 @@
 
     <div class="navbar-menu" id="navbar-menu">
         <div class="navbar-links">
-            <a href="characterdb.html" class="navbar-link">
+            <a href="{{ '/characterdb.html' | relative_url }}" class="navbar-link" data-page="characterdb">
                 <span class="navbar-link-icon"><i class="fa-solid fa-book"></i></span>
                 <span class="navbar-link-text" data-i18n="nav.characterdb">여행가 도감</span>
             </a>
-            <a href="discdb.html" class="navbar-link">
+            <a href="{{ '/discdb.html' | relative_url }}" class="navbar-link" data-page="discdb">
                 <span class="navbar-link-icon"><i class="fa-solid fa-compact-disc"></i></span>
                 <span class="navbar-link-text" data-i18n="nav.discdb">레코드 도감</span>
             </a>
-            <a href="app.html" class="navbar-link active">
+            <a href="{{ '/app.html' | relative_url }}" class="navbar-link" data-page="app">
                 <span class="navbar-link-icon"><i class="fa-solid fa-medal"></i></span>
                 <span class="navbar-link-text" data-i18n="nav.builder">도자기 공방</span>
             </a>
-            <a href="tasks.html" class="navbar-link">
+            <a href="{{ '/tasks.html' | relative_url }}" class="navbar-link" data-page="tasks">
                 <span class="navbar-link-icon"><i class="fa-solid fa-clipboard-list"></i></span>
                 <span class="navbar-link-text" data-i18n="nav.tasks">의뢰 도우미</span>
             </a>
-            <a href="resources.html" class="navbar-link">
+            <a href="{{ '/resources.html' | relative_url }}" class="navbar-link" data-page="resources">
                 <span class="navbar-link-icon"><i class="fa-solid fa-box"></i></span>
                 <span class="navbar-link-text" data-i18n="nav.resources">자원 계산기</span>
             </a>
