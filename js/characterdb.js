@@ -17,6 +17,7 @@ const dbState = {
     charGetLines: {},
     charGetLinesKR: {},
     gameEnums: {},
+    uiText: {},
     selectedCharacterId: null,
     currentLevel: 1,
     currentLimitBreak: 0,
@@ -230,7 +231,8 @@ async function loadData() {
             talentGroupsData,
             talentGroupsKRData,
             talentsData,
-            talentsKRData
+            talentsKRData,
+            uiTextData
         ] = await Promise.all([
             fetch('data/Character.json').then(r => r.json()),
             fetch(`${dataPath}/Character.json`).then(r => r.json()),
@@ -253,7 +255,8 @@ async function loadData() {
             fetch('data/TalentGroup.json').then(r => r.json()),
             fetch(`${dataPath}/TalentGroup.json`).then(r => r.json()),
             fetch('data/Talent.json').then(r => r.json()),
-            fetch(`${dataPath}/Talent.json`).then(r => r.json())
+            fetch(`${dataPath}/Talent.json`).then(r => r.json()),
+            fetch(`${dataPath}/UIText.json`).then(r => r.json())
         ]);
 
         dbState.characters = charactersData;
@@ -278,6 +281,7 @@ async function loadData() {
         dbState.talentGroupsKR = talentGroupsKRData;
         dbState.talents = talentsData;
         dbState.talentsKR = talentsKRData;
+        dbState.uiText = uiTextData;
 
         // Save to cache with language info
         const dataToCache = {
@@ -303,7 +307,8 @@ async function loadData() {
             talentGroups: dbState.talentGroups,
             talentGroupsKR: dbState.talentGroupsKR,
             talents: dbState.talents,
-            talentsKR: dbState.talentsKR
+            talentsKR: dbState.talentsKR,
+            uiText: dbState.uiText
         };
         saveDataToCache(dataToCache);
 
@@ -1444,6 +1449,12 @@ function parseParamValue(paramString, level = 1, skillLevel = 1) {
 function formatValue(value, formatType, enumType = null, fileType = null) {
     // Handle Enum type - convert using GameEnums
     if (formatType === 'Enum' && enumType && value !== null && value !== undefined) {
+        if (enumType === 'EAT') {
+            const uiTextKey = `UIText.Enums_Effect_${value}.1`;
+            if (dbState.uiText && dbState.uiText[uiTextKey]) {
+                return dbState.uiText[uiTextKey];
+            }
+        }
         // Map common abbreviations to full enum names
         const enumMap = {
             'EAT': 'effectAttributeType',

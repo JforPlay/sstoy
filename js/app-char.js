@@ -27,6 +27,7 @@ let state = {
     scriptParameterValue: {},
     buffValue: {},
     shieldValue: {},
+    uiText: {},
     currentPosition: null,
     activeTab: 'master', // Track active tab
     descriptionMode: 'brief', // 'brief' or 'detailed'
@@ -219,13 +220,14 @@ async function loadInteractiveData() {
     const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
 
     console.log('[App-Char] Phase 2: Loading interactive data...');
-    const [charPotentials, potentials, potentialNames, itemNames, items, gameEnums] = await Promise.all([
+    const [charPotentials, potentials, potentialNames, itemNames, items, gameEnums, uiText] = await Promise.all([
         fetch('data/CharPotential.json').then(r => r.json()),
         fetch('data/Potential.json').then(r => r.json()),
         fetch(`${dataPath}/Potential.json`).then(r => r.json()),
         fetch(`${dataPath}/Item.json`).then(r => r.json()),
         fetch('data/Item.json').then(r => r.json()),
-        fetch('data/GameEnums.json').then(r => r.json())
+        fetch('data/GameEnums.json').then(r => r.json()),
+        fetch(`${dataPath}/UIText.json`).then(r => r.json())
     ]);
 
     state.charPotentials = charPotentials;
@@ -234,6 +236,7 @@ async function loadInteractiveData() {
     state.itemNames = itemNames;
     state.items = items;
     state.gameEnums = gameEnums;
+    state.uiText = uiText;
     console.log('[App-Char] Phase 2 complete');
     return true;
 }
@@ -593,6 +596,12 @@ function parseParamValue(paramString, level = 1, skillLevel = 1, position = null
 function formatValue(value, formatType, enumType = null, fileType = null) {
     // Handle Enum type - convert using GameEnums
     if (formatType === 'Enum' && enumType && value !== null && value !== undefined) {
+        if (enumType === 'EAT') {
+            const uiTextKey = `UIText.Enums_Effect_${value}.1`;
+            if (state.uiText && state.uiText[uiTextKey]) {
+                return state.uiText[uiTextKey];
+            }
+        }
         // Map common abbreviations to full enum names
         const enumMap = {
             'EAT': 'effectAttributeType',
