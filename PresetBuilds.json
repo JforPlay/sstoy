@@ -3,6 +3,17 @@
   "presets": [
     {
       "id": "preset-build",
+      "title": "(11/21) 후유카 메인 유파2 노궁빌드",
+      "description": "후유카의 메인 유파2 를 사용하는 노궁 빌드입니다.",
+      "author": "후유카 잠재 계산(2유파 노궁빌드)",
+      "authorLink": "https://arca.live/b/stellasora/154417298",
+      "element": "Fire",
+      "characterId": 134,
+      "tags": ["후유카", "유파 2"],
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokCNrgCccC5zABAEw6AwywYB6NggbWAyfYDstKIAxlKALasgCWmMAzABZGABygBtAKz8BCAJzIpghAA4F0-msEwYmmX10IBumEQC6qYQBtOimcqgA2VLbmPn6mFH0hbJr+60+RwBfCw5IUBdPaEARVcAMIcYXIkx4xOkVFISAmVlMtK1o7EAcIcAQcfyBP2gsUvL+TEATpvrAV3HAAkGQYNCQAENo0B5oGAqRcSkKoh1Rk31JvmnBk3lJogk1MYB2cxArG3nlqBWfXdzIA5mgyAdO4XDI3YkG5rb3dcxAUK7AC1XAGc60seOQRtaP3453+j3anS6yQi3F4RAcw0gkhMDnGajhRDWaJRi2RRFUUnRKwJDj4E1xZgs1mhxL2kG8NLW-kO6PsJ3ccNJXiuN2ZKPuVRq7JRjIFZSFeIegPFfw+3yFnNFaThQ0VHU6ABNOABnThsLpcNDRcYyGSoPUGqHGhAwTEgc1oc5WmCyTpU9j6w0hDpAA"
+    },
+    {
+      "id": "preset-build",
       "title": "(11/19) 후유카 메인 유파1 하이브리드",
       "description": "후유카의 메인 유파1 을 사용하는 하이브리드 빌드입니다.",
       "author": "후유카 1유파 하이브리드 공략",
