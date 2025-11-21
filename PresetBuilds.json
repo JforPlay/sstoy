@@ -10,6 +10,7 @@
       "element": "Fire",
       "characterId": 134,
       "tags": ["후유카", "유파 2"],
+      "new": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokCNrgCccC5zABAEw6AwywYB6NggbWAyfYDstKIAxlKALasgCWmMAzABZGABygBtAKz8BCAJzIpghAA4F0-msEwYmmX10IBumEQC6qYQBtOimcqgA2VLbmPn6mFH0hbJr+60+RwBfCw5IUBdPaEARVcAMIcYXIkx4xOkVFISAmVlMtK1o7EAcIcAQcfyBP2gsUvL+TEATpvrAV3HAAkGQYNCQAENo0B5oGAqRcSkKoh1Rk31JvmnBk3lJogk1MYB2cxArG3nlqBWfXdzIA5mgyAdO4XDI3YkG5rb3dcxAUK7AC1XAGc60seOQRtaP3453+j3anS6yQi3F4RAcw0gkhMDnGajhRDWaJRi2RRFUUnRKwJDj4E1xZgs1mhxL2kG8NLW-kO6PsJ3ccNJXiuN2ZKPuVRq7JRjIFZSFeIegPFfw+3yFnNFaThQ0VHU6ABNOABnThsLpcNDRcYyGSoPUGqHGhAwTEgc1oc5WmCyTpU9j6w0hDpAA"
     },
     {
@@ -21,6 +22,7 @@
       "element": "Fire",
       "characterId": 134,
       "tags": ["후유카", "유파 1", "하이브리드"],
+      "new": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokCNrgCccC5zABDDoDDLBgGquAu44DB9gNZ2A7LSiAMZSgC2bIAlpjAMwAWJgAcoAbQCsAwQhjJpQhACYFMhAE41SgGzbZAdn0D9CSaYAcAXVQiANl0WydUPSCcIDr1B42uAvrackKAeMJiAIquAGENMHsqRMT7qkpiAoV2AFquAM52x6i7Q0TlKXvmJ7uoWaVmFsn4l1QKYgCdNjYCu44AEgyD+gSAAhuEhPHyC4bYS0sPK8uMwyvxqE1rT-HPTyuarBjYg9o4wC95lw8sBQbsT-SAFSRP8CTkTKdDN7fczxdiAOEOAIOOvyrWXpSWtzqXVQPXiA140BmLlGkCkMMmamUOmUqmkKLWyNRi0RFmxyiMGJ0-CmMOGWx2A2JawONIqkDcNNqOm6ImCoURFyuZUxEIBOUxjwFSUx7wy2VFqIZIGeHSlfzuUtJmCw30FOmGqvVXS6QA"
     },
     {
@@ -32,6 +34,7 @@
       "element": "Fire",
       "characterId": 134,
       "tags": ["후유카", "유파 2"],
+      "new": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokKcNXABy4DTmACQEbXACccBc5lEAYylAFs6QBLTGAZgBYqAHKAbQCsHTgnbJhXBJwkiEADllSAnEs6dxkzhzUwATLpgBdVD0aRQWsZkAiq4Awhqle7R7jufNsPUV5Z7dcYGExAE6bgwFdxwAJB-209EPCo7xEOOMjojRSogF9M1ABDIIsWNj0ANl4BYVK9GFkqwVqSvQB2Br1VSsaDDvYajr15ExAzJj6CkFdEqtiXLxA+wT9JxqbFuf1Gj2hQ1KW21e6x7ayckFzp0FZoGG1yyCFr-V6HvU1n+uFtdleYlo-9doe7D0g2GhT+1X2z3YkJiCxmbh+GQR-yRiU+0xAgFCuwAWq4AZzuRXz82ROABMmABnJj0XLMNAFaqiUSoam06YMhAwFogFloaGQdk6EDkgCuACN6dcEM1UCLRWzJQh6kKxXyBcpiUA"
     },
     {
@@ -226,9 +229,13 @@
       "  \"element\": \"Fire\" (Water/Fire/Earth/Wind/Light/Dark/Normal),",
       "  \"characterId\": 100 (3-digit character ID, e.g., 100, 101, 102),",
       "  \"tags\": [\"태그1\", \"태그2\"],",
-      "  \"meta\": true (optional, displays '메타' badge if true),",
+      "  \"new\": true (optional, displays 'NEW' badge - highest priority),",
+      "  \"meta\": true (optional, displays '메타' badge - second priority),",
       "  \"buildHash\": \"복사한_해시_여기에\"",
-      "}"
+      "}",
+      "",
+      "정렬 순서: new → meta → others (각 그룹 내에서 속성 순서대로)",
+      "태그 필터: 태그를 클릭하면 해당 태그가 포함된 빌드만 표시"
     ]
   }
 }
