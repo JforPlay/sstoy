@@ -119,6 +119,12 @@
     gap: 0.25rem;
 }
 
+.section-header .header-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-left: auto;
+}
+
 .help-btn {
     background: none;
     border: none;
@@ -399,6 +405,12 @@
     color: var(--text-primary);
 }
 
+.resource-bottom-card .resource-category-title {
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+}
+
 .stamina-estimate {
     display: flex;
     align-items: center;
@@ -455,6 +467,7 @@
     border-radius: 0.75rem;
     padding: 1rem;
     border: 1px solid var(--border);
+    margin-bottom: 1.5rem;
 }
 
 .resource-items-grid {
@@ -1031,8 +1044,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60%;
-    height: 60%;
+    width: 60px;
+    height: 60px;
     z-index: 2;
 }
 
@@ -1040,6 +1053,38 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+.exp-content-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.exp-content-row .resource-items-grid {
+    flex: 1;
+}
+
+.exp-content-row .exp-summary {
+    flex-shrink: 0;
+    width: 200px;
+}
+
+.exp-summary {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    background: var(--surface);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.exp-summary .net-exp {
+    font-weight: 700;
+    color: var(--text-primary);
 }
 
 .badge-character-icons-container {

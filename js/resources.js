@@ -64,6 +64,7 @@ let resourcesState = {
     itemNames: {},
     selectedCharacters: [],
     selectedDiscs: [],
+    ownedMaterials: {}, // User's owned materials inventory
     characterResources: {}, // Store each character's resource requirements
     discResources: {}, // Store each disc's resource requirements
     itemUsageIndex: {} // Cache of which characters/discs use which items
@@ -100,6 +101,7 @@ function saveResourcesState() {
         const stateToSave = {
             selectedCharacters: resourcesState.selectedCharacters,
             selectedDiscs: resourcesState.selectedDiscs,
+            ownedMaterials: resourcesState.ownedMaterials,
             timestamp: Date.now()
         };
         localStorage.setItem('resourcesPageState', JSON.stringify(stateToSave));
@@ -121,6 +123,11 @@ function loadResourcesState() {
         if (daysSinceUpdate > 7) {
             localStorage.removeItem('resourcesPageState');
             return;
+        }
+
+        // Restore owned materials
+        if (data.ownedMaterials) {
+            resourcesState.ownedMaterials = data.ownedMaterials;
         }
         
         // Restore selected characters
@@ -418,6 +425,11 @@ function switchResourceTab(tabName) {
         content.classList.remove('active');
     });
     document.getElementById(`resources-tab-${tabName}`)?.classList.add('active');
+
+    // If switching to the glance tab, render the matrix
+    if (tabName === 'glance') {
+        renderGlanceTabContent();
+    }
 }
 
 // Open character selection modal
@@ -687,6 +699,62 @@ function calculateCharacterResources(characterId) {
     resourcesState.characterResources[characterId] = resources;
 }
 
+function calculateNetResourcesWithMerging(totalResources, ownedMaterials) {
+    const netResources = {
+        advanceItems: { ...totalResources.advanceItems },
+        skillItems: { ...totalResources.skillItems },
+        discAdvanceItems: { ...(totalResources.discAdvanceItems || {}) },
+        // EXP and Gold are handled separately and don't merge
+        exp: totalResources.exp,
+        gold: totalResources.gold,
+        levelupGold: totalResources.levelupGold
+    };
+
+    const allMaterialGroups = [
+        ...MATERIAL_GROUPS.advance.map(g => ({ ...g, type: 'advanceItems' })),
+        ...MATERIAL_GROUPS.skill.map(g => ({ ...g, type: 'skillItems' })),
+        ...MATERIAL_GROUPS.discAdvance.map(g => ({ ...g, type: 'discAdvanceItems' }))
+    ];
+
+    for (const group of allMaterialGroups) {
+        let leftover = 0;
+        // Iterate from lowest to highest tier (item[0] to item[2])
+        for (let i = 0; i < group.items.length; i++) {
+            const itemId = group.items[i];
+            const required = totalResources[group.type]?.[itemId] || 0;
+            if (required === 0 && !ownedMaterials[itemId]) continue;
+
+            const owned = (ownedMaterials[itemId] || 0) + leftover;
+            
+            const net = required - owned;
+
+            if (net > 0) {
+                // Still need more of this item
+                netResources[group.type][itemId] = net;
+                leftover = 0; // No leftovers to carry to the next tier
+            } else {
+                // Have a surplus of this item
+                netResources[group.type][itemId] = 0; // Requirement met
+                // Calculate how many of the NEXT tier item this surplus converts to
+                leftover = Math.floor(-net / group.mergeRatio);
+            }
+        }
+    }
+    
+    // Filter out items with zero or less net requirement
+    for (const type in netResources) {
+        if (typeof netResources[type] === 'object') {
+            for (const itemId in netResources[type]) {
+                if (netResources[type][itemId] <= 0) {
+                    delete netResources[type][itemId];
+                }
+            }
+        }
+    }
+
+    return netResources;
+}
+
 // ============================================================================
 // HELPER FUNCTIONS FOR MATERIAL CALCULATIONS
 // ============================================================================
@@ -947,7 +1015,27 @@ function removeCharacterFromResources(characterId) {
     showToast('캐릭터가 제거되었습니다', 'info');
 }
 
-// Render resource summary
+function calculateTotalOwnedExp(expType) {
+    let totalOwnedExp = 0;
+    const itemExpData = (expType === 'character') ? resourcesState.charItemExp : resourcesState.discItemExp;
+    const itemExpMap = {};
+
+    // Create a map of ItemId -> ExpValue for faster lookup
+    // Note: charItemExp uses 'ExpValue', discItemExp uses 'Exp'
+    Object.values(itemExpData).forEach(item => {
+        itemExpMap[item.ItemId] = (expType === 'character') ? item.ExpValue : item.Exp;
+    });
+
+    for (const itemId in resourcesState.ownedMaterials) {
+        if (itemExpMap[itemId]) {
+            const ownedQty = resourcesState.ownedMaterials[itemId] || 0;
+            const expValue = itemExpMap[itemId];
+            totalOwnedExp += ownedQty * expValue;
+        }
+    }
+    return totalOwnedExp;
+}
+
 function renderResourceSummary() {
     const container = document.getElementById('resource-summary-content');
     
@@ -955,13 +1043,13 @@ function renderResourceSummary() {
         container.innerHTML = `
             <div class="empty-summary-state">
                 <div class="empty-icon"><i class="fa-solid fa-chart-simple"></i></div>
-                <p>선택된 캐릭터가 없습니다</p>
+                <p>선택된 여행가가 없습니다</p>
             </div>
         `;
         return;
     }
     
-    // Aggregate all resources
+    // 1. Aggregate all required resources
     const totalResources = {
         exp: 0,
         advanceItems: {},
@@ -989,22 +1077,24 @@ function renderResourceSummary() {
             totalResources.skillItems[itemId] += qty;
         });
     });
+
+    // 2. Calculate net resources after considering owned materials and merging
+    const netResources = calculateNetResourcesWithMerging(totalResources, resourcesState.ownedMaterials);
     
     container.innerHTML = '';
     
-    console.log('Total disc resources:', totalResources);
-    
-    // Render advance items section with stamina estimate
-    if (Object.keys(totalResources.advanceItems).length > 0) {
-        const advanceEstimate = calculateStaminaEstimate(totalResources.advanceItems, 'advance');
+    // 3. Render sections based on net resources
+    // Render advance items
+    if (Object.keys(netResources.advanceItems).length > 0) {
+        const advanceEstimate = calculateStaminaEstimate(netResources.advanceItems, 'advance');
         const advanceSection = document.createElement('div');
         advanceSection.className = 'resource-category';
         
         let estimateHTML = '';
         if (advanceEstimate) {
             estimateHTML = `
-                <div class="stamina-estimate">
-                    <span class="estimate-item"><i class="fa-solid fa-bolt"></i> ${advanceEstimate.estimatedStamina} 스태미나</span>
+                <div class="stamina-estimate" title="남은 재료 기준">
+                    <span class="estimate-item"><i class="fa-solid fa-bolt"></i> ${advanceEstimate.estimatedStamina.toLocaleString()} 스태미나</span>
                     <span class="estimate-separator">|</span>
                     <span class="estimate-item"><i class="fa-regular fa-calendar"></i> ${advanceEstimate.estimatedDays}일</span>
                 </div>
@@ -1013,27 +1103,26 @@ function renderResourceSummary() {
         
         advanceSection.innerHTML = `
             <div class="resource-category-header">
-                <div class="resource-category-title">승급 아이템</div>
+                <div class="resource-category-title">승급 아이템 (여행가)</div>
                 ${estimateHTML}
             </div>
             <div class="resource-items-container" id="advance-items-container"></div>
         `;
         container.appendChild(advanceSection);
-        
-        renderAdvanceItems(totalResources.advanceItems);
+        renderAdvanceItems(netResources.advanceItems, totalResources.advanceItems);
     }
     
-    // Render skill items section with stamina estimate
-    if (Object.keys(totalResources.skillItems).length > 0) {
-        const skillEstimate = calculateStaminaEstimate(totalResources.skillItems, 'skill');
+    // Render skill items
+    if (Object.keys(netResources.skillItems).length > 0) {
+        const skillEstimate = calculateStaminaEstimate(netResources.skillItems, 'skill');
         const skillSection = document.createElement('div');
         skillSection.className = 'resource-category';
         
         let estimateHTML = '';
         if (skillEstimate) {
             estimateHTML = `
-                <div class="stamina-estimate">
-                    <span class="estimate-item"><i class="fa-solid fa-bolt"></i> ${skillEstimate.estimatedStamina} 스태미나</span>
+                <div class="stamina-estimate" title="남은 재료 기준">
+                    <span class="estimate-item"><i class="fa-solid fa-bolt"></i> ${skillEstimate.estimatedStamina.toLocaleString()} 스태미나</span>
                     <span class="estimate-separator">|</span>
                     <span class="estimate-item"><i class="fa-regular fa-calendar"></i> ${skillEstimate.estimatedDays}일</span>
                 </div>
@@ -1048,96 +1137,112 @@ function renderResourceSummary() {
             <div class="resource-items-container" id="skill-items-container"></div>
         `;
         container.appendChild(skillSection);
-        
-        renderSkillItems(totalResources.skillItems);
+        renderSkillItems(netResources.skillItems, totalResources.skillItems);
     }
     
-    // Render EXP and Gold side by side at the bottom
-    const totalGold = totalResources.gold + totalResources.levelupGold;
-    if (totalResources.exp > 0 || totalGold > 0) {
+    // Render EXP and Gold
+    const totalRequiredGold = totalResources.gold + totalResources.levelupGold;
+    const netGold = Math.max(0, totalRequiredGold - (resourcesState.ownedMaterials['1'] || 0));
+    
+    const grossExp = totalResources.exp;
+    const totalOwnedExp = calculateTotalOwnedExp('character');
+    const netExp = Math.max(0, grossExp - totalOwnedExp);
+
+    if (grossExp > 0 || netGold > 0) {
         const bottomSection = document.createElement('div');
         bottomSection.className = 'resource-bottom-section';
-        bottomSection.innerHTML = '<div class="resource-bottom-grid" id="bottom-resources-grid"></div>';
         container.appendChild(bottomSection);
 
-        const bottomGrid = document.getElementById('bottom-resources-grid');
+        const bottomGrid = document.createElement('div');
+        bottomGrid.className = 'resource-bottom-grid';
+        bottomSection.appendChild(bottomGrid);
 
-        // Add EXP
-        if (totalResources.exp > 0) {
+        if (grossExp > 0) {
             const expCard = document.createElement('div');
             expCard.className = 'resource-bottom-card';
-            expCard.innerHTML = `
-                <div class="resource-category-title">경험치 (${totalResources.exp.toLocaleString()})</div>
-                <div class="resource-items-grid" id="exp-items-grid"></div>
+            
+            const expSummaryContent = `
+                <div>총 요구량: ${grossExp.toLocaleString()}</div>
+                <div>보유: ${totalOwnedExp.toLocaleString()}</div>
+                <div class="net-exp">남은 요구량: ${netExp.toLocaleString()}</div>
             `;
-            bottomGrid.appendChild(expCard);
-        }
 
-        // Add Total Gold (도라)
-        if (totalGold > 0) {
-            const goldCard = document.createElement('div');
-            goldCard.className = 'resource-bottom-card';
-            goldCard.innerHTML = `
-                <div class="resource-category-title">도라 (총합)</div>
-                <div class="resource-items-grid">
-                    <div class="resource-item">
-                        <div class="resource-item-icon-wrapper">
-                            <img src="assets/items/item_1.png" class="resource-item-icon" alt="도라" onerror="this.style.display='none'">
-                        </div>
-                        <div class="resource-item-name">도라</div>
-                        <div class="resource-item-qty">${totalGold.toLocaleString()}</div>
-                    </div>
+            expCard.innerHTML = `
+                <div class="resource-category-title">경험치</div>
+                <div class="exp-content-row">
+                    <div class="resource-items-grid" id="exp-items-grid"></div>
+                    <div class="exp-summary">${expSummaryContent}</div>
                 </div>
             `;
-            bottomGrid.appendChild(goldCard);
+            bottomGrid.appendChild(expCard);
+            
+            if (netExp > 0) {
+                renderExpItems(netExp);
+            }
         }
 
-        // Render exp items after DOM is ready
-        if (totalResources.exp > 0) {
-            renderExpItems(totalResources.exp);
+        if (netGold > 0) {
+            const goldCard = document.createElement('div');
+            goldCard.className = 'resource-bottom-card';
+            
+            const title = document.createElement('div');
+            title.className = 'resource-category-title';
+            title.textContent = '도라 (총합)';
+            
+            const grid = document.createElement('div');
+            grid.className = 'resource-items-grid';
+            
+            const goldElement = createResourceItemElement(resourcesState.items['1'], netGold, totalRequiredGold, (resourcesState.ownedMaterials['1'] || 0), '1');
+            grid.appendChild(goldElement);
+            
+            goldCard.appendChild(title);
+            goldCard.appendChild(grid);
+            bottomGrid.appendChild(goldCard);
         }
     }
 
-    // Render badge requirements section
     renderBadgeRequirements();
 }
 
 // Render EXP items needed
-function renderExpItems(totalExp) {
+function renderExpItems(netExp) {
     const grid = document.getElementById('exp-items-grid');
     if (!grid) return;
+    grid.innerHTML = '';
+
+    const expItems = Object.values(resourcesState.charItemExp).sort((a, b) => b.ExpValue - a.ExpValue);
     
-    // Calculate optimal item distribution (use largest items first)
-    const expItems = Object.values(resourcesState.charItemExp)
-        .sort((a, b) => b.ExpValue - a.ExpValue);
-    
-    const itemCounts = {};
-    let remainingExp = totalExp;
-    
+    let requiredCounts = {};
+    let remainingRequired = netExp;
     expItems.forEach(expItem => {
-        const count = Math.floor(remainingExp / expItem.ExpValue);
+        const count = Math.floor(remainingRequired / expItem.ExpValue);
         if (count > 0) {
-            itemCounts[expItem.ItemId] = count;
-            remainingExp -= count * expItem.ExpValue;
+            requiredCounts[expItem.ItemId] = (requiredCounts[expItem.ItemId] || 0) + count;
+            remainingRequired -= count * expItem.ExpValue;
         }
     });
+
+    if (remainingRequired > 0 && expItems.length > 0) {
+        const smallestBook = expItems[expItems.length - 1];
+        requiredCounts[smallestBook.ItemId] = (requiredCounts[smallestBook.ItemId] || 0) + 1;
+    }
     
-    // Render items
-    Object.entries(itemCounts).forEach(([itemId, count]) => {
+    Object.keys(requiredCounts).forEach(itemId => {
         const item = resourcesState.items[itemId];
         if (!item) return;
 
-        const itemElement = createResourceItemElement(item, count);
+        const requiredCount = requiredCounts[itemId] || 0;
+        
+        const itemElement = createResourceItemElement(item, requiredCount, requiredCount, 0, itemId);
         grid.appendChild(itemElement);
     });
 }
 
-// Render badge requirements
+// Render badge requirements (no change, as badges aren't "owned" in the same way)
 function renderBadgeRequirements() {
     const container = document.getElementById('resource-summary-content');
     if (!container || resourcesState.selectedCharacters.length === 0) return;
 
-    // Collect all badges needed by level (70, 80, 90)
     const badgesByLevel = {
         70: [],
         80: [],
@@ -1151,11 +1256,9 @@ function renderBadgeRequirements() {
             return;
         }
 
-        // Only include badges for target level >= badge level
         const targetLevel = charData.targetLevel;
-
-        // GemSlots array has 3 items in order: 70, 80, 90
         const levels = [70, 80, 90];
+        
         levels.forEach((level, index) => {
             if (targetLevel >= level) {
                 const gemSlotId = character.GemSlots[index];
@@ -1163,31 +1266,26 @@ function renderBadgeRequirements() {
 
                 if (charGemData && charGemData.GenerateCostTid) {
                     const itemId = charGemData.GenerateCostTid;
-
-                    // Find existing badge for this itemId
                     let badgeEntry = badgesByLevel[level].find(b => b.itemId === itemId);
 
                     if (!badgeEntry) {
-                        // Create new badge entry
                         badgeEntry = {
                             itemId: itemId,
                             characters: []
                         };
                         badgesByLevel[level].push(badgeEntry);
                     }
-
-                    // Add character to this badge
-                    badgeEntry.characters.push(character);
+                    if(!badgeEntry.characters.some(c => c.Id === character.Id)){
+                        badgeEntry.characters.push(character);
+                    }
                 }
             }
         });
     });
 
-    // Check if any badges are needed
     const hasBadges = Object.values(badgesByLevel).some(badges => badges.length > 0);
     if (!hasBadges) return;
 
-    // Create badge section
     const badgeSection = document.createElement('div');
     badgeSection.className = 'resource-category badge-requirements-section';
     badgeSection.innerHTML = `
@@ -1213,7 +1311,6 @@ function renderBadgeRequirements() {
     `;
     container.appendChild(badgeSection);
 
-    // Render badges for each level
     [70, 80, 90].forEach(level => {
         const badgeContainer = document.getElementById(`badge-${level}`);
         if (!badgeContainer) return;
@@ -1222,10 +1319,9 @@ function renderBadgeRequirements() {
             const badgeElement = document.createElement('div');
             badgeElement.className = 'badge-item';
 
-            // Build character icons HTML
             const characterIconsHTML = badgeData.characters.map(character => `
                 <div class="badge-character-icon">
-                    <img src="assets/char/avg1_${character.Id}_002.png" alt="${character.NameKR || character.Name}" onerror="this.style.display='none'">
+                    <img src="assets/char/avg1_${character.Id}_002.png" alt="${resourcesState.characterNames[character.Name] || character.Name}" onerror="this.style.display='none'">
                 </div>
             `).join('');
 
@@ -1245,134 +1341,124 @@ function renderBadgeRequirements() {
     });
 }
 
+
 // Render advance items needed
-function renderAdvanceItems(advanceItems) {
+function renderAdvanceItems(netItems, totalItems) {
     const container = document.getElementById('advance-items-container');
     if (!container) return;
+    container.innerHTML = '';
     
-    // Separate grouped and ungrouped items
-    const groupedItems = [];
-    const ungroupedItems = [];
-    
-    Object.entries(advanceItems).forEach(([itemId, qty]) => {
-        if (isGroupedMaterial(itemId, 'advance')) {
-            groupedItems.push([itemId, qty]);
-        } else {
-            ungroupedItems.push([itemId, qty]);
-        }
-    });
-    
-    // Render grouped items in rows
     MATERIAL_GROUPS.advance.forEach(group => {
-        const groupItems = groupedItems.filter(([id]) => group.items.includes(parseInt(id)));
-        if (groupItems.length > 0) {
+        const hasItemInGroup = group.items.some(id => netItems[id] > 0);
+        if (hasItemInGroup) {
             const groupRow = document.createElement('div');
             groupRow.className = 'resource-group-row';
             
-            groupItems.forEach(([itemId, qty]) => {
+            group.items.forEach(itemId => {
                 const item = resourcesState.items[itemId];
                 if (!item) return;
                 
-                const itemElement = createResourceItemElement(item, qty, itemId);
-                groupRow.appendChild(itemElement);
+                const netQty = netItems[itemId] || 0;
+                const requiredQty = totalItems[itemId] || 0;
+                const ownedQty = resourcesState.ownedMaterials[itemId] || 0;
+                
+                if (requiredQty > 0) {
+                    const itemElement = createResourceItemElement(item, netQty, requiredQty, ownedQty, String(itemId));
+                    groupRow.appendChild(itemElement);
+                }
             });
-            
             container.appendChild(groupRow);
         }
     });
     
-    // Render ungrouped items in a grid
-    if (ungroupedItems.length > 0) {
+    const ungroupedNetItems = Object.keys(netItems).filter(id => !isGroupedMaterial(id, 'advance'));
+    if (ungroupedNetItems.length > 0) {
         const ungroupedGrid = document.createElement('div');
         ungroupedGrid.className = 'resource-items-grid';
-        
-        ungroupedItems.forEach(([itemId, qty]) => {
+        ungroupedNetItems.forEach(itemId => {
             const item = resourcesState.items[itemId];
             if (!item) return;
-            
-            const itemElement = createResourceItemElement(item, qty, itemId);
+
+            const netQty = netItems[itemId] || 0;
+            const requiredQty = totalItems[itemId] || 0;
+            const ownedQty = resourcesState.ownedMaterials[itemId] || 0;
+            const itemElement = createResourceItemElement(item, netQty, requiredQty, ownedQty, itemId);
             ungroupedGrid.appendChild(itemElement);
         });
-        
         container.appendChild(ungroupedGrid);
     }
 }
 
 // Render skill items needed
-function renderSkillItems(skillItems) {
+function renderSkillItems(netItems, totalItems) {
     const container = document.getElementById('skill-items-container');
     if (!container) return;
-    
-    // Separate grouped and ungrouped items
-    const groupedItems = [];
-    const ungroupedItems = [];
-    
-    Object.entries(skillItems).forEach(([itemId, qty]) => {
-        if (isGroupedMaterial(itemId, 'skill')) {
-            groupedItems.push([itemId, qty]);
-        } else {
-            ungroupedItems.push([itemId, qty]);
-        }
-    });
-    
-    // Render grouped items in rows
+    container.innerHTML = '';
+
     MATERIAL_GROUPS.skill.forEach(group => {
-        const groupItems = groupedItems.filter(([id]) => group.items.includes(parseInt(id)));
-        if (groupItems.length > 0) {
+        const hasItemInGroup = group.items.some(id => netItems[id] > 0);
+        if (hasItemInGroup) {
             const groupRow = document.createElement('div');
             groupRow.className = 'resource-group-row';
-            
-            groupItems.forEach(([itemId, qty]) => {
+            group.items.forEach(itemId => {
                 const item = resourcesState.items[itemId];
                 if (!item) return;
-                
-                const itemElement = createResourceItemElement(item, qty, itemId);
-                groupRow.appendChild(itemElement);
+
+                const netQty = netItems[itemId] || 0;
+                const requiredQty = totalItems[itemId] || 0;
+                const ownedQty = resourcesState.ownedMaterials[itemId] || 0;
+
+                if (requiredQty > 0) {
+                    const itemElement = createResourceItemElement(item, netQty, requiredQty, ownedQty, String(itemId));
+                    groupRow.appendChild(itemElement);
+                }
             });
-            
             container.appendChild(groupRow);
         }
     });
     
-    // Render ungrouped items in a grid
-    if (ungroupedItems.length > 0) {
+    const ungroupedNetItems = Object.keys(netItems).filter(id => !isGroupedMaterial(id, 'skill'));
+    if (ungroupedNetItems.length > 0) {
         const ungroupedGrid = document.createElement('div');
         ungroupedGrid.className = 'resource-items-grid';
-        
-        ungroupedItems.forEach(([itemId, qty]) => {
+        ungroupedNetItems.forEach(itemId => {
             const item = resourcesState.items[itemId];
             if (!item) return;
-            
-            const itemElement = createResourceItemElement(item, qty, itemId);
+            const netQty = netItems[itemId] || 0;
+            const requiredQty = totalItems[itemId] || 0;
+            const ownedQty = resourcesState.ownedMaterials[itemId] || 0;
+            const itemElement = createResourceItemElement(item, netQty, requiredQty, ownedQty, itemId);
             ungroupedGrid.appendChild(itemElement);
         });
-        
         container.appendChild(ungroupedGrid);
     }
 }
 
 // Create resource item element
-function createResourceItemElement(item, qty, itemId) {
+function createResourceItemElement(item, netQty, requiredQty, ownedQty, itemId) {
     const itemName = resourcesState.itemNames[item.Title] || item.Title;
     const rarity = item.Rarity || 1;
     const bgImage = `assets/items/rare_item_a_${6 - rarity}.png`;
     
-    // Extract icon filename
     let iconPath = '';
     if (item.Icon) {
-        const iconParts = item.Icon.split('/');
-        const iconFile = iconParts[iconParts.length - 1];
-        iconPath = `assets/items/${iconFile}.png`;
+        iconPath = `assets/items/${item.Icon.split('/').pop()}.png`;
+    } else if (itemId) {
+        // Fallback for items missing an Icon property, like some EXP materials
+        iconPath = `assets/items/item_${itemId}.png`;
     }
-    
-    // Get characters using this item
+
     const charactersUsing = itemId ? getCharactersUsingItem(itemId) : [];
-    
-    // Get discs using this item
     const discsUsing = itemId ? getDiscsUsingItem(itemId) : [];
     
     const div = document.createElement('div');
     div.className = 'resource-item';
+    if (netQty <= 0 && requiredQty > 0) {
+        div.classList.add('completed');
+        div.title = `완료!\n필요: ${requiredQty.toLocaleString()}\n보유: ${ownedQty.toLocaleString()}`;
+    } else {
+        div.title = `필요: ${requiredQty.toLocaleString()}\n보유: ${ownedQty.toLocaleString()}`;
+    }
     
     let characterIconsHTML = '';
     const totalIcons = charactersUsing.length + discsUsing.length;
@@ -1413,16 +1499,21 @@ function createResourceItemElement(item, qty, itemId) {
     
     div.innerHTML = `
         <div class="resource-item-icon-wrapper">
-            <img src="${bgImage}" class="resource-item-bg" alt="background" onerror="this.style.display='none'">
+            <img src="${bgImage}" class="resource-item-bg" alt="" onerror="this.style.display='none'">
             <img src="${iconPath}" class="resource-item-icon" alt="${itemName}" onerror="this.style.display='none'">
             ${characterIconsHTML}
         </div>
         <div class="resource-item-name">${itemName}</div>
-        <div class="resource-item-qty">×${qty.toLocaleString()}</div>
+        <div class="resource-item-qty">×${netQty.toLocaleString()}</div>
     `;
+    
+    if (netQty <= 0) {
+        div.style.display = 'none';
+    }
     
     return div;
 }
+
 
 // Clear all selected characters and resources
 function clearAllResources() {
@@ -1431,7 +1522,7 @@ function clearAllResources() {
         return;
     }
     
-    if (confirm('모든 선택된 캐릭터와 계산된 자원을 초기화하시겠습니까?')) {
+    if (confirm('모든 선택된 여행가와 계산된 자원을 초기화하시겠습니까?')) {
         resourcesState.selectedCharacters = [];
         resourcesState.characterResources = {};
         
@@ -1443,7 +1534,6 @@ function clearAllResources() {
         showToast('모든 데이터가 초기화되었습니다', 'success');
     }
 }
-
 // Show resource help modal
 function showResourceHelp() {
     const modal = document.getElementById('resource-help-modal');
@@ -1744,10 +1834,45 @@ function renderSelectedDiscsList() {
     });
 }
 
+function renderDiscExpItems(netExp) {
+    const grid = document.getElementById('disc-exp-items-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    const expItems = Object.values(resourcesState.discItemExp).sort((a, b) => b.Exp - a.Exp);
+    
+    let requiredCounts = {};
+    let remainingRequired = netExp;
+    expItems.forEach(expItem => {
+        if (expItem && expItem.Exp > 0) {
+            const count = Math.floor(remainingRequired / expItem.Exp);
+            if (count > 0) {
+                requiredCounts[expItem.ItemId] = (requiredCounts[expItem.ItemId] || 0) + count;
+                remainingRequired -= count * expItem.Exp;
+            }
+        }
+    });
+
+    if (remainingRequired > 0 && expItems.length > 0) {
+        const smallestBook = expItems[expItems.length - 1];
+        requiredCounts[smallestBook.ItemId] = (requiredCounts[smallestBook.ItemId] || 0) + 1;
+    }
+
+    Object.keys(requiredCounts).forEach(itemId => {
+        const item = resourcesState.items[itemId];
+        if (!item) return;
+
+        const requiredCount = requiredCounts[itemId] || 0;
+        
+        const itemElement = createResourceItemElement(item, requiredCount, requiredCount, 0, itemId);
+        grid.appendChild(itemElement);
+    });
+}
+
 // Render disc resource summary
 function renderDiscResourceSummary() {
     const container = document.getElementById('disc-resource-summary-content');
-    
+
     if (resourcesState.selectedDiscs.length === 0) {
         container.innerHTML = `
             <div class="empty-summary-state">
@@ -1757,11 +1882,11 @@ function renderDiscResourceSummary() {
         `;
         return;
     }
-    
-    // Aggregate all resources
+
+    // 1. Aggregate all required resources
     const totalResources = {
         exp: 0,
-        advanceItems: {},
+        discAdvanceItems: {},
         gold: 0,
         levelupGold: 0
     };
@@ -1772,174 +1897,151 @@ function renderDiscResourceSummary() {
         totalResources.levelupGold += resources.levelupGold || 0;
 
         Object.entries(resources.advanceItems || {}).forEach(([itemId, qty]) => {
-            if (!totalResources.advanceItems[itemId]) {
-                totalResources.advanceItems[itemId] = 0;
+            if (!totalResources.discAdvanceItems[itemId]) {
+                totalResources.discAdvanceItems[itemId] = 0;
             }
-            totalResources.advanceItems[itemId] += qty;
+            totalResources.discAdvanceItems[itemId] += qty;
         });
     });
+
+    // 2. Calculate net resources
+    const netResources = calculateNetResourcesWithMerging(totalResources, resourcesState.ownedMaterials);
     
     container.innerHTML = '';
-    
-    console.log('Total disc resources:', totalResources);
-    
-    // Render advance items section
-    if (Object.keys(totalResources.advanceItems).length > 0) {
-        console.log('Rendering disc advance items:', totalResources.advanceItems);
-        const advanceEstimate = calculateStaminaEstimate(totalResources.advanceItems, 'discAdvance');
+
+    // 3. Render sections based on net resources
+    // Render advance items
+    if (Object.keys(netResources.discAdvanceItems).length > 0) {
+        const advanceEstimate = calculateStaminaEstimate(netResources.discAdvanceItems, 'discAdvance');
         const advanceSection = document.createElement('div');
         advanceSection.className = 'resource-category';
-        
+
         let estimateHTML = '';
         if (advanceEstimate) {
             estimateHTML = `
-                <div class="stamina-estimate">
-                    <span class="estimate-item"><i class="fa-solid fa-bolt"></i> ${advanceEstimate.estimatedStamina} 스태미나</span>
+                <div class="stamina-estimate" title="남은 재료 기준">
+                    <span class="estimate-item"><i class="fa-solid fa-bolt"></i> ${advanceEstimate.estimatedStamina.toLocaleString()} 스태미나</span>
                     <span class="estimate-separator">|</span>
                     <span class="estimate-item"><i class="fa-regular fa-calendar"></i> ${advanceEstimate.estimatedDays}일</span>
                 </div>
             `;
         }
-        
+
         advanceSection.innerHTML = `
             <div class="resource-category-header">
-                <div class="resource-category-title">승급 아이템</div>
+                <div class="resource-category-title">승급 아이템 (레코드)</div>
                 ${estimateHTML}
             </div>
             <div class="resource-items-container" id="disc-advance-items-container"></div>
         `;
         container.appendChild(advanceSection);
-        
-        renderDiscAdvanceItems(totalResources.advanceItems);
+        renderDiscAdvanceItems(netResources.discAdvanceItems, totalResources.discAdvanceItems);
     }
-    
+
     // Render EXP and Gold
-    const totalGold = totalResources.gold + totalResources.levelupGold;
-    if (totalResources.exp > 0 || totalGold > 0) {
-        const expSection = document.createElement('div');
-        expSection.className = 'resource-bottom-section';
-        expSection.innerHTML = '<div class="resource-bottom-grid" id="disc-bottom-grid"></div>';
-        container.appendChild(expSection);
+    const totalRequiredGold = totalResources.gold + totalResources.levelupGold;
+    const netGold = Math.max(0, totalRequiredGold - (resourcesState.ownedMaterials['1'] || 0));
+    
+    const grossExp = totalResources.exp;
+    const totalOwnedExp = calculateTotalOwnedExp('disc');
+    const netExp = Math.max(0, grossExp - totalOwnedExp);
 
-        const bottomGrid = document.getElementById('disc-bottom-grid');
+    if (grossExp > 0 || netGold > 0) {
+        const bottomSection = document.createElement('div');
+        bottomSection.className = 'resource-bottom-section';
+        container.appendChild(bottomSection);
 
-        // Add EXP card
-        if (totalResources.exp > 0) {
+        const bottomGrid = document.createElement('div');
+        bottomGrid.className = 'resource-bottom-grid';
+        bottomSection.appendChild(bottomGrid);
+
+        if (grossExp > 0) {
             const expCard = document.createElement('div');
             expCard.className = 'resource-bottom-card';
+
+            const expSummaryContent = `
+                <div>총 요구량: ${grossExp.toLocaleString()}</div>
+                <div>보유: ${totalOwnedExp.toLocaleString()}</div>
+                <div class="net-exp">남은 요구량: ${netExp.toLocaleString()}</div>
+            `;
+
             expCard.innerHTML = `
-                <div class="resource-category-title">경험치 (${totalResources.exp.toLocaleString()})</div>
-                <div class="resource-items-grid" id="disc-exp-items-grid"></div>
+                <div class="resource-category-title">경험치</div>
+                <div class="exp-content-row">
+                    <div class="resource-items-grid" id="disc-exp-items-grid"></div>
+                    <div class="exp-summary">${expSummaryContent}</div>
+                </div>
             `;
             bottomGrid.appendChild(expCard);
 
-            // Calculate disc exp items needed
-            const expItems = {};
-            let remainingExp = totalResources.exp;
-
-            // Use disc exp items from DiscItemExp.json
-            const discExpItems = [
-                { itemId: 50004, exp: 20000 },
-                { itemId: 50003, exp: 10000 },
-                { itemId: 50002, exp: 5000 },
-                { itemId: 50001, exp: 1000 }
-            ];
-
-            discExpItems.forEach(({ itemId, exp }) => {
-                const count = Math.floor(remainingExp / exp);
-                if (count > 0) {
-                    expItems[itemId] = count;
-                    remainingExp -= count * exp;
-                }
-            });
-
-            // Render exp items
-            const expGrid = document.getElementById('disc-exp-items-grid');
-            if (expGrid) {
-                Object.entries(expItems).forEach(([itemId, qty]) => {
-                    const item = resourcesState.items[itemId];
-                    if (item) {
-                        const itemElement = createResourceItemElement(item, qty, itemId);
-                        expGrid.appendChild(itemElement);
-                    }
-                });
+            if (netExp > 0) {
+                renderDiscExpItems(netExp);
             }
         }
 
-        // Add Total Gold card
-        if (totalGold > 0) {
+        if (netGold > 0) {
             const goldCard = document.createElement('div');
             goldCard.className = 'resource-bottom-card';
-            goldCard.innerHTML = `
-                <div class="resource-category-title">도라 (총합)</div>
-                <div class="resource-items-grid">
-                    <div class="resource-item">
-                        <div class="resource-item-icon-wrapper">
-                            <img src="assets/items/item_1.png" class="resource-item-icon" alt="도라" onerror="this.style.display='none'">
-                        </div>
-                        <div class="resource-item-name">도라</div>
-                        <div class="resource-item-qty">${totalGold.toLocaleString()}</div>
-                    </div>
-                </div>
-            `;
+            
+            const title = document.createElement('div');
+            title.className = 'resource-category-title';
+            title.textContent = '도라 (총합)';
+            
+            const grid = document.createElement('div');
+            grid.className = 'resource-items-grid';
+            
+            const goldElement = createResourceItemElement(resourcesState.items['1'], netGold, totalRequiredGold, (resourcesState.ownedMaterials['1'] || 0), '1');
+            grid.appendChild(goldElement);
+            
+            goldCard.appendChild(title);
+            goldCard.appendChild(grid);
             bottomGrid.appendChild(goldCard);
         }
     }
 }
 
 // Render disc advance items
-function renderDiscAdvanceItems(advanceItems) {
+function renderDiscAdvanceItems(netItems, totalItems) {
     const container = document.getElementById('disc-advance-items-container');
-    if (!container) {
-        return;
-    }
-    
+    if (!container) return;
     container.innerHTML = '';
-    
-    // Group items
-    const groupedItems = [];
-    const ungroupedItems = [];
-    
-    Object.entries(advanceItems).forEach(([itemId, qty]) => {
-        if (isGroupedMaterial(parseInt(itemId), 'discAdvance')) {
-            groupedItems.push([parseInt(itemId), qty]);
-        } else {
-            ungroupedItems.push([parseInt(itemId), qty]);
-        }
-    });
-    
-    // Render grouped items in rows of 3
+
     MATERIAL_GROUPS.discAdvance.forEach(group => {
-        const groupItems = groupedItems.filter(([itemId]) => group.items.includes(itemId));
-        if (groupItems.length > 0) {
+        const hasItemInGroup = group.items.some(id => netItems[id] > 0);
+        if (hasItemInGroup) {
             const groupRow = document.createElement('div');
             groupRow.className = 'resource-group-row';
-            
-            groupItems.forEach(([itemId, qty]) => {
+
+            group.items.forEach(itemId => {
                 const item = resourcesState.items[itemId];
                 if (!item) return;
-                
-                const itemElement = createResourceItemElement(item, qty, itemId);
-                groupRow.appendChild(itemElement);
+
+                const requiredQty = totalItems[itemId] || 0;
+                if (requiredQty > 0) {
+                    const netQty = netItems[itemId] || 0;
+                    const ownedQty = (resourcesState.ownedMaterials[itemId] || 0);
+                    const itemElement = createResourceItemElement(item, netQty, requiredQty, ownedQty, String(itemId));
+                    groupRow.appendChild(itemElement);
+                }
             });
-            
             container.appendChild(groupRow);
         }
     });
-    
-    // Render ungrouped items in a grid
-    if (ungroupedItems.length > 0) {
+
+    const ungroupedNetItems = Object.keys(netItems).filter(id => !isGroupedMaterial(id, 'discAdvance'));
+    if (ungroupedNetItems.length > 0) {
         const ungroupedGrid = document.createElement('div');
         ungroupedGrid.className = 'resource-items-grid';
-        
-        ungroupedItems.forEach(([itemId, qty]) => {
+        ungroupedNetItems.forEach(itemId => {
             const item = resourcesState.items[itemId];
             if (!item) return;
-            
-            const itemElement = createResourceItemElement(item, qty, itemId);
+
+            const netQty = netItems[itemId] || 0;
+            const requiredQty = totalItems[itemId] || 0;
+            const ownedQty = resourcesState.ownedMaterials[itemId] || 0;
+            const itemElement = createResourceItemElement(item, netQty, requiredQty, ownedQty, itemId);
             ungroupedGrid.appendChild(itemElement);
         });
-        
         container.appendChild(ungroupedGrid);
     }
 }
@@ -1995,11 +2097,34 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // Modal click handler to close when clicking outside
-document.addEventListener('click', function(event) {
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-        if (event.target === modal) {
-            modal.classList.remove('active');
+document.addEventListener('click', (event) => {
+    if (event.target.matches('.modal.active')) {
+        const modalId = event.target.id;
+        switch (modalId) {
+            case 'my-materials-modal':
+                closeMyMaterialsModal();
+                break;
+            case 'character-resource-modal':
+                closeCharacterResourceSelect();
+                break;
+            case 'disc-resource-modal':
+                closeDiscResourceSelect();
+                break;
+            case 'resource-help-modal':
+                closeResourceHelp();
+                break;
+            case 'disc-resource-help-modal':
+                closeDiscResourceHelp();
+                break;
+            case 'character-detail-modal':
+                if (typeof closeCharacterDetailModal === 'function') {
+                    closeCharacterDetailModal();
+                } else {
+                    event.target.classList.remove('active');
+                }
+                break;
+            default:
+                event.target.classList.remove('active');
         }
-    });
+    }
 });

@@ -6,8 +6,10 @@ css:
   - css/components/cards.css
   - css/app-char.css
   - css/resources.css
+  - css/resources-addon.css
 scripts_footer:
   - js/resources.js
+  - js/resources-addon.js
 ---
 
 <div class="container">
@@ -20,11 +22,15 @@ scripts_footer:
     <div class="resources-tab-navigation">
         <button class="resources-tab-btn active" data-tab="characters" onclick="switchResourceTab('characters')">
             <span class="tab-icon"><i class="fa-solid fa-users"></i></span>
-            <span class="tab-label">캐릭터</span>
+            <span class="tab-label">여행가</span>
         </button>
         <button class="resources-tab-btn" data-tab="discs" onclick="switchResourceTab('discs')">
             <span class="tab-icon"><i class="fa-solid fa-compact-disc"></i></span>
             <span class="tab-label">레코드</span>
+        </button>
+        <button class="resources-tab-btn" data-tab="glance" onclick="switchResourceTab('glance')">
+            <span class="tab-icon"><i class="fa-solid fa-border-all"></i></span>
+            <span class="tab-label">한눈에 보기</span>
         </button>
     </div>
 
@@ -34,17 +40,17 @@ scripts_footer:
             <!-- Character Selection Section -->
             <div class="character-selection-section">
                 <div class="section-header">
-                    <h2>캐릭터 선택</h2>
+                    <h2>여행가 선택</h2>
                     <button class="add-character-btn" onclick="openCharacterResourceSelect()">
                         <span class="btn-icon"><i class="fa-solid fa-plus"></i></span>
-                        캐릭터 추가
+                        여행가 추가
                     </button>
                 </div>
 
                 <div class="selected-characters-list" id="selected-characters-list">
                     <div class="empty-selection-state">
                         <div class="empty-icon"><i class="fa-regular fa-clipboard"></i></div>
-                        <p>캐릭터를 선택하여 자원 계산을 시작하세요</p>
+                        <p>여행가를 선택하여 자원 계산을 시작하세요</p>
                     </div>
                 </div>
             </div>
@@ -57,16 +63,22 @@ scripts_footer:
                             <i class="fa-solid fa-circle-question"></i>
                         </button>
                     </h2>
-                    <button class="clear-all-btn" onclick="clearAllResources()">
-                        <span class="btn-icon"><i class="fa-solid fa-trash-can"></i></span>
-                        전체 초기화
-                    </button>
+                    <div class="header-actions">
+                        <button class="my-materials-btn" onclick="openMyMaterialsModal()">
+                            <span class="btn-icon"><i class="fa-solid fa-box-archive"></i></span>
+                            내 재료
+                        </button>
+                        <button class="clear-all-btn" onclick="clearAllResources()">
+                            <span class="btn-icon"><i class="fa-solid fa-trash-can"></i></span>
+                            전체 초기화
+                        </button>
+                    </div>
                 </div>
 
                 <div class="resource-summary-content" id="resource-summary-content">
                     <div class="empty-summary-state">
                         <div class="empty-icon"><i class="fa-solid fa-chart-simple"></i></div>
-                        <p>선택된 캐릭터가 없습니다</p>
+                        <p>선택된 여행가가 없습니다</p>
                     </div>
                 </div>
             </div>
@@ -102,10 +114,16 @@ scripts_footer:
                             <i class="fa-solid fa-circle-question"></i>
                         </button>
                     </h2>
-                    <button class="clear-all-btn" onclick="clearAllDiscResources()">
-                        <span class="btn-icon"><i class="fa-solid fa-trash-can"></i></span>
-                        전체 초기화
-                    </button>
+                    <div class="header-actions">
+                        <button class="my-materials-btn" onclick="openMyMaterialsModal()">
+                            <span class="btn-icon"><i class="fa-solid fa-box-archive"></i></span>
+                            내 재료
+                        </button>
+                        <button class="clear-all-btn" onclick="clearAllDiscResources()">
+                            <span class="btn-icon"><i class="fa-solid fa-trash-can"></i></span>
+                            전체 초기화
+                        </button>
+                    </div>
                 </div>
 
                 <div class="resource-summary-content" id="disc-resource-summary-content">
@@ -118,11 +136,53 @@ scripts_footer:
         </div>
     </div>
 
+    <!-- Glance Tab Content -->
+    <div class="resources-tab-content" id="resources-tab-glance">
+        <div class="section-header">
+            <h2>여행가 육성 재료 매트릭스</h2>
+			<p class="subtitle">행: 승급 재료, 열: 스킬 재료</p>
+        </div>
+        <div id="glance-matrix-container">
+            <!-- Matrix will be rendered here by resources-glance.js -->
+			<div class="loading-overlay" id="glance-loader" style="display: none;">
+                <div class="loading-spinner">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <p>매트릭스 생성 중...</p>
+                </div>
+            </div>
+        </div>
+        <div class="section-header matrix-section-header">
+            <h2>캐릭터 뱃지 매트릭스</h2>
+			<p class="subtitle">행: 레벨, 열: 뱃지</p>
+        </div>
+		<div id="character-badge-matrix-container">
+		</div>
+		<div class="section-header matrix-section-header">
+            <h2>레코드 승급 매트릭스</h2>
+			<p class="subtitle">행: 속성, 열: 재료</p>
+        </div>
+		<div id="disc-advance-matrix-container">
+		</div>
+    </div>
+
+    <!-- My Materials Modal -->
+    <div class="modal" id="my-materials-modal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h2>내 재료 관리</h2>
+                <button class="close-btn" onclick="closeMyMaterialsModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="my-materials-content">
+                <!-- Material inputs will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+
     <!-- Character Selection Modal -->
     <div class="modal" id="character-resource-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>캐릭터 선택</h2>
+                <h2>여행가 선택</h2>
                 <button class="close-btn" onclick="closeCharacterResourceSelect()">&times;</button>
             </div>
             <div class="character-grid" id="character-resource-grid"></div>
@@ -144,7 +204,7 @@ scripts_footer:
     <div class="modal" id="character-detail-modal">
         <div class="modal-content large-modal">
             <div class="modal-header">
-                <h2 id="detail-modal-title">캐릭터 자원 계산</h2>
+                <h2 id="detail-modal-title">여행가 자원 계산</h2>
                 <button class="close-btn" onclick="closeCharacterDetailModal()">&times;</button>
             </div>
             <div class="modal-body" id="character-detail-content">

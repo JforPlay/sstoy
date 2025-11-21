@@ -1,0 +1,463 @@
+/* ============================================================================
+   RESOURCES - GLANCE MATRIX STYLES (Unified)
+   ============================================================================ */
+
+:root {
+    --glance-bg-gradient: linear-gradient(145deg, #2c2c34, #24242c);
+    --glance-cell-bg: rgba(40, 42, 54, 0.8);
+    --glance-header-bg: var(--table-header-bg, #282a36);
+    --glance-highlight-bg: var(--primary-color-translucent, rgba(139, 92, 246, 0.2));
+    --glance-highlight-border: var(--primary-color);
+}
+
+:root[data-theme="light"] {
+    --glance-bg-gradient: linear-gradient(145deg, #f8f9fa, #e9ecef);
+    --glance-cell-bg: rgba(255, 255, 255, 0.8);
+    --glance-header-bg: #f1f3f5;
+    --glance-highlight-bg: rgba(124, 58, 237, 0.1);
+}
+
+/* Main container for all matrices */
+#glance-matrix-container,
+#character-badge-matrix-container,
+#disc-advance-matrix-container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 1rem;
+    background: var(--glance-bg-gradient);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 24px var(--shadow, rgba(0, 0, 0, 0.2));
+}
+
+/* Matrix section spacing */
+#glance-matrix-container {
+    margin-bottom: 2rem;
+}
+
+#character-badge-matrix-container {
+    margin-bottom: 2rem;
+}
+
+#disc-advance-matrix-container {
+    /* No extra margin needed */
+}
+
+/* Section headers for matrices */
+.matrix-section-header {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+    border-bottom: 2px solid var(--border);
+}
+
+.matrix-section-header h2 {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    margin: 0 0 0.25rem 0;
+}
+
+.matrix-section-header .subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* First section header in glance tab (no extra top margin) */
+#resources-tab-glance > .section-header:first-of-type {
+    margin-top: 0;
+}
+
+#resources-tab-glance > .section-header .subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0.25rem 0 0 0;
+}
+
+/* Unified matrix table style */
+#glance-matrix,
+.glance-sub-matrix {
+    border-collapse: separate;
+    border-spacing: 8px;
+    width: 100%;
+}
+
+/* Unified base style for all cells */
+#glance-matrix th, #glance-matrix td,
+.glance-sub-matrix th, .glance-sub-matrix td {
+    padding: 8px;
+    margin: 0;
+    border: none;
+    text-align: center;
+    vertical-align: top;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    border-radius: 8px;
+    position: relative;
+}
+
+/* Unified data cells (td) */
+#glance-matrix td,
+.glance-sub-matrix td {
+    background-color: var(--glance-cell-bg);
+    backdrop-filter: blur(5px);
+    box-shadow: inset 0 0 0 1px var(--border);
+    min-width: 110px;
+    min-height: 110px;
+}
+
+/* Unified header cells (th) */
+#glance-matrix th,
+.glance-sub-matrix th {
+    background-color: var(--glance-header-bg);
+    box-shadow: inset 0 0 0 1px var(--primary-color-translucent, rgba(139, 92, 246, 0.5));
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    min-width: 90px;
+    height: 90px;
+    vertical-align: middle;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+#glance-matrix tbody th,
+.glance-sub-matrix tbody th {
+    left: 0;
+    z-index: 1;
+}
+
+#glance-matrix thead th:first-child,
+.glance-sub-matrix thead th:first-child {
+    z-index: 3;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Unified Material icon styling */
+.material-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--surface, #282a36);
+    box-shadow: 0 4px 8px var(--shadow, rgba(0,0,0,0.3));
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+}
+
+#glance-matrix th:hover .material-icon-wrapper,
+.glance-sub-matrix th:hover .material-icon-wrapper {
+    transform: scale(1.1);
+    border-color: var(--primary-color);
+}
+
+.material-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+/* Unified character portraits grid */
+.char-portraits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
+    gap: 6px;
+    padding: 4px;
+    justify-items: center;
+}
+
+.char-portrait {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--border-light, #44475a);
+    object-fit: cover;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.char-portrait:hover {
+    transform: scale(1.25);
+    z-index: 10;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(var(--primary-color-rgb, 139, 92, 246), 0.5);
+    border-color: var(--primary-color);
+}
+
+/* Unified Highlighting */
+#glance-matrix td.highlight-row, #glance-matrix td.highlight-col,
+.glance-sub-matrix td.highlight-row, .glance-sub-matrix td.highlight-col {
+    background-color: var(--glance-highlight-bg);
+    box-shadow: inset 0 0 0 2px var(--glance-highlight-border);
+}
+
+/* Element icon specific style */
+.glance-sub-matrix .element-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+/* Disc portraits in the disc matrix - larger and square */
+#disc-advance-matrix .char-portrait {
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+#disc-advance-matrix .char-portrait:hover {
+    transform: scale(1.12);
+    border-radius: 8px;
+}
+
+#disc-advance-matrix .char-portraits-grid {
+    grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+}
+
+/* ============================================================================
+   MY MATERIALS MODAL STYLES
+   ============================================================================ */
+
+.my-materials-btn {
+    background-color: var(--primary-color-translucent, rgba(139, 92, 246, 0.2));
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.my-materials-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* My Materials Modal Content */
+#my-materials-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 16px;
+}
+
+.owned-material-section h3 {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.owned-material-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.owned-material-group-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 8px;
+    background: var(--surface);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+}
+
+.owned-material-grid-individual {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+}
+
+.owned-material-item {
+    background: var(--surface-light);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+}
+
+.owned-material-item .resource-item-icon-wrapper {
+    width: 50px;
+    height: 50px;
+}
+
+.owned-material-item .resource-item-name {
+    font-size: 0.8rem;
+    text-align: center;
+    color: var(--text-secondary);
+    height: 32px;
+    overflow: hidden;
+}
+
+.owned-material-input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background-color: var(--surface);
+    color: var(--text-primary);
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.owned-material-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-color-translucent);
+}
+
+.no-materials-message {
+    width: 100%;
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 40px;
+}
+
+.owned-material-subsection {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.owned-material-subsection h4 {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN FOR GLANCE TAB
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    #glance-matrix-container,
+    #character-badge-matrix-container,
+    #disc-advance-matrix-container {
+        padding: 0.5rem;
+    }
+
+    #glance-matrix,
+    .glance-sub-matrix {
+        border-spacing: 4px;
+    }
+
+    #glance-matrix td,
+    .glance-sub-matrix td {
+        min-width: 80px;
+        min-height: 80px;
+        padding: 4px;
+    }
+
+    #glance-matrix th,
+    .glance-sub-matrix th {
+        min-width: 60px;
+        height: 60px;
+    }
+
+    .material-icon-wrapper {
+        width: 40px;
+        height: 40px;
+    }
+
+    .material-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .char-portraits-grid {
+        grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+        gap: 4px;
+    }
+
+    .char-portrait {
+        width: 36px;
+        height: 36px;
+    }
+
+    .glance-sub-matrix .element-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    #disc-advance-matrix .char-portrait {
+        width: 56px;
+        height: 56px;
+    }
+
+    #disc-advance-matrix .char-portraits-grid {
+        grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+    }
+
+    .matrix-section-header {
+        padding: 0.75rem 0;
+    }
+
+    .matrix-section-header h2 {
+        font-size: 1.2rem;
+    }
+}
+
+/* ============================================================================
+   LOADING STATE FOR MATRIX CONTAINERS
+   ============================================================================ */
+
+#glance-matrix-container .loading-overlay,
+#character-badge-matrix-container .loading-overlay,
+#disc-advance-matrix-container .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--glance-bg-gradient);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* ============================================================================
+   EMPTY STATE FOR MATRICES
+   ============================================================================ */
+
+.matrix-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.matrix-empty-state i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.matrix-empty-state p {
+    font-size: 1rem;
+    margin: 0;
+}
