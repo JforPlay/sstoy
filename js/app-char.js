@@ -714,6 +714,11 @@ function extractBuffMetadata(params, level = 1) {
 function parseDescriptionParams(description, params, level = 1, skillLevel = 1, position = null, isSpecificPotential = false, characterLevelPhase = 8) {
     if (!description || !params) return description;
 
+    // Replace vertical tab with <br> for newlines
+    if (description.includes('\u000b')) {
+        description = description.replace(/\u000b/g, '<br>');
+    }
+
     // Create cache key from all parameters that affect output
     const paramsHash = Object.keys(params).filter(k => k.startsWith('Param')).map(k => params[k]).join('|');
 

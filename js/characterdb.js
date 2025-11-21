@@ -1504,6 +1504,11 @@ function formatValue(value, formatType, enumType = null, fileType = null) {
 function processDescription(desc, level, skillLevel = 1) {
     if (!desc) return '';
 
+    // Replace vertical tab with <br> for newlines
+    if (desc.includes('\u000b')) {
+        desc = desc.replace(/\u000b/g, '<br>');
+    }
+
     // Strip out color tags like <color=#0abec5> and </color>
     let parsedDesc = desc.replace(/<color=[^>]+>/g, '').replace(/<\/color>/g, '');
 
