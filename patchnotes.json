@@ -1,5 +1,28 @@
 [
     {
+        "version": "v1.2.0",
+        "date": "2025.11.22",
+        "changes": [
+            {
+                "category": "✨ Added Features",
+                "items": [
+                    "Add language support for enums data (ATK,DEF etc.)",
+                    "의뢰 도우미 : 각 의뢰 옆에 대표 보상 아이콘 추가",
+                    "자원 도우미 : 한눈에 보기 탭추가 / 보유 자원 입력란 추가",
+                    "빌드 도우미 : 추천빌드 정렬 추가 / 페이지 분리 추가"
+                ]
+            },
+            {
+                "category": "✨ Minor Improvements",
+                "items": [
+                    "Optimized loading time for main page",
+                    "fixed potential/skill tooltip rendering issues with newline",
+                    "mobile optimization for app page - preset build tab"
+                ]
+            }
+        ]
+    },
+    {
         "version": "v1.1.1",
         "date": "2025.11.19",
         "changes": [
