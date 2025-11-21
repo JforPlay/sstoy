@@ -447,8 +447,8 @@ window.generatePotentialIconHTML = function(potId, position, level, mark = '') {
                  draggable="true"
                  data-potential-id="${potId}"
                  data-position="${position}">
-                ${backgroundImage ? `<img src="${backgroundImage}" alt="" class="pot-bg-img" onerror="this.style.display='none'">` : ''}
-                ${iconPath ? `<img src="${iconPath}" alt="${name}" class="pot-icon-img" onerror="this.style.display='none'">` : '<span class="pot-icon-placeholder">✦</span>'}
+                ${backgroundImage ? `<img src="${backgroundImage}" alt="" class="pot-bg-img" loading="lazy" onerror="this.style.display='none'">` : ''}
+                ${iconPath ? `<img src="${iconPath}" alt="${name}" class="pot-icon-img" loading="lazy" onerror="this.style.display='none'">` : '<span class="pot-icon-placeholder">✦</span>'}
                 <div class="pot-level-badge">Lv.${level}</div>
                 ${markBadgeHTML}
             </div>

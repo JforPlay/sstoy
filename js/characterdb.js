@@ -625,9 +625,9 @@ function createGiftIcon(gift, isHate) {
     // Create icon structure
     wrapper.innerHTML = `
         <div class="gift-icon-bg">
-            <img src="${rarityBg}" class="gift-rarity-bg" onerror="handleImageError(this)">
+            <img src="${rarityBg}" class="gift-rarity-bg" loading="lazy" onerror="handleImageError(this)">
         </div>
-        <img src="${iconPath}" class="gift-item-icon" onerror="handleImageError(this)" alt="${itemName}">
+        <img src="${iconPath}" class="gift-item-icon" loading="lazy" onerror="handleImageError(this)" alt="${itemName}">
         <div class="gift-tooltip">${itemName}</div>
     `;
 
@@ -1557,6 +1557,7 @@ function parseElementTags(description) {
     const elementColors = {
         '빛': '#FFD700',    // Yellow/Gold for Light
         '불': '#FF4444',    // Red for Fire
+        '화염': '#FF4444',    // Newly used for "후유카"
         '바람': '#44FF44',  // Green for Wind
         '물': '#4444FF',    // Blue for Water
         '어둠': '#9944FF',  // Purple for Dark
@@ -1672,8 +1673,8 @@ function createPotentialCard(potId, level) {
     card.innerHTML = `
         <div class="potential-card-header">
             <div class="potential-card-image">
-                ${backgroundImage ? `<img src="${backgroundImage}" class="potential-bg" onerror="this.style.display='none'">` : ''}
-                ${iconPath ? `<img src="${iconPath}" class="potential-icon" onerror="this.style.display='none'">` : '<span class="potential-placeholder">✨</span>'}
+                ${backgroundImage ? `<img src="${backgroundImage}" class="potential-bg" loading="lazy" onerror="this.style.display='none'">` : ''}
+                ${iconPath ? `<img src="${iconPath}" class="potential-icon" loading="lazy" onerror="this.style.display='none'">` : '<span class="potential-placeholder">✨</span>'}
             </div>
             <div class="potential-card-info">
                 <div class="potential-card-name">${name}</div>
@@ -2000,8 +2001,8 @@ function renderSkills(charId) {
         card.innerHTML = `
             <div class="skill-card-header">
                 <div class="skill-card-icon-wrapper">
-                    <img src="${elementBgPath}" alt="" class="skill-icon-bg" onerror="this.style.display='none'">
-                    ${iconPath ? `<img src="${iconPath}" alt="${title}" class="skill-icon" onerror="this.style.display='none'">` : '<span class="skill-placeholder">⚡</span>'}
+                    <img src="${elementBgPath}" alt="" class="skill-icon-bg" loading="lazy" onerror="this.style.display='none'">
+                    ${iconPath ? `<img src="${iconPath}" alt="${title}" class="skill-icon" loading="lazy" onerror="this.style.display='none'">` : '<span class="skill-placeholder">⚡</span>'}
                 </div>
                 <div class="skill-card-info">
                     <div class="skill-card-title">${title}</div>

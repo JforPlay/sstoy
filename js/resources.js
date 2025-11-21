@@ -1321,16 +1321,16 @@ function renderBadgeRequirements() {
 
             const characterIconsHTML = badgeData.characters.map(character => `
                 <div class="badge-character-icon">
-                    <img src="assets/char/avg1_${character.Id}_002.png" alt="${resourcesState.characterNames[character.Name] || character.Name}" onerror="this.style.display='none'">
+                    <img src="assets/char/avg1_${character.Id}_002.png" alt="${resourcesState.characterNames[character.Name] || character.Name}" loading="lazy" onerror="this.style.display='none'">
                 </div>
             `).join('');
 
             badgeElement.innerHTML = `
                 <div class="badge-item-background">
-                    <img src="assets/items/rare_item_a_3.png" alt="Badge Background" onerror="this.style.display='none'">
+                    <img src="assets/items/rare_item_a_3.png" alt="Badge Background" loading="lazy" onerror="this.style.display='none'">
                 </div>
                 <div class="badge-item-icon">
-                    <img src="assets/items/item_${badgeData.itemId}.png" alt="Badge Item" onerror="this.style.display='none'">
+                    <img src="assets/items/item_${badgeData.itemId}.png" alt="Badge Item" loading="lazy" onerror="this.style.display='none'">
                 </div>
                 <div class="badge-character-icons-container">
                     ${characterIconsHTML}
@@ -1472,10 +1472,11 @@ function createResourceItemElement(item, netQty, requiredQty, ownedQty, itemId) 
         characterIconsHTML = `
             <div class="character-icons-overlay">
                 ${visibleCharacters.map(char => `
-                    <img src="assets/char/avg1_${char.id}_002.png" 
-                         class="character-icon-small" 
+                    <img src="assets/char/avg1_${char.id}_002.png"
+                         class="character-icon-small"
                          alt="${char.name}"
                          title="${char.name}"
+                         loading="lazy"
                          onerror="this.style.display='none'">
                 `).join('')}
                 ${visibleDiscs.map(disc => {
@@ -1485,10 +1486,11 @@ function createResourceItemElement(item, netQty, requiredQty, ownedQty, itemId) 
                         discIconPath = `assets/disc_icons/outfit_${fileId}.png`;
                     }
                     return `
-                        <img src="${discIconPath}" 
-                             class="character-icon-small" 
+                        <img src="${discIconPath}"
+                             class="character-icon-small"
                              alt="${disc.name}"
                              title="${disc.name}"
+                             loading="lazy"
                              onerror="this.style.display='none'">
                     `;
                 }).join('')}
@@ -1496,11 +1498,11 @@ function createResourceItemElement(item, netQty, requiredQty, ownedQty, itemId) 
             </div>
         `;
     }
-    
+
     div.innerHTML = `
         <div class="resource-item-icon-wrapper">
-            <img src="${bgImage}" class="resource-item-bg" alt="" onerror="this.style.display='none'">
-            <img src="${iconPath}" class="resource-item-icon" alt="${itemName}" onerror="this.style.display='none'">
+            <img src="${bgImage}" class="resource-item-bg" alt="" loading="lazy" onerror="this.style.display='none'">
+            <img src="${iconPath}" class="resource-item-icon" alt="${itemName}" loading="lazy" onerror="this.style.display='none'">
             ${characterIconsHTML}
         </div>
         <div class="resource-item-name">${itemName}</div>

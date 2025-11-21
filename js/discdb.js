@@ -229,8 +229,8 @@
 
             card.innerHTML = `
                 <div class="disc-card-image ${rarityInfo.borderClass}">
-                    <img src="${iconPath}" alt="${name}" onerror="this.style.display='none'">
-                    ${elementInfo.icon ? `<img src="${elementInfo.icon}" alt="${elementInfo.name}" class="disc-card-element-badge" onerror="this.style.display='none'">` : ''}
+                    <img src="${iconPath}" alt="${name}" loading="lazy" onerror="this.style.display='none'">
+                    ${elementInfo.icon ? `<img src="${elementInfo.icon}" alt="${elementInfo.name}" class="disc-card-element-badge" loading="lazy" onerror="this.style.display='none'">` : ''}
                 </div>
                 <div class="disc-card-info">
                     <div class="disc-card-name">${name}</div>
@@ -579,8 +579,8 @@
                 skillsHTML.push(`
                     <div class="skill-card main-skill">
                         <div class="skill-icon-container">
-                            ${iconBgPath ? `<img src="${iconBgPath}" alt="skill bg" class="skill-icon-bg" onerror="this.style.display='none'">` : ''}
-                            ${iconPath ? `<img src="${iconPath}" alt="${skillName}" class="skill-icon" onerror="this.style.display='none'">` : ''}
+                            ${iconBgPath ? `<img src="${iconBgPath}" alt="skill bg" class="skill-icon-bg" loading="lazy" onerror="this.style.display='none'">` : ''}
+                            ${iconPath ? `<img src="${iconPath}" alt="${skillName}" class="skill-icon" loading="lazy" onerror="this.style.display='none'">` : ''}
                         </div>
                         <div class="skill-content">
                             <div class="skill-header">
@@ -609,8 +609,8 @@
                 skillsHTML.push(`
                     <div class="skill-card secondary-skill">
                         <div class="skill-icon-container">
-                            ${iconBgPath ? `<img src="${iconBgPath}" alt="skill bg" class="skill-icon-bg" onerror="this.style.display='none'">` : ''}
-                            ${iconPath ? `<img src="${iconPath}" alt="${skillName}" class="skill-icon" onerror="this.style.display='none'">` : ''}
+                            ${iconBgPath ? `<img src="${iconBgPath}" alt="skill bg" class="skill-icon-bg" loading="lazy" onerror="this.style.display='none'">` : ''}
+                            ${iconPath ? `<img src="${iconPath}" alt="${skillName}" class="skill-icon" loading="lazy" onerror="this.style.display='none'">` : ''}
                         </div>
                         <div class="skill-content">
                             <div class="skill-header">
@@ -639,8 +639,8 @@
                 skillsHTML.push(`
                     <div class="skill-card secondary-skill">
                         <div class="skill-icon-container">
-                            ${iconBgPath ? `<img src="${iconBgPath}" alt="skill bg" class="skill-icon-bg" onerror="this.style.display='none'">` : ''}
-                            ${iconPath ? `<img src="${iconPath}" alt="${skillName}" class="skill-icon" onerror="this.style.display='none'">` : ''}
+                            ${iconBgPath ? `<img src="${iconBgPath}" alt="skill bg" class="skill-icon-bg" loading="lazy" onerror="this.style.display='none'">` : ''}
+                            ${iconPath ? `<img src="${iconPath}" alt="${skillName}" class="skill-icon" loading="lazy" onerror="this.style.display='none'">` : ''}
                         </div>
                         <div class="skill-content">
                             <div class="skill-header">
@@ -719,7 +719,7 @@
 
                 return `
                     <div class="note-item">
-                        ${noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="note-icon" onerror="this.style.display='none'">` : ''}
+                        ${noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="note-icon" loading="lazy" onerror="this.style.display='none'">` : ''}
                         <div class="note-info">
                             <div class="note-name">${noteName}</div>
                             <div class="note-count">+${count}</div>
@@ -738,7 +738,7 @@
 
                 return `
                     <div class="note-item">
-                        ${noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="note-icon" onerror="this.style.display='none'">` : ''}
+                        ${noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="note-icon" loading="lazy" onerror="this.style.display='none'">` : ''}
                         <div class="note-info">
                             <div class="note-name">${noteName}</div>
                         </div>

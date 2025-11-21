@@ -253,7 +253,7 @@ function renderOwnershipGrid() {
 
         return `
             <div class="ownership-card ${isOwned ? 'owned' : ''}" data-ownership-char-id="${char.Id}">
-                <img src="${imagePath}" alt="${name}" class="ownership-card-image" onerror="this.style.display='none'">
+                <img src="${imagePath}" alt="${name}" class="ownership-card-image" loading="lazy" onerror="this.style.display='none'">
                 <div class="ownership-card-name">${name}</div>
             </div>
         `;
@@ -518,7 +518,7 @@ function renderTasks() {
                     const iconPath = `assets/items/item_${itemId}.png`;
                     rewardIconHtml = `
                         <div class="task-reward-icon-wrapper">
-                            <img src="${iconPath}" alt="Reward Icon" class="task-reward-icon" onerror="this.style.display='none'">
+                            <img src="${iconPath}" alt="Reward Icon" class="task-reward-icon" loading="lazy" onerror="this.style.display='none'">
                         </div>
                     `;
                 }
@@ -835,7 +835,7 @@ function renderCharacters() {
 
         return `
             <div class="character-card-small ${isOwned ? 'owned' : ''} ${isAssignedToActiveTask ? 'selected' : ''} ${isAssignedToOtherTask ? 'disabled' : ''} ${canFillRemainingSlots ? 'highlighted' : ''} ${cursorClass}" data-character-id="${char.Id}">
-                <img src="${imagePath}" alt="${name}" class="character-image-small" onerror="this.style.display='none'">
+                <img src="${imagePath}" alt="${name}" class="character-image-small" loading="lazy" onerror="this.style.display='none'">
                 <div class="character-name-small">${name}</div>
                 <div class="character-tags-small">
                     ${tags.slice(0, 2).map(tag => {
@@ -885,7 +885,7 @@ function renderCharacterSlots(taskId, assignedChars) {
                 slots.push(`
                     <div class="character-slot filled">
                         <button class="remove-character-btn" data-remove-char-task="${taskId}" data-remove-char-slot="${i}">×</button>
-                        <img src="${imagePath}" alt="${name}" class="slot-image" onerror="this.style.display='none'">
+                        <img src="${imagePath}" alt="${name}" class="slot-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="slot-info">
                             <div class="slot-name">${name}</div>
                             <div class="character-slot-tags">

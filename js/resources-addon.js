@@ -112,7 +112,7 @@ function generateMatrixHtml(charMaterialMap) {
         const item = resourcesState.items[group.items[0]];
         const itemName = resourcesState.itemNames[item.Title] || '';
         headerHtml += `<th data-col-index="${skillIndex}"><div class="material-icon-wrapper" title="${itemName}">
-                       <img src="assets/items/${item.Icon.split('/').pop()}.png" class="material-icon" alt="${itemName}"></div></th>`;
+                       <img src="assets/items/${item.Icon.split('/').pop()}.png" class="material-icon" loading="lazy" alt="${itemName}"></div></th>`;
     });
     headerHtml += '</tr></thead>';
 
@@ -122,7 +122,7 @@ function generateMatrixHtml(charMaterialMap) {
         const itemName = resourcesState.itemNames[item.Title] || '';
         bodyHtml += `<tr data-row-index="${advIndex}">`;
         bodyHtml += `<th data-row-index="${advIndex}"><div class="material-icon-wrapper" title="${itemName}">
-                     <img src="assets/items/${item.Icon.split('/').pop()}.png" class="material-icon" alt="${itemName}"></div></th>`;
+                     <img src="assets/items/${item.Icon.split('/').pop()}.png" class="material-icon" loading="lazy" alt="${itemName}"></div></th>`;
 
         skillGroups.forEach((_, skillIndex) => {
             const matchingChars = Object.keys(charMaterialMap).filter(charId => 
@@ -131,7 +131,7 @@ function generateMatrixHtml(charMaterialMap) {
             bodyHtml += `<td data-col-index="${skillIndex}"><div class="char-portraits-grid">`;
             matchingChars.forEach(charId => {
                 const charName = resourcesState.characterNames[resourcesState.characters[charId].Name] || '';
-                bodyHtml += `<img src="assets/char/avg1_${charId}_002.png" class="char-portrait" title="${charName}" onerror="this.src='assets/char/${charId}_icon.png'">`;
+                bodyHtml += `<img src="assets/char/avg1_${charId}_002.png" class="char-portrait" loading="lazy" title="${charName}" onerror="this.src='assets/char/${charId}_icon.png'">`;
             });
             bodyHtml += '</div></td>';
         });
@@ -266,7 +266,7 @@ function generateCharacterBadgeMatrixHtml(badgeMapData) {
         const itemName = item ? resourcesState.itemNames[item.Title] || '' : `Item ${itemId}`;
         const iconPath = item ? `assets/items/item_${itemId}.png` : '';
         headerHtml += `<th data-col-index="${index}"><div class="material-icon-wrapper" title="${itemName}">
-                       <img src="${iconPath}" class="material-icon" alt="${itemName}" onerror="this.style.display='none'">
+                       <img src="${iconPath}" class="material-icon" loading="lazy" alt="${itemName}" onerror="this.style.display='none'">
                      </div></th>`;
     });
     headerHtml += '</tr></thead>';
@@ -282,7 +282,7 @@ function generateCharacterBadgeMatrixHtml(badgeMapData) {
             if (characters) {
                 characters.forEach(char => {
                     const charName = resourcesState.characterNames[char.Name] || '';
-                    bodyHtml += `<img src="assets/char/avg1_${char.Id}_002.png" class="char-portrait" title="${charName}" onerror="this.src='assets/char/${char.Id}_icon.png'">`;
+                    bodyHtml += `<img src="assets/char/avg1_${char.Id}_002.png" class="char-portrait" loading="lazy" title="${charName}" onerror="this.src='assets/char/${char.Id}_icon.png'">`;
                 });
             }
             bodyHtml += '</div></td>';
@@ -394,7 +394,7 @@ function generateDiscAdvanceMatrixHtml(discMap) {
         const itemName = item ? resourcesState.itemNames[item.Title] || '' : '';
         const iconPath = item ? `assets/items/${item.Icon.split('/').pop()}.png` : '';
         headerHtml += `<th data-col-index="${index}"><div class="material-icon-wrapper" title="${itemName}">
-                       <img src="${iconPath}" class="material-icon" alt="${itemName}" onerror="this.style.display='none'">
+                       <img src="${iconPath}" class="material-icon" loading="lazy" alt="${itemName}" onerror="this.style.display='none'">
                      </div></th>`;
     });
     headerHtml += '</tr></thead>';
@@ -407,7 +407,7 @@ function generateDiscAdvanceMatrixHtml(discMap) {
 
         rowCount++;
         bodyHtml += `<tr data-row-index="${index}">`;
-        bodyHtml += `<th data-row-index="${index}"><img src="${elementType.icon}" class="element-icon" title="${elementType.name}"></th>`;
+        bodyHtml += `<th data-row-index="${index}"><img src="${elementType.icon}" class="element-icon" loading="lazy" title="${elementType.name}"></th>`;
 
         const elementDiscMap = discMap.get(elementType.id);
 
@@ -421,7 +421,7 @@ function generateDiscAdvanceMatrixHtml(discMap) {
                     const discName = discNameKey ? (resourcesState.discIPNames[discNameKey] || `Disc ${disc.Id}`) : `Disc ${disc.Id}`;
                     const iconFile = disc.DiscBg ? disc.DiscBg.split('/').pop() : '';
                     const iconPath = `assets/disc_icons/outfit_${iconFile}.png`;
-                    bodyHtml += `<img src="${iconPath}" class="char-portrait" title="${discName}" onerror="this.style.display='none'">`;
+                    bodyHtml += `<img src="${iconPath}" class="char-portrait" loading="lazy" title="${discName}" onerror="this.style.display='none'">`;
                 });
             }
             bodyHtml += '</div></td>';
@@ -463,8 +463,8 @@ function openMyMaterialsModal() {
         const bgImage = `assets/items/rare_item_a_${6 - (item.Rarity || 1)}.png`;
         return `<div class="owned-material-item">
                     <div class="resource-item-icon-wrapper">
-                        <img src="${bgImage}" class="resource-item-bg" alt="" onerror="this.style.display='none'">
-                        <img src="${iconPath}" class="resource-item-icon" alt="${itemName}" onerror="this.style.display='none'">
+                        <img src="${bgImage}" class="resource-item-bg" alt="" loading="lazy" onerror="this.style.display='none'">
+                        <img src="${iconPath}" class="resource-item-icon" loading="lazy" alt="${itemName}" onerror="this.style.display='none'">
                     </div>
                     <div class="resource-item-name">${itemName}</div>
                     <input type="number" class="owned-material-input" value="${ownedQty}" min="0" oninput="updateOwnedMaterial('${itemId}', this.value)" placeholder="0"/>
