@@ -508,13 +508,34 @@ function renderTasks() {
         const subtitle = getTranslatedTaskSubtitle(task);
         const isSelected = tasksState.selectedTasks.some(t => t.Id === task.Id);
         const isDisabled = !isSelected && tasksState.selectedTasks.length >= tasksState.maxTasks;
+
+        let rewardIconHtml = '';
+        if (task.RewardPreview1) {
+            try {
+                const rewardData = JSON.parse(task.RewardPreview1);
+                if (rewardData && rewardData.length > 0 && rewardData[0].length > 0) {
+                    const itemId = rewardData[0][0];
+                    const iconPath = `assets/items/item_${itemId}.png`;
+                    rewardIconHtml = `
+                        <div class="task-reward-icon-wrapper">
+                            <img src="${iconPath}" alt="Reward Icon" class="task-reward-icon" onerror="this.style.display='none'">
+                        </div>
+                    `;
+                }
+            } catch (e) {
+                console.error('Error parsing RewardPreview1 for task', task.Id, e);
+            }
+        }
         
         return `
             <div class="task-card ${isSelected ? 'selected' : ''} ${isDisabled ? 'disabled' : ''}" 
                  data-task-id="${task.Id}">
                 <div class="task-header">
-                    <div class="task-title">${title}</div>
-                    <div class="task-subtitle">${subtitle}</div>
+                    <div class="task-info-text">
+                        <div class="task-title">${title}</div>
+                        <div class="task-subtitle">${subtitle}</div>
+                    </div>
+                    ${rewardIconHtml}
                 </div>
                 ${(task.Tags || []).length > 0 ? `
                 <div class="task-tags-row">
