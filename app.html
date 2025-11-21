@@ -92,15 +92,15 @@ scripts_footer:
         <!-- Master Position -->
         <div class="character-slot master-slot active-tab" id="tab-master">
             <div class="slot-header">
-                <h2>메인</h2>
-                <button class="description-toggle" onclick="toggleDescriptionMode()"><i class="fa-solid fa-note-sticky"></i> 간략히보기</button>
+                <h2 data-i18n="builder.master">메인</h2>
+                <button class="description-toggle" data-action="toggle-description"><i class="fa-solid fa-note-sticky"></i> <span data-i18n="builder.briefMode">간략히보기</span></button>
             </div>
             <div class="two-column-layout">
                 <div class="character-column">
                     <div class="character-card" id="master-card">
                         <div class="empty-state">
                             <div class="plus-icon">+</div>
-                            <p>메인캐릭터 선택</p>
+                            <p data-i18n="builder.selectMasterCharacter">메인캐릭터 선택</p>
                         </div>
                     </div>
                 </div>
@@ -114,15 +114,15 @@ scripts_footer:
         <!-- Assist Position 1 -->
         <div class="character-slot assist-slot" id="tab-assist1">
             <div class="slot-header">
-                <h2>지원 1</h2>
-                <button class="description-toggle" onclick="toggleDescriptionMode()"><i class="fa-solid fa-note-sticky"></i> 간략히보기</button>
+                <h2 data-i18n="builder.assist1">지원 1</h2>
+                <button class="description-toggle" data-action="toggle-description"><i class="fa-solid fa-note-sticky"></i> <span data-i18n="builder.briefMode">간략히보기</span></button>
             </div>
             <div class="two-column-layout">
                 <div class="character-column">
                     <div class="character-card" id="assist1-card">
                         <div class="empty-state">
                             <div class="plus-icon">+</div>
-                            <p>지원캐릭터 선택</p>
+                            <p data-i18n="builder.selectAssistCharacter">지원캐릭터 선택</p>
                         </div>
                     </div>
                 </div>
@@ -136,15 +136,15 @@ scripts_footer:
         <!-- Assist Position 2 -->
         <div class="character-slot assist-slot" id="tab-assist2">
             <div class="slot-header">
-                <h2>지원 2</h2>
-                <button class="description-toggle" onclick="toggleDescriptionMode()"><i class="fa-solid fa-note-sticky"></i> 간략히보기</button>
+                <h2 data-i18n="builder.assist2">지원 2</h2>
+                <button class="description-toggle" data-action="toggle-description"><i class="fa-solid fa-note-sticky"></i> <span data-i18n="builder.briefMode">간략히보기</span></button>
             </div>
             <div class="two-column-layout">
                 <div class="character-column">
                     <div class="character-card" id="assist2-card">
                         <div class="empty-state">
                             <div class="plus-icon">+</div>
-                            <p>지원캐릭터 선택</p>
+                            <p data-i18n="builder.selectAssistCharacter">지원캐릭터 선택</p>
                         </div>
                     </div>
                 </div>
@@ -179,7 +179,7 @@ scripts_footer:
     <div class="modal" id="character-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>캐릭터 선택</h2>
+                <h2 data-i18n="builder.selectCharacterTitle">캐릭터 선택</h2>
                 <button class="close-btn" onclick="closeCharacterSelect()">&times;</button>
             </div>
 
@@ -187,35 +187,35 @@ scripts_footer:
             <div class="selector-controls">
                 <!-- Search Input -->
                 <div class="search-container">
-                    <input type="text" id="character-search" placeholder="캐릭터 이름 검색..." class="search-input">
+                    <input type="text" id="character-search" data-i18n-placeholder="builder.searchPlaceholder" placeholder="캐릭터 이름 검색..." class="search-input">
                     <i class="fa-solid fa-search search-icon"></i>
                 </div>
 
                 <!-- Element Filter Buttons -->
                 <div class="element-filters">
                     <button class="element-filter-btn active" data-element="all" onclick="filterCharactersByElement('all')">
-                        <i class="fa-solid fa-border-all"></i> 전체
+                        <i class="fa-solid fa-border-all"></i> <span data-i18n="disc.allElements">전체</span>
                     </button>
                     <button class="element-filter-btn" data-element="1" onclick="filterCharactersByElement('1')">
-                        <img src="assets/icon_common_property_1.png" alt="물 속성" class="element-icon" onerror="this.style.display='none'"> 물 속성
+                        <img src="assets/icon_common_property_1.png" alt="물 속성" class="element-icon" onerror="this.style.display='none'"> <span data-i18n="disc.waterElement">물 속성</span>
                     </button>
                     <button class="element-filter-btn" data-element="2" onclick="filterCharactersByElement('2')">
-                        <img src="assets/icon_common_property_2.png" alt="불 속성" class="element-icon" onerror="this.style.display='none'"> 불 속성
+                        <img src="assets/icon_common_property_2.png" alt="불 속성" class="element-icon" onerror="this.style.display='none'"> <span data-i18n="disc.fireElement">불 속성</span>
                     </button>
                     <button class="element-filter-btn" data-element="3" onclick="filterCharactersByElement('3')">
-                        <img src="assets/icon_common_property_3.png" alt="땅 속성" class="element-icon" onerror="this.style.display='none'"> 땅 속성
+                        <img src="assets/icon_common_property_3.png" alt="땅 속성" class="element-icon" onerror="this.style.display='none'"> <span data-i18n="disc.earthElement">땅 속성</span>
                     </button>
                     <button class="element-filter-btn" data-element="4" onclick="filterCharactersByElement('4')">
-                        <img src="assets/icon_common_property_4.png" alt="바람 속성" class="element-icon" onerror="this.style.display='none'"> 바람 속성
+                        <img src="assets/icon_common_property_4.png" alt="바람 속성" class="element-icon" onerror="this.style.display='none'"> <span data-i18n="disc.windElement">바람 속성</span>
                     </button>
                     <button class="element-filter-btn" data-element="5" onclick="filterCharactersByElement('5')">
-                        <img src="assets/icon_common_property_5.png" alt="빛 속성" class="element-icon" onerror="this.style.display='none'"> 빛 속성
+                        <img src="assets/icon_common_property_5.png" alt="빛 속성" class="element-icon" onerror="this.style.display='none'"> <span data-i18n="disc.lightElement">빛 속성</span>
                     </button>
                     <button class="element-filter-btn" data-element="6" onclick="filterCharactersByElement('6')">
-                        <img src="assets/icon_common_property_6.png" alt="어둠 속성" class="element-icon" onerror="this.style.display='none'"> 어둠 속성
+                        <img src="assets/icon_common_property_6.png" alt="어둠 속성" class="element-icon" onerror="this.style.display='none'"> <span data-i18n="disc.darkElement">어둠 속성</span>
                     </button>
                     <button class="element-filter-btn" data-element="7" onclick="filterCharactersByElement('7')">
-                        <img src="assets/icon_common_property_7.png" alt="무속성" class="element-icon" onerror="this.style.display='none'"> 무속성
+                        <img src="assets/icon_common_property_7.png" alt="무속성" class="element-icon" onerror="this.style.display='none'"> <span data-i18n="disc.noElementFilter">무속성</span>
                     </button>
                 </div>
             </div>
@@ -228,7 +228,7 @@ scripts_footer:
     <div id="load-modal">
         <div class="load-modal-content">
             <div class="load-modal-header">
-                <h2>빌드 불러오기</h2>
+                <h2 data-i18n="builder.loadBuildTitle">빌드 불러오기</h2>
                 <button class="load-modal-close" onclick="closeLoadModal()">✕</button>
             </div>
             <div class="load-modal-body">

@@ -14,7 +14,7 @@
     
     // Build state structure
     const buildState = {
-        buildTitle: '새로운 빌드',
+        buildTitle: '',  // Will be set on init
         buildMemo: ''
     };
 
@@ -508,7 +508,8 @@
         const now = Date.now();
         if (now < saveCooldownEnd) {
             const remaining = Math.ceil((saveCooldownEnd - now) / 1000);
-            showToast(`${remaining}초 후에 다시 시도해주세요.`, 'info');
+            const msg = (window.i18n?.t('saveload.cooldownMessage') || 'Please try again in ${remaining} seconds.').replace('${remaining}', remaining);
+            showToast(msg, 'info');
             return;
         }
 
@@ -536,8 +537,9 @@
             console.log(`[LocalStorage] Saved ${builds.length} builds: ${json.length} → ${compressed.length} chars (${compressionRatio}% reduction)`);
 
             // Use shortened key for display
-            const displayTitle = buildData.n || '새로운 빌드';
-            showToast(`빌드 "${displayTitle}"을(를) 저장했습니다!`, 'success');
+            const displayTitle = buildData.n || (window.i18n?.t('builder.newBuild') || 'New Build');
+            const msg = (window.i18n?.t('saveload.buildSaved') || 'Build "${title}" saved!').replace('${title}', displayTitle);
+            showToast(msg, 'success');
             
             // Set cooldown
             saveCooldownEnd = now + COOLDOWN_MS;
@@ -549,7 +551,7 @@
             }
         } catch (error) {
             console.error('Error saving to localStorage:', error);
-            showToast('빌드 저장에 실패했습니다.', 'error');
+            showToast(window.i18n?.t('saveload.saveFailed') || 'Failed to save build.', 'error');
         }
     }
     
@@ -597,7 +599,7 @@
             }
         } catch (error) {
             console.error('Error loading from localStorage:', error);
-            showToast('빌드 불러오기에 실패했습니다.', 'error');
+            showToast(window.i18n?.t('saveload.loadFailed') || 'Failed to load build.', 'error');
         }
     }
     
@@ -610,7 +612,7 @@
             let builds = getLocalStorageBuilds();
             if (index >= 0 && index < builds.length) {
                 // Use shortened key (v2 format)
-                const deletedTitle = builds[index].n || '제목 없음';
+                const deletedTitle = builds[index].n || (window.i18n?.t('saveload.noTitle') || 'Untitled');
                 builds.splice(index, 1);
 
                 // Save compressed
@@ -618,12 +620,13 @@
                 const compressed = LZString.compress(json);
                 localStorage.setItem(LOCALSTORAGE_KEY, compressed);
 
-                showToast(`빌드 "${deletedTitle}"을(를) 삭제했습니다.`, 'success');
+                const msg = (window.i18n?.t('saveload.buildDeleted') || 'Build "${title}" deleted.').replace('${title}', deletedTitle);
+                showToast(msg, 'success');
                 renderLoadList();
             }
         } catch (error) {
             console.error('Error deleting from localStorage:', error);
-            showToast('빌드 삭제에 실패했습니다.', 'error');
+            showToast(window.i18n?.t('saveload.deleteFailed') || 'Failed to delete build.', 'error');
         }
     }
     
@@ -748,7 +751,8 @@
         const now = Date.now();
         if (now < shareCooldownEnd) {
             const remaining = Math.ceil((shareCooldownEnd - now) / 1000);
-            showToast(`${remaining}초 후에 다시 시도해주세요.`, 'info');
+            const msg = (window.i18n?.t('saveload.cooldownMessage') || 'Please try again in ${remaining} seconds.').replace('${remaining}', remaining);
+            showToast(msg, 'info');
             return;
         }
         
@@ -764,13 +768,14 @@
             console.log(`[Share] Excluded to save space: skill levels (default to Lv.1), notes (recalculated)`);
 
             if (url.length > 4000) {
-                showToast(`⚠️ URL이 너무 깁니다 (${url.length}자). 일부 브라우저에서 작동하지 않을 수 있습니다. 로컬 저장을 권장합니다.`, 'warning');
+                const warnMsg = (window.i18n?.t('saveload.urlTooLong') || '⚠️ URL is too long (${length} chars). May not work in some browsers.').replace('${length}', url.length);
+                showToast(warnMsg, 'warning');
             }
 
             // Copy to clipboard
             navigator.clipboard.writeText(url).then(() => {
                 if (url.length <= 4000) {
-                    showToast('공유 링크가 클립보드에 복사되었습니다! (스킬은 Lv.1로 설정됩니다)', 'success');
+                    showToast(window.i18n?.t('saveload.shareLinkCopied') || 'Share link copied! (Skills set to Lv.1)', 'success');
                 }
 
                 // Set cooldown
@@ -782,7 +787,7 @@
             });
         } catch (error) {
             console.error('Error generating share URL:', error);
-            showToast('공유 링크 생성에 실패했습니다.', 'error');
+            showToast(window.i18n?.t('saveload.shareCreateFailed') || 'Failed to create share link.', 'error');
         }
     }
     
@@ -808,7 +813,7 @@
             }
         } catch (error) {
             console.error('Error loading from URL:', error);
-            showToast('URL에서 빌드를 불러오는데 실패했습니다. 링크가 손상되었을 수 있습니다.', 'error');
+            showToast(window.i18n?.t('saveload.urlLoadFailed') || 'Failed to load build from URL. Link may be corrupted.', 'error');
             // Clear bad URL hash
             window.history.replaceState({}, document.title, window.location.pathname);
         }
@@ -842,7 +847,7 @@
      * Handle build title change
      */
     function handleBuildTitleChange(event) {
-        buildState.buildTitle = event.target.value || '새로운 빌드';
+        buildState.buildTitle = event.target.value || (window.i18n?.t('builder.newBuild') || 'New Build');
     }
     
     /**
@@ -876,35 +881,36 @@
         const builds = getLocalStorageBuilds();
         
         if (builds.length === 0) {
-            listContainer.innerHTML = '<p class="empty-state-text">저장된 빌드가 없습니다.</p>';
+            listContainer.innerHTML = `<p class="empty-state-text">${window.i18n?.t('saveload.noSavedBuilds') || 'No saved builds.'}</p>`;
             return;
         }
         
         listContainer.innerHTML = builds.map((build, index) => {
             // Use shortened keys (v2 format)
             const timestamp = build.t || Date.now();
-            const buildTitle = build.n || '제목 없음';
+            const buildTitle = build.n || (window.i18n?.t('saveload.noTitle') || 'Untitled');
             const buildMemo = build.m || '';
-            
+
             const date = new Date(timestamp);
-            const dateStr = date.toLocaleString('ko-KR');
-            
+            const locale = window.i18n?.uiLang === 'ko' ? 'ko-KR' : 'en-US';
+            const dateStr = date.toLocaleString(locale);
+
             return `
                 <div class="load-item">
                     <div class="load-item-info">
                         <div class="load-item-title">${buildTitle}</div>
                         <div class="load-item-meta">
-                            <span>저장 시간: ${dateStr}</span>
-                            ${buildMemo ? `<span class="has-memo">${getIcon('memo')} 메모 있음</span>` : ''}
+                            <span>${window.i18n?.t('saveload.savedTime') || 'Saved'}: ${dateStr}</span>
+                            ${buildMemo ? `<span class="has-memo">${getIcon('memo')} ${window.i18n?.t('saveload.hasMemo') || 'Has memo'}</span>` : ''}
                         </div>
                     </div>
                     <div class="load-item-actions">
-                        <button class="load-btn" 
+                        <button class="load-btn"
                                 data-action="saveload-load-build"
-                                data-index="${index}">불러오기</button>
+                                data-index="${index}">${window.i18n?.t('saveload.load') || 'Load'}</button>
                         <button class="delete-btn"
                                 data-action="saveload-delete-build"
-                                data-index="${index}">삭제</button>
+                                data-index="${index}">${window.i18n?.t('saveload.delete') || 'Delete'}</button>
                     </div>
                 </div>
             `;
@@ -920,15 +926,15 @@
         modal.innerHTML = `
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>공유 링크</h2>
+                    <h2>${window.i18n?.t('saveload.shareLink') || 'Share Link'}</h2>
                     <button class="close-button" data-action="saveload-close-modal">✕</button>
                 </div>
                 <div class="modal-body">
-                    <p>아래 링크를 복사하여 공유하세요:</p>
+                    <p>${window.i18n?.t('saveload.shareLinkDesc') || 'Copy and share the link below:'}</p>
                     <textarea class="share-url-textarea" readonly>${url}</textarea>
-                    <button class="copy-url-btn" 
+                    <button class="copy-url-btn"
                             data-action="saveload-copy-url"
-                            data-url="${url}">복사</button>
+                            data-url="${url}">${window.i18n?.t('saveload.copy') || 'Copy'}</button>
                 </div>
             </div>
         `;
@@ -958,10 +964,13 @@
                 button.innerHTML = originalHTML;
             } else {
                 const icon = buttonId === 'save-btn' ? '💾' : '🔗';
-                const text = buttonId === 'save-btn' ? '저장' : 'URL 공유';
+                const text = buttonId === 'save-btn'
+                    ? (window.i18n?.t('common.save') || 'Save')
+                    : (window.i18n?.t('builder.urlShare') || 'URL Share');
+                const secText = window.i18n?.t('saveload.seconds') || 's';
                 button.innerHTML = `
                     <span class="btn-icon">${icon}</span>
-                    <span class="btn-text">${text} (${remaining}초)</span>
+                    <span class="btn-text">${text} (${remaining}${secText})</span>
                 `;
                 setTimeout(updateTimer, 100);
             }

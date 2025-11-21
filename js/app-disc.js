@@ -137,7 +137,7 @@
             renderDiscs();
         } catch (error) {
             console.error('Error loading disc data:', error);
-            showToast('레코드 데이터를 불러오는데 실패했습니다.', 'error');
+            showToast(window.i18n?.t('disc.loadError') || 'Failed to load disc data.', 'error');
         }
     }
     
@@ -162,10 +162,11 @@
     
     // Get element info for a disc
     function getDiscElementInfo(disc) {
-        if (!disc || !disc.EET) return { name: '무속성', icon: '' };
+        const noElement = window.i18n?.t('disc.noElement') || 'No Element';
+        if (!disc || !disc.EET) return { name: noElement, icon: '' };
         const elementInfo = discsState.gameEnums.elementType?.[disc.EET];
         return {
-            name: elementInfo?.name || '무속성',
+            name: elementInfo?.name || noElement,
             icon: elementInfo?.icon || ''
         };
     }
@@ -592,7 +593,7 @@
         const allNoteTypes = Object.keys(discsState.subNoteSkillData).sort();
 
         if (allNoteTypes.length === 0) {
-            return '<p class="no-notes">소리 데이터를 불러오는 중...</p>';
+            return `<p class="no-notes">${window.i18n?.t('disc.noteDataLoading') || 'Loading note data...'}</p>`;
         }
 
         // Separate used (required by main discs) and unused notes
@@ -629,11 +630,11 @@
                     </div>
                     <div class="note-levels">
                         <div class="note-level-row">
-                            <span class="note-level-label">보조 레코드:</span>
+                            <span class="note-level-label">${window.i18n?.t('disc.subDisc') || 'Sub Disc'}:</span>
                             <span class="note-level-value from-discs">${fromDiscs}</span>
                         </div>
                         <div class="note-level-row">
-                            <span class="note-level-label">총 레벨:</span>
+                            <span class="note-level-label">${window.i18n?.t('disc.totalLevel') || 'Total Level'}:</span>
                             <div class="note-level-control">
                                 <button class="note-adjust-btn" 
                                         data-action="disc-adjust-note-level"
@@ -653,7 +654,7 @@
                             </div>
                         </div>
                         <div class="note-level-row additional">
-                            <span class="note-level-label">추가 획득:</span>
+                            <span class="note-level-label">${window.i18n?.t('disc.additionalAcquired') || 'Additional'}:</span>
                             <span class="note-level-value additional-level">${acquired}</span>
                         </div>
                     </div>
@@ -663,7 +664,7 @@
                         </div>
                     ` : `
                         <div class="note-effect inactive">
-                            <div class="note-desc">소리 레벨이 0입니다</div>
+                            <div class="note-desc">${window.i18n?.t('disc.noteLevelZero') || 'Note level is 0'}</div>
                         </div>
                     `}
                 </div>
@@ -674,12 +675,12 @@
         let html = '';
 
         if (usedNotes.length > 0) {
-            html += '<div class="notes-section-header used">📌 사용 중인 소리</div>';
+            html += `<div class="notes-section-header used">${window.i18n?.t('disc.usedNotes') || '📌 Used Notes'}</div>`;
             html += usedNotes.map(noteId => generateNoteCard(noteId, true)).join('');
         }
 
         if (unusedNotes.length > 0) {
-            html += '<div class="notes-section-header unused">💤 미사용 소리</div>';
+            html += `<div class="notes-section-header unused">${window.i18n?.t('disc.unusedNotes') || '💤 Unused Notes'}</div>`;
             html += unusedNotes.map(noteId => generateNoteCard(noteId, false)).join('');
         }
 
@@ -711,21 +712,21 @@
                     <!-- Disc Score Display -->
                     <div class="disc-score-banner">
                         <div class="disc-score-main">
-                            <span class="disc-score-label">레코드 총 점수:</span>
+                            <span class="disc-score-label">${window.i18n?.t('disc.discTotalScore') || 'Disc Total Score'}:</span>
                             <span class="disc-score-value">${discScore}</span>
                         </div>
                         <div class="disc-score-breakdown">
-                            <span class="disc-score-detail">협주: ${secondarySkillScore}</span>
+                            <span class="disc-score-detail">${window.i18n?.t('disc.harmonyScore') || 'Harmony'}: ${secondarySkillScore}</span>
                             <span class="disc-score-separator">|</span>
-                            <span class="disc-score-detail">소리: ${notesScore}</span>
+                            <span class="disc-score-detail">${window.i18n?.t('disc.noteScore') || 'Notes'}: ${notesScore}</span>
                         </div>
                     </div>
-                    
+
                     <!-- Main Disc Slots -->
                     <div class="disc-section">
                         <h3 class="section-title">
                             <span class="section-icon">🎵</span>
-                            메인 레코드
+                            ${window.i18n?.t('disc.mainDisc') || 'Main Disc'}
                         </h3>
                         <div class="disc-slots-grid">
                             ${generateDiscSlot('main1', 1, true)}
@@ -734,11 +735,11 @@
                         </div>
                     </div>
 
-                    <!-- 보조 Disc Slots -->
+                    <!-- Sub Disc Slots -->
                     <div class="disc-section">
                         <h3 class="section-title">
                             <span class="section-icon">🎶</span>
-                            보조 레코드
+                            ${window.i18n?.t('disc.subDiscLabel') || 'Sub Disc'}
                         </h3>
                         <div class="disc-slots-grid">
                             ${generateDiscSlot('sub1', 1, false)}
@@ -759,16 +760,16 @@
                         <div class="notes-sidebar-header">
                             <h3 class="notes-sidebar-title">
                                 <span class="section-icon">🎼</span>
-                                소리 레벨
+                                ${window.i18n?.t('disc.noteLevel') || 'Note Level'}
                             </h3>
-                            <button class="notes-sidebar-close" 
-                                    data-action="disc-close-notes-sidebar" 
-                                    title="닫기">
+                            <button class="notes-sidebar-close"
+                                    data-action="disc-close-notes-sidebar"
+                                    title="${window.i18n?.t('disc.close') || 'Close'}">
                                 <span>✕</span>
                             </button>
                         </div>
                         <div class="disc-notes-info">
-                            <p class="notes-explanation">보조 레코드가 자동으로 소리를 제공합니다. 추가 획득한 소리를 설정하세요.</p>
+                            <p class="notes-explanation">${window.i18n?.t('disc.noteExplanation') || 'Sub discs automatically provide notes. Set additional acquired notes.'}</p>
                         </div>
                         <div class="disc-notes-grid" id="disc-notes-grid">
                             ${generateNotesDisplay()}
@@ -780,9 +781,9 @@
                 <button class="notes-sidebar-toggle ${sidebarOpen ? 'hidden' : ''}"
                         id="notes-sidebar-toggle"
                         data-action="disc-toggle-notes-sidebar"
-                        title="소리 레벨 보기">
+                        title="${window.i18n?.t('disc.noteLevel') || 'Note Level'}">
                     <span class="toggle-icon">🎼</span>
-                    <span class="toggle-text">소리</span>
+                    <span class="toggle-text">${window.i18n?.t('disc.notes') || 'Notes'}</span>
                     ${activeNotesCount > 0 ? `<span class="toggle-badge">${activeNotesCount}</span>` : ''}
                 </button>
             </div>
@@ -791,7 +792,7 @@
             <div class="modal" id="disc-modal">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2>레코드 선택 - <span id="modal-slot-type"></span> <span id="modal-slot-number"></span></h2>
+                        <h2>${window.i18n?.t('disc.selectDisc') || 'Select Disc'} - <span id="modal-slot-type"></span> <span id="modal-slot-number"></span></h2>
                         <button class="close-btn" data-action="disc-close-selector">&times;</button>
                     </div>
 
@@ -799,35 +800,35 @@
                     <div class="selector-controls">
                         <!-- Search Input -->
                         <div class="search-container">
-                            <input type="text" id="disc-search" placeholder="레코드 이름 검색..." class="search-input">
+                            <input type="text" id="disc-search" placeholder="${window.i18n?.t('disc.discSearchPlaceholder') || 'Search disc name...'}" class="search-input">
                             <i class="fa-solid fa-search search-icon"></i>
                         </div>
 
                         <!-- Element Filter Buttons -->
                         <div class="element-filters">
                             <button class="element-filter-btn active" data-element="all" data-action="disc-filter-element">
-                                <i class="fa-solid fa-border-all"></i> 전체
+                                <i class="fa-solid fa-border-all"></i> ${window.i18n?.t('disc.allElements') || 'All'}
                             </button>
                             <button class="element-filter-btn" data-element="1" data-action="disc-filter-element">
-                                <img src="assets/icon_common_property_1.png" alt="물 속성" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> 물 속성
+                                <img src="assets/icon_common_property_1.png" alt="${window.i18n?.t('disc.waterElement') || 'Water'}" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> ${window.i18n?.t('disc.waterElement') || 'Water'}
                             </button>
                             <button class="element-filter-btn" data-element="2" data-action="disc-filter-element">
-                                <img src="assets/icon_common_property_2.png" alt="불 속성" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> 불 속성
+                                <img src="assets/icon_common_property_2.png" alt="${window.i18n?.t('disc.fireElement') || 'Fire'}" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> ${window.i18n?.t('disc.fireElement') || 'Fire'}
                             </button>
                             <button class="element-filter-btn" data-element="3" data-action="disc-filter-element">
-                                <img src="assets/icon_common_property_3.png" alt="땅 속성" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> 땅 속성
+                                <img src="assets/icon_common_property_3.png" alt="${window.i18n?.t('disc.earthElement') || 'Earth'}" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> ${window.i18n?.t('disc.earthElement') || 'Earth'}
                             </button>
                             <button class="element-filter-btn" data-element="4" data-action="disc-filter-element">
-                                <img src="assets/icon_common_property_4.png" alt="바람 속성" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> 바람 속성
+                                <img src="assets/icon_common_property_4.png" alt="${window.i18n?.t('disc.windElement') || 'Wind'}" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> ${window.i18n?.t('disc.windElement') || 'Wind'}
                             </button>
                             <button class="element-filter-btn" data-element="5" data-action="disc-filter-element">
-                                <img src="assets/icon_common_property_5.png" alt="빛 속성" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> 빛 속성
+                                <img src="assets/icon_common_property_5.png" alt="${window.i18n?.t('disc.lightElement') || 'Light'}" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> ${window.i18n?.t('disc.lightElement') || 'Light'}
                             </button>
                             <button class="element-filter-btn" data-element="6" data-action="disc-filter-element">
-                                <img src="assets/icon_common_property_6.png" alt="어둠 속성" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> 어둠 속성
+                                <img src="assets/icon_common_property_6.png" alt="${window.i18n?.t('disc.darkElement') || 'Dark'}" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> ${window.i18n?.t('disc.darkElement') || 'Dark'}
                             </button>
                             <button class="element-filter-btn" data-element="7" data-action="disc-filter-element">
-                                <img src="assets/icon_common_property_7.png" alt="무속성" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> 무속성
+                                <img src="assets/icon_common_property_7.png" alt="${window.i18n?.t('disc.noElementFilter') || 'No Element'}" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> ${window.i18n?.t('disc.noElementFilter') || 'No Element'}
                             </button>
                         </div>
                     </div>
@@ -880,7 +881,7 @@
             if (noteItems) {
                 return `
                     <div class="disc-card-notes-section">
-                        <div class="disc-card-notes-header">🎵 제공 소리</div>
+                        <div class="disc-card-notes-header">${window.i18n?.t('disc.providedNotes') || '🎵 Provided Notes'}</div>
                         <div class="disc-card-notes-grid">
                             ${noteItems}
                         </div>
@@ -905,7 +906,7 @@
         const phaseLabel = phaseLabelMap[subDiscLevel] || '1+';
         
         if (selectedDisc) {
-            const discName = discsState.discNames[selectedDisc.Id] || '알 수 없는 레코드';
+            const discName = discsState.discNames[selectedDisc.Id] || (window.i18n?.t('disc.unknownDisc') || 'Unknown Disc');
             const iconPath = getDiscIconPath(selectedDisc);
             const largePath = getDiscLargeImagePath(selectedDisc.DiscBg);
             const elementInfo = getDiscElementInfo(selectedDisc);
@@ -931,7 +932,7 @@
             if (!isMain) {
                 levelControlHtml = `
                     <div class="limit-break-control">
-                        <label class="limit-break-label">레벨</label>
+                        <label class="limit-break-label">${window.i18n?.t('disc.level') || 'Level'}</label>
                         <div class="limit-break-selector">
                             <button class="lb-btn" 
                                     data-action="disc-adjust-sub-level"
@@ -956,12 +957,12 @@
                 // Generate exceed icons based on limitBreak value
                 let exceedIconsHtml = '';
                 for (let i = 0; i < limitBreak; i++) {
-                    exceedIconsHtml += `<img src="${exceedIconPath}" alt="돌파" class="exceed-icon" width="32" height="32" loading="lazy" onerror="this.style.display='none'">`;
+                    exceedIconsHtml += `<img src="${exceedIconPath}" alt="${window.i18n?.t('disc.breakthrough') || 'Breakthrough'}" class="exceed-icon" width="32" height="32" loading="lazy" onerror="this.style.display='none'">`;
                 }
                 
                 levelControlHtml = `
                     <div class="limit-break-control">
-                        <label class="limit-break-label">돌파</label>
+                        <label class="limit-break-label">${window.i18n?.t('disc.breakthrough') || 'Breakthrough'}</label>
                         <div class="limit-break-selector">
                             <button class="lb-btn"
                                     data-action="disc-adjust-limit-break"
@@ -1010,15 +1011,15 @@
                             </div>
                         </div>
                         <div class="disc-action-buttons">
-                            <button class="change-disc-btn" 
+                            <button class="change-disc-btn"
                                     data-action="disc-open-selector"
                                     data-slot-id="${slotId}">
-                                레코드 변경
+                                ${window.i18n?.t('disc.changeDisc') || 'Change Disc'}
                             </button>
-                            <button class="remove-disc-btn" 
+                            <button class="remove-disc-btn"
                                     data-action="disc-remove"
                                     data-slot-id="${slotId}">
-                                레코드 제거
+                                ${window.i18n?.t('disc.removeDisc') || 'Remove Disc'}
                             </button>
                         </div>
                     </div>
@@ -1039,12 +1040,12 @@
                      data-slot-id="${slotId}">
                     <div class="disc-slot-header">
                         <span class="disc-slot-number">${slotNumber}</span>
-                        <span class="disc-slot-name">${isMain ? '메인' : '보조'} 레코드 ${slotNumber}</span>
+                        <span class="disc-slot-name">${isMain ? (window.i18n?.t('disc.main') || 'Main') : (window.i18n?.t('disc.sub') || 'Sub')} ${window.i18n?.t('summary.disc') || 'Disc'} ${slotNumber}</span>
                     </div>
                     <div class="disc-slot-preview">
                         <div class="disc-placeholder">
                             <span class="disc-placeholder-icon">${getIcon('disc')}</span>
-                            <p>레코드 선택</p>
+                            <p>${window.i18n?.t('disc.selectDiscSlot') || 'Select Disc'}</p>
                         </div>
                     </div>
                 </div>
@@ -1079,7 +1080,7 @@
                     </div>
                     <div class="skill-content">
                         <div class="skill-header">
-                            <span class="skill-badge main">멜로디 스킬</span>
+                            <span class="skill-badge main">${window.i18n?.t('disc.melodySkill') || 'Melody Skill'}</span>
                             <span class="skill-level-badge">Lv.${limitBreak}</span>
                             <span class="skill-name">${translation.name}</span>
                         </div>
@@ -1095,7 +1096,7 @@
                 const secondarySkill = skillData.skill;
                 const isActive = skillData.isActive;
                 const skillLevel = skillData.Level || 0;
-                const badgeText = '협주 스킬';
+                const badgeText = window.i18n?.t('disc.harmonySkill') || 'Harmony Skill';
 
                 if (isActive && secondarySkill) {
                     // Active skill with requirements met
@@ -1125,11 +1126,11 @@
                         <div class="disc-skill-item secondary-skill inactive">
                             <div class="skill-content">
                                 <div class="skill-header">
-                                    <span class="skill-badge secondary inactive">협주 스킬</span>
+                                    <span class="skill-badge secondary inactive">${window.i18n?.t('disc.harmonySkill') || 'Harmony Skill'}</span>
                                     <span class="skill-level-badge secondary-level inactive">Lv.0</span>
-                                    <span class="skill-name">요구 조건 미충족</span>
+                                    <span class="skill-name">${window.i18n?.t('disc.requirementNotMet') || 'Requirement Not Met'}</span>
                                 </div>
-                                <div class="skill-desc">필요한 소리 레벨을 충족하지 못했습니다.</div>
+                                <div class="skill-desc">${window.i18n?.t('disc.noteLevelNotMet') || 'Required note level not met.'}</div>
                             </div>
                         </div>
                     `;
@@ -1229,7 +1230,7 @@
 
         return `
             <div class="note-requirements-section">
-                <div class="note-requirements-header">🎵 필요 소리</div>
+                <div class="note-requirements-header">${window.i18n?.t('disc.requiredNotes') || '🎵 Required Notes'}</div>
                 <div class="note-requirements-grid">
                     ${noteItems}
                 </div>
@@ -1252,13 +1253,13 @@
         const isMain = slotId.startsWith('main');
         const num = slotId.replace(/\D/g, '');
 
-        slotType.textContent = isMain ? '메인' : '보조';
+        slotType.textContent = isMain ? (window.i18n?.t('disc.main') || 'Main') : (window.i18n?.t('disc.sub') || 'Sub');
         slotNumber.textContent = num;
 
         // Prepare all discs with names for search
         discsState.discSelector.allDiscsWithNames = discsState.allDiscs.map(disc => ({
             disc,
-            name: discsState.discNames[disc.Id] || '알 수 없는 레코드',
+            name: discsState.discNames[disc.Id] || (window.i18n?.t('disc.unknownDisc') || 'Unknown Disc'),
             id: String(disc.Id)
         }));
 
@@ -1386,11 +1387,11 @@
         if (sortedDiscs.length === 0) {
             const emptyState = document.createElement('div');
             emptyState.className = 'empty-search-state';
-            emptyState.innerHTML = '<p>검색 결과가 없습니다</p>';
+            emptyState.innerHTML = `<p>${window.i18n?.t('builder.noSearchResults') || 'No search results'}</p>`;
             fragment.appendChild(emptyState);
         } else {
             sortedDiscs.forEach(disc => {
-            const discName = discsState.discNames[disc.Id] || '알 수 없는 레코드';
+            const discName = discsState.discNames[disc.Id] || (window.i18n?.t('disc.unknownDisc') || 'Unknown Disc');
             const iconPath = getDiscIconPath(disc);
             const isSelected = discsState.selectedDiscs[slotId]?.Id === disc.Id;
             const isDisabled = selectedDiscIds.has(disc.Id); // Check if already selected elsewhere
@@ -1443,7 +1444,7 @@
                     <div class="disc-placeholder" style="display: none;">
                         <span class="disc-placeholder-icon">${getIcon('disc')}</span>
                     </div>
-                    ${isDisabled ? '<div class="disc-disabled-overlay"><span class="disc-disabled-text">이미 선택됨</span></div>' : ''}
+                    ${isDisabled ? `<div class="disc-disabled-overlay"><span class="disc-disabled-text">${window.i18n?.t('disc.alreadySelected') || 'Already Selected'}</span></div>` : ''}
                 </div>
                 <div class="disc-option-info">
                     <div class="disc-option-name">${discName}</div>
@@ -1503,11 +1504,15 @@
         closeDiscSelector();
         renderDiscs();
 
-        const discName = discsState.discNames[disc.Id] || '레코드';
+        const discName = discsState.discNames[disc.Id] || (window.i18n?.t('summary.disc') || 'Disc');
         const isMain = currentSlot.startsWith('main');
         const num = currentSlot.replace(/\D/g, '');
-        const slotType = isMain ? '메인' : '보조';
-        showToast(`${slotType} 슬롯 ${num}에 ${discName}을(를) 선택했습니다.`, 'success');
+        const slotType = isMain ? (window.i18n?.t('disc.main') || 'Main') : (window.i18n?.t('disc.sub') || 'Sub');
+        const msg = (window.i18n?.t('disc.discSelected') || 'Selected ${discName} for ${slotType} slot ${num}.')
+            .replace('${discName}', discName)
+            .replace('${slotType}', slotType)
+            .replace('${num}', num);
+        showToast(msg, 'success');
     }
     
     // Remove a disc from a slot
@@ -1517,10 +1522,10 @@
         }
         
         const disc = discsState.selectedDiscs[slotId];
-        const discName = discsState.discNames[disc.Id] || '레코드';
+        const discName = discsState.discNames[disc.Id] || (window.i18n?.t('summary.disc') || 'Disc');
         const isMain = slotId.startsWith('main');
         const num = slotId.replace(/\D/g, '');
-        const slotType = isMain ? '메인' : '보조';
+        const slotType = isMain ? (window.i18n?.t('disc.main') || 'Main') : (window.i18n?.t('disc.sub') || 'Sub');
         
         // Clear the disc data
         delete discsState.selectedDiscs[slotId];
@@ -1543,7 +1548,11 @@
         // Re-render the discs view
         renderDiscs();
         
-        showToast(`${slotType} 슬롯 ${num}에서 ${discName}을(를) 제거했습니다.`, 'info');
+        const removeMsg = (window.i18n?.t('disc.discRemoved') || 'Removed ${discName} from ${slotType} slot ${num}.')
+            .replace('${discName}', discName)
+            .replace('${slotType}', slotType)
+            .replace('${num}', num);
+        showToast(removeMsg, 'info');
     }
     
     // Close disc selector modal

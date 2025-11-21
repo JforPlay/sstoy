@@ -296,17 +296,18 @@ async function loadData() {
         ]).catch(error => {
             console.error('[App-Char] Background loading error:', error);
             if (typeof showError === 'function') {
-                showError('일부 데이터 로드에 실패했습니다.');
+                showError(window.i18n?.t('messages.error') || 'Some data failed to load.');
             }
         });
 
     } catch (error) {
         console.error('Error loading data:', error);
         // Use toast notification instead of alert
+        const errorMsg = window.i18n?.t('messages.error') || 'Failed to load game data.';
         if (typeof showError === 'function') {
-            showError('게임 데이터를 불러오는데 실패했습니다. data/ 폴더에 모든 데이터 파일이 있는지 확인해주세요.');
+            showError(errorMsg);
         } else {
-            alert('게임 데이터를 불러오는데 실패했습니다. data/ 폴더에 모든 데이터 파일이 있는지 확인해주세요.');
+            alert(errorMsg);
         }
     }
 }
@@ -1044,7 +1045,7 @@ function renderCharacterGrid(searchQuery = '') {
     if (charactersToDisplay.length === 0) {
         const emptyState = document.createElement('div');
         emptyState.className = 'empty-search-state';
-        emptyState.innerHTML = '<p>검색 결과가 없습니다</p>';
+        emptyState.innerHTML = `<p>${window.i18n?.t('builder.noSearchResults') || 'No search results'}</p>`;
         fragment.appendChild(emptyState);
     } else {
         charactersToDisplay.forEach(({ id, char, name }) => {
@@ -1076,7 +1077,7 @@ function renderCharacterGrid(searchQuery = '') {
                         <div class="character-item-id">ID: ${id}</div>
                     </div>
                 </div>
-                <div class="character-item-id">등급: ${getIcon('star').repeat(stars)}</div>
+                <div class="character-item-id">${window.i18n?.t('builder.grade') || 'Grade'}: ${getIcon('star').repeat(stars)}</div>
             `;
             fragment.appendChild(item);
         });
@@ -1167,10 +1168,13 @@ function updateCharacterCard(position) {
     const character = state.party[position];
     
     if (!character) {
+        const selectText = position === 'master'
+            ? (window.i18n?.t('builder.selectMasterCharacter') || 'Select Master')
+            : (window.i18n?.t('builder.selectAssistCharacter') || 'Select Assist');
         card.innerHTML = `
             <div class="empty-state">
                 <div class="plus-icon">+</div>
-                <p>${position === 'master' ? '메인캐릭터 선택' : '지원캐릭터 선택'}</p>
+                <p>${selectText}</p>
             </div>
         `;
         // Enable click on empty card to select character
@@ -1201,11 +1205,12 @@ function updateCharacterCard(position) {
     // Get skill information
     const skills = getCharacterSkills(character, position);
     const isMaster = position === 'master';
+    const t = (key) => window.i18n?.t(key) || key;
     const skillLabels = {
-        normalAtk: '일반공격',
-        skill: isMaster ? '스킬' : '지원',
-        ultimate: '필살기',
-        masterSkill: '스킬'  // For assist characters showing their master skill
+        normalAtk: t('builder.skills.normalAtk'),
+        skill: isMaster ? t('builder.skills.skill') : t('builder.skills.assist'),
+        ultimate: t('builder.skills.ultimate'),
+        masterSkill: t('builder.skills.skill')  // For assist characters showing their master skill
     };
     
     // Initialize skill levels if not set
@@ -1228,11 +1233,11 @@ function updateCharacterCard(position) {
             <div class="character-action-buttons">
                 <button class="change-character-btn" data-action="open-character-select" data-position="${position}">
                     <span class="change-icon">🔄</span>
-                    <span>변경</span>
+                    <span>${t('builder.change')}</span>
                 </button>
                 <button class="remove-character-btn" data-action="remove-character" data-position="${position}">
                     <span class="remove-icon">${getIcon('remove')}</span>
-                    <span>제거</span>
+                    <span>${t('builder.remove')}</span>
                 </button>
             </div>
             <div class="character-info-header">
@@ -1240,7 +1245,7 @@ function updateCharacterCard(position) {
                 <div class="character-id">ID: ${character.id}</div>
             </div>
             <div class="character-level-phase-selector">
-                <label class="level-phase-label">캐릭터 레벨:</label>
+                <label class="level-phase-label">${t('builder.characterLevel')}:</label>
                 <select class="level-phase-select" data-action="update-character-level-phase" data-position="${position}">
                     <option value="0" ${currentLevelPhase === 0 ? 'selected' : ''}>1+</option>
                     <option value="1" ${currentLevelPhase === 1 ? 'selected' : ''}>10+</option>
@@ -1256,31 +1261,31 @@ function updateCharacterCard(position) {
             <div class="character-stats-enhanced">
                 <div class="stat-card stat-grade">
                     <div class="stat-content">
-                        <div class="stat-label"><strong>등급</strong></div>
+                        <div class="stat-label"><strong>${t('builder.grade')}</strong></div>
                         <div class="stat-value">${getIcon('star').repeat(stars)}</div>
                     </div>
                 </div>
                 <div class="stat-card stat-class">
                     <div class="stat-content">
-                        <div class="stat-label"><strong>클래스</strong></div>
+                        <div class="stat-label"><strong>${t('builder.class')}</strong></div>
                         <div class="stat-value">${jobClassName}</div>
                     </div>
                 </div>
                 <div class="stat-card stat-faction">
                     <div class="stat-content">
-                        <div class="stat-label"><strong>세력</strong></div>
+                        <div class="stat-label"><strong>${t('builder.faction')}</strong></div>
                         <div class="stat-value">${character.data.Faction}</div>
                     </div>
                 </div>
                 <div class="stat-card stat-element">
                     <div class="stat-content">
-                        <div class="stat-label"><strong>속성</strong></div>
+                        <div class="stat-label"><strong>${t('builder.element')}</strong></div>
                         <div class="stat-value">${elementIcon ? `<img src="${elementIcon}" alt="${elementName}" class="element-icon-inline" title="${elementName}" onerror="this.style.display='none'">` : elementName}</div>
                     </div>
                 </div>
             </div>
             <div class="character-skills">
-                <div class="skills-title">스킬 정보</div>
+                <div class="skills-title">${t('builder.skillInfo')}</div>
                 ${(isMaster ? ['normalAtk', 'skill', 'ultimate'] : ['normalAtk', 'masterSkill', 'skill', 'ultimate']).map(key => {
                     const skill = skills[key];
                     if (!skill) return '';
@@ -1327,10 +1332,10 @@ function updateCharacterCard(position) {
                                 ${description ? `<div class="skill-desc">${description}</div>` : ''}
                                 <div class="skill-header">
                                     <span class="skill-label">${skillLabels[key]}</span>
-                                    ${skill.cd > 0 ? `<span class="skill-label">CD: ${(skill.cd / 10000).toFixed(1)}초</span>` : ''}
+                                    ${skill.cd > 0 ? `<span class="skill-label">CD: ${(skill.cd / 10000).toFixed(1)}${t('builder.cooldown')}</span>` : ''}
                                     ${hasLevelSelector ? `
                                     <div class="skill-level-selector">
-                                        <label class="skill-level-label">레벨:</label>
+                                        <label class="skill-level-label">${t('builder.skillLevel')}:</label>
                                         <div class="skill-level-controls">
                                             <button class="level-btn" 
                                                     data-action="update-skill-level"
@@ -1475,7 +1480,7 @@ function togglePotential(potentialId, position) {
             
             // Only allow 2 specific potentials
             if (selectedSpecificCount >= 2) {
-                showError('최대 2개의 캐릭터 전용 잠재력만 선택할 수 있습니다.');
+                showError(window.i18n?.t('builder.maxSpecificPotentials') || 'Maximum 2 character-specific potentials can be selected.');
                 return;
             }
         }
@@ -1596,7 +1601,7 @@ function updateScoreDisplay(position) {
     
     if (scoreDisplay) {
         const totalScore = calculateCharacterScore(position);
-        scoreDisplay.innerHTML = `<span class="score-label">총 점수:</span> <span class="score-value">${totalScore}</span>`;
+        scoreDisplay.innerHTML = `<span class="score-label">${window.i18n?.t('builder.totalScore') || 'Total Score'}:</span> <span class="score-value">${totalScore}</span>`;
     }
 }
 
@@ -1667,8 +1672,8 @@ function createPotentialCard(potId, position) {
         currentLevel = state.potentialLevels[position]?.[potId] || 1;
     }
     
-    let briefDesc = state.potentialNames[briefKey] || '간략한 설명이 없습니다';
-    let detailedDesc = state.potentialNames[detailedKey] || '상세한 설명이 없습니다';
+    let briefDesc = state.potentialNames[briefKey] || (window.i18n?.t('builder.briefDesc') || 'No brief description available');
+    let detailedDesc = state.potentialNames[detailedKey] || (window.i18n?.t('builder.detailedDesc') || 'No detailed description available');
     
     // Get skill level for DamageNum parameters
     // For specific potentials, use character's skill level
@@ -1718,7 +1723,7 @@ function createPotentialCard(potId, position) {
     return `
         <div class="potential-card ${isSelected ? 'selected' : ''}" data-build="${buildNumber}">
             ${buildLabel ? `<div class="build-badge">${buildLabel}</div>` : ''}
-            ${isSelected ? `<div class="score-badge">점수: ${score}</div>` : ''}
+            ${isSelected ? `<div class="score-badge">${window.i18n?.t('builder.score') || 'Score'}: ${score}</div>` : ''}
             <div class="potential-card-header" 
                  data-action="toggle-potential" 
                  data-potential-id="${potId}" 
@@ -1731,13 +1736,13 @@ function createPotentialCard(potId, position) {
                     <div class="potential-card-name">${name}</div>
                     <div class="potential-card-meta">
                         <span>ID: ${potId}</span>
-                        ${!isSpecificPotential ? `<span>최대 레벨: ${actualMaxLevel}</span>` : ''}
+                        ${!isSpecificPotential ? `<span>${window.i18n?.t('builder.maxLevel') || 'Max Level'}: ${actualMaxLevel}</span>` : ''}
                     </div>
                 </div>
             </div>
             ${isSelected && !isSpecificPotential && actualMaxLevel > 1 ? `
                 <div class="potential-level-selector">
-                    <div class="potential-level-label">레벨:</div>
+                    <div class="potential-level-label">${window.i18n?.t('builder.potentialLevel') || 'Level'}:</div>
                     <div class="potential-level-controls">
                         <button class="level-btn" 
                                 data-action="update-potential-level"
@@ -1772,13 +1777,13 @@ function createPotentialCard(potId, position) {
                     <div class="buff-metadata">
                         ${buffMetadata.time !== undefined ? `
                             <span class="buff-meta-item">
-                                <span class="buff-meta-label">지속 시간:</span>
-                                <span class="buff-meta-value">${(buffMetadata.time / 10000).toFixed(1)}초</span>
+                                <span class="buff-meta-label">${window.i18n?.t('builder.buffDuration') || 'Duration'}:</span>
+                                <span class="buff-meta-value">${(buffMetadata.time / 10000).toFixed(1)}${window.i18n?.t('builder.cooldown') || 's'}</span>
                             </span>
                         ` : ''}
                         ${buffMetadata.timeSuperposition !== undefined ? `
                             <span class="buff-meta-item">
-                                <span class="buff-meta-label">지속 갱신방식:</span>
+                                <span class="buff-meta-label">${window.i18n?.t('builder.buffRefresh') || 'Refresh Type'}:</span>
                                 <span class="buff-meta-value">${state.gameEnums.timeSuperposition?.[buffMetadata.timeSuperposition]?.name || buffMetadata.timeSuperposition}</span>
                             </span>
                         ` : ''}
@@ -1798,9 +1803,20 @@ function toggleDescriptionMode() {
 
     // Update all toggle button texts
     const buttons = document.querySelectorAll('.description-toggle');
-    const buttonText = state.descriptionMode === 'brief' ? `${getIcon('memo')} 간략히보기` : `${getIcon('summary')} 상세보기`;
+    const briefModeText = window.i18n?.t('builder.briefMode') || 'Brief';
+    const detailedModeText = window.i18n?.t('builder.detailedMode') || 'Detailed';
+    const newModeText = state.descriptionMode === 'brief' ? briefModeText : detailedModeText;
+    const newI18nKey = state.descriptionMode === 'brief' ? 'builder.briefMode' : 'builder.detailedMode';
+
     buttons.forEach(button => {
-        button.innerHTML = buttonText;
+        const span = button.querySelector('span[data-i18n]');
+        if (span) {
+            span.textContent = newModeText;
+            span.setAttribute('data-i18n', newI18nKey);
+        } else {
+            // Fallback for buttons without span structure
+            button.innerHTML = `<i class="fa-solid fa-note-sticky"></i> <span data-i18n="${newI18nKey}">${newModeText}</span>`;
+        }
     });
 
     // Re-render all character cards and potential displays
@@ -1838,7 +1854,7 @@ function updatePotentialsDisplay(position) {
     const charPotential = state.charPotentials[charId];
     
     if (!charPotential) {
-        otherContainer.innerHTML = '<p style="color: var(--text-secondary); padding: 8px; font-size: 0.9rem;">사용 가능한 잠재력이 없습니다</p>';
+        otherContainer.innerHTML = `<p style="color: var(--text-secondary); padding: 8px; font-size: 0.9rem;">${window.i18n?.t('builder.noPotentialsAvailable') || 'No potentials available'}</p>`;
         return;
     }
     
@@ -1864,7 +1880,7 @@ function updatePotentialsDisplay(position) {
     // Display specific potentials in the specific section
     if (specificPotentials.length > 0) {
         specificSection.innerHTML = `
-            <div class="potential-section-title">${isMaster ? '마스터' : '어시스트'} 전용 잠재력</div>
+            <div class="potential-section-title">${isMaster ? (window.i18n?.t('builder.masterSpecificPotential') || 'Master Specific Potentials') : (window.i18n?.t('builder.assistSpecificPotential') || 'Assist Specific Potentials')}</div>
             ${specificPotentials.map(potId => createPotentialCard(potId, position)).join('')}
         `;
     }
@@ -1877,7 +1893,7 @@ function updatePotentialsDisplay(position) {
         const section = document.createElement('div');
         section.className = 'potential-category';
         section.innerHTML = `
-            <div class="potential-category-title">${isMaster ? '마스터' : '어시스트'} 일반 및 공용 잠재력</div>
+            <div class="potential-category-title">${isMaster ? (window.i18n?.t('builder.masterNormalPotential') || 'Master Normal & Common Potentials') : (window.i18n?.t('builder.assistNormalPotential') || 'Assist Normal & Common Potentials')}</div>
             <div class="normal-common-grid">
                 ${allNormalCommonPotentials.map(potId => createPotentialCard(potId, position)).join('')}
             </div>

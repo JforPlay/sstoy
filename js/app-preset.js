@@ -98,7 +98,7 @@
                 <div class="preset-card" data-preset-id="${preset.id}" data-element="${preset.element || 'all'}" data-tags="${tags.join(',')}">
                     ${thumbnailPath ? `
                         <div class="preset-thumbnail">
-                            <img src="${thumbnailPath}" alt="${preset.title}" onerror="this.parentElement.style.display='none'" />
+                            <img src="${thumbnailPath}" alt="${preset.title}" loading="lazy" onerror="this.parentElement.style.display='none'" />
                         </div>
                     ` : ''}
                     <div class="preset-info">
@@ -108,7 +108,7 @@
                                 ${element.name}
                             </span>
                             ${preset.new ? '<span class="preset-new-badge">NEW</span>' : ''}
-                            ${preset.meta ? '<span class="preset-meta-badge">메타</span>' : ''}
+                            ${preset.meta ? `<span class="preset-meta-badge">${window.i18n?.t('preset.meta') || 'Meta'}</span>` : ''}
                         </div>
                         <h4 class="preset-title">${preset.title}</h4>
                         <p class="preset-description">${preset.description || ''}</p>
@@ -121,13 +121,13 @@
                             ${preset.authorLink ? `
                                 <a href="${preset.authorLink}" target="_blank" rel="noopener" class="preset-author-link">
                                     <span class="author-icon">👤</span>
-                                    <span>${preset.author || '익명'}</span>
+                                    <span>${preset.author || (window.i18n?.t('preset.anonymous') || 'Anonymous')}</span>
                                     <span class="external-icon">🔗</span>
                                 </a>
                             ` : `
                                 <span class="preset-author">
                                     <span class="author-icon">👤</span>
-                                    ${preset.author || '익명'}
+                                    ${preset.author || (window.i18n?.t('preset.anonymous') || 'Anonymous')}
                                 </span>
                             `}
                             <button
@@ -136,7 +136,7 @@
                                 data-build-title="${preset.title}"
                                 data-confirm-state="initial"
                             >
-                                보러가기
+                                ${window.i18n?.t('preset.viewBuild') || 'View'}
                             </button>
                         </div>
                     </div>
@@ -155,7 +155,8 @@
         if (!container) return;
 
         if (totalPages <= 1) {
-            container.innerHTML = `<span class="pagination-info">총 ${totalItems}개의 빌드</span>`;
+            const countText = (window.i18n?.t('preset.totalBuilds') || '${count} builds total').replace('${count}', totalItems);
+            container.innerHTML = `<span class="pagination-info">${countText}</span>`;
             return;
         }
 
@@ -303,14 +304,14 @@
             if (confirmState === 'initial') {
                 // First click - Show confirmation
                 btn.dataset.confirmState = 'confirm';
-                btn.textContent = '불러오기';
+                btn.textContent = window.i18n?.t('preset.loadBuild') || 'Load';
                 btn.style.background = '#e67e22'; // Orange warning color
 
                 // Auto-revert after 3 seconds
                 setTimeout(() => {
                     if (btn.dataset.confirmState === 'confirm') {
                         btn.dataset.confirmState = 'initial';
-                        btn.textContent = '보러가기';
+                        btn.textContent = window.i18n?.t('preset.viewBuild') || 'View';
                         btn.style.background = '';
                     }
                 }, 3000);
@@ -342,7 +343,7 @@
 
                         // Reset button state
                         btn.dataset.confirmState = 'initial';
-                        btn.textContent = '보러가기';
+                        btn.textContent = window.i18n?.t('preset.viewBuild') || 'View';
                         btn.disabled = false;
                         btn.style.background = '';
 
@@ -359,12 +360,12 @@
                             presetContainer.style.opacity = '1';
                         }
                         btn.dataset.confirmState = 'initial';
-                        btn.textContent = '실패';
+                        btn.textContent = window.i18n?.t('preset.loadFailed') || 'Failed';
                         btn.disabled = false;
                         btn.style.background = '#e74c3c';
 
                         setTimeout(() => {
-                            btn.textContent = '보러가기';
+                            btn.textContent = window.i18n?.t('preset.viewBuild') || 'View';
                             btn.style.background = '';
                         }, 2000);
                     }
@@ -428,8 +429,8 @@
                 container.innerHTML = `
                     <div class="preset-empty-state">
                         <div class="empty-icon">🌟</div>
-                        <h3>프리셋 빌드가 없습니다</h3>
-                        <p>data/PresetBuilds.json에 프리셋을 추가하세요</p>
+                        <h3>${window.i18n?.t('preset.noPresets') || 'No preset builds'}</h3>
+                        <p>${window.i18n?.t('preset.noPresetsDesc') || 'Add presets to data/PresetBuilds.json'}</p>
                     </div>
                 `;
                 return;
@@ -451,9 +452,9 @@
 
             // Element filters
             html += '<div class="preset-filter-group">';
-            html += '<span class="filter-group-label">속성별로 찾기</span>';
+            html += `<span class="filter-group-label">${window.i18n?.t('preset.filterByElement') || 'Filter by Element'}</span>`;
             html += '<div class="preset-filters">';
-            html += '<button class="element-filter-btn active" data-element="all" onclick="filterPresetsByElement(\'all\')">전체</button>';
+            html += `<button class="element-filter-btn active" data-element="all" onclick="filterPresetsByElement('all')">${window.i18n?.t('disc.allElements') || 'All'}</button>`;
 
             Object.keys(elementsData).forEach(elementKey => {
                 const element = elementsData[elementKey];
@@ -469,12 +470,12 @@
             // Tag filters
             if (allTags.size > 0) {
                 html += '<div class="preset-filter-group">';
-                html += '<span class="filter-group-label">태그로 찾기</span>';
+                html += `<span class="filter-group-label">${window.i18n?.t('preset.filterByTag') || 'Filter by Tag'}</span>`;
                 html += '<div class="tag-filter-buttons">';
                 [...allTags].sort().forEach(tag => {
                     html += `<button class="tag-filter-btn" data-tag="${tag}" onclick="toggleTagFilter('${tag}')">${tag}</button>`;
                 });
-                html += `<button class="tag-filter-clear" onclick="clearTagFilters()">선택 초기화</button>`;
+                html += `<button class="tag-filter-clear" onclick="clearTagFilters()">${window.i18n?.t('preset.clearFilters') || 'Clear Filters'}</button>`;
                 html += '</div></div>';
             }
 
@@ -497,7 +498,7 @@
             container.innerHTML = `
                 <div class="preset-error-state">
                     <div class="error-icon">⚠️</div>
-                    <h3>프리셋 불러오기 실패</h3>
+                    <h3>${window.i18n?.t('preset.presetLoadFailed') || 'Failed to load presets'}</h3>
                     <p>${error.message}</p>
                 </div>
             `;

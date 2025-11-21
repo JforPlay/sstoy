@@ -54,29 +54,29 @@
                 <div class="build-info-section">
                     <div class="build-info-header">
                         <div class="build-title-wrapper">
-                            <label class="build-title-label">빌드 이름</label>
-                            <input 
-                                type="text" 
-                                id="build-title-input" 
-                                class="build-title-input" 
-                                placeholder="빌드 이름 입력..."
+                            <label class="build-title-label">${window.i18n?.t('builder.buildName') || 'Build Name'}</label>
+                            <input
+                                type="text"
+                                id="build-title-input"
+                                class="build-title-input"
+                                placeholder="${window.i18n?.t('builder.buildNamePlaceholder') || 'Enter build name...'}"
                                 oninput="handleBuildTitleChange(event)"
-                                value="${window.buildState?.buildTitle || '새로운 빌드'}"
+                                value="${window.buildState?.buildTitle || (window.i18n?.t('builder.newBuild') || 'New Build')}"
                             />
                         </div>
-                        
+
                         <div class="save-load-actions">
                             <button class="save-btn" data-action="saveload-save" id="save-btn">
                                 <span class="btn-icon">💾</span>
-                                <span class="btn-text">저장</span>
+                                <span class="btn-text">${window.i18n?.t('common.save') || 'Save'}</span>
                             </button>
                             <button class="load-btn-main" data-action="saveload-load">
                                 <span class="btn-icon">📂</span>
-                                <span class="btn-text">불러오기</span>
+                                <span class="btn-text">${window.i18n?.t('common.load') || 'Load'}</span>
                             </button>
                             <button class="share-btn" data-action="saveload-share" id="share-btn">
                                 <span class="btn-icon">🔗</span>
-                                <span class="btn-text">URL 공유</span>
+                                <span class="btn-text">${window.i18n?.t('builder.urlShare') || 'URL Share'}</span>
                             </button>
                         </div>
                     </div>
@@ -86,11 +86,11 @@
 
                 <!-- Party Overview Cards -->
                 <div class="summary-section">
-                    <h3 class="summary-section-title">${getIcon('people')} 캐릭터</h3>
+                    <h3 class="summary-section-title">${getIcon('people')} ${window.i18n?.t('builder.characters') || 'Characters'}</h3>
                     <div class="summary-cards-grid">
-                        ${generateSummaryCard('master', `${getIcon('master')} 메인`, 'master-badge')}
-                        ${generateSummaryCard('assist1', `${getIcon('assist')} 지원 1`, 'assist-badge')}
-                        ${generateSummaryCard('assist2', `${getIcon('assist')} 지원 2`, 'assist-badge')}
+                        ${generateSummaryCard('master', `${getIcon('master')} ${window.i18n?.t('builder.master') || 'Master'}`, 'master-badge')}
+                        ${generateSummaryCard('assist1', `${getIcon('assist')} ${window.i18n?.t('builder.assist1') || 'Assist 1'}`, 'assist-badge')}
+                        ${generateSummaryCard('assist2', `${getIcon('assist')} ${window.i18n?.t('builder.assist2') || 'Assist 2'}`, 'assist-badge')}
                     </div>
                 </div>
 
@@ -103,7 +103,7 @@
 
                 <!-- Build Stats Summary -->
                 <div class="build-stats-panel">
-                    <h3>파티 통계</h3>
+                    <h3>${window.i18n?.t('builder.partyStats') || 'Party Stats'}</h3>
                     <div class="build-stats-grid" id="build-stats-grid">
                         ${generateBuildStats()}
                     </div>
@@ -111,13 +111,12 @@
 
                 <!-- Quick Notes -->
                 <div class="build-notes-panel">
-                    <h3>빌드 메모 <span class="memo-hint">(로컬 저장 시에만 포함)</span></h3>
-                    <textarea 
-                        class="build-notes-textarea" 
+                    <h3>${window.i18n?.t('builder.buildNotes') || 'Build Notes'} <span class="memo-hint">${window.i18n?.t('builder.memoHint') || '(Local save only)'}</span></h3>
+                    <textarea
+                        class="build-notes-textarea"
                         id="build-notes"
-                        placeholder="빌드에 대한 메모를 작성하세요...&#10;예: 특정 보스 전용, PvP 최적화 등&#10;&#10;💡 이 메모는 로컬 저장에만 포함되며 URL 공유 시에는 제외됩니다."
+                        placeholder="${window.i18n?.t('builder.buildMemoPlaceholder') || 'Write notes about this build...'}"
                         oninput="handleBuildMemoChange(event)"
-                    >
                     ></textarea>
                 </div>
             </div>
@@ -139,7 +138,7 @@
                     <div class="summary-card-body">
                         <div class="summary-character-preview">
                             <div class="summary-empty-state">
-                                <p>캐릭터를 선택해주세요</p>
+                                <p>${window.i18n?.t('builder.selectCharacter') || 'Please select a character'}</p>
                             </div>
                         </div>
                     </div>
@@ -160,6 +159,7 @@
                                 <img src="assets/char/avg1_${charId}_002.png"
                                      alt="${charName}"
                                      class="summary-char-image"
+                                     loading="lazy"
                                      onerror="this.style.display='none'">
                                 <div class="summary-char-name-section">
                                     <div class="summary-card-badge ${badgeClass}">${title}</div>
@@ -178,7 +178,7 @@
     // Generate ALL discs section (main + sub + notes in 3 columns)
     function generateAllDiscsSection() {
         if (!window.discsState) {
-            return '<p style="color: var(--text-secondary); padding: 1rem;">레코드 데이터를 불러오는 중...</p>';
+            return `<p style="color: var(--text-secondary); padding: 1rem;">${window.i18n?.t('messages.loading') || 'Loading...'}</p>`;
         }
         
         const mainSlots = ['main1', 'main2', 'main3'];
@@ -191,17 +191,17 @@
         
         // Column 1: Main Discs
         html += '<div class="summary-disc-column">';
-        html += '<h3 class="summary-section-title">🎵 메인 레코드</h3>';
+        html += `<h3 class="summary-section-title">${window.i18n?.t('summary.mainDiscs') || '🎵 Main Discs'}</h3>`;
         
         if (hasMainDiscs) {
             mainSlots.forEach((slotId, index) => {
                 const disc = window.discsState.selectedDiscs?.[slotId];
                 if (!disc) {
-                    html += '<div class="summary-disc-card empty">슬롯 비어있음</div>';
+                    html += `<div class="summary-disc-card empty">${window.i18n?.t('summary.emptySlot') || 'Empty Slot'}</div>`;
                     return;
                 }
-                
-                const discName = window.discsState.discNames?.[disc.Id] || '레코드';
+
+                const discName = window.discsState.discNames?.[disc.Id] || (window.i18n?.t('summary.disc') || 'Disc');
                 const limitBreak = window.discsState.discLimitBreaks?.[slotId] || 1;
                 
                 // Get disc icon
@@ -216,7 +216,7 @@
                 // Get main skill
                 const mainSkillId = disc.MainSkillGroupId ? `${disc.MainSkillGroupId}${String(limitBreak).padStart(2, '0')}` : null;
                 const mainSkill = mainSkillId ? window.discsState.mainSkillData?.[mainSkillId] : null;
-                const mainSkillName = mainSkill ? (window.discsState.mainSkillKRData?.[mainSkill.Name] || mainSkill.Name || '멜로디') : '';
+                const mainSkillName = mainSkill ? (window.discsState.mainSkillKRData?.[mainSkill.Name] || mainSkill.Name || (window.i18n?.t('summary.melody') || 'Melody')) : '';
                 
                 // Get secondary skills
                 const secondarySkills = [];
@@ -246,13 +246,13 @@
                                         });
                                         
                                         if (requirementsMet) {
-                                            const skillName = window.discsState.secondarySkillKRData?.[skill.Name] || skill.Name || '협주';
+                                            const skillName = window.discsState.secondarySkillKRData?.[skill.Name] || skill.Name || (window.i18n?.t('summary.harmony') || 'Harmony');
                                             secondarySkills.push({ name: skillName, level: skill.Level || level });
                                             break;
                                         }
                                     } catch (e) {}
                                 } else if (level === 1) {
-                                    const skillName = window.discsState.secondarySkillKRData?.[skill.Name] || skill.Name || '협주';
+                                    const skillName = window.discsState.secondarySkillKRData?.[skill.Name] || skill.Name || (window.i18n?.t('summary.harmony') || 'Harmony');
                                     secondarySkills.push({ name: skillName, level: 1 });
                                     break;
                                 }
@@ -264,38 +264,38 @@
                 html += `
                     <div class="summary-disc-card">
                         <div class="disc-card-icon-row">
-                            ${iconPath ? `<img src="${iconPath}" alt="${discName}" class="disc-card-icon" onerror="this.style.display='none'">` : `<div class="disc-card-icon-placeholder">${getIcon('disc')}</div>`}
+                            ${iconPath ? `<img src="${iconPath}" alt="${discName}" class="disc-card-icon" loading="lazy" onerror="this.style.display='none'">` : `<div class="disc-card-icon-placeholder">${getIcon('disc')}</div>`}
                             <div class="disc-card-info">
                                 <div class="disc-card-name">${discName}</div>
-                                <div class="disc-card-lb">돌파 ${limitBreak}</div>
+                                <div class="disc-card-lb">${window.i18n?.t('summary.breakthrough') || 'Breakthrough'} ${limitBreak}</div>
                             </div>
                         </div>
                         <div class="disc-skills-badges">
-                            ${mainSkillName ? `<span class="disc-skill-badge main" title="${mainSkillName}">멜로디 Lv.${limitBreak}</span>` : ''}
-                            ${secondarySkills.map(s => `<span class="disc-skill-badge secondary" title="${s.name}">협주 Lv.${s.level}</span>`).join('')}
+                            ${mainSkillName ? `<span class="disc-skill-badge main" title="${mainSkillName}">${window.i18n?.t('summary.melody') || 'Melody'} Lv.${limitBreak}</span>` : ''}
+                            ${secondarySkills.map(s => `<span class="disc-skill-badge secondary" title="${s.name}">${window.i18n?.t('summary.harmony') || 'Harmony'} Lv.${s.level}</span>`).join('')}
                         </div>
                     </div>
                 `;
             });
         } else {
-            html += '<p style="color: var(--text-secondary); padding: 1rem;">선택된 메인 레코드 없음</p>';
+            html += `<p style="color: var(--text-secondary); padding: 1rem;">${window.i18n?.t('summary.noMainDiscs') || 'No main discs selected'}</p>`;
         }
         
         html += '</div>'; // End main discs column
         
         // Column 2: Sub Discs
         html += '<div class="summary-disc-column">';
-        html += '<h3 class="summary-section-title">🎶 보조 레코드</h3>';
+        html += `<h3 class="summary-section-title">${window.i18n?.t('summary.subDiscs') || '🎶 Sub Discs'}</h3>`;
         
         if (hasSubDiscs) {
             subSlots.forEach((slotId, index) => {
                 const disc = window.discsState.selectedDiscs?.[slotId];
                 if (!disc) {
-                    html += '<div class="summary-disc-card empty">슬롯 비어있음</div>';
+                    html += `<div class="summary-disc-card empty">${window.i18n?.t('summary.emptySlot') || 'Empty Slot'}</div>`;
                     return;
                 }
-                
-                const discName = window.discsState.discNames?.[disc.Id] || '레코드';
+
+                const discName = window.discsState.discNames?.[disc.Id] || (window.i18n?.t('summary.disc') || 'Disc');
                 const subDiscLevel = window.discsState.subDiscLevels?.[slotId] || 0;
                 const phaseLabelMap = ['1+', '10+', '20+', '30+', '40+', '50+', '60+', '70+', '80+'];
                 const phaseLabel = phaseLabelMap[subDiscLevel] || '1+';
@@ -329,10 +329,10 @@
                 html += `
                     <div class="summary-disc-card sub-disc">
                         <div class="disc-card-icon-row">
-                            ${iconPath ? `<img src="${iconPath}" alt="${discName}" class="disc-card-icon" onerror="this.style.display='none'">` : `<div class="disc-card-icon-placeholder">${getIcon('disc')}</div>`}
+                            ${iconPath ? `<img src="${iconPath}" alt="${discName}" class="disc-card-icon" loading="lazy" onerror="this.style.display='none'">` : `<div class="disc-card-icon-placeholder">${getIcon('disc')}</div>`}
                             <div class="disc-card-info">
                                 <div class="disc-card-name">${discName}</div>
-                                <div class="disc-card-lb">레벨 ${phaseLabel}</div>
+                                <div class="disc-card-lb">${window.i18n?.t('summary.level') || 'Level'} ${phaseLabel}</div>
                             </div>
                         </div>
                         ${notesInfo ? `<div class="sub-disc-notes">${notesInfo}</div>` : ''}
@@ -340,14 +340,14 @@
                 `;
             });
         } else {
-            html += '<p style="color: var(--text-secondary); padding: 1rem;">선택된 보조 레코드 없음</p>';
+            html += `<p style="color: var(--text-secondary); padding: 1rem;">${window.i18n?.t('summary.noSubDiscs') || 'No sub discs selected'}</p>`;
         }
         
         html += '</div>'; // End sub discs column
         
         // Column 3: Notes
         html += '<div class="summary-disc-column notes-column">';
-        html += '<h3 class="summary-section-title">🎼 음표</h3>';
+        html += `<h3 class="summary-section-title">${window.i18n?.t('summary.notes') || '🎼 Notes'}</h3>`;
         html += generateNotesSummary();
         html += '</div>'; // End notes column
         
@@ -360,7 +360,7 @@
     // Generate notes summary section
     function generateNotesSummary() {
         if (!window.discsState || !window.discsState.subNoteSkillData) {
-            return '<p style="color: var(--text-secondary); padding: 1rem;">음표 데이터를 불러오는 중...</p>';
+            return `<p style="color: var(--text-secondary); padding: 1rem;">${window.i18n?.t('summary.noteDataLoading') || 'Loading note data...'}</p>`;
         }
         
         const notesFromDiscs = window.calculateNotesFromSubDiscs ? window.calculateNotesFromSubDiscs() : {};
@@ -409,20 +409,20 @@
         });
         
         if (usedNotes.length === 0 && unusedNotes.length === 0) {
-            return '<p style="color: var(--text-secondary); padding: 1rem;">활성화된 음표 없음</p>';
+            return `<p style="color: var(--text-secondary); padding: 1rem;">${window.i18n?.t('summary.noActiveNotes') || 'No active notes'}</p>`;
         }
         
         let html = '<div class="summary-notes-compact-container">';
         
         if (usedNotes.length > 0) {
             html += `<div class="notes-compact-subsection">
-                <h4 class="notes-compact-title used">📌 사용 중인 음표</h4>
+                <h4 class="notes-compact-title used">${window.i18n?.t('summary.usedNotes') || '📌 Used Notes'}</h4>
                 <div class="notes-compact-grid">`;
             
             usedNotes.forEach(note => {
                 html += `
                     <div class="note-compact-card used" title="${note.name}">
-                        ${note.icon ? `<img src="${note.icon}" alt="${note.name}" class="note-compact-icon" onerror="this.style.display='none'">` : '<div class="note-compact-icon-placeholder">🎵</div>'}
+                        ${note.icon ? `<img src="${note.icon}" alt="${note.name}" class="note-compact-icon" loading="lazy" onerror="this.style.display='none'">` : '<div class="note-compact-icon-placeholder">🎵</div>'}
                         <div class="note-compact-level">${note.total}</div>
                     </div>
                 `;
@@ -433,13 +433,13 @@
         
         if (unusedNotes.length > 0) {
             html += `<div class="notes-compact-subsection">
-                <h4 class="notes-compact-title unused">💤 미사용 음표</h4>
+                <h4 class="notes-compact-title unused">${window.i18n?.t('summary.unusedNotes') || '💤 Unused Notes'}</h4>
                 <div class="notes-compact-grid">`;
             
             unusedNotes.forEach(note => {
                 html += `
                     <div class="note-compact-card unused" title="${note.name}">
-                        ${note.icon ? `<img src="${note.icon}" alt="${note.name}" class="note-compact-icon" onerror="this.style.display='none'">` : '<div class="note-compact-icon-placeholder">🎵</div>'}
+                        ${note.icon ? `<img src="${note.icon}" alt="${note.name}" class="note-compact-icon" loading="lazy" onerror="this.style.display='none'">` : '<div class="note-compact-icon-placeholder">🎵</div>'}
                         <div class="note-compact-level">${note.total}</div>
                     </div>
                 `;
@@ -458,11 +458,11 @@
 
         // Map of skill types with generic labels
         const skillMapping = isMaster ? [
-            { key: 'NormalAtkId', label: '평타' },
-            { key: 'SkillId', label: '스킬' },
-            { key: 'UltimateId', label: '필살기' }
+            { key: 'NormalAtkId', label: window.i18n?.t('summary.normalAtk') || 'Normal' },
+            { key: 'SkillId', label: window.i18n?.t('summary.skill') || 'Skill' },
+            { key: 'UltimateId', label: window.i18n?.t('summary.ultimate') || 'Ultimate' }
         ] : [
-            { key: 'AssistSkillId', label: '지원' }
+            { key: 'AssistSkillId', label: window.i18n?.t('summary.assist') || 'Assist' }
         ];
 
         let html = '<div class="summary-skills-inline">';
@@ -486,8 +486,8 @@
 
         if (selectedPotentials.length === 0) {
             return `<div class="summary-potentials">
-                <div class="summary-section-label">잠재력: 0</div>
-                <p style="color: var(--text-secondary); font-size: 0.85rem; padding: 8px;">선택된 잠재력 없음</p>
+                <div class="summary-section-label">${window.i18n?.t('builder.potentials') || 'Potentials'}: 0</div>
+                <p style="color: var(--text-secondary); font-size: 0.85rem; padding: 8px;">${window.i18n?.t('builder.noPotentialsSelected') || 'No potentials selected'}</p>
             </div>`;
         }
 
@@ -529,8 +529,8 @@
 
         let html = `<div class="summary-potentials">
             <div class="summary-section-label-row">
-                <span>잠재력: ${totalPotentialLevels}</span>
-                <span class="potential-hint">클릭: 우선도 변경 | 드래그: 순서 변경</span>
+                <span>${window.i18n?.t('builder.potentials') || 'Potentials'}: ${totalPotentialLevels}</span>
+                <span class="potential-hint">${window.i18n?.t('builder.potentialHint') || 'Click: Change priority | Drag: Reorder'}</span>
             </div>`;
 
         // Render specific potentials first (top row, max 2)
@@ -636,31 +636,31 @@
         return `
             <div class="build-stat-card highlight build-level-card">
                 <div class="build-level-icon-container">
-                    <img src="${buildIconPath}" alt="Build Level ${buildLevel}" class="build-level-icon" onerror="this.style.display='none'">
+                    <img src="${buildIconPath}" alt="Build Level ${buildLevel}" class="build-level-icon" loading="lazy" onerror="this.style.display='none'">
                 </div>
                 <div class="build-stat-info">
-                    <span class="build-stat-label">빌드 레벨</span>
+                    <span class="build-stat-label">${window.i18n?.t('builder.buildLevel') || 'Build Level'}</span>
                     <span class="build-stat-value large">Lv.${buildLevel}</span>
                 </div>
             </div>
             <div class="build-stat-card highlight">
                 <div class="build-stat-icon">${getIcon('star')}</div>
                 <div class="build-stat-info">
-                    <span class="build-stat-label">총 점수</span>
+                    <span class="build-stat-label">${window.i18n?.t('builder.totalScore') || 'Total Score'}</span>
                     <span class="build-stat-value large">${totalScore}</span>
                 </div>
             </div>
             <div class="build-stat-card">
                 <div class="build-stat-icon">${getIcon('critPower')}</div>
                 <div class="build-stat-info">
-                    <span class="build-stat-label">총 잠재력</span>
+                    <span class="build-stat-label">${window.i18n?.t('builder.totalPotentials') || 'Total Potentials'}</span>
                     <span class="build-stat-value">${totalPotentialLevels}</span>
                 </div>
             </div>
         `;
     }
     
-    // Set potential mark (필수, 다다익선, 명함만, 후순위) - cycles through options
+    // Set potential mark (Essential, Recommended, Minimum, Low Priority) - cycles through options
     function cyclePotentialMark(position, potId) {
         if (!window.state.potentialMarks) {
             window.state.potentialMarks = {};
@@ -671,23 +671,20 @@
 
         const currentMark = window.state.potentialMarks[position][potId] || '';
 
+        // Mark keys for i18n
+        const markKeys = ['', 'essential', 'recommended', 'minimum', 'low'];
+        const markValues = ['', '필수', '다다익선', '명함만', '후순위'];
+
         // Migrate old values to new ones
         let migratedMark = currentMark;
         if (currentMark === '권장') migratedMark = '다다익선';
         if (currentMark === 'Lv.1') migratedMark = '명함만';
 
-        // Cycle through: '' -> '필수' -> '다다익선' -> '명함만' -> '후순위' -> ''
-        if (migratedMark === '') {
-            window.state.potentialMarks[position][potId] = '필수';
-        } else if (migratedMark === '필수') {
-            window.state.potentialMarks[position][potId] = '다다익선';
-        } else if (migratedMark === '다다익선') {
-            window.state.potentialMarks[position][potId] = '명함만';
-        } else if (migratedMark === '명함만') {
-            window.state.potentialMarks[position][potId] = '후순위';
-        } else {
-            window.state.potentialMarks[position][potId] = '';
-        }
+        // Find current index and cycle to next
+        let currentIndex = markValues.indexOf(migratedMark);
+        if (currentIndex === -1) currentIndex = 0;
+        const nextIndex = (currentIndex + 1) % markValues.length;
+        window.state.potentialMarks[position][potId] = markValues[nextIndex];
 
         updateSummary();
     }
@@ -720,7 +717,7 @@
         URL.revokeObjectURL(url);
         
         if (typeof showSuccess === 'function') {
-            showSuccess('빌드를 성공적으로 내보냈습니다!');
+            showSuccess(window.i18n?.t('summary.buildExported') || 'Build exported successfully!');
         }
     }
     
@@ -738,41 +735,45 @@
         
         navigator.clipboard.writeText(shareUrl).then(() => {
             if (typeof showSuccess === 'function') {
-                showSuccess('공유 링크가 클립보드에 복사되었습니다!');
+                showSuccess(window.i18n?.t('summary.shareLinkCopied') || 'Share link copied to clipboard!');
             }
         }).catch(err => {
             console.error('Failed to copy:', err);
             if (typeof showError === 'function') {
-                showError('링크 복사에 실패했습니다.');
+                showError(window.i18n?.t('summary.shareLinkFailed') || 'Failed to copy link.');
             }
         });
     }
-    
+
     // Copy build as text
     function copyBuild() {
-        let text = '=== 스텔라 소라 빌드 ===\n\n';
-        
+        let text = (window.i18n?.t('summary.buildTitle') || '=== Stella Sora Build ===') + '\n\n';
+
         ['master', 'assist1', 'assist2'].forEach(position => {
             const character = window.state?.party?.[position];
             if (!character) return;
-            
-            const posLabel = position === 'master' ? '메인' : position === 'assist1' ? '지원 1' : '지원 2';
+
+            const posLabel = position === 'master'
+                ? (window.i18n?.t('summary.main') || 'Master')
+                : position === 'assist1'
+                    ? (window.i18n?.t('summary.assist1') || 'Assist 1')
+                    : (window.i18n?.t('summary.assist2') || 'Assist 2');
             text += `【${posLabel}】${character.name}\n`;
             
             // Skills
             const charData = character.data;
             const isMaster = position === 'master';
             const skillMapping = isMaster ? [
-                { key: 'NormalAtkId', label: '일반공격' },
-                { key: 'SkillId', label: '스킬' },
-                { key: 'UltimateId', label: '필살기' },
-                { key: 'DodgeId', label: '회피' },
-                { key: 'SpecialSkillId', label: '특수스킬' }
+                { key: 'NormalAtkId', label: window.i18n?.t('builder.skills.normalAtk') || 'Normal Attack' },
+                { key: 'SkillId', label: window.i18n?.t('builder.skills.skill') || 'Skill' },
+                { key: 'UltimateId', label: window.i18n?.t('builder.skills.ultimate') || 'Ultimate' },
+                { key: 'DodgeId', label: window.i18n?.t('builder.skills.dodge') || 'Dodge' },
+                { key: 'SpecialSkillId', label: window.i18n?.t('builder.skills.specialSkill') || 'Special Skill' }
             ] : [
-                { key: 'AssistSkillId', label: '어시스트' }
+                { key: 'AssistSkillId', label: window.i18n?.t('builder.skills.assist') || 'Assist' }
             ];
-            
-            text += '  스킬 레벨:\n';
+
+            text += `  ${window.i18n?.t('summary.skillLevels') || 'Skill Levels'}:\n`;
             skillMapping.forEach(({ key, label }) => {
                 const skillId = charData[key];
                 if (skillId && window.state?.skills?.[skillId]) {
@@ -787,7 +788,7 @@
             // Potentials
             const potentials = window.state?.selectedPotentials?.[position] || [];
             if (potentials.length > 0) {
-                text += '  잠재력:\n';
+                text += `  ${window.i18n?.t('summary.potentials') || 'Potentials'}:\n`;
                 potentials.forEach(potId => {
                     const potential = window.state?.potentials?.[potId];
                     if (potential) {
@@ -805,17 +806,17 @@
         
         const notes = document.getElementById('build-notes')?.value;
         if (notes) {
-            text += `메모:\n${notes}\n`;
+            text += `${window.i18n?.t('summary.memo') || 'Memo'}:\n${notes}\n`;
         }
-        
+
         navigator.clipboard.writeText(text).then(() => {
             if (typeof showSuccess === 'function') {
-                showSuccess('빌드 정보가 클립보드에 복사되었습니다!');
+                showSuccess(window.i18n?.t('summary.buildCopied') || 'Build info copied to clipboard!');
             }
         }).catch(err => {
             console.error('Failed to copy:', err);
             if (typeof showError === 'function') {
-                showError('복사에 실패했습니다.');
+                showError(window.i18n?.t('summary.copyFailed') || 'Copy failed.');
             }
         });
     }
