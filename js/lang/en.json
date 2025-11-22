@@ -284,8 +284,8 @@
     "loading": "Loading..."
   },
   "landing": {
-    "title": "Stella Sora Tools",
-    "tagline": "Language : limited support for UI text & full support for in-game text.",
+    "title": "Stella Sora Tools & DB",
+    "tagline": "Language : Currently adding support for UI text & full support for in-game text.",
     "heroDesc1": "Create optimal Stella Sora builds quickly and easily!",
     "heroDesc2": "Manage characters, potentials, and records all in one place.",
     "btnCharDB": "Trekker DB",
