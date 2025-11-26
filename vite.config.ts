@@ -36,15 +36,18 @@ export default defineConfig(({ command, mode }) => ({
       deleteOriginFile: false
     }),
 
-    // Copy preset builds into the dist root so fetchJSON('PresetBuilds.json') works in production
+    // Copy preset builds and patch notes into the dist root so fetchJSON works in production
     {
       name: 'copy-preset-builds',
       closeBundle() {
-        const src = resolve(__dirname, 'PresetBuilds.json');
-        const dest = resolve(__dirname, 'dist', 'PresetBuilds.json');
-        if (fs.existsSync(src)) {
-          fs.copyFileSync(src, dest);
-        }
+        const filesToCopy = ['PresetBuilds.json', 'patchnotes.json'];
+        filesToCopy.forEach((file) => {
+          const src = resolve(__dirname, file);
+          const dest = resolve(__dirname, 'dist', file);
+          if (fs.existsSync(src)) {
+            fs.copyFileSync(src, dest);
+          }
+        });
       }
     }
   ],
