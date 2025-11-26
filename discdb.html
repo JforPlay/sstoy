@@ -238,6 +238,18 @@
         </div>
     </div>
 
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swUrl = new URL('sw.js', window.location.href).pathname;
+                navigator.serviceWorker.register(swUrl)
+                    .then(reg => console.log('[SW] Registered:', reg.scope))
+                    .catch(err => console.warn('[SW] Registration failed:', err));
+            });
+        }
+    </script>
+
     <script type="module" src="src/pages/discdb.ts"></script>
 </body>
 

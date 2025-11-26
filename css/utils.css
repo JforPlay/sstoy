@@ -1,7 +1,14 @@
 /* ================================
    Global Styles & Font
    ================================ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+/* Centralized Font Variables */
+:root {
+    --font-main: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'Space Mono', 'Courier New', monospace;
+    --font-korean: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+}
 
 * {
     box-sizing: border-box;
@@ -9,14 +16,31 @@
     padding: 0;
 }
 
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+/* Apply fonts only to text elements, not icons */
+body,
+input,
+textarea,
+button,
+select {
+    font-family: var(--font-main);
     font-size: 16px;
     line-height: 1.6;
     color: var(--text-primary);
-    background: var(--background);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background: var(--background);
+}
+
+/* Korean language support - only for text, not icons */
+:lang(ko) body,
+:lang(ko) input,
+:lang(ko) textarea,
+:lang(ko) button,
+:lang(ko) select {
+    font-family: var(--font-main), var(--font-korean);
 }
 
 /* Add subtle texture to light mode background */
@@ -706,6 +730,77 @@ body {
         min-width: auto;
         max-width: none;
     }
+}
+
+/* ================================
+   Loading Spinner (Minimalistic)
+   ================================ */
+.spinner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    gap: 1.5rem;
+}
+
+.spinner {
+    position: relative;
+    width: 48px;
+    height: 48px;
+}
+
+.spinner-circle {
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spinner-rotate 0.8s linear infinite;
+}
+
+@keyframes spinner-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Overlay spinner for full-page loading */
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+[data-theme="light"] .spinner-overlay {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+/* Small spinner variant */
+.spinner-small {
+    width: 24px;
+    height: 24px;
+}
+
+.spinner-small .spinner-circle {
+    border-width: 2px;
 }
 
 /* ================================
