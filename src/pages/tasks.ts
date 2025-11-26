@@ -628,7 +628,8 @@ function renderSelectedTasks(): void {
 
 function renderCharacterSlots(taskId: number, assignedChars: (number | null)[]): string {
   const slots: string[] = [];
-  for (let i = 0; i < tasksState.maxCharactersPerTask; i++) {
+  const maxSlots = Math.max(1, tasksState.maxCharactersPerTask || 0 || 3);
+  for (let i = 0; i < maxSlots; i++) {
     const charId = assignedChars[i];
     if (charId) {
       const char = tasksState.characters.find((c) => parseInt(c.Id) === charId);
