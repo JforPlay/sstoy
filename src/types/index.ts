@@ -517,8 +517,12 @@ declare global {
     parseElementTags?: (description: string) => string;
     processDescriptionText?: (description: string) => string;
 
-    // Image error handling
+    // Image error handling and optimization
     handleImageError?: (img: HTMLImageElement) => void;
+    createOptimizedImage?: (src: string, alt: string, className?: string, eager?: boolean) => string;
+    createResponsiveImage?: (basePath: string, alt: string, className?: string, eager?: boolean) => string;
+    preloadImage?: (src: string) => void;
+    enableLazyLoadingInContainer?: (container: HTMLElement) => void;
 
     // Empty state helpers
     createEmptyState?: (iconName: string, message: string) => string;

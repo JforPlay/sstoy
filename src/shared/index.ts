@@ -2,23 +2,78 @@
  * Shared utilities module - consolidates duplicate code across all modules
  *
  * This module provides:
- * - Cached JSON fetching
+ * - Cached JSON fetching with memory limits
  * - Debounce utility
  * - Debug logging
  * - Language change handler registration
  * - Toast notifications
  * - LRU Cache implementation
+ * - Loading spinners
+ * - Performance tracking
+ * - Virtual scrolling
  */
 
 // =============================================================================
-// JSON CACHING
+// JSON CACHING WITH MEMORY LIMITS
 // =============================================================================
 
 const jsonCache = new Map<string, unknown>();
 const inFlight = new Map<string, Promise<unknown>>();
 
+// Cache size tracking
+const MAX_CACHE_SIZE = 50 * 1024 * 1024; // 50MB limit
+let currentCacheSize = 0;
+
+/**
+ * Estimate size of data in bytes
+ */
+function estimateSize(data: unknown): number {
+  try {
+    return JSON.stringify(data).length * 2; // Rough estimate (UTF-16)
+  } catch {
+    return 1024; // Default estimate if stringify fails
+  }
+}
+
+/**
+ * Evict oldest cache entries if needed
+ */
+function evictIfNeeded(newDataSize: number): void {
+  if (currentCacheSize + newDataSize <= MAX_CACHE_SIZE) {
+    return;
+  }
+
+  // Evict oldest entries until we have enough space
+  const entriesToEvict: string[] = [];
+  let freedSpace = 0;
+
+  for (const key of jsonCache.keys()) {
+    const data = jsonCache.get(key);
+    const size = estimateSize(data);
+    entriesToEvict.push(key);
+    freedSpace += size;
+
+    if (currentCacheSize - freedSpace + newDataSize <= MAX_CACHE_SIZE) {
+      break;
+    }
+  }
+
+  // Remove evicted entries
+  entriesToEvict.forEach((key) => {
+    const data = jsonCache.get(key);
+    const size = estimateSize(data);
+    jsonCache.delete(key);
+    currentCacheSize -= size;
+  });
+
+  if (entriesToEvict.length > 0) {
+    console.log(`[Cache] Evicted ${entriesToEvict.length} entries, freed ${(freedSpace / 1024 / 1024).toFixed(2)}MB`);
+  }
+}
+
 /**
  * Fetch JSON with caching to prevent duplicate requests
+ * Includes memory limit management
  */
 export async function fetchJSON<T = unknown>(path: string): Promise<T> {
   if (jsonCache.has(path)) {
@@ -35,7 +90,13 @@ export async function fetchJSON<T = unknown>(path: string): Promise<T> {
         throw new Error(`Failed to fetch ${path}: ${res.status} ${res.statusText}`);
       }
       const data = await res.json();
+
+      // Estimate size and evict if needed
+      const dataSize = estimateSize(data);
+      evictIfNeeded(dataSize);
+
       jsonCache.set(path, data);
+      currentCacheSize += dataSize;
       inFlight.delete(path);
       return data as T;
     })
@@ -54,14 +115,29 @@ export async function fetchJSON<T = unknown>(path: string): Promise<T> {
 export function clearJSONCache(prefix = ''): void {
   if (!prefix) {
     jsonCache.clear();
+    currentCacheSize = 0;
     return;
   }
 
   for (const key of jsonCache.keys()) {
     if (key.startsWith(prefix)) {
+      const data = jsonCache.get(key);
+      const size = estimateSize(data);
       jsonCache.delete(key);
+      currentCacheSize -= size;
     }
   }
+}
+
+/**
+ * Get current cache stats
+ */
+export function getCacheStats(): { size: number; entries: number; sizeMB: number } {
+  return {
+    size: currentCacheSize,
+    entries: jsonCache.size,
+    sizeMB: currentCacheSize / 1024 / 1024,
+  };
 }
 
 // =============================================================================
@@ -481,7 +557,7 @@ export function querySelectorAll<T extends HTMLElement>(
 }
 
 // =============================================================================
-// IMAGE ERROR HANDLING
+// IMAGE OPTIMIZATION & ERROR HANDLING
 // =============================================================================
 
 /**
@@ -495,6 +571,79 @@ export function handleImageError(img: HTMLImageElement): void {
  * Create onerror handler string for inline use in templates
  */
 export const IMAGE_ERROR_HANDLER = "this.style.display='none'";
+
+/**
+ * Generate optimized image HTML with lazy loading
+ * @param src - Image source path
+ * @param alt - Alt text for accessibility
+ * @param className - Optional CSS class
+ * @param eager - Set to true to disable lazy loading (for above-the-fold images)
+ */
+export function createOptimizedImage(
+  src: string,
+  alt: string,
+  className = '',
+  eager = false
+): string {
+  const loading = eager ? 'eager' : 'lazy';
+  const classes = className ? ` class="${className}"` : '';
+
+  return `<img src="${src}" alt="${alt}"${classes} loading="${loading}" onerror="${IMAGE_ERROR_HANDLER}">`;
+}
+
+/**
+ * Generate responsive image HTML with multiple sources
+ * Automatically tries WebP format with fallback
+ */
+export function createResponsiveImage(
+  basePath: string,
+  alt: string,
+  className = '',
+  eager = false
+): string {
+  const loading = eager ? 'eager' : 'lazy';
+  const classes = className ? ` class="${className}"` : '';
+
+  // Extract path and extension
+  const lastDot = basePath.lastIndexOf('.');
+  const pathWithoutExt = basePath.substring(0, lastDot);
+  const ext = basePath.substring(lastDot);
+
+  // Generate WebP path
+  const webpPath = `${pathWithoutExt}.webp`;
+
+  return `
+    <picture>
+      <source srcset="${webpPath}" type="image/webp">
+      <img src="${basePath}" alt="${alt}"${classes} loading="${loading}" onerror="${IMAGE_ERROR_HANDLER}">
+    </picture>
+  `.trim();
+}
+
+/**
+ * Preload critical images for faster initial rendering
+ * Call this for above-the-fold images
+ */
+export function preloadImage(src: string): void {
+  if (typeof document === 'undefined') return;
+
+  const link = document.createElement('link');
+  link.rel = 'preload';
+  link.as = 'image';
+  link.href = src;
+  document.head.appendChild(link);
+}
+
+/**
+ * Add lazy loading to all images in a container
+ * Useful for dynamically loaded content
+ */
+export function enableLazyLoadingInContainer(container: HTMLElement): void {
+  const images = container.querySelectorAll('img:not([loading])');
+  images.forEach((img) => {
+    (img as HTMLImageElement).loading = 'lazy';
+  });
+}
 
 // =============================================================================
 // ELEMENT TAG PARSING
@@ -788,6 +937,10 @@ export function initShared(): void {
   window.handleImageError = handleImageError;
   window.createEmptyState = createEmptyState;
   window.createLoadingState = createLoadingState;
+  window.createOptimizedImage = createOptimizedImage;
+  window.createResponsiveImage = createResponsiveImage;
+  window.preloadImage = preloadImage;
+  window.enableLazyLoadingInContainer = enableLazyLoadingInContainer;
 
   log('[Shared] Utilities initialized');
 }
@@ -800,3 +953,20 @@ if (typeof document !== 'undefined') {
     initShared();
   }
 }
+
+// =============================================================================
+// RE-EXPORT UTILITY MODULES
+// =============================================================================
+
+// Spinner utilities
+export { showSpinner, showOverlaySpinner, createSpinnerHTML, withSpinner } from './spinner';
+
+// Virtual scrolling
+export { VirtualScroller, VirtualGrid } from './virtual-scroll';
+export type { VirtualScrollConfig } from './virtual-scroll';
+
+// Performance tracking
+export { measurePerformance, withPerformance, withPerformanceSync, getWebVitals, logMemoryUsage, initPerformanceMonitoring, observePerformance } from './performance';
+
+// Data loading
+export { loadCoreData, loadFeatureData, loadLanguageData, preloadFeatureData, isFeatureLoaded, getAvailableFeatures } from './data-loader';
