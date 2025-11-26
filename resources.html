@@ -1,273 +1,372 @@
----
-layout: default
-title: "자원 계산기"
-css:
-  - css/components/modals.css
-  - css/components/cards.css
-  - css/app-char.css
-  - css/resources.css
-  - css/resources-addon.css
-scripts_footer:
-  - js/resources.js
-  - js/resources-addon.js
----
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
 
-<div class="container">
-    <header>
-        <h1><i class="fa-solid fa-box"></i> 자원 도우미</h1>
-        <p class="subtitle">캐릭터와 레코드 육성에 필요한 자원을 계산하세요</p>
-    </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Main Tab Navigation -->
-    <div class="resources-tab-navigation">
-        <button class="resources-tab-btn active" data-tab="characters" onclick="switchResourceTab('characters')">
-            <span class="tab-icon"><i class="fa-solid fa-users"></i></span>
-            <span class="tab-label">여행가</span>
-        </button>
-        <button class="resources-tab-btn" data-tab="discs" onclick="switchResourceTab('discs')">
-            <span class="tab-icon"><i class="fa-solid fa-compact-disc"></i></span>
-            <span class="tab-label">레코드</span>
-        </button>
-        <button class="resources-tab-btn" data-tab="glance" onclick="switchResourceTab('glance')">
-            <span class="tab-icon"><i class="fa-solid fa-border-all"></i></span>
-            <span class="tab-label">한눈에 보기</span>
-        </button>
-    </div>
+    <!-- Theme Initialization -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
 
-    <!-- Characters Tab Content -->
-    <div class="resources-tab-content active" id="resources-tab-characters">
-        <div class="resources-layout">
-            <!-- Character Selection Section -->
-            <div class="character-selection-section">
-                <div class="section-header">
-                    <h2>여행가 선택</h2>
-                    <button class="add-character-btn" onclick="openCharacterResourceSelect()">
-                        <span class="btn-icon"><i class="fa-solid fa-plus"></i></span>
-                        여행가 추가
-                    </button>
+    <!-- Hide i18n elements until translations load -->
+    <style>
+        html.i18n-loading [data-i18n],
+        html.i18n-loading [data-i18n-placeholder],
+        html.i18n-loading [data-i18n-title] {
+            opacity: 0;
+        }
+
+        html:not(.i18n-loading) [data-i18n],
+        html:not(.i18n-loading) [data-i18n-placeholder],
+        html:not(.i18n-loading) [data-i18n-title] {
+            opacity: 1;
+            transition: opacity 0.15s ease-in;
+        }
+    </style>
+    <script>document.documentElement.classList.add('i18n-loading');</script>
+
+    <title>자원 계산기</title>
+    <link rel="icon" type="image/png" href="assets/others/favicon.png">
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="css/utils.css">
+    <link rel="stylesheet" href="css/components/ui-components.css">
+    <link rel="stylesheet" href="css/app-char.css">
+    <link rel="stylesheet" href="css/resources.css">
+    <link rel="stylesheet" href="css/resources-addon.css">
+
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+        data-cf-beacon='{"token": "2db4a0ab2bf144419ec4ed1c864c934d"}'></script>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <span class="navbar-logo"><i class="fa-solid fa-star"></i></span>
+            <span class="navbar-title" data-i18n="nav.title">스소 도우미</span>
+        </a>
+        <button class="navbar-hamburger" id="navbar-hamburger" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="navbar-menu" id="navbar-menu">
+            <div class="navbar-links">
+                <a href="characterdb.html" class="navbar-link" data-page="characterdb">
+                    <span class="navbar-link-icon"><i class="fa-solid fa-book"></i></span>
+                    <span class="navbar-link-text" data-i18n="nav.characterdb">여행가 도감</span>
+                </a>
+                <a href="discdb.html" class="navbar-link" data-page="discdb">
+                    <span class="navbar-link-icon"><i class="fa-solid fa-compact-disc"></i></span>
+                    <span class="navbar-link-text" data-i18n="nav.discdb">레코드 도감</span>
+                </a>
+                <a href="app.html" class="navbar-link" data-page="app">
+                    <span class="navbar-link-icon"><i class="fa-solid fa-medal"></i></span>
+                    <span class="navbar-link-text" data-i18n="nav.builder">도자기 공방</span>
+                </a>
+                <a href="tasks.html" class="navbar-link" data-page="tasks">
+                    <span class="navbar-link-icon"><i class="fa-solid fa-clipboard-list"></i></span>
+                    <span class="navbar-link-text" data-i18n="nav.tasks">의뢰 도우미</span>
+                </a>
+                <a href="resources.html" class="navbar-link" data-page="resources">
+                    <span class="navbar-link-icon"><i class="fa-solid fa-box"></i></span>
+                    <span class="navbar-link-text" data-i18n="nav.resources">자원 도우미</span>
+                </a>
+            </div>
+            <button id="theme-toggle" class="theme-toggle" onclick="window.toggleTheme()">
+                <i class="theme-icon fa-solid fa-sun"></i>
+                <span class="theme-text" data-i18n="nav.themeLight">라이트</span>
+            </button>
+            <select id="language-select" class="language-select"
+                onchange="if(window.i18n) window.i18n.setLanguage(this.value)">
+                <option value="KR">KR | 한국어</option>
+                <option value="JP">JP | 日本語</option>
+                <option value="EN">EN | English</option>
+                <option value="CN">CN | 中文</option>
+            </select>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1><i class="fa-solid fa-box"></i> <span data-i18n="resources.title">자원 도우미</span></h1>
+            <p class="subtitle" data-i18n="resources.subtitle">캐릭터와 레코드 육성에 필요한 자원을 계산하세요</p>
+        </header>
+
+        <!-- Main Tab Navigation -->
+        <div class="resources-tab-navigation">
+            <button class="resources-tab-btn active" data-tab="characters"
+                onclick="window.switchResourceTab('characters')">
+                <span class="tab-icon"><i class="fa-solid fa-users"></i></span>
+                <span class="tab-label" data-i18n="resources.characters">여행가</span>
+            </button>
+            <button class="resources-tab-btn" data-tab="discs" onclick="window.switchResourceTab('discs')">
+                <span class="tab-icon"><i class="fa-solid fa-compact-disc"></i></span>
+                <span class="tab-label" data-i18n="resources.discs">레코드</span>
+            </button>
+            <button class="resources-tab-btn" data-tab="glance" onclick="window.switchResourceTab('glance')">
+                <span class="tab-icon"><i class="fa-solid fa-border-all"></i></span>
+                <span class="tab-label" data-i18n="resources.glance">한눈에 보기</span>
+            </button>
+        </div>
+
+        <!-- Characters Tab Content -->
+        <div class="resources-tab-content active" id="resources-tab-characters">
+            <div class="resources-layout">
+                <div class="character-selection-section">
+                    <div class="section-header">
+                        <h2 data-i18n="resources.selectCharacter">여행가 선택</h2>
+                        <div class="header-actions">
+                            <button class="add-character-btn" onclick="window.openCharacterResourceSelect()">
+                                <span class="btn-icon"><i class="fa-solid fa-plus"></i></span>
+                                <span data-i18n="resources.addCharacter">여행가 추가</span>
+                            </button>
+                            <button class="clear-all-btn" onclick="window.clearAllResources()">
+                                <span class="btn-icon"><i class="fa-solid fa-trash-can"></i></span>
+                                <span data-i18n="resources.clearAll">전체 초기화</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="selected-characters-list" id="selected-characters-list">
+                        <div class="empty-selection-state">
+                            <div class="empty-icon"><i class="fa-regular fa-clipboard"></i></div>
+                            <p data-i18n="resources.selectCharacterEmpty">여행가를 선택하여 자원 계산을 시작하세요</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="selected-characters-list" id="selected-characters-list">
-                    <div class="empty-selection-state">
-                        <div class="empty-icon"><i class="fa-regular fa-clipboard"></i></div>
-                        <p>여행가를 선택하여 자원 계산을 시작하세요</p>
+                <div class="resource-summary-section">
+                    <div class="section-header">
+                        <h2><span data-i18n="resources.requiredResources">필요한 자원</span>
+                            <button class="help-btn" onclick="window.showResourceHelp()"
+                                data-i18n-title="resources.viewCalculationMethod" title="계산 방법 보기">
+                                <i class="fa-solid fa-circle-question"></i>
+                            </button>
+                        </h2>
+                        <div class="header-actions">
+                            <button class="my-materials-btn" onclick="window.openMyMaterialsModal()">
+                                <span class="btn-icon"><i class="fa-solid fa-box-archive"></i></span>
+                                <span data-i18n="resources.myMaterials">내 재료</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="resource-summary-content" id="resource-summary-content">
+                        <div class="empty-summary-state">
+                            <div class="empty-icon"><i class="fa-solid fa-chart-simple"></i></div>
+                            <p data-i18n="resources.noCharacterSelected">선택된 여행가가 없습니다</p>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Resource Summary Section -->
-            <div class="resource-summary-section">
-                <div class="section-header">
-                    <h2>필요한 자원
-                        <button class="help-btn" onclick="showResourceHelp()" title="계산 방법 보기">
-                            <i class="fa-solid fa-circle-question"></i>
-                        </button>
+        <!-- Discs Tab Content -->
+        <div class="resources-tab-content" id="resources-tab-discs">
+            <div class="resources-layout">
+                <div class="character-selection-section">
+                    <div class="section-header">
+                        <h2 data-i18n="resources.selectDisc">레코드 선택</h2>
+                        <div class="header-actions">
+                            <button class="add-character-btn" onclick="window.openDiscResourceSelect()">
+                                <span class="btn-icon"><i class="fa-solid fa-plus"></i></span>
+                                <span data-i18n="resources.addDisc">레코드 추가</span>
+                            </button>
+                            <button class="clear-all-btn" onclick="window.clearAllDiscResources()">
+                                <span class="btn-icon"><i class="fa-solid fa-trash-can"></i></span>
+                                <span data-i18n="resources.clearAll">전체 초기화</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="selected-characters-list" id="selected-discs-list">
+                        <div class="empty-selection-state">
+                            <div class="empty-icon"><i class="fa-regular fa-clipboard"></i></div>
+                            <p data-i18n="resources.selectDiscEmpty">레코드를 선택하여 자원 계산을 시작하세요</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-summary-section">
+                    <div class="section-header">
+                        <h2><span data-i18n="resources.requiredResources">필요한 자원</span>
+                            <button class="help-btn" onclick="window.showDiscResourceHelp()"
+                                data-i18n-title="resources.viewCalculationMethod" title="계산 방법 보기">
+                                <i class="fa-solid fa-circle-question"></i>
+                            </button>
+                        </h2>
+                        <div class="header-actions">
+                            <button class="my-materials-btn" onclick="window.openMyMaterialsModal()">
+                                <span class="btn-icon"><i class="fa-solid fa-box-archive"></i></span>
+                                <span data-i18n="resources.myMaterials">내 재료</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="resource-summary-content" id="disc-resource-summary-content">
+                        <div class="empty-summary-state">
+                            <div class="empty-icon"><i class="fa-solid fa-chart-simple"></i></div>
+                            <p data-i18n="resources.noDiscSelected">선택된 레코드가 없습니다</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Glance Tab Content -->
+        <div class="resources-tab-content" id="resources-tab-glance">
+            <div class="section-header">
+                <h2 data-i18n="resources.characterMaterialMatrix">여행가 육성 재료 매트릭스</h2>
+                <p class="subtitle" data-i18n="resources.characterMaterialMatrixDesc">행: 승급 재료, 열: 스킬 재료</p>
+            </div>
+            <div id="glance-matrix-container">
+                <div class="loading-overlay" id="glance-loader" style="display: none;">
+                    <div class="loading-spinner">
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+                        <p data-i18n="resources.generatingMatrix">매트릭스 생성 중...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section-header matrix-section-header">
+                <h2 data-i18n="resources.characterBadgeMatrix">캐릭터 뱃지 매트릭스</h2>
+                <p class="subtitle" data-i18n="resources.characterBadgeMatrixDesc">행: 레벨, 열: 뱃지</p>
+            </div>
+            <div id="character-badge-matrix-container"></div>
+            <div class="section-header matrix-section-header">
+                <h2 data-i18n="resources.discAdvanceMatrix">레코드 승급 매트릭스</h2>
+                <p class="subtitle" data-i18n="resources.discAdvanceMatrixDesc">행: 속성, 열: 재료</p>
+            </div>
+            <div id="disc-advance-matrix-container"></div>
+        </div>
+
+        <!-- Modals -->
+        <div class="modal" id="my-materials-modal">
+            <div class="modal-content large-modal">
+                <div class="modal-header">
+                    <h2 data-i18n="resources.myMaterialsManagement">내 재료 관리</h2>
+                    <button class="close-btn" onclick="window.closeMyMaterialsModal()">&times;</button>
+                </div>
+                <div class="modal-body" id="my-materials-content"></div>
+            </div>
+        </div>
+
+        <div class="modal" id="character-resource-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 data-i18n="resources.selectCharacter">여행가 선택</h2>
+                    <button class="close-btn" onclick="window.closeCharacterResourceSelect()">&times;</button>
+                </div>
+                <div class="character-grid" id="character-resource-grid"></div>
+            </div>
+        </div>
+
+        <div class="modal" id="disc-resource-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 data-i18n="resources.selectDisc">레코드 선택</h2>
+                    <button class="close-btn" onclick="window.closeDiscResourceSelect()">&times;</button>
+                </div>
+                <div class="disc-grid" id="disc-resource-grid"></div>
+            </div>
+        </div>
+
+        <div class="modal" id="character-detail-modal">
+            <div class="modal-content large-modal">
+                <div class="modal-header">
+                    <h2 id="detail-modal-title" data-i18n="resources.characterResourceCalc">여행가 자원 계산</h2>
+                    <button class="close-btn" onclick="window.closeCharacterDetailModal()">&times;</button>
+                </div>
+                <div class="modal-body" id="character-detail-content"></div>
+            </div>
+        </div>
+
+        <div class="modal" id="resource-help-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fa-solid fa-circle-info"></i> <span data-i18n="resources.helpTitle">자원 계산 방법</span>
                     </h2>
-                    <div class="header-actions">
-                        <button class="my-materials-btn" onclick="openMyMaterialsModal()">
-                            <span class="btn-icon"><i class="fa-solid fa-box-archive"></i></span>
-                            내 재료
-                        </button>
-                        <button class="clear-all-btn" onclick="clearAllResources()">
-                            <span class="btn-icon"><i class="fa-solid fa-trash-can"></i></span>
-                            전체 초기화
-                        </button>
+                    <button class="close-btn" onclick="window.closeResourceHelp()">&times;</button>
+                </div>
+                <div class="modal-body help-modal-body">
+                    <div class="help-section">
+                        <h3><i class="fa-solid fa-arrow-up-wide-short"></i> <span
+                                data-i18n="resources.helpAdvanceTitle">승급 아이템 스태미나 계산</span></h3>
+                        <p><strong data-i18n="resources.helpDailyReward">일일 임무 보상:</strong> <span
+                                data-i18n="resources.helpAdvanceDaily">Math.ceil(85 + 17 × 0.5) = 하루치 획득량 가장 낮은 재료로
+                                치환</span></p>
+                        <p><strong data-i18n="resources.helpDungeonDrop">던전 드롭:</strong> <span
+                                data-i18n="resources.helpAdvanceDungeon">Math.ceil(0.5×3×3 + 0.5×3 + 10) = 스태 30당 획득량 가장
+                                낮은 재료로 치환</span></p>
+                        <p><strong data-i18n="resources.helpDungeonRun">던전 1회 실행:</strong> <span
+                                data-i18n="resources.helpDungeonStamina">30 스태미나 소모</span></p>
+                        <p class="help-note" data-i18n="resources.helpMergeNote">💡 하위 등급 소재는 3:1 비율로 상위 등급으로 합성되는걸로 일괄
+                            치환</p>
                     </div>
-                </div>
-
-                <div class="resource-summary-content" id="resource-summary-content">
-                    <div class="empty-summary-state">
-                        <div class="empty-icon"><i class="fa-solid fa-chart-simple"></i></div>
-                        <p>선택된 여행가가 없습니다</p>
+                    <div class="help-section">
+                        <h3><i class="fa-solid fa-wand-magic-sparkles"></i> <span
+                                data-i18n="resources.helpSkillTitle">스킬 강화 아이템 스태미나 계산</span></h3>
+                        <p><strong data-i18n="resources.helpDailyReward">일일 임무 보상:</strong> <span
+                                data-i18n="resources.helpSkillDaily">Math.ceil(29.5 + 7.5 × 0.5) = 하루치 획득량 가장 낮은 재료로
+                                치환</span></p>
+                        <p><strong data-i18n="resources.helpDungeonDrop">던전 드롭:</strong> <span
+                                data-i18n="resources.helpSkillDungeon">Math.ceil(0.5×3×3 + 1.5×3 + 10) = 스태 30당 획득량 가장
+                                낮은 재료로 치환</span></p>
+                        <p><strong data-i18n="resources.helpDungeonRun">던전 1회 실행:</strong> <span
+                                data-i18n="resources.helpDungeonStamina">30 스태미나 소모</span></p>
+                        <p class="help-note" data-i18n="resources.helpMergeNote">💡 하위 등급 소재는 3:1 비율로 상위 등급으로 합성되는걸로 일괄
+                            치환</p>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Discs Tab Content (Placeholder) -->
-    <div class="resources-tab-content" id="resources-tab-discs">
-        <div class="resources-layout">
-            <!-- Disc Selection Section -->
-            <div class="character-selection-section">
-                <div class="section-header">
-                    <h2>레코드 선택</h2>
-                    <button class="add-character-btn" onclick="openDiscResourceSelect()">
-                        <span class="btn-icon"><i class="fa-solid fa-plus"></i></span>
-                        레코드 추가
-                    </button>
-                </div>
-
-                <div class="selected-characters-list" id="selected-discs-list">
-                    <div class="empty-selection-state">
-                        <div class="empty-icon"><i class="fa-regular fa-clipboard"></i></div>
-                        <p>레코드를 선택하여 자원 계산을 시작하세요</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Disc Resource Summary Section -->
-            <div class="resource-summary-section">
-                <div class="section-header">
-                    <h2>필요한 자원
-                        <button class="help-btn" onclick="showDiscResourceHelp()" title="계산 방법 보기">
-                            <i class="fa-solid fa-circle-question"></i>
-                        </button>
-                    </h2>
-                    <div class="header-actions">
-                        <button class="my-materials-btn" onclick="openMyMaterialsModal()">
-                            <span class="btn-icon"><i class="fa-solid fa-box-archive"></i></span>
-                            내 재료
-                        </button>
-                        <button class="clear-all-btn" onclick="clearAllDiscResources()">
-                            <span class="btn-icon"><i class="fa-solid fa-trash-can"></i></span>
-                            전체 초기화
-                        </button>
-                    </div>
-                </div>
-
-                <div class="resource-summary-content" id="disc-resource-summary-content">
-                    <div class="empty-summary-state">
-                        <div class="empty-icon"><i class="fa-solid fa-chart-simple"></i></div>
-                        <p>선택된 레코드가 없습니다</p>
+                    <div class="help-section">
+                        <h3><i class="fa-solid fa-calendar-days"></i> <span data-i18n="resources.helpDaysTitle">예상 일수+스테
+                                계산</span></h3>
+                        <p data-i18n="resources.helpDaysDesc">일일 임무/던전의 보너스 드랍을 모두 50%로 가정, 각종 가변 드랍수치는 다 중간값 사용</p>
+                        <p class="help-note" data-i18n="resources.helpDaysWarning">⚠️ 이 계산은 예상치이며 실제 운빨에 따라 달라질 수 있습니다
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Glance Tab Content -->
-    <div class="resources-tab-content" id="resources-tab-glance">
-        <div class="section-header">
-            <h2>여행가 육성 재료 매트릭스</h2>
-			<p class="subtitle">행: 승급 재료, 열: 스킬 재료</p>
-        </div>
-        <div id="glance-matrix-container">
-            <!-- Matrix will be rendered here by resources-glance.js -->
-			<div class="loading-overlay" id="glance-loader" style="display: none;">
-                <div class="loading-spinner">
-                    <i class="fa-solid fa-spinner fa-spin"></i>
-                    <p>매트릭스 생성 중...</p>
+        <div class="modal" id="disc-resource-help-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fa-solid fa-circle-info"></i> <span data-i18n="resources.discHelpTitle">레코드 자원 계산
+                            방법</span></h2>
+                    <button class="close-btn" onclick="window.closeDiscResourceHelp()">&times;</button>
                 </div>
-            </div>
-        </div>
-        <div class="section-header matrix-section-header">
-            <h2>캐릭터 뱃지 매트릭스</h2>
-			<p class="subtitle">행: 레벨, 열: 뱃지</p>
-        </div>
-		<div id="character-badge-matrix-container">
-		</div>
-		<div class="section-header matrix-section-header">
-            <h2>레코드 승급 매트릭스</h2>
-			<p class="subtitle">행: 속성, 열: 재료</p>
-        </div>
-		<div id="disc-advance-matrix-container">
-		</div>
-    </div>
-
-    <!-- My Materials Modal -->
-    <div class="modal" id="my-materials-modal">
-        <div class="modal-content large-modal">
-            <div class="modal-header">
-                <h2>내 재료 관리</h2>
-                <button class="close-btn" onclick="closeMyMaterialsModal()">&times;</button>
-            </div>
-            <div class="modal-body" id="my-materials-content">
-                <!-- Material inputs will be dynamically generated here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Character Selection Modal -->
-    <div class="modal" id="character-resource-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>여행가 선택</h2>
-                <button class="close-btn" onclick="closeCharacterResourceSelect()">&times;</button>
-            </div>
-            <div class="character-grid" id="character-resource-grid"></div>
-        </div>
-    </div>
-
-    <!-- Disc Selection Modal -->
-    <div class="modal" id="disc-resource-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>레코드 선택</h2>
-                <button class="close-btn" onclick="closeDiscResourceSelect()">&times;</button>
-            </div>
-            <div class="disc-grid" id="disc-resource-grid"></div>
-        </div>
-    </div>
-
-    <!-- Character Resource Detail Modal -->
-    <div class="modal" id="character-detail-modal">
-        <div class="modal-content large-modal">
-            <div class="modal-header">
-                <h2 id="detail-modal-title">여행가 자원 계산</h2>
-                <button class="close-btn" onclick="closeCharacterDetailModal()">&times;</button>
-            </div>
-            <div class="modal-body" id="character-detail-content">
-                <!-- Content will be dynamically generated -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Help Modal -->
-    <div class="modal" id="resource-help-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fa-solid fa-circle-info"></i> 자원 계산 방법</h2>
-                <button class="close-btn" onclick="closeResourceHelp()">&times;</button>
-            </div>
-            <div class="modal-body help-modal-body">
-                <div class="help-section">
-                    <h3><i class="fa-solid fa-arrow-up-wide-short"></i> 승급 아이템 스태미나 계산</h3>
-                    <p><strong>일일 임무 보상:</strong> Math.ceil(85 + 17 × 0.5) = 하루치 획득량 가장 낮은 재료로 치환</p>
-                    <p><strong>던전 드롭:</strong> Math.ceil(0.5×3×3 + 0.5×3 + 10) = 스태 30당 획득량 가장 낮은 재료로 치환</p>
-                    <p><strong>던전 1회 실행:</strong> 30 스태미나 소모</p>
-                    <p class="help-note">💡 하위 등급 소재는 3:1 비율로 상위 등급으로 합성되는걸로 일괄 치환</p>
-                </div>
-
-                <div class="help-section">
-                    <h3><i class="fa-solid fa-wand-magic-sparkles"></i> 스킬 강화 아이템 스태미나 계산</h3>
-                    <p><strong>일일 임무 보상:</strong> Math.ceil(29.5 + 7.5 × 0.5) = 하루치 획득량 가장 낮은 재료로 치환</p>
-                    <p><strong>던전 드롭:</strong> Math.ceil(0.5×3×3 + 1.5×3 + 10) = 스태 30당 획득량 가장 낮은 재료로 치환</p>
-                    <p><strong>던전 1회 실행:</strong> 30 스태미나 소모</p>
-                    <p class="help-note">💡 하위 등급 소재는 3:1 비율로 상위 등급으로 합성되는걸로 일괄 치환</p>
-                </div>
-
-                <div class="help-section">
-                    <h3><i class="fa-solid fa-calendar-days"></i> 예상 일수+스테 계산</h3>
-                    <p>일일 임무/던전의 보너스 드랍을 모두 50%로 가정, 각종 가변 드랍수치는 다 중간값 사용</p>
-                    <p class="help-note">⚠️ 이 계산은 예상치이며 실제 운빨에 따라 달라질 수 있습니다</p>
+                <div class="modal-body help-modal-body">
+                    <div class="help-section">
+                        <h3><i class="fa-solid fa-arrow-up-wide-short"></i> <span
+                                data-i18n="resources.discHelpAdvanceTitle">레코드 승급 아이템 스태미나 계산</span></h3>
+                        <p><strong data-i18n="resources.helpDailyReward">일일 임무 보상:</strong> <span
+                                data-i18n="resources.discHelpAdvanceDaily">Math.ceil(17 + 3.5 × 0.5) = 하루치 획득량 가장 낮은 재료로
+                                치환</span></p>
+                        <p><strong data-i18n="resources.helpDungeonDrop">던전 드롭:</strong> <span
+                                data-i18n="resources.discHelpAdvanceDungeon">Math.ceil(0.5×3×3 + 0.5×3 + 10) = 스태 30당
+                                획득량 가장 낮은 재료로 치환</span></p>
+                        <p><strong data-i18n="resources.helpDungeonRun">던전 1회 실행:</strong> <span
+                                data-i18n="resources.helpDungeonStamina">30 스태미나 소모</span></p>
+                        <p class="help-note" data-i18n="resources.helpMergeNote">💡 하위 등급 소재는 3:1 비율로 상위 등급으로 합성되는걸로 일괄
+                            치환</p>
+                    </div>
+                    <div class="help-section">
+                        <h3><i class="fa-solid fa-calendar-days"></i> <span data-i18n="resources.helpDaysTitle">예상 일수+스테
+                                계산</span></h3>
+                        <p data-i18n="resources.helpDaysDesc">일일 임무/던전의 보너스 드랍을 모두 50%로 가정, 각종 가변 드랍수치는 다 중간값 사용</p>
+                        <p class="help-note" data-i18n="resources.helpDaysWarning">⚠️ 이 계산은 예상치이며 실제 운빨에 따라 달라질 수 있습니다
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Disc Help Modal -->
-    <div class="modal" id="disc-resource-help-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fa-solid fa-circle-info"></i> 레코드 자원 계산 방법</h2>
-                <button class="close-btn" onclick="closeDiscResourceHelp()">&times;</button>
-            </div>
-            <div class="modal-body help-modal-body">
-                <div class="help-section">
-                    <h3><i class="fa-solid fa-arrow-up-wide-short"></i> 레코드 승급 아이템 스태미나 계산</h3>
-                    <p><strong>일일 임무 보상:</strong> Math.ceil(17 + 3.5 × 0.5) = 하루치 획득량 가장 낮은 재료로 치환</p>
-                    <p><strong>던전 드롭:</strong> Math.ceil(0.5×3×3 + 0.5×3 + 10) = 스태 30당 획득량 가장 낮은 재료로 치환</p>
-                    <p><strong>던전 1회 실행:</strong> 30 스태미나 소모</p>
-                    <p class="help-note">💡 하위 등급 소재는 3:1 비율로 상위 등급으로 합성되는걸로 일괄 치환</p>
-                </div>
+    <script type="module" src="src/pages/resources.ts"></script>
+</body>
 
-                <div class="help-section">
-                    <h3><i class="fa-solid fa-calendar-days"></i> 예상 일수+스테 계산</h3>
-                    <p>일일 임무/던전의 보너스 드랍을 모두 50%로 가정, 각종 가변 드랍수치는 다 중간값 사용</p>
-                    <p class="help-note">⚠️ 이 계산은 예상치이며 실제 운빨에 따라 달라질 수 있습니다</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+</html>

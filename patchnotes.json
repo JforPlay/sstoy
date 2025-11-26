@@ -1,5 +1,27 @@
 [
     {
+        "version": "v1.3.0",
+        "date": "2025.11.26",
+        "changes": [
+            {
+                "category": "✨ Major Update",
+                "items": [
+                    "Migrate from vanilla JS to TypeScript for better code maintainability",
+                    "Add build step for minification and optimization",
+                    "Much more UI language support for EN",
+                    "Changed mainpage, and color schemes throughout the project to match the game's theme"
+                ]
+            },
+            {
+                "category": "✨ Bug fixes",
+                "items": [
+                    "Fixed some tooltip rendering issues",
+                    "Fixed layout issues of specific potentials on mobile"
+                ]
+            }
+        ]
+    },
+    {
         "version": "v1.2.0",
         "date": "2025.11.22",
         "changes": [
