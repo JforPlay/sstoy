@@ -65,6 +65,54 @@ export function clearJSONCache(prefix = ''): void {
 }
 
 // =============================================================================
+// NAVBAR
+// =============================================================================
+
+function initNavbarToggle(): void {
+  const hamburger = document.getElementById('navbar-hamburger');
+  const menu = document.getElementById('navbar-menu');
+
+  if (!hamburger || !menu) return;
+
+  const closeMenu = (): void => {
+    menu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  };
+
+  const toggleMenu = (): void => {
+    const isOpen = !menu.classList.contains('open');
+    if (isOpen) {
+      menu.classList.add('open');
+    } else {
+      menu.classList.remove('open');
+    }
+    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  };
+
+  hamburger.addEventListener('click', toggleMenu);
+  hamburger.setAttribute('aria-expanded', 'false');
+
+  menu.querySelectorAll('a.navbar-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      // Close menu after navigation on mobile
+      closeMenu();
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      closeMenu();
+    }
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initNavbarToggle);
+} else {
+  initNavbarToggle();
+}
+
+// =============================================================================
 // DEBOUNCE
 // =============================================================================
 
