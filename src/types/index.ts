@@ -432,6 +432,11 @@ export interface ActionElement extends HTMLElement {
 // GLOBAL DECLARATIONS
 // =============================================================================
 
+type CompressionLib = Pick<
+  typeof import('fflate'),
+  'deflateSync' | 'inflateSync' | 'strToU8' | 'strFromU8'
+>;
+
 declare global {
   interface Window {
     // State objects
@@ -535,12 +540,7 @@ declare global {
     closeLoadModal?: () => void;
     
     // Compression library
-    fflate?: {
-      deflateSync: (data: Uint8Array, opts?: { level?: number; mem?: number }) => Uint8Array;
-      inflateSync: (data: Uint8Array) => Uint8Array;
-      strToU8: (str: string) => Uint8Array;
-      strFromU8: (data: Uint8Array) => string;
-    };
+    fflate?: CompressionLib;
   }
 }
 

@@ -8,6 +8,8 @@ import type { Position, MainTab, PotentialMark, Disc } from '@/types';
 import * as LZString from 'lz-string';
 import * as fflate from 'fflate';
 
+type CompressionLib = Pick<typeof fflate, 'deflateSync' | 'inflateSync' | 'strToU8' | 'strFromU8'>;
+
 // =============================================================================
 // TYPES
 // =============================================================================
@@ -67,18 +69,6 @@ interface IdMaps {
   discMap: { toIdx: Map<number, number>; fromIdx: Record<number, number> };
 }
 
-// fflate library type
-declare global {
-  interface Window {
-    fflate?: {
-      deflateSync: (data: Uint8Array, opts?: { level?: number; mem?: number }) => Uint8Array;
-      inflateSync: (data: Uint8Array) => Uint8Array;
-      strToU8: (str: string) => Uint8Array;
-      strFromU8: (data: Uint8Array) => string;
-    };
-  }
-}
-
 // Note: getIcon is available on window object
 
 // =============================================================================
@@ -117,8 +107,8 @@ export const buildState: BuildState = {
 };
 
 // Resolve compression library once to avoid optional globals
-const compressionLib = (() => {
-  const lib = typeof window !== 'undefined' ? window.fflate ?? fflate : fflate;
+const compressionLib: CompressionLib = (() => {
+  const lib = (typeof window !== 'undefined' ? window.fflate ?? fflate : fflate) as CompressionLib;
   if (typeof window !== 'undefined' && !window.fflate) {
     window.fflate = lib;
   }
@@ -997,10 +987,12 @@ function compressSharePayload(
 ): { mode: string; data: string; length: number } {
   if (!bytes || bytes.length === 0)
     return { mode: 'raw', data: '', length: 0 };
+
   const rawEncoded = base32768Encode(bytes);
   let best = { mode: 'raw', data: rawEncoded, length: rawEncoded.length };
 
-  if (canUseCompression()) {
+  // Skip deflate for tiny payloads to avoid extra work for negligible gains
+  if (bytes.length > 24 && canUseCompression()) {
     const compressed = compressionLib.deflateSync(bytes, { level: 9, mem: 8 });
     const deflated = base91Encode(compressed);
     if (deflated.length < best.length) {
