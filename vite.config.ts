@@ -53,8 +53,7 @@ export default defineConfig(({ command, mode }) => ({
         characterdb: resolve(__dirname, 'characterdb.html'),
         discdb: resolve(__dirname, 'discdb.html'),
         resources: resolve(__dirname, 'resources.html'),
-        tasks: resolve(__dirname, 'tasks.html'),
-        dmgcalc: resolve(__dirname, 'dmgcalc.html')
+        tasks: resolve(__dirname, 'tasks.html')
       },
       output: {
         manualChunks: {
