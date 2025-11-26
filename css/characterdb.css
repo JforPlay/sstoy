@@ -38,7 +38,7 @@
     left: -2px;
     right: -2px;
     bottom: -2px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     border-radius: 0.5rem;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -58,7 +58,7 @@
 .character-selector-card.selected {
     border-color: var(--primary-color);
     box-shadow: 0 0 0.75rem var(--shadow-primary-strong);
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+    background: rgba(99, 102, 241, 0.1);
 }
 
 .character-selector-img {
@@ -119,7 +119,7 @@
     grid-template-columns: 45fr 55fr;
     gap: 0;
     min-height: 28rem;
-    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-light) 100%);
+    background: var(--surface);
     border-radius: 1.25rem;
     overflow: hidden;
     box-shadow: 0 1rem 3rem var(--shadow);
@@ -132,7 +132,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 30% 50%, var(--char-theme-color) 0%, transparent 60%);
+    background: transparent;
     opacity: 0.08;
     pointer-events: none;
     z-index: 0;
@@ -151,19 +151,13 @@
     justify-content: center;
     padding: 2rem 2rem 5rem 2rem;
     overflow: hidden;
-    background: linear-gradient(135deg,
-        rgba(0, 0, 0, 0.02) 0%,
-        transparent 50%,
-        rgba(255, 255, 255, 0.03) 100%
-    );
+    background: transparent;
 }
 
 .portrait-background {
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(circle at 50% 50%, var(--char-theme-color) 0%, transparent 70%),
-        linear-gradient(45deg, transparent 30%, var(--char-theme-color) 100%);
+    background: transparent;
     opacity: 0.12;
     filter: blur(3rem);
     animation: breathe 6s ease-in-out infinite;
@@ -231,10 +225,7 @@
     flex-direction: column;
     padding: 2rem 2rem 2rem 1.5rem;
     gap: 1.5rem;
-    background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.05) 0%,
-        rgba(255, 255, 255, 0.02) 100%
-    );
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(0.5rem);
     border-left: 2px solid rgba(255, 255, 255, 0.1);
     position: relative;
@@ -598,7 +589,7 @@
 }
 
 .char-type-btn.active {
-    background: linear-gradient(135deg, var(--char-theme-color), rgba(255, 255, 255, 0.3));
+    background: var(--char-theme-color);
     color: white;
     border-color: var(--char-theme-color);
     box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.4);
@@ -630,7 +621,7 @@
 
 /* New Gallery Card Design */
 .char-img-wrapper-new {
-    background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+    background: var(--surface-light);
     border-radius: 1rem;
     overflow: hidden;
     border: 3px solid var(--border);
@@ -646,7 +637,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+    background: rgba(99, 102, 241, 0.15);
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
@@ -687,7 +678,7 @@
     height: auto;
     display: block;
     object-fit: contain;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+    background: rgba(99, 102, 241, 0.05);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 1rem;
     min-height: 12rem;
@@ -834,7 +825,7 @@
 }
 
 .level-control {
-    background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+    background: var(--surface-light);
     padding: 1.125rem;
     border-radius: 0.625rem;
     margin-bottom: 1rem;
@@ -859,10 +850,7 @@
 }
 
 .level-display {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
     font-size: 1.25rem;
     font-weight: 800;
 }
@@ -873,7 +861,7 @@
     gap: 0.375rem;
     margin-left: 0.75rem;
     padding: 0.375rem 0.75rem;
-    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(239, 68, 68, 0.2));
+    background: rgba(245, 158, 11, 0.2);
     border: 2px solid var(--accent);
     border-radius: 0.5rem;
     font-size: 0.813rem;
@@ -908,7 +896,7 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     cursor: pointer;
     box-shadow: 0 0.25rem 0.75rem var(--shadow-primary-medium);
     transition: transform 0.2s ease;
@@ -922,7 +910,7 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     cursor: pointer;
     border: none;
     box-shadow: 0 0.25rem 0.75rem var(--shadow-primary-medium);
@@ -940,7 +928,7 @@
 }
 
 .stat-card {
-    background: linear-gradient(135deg, var(--surface-light) 0%, rgba(99, 102, 241, 0.03) 100%);
+    background: var(--surface-light);
     padding: 1.25rem;
     border-radius: 0.75rem;
     border: 2px solid var(--border);
@@ -959,7 +947,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -1004,11 +992,7 @@
 .stat-value {
     font-size: 1.5rem;
     font-weight: 900;
-    color: var(--text-primary);
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
     line-height: 1;
 }
 
@@ -1046,12 +1030,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+    background: rgba(99, 102, 241, 0.05);
     transition: background 0.3s ease;
 }
 
 .archive-header:hover {
-    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
+    background: rgba(99, 102, 241, 0.15);
 }
 
 .archive-title {
@@ -1096,7 +1080,7 @@
 .archive-update-notice {
     margin-top: 0.75rem;
     padding: 0.75rem;
-    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1));
+    background: rgba(245, 158, 11, 0.1);
     border-left: 3px solid var(--accent);
     border-radius: 0.375rem;
     color: var(--text-secondary);
@@ -1140,7 +1124,7 @@
 }
 
 .dating-card {
-    background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+    background: var(--surface-light);
     border-radius: 0.625rem;
     border: 2px solid var(--border);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1157,7 +1141,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #f472b6, #ec4899, #db2777);
+    background: #ec4899;
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -1177,7 +1161,7 @@
     overflow: hidden;
     border-bottom: 2px solid var(--border);
     position: relative;
-    background: linear-gradient(135deg, rgba(244, 114, 182, 0.1), rgba(139, 92, 246, 0.1));
+    background: rgba(244, 114, 182, 0.1);
 }
 
 .dating-cg-img {
@@ -1220,7 +1204,7 @@
 }
 
 .dating-answer {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15));
+    background: rgba(16, 185, 129, 0.15);
     padding: 0.625rem 0.875rem;
     margin: 0 0.625rem 0.625rem;
     border-radius: 0.375rem;
@@ -1239,7 +1223,7 @@
 
 /* Chat Lines Container */
 .chat-lines-container {
-    background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+    background: var(--surface-light);
     border-radius: 0.625rem;
     border: 2px solid var(--border);
     padding: 0.875rem;
@@ -1259,7 +1243,7 @@
 }
 
 .chat-line-item {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(236, 72, 153, 0.08));
+    background: rgba(124, 58, 237, 0.08);
     border-left: 3px solid var(--primary-color);
     padding: 0.75rem;
     margin-bottom: 0.625rem;
@@ -1272,7 +1256,7 @@
 }
 
 .chat-line-item:hover {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(236, 72, 153, 0.12));
+    background: rgba(124, 58, 237, 0.15);
     transform: translateX(0.25rem);
 }
 
@@ -1527,7 +1511,7 @@
     gap: 1.5rem;
     margin-bottom: 1.5rem;
     padding: 1.25rem;
-    background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+    background: var(--surface-light);
     border-radius: 0.875rem;
     border: 2px solid var(--border);
     flex-wrap: wrap;
@@ -1568,7 +1552,7 @@
 }
 
 .potential-type-btn.active {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
     box-shadow: 0 0.5rem 1.5rem var(--shadow-primary-strong);
@@ -1606,10 +1590,7 @@
 }
 
 .potential-level-display {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
     font-size: 1.375rem;
     font-weight: 900;
 }
@@ -1636,7 +1617,7 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     cursor: pointer;
     box-shadow: 0 0.25rem 0.75rem var(--shadow-primary-medium);
     transition: transform 0.2s ease;
@@ -1650,7 +1631,7 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     cursor: pointer;
     border: none;
     box-shadow: 0 0.25rem 0.75rem var(--shadow-primary-medium);
@@ -1716,9 +1697,7 @@
     padding: 1rem 1.5rem;
     margin-top: 1.5rem;
     margin-bottom: 0.75rem;
-    background: linear-gradient(135deg,
-        rgba(99, 102, 241, 0.15) 0%,
-        rgba(139, 92, 246, 0.15) 100%);
+    background: rgba(99, 102, 241, 0.15);
     border-left: 4px solid var(--primary-color);
     border-radius: 0.5rem;
     box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
@@ -1730,9 +1709,7 @@
 }
 
 .potential-build-header:hover {
-    background: linear-gradient(135deg,
-        rgba(99, 102, 241, 0.2) 0%,
-        rgba(139, 92, 246, 0.2) 100%);
+    background: rgba(99, 102, 241, 0.25);
     box-shadow: 0 0.375rem 1rem rgba(99, 102, 241, 0.2);
     transform: translateX(0.25rem);
 }
@@ -1821,7 +1798,7 @@
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+    background: var(--surface-light);
     border-right: 3px solid var(--border);
 }
 
@@ -1892,11 +1869,11 @@
 /* Parameter value styling (from app-char.css) */
 .potentials-display .param-value {
     font-weight: 700;
-    color: var(--accent);
+    color: var(--pastel-pink);
 }
 
 .potentials-display .param-no-level {
-    color: #10b981;
+    color: var(--sky-blue)
 }
 
 .potentials-display .param-red {
@@ -1911,7 +1888,7 @@
 }
 
 .potentials-display .potential-card:hover .potential-card-header {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, var(--surface-light) 100%);
+    background: rgba(99, 102, 241, 0.1);
     border-right-color: var(--primary-color);
 }
 
@@ -2289,12 +2266,12 @@
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+    background: var(--surface-light);
     border-right: 3px solid var(--border);
 }
 
 .skill-card:hover .skill-card-header {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, var(--surface-light) 100%);
+    background: rgba(99, 102, 241, 0.1);
     border-right-color: var(--primary-color);
 }
 
@@ -2431,12 +2408,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 1.25rem;
-    background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+    background: var(--surface-light);
     border-bottom: 2px solid var(--border);
 }
 
 .talent-section:hover .talent-section-header {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, var(--surface-light) 100%);
+    background: rgba(99, 102, 241, 0.1);
     border-bottom-color: var(--primary-color);
 }
 

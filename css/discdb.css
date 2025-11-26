@@ -756,8 +756,16 @@
 }
 
 .skill-description .param-value {
-    color: var(--accent);
+    color: var(--pastel-pink);
     font-weight: 700;
+}
+
+.skill-description .param-no-level {
+    color: var(--sky-blue);
+}
+
+.skill-description .param-red {
+    color: #ef4444; /* Red color for unsupported LevelData values */
 }
 
 .skill-description .element-tag {

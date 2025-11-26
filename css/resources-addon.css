@@ -223,23 +223,24 @@
    ============================================================================ */
 
 .my-materials-btn {
-    background-color: var(--primary-color-translucent, rgba(139, 92, 246, 0.2));
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
+    background-color: var(--mint-green);
+    border: none;
+    color: white;
     padding: 8px 12px;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: 600;
     display: inline-flex;
     align-items: center;
     gap: 8px;
 }
 
 .my-materials-btn:hover {
-    background-color: var(--primary-color);
-    color: white;
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(126, 215, 193, 0.3);
 }
 
 /* My Materials Modal Content */
