@@ -1527,10 +1527,10 @@ function assignBestPartialTeam(
         if (seenTags.has(tag)) return;
         seenTags.add(tag);
 
-        if (remainingRequired[tag] > 0) {
+        if ((remainingRequired[tag] || 0) > 0) {
           requiredHits++;
           rarityBonus += tagRarity[tag]?.rarity || 0;
-        } else if (remainingExtra[tag] > 0) {
+        } else if ((remainingExtra[tag] || 0) > 0) {
           extraHits++;
           rarityBonus += (tagRarity[tag]?.rarity || 0) * 0.5;
         }
@@ -1539,14 +1539,14 @@ function assignBestPartialTeam(
       if (requiredHits === 0) return;
 
       const futureValue = charTags.reduce((sum, tag) => {
-        if (remainingRequired[tag] > 0) return sum + 2;
-        if (remainingExtra[tag] > 0) return sum + 1;
+        if ((remainingRequired[tag] || 0) > 0) return sum + 2;
+        if ((remainingExtra[tag] || 0) > 0) return sum + 1;
         return sum;
       }, 0);
 
       const externalExtraPenalty = charTags.reduce((sum, tag) => {
-        if (remainingExtra[tag] > 0) return sum;
-        if (globalExtraDemand[tag] > 0) return sum + 1;
+        if ((remainingExtra[tag] || 0) > 0) return sum;
+        if ((globalExtraDemand[tag] || 0) > 0) return sum + 1;
         return sum;
       }, 0);
 
@@ -1576,10 +1576,10 @@ function assignBestPartialTeam(
       if (seenTags.has(tag)) return;
       seenTags.add(tag);
 
-      if (remainingRequired[tag] > 0) {
-        remainingRequired[tag]--;
-      } else if (remainingExtra[tag] > 0) {
-        remainingExtra[tag]--;
+      if ((remainingRequired[tag] || 0) > 0) {
+        remainingRequired[tag] = (remainingRequired[tag] || 0) - 1;
+      } else if ((remainingExtra[tag] || 0) > 0) {
+        remainingExtra[tag] = (remainingExtra[tag] || 0) - 1;
       }
     });
 
@@ -1603,6 +1603,15 @@ function assignBestPartialTeam(
       extraCoverageByTag[tag] = covered;
     }
   });
+  const baseCoverageByTag: Record<number, number> = {};
+  requiredTags.forEach((tag) => {
+    const needed = tagCounts.required[tag] || 0;
+    const remaining = remainingRequired[tag] || 0;
+    const covered = Math.max(0, needed - remaining);
+    if (covered > 0) {
+      baseCoverageByTag[tag] = covered;
+    }
+  });
 
   return {
     chars: selectedChars,
@@ -1610,6 +1619,7 @@ function assignBestPartialTeam(
     extrasFull: requiredComplete && extrasComplete,
     extraSlotsCovered,
     extraCoverageByTag,
+    baseCoverageByTag,
     size: selectedChars.length,
     rarityBonus: 0,
   };
@@ -1815,6 +1825,7 @@ function autoFillCharacters(): void {
     remainingResult.assignment.forEach((team, idx) => {
       if (!team) return;
       const taskInfo = remainingBaseInfos[idx];
+      if (!taskInfo) return;
       applyAutoAssignmentForTask(taskInfo, team);
       team.charIds.forEach((id) => usedCharIds.add(id));
       greedyCompletedTaskIds.add(taskInfo.id);

@@ -26,7 +26,7 @@
 .header-title h1 {
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(--primary-color);
     margin: 0 0 0.25rem 0;
     display: flex;
     align-items: center;
@@ -79,6 +79,7 @@
 .task-pool {
     background: var(--surface);
     border-right: 2px solid var(--border);
+    border-radius: 1rem 0 0 1rem;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -300,7 +301,7 @@
     flex-direction: column;
     overflow-y: auto;
     background: var(--bg-primary);
-    padding: 1.5rem;
+    padding: 0 1.5rem 1.5rem 1.5rem;
     gap: 1.5rem;
 }
 
@@ -433,6 +434,25 @@
     margin-bottom: 0.5rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--border);
+}
+
+.selected-task-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.task-active-badge {
+    background: var(--sky-blue);
+    color: #0b1220;
+    font-weight: 700;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 999px;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1;
 }
 
 .selected-task-info {
