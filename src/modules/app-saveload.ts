@@ -6,6 +6,7 @@
 import { fetchJSON, log, onLanguageChange, showToast } from '@/shared';
 import type { Position, MainTab, PotentialMark, Disc } from '@/types';
 import * as LZString from 'lz-string';
+import * as fflate from 'fflate';
 
 // =============================================================================
 // TYPES
@@ -115,18 +116,25 @@ export const buildState: BuildState = {
   buildMemo: '',
 };
 
+// Resolve compression library once to avoid optional globals
+const compressionLib = (() => {
+  const lib = typeof window !== 'undefined' ? window.fflate ?? fflate : fflate;
+  if (typeof window !== 'undefined' && !window.fflate) {
+    window.fflate = lib;
+  }
+  return lib;
+})();
+
 // =============================================================================
 // UTILITY FUNCTIONS
 // =============================================================================
 
-function canUseFflate(): boolean {
-  const lib = window.fflate;
-  return !!(
-    lib &&
-    typeof lib.deflateSync === 'function' &&
-    typeof lib.inflateSync === 'function' &&
-    typeof lib.strToU8 === 'function' &&
-    typeof lib.strFromU8 === 'function'
+function canUseCompression(): boolean {
+  return (
+    typeof compressionLib.deflateSync === 'function' &&
+    typeof compressionLib.inflateSync === 'function' &&
+    typeof compressionLib.strToU8 === 'function' &&
+    typeof compressionLib.strFromU8 === 'function'
   );
 }
 
@@ -137,16 +145,16 @@ function toNum(value: unknown): number {
 
 function stringToBytes(str: string): Uint8Array {
   if (!str) return new Uint8Array(0);
-  if (canUseFflate()) {
-    return window.fflate!.strToU8(str);
+  if (canUseCompression()) {
+    return compressionLib.strToU8(str);
   }
   return new TextEncoder().encode(str);
 }
 
 function bytesToString(bytes: Uint8Array): string {
   if (!bytes || bytes.length === 0) return '';
-  if (canUseFflate()) {
-    return window.fflate!.strFromU8(bytes);
+  if (canUseCompression()) {
+    return compressionLib.strFromU8(bytes);
   }
   return new TextDecoder().decode(bytes);
 }
@@ -992,8 +1000,8 @@ function compressSharePayload(
   const rawEncoded = base32768Encode(bytes);
   let best = { mode: 'raw', data: rawEncoded, length: rawEncoded.length };
 
-  if (canUseFflate()) {
-    const compressed = window.fflate!.deflateSync(bytes, { level: 9, mem: 8 });
+  if (canUseCompression()) {
+    const compressed = compressionLib.deflateSync(bytes, { level: 9, mem: 8 });
     const deflated = base91Encode(compressed);
     if (deflated.length < best.length) {
       best = { mode: 'deflate', data: deflated, length: deflated.length };
@@ -1009,11 +1017,11 @@ function decompressSharePayload(input: string, mode: string): Uint8Array {
     return base32768Decode(input);
   }
   if (mode === 'deflate') {
-    if (!canUseFflate()) {
+    if (!canUseCompression()) {
       throw new Error('fflate not available for decompression');
     }
     const bytes = base91Decode(input);
-    return window.fflate!.inflateSync(bytes);
+    return compressionLib.inflateSync(bytes);
   }
   throw new Error('Unknown share payload mode');
 }
