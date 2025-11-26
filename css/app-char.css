@@ -9,25 +9,8 @@ html {
     font-size: 16px; /* 1rem = 16px on desktop */
 }
 
+/* Colors are now inherited from global utils.css */
 :root {
-    --primary-color: #6366f1;
-    --secondary-color: #8b5cf6;
-    --background: #0f172a;
-    --surface: #1e293b;
-    --surface-light: #334155;
-    --text-primary: #f1f5f9;
-    --text-secondary: #cbd5e1;
-    --border: #475569;
-    --accent: #f59e0b;
-    --success: #10b981;
-    --danger: #ef4444;
-    --shadow: rgba(0, 0, 0, 0.3);
-    
-    /* Shadow variations for consistency */
-    --shadow-primary-light: rgba(99, 102, 241, 0.3);
-    --shadow-primary-medium: rgba(99, 102, 241, 0.4);
-    --shadow-primary-strong: rgba(99, 102, 241, 0.5);
-    
     /* Common sizes */
     --icon-size-sm: 1rem;
     --icon-size-md: 2rem;
@@ -37,7 +20,7 @@ html {
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-display: swap; /* Prevent FOIT (Flash of Invisible Text) */
-    background: linear-gradient(135deg, var(--background) 0%, #1a1f35 100%);
+    background: var(--background);
     color: var(--text-primary);
     min-height: 100vh;
     padding: 0;
@@ -60,10 +43,7 @@ header {
 
 h1 {
     font-size: 2.25rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
     margin-bottom: 0.5rem;
 }
 
@@ -116,7 +96,7 @@ h1 {
 }
 
 .compact-main-tab.active {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     color: var(--text-primary);
     border-color: var(--accent);
     box-shadow: 0 0.25rem 1.25rem var(--shadow-primary-strong);
@@ -235,7 +215,7 @@ h1 {
 }
 
 .main-tab-button.active {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     color: var(--text-primary);
     border-color: var(--accent);
     box-shadow: 0 8px 28px var(--shadow-primary-strong);
@@ -308,7 +288,7 @@ h1 {
 }
 
 .tab-button.active {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     color: var(--text-primary);
     border-color: var(--accent);
     box-shadow: 0 4px 12px var(--shadow-primary-medium);
@@ -388,12 +368,34 @@ h1 {
 
 .potential-section-title {
     width: 100%;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--accent);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--sky-blue);
     margin-bottom: 0.75rem;
     padding-bottom: 8px;
     border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .potential-section-title {
+    color: var(--mint-green);
+}
+
+.potential-section-title::before {
+    content: '';
+    width: 4px;
+    height: 20px;
+    background: var(--sky-blue);
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(107, 155, 209, 0.3);
+}
+
+[data-theme="dark"] .potential-section-title::before {
+    background: var(--mint-green);
+    box-shadow: 0 2px 4px rgba(126, 215, 193, 0.3);
 }
 
 .specific-potentials-section .potential-card {
@@ -459,7 +461,7 @@ h1 {
 
 .slot-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     margin-bottom: 1rem;
     gap: 1rem;
@@ -482,7 +484,7 @@ h1 {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: var(--surface-light);
+    background: var(--surface);
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     border: 1px solid var(--border);
@@ -519,16 +521,17 @@ h1 {
 }
 
 .character-score-display {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    padding: 0.5rem 1rem;
-    border-radius: 0.75rem;
+    background: var(--primary-color);
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
     font-size: 1rem;
     font-weight: 700;
     color: white;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 2px 8px rgba(107, 155, 209, 0.3);
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    height: 2.5rem;
 }
 
 .character-score-display .score-label {
@@ -543,12 +546,12 @@ h1 {
 
 /* Disc Score Display */
 .disc-score-banner {
-    background: linear-gradient(135deg, #6a4c93 0%, #5a3c83 100%);
+    background: var(--lavender);
     color: white;
     padding: 16px 24px;
     border-radius: 10px;
     margin: 0 0 20px 0;
-    box-shadow: 0 4px 12px rgba(106, 76, 147, 0.4);
+    box-shadow: 0 4px 12px rgba(197, 184, 224, 0.4);
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -592,7 +595,7 @@ h1 {
 }
 
 .position-badge {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     padding: 0.375rem 16px;
     border-radius: 1.25rem;
     font-size: 0.85rem;
@@ -608,16 +611,21 @@ h1 {
     flex-direction: column;
     align-items: center;
     margin-bottom: 0;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
-    border: 2px solid transparent;
+    border: 2px solid var(--border);
     width: 100%;
 }
 
+[data-theme="dark"] .character-card {
+    background: rgba(20, 20, 20, 0.5);
+}
+
 .character-card:hover {
-    border-color: var(--primary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px var(--shadow-primary-medium);
+    border-color: var(--sky-blue);
+    border-width: 3px;
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 3px rgba(107, 155, 209, 0.1), 0 4px 12px rgba(107, 155, 209, 0.2);
 }
 
 .character-card:hover .empty-state {
@@ -667,7 +675,7 @@ h1 {
 .change-character-btn,
 .remove-character-btn {
     flex: 1;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent));
+    background: var(--primary-color);
     color: white;
     border: none;
     padding: 0.625rem 16px;
@@ -680,11 +688,11 @@ h1 {
     justify-content: center;
     gap: 0.5rem;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px var(--shadow-primary-light);
+    box-shadow: 0 2px 8px rgba(107, 155, 209, 0.3);
 }
 
 .remove-character-btn {
-    background: linear-gradient(135deg, var(--danger), #b91c1c);
+    background: var(--danger);
 }
 
 .change-character-btn:hover,
@@ -738,7 +746,7 @@ h1 {
     width: 100%;
     justify-content: center;
     margin-bottom: 0.75rem;
-    background: var(--background);
+    background: var(--surface);
     padding: 0.5rem;
     border-radius: 0.375rem;
 }
@@ -787,23 +795,24 @@ h1 {
 
 .character-stats-enhanced .stat-label {
     color: var(--text-primary);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.3px;
 }
 
 .character-stats-enhanced .stat-value {
     color: var(--text-secondary);
-    font-size: 0.75rem;
-    font-weight: 500;
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
 .element-icon-inline {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     object-fit: contain;
     display: inline-block;
     vertical-align: middle;
+    margin: 0 2px;
 }
 
 .character-skills {
@@ -814,20 +823,21 @@ h1 {
 .skills-title {
     font-size: 0.85rem;
     font-weight: 700;
-    color: var(--accent);
+    color: var(--sky-blue);
     margin-bottom: 0.5rem;
-    border-bottom: 2px solid var(--accent);
+    border-bottom: 2px solid var(--sky-blue);
     padding-bottom: 4px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .skill-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.625rem;
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 0.5rem 0.75rem;
     font-size: 0.75rem;
-    padding: 0.625rem;
+    padding: 0.75rem;
     background: var(--surface);
     border-radius: 0.5rem;
     margin-bottom: 0.5rem;
@@ -848,6 +858,8 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    grid-row: 1;
+    grid-column: 1;
 }
 
 .skill-icon-bg {
@@ -868,55 +880,64 @@ h1 {
 }
 
 .skill-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    flex: 1;
-    min-width: 0;
+    display: contents;
 }
 
 .skill-title {
     color: var(--primary-color);
     font-weight: 600;
-    font-size: 0.8rem;
-    margin-bottom: 2px;
+    font-size: 0.875rem;
+    grid-row: 1;
+    grid-column: 2;
+    display: flex;
+    align-items: center;
 }
 
 .skill-desc {
-    color: var(--text-secondary);
-    font-size: 0.7rem;
-    line-height: 1.4;
-    margin-bottom: 4px;
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    grid-row: 2;
+    grid-column: 1 / -1;
 }
 
 .param-value {
     font-weight: 700;
-    color: var(--accent);
+    color: var(--pastel-pink);
 }
 
 .param-no-level {
-    color: #10b981; /* Green color for NoLevel parameters */
+    color: var(--sky-blue);
+    font-weight: 700;
 }
 
 .param-red {
-    color: #ef4444; /* Red color for unsupported LevelData values */
+    color: var(--danger);
+    font-weight: 700;
 }
 
 .skill-header {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+    gap: 0.75rem;
+    grid-row: 3;
+    grid-column: 1 / -1;
 }
 
 .skill-label {
-    color: var(--accent);
-    font-weight: 500;
-    font-size: 0.65rem;
+    color: var(--sky-blue);
+    font-weight: 600;
+    font-size: 0.75rem;
     background: var(--surface-light);
-    padding: 3px 8px;
+    padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
     white-space: nowrap;
+    border: 1px solid var(--border-light);
+}
+
+[data-theme="dark"] .skill-label {
+    background: rgba(30, 30, 30, 0.4);
 }
 
 .skill-level-selector {
@@ -928,8 +949,8 @@ h1 {
 
 .skill-level-label {
     color: var(--text-secondary);
-    font-size: 0.75rem;
-    font-weight: 500;
+    font-size: 0.8rem;
+    font-weight: 600;
     margin: 0;
 }
 
@@ -963,27 +984,50 @@ h1 {
 }
 
 .description-toggle-wrapper {
-    margin-bottom: 1rem;
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    gap: 0.75rem;
+    margin-left: auto;
+}
+
+.description-toggle-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    white-space: nowrap;
 }
 
 .description-toggle {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    border: none;
-    padding: 0.5rem 20px;
+    background: var(--surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1.25rem;
     border-radius: 0.5rem;
     cursor: pointer;
     font-size: 0.85rem;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 2px 8px var(--shadow);
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+[data-theme="dark"] .description-toggle {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    box-shadow: 0 2px 8px rgba(107, 155, 209, 0.3);
 }
 
 .description-toggle:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.5);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+[data-theme="dark"] .description-toggle:hover {
+    box-shadow: 0 4px 12px rgba(107, 155, 209, 0.4);
 }
 
 .description-toggle:active {
@@ -996,20 +1040,31 @@ h1 {
 
 .potential-category-title {
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 0.75rem;
-    color: var(--accent);
+    color: var(--sky-blue);
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .potential-category-title {
+    color: var(--mint-green);
 }
 
 .potential-category-title::before {
     content: '';
     width: 4px;
     height: 20px;
-    background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+    background: var(--sky-blue);
     border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(107, 155, 209, 0.3);
+}
+
+[data-theme="dark"] .potential-category-title::before {
+    background: var(--mint-green);
+    box-shadow: 0 2px 4px rgba(126, 215, 193, 0.3);
 }
 
 .potential-cards-grid {
@@ -1031,15 +1086,20 @@ h1 {
 }
 
 .potential-card {
-    background: var(--surface-light);
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 0.625rem;
     overflow: hidden;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
+    border: 2px solid var(--border);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     display: flex;
     flex-direction: column;
     position: relative;
+    backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .potential-card {
+    background: rgba(20, 20, 20, 0.4);
 }
 
 /* Build Badge */
@@ -1047,7 +1107,7 @@ h1 {
     position: absolute;
     top: 8px;
     right: 8px;
-    color: white;
+    color: #000000;
     font-size: 0.7rem;
     font-weight: 700;
     padding: 4px 10px;
@@ -1057,12 +1117,16 @@ h1 {
     letter-spacing: 0.5px;
 }
 
+[data-theme="dark"] .build-badge {
+    color: #000000;
+}
+
 /* Score Badge */
 .score-badge {
     position: absolute;
     top: 8px;
     left: 8px;
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    background: var(--primary-color);
     color: white;
     font-size: 0.75rem;
     font-weight: 700;
@@ -1075,25 +1139,33 @@ h1 {
 
 /* Different colors for each build */
 .potential-card[data-build="1"] .build-badge {
-    background: linear-gradient(135deg, #f59e0b, #f97316);
+    background: var(--peach);
 }
 
 .potential-card[data-build="2"] .build-badge {
-    background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+    background: var(--lavender);
 }
 
 .potential-card[data-build="3"] .build-badge {
-    background: linear-gradient(135deg, #10b981, #34d399);
+    background: var(--mint-green);
 }
 
 .potential-card:hover {
-    border-color: var(--secondary-color);
-    transform: translateY(-2px);
+    border-color: var(--pastel-pink);
+    border-width: 3px;
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 3px rgba(232, 138, 173, 0.1), 0 4px 12px rgba(232, 138, 173, 0.2);
 }
 
 .potential-card.selected {
-    border-color: var(--success);
-    background: rgba(16, 185, 129, 0.1);
+    border-color: var(--mint-green);
+    border-width: 3px;
+    background: rgba(126, 215, 193, 0.08);
+    box-shadow: 0 0 0 3px rgba(126, 215, 193, 0.15), var(--shadow-soft);
+}
+
+[data-theme="dark"] .potential-card.selected {
+    background: rgba(143, 217, 207, 0.12);
 }
 
 .potential-card-header {
@@ -1185,7 +1257,7 @@ h1 {
 
 .potential-level-label {
     color: var(--text-secondary);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 600;
     text-align: center;
 }
@@ -1255,65 +1327,84 @@ h1 {
 }
 
 .potential-card-desc {
-    color: var(--text-secondary);
-    font-size: 0.75rem;
-    line-height: 1.4;
-    background: var(--surface);
-    padding: 0.5rem;
-    border-radius: 0.375rem;
-    border-left: 3px solid var(--primary-color);
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    background: var(--surface-light);
+    padding: 0.75rem 0.5rem;
+    border-radius: 0.5rem;
     min-height: 3em;
+    letter-spacing: 0.01em;
+    word-spacing: 0.05em;
+}
+
+[data-theme="dark"] .potential-card-desc {
+    background: rgba(40, 40, 40, 0.6);
+    color: var(--text-primary);
 }
 
 .buff-metadata {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 8px;
-    padding: 0.5rem;
+    gap: 0.625rem;
+    margin-top: 10px;
+    padding: 0.75rem;
     background: var(--surface-light);
-    border-radius: 0.375rem;
-    font-size: 0.7rem;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    border: 1px solid var(--border-light);
+}
+
+[data-theme="dark"] .buff-metadata {
+    background: rgba(30, 30, 30, 0.4);
 }
 
 .buff-meta-item {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.375rem;
 }
 
 .buff-meta-label {
     color: var(--text-secondary);
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 0.75rem;
 }
 
 .buff-meta-value {
     color: var(--accent);
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .potential-card-details {
     display: grid;
-    gap: 0.25rem;
+    gap: 0.375rem;
 }
 
 .potential-detail-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.7rem;
-    padding: 3px 6px;
-    background: var(--surface);
-    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    padding: 0.375rem 0.5rem;
+    background: var(--surface-light);
+    border-radius: 0.375rem;
+    border: 1px solid var(--border-light);
+}
+
+[data-theme="dark"] .potential-detail-row {
+    background: rgba(30, 30, 30, 0.4);
 }
 
 .potential-detail-label {
     color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.75rem;
 }
 
 .potential-detail-value {
     color: var(--text-primary);
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .modal {
@@ -1617,9 +1708,9 @@ h1 {
 
 @media (max-width: 480px) {
     .specific-potentials-section .potential-card {
-        flex: 0 1 100%;
+        flex: 0 1 calc(50% - 8px);
     }
-    
+
     .normal-common-grid {
         grid-template-columns: repeat(3, 1fr);
     }

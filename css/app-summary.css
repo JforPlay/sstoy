@@ -38,25 +38,32 @@
 }
 
 .summary-card {
-    background: var(--surface);
+    background: rgba(255, 255, 255, 0.7);
     border-radius: 1rem;
     padding: 1.5rem;
-    box-shadow: 0 0.25rem 1.25rem var(--shadow);
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
+    box-shadow: var(--shadow-soft);
+    border: 3px solid var(--border);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .summary-card {
+    background: rgba(20, 20, 20, 0.6);
 }
 
 .summary-card:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0 0.5rem 28px var(--shadow);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
 }
 
 .summary-card.master-summary {
-    border-color: var(--accent);
+    border-color: var(--mint-green);
+    box-shadow: 0 0 0 3px rgba(126, 215, 193, 0.12), var(--shadow-soft);
 }
 
 .summary-card.assist-summary {
-    border-color: var(--primary-color);
+    border-color: var(--sky-blue);
+    box-shadow: 0 0 0 3px rgba(107, 155, 209, 0.12), var(--shadow-soft);
 }
 
 .summary-card-badge {
@@ -71,12 +78,12 @@
 }
 
 .master-badge {
-    background: linear-gradient(135deg, var(--accent), #f97316);
+    background: var(--peach);
     color: white;
 }
 
 .assist-badge {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     color: white;
 }
 
@@ -132,16 +139,23 @@
 }
 
 .summary-skills, .summary-potentials {
-    background: var(--surface-light);
+    background: rgba(255, 255, 255, 0.4);
     border-radius: 0.625rem;
     padding: 1rem;
+    border: 2px solid var(--border-light);
+    backdrop-filter: blur(4px);
+}
+
+[data-theme="dark"] .summary-skills,
+[data-theme="dark"] .summary-potentials {
+    background: rgba(30, 30, 30, 0.3);
 }
 
 /* Skill level badge for specific potentials */
 .potential-level-compact.skill-level {
-    color: #8b5cf6;
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(168, 85, 247, 0.1));
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    color: var(--lavender);
+    background: rgba(197, 184, 224, 0.15);
+    border: 1px solid rgba(197, 184, 224, 0.3);
     font-weight: 700;
 }
 
@@ -285,16 +299,21 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.625rem 0.75rem;
-    background: var(--surface-light);
+    background: rgba(255, 255, 255, 0.6);
     border-radius: 0.5rem;
     margin-bottom: 0.5rem;
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(4px);
+}
+
+[data-theme="dark"] .summary-potential-item {
+    background: rgba(30, 30, 30, 0.4);
 }
 
 .summary-potential-item:hover {
-    background: var(--surface);
+    background: rgba(107, 155, 209, 0.08);
     border-color: var(--primary-color);
     transform: translateX(4px);
 }
@@ -329,19 +348,19 @@
 }
 
 .potential-mark-badge.essential {
-    background: linear-gradient(135deg, #ef4444, #dc2626);
+    background: var(--danger);
 }
 
 .potential-mark-badge.recommended {
-    background: linear-gradient(135deg, #078a0d, #025302);
+    background: var(--mint-green);
 }
 
 .potential-mark-badge.level-one {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    background: var(--lavender);
 }
 
 .potential-mark-badge.low-priority {
-    background: linear-gradient(135deg, #6b7280, #4b5563);
+    background: #6b7280;
 }
 
 .potential-level-compact {
@@ -514,7 +533,7 @@
 
 /* Build Stats Highlight */
 .build-stat-card.highlight {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
 }
 
 .build-stat-card.highlight .build-stat-icon,
@@ -604,13 +623,13 @@
 }
 
 .notes-subsection-title.used {
-    background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(22, 163, 74, 0.15));
-    color: #22c55e;
-    border-left: 3px solid #22c55e;
+    background: rgba(126, 215, 193, 0.15);
+    color: var(--mint-green);
+    border-left: 3px solid var(--mint-green);
 }
 
 .notes-subsection-title.unused {
-    background: linear-gradient(135deg, rgba(156, 163, 175, 0.15), rgba(107, 114, 128, 0.15));
+    background: rgba(156, 163, 175, 0.15);
     color: #9ca3af;
     border-left: 3px solid #9ca3af;
 }
@@ -698,13 +717,13 @@
 }
 
 .notes-compact-title.used {
-    background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(22, 163, 74, 0.15));
-    color: #22c55e;
-    border-left: 3px solid #22c55e;
+    background: rgba(126, 215, 193, 0.15);
+    color: var(--mint-green);
+    border-left: 3px solid var(--mint-green);
 }
 
 .notes-compact-title.unused {
-    background: linear-gradient(135deg, rgba(156, 163, 175, 0.15), rgba(107, 114, 128, 0.15));
+    background: rgba(156, 163, 175, 0.15);
     color: #9ca3af;
     border-left: 3px solid #9ca3af;
 }
@@ -735,8 +754,8 @@
 }
 
 .note-compact-card.used {
-    border-color: #22c55e;
-    background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(22, 163, 74, 0.05));
+    border-color: var(--mint-green);
+    background: rgba(126, 215, 193, 0.05);
 }
 
 .note-compact-card.unused {
@@ -996,9 +1015,7 @@
     aspect-ratio: 0.7;
     border: 2px dashed var(--accent);
     border-radius: 0.625rem 0.625rem 0 0;
-    background: linear-gradient(135deg,
-        rgba(236, 72, 153, 0.08),
-        rgba(124, 58, 237, 0.08));
+    background: rgba(232, 138, 173, 0.08);
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -1029,14 +1046,10 @@
 
 @keyframes pulse-placeholder {
     0%, 100% {
-        background: linear-gradient(135deg,
-            rgba(236, 72, 153, 0.08),
-            rgba(124, 58, 237, 0.08));
+        background: rgba(232, 138, 173, 0.08);
     }
     50% {
-        background: linear-gradient(135deg,
-            rgba(236, 72, 153, 0.15),
-            rgba(124, 58, 237, 0.15));
+        background: rgba(232, 138, 173, 0.15);
     }
 }
 
@@ -1099,11 +1112,11 @@
 }
 
 .master-badge {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
+    background: var(--peach);
 }
 
 .assist-badge {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    background: var(--primary-color);
 }
 
 .summary-char-name {
@@ -1159,25 +1172,25 @@
 }
 
 .disc-skill-badge.main {
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
-    border-color: #fbbf24;
-    color: #92400e;
+    background: var(--peach);
+    border-color: var(--peach);
+    color: white;
 }
 
 .disc-skill-badge.main:hover {
-    border-color: #f59e0b;
-    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
+    border-color: var(--peach);
+    box-shadow: 0 2px 6px rgba(244, 198, 160, 0.3);
 }
 
 .disc-skill-badge.secondary {
-    background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
-    border-color: #818cf8;
-    color: #3730a3;
+    background: var(--lavender);
+    border-color: var(--lavender);
+    color: white;
 }
 
 .disc-skill-badge.secondary:hover {
-    border-color: #6366f1;
-    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
+    border-color: var(--lavender);
+    box-shadow: 0 2px 6px rgba(197, 184, 224, 0.3);
 }
 
 /* ============================================================================

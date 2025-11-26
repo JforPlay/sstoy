@@ -62,6 +62,10 @@
     box-shadow: 0 0.5rem 1.5rem var(--shadow);
 }
 
+.disc-slot-card.sub-disc:hover {
+    border-color: var(--secondary-color);
+}
+
 .disc-slot-header {
     display: flex;
     align-items: center;
@@ -70,7 +74,7 @@
 }
 
 .disc-slot-number {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     color: white;
     width: 2rem;
     height: 2rem;
@@ -81,6 +85,10 @@
     font-weight: 700;
     font-size: 0.9rem;
     flex-shrink: 0;
+}
+
+.disc-slot-card.sub-disc .disc-slot-number {
+    background: var(--secondary-color);
 }
 
 .disc-slot-name-group {
@@ -249,8 +257,8 @@
 
 .disc-option.selected {
     border-color: var(--primary-color);
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    background: rgba(107, 155, 209, 0.1);
+    box-shadow: 0 0 0 3px rgba(107, 155, 209, 0.2);
 }
 
 .disc-option.disabled {
@@ -266,13 +274,13 @@
 }
 
 .disc-option.has-required-notes {
-    border-color: #10b981;
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(5, 150, 105, 0.08));
+    border-color: var(--mint-green);
+    background: rgba(126, 215, 193, 0.08);
 }
 
 .disc-option.has-required-notes:hover {
-    border-color: #10b981;
-    box-shadow: 0 0.5rem 1rem rgba(16, 185, 129, 0.3);
+    border-color: var(--mint-green);
+    box-shadow: 0 0.5rem 1rem rgba(126, 215, 193, 0.3);
 }
 
 .disc-disabled-overlay {
@@ -465,6 +473,10 @@
     border-color: var(--primary-color);
 }
 
+.disc-slot-card.sub-disc.filled {
+    border-color: var(--secondary-color);
+}
+
 .disc-slot-card.filled .disc-slot-preview {
     padding: 1rem;
     display: flex;
@@ -587,7 +599,7 @@
     padding: 0.75rem;
     background: var(--surface-light);
     border-radius: 0.625rem;
-    border-left: 4px solid #06b6d4;
+    border-left: 4px solid var(--secondary-color);
 }
 
 .note-requirements-header {
@@ -618,7 +630,7 @@
 }
 
 .required-note-item:hover {
-    border-color: #06b6d4;
+    border-color: var(--secondary-color);
     background: var(--surface);
 }
 
@@ -784,12 +796,12 @@
 }
 
 .skill-badge.main {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
+    background: var(--peach);
     color: white;
 }
 
 .skill-badge.secondary {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    background: var(--lavender);
     color: white;
 }
 
@@ -809,9 +821,9 @@
 }
 
 .skill-level-badge.secondary-level {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(124, 58, 237, 0.15) 100%);
-    border-color: #8b5cf6;
-    color: #8b5cf6;
+    background: rgba(197, 184, 224, 0.15);
+    border-color: var(--lavender);
+    color: var(--lavender);
 }
 
 .skill-level-badge.inactive {
@@ -837,6 +849,14 @@
 .skill-desc .param-value {
     color: #ec6d21;
     font-weight: 700;
+}
+
+.skill-desc .param-no-level {
+    color: #10b981; /* Green color for NoLevel parameters */
+}
+
+.skill-desc .param-red {
+    color: #ef4444; /* Red color for unsupported LevelData values */
 }
 
 .skill-params {
@@ -1162,6 +1182,7 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    color: #000000;
 }
 
 .toggle-badge {
@@ -1224,9 +1245,9 @@
 }
 
 .notes-section-header.used {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.15));
-    color: #10b981;
-    border-left: 4px solid #10b981;
+    background: rgba(126, 215, 193, 0.15);
+    color: var(--mint-green);
+    border-left: 4px solid var(--mint-green);
 }
 
 .notes-section-header.unused {
@@ -1362,7 +1383,7 @@
 }
 
 .disc-note-card:hover {
-    border-color: var(--secondary-color);
+    border-color: var(--primary-color);
     box-shadow: 0 0.25rem 0.75rem var(--shadow);
     transform: translateY(-2px);
 }
@@ -1533,6 +1554,14 @@
 .note-desc .param-value {
     color: #ec6d21;
     font-weight: 700;
+}
+
+.note-desc .param-no-level {
+    color: #10b981;
+}
+
+.note-desc .param-red {
+    color: #ef4444;
 }
 
 .no-notes {
