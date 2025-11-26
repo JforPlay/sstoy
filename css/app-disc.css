@@ -274,12 +274,12 @@
 }
 
 .disc-option.has-required-notes {
-    border-color: var(--mint-green);
+    border-color: var(--secondary-color);
     background: rgba(126, 215, 193, 0.08);
 }
 
 .disc-option.has-required-notes:hover {
-    border-color: var(--mint-green);
+    border-color: var(--secondary-color);
     box-shadow: 0 0.5rem 1rem rgba(126, 215, 193, 0.3);
 }
 
@@ -1174,6 +1174,10 @@
     transform: translateY(-50%) translateX(100px);
 }
 
+[data-theme="dark"] .notes-sidebar-toggle {
+    color: white;
+}
+
 .toggle-icon {
     font-size: 1.5rem;
 }
@@ -1247,7 +1251,7 @@
 .notes-section-header.used {
     background: rgba(126, 215, 193, 0.15);
     color: var(--mint-green);
-    border-left: 4px solid var(--mint-green);
+    border-left: 4px solid var(--secondary-color);
 }
 
 .notes-section-header.unused {

@@ -484,6 +484,9 @@ declare global {
     cyclePotentialMark?: (position: Position, potId: number) => void;
     calculateCharacterScore?: (position: Position) => number;
     generatePotentialIconHTML?: (potId: number, position: Position, level: number, mark: PotentialMark) => string;
+    openStarTowerModal?: () => void;
+    closeStarTowerModal?: () => void;
+    filterStarTowerQA?: (searchTerm: string) => void;
     
     // Preset module functions
     renderPresets?: () => void;
