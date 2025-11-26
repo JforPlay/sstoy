@@ -230,10 +230,10 @@ body::after {
 .left-side {
     position: fixed;
     left: 2rem;
-    top: 5rem;
+    top: 3.5rem;
     transform: none;
     width: 320px;
-    max-height: calc(100vh - 6rem);
+    max-height: calc(100vh - 12rem);
     background: transparent;
     backdrop-filter: none;
     border-radius: 0;
@@ -252,8 +252,8 @@ body::after {
 }
 
 .brand {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
     border-bottom: 2px solid var(--text-primary);
     position: relative;
     text-align: center;
@@ -262,12 +262,12 @@ body::after {
 .brand::after {
     content: '✦';
     position: absolute;
-    bottom: -0.6rem;
+    bottom: -0.5rem;
     left: 50%;
     transform: translateX(-50%);
     background: var(--text-primary);
     color: var(--sky-blue);
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 0 0.3rem;
     line-height: 1;
     display: flex;
@@ -277,25 +277,25 @@ body::after {
 
 .brand-title {
     font-family: 'Fredoka', sans-serif;
-    font-size: 2.2rem;
+    font-size: 1.9rem;
     font-weight: 700;
     color: var(--sky-blue);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     letter-spacing: 0.02em;
 }
 
 .brand-subtitle {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 400;
     color: var(--text-secondary);
     letter-spacing: 0.02em;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .nav-links {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
     flex: 1;
     overflow-y: auto;
     padding-right: 0.5rem;
@@ -304,8 +304,8 @@ body::after {
 .nav-item {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.65rem 0;
+    gap: 0.85rem;
+    padding: 0.5rem 0;
     background: transparent;
     border-radius: 0;
     border: none;
@@ -342,8 +342,8 @@ body::after {
 }
 
 .nav-icon {
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -375,14 +375,14 @@ body::after {
 
 .nav-content h3 {
     font-family: 'Fredoka', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
     letter-spacing: 0.01em;
 }
 
 .nav-content p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
     font-weight: 400;
 }
@@ -446,11 +446,12 @@ body::after {
 }
 
 .carousel-slide {
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding: 10rem 1rem 3rem 1rem;
+    padding: 4.5rem 1rem 3rem 1rem;
     scroll-snap-align: start;
     position: relative;
     z-index: 2;
@@ -469,10 +470,13 @@ body::after {
     width: 100%;
     position: relative;
     z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .slide-header {
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
 }
 
 .slide-label {
@@ -575,10 +579,21 @@ body::after {
     width: 100%;
     position: relative;
     overflow: hidden;
-    margin-top: 1.5rem;
-    display: inline-block;
-    text-align: center;
+    margin-top: 0.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
     text-decoration: none;
+}
+
+.slide-cta .arrow-icon {
+    transition: transform 0.3s ease;
+}
+
+.slide-cta:hover .arrow-icon {
+    transform: translateX(4px);
 }
 
 .slide-cta::before {
@@ -655,6 +670,255 @@ body::after {
 
 .footer-link i {
     font-size: 1rem;
+}
+
+/* Handle very short screens - Progressive approach */
+
+/* Taller short screens (850px - 900px) - Build preview fix */
+@media (max-height: 900px) {
+    .build-preview-image img {
+        max-height: 400px;
+        object-fit: contain;
+    }
+
+    .carousel-slide {
+        padding: 4.25rem 1rem 2.5rem 1rem;
+    }
+}
+
+@media (max-height: 850px) {
+    .carousel-slide {
+        padding: 4rem 1rem 2rem 1rem;
+    }
+
+    .slide-image {
+        height: 300px;
+    }
+
+    .build-preview-image img {
+        max-height: 300px;
+        object-fit: contain;
+    }
+
+    .slide-cta {
+        margin-top: 0.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .slide-header {
+        margin-bottom: 0.4rem;
+    }
+}
+
+/* Medium-short screens (700px - 800px) */
+@media (max-height: 800px) {
+    .carousel-slide {
+        padding: 3.75rem 1rem 2rem 1rem;
+    }
+
+    .slide-image {
+        height: 280px;
+    }
+
+    .build-preview-image img {
+        max-height: 260px;
+        object-fit: contain;
+    }
+
+    .slide-header {
+        margin-bottom: 0.35rem;
+    }
+
+    .slide-cta {
+        margin-top: 0.25rem;
+    }
+}
+
+/* Short screens (600px - 700px) */
+@media (max-height: 700px) {
+    /* Hide disclaimer earlier to prevent overlap */
+    .disclaimer-section {
+        display: none;
+    }
+
+    .left-side {
+        max-height: calc(100vh - 11rem);
+        top: 3rem;
+    }
+
+    .carousel-slide {
+        padding: 3.5rem 1rem 2rem 1rem;
+    }
+
+    .slide-image {
+        height: 220px;
+    }
+
+    .build-preview-image img {
+        max-height: 200px;
+    }
+
+    .slide-header {
+        margin-bottom: 0.3rem;
+    }
+
+    .slide-title {
+        font-size: 1.8rem;
+    }
+
+    .slide-description {
+        font-size: 0.95rem;
+    }
+
+    .slide-cta {
+        margin-top: 0.2rem;
+        margin-bottom: 1rem;
+        padding: 0.85rem 1.75rem;
+    }
+
+    .footer-links {
+        bottom: 1.5rem;
+        gap: 1rem;
+    }
+
+    .footer-link {
+        font-size: 0.9rem;
+    }
+}
+
+/* Very short screens (500px - 600px) */
+@media (max-height: 600px) {
+    .left-side {
+        max-height: calc(100vh - 9rem);
+        top: 2.5rem;
+    }
+
+    .carousel-slide {
+        padding: 3rem 1rem 1.5rem 1rem;
+    }
+
+    .slide-image {
+        height: 180px;
+    }
+
+    .build-preview-image img {
+        max-height: 160px;
+    }
+
+    .slide-header {
+        margin-bottom: 0.25rem;
+    }
+
+    .slide-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .slide-description {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .slide-cta {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        margin-top: 0.2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .footer-links {
+        bottom: 1rem;
+        gap: 0.75rem;
+    }
+
+    .brand-title {
+        font-size: 1.6rem;
+    }
+
+    .brand-subtitle {
+        font-size: 0.8rem;
+    }
+}
+
+/* Extremely short screens (< 500px) */
+@media (max-height: 500px) {
+    .left-side {
+        max-height: calc(100vh - 8rem);
+        top: 2rem;
+    }
+
+    .footer-links {
+        bottom: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .footer-link {
+        font-size: 0.85rem;
+        padding: 0.2rem 0;
+    }
+
+    .carousel-slide {
+        padding: 2rem 1rem 1rem 1rem;
+    }
+
+    .slide-image {
+        height: 120px;
+    }
+
+    .build-preview-image img {
+        max-height: 130px;
+    }
+
+    .slide-header {
+        margin-bottom: 0.2rem;
+    }
+
+    .slide-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .slide-description {
+        font-size: 0.8rem;
+        line-height: 1.3;
+    }
+
+    .slide-cta {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        margin-top: 0.15rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .brand {
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
+
+    .brand-title {
+        font-size: 1.4rem;
+    }
+
+    .brand-subtitle {
+        font-size: 0.75rem;
+    }
+
+    .nav-links {
+        gap: 0.75rem;
+    }
+
+    .nav-content h3 {
+        font-size: 0.95rem;
+    }
+
+    .nav-content p {
+        font-size: 0.75rem;
+    }
+
+    .nav-icon {
+        width: 34px;
+        height: 34px;
+    }
 }
 
 .scroll-indicator {
@@ -926,6 +1190,11 @@ body::after {
         scroll-snap-type: none;
     }
 
+    .carousel-slide {
+        min-height: calc(100vh - 140px);
+        padding: 6rem 1rem 2rem 1rem;
+    }
+
     .nav-links {
         background: transparent;
         padding: 0.5rem 0;
@@ -972,7 +1241,8 @@ body::after {
     }
 
     .carousel-slide {
-        padding: 6rem 1rem 2rem 1rem;
+        min-height: calc(100vh - 120px);
+        padding: 5rem 1rem 1.5rem 1rem;
     }
 
     .brand-title {
