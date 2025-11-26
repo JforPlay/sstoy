@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import fs from 'fs';
 import compression from 'vite-plugin-compression';
 import { createHtmlPlugin } from 'vite-plugin-html';
 
@@ -33,7 +34,19 @@ export default defineConfig(({ command, mode }) => ({
       ext: '.gz',
       threshold: 1024,
       deleteOriginFile: false
-    })
+    }),
+
+    // Copy preset builds into the dist root so fetchJSON('PresetBuilds.json') works in production
+    {
+      name: 'copy-preset-builds',
+      closeBundle() {
+        const src = resolve(__dirname, 'PresetBuilds.json');
+        const dest = resolve(__dirname, 'dist', 'PresetBuilds.json');
+        if (fs.existsSync(src)) {
+          fs.copyFileSync(src, dest);
+        }
+      }
+    }
   ],
 
   resolve: {
