@@ -1217,3 +1217,231 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Star Tower Button & Modal */
+.summary-section-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.875rem;
+    gap: 1rem;
+}
+
+.summary-section-header-row .summary-section-title {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+    flex: 1;
+}
+
+.star-tower-btn {
+    font-family: 'Poppins', sans-serif;
+    background: var(--surface);
+    color: var(--text-primary);
+    border: 2px solid var(--border);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.star-tower-btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--sky-blue);
+    color: var(--sky-blue);
+}
+
+.star-tower-btn .btn-icon {
+    font-size: 1.1rem;
+}
+
+.star-tower-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.star-tower-modal-content {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.star-tower-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 2px solid var(--border-light);
+    background: var(--surface);
+}
+
+.star-tower-modal-header h2 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.star-tower-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    line-height: 1;
+}
+
+.star-tower-close:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #ff4444;
+}
+
+.star-tower-search {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.star-tower-search input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+}
+
+.star-tower-search input:focus {
+    outline: none;
+    border-color: var(--sky-blue);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.star-tower-qa-list {
+    padding: 1rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.star-tower-qa-item {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+}
+
+.star-tower-qa-item:hover {
+    border-color: var(--sky-blue);
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.15);
+    transform: translateY(-1px);
+}
+
+.star-tower-qa-item:last-child {
+    margin-bottom: 0;
+}
+
+.star-tower-question,
+.star-tower-answer {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.star-tower-answer {
+    margin-bottom: 0;
+    padding-left: 0.5rem;
+}
+
+.qa-icon {
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+    flex-shrink: 0;
+}
+
+.star-tower-question .qa-icon {
+    color: var(--sky-blue);
+}
+
+.star-tower-answer .qa-icon {
+    color: var(--mint-green);
+}
+
+.qa-text {
+    color: var(--text-primary);
+    line-height: 1.6;
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .star-tower-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .star-tower-btn .btn-text {
+        display: none;
+    }
+
+    .star-tower-btn .btn-icon {
+        font-size: 1.2rem;
+    }
+
+    .star-tower-modal-content {
+        max-height: 90vh;
+    }
+
+    .star-tower-modal-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .star-tower-qa-item {
+        padding: 0.875rem 1rem;
+    }
+}

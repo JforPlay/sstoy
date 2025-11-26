@@ -619,6 +619,127 @@ function generateBuildStats(): string {
 }
 
 // =============================================================================
+// STAR TOWER Q&A
+// =============================================================================
+
+interface StarTowerQA {
+  question: string;
+  answer: string;
+}
+
+const STAR_TOWER_QA_DATA: StarTowerQA[] = [
+  {
+    question: '음...... 별의 탑이 가장 좋아하는 숫자는 뭘까?',
+    answer: '3? 항상 그렇게 선택했으니까......',
+  },
+  {
+    question: '몇시까지 버텨야 \'밤샘\' 이라고 생각해?',
+    answer: '12시?',
+  },
+  {
+    question: '자, 시험이야. 2의 10제곱은 얼마일까?',
+    answer: '1024?',
+  },
+  {
+    question: '자, 시험이야. 정육면체는 몇 개의 면이 있을까?',
+    answer: '6개?',
+  },
+  {
+    question: '한번 맞혀봐...... 난 어떤 여행자와의 대화를 더 좋아할까?',
+    answer: '큰 꿈을 가진 사람.',
+  },
+  {
+    question: '\'큰 뜻을 품는다\'는건 뭐라고 생각해?',
+    answer: '계획을 잘 세우고, 실행해야 해.',
+  },
+  {
+    question: '욕망에 충실하다는건...... 어떤 걸 말하는 것 같아?',
+    answer: '현재를 즐기자!',
+  },
+  {
+    question: '자, 시험이야. 한 옥타브엔 몇 개의 음이 있을까?',
+    answer: '12개?',
+  },
+  {
+    question: '한번 맞혀봐. 난 어떤 여행가를 더 좋아할까?',
+    answer: '욕망에 충실한 사람.',
+  },
+  {
+    question: '뭘 먹는 게 건강에 더 좋을까?',
+    answer: '야채를 많이 먹으라고?',
+  },
+  {
+    question: '이 중에서 어떤 게 건강에 좋을까?',
+    answer: '균형적인 음식?',
+  },
+  {
+    question: '이 중에서 어떤 걸 줄이는 게 건강에 좋을까?',
+    answer: '오래 앉아 있지 말라고?',
+  },
+];
+
+function generateStarTowerQA(): string {
+  return STAR_TOWER_QA_DATA.map(
+    (qa, index) => `
+    <div class="star-tower-qa-item" data-index="${index}">
+      <div class="star-tower-question">
+        <span class="qa-icon">Q.</span>
+        <span class="qa-text">${qa.question}</span>
+      </div>
+      <div class="star-tower-answer">
+        <span class="qa-icon">A)</span>
+        <span class="qa-text">${qa.answer}</span>
+      </div>
+    </div>
+  `
+  ).join('');
+}
+
+function openStarTowerModal(): void {
+  const modal = document.getElementById('star-tower-modal');
+  if (modal) {
+    modal.style.display = 'flex';
+    const searchInput = document.getElementById('star-tower-search') as HTMLInputElement;
+    if (searchInput) {
+      searchInput.value = '';
+      searchInput.focus();
+    }
+    filterStarTowerQA('');
+  }
+}
+
+function closeStarTowerModal(): void {
+  const modal = document.getElementById('star-tower-modal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+function filterStarTowerQA(searchTerm: string): void {
+  const items = document.querySelectorAll('.star-tower-qa-item');
+  const normalizedSearch = searchTerm.toLowerCase().trim();
+
+  items.forEach((item) => {
+    const index = parseInt(item.getAttribute('data-index') || '0', 10);
+    const qa = STAR_TOWER_QA_DATA[index];
+
+    if (!qa) {
+      (item as HTMLElement).style.display = 'none';
+      return;
+    }
+
+    const questionMatch = qa.question.toLowerCase().includes(normalizedSearch);
+    const answerMatch = qa.answer.toLowerCase().includes(normalizedSearch);
+
+    if (normalizedSearch === '' || questionMatch || answerMatch) {
+      (item as HTMLElement).style.display = 'block';
+    } else {
+      (item as HTMLElement).style.display = 'none';
+    }
+  });
+}
+
+// =============================================================================
 // MAIN RENDER
 // =============================================================================
 
@@ -664,7 +785,13 @@ export async function renderSummary(): Promise<void> {
 
       <!-- Party Overview Cards -->
       <div class="summary-section">
-        <h3 class="summary-section-title">${window.getIcon?.('people') || ''} ${window.i18n?.t('builder.characters') || 'Characters'}</h3>
+        <div class="summary-section-header-row">
+          <h3 class="summary-section-title">${window.getIcon?.('people') || ''} ${window.i18n?.t('builder.characters') || 'Characters'}</h3>
+          <button class="star-tower-btn" onclick="openStarTowerModal()">
+            <span class="btn-icon">⭐</span>
+            <span class="btn-text">별의 탑 정답지</span>
+          </button>
+        </div>
         <div class="summary-cards-grid">
           ${generateSummaryCard('master', `${window.getIcon?.('master') || ''} ${window.i18n?.t('builder.master') || 'Master'}`, 'master-badge')}
           ${generateSummaryCard('assist1', `${window.getIcon?.('assist') || ''} ${window.i18n?.t('builder.assist1') || 'Assist 1'}`, 'assist-badge')}
@@ -696,6 +823,22 @@ export async function renderSummary(): Promise<void> {
           placeholder="${window.i18n?.t('builder.buildMemoPlaceholder') || 'Write notes about this build...'}"
           oninput="handleBuildMemoChange(event)"
         ></textarea>
+      </div>
+    </div>
+
+    <!-- Star Tower Q&A Modal -->
+    <div id="star-tower-modal" class="star-tower-modal">
+      <div class="star-tower-modal-content">
+        <div class="star-tower-modal-header">
+          <h2>⭐ 별의 탑 정답지</h2>
+          <button class="star-tower-close" onclick="closeStarTowerModal()">&times;</button>
+        </div>
+        <div class="star-tower-search">
+          <input type="text" id="star-tower-search" placeholder="질문 검색..." oninput="filterStarTowerQA(this.value)">
+        </div>
+        <div class="star-tower-qa-list" id="star-tower-qa-list">
+          ${generateStarTowerQA()}
+        </div>
       </div>
     </div>
   `;
@@ -787,6 +930,28 @@ function setupSummaryEventDelegation(): void {
   });
 
   setupPotentialDragAndDrop(summaryContainer);
+  setupStarTowerModalEvents();
+}
+
+function setupStarTowerModalEvents(): void {
+  // Close modal when clicking outside
+  document.addEventListener('click', (e: MouseEvent) => {
+    const modal = document.getElementById('star-tower-modal');
+    if (modal && modal.style.display === 'flex') {
+      const target = e.target as HTMLElement;
+      if (target === modal) {
+        closeStarTowerModal();
+      }
+    }
+  });
+
+  // Close modal on ESC key
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    const modal = document.getElementById('star-tower-modal');
+    if (modal && modal.style.display === 'flex' && e.key === 'Escape') {
+      closeStarTowerModal();
+    }
+  });
 }
 
 function setupPotentialDragAndDrop(container: HTMLElement): void {
@@ -964,6 +1129,9 @@ if (typeof window !== 'undefined') {
   window.updateSummary = updateSummary;
   window.saveBuildNotes = saveBuildNotes;
   window.cyclePotentialMark = cyclePotentialMark;
+  window.openStarTowerModal = openStarTowerModal;
+  window.closeStarTowerModal = closeStarTowerModal;
+  window.filterStarTowerQA = filterStarTowerQA;
 }
 
 if (document.readyState === 'loading') {
