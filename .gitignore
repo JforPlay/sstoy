@@ -1,5 +1,34 @@
-dev/
+# Dependencies
+node_modules/
+
+# Build output
+dist/
 _site/
-.vscode/
+
+# Cache
+.vite/
 .jekyll-cache/
-_config.yml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dev
+dev/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# others
+deprecated/
