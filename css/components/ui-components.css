@@ -1,0 +1,501 @@
+/* Loading Spinner - Simple centered spinner to avoid CLS */
+
+/* Spinner container - fixed overlay */
+.spinner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--background);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.spinner-container.hidden {
+  display: none;
+}
+
+/* Spinning loader */
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--surface-light, #333);
+  border-top-color: var(--primary, #6366f1);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading text */
+.loading-text {
+  color: var(--text-secondary, #888);
+  font-size: 0.9rem;
+}
+/* ============================================
+   UNIFIED MODAL COMPONENTS
+   Shared modal/dialog styles across all pages
+   ============================================ */
+
+/* Base Modal Container */
+.modal,
+#disc-modal,
+#load-modal,
+#disc-image-viewer {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+}
+
+#disc-image-viewer {
+  z-index: 2000;
+}
+
+.modal.active,
+#disc-modal.active,
+#load-modal.active,
+#disc-image-viewer.active {
+  display: flex;
+}
+
+/* Modal Content Container */
+.modal-content,
+.load-modal-content,
+#disc-image-viewer img {
+  background: var(--surface);
+  border-radius: 1rem;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 1rem 3rem var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Special case for image viewer */
+#disc-image-viewer img {
+  max-width: 80vw;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+/* Modal Header */
+.modal-header,
+.load-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.modal-header h2,
+.load-modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Close Button */
+.close-btn,
+.load-modal-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.close-btn:hover,
+.load-modal-close:hover {
+  background: var(--surface-light);
+  color: var(--text-primary);
+  transform: rotate(90deg);
+}
+
+/* Modal Body */
+.modal-body,
+.load-modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-content,
+  .load-modal-content {
+    max-width: 95vw;
+    max-height: 95vh;
+    border-radius: 0.75rem;
+  }
+
+  .modal-header,
+  .load-modal-header {
+    padding: 1rem;
+  }
+
+  .modal-header h2,
+  .load-modal-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .modal-body,
+  .load-modal-body {
+    padding: 1rem;
+  }
+}
+/* ============================================
+   UNIFIED CARD COMPONENTS
+   Shared card styles across all pages
+   ============================================ */
+
+/* Base Card */
+.card-base {
+  background: var(--surface-light);
+  border: 2px solid var(--border);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.card-base:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.5rem 1.5rem var(--shadow);
+  border-color: var(--primary-color);
+}
+
+/* Card with Image (Character/Disc Cards) */
+.card-with-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  position: relative;
+}
+
+.card-image-container {
+  width: 100%;
+  aspect-ratio: 1;
+  margin-bottom: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card-with-image:hover .card-image {
+  transform: scale(1.1);
+}
+
+/* Card Info/Content */
+.card-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.card-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Card Badges/Tags */
+.card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.card-badge {
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: var(--surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+/* Card States */
+.card-base.active {
+  border-color: var(--primary-color);
+  background: rgba(99, 102, 241, 0.05);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.card-base.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.card-base.selected {
+  border-color: var(--success);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+/* Grid Layouts for Cards */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.cards-grid-large {
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+}
+
+.cards-grid-small {
+  grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .card-with-image {
+    padding: 0.75rem;
+  }
+
+  .card-title {
+    font-size: 0.8rem;
+  }
+
+  .card-subtitle {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+    gap: 0.5rem;
+  }
+}
+/* ============================================
+   UNIFIED FILTER/SEARCH COMPONENTS
+   Shared filter and search styles across all pages
+   ============================================ */
+
+/* Filter Container */
+.selector-controls,
+.preset-filters-container {
+  padding: 1rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Search Container */
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  background: var(--surface-light);
+  border: 2px solid var(--border);
+  border-radius: 0.5rem;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.search-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.search-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+/* Filter Buttons Container */
+.element-filters,
+.preset-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+/* Filter Button */
+.element-filter-btn,
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.875rem;
+  background: var(--surface-light);
+  border: 2px solid var(--border);
+  border-radius: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.element-filter-btn:hover,
+.filter-btn:hover {
+  background: var(--surface);
+  border-color: var(--primary-color);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.element-filter-btn.active,
+.filter-btn.active {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent));
+  border-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 0.25rem 0.75rem rgba(99, 102, 241, 0.3);
+}
+
+.element-filter-btn:active,
+.filter-btn:active {
+  transform: translateY(0);
+}
+
+/* Filter Icon */
+.filter-icon {
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Filter Label */
+.filter-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+/* Clear Filters Button */
+.clear-filters-btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 2px dashed var(--border);
+  border-radius: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-filters-btn:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .selector-controls,
+  .preset-filters-container {
+    padding: 0.75rem;
+  }
+
+  .search-input {
+    font-size: 0.9rem;
+    padding: 0.625rem 2.25rem 0.625rem 0.875rem;
+  }
+
+  .element-filter-btn,
+  .filter-btn {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    gap: 0.25rem;
+  }
+
+  .filter-icon {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .element-filters,
+  .preset-filters {
+    gap: 0.375rem;
+  }
+
+  .element-filter-btn,
+  .filter-btn {
+    padding: 0.375rem 0.625rem;
+    font-size: 0.75rem;
+  }
+}
