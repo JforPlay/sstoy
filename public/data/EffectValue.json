@@ -54830,9 +54830,9 @@
     "Tag": "1",
     "EffectRate": 100,
     "EffectType": 12,
-    "EffectTypeFirstSubtype": 53,
+    "EffectTypeFirstSubtype": 61,
     "EffectTypeSecondSubtype": 1,
-    "EffectTypeParam1": "0.5"
+    "EffectTypeParam1": "0.65"
   },
   "631009901": {
     "Id": 631009901,

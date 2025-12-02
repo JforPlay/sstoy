@@ -15692,7 +15692,7 @@
     "Type": 4,
     "Stype": 4,
     "Rarity": 3,
-    "PositionLimit": 2000,
+    "PositionLimit": 5000,
     "Display": true,
     "Icon": "Icon/Item/item_4",
     "Icon2": "Icon/ZZZOther/item_4_small"

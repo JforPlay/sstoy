@@ -2270,7 +2270,7 @@
   "UIText.SavePermission_Tips_NeverAgain.1": "Don't show again",
   "UIText.ScoreBossRankingDetail.1": "Ranking Details",
   "UIText.ScoreBossRankingEmpty.1": "No Ranking Available",
-  "UIText.ScoreBossRankingEndTime.1": "Final Ranking:",
+  "UIText.ScoreBossRankingEndTime.1": "Final Ranking:<space=7>",
   "UIText.ScoreBossRankingHighScore.1": "Highest Score",
   "UIText.ScoreBossRankingPlayerName.1": "Player",
   "UIText.ScoreBossRankingTeamOne.1": "Squad 1",

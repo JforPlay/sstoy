@@ -31426,7 +31426,7 @@
     "HitdamageInfo": "潜能2",
     "DistanceType": 2,
     "SourceType": 1,
-    "DamageType": 6,
+    "DamageType": 2,
     "EffectType": 1,
     "ElementType": 6,
     "DamageTag": [
@@ -31488,7 +31488,7 @@
     "HitdamageInfo": "潜能4",
     "DistanceType": 2,
     "SourceType": 1,
-    "DamageType": 6,
+    "DamageType": 2,
     "EffectType": 1,
     "ElementType": 6,
     "DamageTag": [
@@ -59143,7 +59143,7 @@
     ],
     "DamageBonusType": 1,
     "SkillPercentAmend": [
-      1250000,
+      1000000,
       0
     ],
     "SkillAbsAmend": [
@@ -59164,7 +59164,7 @@
     ],
     "DamageBonusType": 1,
     "SkillPercentAmend": [
-      1200000,
+      960000,
       0
     ],
     "SkillAbsAmend": [
@@ -59185,7 +59185,7 @@
     ],
     "DamageBonusType": 1,
     "SkillPercentAmend": [
-      1100000,
+      880000,
       0
     ],
     "SkillAbsAmend": [
