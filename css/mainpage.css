@@ -33,8 +33,8 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background: url('../assets/others/main_bg.jpg') center/cover no-repeat fixed;
-    opacity: 0.15;
+    background: url('/assets/others/main_bg.jpg') center/cover no-repeat fixed;
+    opacity: 0.25; /* Increased opacity for darker background in light mode */
     filter: blur(2px);
     pointer-events: none;
 }
