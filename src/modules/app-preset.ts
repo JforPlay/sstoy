@@ -31,9 +31,18 @@ interface PresetBuild {
   meta?: boolean;
 }
 
+interface PresetMetadata {
+  lastUpdated?: string;
+  bossRush?: string;
+  jointDrill?: string;
+  totalBuilds?: number;
+  notes?: string;
+}
+
 interface PresetData {
   presets: PresetBuild[];
   elements?: Record<string, ElementData>;
+  metadata?: PresetMetadata;
 }
 
 // Global function declarations - defined in types/index.ts
@@ -114,6 +123,72 @@ function getPaginatedPresets(filtered: PresetBuild[]): PresetBuild[] {
  */
 function getTotalPages(filtered: PresetBuild[]): number {
   return Math.ceil(filtered.length / ITEMS_PER_PAGE);
+}
+
+/**
+ * Generate info container HTML
+ */
+function generateInfoContainer(metadata: PresetMetadata | undefined, totalPresets: number): string {
+  if (!metadata) return '';
+
+  const actualTotal = metadata.totalBuilds === 0 ? totalPresets : metadata.totalBuilds;
+
+  return `
+    <div class="preset-info-banner">
+      <div class="preset-info-grid">
+        <div class="preset-info-item">
+          <div class="preset-info-item-icon">
+            <i class="fa-regular fa-calendar-days"></i>
+          </div>
+          <div class="preset-info-item-content">
+            <div class="preset-info-item-label">${window.i18n?.t('preset.lastUpdated') || '최근 업데이트'}</div>
+            <div class="preset-info-item-value">${metadata.lastUpdated || 'N/A'}</div>
+          </div>
+        </div>
+
+        ${metadata.bossRush ? `
+        <div class="preset-info-item">
+          <div class="preset-info-item-icon">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div class="preset-info-item-content">
+            <div class="preset-info-item-label">${window.i18n?.t('preset.bossRush') || '연합토벌'}</div>
+            <div class="preset-info-item-value">${metadata.bossRush}</div>
+          </div>
+        </div>
+        ` : ''}
+
+        ${metadata.jointDrill ? `
+        <div class="preset-info-item">
+          <div class="preset-info-item-icon">
+            <i class="fa-solid fa-skull-crossbones"></i>
+          </div>
+          <div class="preset-info-item-content">
+            <div class="preset-info-item-label">${window.i18n?.t('preset.jointDrill') || '종언'}</div>
+            <div class="preset-info-item-value">${metadata.jointDrill}</div>
+          </div>
+        </div>
+        ` : ''}
+
+        <div class="preset-info-item">
+          <div class="preset-info-item-icon">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+          <div class="preset-info-item-content">
+            <div class="preset-info-item-label">${window.i18n?.t('preset.totalBuilds') || '총 빌드 수'}</div>
+            <div class="preset-info-item-value">${actualTotal}개</div>
+          </div>
+        </div>
+      </div>
+
+      ${metadata.notes ? `
+      <div class="preset-info-note">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>${metadata.notes}</span>
+      </div>
+      ` : ''}
+    </div>
+  `;
 }
 
 /**
@@ -655,7 +730,12 @@ export async function renderPresets(): Promise<void> {
       (preset.tags || []).forEach((tag) => allTags.add(tag));
     });
 
-    let html = '<div class="preset-layout"><div class="preset-builds-section">';
+    let html = '<div class="preset-layout">';
+
+    // Info container
+    html += generateInfoContainer(presetData.metadata, allPresetsData.length);
+
+    html += '<div class="preset-builds-section">';
 
     // Filters section
     html += '<div class="preset-filters-section">';

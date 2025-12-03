@@ -459,7 +459,7 @@
     "meta": "메타",
     "anonymous": "익명",
     "viewBuild": "보러가기",
-    "totalBuilds": "총 ${count}개의 빌드",
+    "totalBuilds": "총 빌드 수",
     "loadBuild": "불러오기",
     "loadFailed": "실패",
     "noPresets": "프리셋 빌드가 없습니다",
@@ -470,7 +470,10 @@
     "presetLoadFailed": "프리셋 불러오기 실패",
     "searchTags": "태그 검색...",
     "activeTags": "선택된 필터",
-    "noTagsFound": "태그를 찾을 수 없습니다"
+    "noTagsFound": "태그를 찾을 수 없습니다",
+    "lastUpdated": "최근 업데이트",
+    "bossRush": "연합 토벌",
+    "jointDrill": "종언의 노래"
   },
   "messages": {
     "saved": "저장되었습니다",

@@ -35,6 +35,140 @@
 }
 
 /* ============================================================================
+   INFO BANNER - Metadata Display
+   ============================================================================ */
+
+.preset-info-banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.preset-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 0;
+}
+
+.preset-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    padding: 0.75rem;
+    background: var(--background);
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+}
+
+.preset-info-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    min-width: 2.5rem;
+    background: var(--primary-color);
+    color: #ffffff;
+    border-radius: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.preset-info-item-icon i {
+    color: #ffffff;
+}
+
+.preset-info-item-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.preset-info-item-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    margin-bottom: 0.25rem;
+}
+
+.preset-info-item-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.preset-info-note {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    margin-top: 1rem;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--primary-color);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.preset-info-note i {
+    color: var(--primary-color);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .preset-info-banner {
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .preset-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    .preset-info-item {
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .preset-info-item-icon {
+        width: 2rem;
+        height: 2rem;
+        min-width: 2rem;
+        font-size: 0.875rem;
+    }
+
+    .preset-info-item-label {
+        font-size: 0.625rem;
+        margin-bottom: 0.125rem;
+    }
+
+    .preset-info-item-value {
+        font-size: 0.8rem;
+        line-height: 1.3;
+    }
+
+    .preset-info-note {
+        padding: 0.625rem 0.75rem;
+        font-size: 0.75rem;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .preset-info-note i {
+        font-size: 0.875rem;
+    }
+}
+
+/* ============================================================================
    FILTERS SECTION - Polished Layout
    ============================================================================ */
 
@@ -549,28 +683,32 @@
         padding: 0.5rem 0.75rem 0.75rem 0.75rem;
     }
 
-    /* Filters on mobile */
+    /* Filters on mobile - more compact */
     .preset-filters-section {
-        padding: 0.75rem;
-        gap: 0.75rem;
-        margin-bottom: 1rem;
+        padding: 0.625rem;
+        gap: 0.625rem;
+        margin-bottom: 0.75rem;
     }
 
     .preset-filter-group {
-        gap: 0.5rem;
-    }
-
-    .filter-group-label {
-        font-size: 0.75rem;
-    }
-
-    .preset-filters {
         gap: 0.375rem;
     }
 
+    .filter-group-label {
+        font-size: 0.7rem;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 0.25rem;
+    }
+
+    .preset-filters {
+        gap: 0.3rem;
+        justify-content: center;
+    }
+
     .element-filter-btn {
-        padding: 0.25rem 0.625rem;
-        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
     }
 
     .element-filter-icon {
@@ -578,9 +716,9 @@
         height: 16px;
     }
 
-    /* Tag filters on mobile */
+    /* Tag filters on mobile - more compact */
     .tag-filter-header {
-        gap: 0.5rem;
+        gap: 0.375rem;
     }
 
     .tag-search-wrapper {
@@ -590,26 +728,26 @@
     }
 
     .tag-search-input {
-        padding: 0.425rem 0.75rem 0.425rem 2rem;
-        font-size: 0.75rem;
+        padding: 0.375rem 0.625rem 0.375rem 1.75rem;
+        font-size: 0.7rem;
     }
 
     .tag-search-icon {
-        left: 0.625rem;
-        font-size: 0.75rem;
+        left: 0.5rem;
+        font-size: 0.7rem;
     }
 
     .tag-filter-clear {
-        padding: 0.425rem 0.75rem;
-        font-size: 0.7rem;
+        padding: 0.375rem 0.625rem;
+        font-size: 0.65rem;
     }
 
     .active-tags-section {
-        padding: 0.625rem;
+        padding: 0.5rem;
     }
 
     .active-tags-label {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
     }
 
     .tag-filter-buttons {

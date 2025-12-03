@@ -459,7 +459,7 @@
     "meta": "Meta",
     "anonymous": "Anonymous",
     "viewBuild": "View",
-    "totalBuilds": "${count} builds total",
+    "totalBuilds": "Total Builds",
     "loadBuild": "Load",
     "loadFailed": "Failed",
     "noPresets": "No preset builds",
@@ -470,7 +470,10 @@
     "presetLoadFailed": "Failed to load preset",
     "searchTags": "Search tags...",
     "activeTags": "Active filters",
-    "noTagsFound": "No tags found"
+    "noTagsFound": "No tags found",
+    "lastUpdated": "Last Updated",
+    "bossRush": "Boss Rush",
+    "jointDrill": "Joint Drill"
   },
   "messages": {
     "saved": "Saved successfully",
