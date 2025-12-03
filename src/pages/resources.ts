@@ -4,11 +4,15 @@
  */
 
 // Import shared utilities (auto-initializes)
-import '@/shared';
-import '@/i18n';
-import { saveToLocalStorage, loadFromLocalStorage, removeFromLocalStorage } from '@/utils/storage';
+import '../shared';
+import '../i18n';
+import { initGlobalHeader } from '../shared/ui-components';
+import { saveToLocalStorage, loadFromLocalStorage, removeFromLocalStorage } from '../utils/storage';
+import { loadCoreData, loadFeatureData, loadLanguageData } from '../shared/data-loader';
+import { GameData } from '../shared/game-data';
+import { debounce } from '../shared/index';
 
-import type { CharacterData, Disc, GameEnums } from '@/types';
+import type { CharacterData, Disc, GameEnums } from '../types';
 
 // =============================================================================
 // INTERFACES
@@ -175,6 +179,9 @@ interface ResourcesState {
   characterResources: Record<string, CharacterResources>;
   discResources: Record<string, DiscResources>;
   itemUsageIndex: Record<string, { characters: string[]; discs: string[] }>;
+  currentElementFilter: string;
+  currentSearchFilter: string;
+  characterSelectorFuse: any;
 }
 
 // =============================================================================
@@ -244,6 +251,9 @@ const resourcesState: ResourcesState = {
   characterResources: {},
   discResources: {},
   itemUsageIndex: {},
+  currentElementFilter: 'all',
+  currentSearchFilter: '',
+  characterSelectorFuse: null,
 };
 
 // =============================================================================
@@ -258,8 +268,10 @@ function showLoadingState(show: boolean): void {
     loader.className = 'loading-overlay';
     loader.innerHTML = `
       <div class="loading-spinner">
-        <i class="fa-solid fa-spinner fa-spin"></i>
-        <p>데이터를 불러오는 중...</p>
+        <div class="spinner-icon">
+          <i class="fa-solid fa-spinner fa-spin"></i>
+        </div>
+        <p class="spinner-text">${window.i18n?.t('resources.loadingData') || '데이터를 불러오는 중...'}</p>
       </div>
     `;
     document.body.appendChild(loader);
@@ -431,65 +443,54 @@ function getDiscsUsingItem(itemId: string): SelectedDisc[] {
 async function loadResourcesData(): Promise<void> {
   try {
     const gameLang = window.i18n?.currentLang || 'KR';
-    const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
-
     console.log(`[Resources] Loading data for language: ${gameLang}`);
 
-    const [
-      charactersData,
-      characterNamesData,
-      characterUpgradeData,
-      characterSkillUpgradeData,
-      characterAdvanceData,
-      charItemExpData,
-      charGemData,
-      discsData,
-      discStrengthenData,
-      discPromoteData,
-      discItemExpData,
-      discIPData,
-      discIPNamesData,
-      gameEnumsData,
-      itemsData,
-      itemNamesData,
-    ] = await Promise.all([
-      fetch('data/Character.json').then((r) => r.json()),
-      fetch(`${dataPath}/Character.json`).then((r) => r.json()),
-      fetch('data/CharacterUpgrade.json').then((r) => r.json()),
-      fetch('data/CharacterSkillUpgrade.json').then((r) => r.json()),
-      fetch('data/CharacterAdvance.json').then((r) => r.json()),
-      fetch('data/CharItemExp.json').then((r) => r.json()),
-      fetch('data/CharGem.json').then((r) => r.json()),
-      fetch('data/Disc.json').then((r) => r.json()),
-      fetch('data/DiscStrengthen.json').then((r) => r.json()),
-      fetch('data/DiscPromote.json').then((r) => r.json()),
-      fetch('data/DiscItemExp.json').then((r) => r.json()),
-      fetch('data/DiscIP.json').then((r) => r.json()),
-      fetch(`${dataPath}/DiscIP.json`).then((r) => r.json()),
-      fetch('data/GameEnums.json').then((r) => r.json()),
-      fetch('data/Item.json').then((r) => r.json()),
-      fetch(`${dataPath}/Item.json`).then((r) => r.json()),
-    ]);
+    await loadCoreData();
+    await loadFeatureData('characterBuilder');
+    await loadFeatureData('discSystem');
 
-    resourcesState.characters = charactersData;
-    resourcesState.characterNames = characterNamesData;
-    resourcesState.characterUpgrade = characterUpgradeData;
-    resourcesState.characterSkillUpgrade = characterSkillUpgradeData;
-    resourcesState.characterAdvance = characterAdvanceData;
-    resourcesState.charItemExp = charItemExpData;
-    resourcesState.charGem = charGemData;
-    resourcesState.discs = discsData;
-    resourcesState.discStrengthen = discStrengthenData;
-    resourcesState.discPromote = discPromoteData;
-    resourcesState.discItemExp = discItemExpData;
-    resourcesState.discIP = discIPData;
-    resourcesState.discIPNames = discIPNamesData;
-    resourcesState.gameEnums = gameEnumsData;
-    resourcesState.items = itemsData;
-    resourcesState.itemNames = itemNamesData;
+    await loadLanguageData(gameLang, ['Character.json', 'DiscIP.json', 'Item.json']);
+
+    resourcesState.characters = GameData.characters || {};
+    resourcesState.characterNames = (GameData.charactersKR || {}) as any;
+    resourcesState.characterUpgrade = (GameData.characterUpgrade || {}) as any;
+    resourcesState.characterSkillUpgrade = (GameData.characterSkillUpgrade || {}) as any;
+    resourcesState.characterAdvance = (GameData.characterAdvance || {}) as any;
+    resourcesState.charItemExp = GameData.charItemExp || {};
+    resourcesState.charGem = GameData.charGem || {};
+    resourcesState.discs = GameData.discs || {};
+    resourcesState.discStrengthen = (GameData.discStrengthen || {}) as any;
+    resourcesState.discPromote = (GameData.discPromote || {}) as any;
+    resourcesState.discItemExp = GameData.discItemExp || {};
+    resourcesState.discIP = GameData.discIP || {};
+    resourcesState.discIPNames = (GameData.discIPKR || {}) as any;
+    resourcesState.gameEnums = (GameData.gameEnums || {}) as any;
+    resourcesState.items = GameData.items || {};
+    resourcesState.itemNames = (GameData.itemsKR || {}) as any;
+
+    // Initialize Fuse.js for character search
+    initializeCharacterSearch();
   } catch (error) {
     console.error('Error loading resources data:', error);
     throw error;
+  }
+}
+
+function initializeCharacterSearch(): void {
+  // Prepare character data for search
+  const characterList = Object.entries(resourcesState.characters)
+    .filter(([, char]) => char.Visible && char.Available)
+    .map(([id, char]) => ({
+      id,
+      Name: resourcesState.characterNames[char.Name as string] || char.Name,
+    }));
+
+  // Initialize Fuse.js if available
+  if (typeof (window as any).Fuse !== 'undefined') {
+    resourcesState.characterSelectorFuse = new (window as any).Fuse(characterList, {
+      keys: ['Name'],
+      threshold: 0.3,
+    });
   }
 }
 
@@ -767,17 +768,54 @@ function switchResourceTab(tabName: string): void {
   }
 }
 
-function openCharacterResourceSelect(): void {
-  const modal = document.getElementById('character-resource-modal');
-  const grid = document.getElementById('character-resource-grid');
+function filterResourceCharactersByElement(element: string): void {
+  resourcesState.currentElementFilter = element;
 
-  if (!modal || !grid) return;
+  // Update button states
+  document.querySelectorAll('.element-filter-btn').forEach((btn) => {
+    btn.classList.remove('active');
+  });
+  document
+    .querySelector(`.element-filter-btn[data-element="${element}"]`)
+    ?.classList.add('active');
+
+  // Re-render the grid
+  renderCharacterResourceGrid();
+}
+
+function renderCharacterResourceGrid(): void {
+  const grid = document.getElementById('character-resource-grid');
+  if (!grid) return;
 
   grid.innerHTML = '';
 
-  const availableCharacters = Object.entries(resourcesState.characters)
+  let availableCharacters = Object.entries(resourcesState.characters)
     .filter(([, char]) => char.Visible && char.Available)
     .sort((a, b) => parseInt(a[0]) - parseInt(b[0]));
+
+  // Apply element filter
+  if (resourcesState.currentElementFilter !== 'all') {
+    availableCharacters = availableCharacters.filter(
+      ([, char]) => String(char.EET) === resourcesState.currentElementFilter
+    );
+  }
+
+  // Apply search filter
+  if (resourcesState.currentSearchFilter) {
+    if (resourcesState.characterSelectorFuse) {
+      // Use Fuse.js for fuzzy search
+      const searchResults = resourcesState.characterSelectorFuse.search(resourcesState.currentSearchFilter);
+      const matchedIds = new Set(searchResults.map((r: any) => r.item.id));
+      availableCharacters = availableCharacters.filter(([id]) => matchedIds.has(id));
+    } else {
+      // Fallback to simple includes
+      const lower = resourcesState.currentSearchFilter.toLowerCase();
+      availableCharacters = availableCharacters.filter(([id, char]) => {
+        const charName = resourcesState.characterNames[char.Name as string] || char.Name;
+        return String(charName).toLowerCase().includes(lower);
+      });
+    }
+  }
 
   const fragment = document.createDocumentFragment();
 
@@ -785,22 +823,33 @@ function openCharacterResourceSelect(): void {
     const isSelected = resourcesState.selectedCharacters.some((c) => c.id === id);
 
     const charItem = document.createElement('div');
-    charItem.className = `character-item ${isSelected ? 'disabled' : ''}`;
+    charItem.className = `character-selector-card ${isSelected ? 'disabled' : ''}`;
     charItem.dataset.characterId = id;
 
     const charName = resourcesState.characterNames[char.Name as string] || char.Name;
 
+    // Get grade (rarity) as stars
+    const gradeNum = Number(char.Grade) || 3;
+    const gradeData = (resourcesState.gameEnums?.characterGrade as any)?.[gradeNum];
+    const stars = gradeData?.stars ? '★'.repeat(gradeData.stars) : '★'.repeat(gradeNum);
+
+    // Get element icon using EET (Element Enum Type)
+    const elementId = char.EET;
+    const elementIconPath = elementId ? `assets/icon_common_property_${elementId}.png` : '';
+
     charItem.innerHTML = `
-      <div class="character-item-header">
+      <div class="character-selector-img-wrapper">
         <img src="assets/char/avg1_${id}_002.png"
              alt="${charName}"
-             class="character-item-image"
+             class="character-selector-img"
              loading="lazy"
              onerror="this.style.display='none'">
+        ${elementIconPath ? `<img src="${elementIconPath}" alt="Element" class="character-element-icon" loading="lazy" onerror="this.style.display='none'">` : ''}
       </div>
-      <div class="character-item-info">
-        <div class="character-item-name">${charName}</div>
-        ${isSelected ? '<div class="character-item-id" style="color: var(--primary-color);">선택됨</div>' : ''}
+      <div class="character-selector-info">
+        <div class="character-selector-name">${charName}</div>
+        <div class="character-selector-grade">${stars}</div>
+        ${isSelected ? '<div style="font-size: 0.65rem; color: var(--primary-color); font-weight: 600;">선택됨</div>' : ''}
       </div>
     `;
 
@@ -808,7 +857,31 @@ function openCharacterResourceSelect(): void {
   });
 
   grid.appendChild(fragment);
+}
+
+function openCharacterResourceSelect(): void {
+  const modal = document.getElementById('character-resource-modal');
+
+  if (!modal) return;
+
+  // Reset filters when opening
+  resourcesState.currentElementFilter = 'all';
+  resourcesState.currentSearchFilter = '';
+
+  document.querySelectorAll('.element-filter-btn').forEach((btn) => {
+    btn.classList.remove('active');
+  });
+  document.querySelector('.element-filter-btn[data-element="all"]')?.classList.add('active');
+
+  renderCharacterResourceGrid();
   modal.classList.add('active');
+
+  // Focus and clear search input
+  const searchInput = document.getElementById('character-resource-search') as HTMLInputElement;
+  if (searchInput) {
+    searchInput.value = '';
+    searchInput.focus();
+  }
 }
 
 function closeCharacterResourceSelect(): void {
@@ -899,7 +972,7 @@ function removeCharacterFromResources(characterId: string): void {
   renderResourceSummary();
   saveResourcesState();
 
-  window.showToast?.('캐릭터가 제거되었습니다', 'info');
+  window.showToast?.(window.i18n?.t('resources.characterRemoved') || '캐릭터가 제거되었습니다', 'info');
 }
 
 function renderSelectedCharactersList(): void {
@@ -910,7 +983,7 @@ function renderSelectedCharactersList(): void {
     container.innerHTML = `
       <div class="empty-selection-state">
         <div class="empty-icon">${window.getIcon?.('emptyClipboard') || ''}</div>
-        <p>캐릭터를 선택하여 자원 계산을 시작하세요</p>
+        <p>${window.i18n?.t('resources.selectCharacterEmpty')}</p>
       </div>
     `;
     return;
@@ -941,10 +1014,10 @@ function renderSelectedCharactersList(): void {
 
       <div class="character-level-controls">
         <div class="level-section">
-          <div class="level-section-title">캐릭터 레벨</div>
+          <div class="level-section-title">${window.i18n?.t('resources.characterLevel')}</div>
           <div class="level-input-row">
             <div class="level-input-group">
-              <label class="level-input-label">현재</label>
+              <label class="level-input-label">${window.i18n?.t('resources.current')}</label>
               <input type="number"
                      class="level-input-field"
                      value="${char.currentLevel}"
@@ -954,7 +1027,7 @@ function renderSelectedCharactersList(): void {
                      data-field="currentLevel">
             </div>
             <div class="level-input-group">
-              <label class="level-input-label">목표</label>
+              <label class="level-input-label">${window.i18n?.t('resources.target')}</label>
               <input type="number"
                      class="level-input-field"
                      value="${char.targetLevel}"
@@ -967,7 +1040,7 @@ function renderSelectedCharactersList(): void {
         </div>
 
         <div class="level-section">
-          <div class="level-section-title">스킬 레벨</div>
+          <div class="level-section-title">${window.i18n?.t('resources.skillLevel')}</div>
           <div class="skill-level-grid">
             ${['normal', 'main', 'assist', 'ultimate']
               .map(
@@ -1031,9 +1104,13 @@ function createResourceItemElement(
   div.className = 'resource-item';
   if (netQty <= 0 && requiredQty > 0) {
     div.classList.add('completed');
-    div.title = `완료!\n필요: ${requiredQty.toLocaleString()}\n보유: ${ownedQty.toLocaleString()}`;
+    div.title = (window.i18n?.t('resources.tooltipComplete') || '완료!\n필요: ${required}\n보유: ${owned}')
+      .replace('${required}', requiredQty.toLocaleString())
+      .replace('${owned}', ownedQty.toLocaleString());
   } else {
-    div.title = `필요: ${requiredQty.toLocaleString()}\n보유: ${ownedQty.toLocaleString()}`;
+    div.title = (window.i18n?.t('resources.tooltipRequired') || '필요: ${required}\n보유: ${owned}')
+      .replace('${required}', requiredQty.toLocaleString())
+      .replace('${owned}', ownedQty.toLocaleString());
   }
 
   let characterIconsHTML = '';
@@ -1164,7 +1241,7 @@ function renderResourceSummary(): void {
 
     advanceSection.innerHTML = `
       <div class="resource-category-header">
-        <div class="resource-category-title">승급 아이템 (여행가)</div>
+        <div class="resource-category-title">${window.i18n?.t('resources.advanceItemsCharacter')}</div>
         ${estimateHTML}
       </div>
       <div class="resource-items-container" id="advance-items-container"></div>
@@ -1191,7 +1268,7 @@ function renderResourceSummary(): void {
 
     skillSection.innerHTML = `
       <div class="resource-category-header">
-        <div class="resource-category-title">스킬 강화 아이템</div>
+        <div class="resource-category-title">${window.i18n?.t('resources.skillEnhanceItems')}</div>
         ${estimateHTML}
       </div>
       <div class="resource-items-container" id="skill-items-container"></div>
@@ -1227,7 +1304,7 @@ function renderResourceSummary(): void {
       `;
 
       expCard.innerHTML = `
-        <div class="resource-category-title">경험치</div>
+        <div class="resource-category-title">${window.i18n?.t('resources.experience')}</div>
         <div class="exp-content-row">
           <div class="resource-items-grid" id="exp-items-grid"></div>
           <div class="exp-summary">${expSummaryContent}</div>
@@ -1246,7 +1323,7 @@ function renderResourceSummary(): void {
 
       const title = document.createElement('div');
       title.className = 'resource-category-title';
-      title.textContent = '도라 (총합)';
+      title.textContent = window.i18n?.t('resources.doraTotal') || '도라 (총합)';
 
       const grid = document.createElement('div');
       grid.className = 'resource-items-grid';
@@ -1534,7 +1611,7 @@ function renderBadgeRequirements(): void {
 
 function clearAllResources(): void {
   if (resourcesState.selectedCharacters.length === 0) {
-    window.showToast?.('초기화할 데이터가 없습니다', 'info');
+    window.showToast?.(window.i18n?.t('resources.noDataToReset') || '초기화할 데이터가 없습니다', 'info');
     return;
   }
 
@@ -1547,7 +1624,7 @@ function clearAllResources(): void {
     renderResourceSummary();
     saveResourcesState();
 
-    window.showToast?.('모든 데이터가 초기화되었습니다', 'success');
+    window.showToast?.(window.i18n?.t('resources.allDataReset') || '모든 데이터가 초기화되었습니다', 'success');
   }
 }
 
@@ -1584,7 +1661,7 @@ function openDiscResourceSelect(): void {
     const discNameKey = discIPData?.StoryName;
     const discName = discNameKey
       ? resourcesState.discIPNames[discNameKey] || discNameKey
-      : `레코드 ${id}`;
+      : (window.i18n?.t('resources.discN') || '레코드 ${id}').replace('${id}', id.toString());
 
     const elementInfo = resourcesState.gameEnums.elementType?.[disc.EET];
     const elementIcon = elementInfo?.icon || '';
@@ -1679,7 +1756,7 @@ function removeDiscFromResources(discId: string): void {
   renderDiscResourceSummary();
   saveResourcesState();
 
-  window.showToast?.('레코드가 제거되었습니다', 'info');
+  window.showToast?.(window.i18n?.t('resources.discRemoved') || '레코드가 제거되었습니다', 'info');
 }
 
 function renderSelectedDiscsList(): void {
@@ -1690,7 +1767,7 @@ function renderSelectedDiscsList(): void {
     container.innerHTML = `
       <div class="empty-selection-state">
         <div class="empty-icon"><i class="fa-regular fa-clipboard"></i></div>
-        <p>레코드를 선택하여 자원 계산을 시작하세요</p>
+        <p>${window.i18n?.t('resources.selectDiscEmpty')}</p>
       </div>
     `;
     return;
@@ -1737,7 +1814,7 @@ function renderSelectedDiscsList(): void {
           <div class="level-section-title">레벨</div>
           <div class="level-input-row">
             <div class="level-input-group">
-              <label class="level-input-label">현재 레벨</label>
+              <label class="level-input-label">${window.i18n?.t('resources.currentLevel')}</label>
               <input type="number"
                      class="level-input-field"
                      value="${disc.currentLevel}"
@@ -1746,7 +1823,7 @@ function renderSelectedDiscsList(): void {
                      data-field="currentLevel">
             </div>
             <div class="level-input-group">
-              <label class="level-input-label">목표 레벨</label>
+              <label class="level-input-label">${window.i18n?.t('resources.targetLevel')}</label>
               <input type="number"
                      class="level-input-field"
                      value="${disc.targetLevel}"
@@ -1771,7 +1848,7 @@ function renderDiscResourceSummary(): void {
     container.innerHTML = `
       <div class="empty-summary-state">
         <div class="empty-icon"><i class="fa-solid fa-chart-simple"></i></div>
-        <p>선택된 레코드가 없습니다</p>
+        <p>${window.i18n?.t('resources.noDiscSelected')}</p>
       </div>
     `;
     return;
@@ -1825,7 +1902,7 @@ function renderDiscResourceSummary(): void {
 
     advanceSection.innerHTML = `
       <div class="resource-category-header">
-        <div class="resource-category-title">승급 아이템 (레코드)</div>
+        <div class="resource-category-title">${window.i18n?.t('resources.advanceItemsDisc')}</div>
         ${estimateHTML}
       </div>
       <div class="resource-items-container" id="disc-advance-items-container"></div>
@@ -1880,7 +1957,7 @@ function renderDiscResourceSummary(): void {
 
       const title = document.createElement('div');
       title.className = 'resource-category-title';
-      title.textContent = '도라 (총합)';
+      title.textContent = window.i18n?.t('resources.doraTotal') || '도라 (총합)';
 
       const grid = document.createElement('div');
       grid.className = 'resource-items-grid';
@@ -2000,11 +2077,11 @@ function renderDiscExpItems(netExp: number): void {
 
 function clearAllDiscResources(): void {
   if (resourcesState.selectedDiscs.length === 0) {
-    window.showToast?.('초기화할 데이터가 없습니다', 'info');
+    window.showToast?.(window.i18n?.t('resources.noDataToReset') || '초기화할 데이터가 없습니다', 'info');
     return;
   }
 
-  if (confirm('모든 선택된 레코드와 계산된 자원을 초기화하시겠습니까?')) {
+  if (confirm(window.i18n?.t('resources.confirmResetDiscs') || '모든 선택된 레코드와 계산된 자원을 초기화하시겠습니까?')) {
     resourcesState.selectedDiscs = [];
     resourcesState.discResources = {};
 
@@ -2013,7 +2090,7 @@ function clearAllDiscResources(): void {
     renderDiscResourceSummary();
     saveResourcesState();
 
-    window.showToast?.('모든 데이터가 초기화되었습니다', 'success');
+    window.showToast?.(window.i18n?.t('resources.allDataReset') || '모든 데이터가 초기화되었습니다', 'success');
   }
 }
 
@@ -2076,7 +2153,7 @@ function renderAtAGlanceMatrix(): void {
       !resourcesState.characterAdvance ||
       !resourcesState.characterSkillUpgrade
     ) {
-      throw new Error('필요한 캐릭터 데이터가 로드되지 않았습니다.');
+      throw new Error(window.i18n?.t('resources.characterDataNotLoaded') || '필요한 캐릭터 데이터가 로드되지 않았습니다.');
     }
 
     const charMaterialMap = buildCharacterMaterialMap();
@@ -2255,7 +2332,7 @@ function renderCharacterBadgeMatrix(): void {
 
   try {
     if (!resourcesState.characters || !resourcesState.charGem) {
-      throw new Error('필요한 캐릭터 뱃지 데이터가 로드되지 않았습니다.');
+      throw new Error(window.i18n?.t('resources.badgeDataNotLoaded') || '필요한 캐릭터 뱃지 데이터가 로드되지 않았습니다.');
     }
 
     const badgeMap = buildCharacterBadgeMap();
@@ -2370,7 +2447,7 @@ function renderDiscAdvanceMatrix(): void {
 
   try {
     if (!resourcesState.discs || !resourcesState.discPromote || !resourcesState.gameEnums) {
-      throw new Error('필요한 레코드 데이터가 로드되지 않았습니다.');
+      throw new Error(window.i18n?.t('resources.discDataNotLoaded') || '필요한 레코드 데이터가 로드되지 않았습니다.');
     }
 
     const discMap = buildDiscAdvanceMap();
@@ -2534,6 +2611,18 @@ function initEventDelegation(): void {
   if (discGrid) {
     discGrid.addEventListener('click', handleDiscGridClick);
   }
+
+  // Search input for character selector
+  const searchInput = document.getElementById('character-resource-search') as HTMLInputElement;
+  if (searchInput) {
+    searchInput.addEventListener(
+      'input',
+      debounce((e: Event) => {
+        resourcesState.currentSearchFilter = (e.target as HTMLInputElement).value;
+        renderCharacterResourceGrid();
+      }, 150)
+    );
+  }
 }
 
 function handleCharacterListClick(event: Event): void {
@@ -2598,7 +2687,7 @@ function handleDiscInputChange(event: Event): void {
 
 function handleCharacterGridClick(event: Event): void {
   const target = event.target as HTMLElement;
-  const charItem = target.closest('.character-item:not(.disabled)') as HTMLElement;
+  const charItem = target.closest('.character-selector-card:not(.disabled)') as HTMLElement;
   if (charItem) {
     const characterId = charItem.dataset.characterId;
     if (characterId) {
@@ -2644,6 +2733,9 @@ async function initResourcesPage(): Promise<void> {
 
     await window.i18n?.init();
 
+    // Initialize Global Header after i18n is ready
+    initGlobalHeader('resources');
+
     window.addEventListener('languageChanged', async () => {
       console.log('[Resources] Language changed, reloading data');
       await loadResourcesData();
@@ -2685,7 +2777,7 @@ async function initResourcesPage(): Promise<void> {
     renderDiscResourceSummary();
   } catch (error) {
     console.error('Error initializing resources page:', error);
-    window.showToast?.('데이터 로딩 실패', 'error');
+    window.showToast?.(window.i18n?.t('resources.dataLoadingFailed') || '데이터 로딩 실패', 'error');
   } finally {
     showLoadingState(false);
   }
@@ -2697,7 +2789,7 @@ document.addEventListener('click', (event) => {
     const modalId = target.id;
     switch (modalId) {
       case 'my-materials-modal':
-        // closeMyMaterialsModal();
+        closeMyMaterialsModal();
         break;
       case 'character-resource-modal':
         closeCharacterResourceSelect();
@@ -2723,10 +2815,97 @@ if (document.readyState === 'loading') {
   initResourcesPage();
 }
 
+// =============================================================================
+// MY MATERIALS MODAL
+// =============================================================================
+
+function openMyMaterialsModal(): void {
+  const modal = document.getElementById('my-materials-modal');
+  const content = document.getElementById('my-materials-content');
+  if (!modal || !content) return;
+
+  content.innerHTML = '';
+  const fragment = document.createDocumentFragment();
+
+  const createMaterialInput = (itemId: string): string => {
+    const item = resourcesState.items[itemId];
+    if (!item) return '';
+    const ownedQty = resourcesState.ownedMaterials[itemId] || 0;
+    const itemName = resourcesState.itemNames[item.Title as string] || item.Title;
+    const iconFile = item.Icon ? (item.Icon as string).split('/').pop() : '';
+    const iconPath = `assets/items/${iconFile}.png`;
+    const bgImage = `assets/items/rare_item_a_${6 - (item.Rarity || 1)}.png`;
+
+    return `<div class="owned-material-item">
+      <div class="resource-item-icon-wrapper">
+        <img src="${bgImage}" class="resource-item-bg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <img src="${iconPath}" class="resource-item-icon" alt="${itemName}" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="resource-item-name">${itemName}</div>
+      <input type="number" class="owned-material-input" value="${ownedQty}" min="0" oninput="window.updateOwnedMaterial('${itemId}', this.value)" placeholder="0"/>
+    </div>`;
+  };
+
+  // Sections for different material types
+  const sections: Record<string, MaterialGroup[]> = {
+    '승급 아이템 (캐릭터)': MATERIAL_GROUPS.advance || [],
+    '승급 아이템 (레코드)': MATERIAL_GROUPS.discAdvance || [],
+    '스킬 강화 아이템': MATERIAL_GROUPS.skill || [],
+  };
+
+  for (const [title, groups] of Object.entries(sections)) {
+    const section = document.createElement('div');
+    section.className = 'owned-material-section';
+    const heading = document.createElement('h3');
+    heading.textContent = title;
+    section.appendChild(heading);
+
+    const grid = document.createElement('div');
+    grid.className = 'owned-material-grid';
+
+    groups.forEach((group) => {
+      const groupRow = document.createElement('div');
+      groupRow.className = 'owned-material-group-row';
+      group.items.forEach((itemId) => {
+        const div = document.createElement('div');
+        div.innerHTML = createMaterialInput(String(itemId));
+        groupRow.appendChild(div.firstElementChild as HTMLElement);
+      });
+      grid.appendChild(groupRow);
+    });
+
+    section.appendChild(grid);
+    fragment.appendChild(section);
+  }
+
+  content.appendChild(fragment);
+  modal.classList.add('active');
+}
+
+function closeMyMaterialsModal(): void {
+  const modal = document.getElementById('my-materials-modal');
+  if (modal) {
+    modal.classList.remove('active');
+  }
+  renderResourceSummary();
+  renderDiscResourceSummary();
+}
+
+function updateOwnedMaterial(itemId: string, quantity: string): void {
+  const numQty = parseInt(quantity);
+  if (isNaN(numQty) || numQty <= 0) {
+    delete resourcesState.ownedMaterials[itemId];
+  } else {
+    resourcesState.ownedMaterials[itemId] = numQty;
+  }
+  saveResourcesState();
+}
+
 // Global exports
 window.switchResourceTab = switchResourceTab;
 window.openCharacterResourceSelect = openCharacterResourceSelect;
 window.closeCharacterResourceSelect = closeCharacterResourceSelect;
+window.filterResourceCharactersByElement = filterResourceCharactersByElement;
 window.openDiscResourceSelect = openDiscResourceSelect;
 window.closeDiscResourceSelect = closeDiscResourceSelect;
 window.clearAllResources = clearAllResources;
@@ -2735,12 +2914,16 @@ window.showResourceHelp = showResourceHelp;
 window.closeResourceHelp = closeResourceHelp;
 window.showDiscResourceHelp = showDiscResourceHelp;
 window.closeDiscResourceHelp = closeDiscResourceHelp;
+window.openMyMaterialsModal = openMyMaterialsModal;
+window.closeMyMaterialsModal = closeMyMaterialsModal;
+window.updateOwnedMaterial = updateOwnedMaterial;
 
 declare global {
   interface Window {
     switchResourceTab: typeof switchResourceTab;
     openCharacterResourceSelect: typeof openCharacterResourceSelect;
     closeCharacterResourceSelect: typeof closeCharacterResourceSelect;
+    filterResourceCharactersByElement: typeof filterResourceCharactersByElement;
     openDiscResourceSelect: typeof openDiscResourceSelect;
     closeDiscResourceSelect: typeof closeDiscResourceSelect;
     clearAllResources: typeof clearAllResources;
@@ -2749,6 +2932,9 @@ declare global {
     closeResourceHelp: typeof closeResourceHelp;
     showDiscResourceHelp: typeof showDiscResourceHelp;
     closeDiscResourceHelp: typeof closeDiscResourceHelp;
+    openMyMaterialsModal: typeof openMyMaterialsModal;
+    closeMyMaterialsModal: typeof closeMyMaterialsModal;
+    updateOwnedMaterial: typeof updateOwnedMaterial;
   }
 }
 

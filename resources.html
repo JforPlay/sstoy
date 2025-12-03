@@ -34,13 +34,13 @@
     <link rel="icon" type="image/png" href="assets/others/favicon.png">
 
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <!-- Font Awesome 7 Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="css/utils.css">
     <link rel="stylesheet" href="css/components/ui-components.css">
-    <link rel="stylesheet" href="css/app-char.css">
     <link rel="stylesheet" href="css/resources.css">
     <link rel="stylesheet" href="css/resources-addon.css">
 
@@ -49,55 +49,12 @@
 </head>
 
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <a href="index.html" class="navbar-brand">
-            <span class="navbar-logo"><i class="fa-solid fa-star"></i></span>
-            <span class="navbar-title" data-i18n="nav.title">스소 도우미</span>
-        </a>
-        <button class="navbar-hamburger" id="navbar-hamburger" aria-label="Toggle menu">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-        <div class="navbar-menu" id="navbar-menu">
-            <div class="navbar-links">
-                <a href="characterdb.html" class="navbar-link" data-page="characterdb">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-book"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.characterdb">여행가 도감</span>
-                </a>
-                <a href="discdb.html" class="navbar-link" data-page="discdb">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-compact-disc"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.discdb">레코드 도감</span>
-                </a>
-                <a href="app.html" class="navbar-link" data-page="app">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-medal"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.builder">도자기 공방</span>
-                </a>
-                <a href="tasks.html" class="navbar-link" data-page="tasks">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-clipboard-list"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.tasks">의뢰 도우미</span>
-                </a>
-                <a href="resources.html" class="navbar-link" data-page="resources">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-box"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.resources">자원 도우미</span>
-                </a>
-            </div>
-            <button id="theme-toggle" class="theme-toggle" onclick="window.toggleTheme()">
-                <i class="theme-icon fa-solid fa-sun"></i>
-                <span class="theme-text" data-i18n="nav.themeLight">라이트</span>
-            </button>
-            <select id="language-select" class="language-select"
-                onchange="if(window.i18n) window.i18n.setLanguage(this.value)">
-                <option value="KR">KR | 한국어</option>
-                <option value="JP">JP | 日本語</option>
-                <option value="EN">EN | English</option>
-                <option value="CN">CN | 中文</option>
-            </select>
-        </div>
-    </nav>
+    <!-- Navigation Bar (Dynamic) -->
+    <div id="global-navigation"></div>
 
     <div class="container">
         <header>
-            <h1><i class="fa-solid fa-box"></i> <span data-i18n="resources.title">자원 도우미</span></h1>
+            <h1><img src="assets/others/btn_main_system_shop.png" alt="Resources Icon" class="page-title-icon"> <span data-i18n="resources.title">자원 도우미</span></h1>
             <p class="subtitle" data-i18n="resources.subtitle">캐릭터와 레코드 육성에 필요한 자원을 계산하세요</p>
         </header>
 
@@ -260,6 +217,40 @@
                 <div class="modal-header">
                     <h2 data-i18n="resources.selectCharacter">여행가 선택</h2>
                     <button class="close-btn" onclick="window.closeCharacterResourceSelect()">&times;</button>
+                </div>
+                <div class="selector-controls">
+                    <div class="search-container">
+                        <input type="text" id="character-resource-search" data-i18n-placeholder="builder.searchPlaceholder"
+                            placeholder="캐릭터 이름 검색..." class="search-input">
+                        <i class="fa-solid fa-search search-icon"></i>
+                    </div>
+
+                    <div class="element-filters">
+                        <button class="element-filter-btn active" data-element="all" onclick="window.filterResourceCharactersByElement('all')">
+                            <i class="fa-solid fa-border-all"></i> <span data-i18n="disc.allElements">전체</span>
+                        </button>
+                        <button class="element-filter-btn" data-element="1" onclick="window.filterResourceCharactersByElement('1')">
+                            <img src="assets/icon_common_property_1.png" alt="빛" class="element-icon" loading="lazy">
+                        </button>
+                        <button class="element-filter-btn" data-element="2" onclick="window.filterResourceCharactersByElement('2')">
+                            <img src="assets/icon_common_property_2.png" alt="어둠" class="element-icon" loading="lazy">
+                        </button>
+                        <button class="element-filter-btn" data-element="3" onclick="window.filterResourceCharactersByElement('3')">
+                            <img src="assets/icon_common_property_3.png" alt="물" class="element-icon" loading="lazy">
+                        </button>
+                        <button class="element-filter-btn" data-element="4" onclick="window.filterResourceCharactersByElement('4')">
+                            <img src="assets/icon_common_property_4.png" alt="불" class="element-icon" loading="lazy">
+                        </button>
+                        <button class="element-filter-btn" data-element="5" onclick="window.filterResourceCharactersByElement('5')">
+                            <img src="assets/icon_common_property_5.png" alt="번개" class="element-icon" loading="lazy">
+                        </button>
+                        <button class="element-filter-btn" data-element="6" onclick="window.filterResourceCharactersByElement('6')">
+                            <img src="assets/icon_common_property_6.png" alt="바람" class="element-icon" loading="lazy">
+                        </button>
+                        <button class="element-filter-btn" data-element="7" onclick="window.filterResourceCharactersByElement('7')">
+                            <img src="assets/icon_common_property_7.png" alt="얼음" class="element-icon" loading="lazy">
+                        </button>
+                    </div>
                 </div>
                 <div class="character-grid" id="character-resource-grid"></div>
             </div>
