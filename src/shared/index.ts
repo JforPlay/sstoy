@@ -265,7 +265,7 @@ export function initLanguageChangeListener(): void {
 // ICON SYSTEM
 // =============================================================================
 
-const ICONS: Record<string, string> = {
+export const ICONS: Record<string, string> = {
   // Navigation & Core
   logo: 'fa-solid fa-star',
   characterDB: 'fa-solid fa-book',
@@ -301,6 +301,12 @@ const ICONS: Record<string, string> = {
   attackPower: 'fa-solid fa-gavel',
   critPower: 'fa-solid fa-burst',
   impactPower: 'fa-solid fa-bolt',
+  // Character Stats (for characterdb stats display)
+  attack: 'fa-solid fa-hand-fist',
+  hp: 'fa-solid fa-heart',
+  defense: 'fa-solid fa-shield',
+  accuracy: 'fa-solid fa-bullseye',
+  critRate: 'fa-solid fa-star-half-stroke',
   // Toast Notifications
   error: 'fa-solid fa-circle-exclamation',
   warning: 'fa-solid fa-triangle-exclamation',
@@ -309,6 +315,7 @@ const ICONS: Record<string, string> = {
   //Misc
   sun: 'fa-solid fa-sun',
   moon: 'fa-solid fa-moon',
+  birthday: 'fa-solid fa-cake-candles',
 };
 
 /**
@@ -712,120 +719,6 @@ export function processDescriptionText(description: string): string {
 }
 
 // =============================================================================
-// POTENTIAL ICON HTML GENERATOR
-// =============================================================================
-
-/**
- * Generate HTML for potential icon (used in summary view)
- */
-export function generatePotentialIconHTML(
-  potId: number,
-  position: string,
-  stateOrLevel: any,
-  charIdOrMark: string | number | null = null
-): string {
-  // Handle both old signature (potId, position, level, mark)
-  // and new signature (potId, position, state, charId)
-  let level = 1;
-  let mark: string | null = null;
-  
-  if (typeof stateOrLevel === 'number') {
-    // Old signature: (potId, position, level, mark)
-    level = stateOrLevel;
-    mark = charIdOrMark as string | null;
-  } else {
-    // New signature: (potId, position, state, charId) - extract level from state
-    const state = stateOrLevel;
-    level = state?.potentialLevels?.[position]?.[potId] || 1;
-    mark = state?.potentialMarks?.[position]?.[potId] || null;
-  }
-
-  // IMAGE_SIZES constant for consistent dimensions
-  const IMAGE_SIZES = {
-    POTENTIAL_ICON: { width: 64, height: 64 },
-  };
-  if (!window.state?.potentials?.[potId]) return '';
-
-  const potential = window.state.potentials[potId];
-  const itemData = window.state.items?.[potId];
-
-  // Get potential name from itemNames using BriefDesc key
-  // Convert Potential.XXXXX.1 to Item.XXXXX.1 for itemNames lookup
-  const briefDescKey = potential.BriefDesc as string | undefined;
-  const itemKey = briefDescKey ? String(briefDescKey).replace('Potential.', 'Item.') : null;
-  const name = itemKey
-    ? window.state.itemNames?.[itemKey] || `Potential ${potId}`
-    : `Potential ${potId}`;
-
-  // Get icon path
-  let iconPath = '';
-  if (itemData?.Icon) {
-    const iconName = itemData.Icon.split('/').pop();
-    iconPath = `assets/skill_icons/${iconName}_A.png`;
-  }
-
-  // Determine background image based on Stype
-  let backgroundImage = '';
-  if (itemData) {
-    if (itemData.Stype === 42) {
-      backgroundImage = 'assets/skill_icons/rare_vestige_card_s_7.png';
-    } else if (itemData.Stype === 41) {
-      if (itemData.Rarity === 1) {
-        backgroundImage = 'assets/skill_icons/rare_vestige_card_s_9.png';
-      } else if (itemData.Rarity === 2) {
-        backgroundImage = 'assets/skill_icons/rare_vestige_card_s_8.png';
-      }
-    }
-  }
-
-  // Migrate old mark values to new ones (support both Korean and English)
-  let migratedMark = mark;
-  // Map legacy Korean to current Korean
-  if (mark === '권장') migratedMark = '다다익선';
-  if (mark === 'Lv.1') migratedMark = '명함만';
-  // Map English to Korean for display
-  if (mark === 'essential') migratedMark = '필수';
-  if (mark === 'recommended') migratedMark = '다다익선';
-  if (mark === 'minimum') migratedMark = '명함만';
-  if (mark === 'low') migratedMark = '후순위';
-
-  // Generate mark badge HTML
-  let markBadgeHTML = '';
-  if (migratedMark === '필수') {
-    markBadgeHTML = '<span class="pot-mark-badge essential">필수</span>';
-  } else if (migratedMark === '다다익선') {
-    markBadgeHTML = '<span class="pot-mark-badge recommended">다다익선</span>';
-  } else if (migratedMark === '명함만') {
-    markBadgeHTML = '<span class="pot-mark-badge level-one">명함만</span>';
-  } else if (migratedMark === '후순위') {
-    markBadgeHTML = '<span class="pot-mark-badge low-priority">후순위</span>';
-  }
-
-  return `
-        <div class="potential-icon-card">
-            <div class="potential-icon-compact"
-                 draggable="true"
-                 data-potential-id="${potId}"
-                 data-position="${position}">
-                ${
-                  backgroundImage
-                    ? `<img src="${backgroundImage}" alt="" class="pot-bg-img" loading="lazy" onerror="this.style.display='none'">`
-                    : ''
-                }
-                ${
-                  iconPath
-                    ? `<img src="${iconPath}" alt="${name}" class="pot-icon-img" loading="lazy" onerror="this.style.display='none'">`
-                    : '<span class="pot-icon-placeholder">✦</span>'
-                }
-                <div class="pot-level-badge">Lv.${level}</div>
-                ${markBadgeHTML}
-            </div>
-            <div class="pot-name-label">${name}</div>
-        </div>
-    `;
-}
-
-// =============================================================================
 // EMPTY STATE HELPERS
 // =============================================================================
 
@@ -931,7 +824,7 @@ export function initShared(): void {
   window.toggleTheme = toggleTheme;
   window.ICONS = ICONS;
   window.createIconElement = createIconElement;
-  window.generatePotentialIconHTML = generatePotentialIconHTML;
+  // window.generatePotentialIconHTML moved to ui-components
   window.parseElementTags = parseElementTags;
   window.processDescriptionText = processDescriptionText;
   window.handleImageError = handleImageError;
