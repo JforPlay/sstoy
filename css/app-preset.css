@@ -134,7 +134,7 @@
     background: rgba(231, 76, 60, 0.08);
 }
 
-.element-filter-btn {
+.preset-filters .element-filter-btn {
     padding: 0.375rem 0.875rem;
     border: 1.5px solid var(--border);
     border-radius: 1.25rem;
@@ -149,20 +149,20 @@
     gap: 0.25rem;
 }
 
-.element-filter-btn:hover {
+.preset-filters .element-filter-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
     background: rgba(var(--accent-rgb, 52, 152, 219), 0.08);
 }
 
-.element-filter-btn.active {
+.preset-filters .element-filter-btn.active {
     background: var(--accent);
     border-color: var(--accent);
     color: white;
 }
 
 /* Element Filter Icon */
-.element-filter-icon {
+.preset-filters .element-filter-icon {
     width: 20px;
     height: 20px;
     vertical-align: middle;

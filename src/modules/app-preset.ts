@@ -3,8 +3,8 @@
  * Handles preset build browsing and loading
  */
 
-import { log, onLanguageChange } from '@/shared';
-import type { MainTab } from '@/types';
+import { log, onLanguageChange } from '../shared';
+import type { MainTab } from '../types';
 
 // =============================================================================
 // TYPES
@@ -588,16 +588,9 @@ export async function renderPresets(): Promise<void> {
 // INITIALIZATION
 // =============================================================================
 
-function initPresetTab(): void {
+export function init(): void {
   setupPresetLoadButtons();
   log('[Preset] Tab initialized');
-}
-
-// Setup on DOM ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initPresetTab);
-} else {
-  initPresetTab();
 }
 
 // Listen for language changes

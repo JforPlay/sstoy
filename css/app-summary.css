@@ -839,7 +839,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.75rem;
-    min-height: 90px;
 }
 
 .summary-potential-icons-grid.specific-pots-grid {

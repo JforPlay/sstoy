@@ -25,7 +25,7 @@
     gap: 1.5rem;
 }
 
-.section-title {
+#discs-container .section-title {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-primary);
