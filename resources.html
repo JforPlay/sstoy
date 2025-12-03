@@ -262,6 +262,40 @@
                     <h2 data-i18n="resources.selectDisc">레코드 선택</h2>
                     <button class="close-btn" onclick="window.closeDiscResourceSelect()">&times;</button>
                 </div>
+                <div class="selector-controls">
+                    <div class="search-container">
+                        <input type="text" id="disc-resource-search" data-i18n-placeholder="builder.searchPlaceholder"
+                            placeholder="레코드 이름 검색..." class="search-input">
+                        <i class="fa-solid fa-search search-icon"></i>
+                    </div>
+
+                    <div class="element-filters">
+                        <button class="element-filter-btn active" data-element="all" onclick="window.filterResourceDiscsByElement('all')">
+                            <i class="fa-solid fa-border-all"></i> <span data-i18n="disc.allElements">전체</span>
+                        </button>
+                        <button class="element-filter-btn" data-element="1" onclick="window.filterResourceDiscsByElement('1')">
+                            <img src="assets/icon_common_property_1.png" alt="빛" class="element-icon" loading="lazy">
+                        </button>
+                        <button class="element-filter-btn" data-element="2" onclick="window.filterResourceDiscsByElement('2')">
+                            <img src="assets/icon_common_property_2.png" alt="어둠" class="element-icon" loading="lazy">
+                        </button>
+                        <button class="element-filter-btn" data-element="3" onclick="window.filterResourceDiscsByElement('3')">
+                            <img src="assets/icon_common_property_3.png" alt="물" class="element-icon" loading="lazy">
+                        </button>
+                        <button class="element-filter-btn" data-element="4" onclick="window.filterResourceDiscsByElement('4')">
+                            <img src="assets/icon_common_property_4.png" alt="불" class="element-icon" loading="lazy">
+                        </button>
+                        <button class="element-filter-btn" data-element="5" onclick="window.filterResourceDiscsByElement('5')">
+                            <img src="assets/icon_common_property_5.png" alt="번개" class="element-icon" loading="lazy">
+                        </button>
+                        <button class="element-filter-btn" data-element="6" onclick="window.filterResourceDiscsByElement('6')">
+                            <img src="assets/icon_common_property_6.png" alt="바람" class="element-icon" loading="lazy">
+                        </button>
+                        <button class="element-filter-btn" data-element="7" onclick="window.filterResourceDiscsByElement('7')">
+                            <img src="assets/icon_common_property_7.png" alt="얼음" class="element-icon" loading="lazy">
+                        </button>
+                    </div>
+                </div>
                 <div class="disc-grid" id="disc-resource-grid"></div>
             </div>
         </div>
