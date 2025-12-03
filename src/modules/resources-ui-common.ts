@@ -5,6 +5,9 @@
 import { resourcesState, saveResourcesState, MATERIAL_GROUPS } from './resources-state';
 import type { Item, MaterialGroup } from './resources-types';
 import { getCharactersUsingItem, getDiscsUsingItem } from './resources-calc';
+import { Modal } from '../shared/ui-components';
+
+let myMaterialsModal: Modal | null = null;
 
 export function showLoadingState(show: boolean): void {
   let loader = document.getElementById('resources-loader');
@@ -141,9 +144,12 @@ export function createResourceItemElement(
 }
 
 export function openMyMaterialsModal(): void {
-  const modal = document.getElementById('my-materials-modal');
+  if (!myMaterialsModal) {
+    myMaterialsModal = new Modal('my-materials-modal');
+  }
+
   const content = document.getElementById('my-materials-content');
-  if (!modal || !content) return;
+  if (!content) return;
 
   content.innerHTML = '';
   const fragment = document.createDocumentFragment();
@@ -199,13 +205,12 @@ export function openMyMaterialsModal(): void {
   }
 
   content.appendChild(fragment);
-  modal.classList.add('active');
+  myMaterialsModal.open();
 }
 
 export function closeMyMaterialsModal(renderCallback: () => void): void {
-  const modal = document.getElementById('my-materials-modal');
-  if (modal) {
-    modal.classList.remove('active');
+  if (myMaterialsModal) {
+    myMaterialsModal.close();
   }
   renderCallback();
 }

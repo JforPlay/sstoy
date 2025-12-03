@@ -19,8 +19,7 @@
 
 /* Main container for all matrices */
 #glance-matrix-container,
-#character-badge-matrix-container,
-#disc-advance-matrix-container {
+#character-badge-matrix-container {
     width: 100%;
     overflow-x: auto;
     padding: 1rem;
@@ -37,10 +36,6 @@
 
 #character-badge-matrix-container {
     margin-bottom: 2rem;
-}
-
-#disc-advance-matrix-container {
-    /* No extra margin needed */
 }
 
 /* Section headers for matrices */
@@ -103,6 +98,7 @@
     box-shadow: inset 0 0 0 1px var(--border);
     min-width: 110px;
     min-height: 110px;
+    height: 1px;
 }
 
 /* Unified header cells (th) */
@@ -199,23 +195,6 @@
     width: 48px;
     height: 48px;
     object-fit: contain;
-}
-
-/* Disc portraits in the disc matrix - larger and square */
-#disc-advance-matrix .char-portrait {
-    width: 72px;
-    height: 72px;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-#disc-advance-matrix .char-portrait:hover {
-    transform: scale(1.12);
-    border-radius: 8px;
-}
-
-#disc-advance-matrix .char-portraits-grid {
-    grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
 }
 
 /* ============================================================================
@@ -352,8 +331,7 @@
 
 @media (max-width: 768px) {
     #glance-matrix-container,
-    #character-badge-matrix-container,
-    #disc-advance-matrix-container {
+    #character-badge-matrix-container {
         padding: 0.5rem;
     }
 
@@ -400,15 +378,6 @@
         height: 36px;
     }
 
-    #disc-advance-matrix .char-portrait {
-        width: 56px;
-        height: 56px;
-    }
-
-    #disc-advance-matrix .char-portraits-grid {
-        grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
-    }
-
     .matrix-section-header {
         padding: 0.75rem 0;
     }
@@ -423,8 +392,7 @@
    ============================================================================ */
 
 #glance-matrix-container .loading-overlay,
-#character-badge-matrix-container .loading-overlay,
-#disc-advance-matrix-container .loading-overlay {
+#character-badge-matrix-container .loading-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -462,3 +430,168 @@
     font-size: 1rem;
     margin: 0;
 }
+
+/* ============================================================================
+   COMBINED ADVANCE MATRIX STYLES
+   ============================================================================ */
+
+#combined-advance-matrix-container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 1rem;
+    background: var(--glance-bg-gradient);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 24px var(--shadow, rgba(0, 0, 0, 0.2));
+}
+
+/* Combined matrix header with two materials side by side */
+.combined-material-header {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.combined-material-header .material-icon-wrapper {
+    width: 45px;
+    height: 45px;
+}
+
+.combined-material-header .material-icon {
+    width: 28px;
+    height: 28px;
+}
+
+/* Combined portraits container - horizontal layout (side by side) */
+.combined-portraits-container {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    padding: 8px;
+    min-height: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+/* Section for characters or discs within a cell */
+.combined-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 6px;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
+    flex: 1;
+    align-self: stretch;
+}
+
+.combined-characters {
+    background: rgba(107, 155, 209, 0.1);
+    border: 1px solid rgba(107, 155, 209, 0.3);
+}
+
+.combined-discs {
+    background: rgba(232, 138, 173, 0.1);
+    border: 1px solid rgba(232, 138, 173, 0.3);
+}
+
+/* Smaller portrait size for combined view */
+.combined-section .char-portrait.small {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+}
+
+.combined-section .char-portrait.small:hover {
+    transform: scale(1.15);
+    z-index: 10;
+    position: relative;
+}
+
+/* Disc portraits - square style matching disc matrix */
+.disc-portrait-square {
+    width: 68px;
+    height: 68px;
+    border-radius: 8px;
+    border: 2px solid var(--border-light, #44475a);
+    object-fit: cover;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.disc-portrait-square:hover {
+    transform: scale(1.15);
+    z-index: 10;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(232, 138, 173, 0.5);
+    border-color: var(--pastel-pink, #e88aad);
+}
+
+/* Combined matrix specific adjustments */
+#combined-advance-matrix td {
+    min-width: 240px;
+    min-height: 120px;
+    padding: 0;
+    vertical-align: stretch;
+}
+
+#combined-advance-matrix-4star td {
+    min-width: 240px;
+    min-height: 120px;
+    padding: 0;
+    vertical-align: stretch;
+}
+
+#combined-advance-matrix th {
+    min-width: 120px;
+}
+
+/* Responsive adjustments for combined matrix */
+@media (max-width: 768px) {
+    .combined-material-header {
+        flex-direction: row;
+        gap: 4px;
+    }
+    
+    .combined-material-header .material-icon-wrapper {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .combined-portraits-container {
+        gap: 6px;
+        padding: 6px;
+        min-height: 120px;
+    }
+    
+    .combined-section {
+        gap: 3px;
+        padding: 4px;
+        min-height: 50px;
+    }
+    
+    .combined-section .char-portrait.small {
+        width: 42px;
+        height: 42px;
+    }
+    
+    .disc-portrait-square {
+        width: 56px;
+        height: 56px;
+    }
+    
+    #combined-advance-matrix td {
+        min-width: 140px;
+        min-height: 140px;
+        padding: 4px;
+    }
+    
+    #combined-advance-matrix th {
+        min-width: 90px;
+    }
+}
+

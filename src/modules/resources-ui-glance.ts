@@ -20,9 +20,10 @@ export function renderGlanceTabContent(): void {
   if (loader) loader.style.display = 'flex';
 
   try {
+    renderCombinedAdvanceMatrix();
+    renderCombinedAdvanceMatrix4Star();
     renderAtAGlanceMatrix();
     renderCharacterBadgeMatrix();
-    renderDiscAdvanceMatrix();
 
     isGlanceTabRendered = true;
   } catch (error) {
@@ -336,55 +337,110 @@ function generateCharacterBadgeMatrixHtml(badgeMapData: BadgeMapData): string {
 }
 
 /**
- * Render disc advancement matrix
+ * Render combined character and disc advancement matrix
+ * Groups materials by first digit (same dungeon source)
  */
-function renderDiscAdvanceMatrix(): void {
-  const container = document.getElementById('disc-advance-matrix-container');
+function renderCombinedAdvanceMatrix(): void {
+  const container = document.getElementById('combined-advance-matrix-container');
   if (!container) return;
 
   try {
-    if (!resourcesState.discs || !resourcesState.discPromote || !resourcesState.gameEnums) {
-      throw new Error(window.i18n?.t('resources.discDataNotLoaded') || '필요한 레코드 데이터가 로드되지 않았습니다.');
+    if (!resourcesState.characters || !resourcesState.discs || 
+        !resourcesState.characterAdvance || !resourcesState.discPromote || 
+        !resourcesState.gameEnums) {
+      throw new Error(window.i18n?.t('resources.dataLoadingFailed') || '데이터 로드 실패');
     }
 
-    const discMap = buildDiscAdvanceMap();
-    const matrixHtml = generateDiscAdvanceMatrixHtml(discMap);
+    const combinedData = buildCombinedAdvanceMap();
+    const matrixHtml = generateCombinedAdvanceMatrixHtml(combinedData);
 
     container.innerHTML = matrixHtml;
-    initMatrixInteractions(document.getElementById('disc-advance-matrix'));
+    initMatrixInteractions(document.getElementById('combined-advance-matrix'));
   } catch (error) {
-    console.error('Error rendering disc advance matrix:', error);
+    console.error('Error rendering combined advance matrix:', error);
     const errorMsg = error instanceof Error ? error.message : String(error);
-    container.innerHTML = `<p>레코드 승급 매트릭스 생성 중 오류: ${errorMsg}</p>`;
+    container.innerHTML = `<p>통합 승급 매트릭스 생성 중 오류: ${errorMsg}</p>`;
   }
 }
 
-function buildDiscAdvanceMap(): Map<number, Map<number, Disc[]>> {
-  const discMap = new Map<number, Map<number, Disc[]>>();
-  const materialGroupMap = new Map(MATERIAL_GROUPS.discAdvance?.map((g, i) => [i, g.items]) || []);
+interface CombinedAdvanceData {
+  characters: Map<number, Map<number, CharacterData[]>>;
+  discs: Map<number, Map<number, Disc[]>>;
+  materialGroups: Array<{ charGroup: number; discGroup: number }>;
+}
 
-  const findGroupIndex = (itemId: number): number => {
-    for (const [index, items] of materialGroupMap.entries()) {
+function buildCombinedAdvanceMap(): CombinedAdvanceData {
+  const characterMap = new Map<number, Map<number, CharacterData[]>>();
+  const discMap = new Map<number, Map<number, Disc[]>>();
+  
+  // Material group indices that will be paired together
+  const materialGroups = [
+    { charGroup: 0, discGroup: 0 }, // 20071-73 with 21071-73
+    { charGroup: 1, discGroup: 1 }, // 20081-83 with 21081-83
+    { charGroup: 2, discGroup: 2 }, // 20091-93 with 21091-93
+  ];
+
+  const charMaterialGroupMap = new Map(MATERIAL_GROUPS.advance?.map((g, i) => [i, g.items]) || []);
+  const discMaterialGroupMap = new Map(MATERIAL_GROUPS.discAdvance?.map((g, i) => [i, g.items]) || []);
+
+  const findGroupIndex = (itemMap: Map<number, number[]>, itemId: number): number => {
+    for (const [index, items] of itemMap.entries()) {
       if (items.includes(itemId)) return index;
     }
     return -1;
   };
 
+  // Build character map by element
+  for (const character of Object.values(resourcesState.characters)) {
+    if (!character.Visible || !character.Available || character.Grade !== 1) {
+      continue; // Only 5-star (Grade 1)
+    }
+
+    const elementType = character.EET as number;
+    if (!characterMap.has(elementType)) {
+      characterMap.set(elementType, new Map());
+    }
+    const elementCharMap = characterMap.get(elementType)!;
+
+    if (character.AdvanceGroup) {
+      const advanceData = Object.values(resourcesState.characterAdvance).filter(
+        (adv) => adv.Group === character.AdvanceGroup
+      );
+      
+      for (const adv of advanceData) {
+        for (let i = 1; i <= 4; i++) {
+          const tid = adv[`Tid${i}`];
+          if (tid) {
+            const groupIndex = findGroupIndex(charMaterialGroupMap, tid as number);
+            if (groupIndex !== -1) {
+              if (!elementCharMap.has(groupIndex)) {
+                elementCharMap.set(groupIndex, []);
+              }
+              const chars = elementCharMap.get(groupIndex)!;
+              if (!chars.some((c) => c.Id === character.Id)) {
+                chars.push(character);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Build disc map by element
   for (const disc of Object.values(resourcesState.discs)) {
     if (!disc.Visible || !disc.Available || (disc.StrengthenGroupId as number) < 41) {
-      continue;
+      continue; // Only 5-star discs
     }
 
     const promoteGroupId = disc.PromoteGroupId as number;
-    if (!promoteGroupId) {
-      continue;
-    }
+    if (!promoteGroupId) continue;
 
-    const eet = disc.EET as number;
-    if (!discMap.has(eet)) {
-      discMap.set(eet, new Map());
+    const elementType = disc.EET as number;
+    if (!discMap.has(elementType)) {
+      discMap.set(elementType, new Map());
     }
-    const elementMap = discMap.get(eet)!;
+    const elementDiscMap = discMap.get(elementType)!;
 
     for (let i = 1; i <= 8; i++) {
       const promoteId = `${promoteGroupId}${String(i).padStart(3, '0')}`;
@@ -394,14 +450,14 @@ function buildDiscAdvanceMap(): Map<number, Map<number, Disc[]>> {
         for (let j = 1; j <= 3; j++) {
           const itemId = promoteData[`ItemId${j}`];
           if (itemId) {
-            const groupIndex = findGroupIndex(parseInt(String(itemId)));
+            const groupIndex = findGroupIndex(discMaterialGroupMap, parseInt(String(itemId)));
             if (groupIndex !== -1) {
-              if (!elementMap.has(groupIndex)) {
-                elementMap.set(groupIndex, []);
+              if (!elementDiscMap.has(groupIndex)) {
+                elementDiscMap.set(groupIndex, []);
               }
-              const discsInGroup = elementMap.get(groupIndex)!;
-              if (!discsInGroup.some((d) => d.Id === disc.Id)) {
-                discsInGroup.push(disc);
+              const discs = elementDiscMap.get(groupIndex)!;
+              if (!discs.some((d) => d.Id === disc.Id)) {
+                discs.push(disc);
               }
             }
           }
@@ -410,52 +466,81 @@ function buildDiscAdvanceMap(): Map<number, Map<number, Disc[]>> {
     }
   }
 
-  return discMap;
+  return { characters: characterMap, discs: discMap, materialGroups };
 }
 
-function generateDiscAdvanceMatrixHtml(discMap: Map<number, Map<number, Disc[]>>): string {
-  const materialGroups = MATERIAL_GROUPS.discAdvance || [];
+function generateCombinedAdvanceMatrixHtml(data: CombinedAdvanceData): string {
+  const { characters, discs, materialGroups } = data;
   const gameEnums = resourcesState.gameEnums as unknown as {
     elementType: Record<string, { name: string; icon: string; id?: number }>;
   };
   const elementTypes = Object.entries(gameEnums.elementType)
     .map(([id, e]) => ({ ...e, id: parseInt(id) }))
-    .filter((e) => e.id && e.id > 0 && e.id < 7);
+    .filter((e) => e.id && e.id > 0 && e.id < 7)
+    .sort((a, b) => a.id! - b.id!);
 
-  if (discMap.size === 0) {
-    return `<div class="matrix-empty-state">
-        <i class="fa-solid fa-compact-disc"></i>
-        <p>5성 레코드 데이터를 불러올 수 없습니다.</p>
-    </div>`;
-  }
-
+  // Header: Material pairs (character + disc materials side by side)
   let headerHtml = '<thead><tr><th></th>';
-  materialGroups.forEach((group, index) => {
-    const item = resourcesState.items[group.items[0]!];
-    const itemName = item?.Title ? resourcesState.itemNames[item.Title as string] || '' : '';
-    const iconPath = item?.Icon ? `assets/items/${item.Icon.split('/').pop()}.png` : '';
-    headerHtml += `<th data-col-index="${index}"><div class="material-icon-wrapper" title="${itemName}">
-                   <img src="${iconPath}" class="material-icon" loading="lazy" alt="${itemName}" onerror="this.style.display='none'">
-                 </div></th>`;
+  materialGroups.forEach((groupPair, pairIndex) => {
+    const charGroup = MATERIAL_GROUPS.advance?.[groupPair.charGroup];
+    const discGroup = MATERIAL_GROUPS.discAdvance?.[groupPair.discGroup];
+    
+    const charItem = charGroup ? resourcesState.items[charGroup.items[0]!] : null;
+    const discItem = discGroup ? resourcesState.items[discGroup.items[0]!] : null;
+    
+    const charName = charItem?.Title ? resourcesState.itemNames[charItem.Title as string] || '' : '';
+    const discName = discItem?.Title ? resourcesState.itemNames[discItem.Title as string] || '' : '';
+    
+    const charIconPath = charItem?.Icon ? `assets/items/${charItem.Icon.split('/').pop()}.png` : '';
+    const discIconPath = discItem?.Icon ? `assets/items/${discItem.Icon.split('/').pop()}.png` : '';
+    
+    headerHtml += `<th data-col-index="${pairIndex}">
+      <div class="combined-material-header">
+        <div class="material-icon-wrapper material-char" title="${charName}">
+          <img src="${charIconPath}" class="material-icon" loading="lazy" alt="${charName}">
+        </div>
+        <div class="material-icon-wrapper material-disc" title="${discName}">
+          <img src="${discIconPath}" class="material-icon" loading="lazy" alt="${discName}">
+        </div>
+      </div>
+    </th>`;
   });
   headerHtml += '</tr></thead>';
 
+  // Body: Rows by element
   let bodyHtml = '<tbody>';
-  let rowCount = 0;
-  elementTypes.forEach((elementType, index) => {
-    if (!discMap.has(elementType.id!)) return;
+  elementTypes.forEach((elementType, rowIndex) => {
+    const elementId = elementType.id!;
+    bodyHtml += `<tr data-row-index="${rowIndex}">`;
+    bodyHtml += `<th data-row-index="${rowIndex}">
+      <img src="${elementType.icon}" class="element-icon" loading="lazy" title="${elementType.name}">
+    </th>`;
 
-    rowCount++;
-    bodyHtml += `<tr data-row-index="${index}">`;
-    bodyHtml += `<th data-row-index="${index}"><img src="${elementType.icon}" class="element-icon" loading="lazy" title="${elementType.name}"></th>`;
+    const elementCharMap = characters.get(elementId);
+    const elementDiscMap = discs.get(elementId);
 
-    const elementDiscMap = discMap.get(elementType.id!);
-
-    materialGroups.forEach((_, groupIndex) => {
-      bodyHtml += `<td data-col-index="${groupIndex}"><div class="char-portraits-grid">`;
-      const discs = elementDiscMap ? elementDiscMap.get(groupIndex) : null;
-      if (discs && discs.length > 0) {
-        discs.forEach((disc) => {
+    materialGroups.forEach((groupPair, colIndex) => {
+      bodyHtml += `<td data-col-index="${colIndex}">
+        <div class="combined-portraits-container">`;
+      
+      // Characters section
+      bodyHtml += '<div class="combined-section combined-characters">';
+      const chars = elementCharMap?.get(groupPair.charGroup);
+      if (chars && chars.length > 0) {
+        chars.forEach((char) => {
+          const charName = char.Name
+            ? resourcesState.characterNames[char.Name as string] || ''
+            : '';
+          bodyHtml += `<img src="assets/char/avg1_${char.Id}_002.png" class="char-portrait small" loading="lazy" title="[여행가] ${charName}" onerror="this.src='assets/char/${char.Id}_icon.png'">`;
+        });
+      }
+      bodyHtml += '</div>';
+      
+      // Discs section
+      bodyHtml += '<div class="combined-section combined-discs">';
+      const discList = elementDiscMap?.get(groupPair.discGroup);
+      if (discList && discList.length > 0) {
+        discList.forEach((disc) => {
           const discIPData = resourcesState.discIP[disc.Id];
           const discNameKey = discIPData?.StoryName;
           const discName = discNameKey
@@ -463,21 +548,230 @@ function generateDiscAdvanceMatrixHtml(discMap: Map<number, Map<number, Disc[]>>
             : `Disc ${disc.Id}`;
           const iconFile = disc.DiscBg ? String(disc.DiscBg).split('/').pop() : '';
           const iconPath = `assets/disc_icons/outfit_${iconFile}.png`;
-          bodyHtml += `<img src="${iconPath}" class="char-portrait" loading="lazy" title="${discName}" onerror="this.style.display='none'">`;
+          bodyHtml += `<img src="${iconPath}" class="disc-portrait-square" loading="lazy" title="[레코드] ${discName}" onerror="this.style.display='none'">`;
         });
       }
+      bodyHtml += '</div>';
+      
       bodyHtml += '</div></td>';
     });
     bodyHtml += '</tr>';
   });
   bodyHtml += '</tbody>';
 
-  if (rowCount === 0) {
-    return `<div class="matrix-empty-state">
-        <i class="fa-solid fa-compact-disc"></i>
-        <p>표시할 5성 레코드가 없습니다.</p>
-    </div>`;
+  return `<table class="glance-sub-matrix combined-matrix" id="combined-advance-matrix">${headerHtml}${bodyHtml}</table>`;
+}
+
+/**
+ * Render combined character (4-star) and disc (5-star) advancement matrix
+ */
+function renderCombinedAdvanceMatrix4Star(): void {
+  const container = document.getElementById('combined-advance-matrix-4star-container');
+  if (!container) return;
+
+  try {
+    if (!resourcesState.characters || !resourcesState.discs || 
+        !resourcesState.characterAdvance || !resourcesState.discPromote || 
+        !resourcesState.gameEnums) {
+      throw new Error(window.i18n?.t('resources.dataLoadingFailed') || '데이터 로드 실패');
+    }
+
+    const combinedData = buildCombinedAdvanceMap4Star();
+    const matrixHtml = generateCombinedAdvanceMatrixHtml4Star(combinedData);
+
+    container.innerHTML = matrixHtml;
+    initMatrixInteractions(document.getElementById('combined-advance-matrix-4star'));
+  } catch (error) {
+    console.error('Error rendering 4-star combined advance matrix:', error);
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    container.innerHTML = `<p>통합 승급 매트릭스 (4성) 생성 중 오류: ${errorMsg}</p>`;
+  }
+}
+
+function buildCombinedAdvanceMap4Star(): CombinedAdvanceData {
+  const characterMap = new Map<number, Map<number, CharacterData[]>>();
+  const discMap = new Map<number, Map<number, Disc[]>>();
+  
+  const materialGroups = [
+    { charGroup: 0, discGroup: 0 },
+    { charGroup: 1, discGroup: 1 },
+    { charGroup: 2, discGroup: 2 },
+  ];
+
+  const charMaterialGroupMap = new Map(MATERIAL_GROUPS.advance?.map((g, i) => [i, g.items]) || []);
+  const discMaterialGroupMap = new Map(MATERIAL_GROUPS.discAdvance?.map((g, i) => [i, g.items]) || []);
+
+  const findGroupIndex = (itemMap: Map<number, number[]>, itemId: number): number => {
+    for (const [index, items] of itemMap.entries()) {
+      if (items.includes(itemId)) return index;
+    }
+    return -1;
+  };
+
+  // Build character map by element - 4-star only (Grade 2)
+  for (const character of Object.values(resourcesState.characters)) {
+    if (!character.Visible || !character.Available || character.Grade !== 2) {
+      continue; // Only 4-star (Grade 2)
+    }
+
+    const elementType = character.EET as number;
+    if (!characterMap.has(elementType)) {
+      characterMap.set(elementType, new Map());
+    }
+    const elementCharMap = characterMap.get(elementType)!;
+
+    if (character.AdvanceGroup) {
+      const advanceData = Object.values(resourcesState.characterAdvance).filter(
+        (adv) => adv.Group === character.AdvanceGroup
+      );
+      
+      for (const adv of advanceData) {
+        for (let i = 1; i <= 4; i++) {
+          const tid = adv[`Tid${i}`];
+          if (tid) {
+            const groupIndex = findGroupIndex(charMaterialGroupMap, tid as number);
+            if (groupIndex !== -1) {
+              if (!elementCharMap.has(groupIndex)) {
+                elementCharMap.set(groupIndex, []);
+              }
+              const chars = elementCharMap.get(groupIndex)!;
+              if (!chars.some((c) => c.Id === character.Id)) {
+                chars.push(character);
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
-  return `<table class="glance-sub-matrix" id="disc-advance-matrix">${headerHtml}${bodyHtml}</table>`;
+  // Build disc map by element - 5-star only (same as before)
+  for (const disc of Object.values(resourcesState.discs)) {
+    if (!disc.Visible || !disc.Available || (disc.StrengthenGroupId as number) < 41) {
+      continue;
+    }
+
+    const promoteGroupId = disc.PromoteGroupId as number;
+    if (!promoteGroupId) continue;
+
+    const elementType = disc.EET as number;
+    if (!discMap.has(elementType)) {
+      discMap.set(elementType, new Map());
+    }
+    const elementDiscMap = discMap.get(elementType)!;
+
+    for (let i = 1; i <= 8; i++) {
+      const promoteId = `${promoteGroupId}${String(i).padStart(3, '0')}`;
+      const promoteData = resourcesState.discPromote[promoteId];
+
+      if (promoteData) {
+        for (let j = 1; j <= 3; j++) {
+          const itemId = promoteData[`ItemId${j}`];
+          if (itemId) {
+            const groupIndex = findGroupIndex(discMaterialGroupMap, parseInt(String(itemId)));
+            if (groupIndex !== -1) {
+              if (!elementDiscMap.has(groupIndex)) {
+                elementDiscMap.set(groupIndex, []);
+              }
+              const discs = elementDiscMap.get(groupIndex)!;
+              if (!discs.some((d) => d.Id === disc.Id)) {
+                discs.push(disc);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return { characters: characterMap, discs: discMap, materialGroups };
 }
+
+function generateCombinedAdvanceMatrixHtml4Star(data: CombinedAdvanceData): string {
+  const { characters, discs, materialGroups } = data;
+  const gameEnums = resourcesState.gameEnums as unknown as {
+    elementType: Record<string, { name: string; icon: string; id?: number }>;  };
+  const elementTypes = Object.entries(gameEnums.elementType)
+    .map(([id, e]) => ({ ...e, id: parseInt(id) }))
+    .filter((e) => e.id && e.id > 0 && e.id < 7)
+    .sort((a, b) => a.id! - b.id!);
+
+  let headerHtml = '<thead><tr><th></th>';
+  materialGroups.forEach((groupPair, pairIndex) => {
+    const charGroup = MATERIAL_GROUPS.advance?.[groupPair.charGroup];
+    const discGroup = MATERIAL_GROUPS.discAdvance?.[groupPair.discGroup];
+    
+    const charItem = charGroup ? resourcesState.items[charGroup.items[0]!] : null;
+    const discItem = discGroup ? resourcesState.items[discGroup.items[0]!] : null;
+    
+    const charName = charItem?.Title ? resourcesState.itemNames[charItem.Title as string] || '' : '';
+    const discName = discItem?.Title ? resourcesState.itemNames[discItem.Title as string] || '' : '';
+    
+    const charIconPath = charItem?.Icon ? `assets/items/${charItem.Icon.split('/').pop()}.png` : '';
+    const discIconPath = discItem?.Icon ? `assets/items/${discItem.Icon.split('/').pop()}.png` : '';
+    
+    headerHtml += `<th data-col-index="${pairIndex}">
+      <div class="combined-material-header">
+        <div class="material-icon-wrapper material-char" title="${charName}">
+          <img src="${charIconPath}" class="material-icon" loading="lazy" alt="${charName}">
+        </div>
+        <div class="material-icon-wrapper material-disc" title="${discName}">
+          <img src="${discIconPath}" class="material-icon" loading="lazy" alt="${discName}">
+        </div>
+      </div>
+    </th>`;
+  });
+  headerHtml += '</tr></thead>';
+
+  let bodyHtml = '<tbody>';
+  elementTypes.forEach((elementType, rowIndex) => {
+    const elementId = elementType.id!;
+    bodyHtml += `<tr data-row-index="${rowIndex}">`;
+    bodyHtml += `<th data-row-index="${rowIndex}">
+      <img src="${elementType.icon}" class="element-icon" loading="lazy" title="${elementType.name}">
+    </th>`;
+
+    const elementCharMap = characters.get(elementId);
+    const elementDiscMap = discs.get(elementId);
+
+    materialGroups.forEach((groupPair, colIndex) => {
+      bodyHtml += `<td data-col-index="${colIndex}">
+        <div class="combined-portraits-container">`;
+      
+      bodyHtml += '<div class="combined-section combined-characters">';
+      const chars = elementCharMap?.get(groupPair.charGroup);
+      if (chars && chars.length > 0) {
+        chars.forEach((char) => {
+          const charName = char.Name
+            ? resourcesState.characterNames[char.Name as string] || ''
+            : '';
+          bodyHtml += `<img src="assets/char/avg1_${char.Id}_002.png" class="char-portrait small" loading="lazy" title="[여행가 4★] ${charName}" onerror="this.src='assets/char/${char.Id}_icon.png'">`;
+        });
+      }
+      bodyHtml += '</div>';
+      
+      bodyHtml += '<div class="combined-section combined-discs">';
+      const discList = elementDiscMap?.get(groupPair.discGroup);
+      if (discList && discList.length > 0) {
+        discList.forEach((disc) => {
+          const discIPData = resourcesState.discIP[disc.Id];
+          const discNameKey = discIPData?.StoryName;
+          const discName = discNameKey
+            ? resourcesState.discIPNames[discNameKey as string] || `Disc ${disc.Id}`
+            : `Disc ${disc.Id}`;
+          const iconFile = disc.DiscBg ? String(disc.DiscBg).split('/').pop() : '';
+          const iconPath = `assets/disc_icons/outfit_${iconFile}.png`;
+          bodyHtml += `<img src="${iconPath}" class="disc-portrait-square" loading="lazy" title="[레코드 5★] ${discName}" onerror="this.style.display='none'">`;
+        });
+      }
+      bodyHtml += '</div>';
+      
+      bodyHtml += '</div></td>';
+    });
+    bodyHtml += '</tr>';
+  });
+  bodyHtml += '</tbody>';
+
+  return `<table class="glance-sub-matrix combined-matrix" id="combined-advance-matrix-4star">${headerHtml}${bodyHtml}</table>`;
+}
+

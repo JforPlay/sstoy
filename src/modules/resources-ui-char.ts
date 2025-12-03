@@ -5,7 +5,10 @@
 import { resourcesState, saveResourcesState, MATERIAL_GROUPS } from './resources-state';
 import { calculateCharacterResources, buildItemUsageIndex, calculateNetResourcesWithMerging, calculateStaminaEstimate, calculateTotalOwnedExp, isGroupedMaterial } from './resources-calc';
 import { createResourceItemElement } from './resources-ui-common';
+import { Modal } from '../shared/ui-components';
 import type { SelectedCharacter, TotalResources, CharacterData, CharacterAdvance } from './resources-types';
+
+let characterModal: Modal | null = null;
 
 export function renderCharacterResourceGrid(): void {
   const grid = document.getElementById('character-resource-grid');
@@ -88,9 +91,9 @@ export function renderCharacterResourceGrid(): void {
 }
 
 export function openCharacterResourceSelect(): void {
-  const modal = document.getElementById('character-resource-modal');
-
-  if (!modal) return;
+  if (!characterModal) {
+    characterModal = new Modal('character-resource-modal');
+  }
 
   // Reset filters when opening
   resourcesState.currentElementFilter = 'all';
@@ -102,7 +105,7 @@ export function openCharacterResourceSelect(): void {
   document.querySelector('.element-filter-btn[data-element="all"]')?.classList.add('active');
 
   renderCharacterResourceGrid();
-  modal.classList.add('active');
+  characterModal.open();
 
   // Focus and clear search input
   const searchInput = document.getElementById('character-resource-search') as HTMLInputElement;
@@ -113,7 +116,9 @@ export function openCharacterResourceSelect(): void {
 }
 
 export function closeCharacterResourceSelect(): void {
-  document.getElementById('character-resource-modal')?.classList.remove('active');
+  if (characterModal) {
+    characterModal.close();
+  }
 }
 
 export function selectCharacterForResources(characterId: string): void {
@@ -228,6 +233,11 @@ export function renderSelectedCharactersList(): void {
   resourcesState.selectedCharacters.forEach((char) => {
     // Look up name dynamically for i18n support
     const currentName = resourcesState.characterNames[resourcesState.characters[char.id]?.Name as string] || char.name;
+    const character = resourcesState.characters[char.id];
+    const elementInfo = character?.EET ? resourcesState.gameEnums.elementType?.[character.EET] : undefined;
+    const elementIcon = elementInfo?.icon || '';
+    const elementName = elementInfo?.name || '';
+    const gradeStars = character?.Grade === 1 ? 5 : character?.Grade === 2 ? 4 : 3;
 
     const card = document.createElement('div');
     card.className = 'character-resource-card';
@@ -240,7 +250,11 @@ export function renderSelectedCharactersList(): void {
              loading="lazy"
              onerror="this.src='assets/char/${char.id}_icon.png'">
         <div class="character-resource-info">
-          <div class="character-resource-name">${currentName}</div>
+          <div class="character-resource-name" style="display: flex; align-items: center; gap: 8px;">
+            <span>${currentName}</span>
+            ${elementIcon ? `<img src="${elementIcon}" alt="${elementName}" class="element-icon-inline" style="width: 22px; height: 22px;" onerror="this.style.display='none'">` : ''}
+            <span style="color: #ffd700;">${'⭐'.repeat(gradeStars)}</span>
+          </div>
         </div>
         <div class="character-resource-actions">
           <button class="remove-resource-btn" type="button">

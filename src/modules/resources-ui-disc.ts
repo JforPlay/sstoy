@@ -5,7 +5,11 @@
 import { resourcesState, saveResourcesState, MATERIAL_GROUPS } from './resources-state';
 import { calculateDiscResources, buildItemUsageIndex, calculateNetResourcesWithMerging, calculateStaminaEstimate, calculateTotalOwnedExp, isGroupedMaterial } from './resources-calc';
 import { createResourceItemElement } from './resources-ui-common';
+import { getDiscRarityInfo } from '../shared/game-data';
+import { Modal } from '../shared/ui-components';
 import type { SelectedDisc, DiscPromote, TotalResources } from './resources-types';
+
+let discModal: Modal | null = null;
 
 export function renderDiscResourceGrid(): void {
   const grid = document.getElementById('disc-resource-grid');
@@ -41,8 +45,6 @@ export function renderDiscResourceGrid(): void {
   const fragment = document.createDocumentFragment();
 
   availableDiscs.forEach(([id, disc]) => {
-    const rarityStars = disc.StrengthenGroupId === 41 ? 5 : disc.StrengthenGroupId === 31 ? 4 : 3;
-
     const discIPData = resourcesState.discIP[id];
     const discNameKey = discIPData?.StoryName;
     const discName = discNameKey
@@ -51,13 +53,13 @@ export function renderDiscResourceGrid(): void {
 
     const elementInfo = resourcesState.gameEnums.elementType?.[disc.EET];
     const elementIcon = elementInfo?.icon || '';
+    const rarityInfo = getDiscRarityInfo(disc);
 
     const isSelected = resourcesState.selectedDiscs.some((d) => d.id === id);
 
     const discItem = document.createElement('div');
     discItem.className = `disc-item ${isSelected ? 'disabled' : ''}`;
     discItem.dataset.discId = id;
-    discItem.dataset.rarity = String(rarityStars);
     discItem.dataset.name = discName;
 
     let discIconPath = '';
@@ -67,19 +69,20 @@ export function renderDiscResourceGrid(): void {
     }
 
     discItem.innerHTML = `
-      <img src="${discIconPath}" class="disc-item-image" alt="Disc ${id}" loading="lazy" onerror="this.style.display='none'">
+      <div class="disc-item-image ${rarityInfo.borderClass}">
+        <img src="${discIconPath}" alt="Disc ${id}" loading="lazy" onerror="this.style.display='none'">
+      </div>
       <div class="disc-item-info">
         <div class="disc-item-name">
           ${discName}
           ${elementIcon ? `<img src="${elementIcon}" alt="Element" class="element-icon-inline" style="width: 20px; height: 20px; margin-left: 6px; vertical-align: middle;" onerror="this.style.display='none'">` : ''}
         </div>
-        <div class="disc-item-grade">${'⭐'.repeat(rarityStars)}</div>
         <div class="disc-item-id">ID: ${id}</div>
       </div>
     `;
 
     if (!isSelected) {
-      discItem.onclick = () => selectDisc(id, rarityStars, discName as string);
+      discItem.onclick = () => selectDisc(id, discName as string);
     }
 
     fragment.appendChild(discItem);
@@ -89,8 +92,9 @@ export function renderDiscResourceGrid(): void {
 }
 
 export function openDiscResourceSelect(): void {
-  const modal = document.getElementById('disc-resource-modal');
-  if (!modal) return;
+  if (!discModal) {
+    discModal = new Modal('disc-resource-modal');
+  }
 
   // Reset filters
   resourcesState.currentElementFilter = 'all';
@@ -111,7 +115,7 @@ export function openDiscResourceSelect(): void {
   }
 
   renderDiscResourceGrid();
-  modal.classList.add('active');
+  discModal.open();
 }
 
 export function filterResourceDiscsByElement(element: string): void {
@@ -134,13 +138,14 @@ export function closeDiscResourceSelect(): void {
   document.getElementById('disc-resource-modal')?.classList.remove('active');
 }
 
-export function selectDisc(discId: string, rarity: number, name: string): void {
+export function selectDisc(discId: string, name: string): void {
   const disc = resourcesState.discs[discId];
+  const rarityInfo = getDiscRarityInfo(disc || null);
 
   resourcesState.selectedDiscs.push({
     id: discId,
     name: name,
-    rarity: rarity,
+    rarity: rarityInfo.stars,
     currentLevel: 1,
     targetLevel: 90,
     data: disc!,
