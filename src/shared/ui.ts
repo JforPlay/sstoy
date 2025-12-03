@@ -242,7 +242,10 @@ export function initNavbarToggle(): void {
     hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   };
 
-  hamburger.addEventListener('click', toggleMenu);
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevent triggering document click
+    toggleMenu();
+  });
   hamburger.setAttribute('aria-expanded', 'false');
 
   menu.querySelectorAll('a.navbar-link').forEach((link) => {
@@ -250,6 +253,16 @@ export function initNavbarToggle(): void {
       // Close menu after navigation on mobile
       closeMenu();
     });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as Node;
+    if (menu.classList.contains('open') && 
+        !menu.contains(target) && 
+        !hamburger.contains(target)) {
+      closeMenu();
+    }
   });
 
   window.addEventListener('resize', () => {

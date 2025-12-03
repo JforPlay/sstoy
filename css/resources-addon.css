@@ -19,14 +19,17 @@
 
 /* Main container for all matrices */
 #glance-matrix-container,
-#character-badge-matrix-container {
+#character-badge-matrix-container,
+#combined-advance-matrix-container,
+#combined-advance-matrix-4star-container {
     width: 100%;
     overflow-x: auto;
     padding: 1rem;
     background: var(--glance-bg-gradient);
-    border-radius: 12px;
+    border-radius: 0.75rem;
     border: 1px solid var(--border);
-    box-shadow: 0 8px 24px var(--shadow, rgba(0, 0, 0, 0.2));
+    box-shadow: 0 0.5rem 1.5rem var(--shadow, rgba(0, 0, 0, 0.2));
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Matrix section spacing */
@@ -73,20 +76,21 @@
 #glance-matrix,
 .glance-sub-matrix {
     border-collapse: separate;
-    border-spacing: 8px;
+    border-spacing: 0.5rem;
     width: 100%;
+    min-width: fit-content;
 }
 
 /* Unified base style for all cells */
 #glance-matrix th, #glance-matrix td,
 .glance-sub-matrix th, .glance-sub-matrix td {
-    padding: 8px;
+    padding: 0.5rem;
     margin: 0;
     border: none;
     text-align: center;
     vertical-align: top;
     transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     position: relative;
 }
 
@@ -96,8 +100,8 @@
     background-color: var(--glance-cell-bg);
     backdrop-filter: blur(5px);
     box-shadow: inset 0 0 0 1px var(--border);
-    min-width: 110px;
-    min-height: 110px;
+    min-width: 6.875rem;
+    min-height: 6.875rem;
     height: 1px;
 }
 
@@ -109,8 +113,8 @@
     position: sticky;
     top: 0;
     z-index: 2;
-    min-width: 90px;
-    height: 90px;
+    min-width: 5.625rem;
+    height: 5.625rem;
     vertical-align: middle;
     font-weight: bold;
     color: var(--text-primary);
@@ -134,8 +138,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
+    width: 3.125rem;
+    height: 3.125rem;
     border-radius: 50%;
     background: var(--surface, #282a36);
     box-shadow: 0 4px 8px var(--shadow, rgba(0,0,0,0.3));
@@ -151,23 +155,31 @@
 }
 
 .material-icon {
-    width: 30px;
-    height: 30px;
+    width: 1.875rem;
+    height: 1.875rem;
     object-fit: contain;
 }
 
 /* Unified character portraits grid */
 .char-portraits-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
-    gap: 6px;
-    padding: 4px;
+    grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));
+    gap: 0.375rem;
+    padding: 0.25rem;
     justify-items: center;
 }
 
+@media (max-width: 768px) {
+    .char-portraits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.25rem;
+        padding: 0.1875rem;
+    }
+}
+
 .char-portrait {
-    width: 48px;
-    height: 48px;
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
     border: 2px solid var(--border-light, #44475a);
     object-fit: cover;
@@ -192,8 +204,8 @@
 
 /* Element icon specific style */
 .glance-sub-matrix .element-icon {
-    width: 48px;
-    height: 48px;
+    width: 3rem;
+    height: 3rem;
     object-fit: contain;
 }
 
@@ -205,15 +217,15 @@
     background-color: var(--mint-green);
     border: none;
     color: white;
-    padding: 8px 12px;
-    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 0.9rem;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .my-materials-btn:hover {
@@ -226,70 +238,70 @@
 #my-materials-content {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 1.5rem;
     max-height: 70vh;
     overflow-y: auto;
-    padding: 16px;
+    padding: 1rem;
 }
 
 .owned-material-section h3 {
     font-size: 1.2rem;
     color: var(--text-primary);
-    margin-bottom: 12px;
-    padding-bottom: 8px;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
     border-bottom: 2px solid var(--primary-color);
 }
 
 .owned-material-grid {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .owned-material-group-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    padding: 8px;
+    gap: 0.5rem;
+    padding: 0.5rem;
     background: var(--surface);
-    border-radius: 6px;
+    border-radius: 0.375rem;
     border: 1px solid var(--border);
 }
 
 .owned-material-grid-individual {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(9.375rem, 1fr));
+    gap: 0.75rem;
 }
 
 .owned-material-item {
     background: var(--surface-light);
-    border-radius: 8px;
-    padding: 12px;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
     border: 1px solid var(--border);
 }
 
 .owned-material-item .resource-item-icon-wrapper {
-    width: 50px;
-    height: 50px;
+    width: 3.125rem;
+    height: 3.125rem;
 }
 
 .owned-material-item .resource-item-name {
     font-size: 0.8rem;
     text-align: center;
     color: var(--text-secondary);
-    height: 32px;
+    height: 2rem;
     overflow: hidden;
 }
 
 .owned-material-input {
     width: 100%;
-    padding: 8px;
-    border-radius: 6px;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
     border: 1px solid var(--border);
     background-color: var(--surface);
     color: var(--text-primary);
@@ -309,12 +321,12 @@
     grid-column: 1 / -1;
     text-align: center;
     color: var(--text-secondary);
-    padding: 40px;
+    padding: 2.5rem;
 }
 
 .owned-material-subsection {
-    margin-top: 16px;
-    padding-top: 16px;
+    margin-top: 1rem;
+    padding-top: 1rem;
     border-top: 1px solid var(--border);
 }
 
@@ -322,7 +334,7 @@
     font-size: 1rem;
     color: var(--text-secondary);
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
 }
 
 /* ============================================================================
@@ -331,59 +343,62 @@
 
 @media (max-width: 768px) {
     #glance-matrix-container,
-    #character-badge-matrix-container {
+    #character-badge-matrix-container,
+    #combined-advance-matrix-container,
+    #combined-advance-matrix-4star-container {
         padding: 0.5rem;
+        margin-bottom: 1rem;
     }
 
     #glance-matrix,
     .glance-sub-matrix {
-        border-spacing: 4px;
+        border-spacing: 0.1875rem;
     }
 
     #glance-matrix td,
     .glance-sub-matrix td {
-        min-width: 80px;
-        min-height: 80px;
-        padding: 4px;
+        min-width: 5.625rem;
+        min-height: 5.625rem;
+        padding: 0.1875rem;
     }
 
     #glance-matrix th,
     .glance-sub-matrix th {
-        min-width: 60px;
-        height: 60px;
+        min-width: 3.375rem;
+        height: 3.375rem;
+        padding: 0.25rem;
     }
 
     .material-icon-wrapper {
-        width: 40px;
-        height: 40px;
+        width: 2.25rem;
+        height: 2.25rem;
     }
 
     .material-icon {
-        width: 24px;
-        height: 24px;
-    }
-
-    .char-portraits-grid {
-        grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
-        gap: 4px;
+        width: 1.375rem;
+        height: 1.375rem;
     }
 
     .char-portrait {
-        width: 36px;
-        height: 36px;
+        width: 2.5rem;
+        height: 2.5rem;
     }
 
     .glance-sub-matrix .element-icon {
-        width: 36px;
-        height: 36px;
+        width: 2rem;
+        height: 2rem;
     }
 
     .matrix-section-header {
-        padding: 0.75rem 0;
+        padding: 0.5rem 0;
     }
 
     .matrix-section-header h2 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+    }
+    
+    .matrix-section-header .subtitle {
+        font-size: 0.8rem;
     }
 }
 
@@ -399,7 +414,7 @@
     right: 0;
     bottom: 0;
     background: var(--glance-bg-gradient);
-    border-radius: 12px;
+    border-radius: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -435,41 +450,31 @@
    COMBINED ADVANCE MATRIX STYLES
    ============================================================================ */
 
-#combined-advance-matrix-container {
-    width: 100%;
-    overflow-x: auto;
-    padding: 1rem;
-    background: var(--glance-bg-gradient);
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    box-shadow: 0 8px 24px var(--shadow, rgba(0, 0, 0, 0.2));
-}
-
 /* Combined matrix header with two materials side by side */
 .combined-material-header {
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap: 0.5rem;
     align-items: center;
     justify-content: center;
 }
 
 .combined-material-header .material-icon-wrapper {
-    width: 45px;
-    height: 45px;
+    width: 2.8125rem;
+    height: 2.8125rem;
 }
 
 .combined-material-header .material-icon {
-    width: 28px;
-    height: 28px;
+    width: 1.75rem;
+    height: 1.75rem;
 }
 
 /* Combined portraits container - horizontal layout (side by side) */
 .combined-portraits-container {
     display: flex;
     flex-direction: row;
-    gap: 8px;
-    padding: 8px;
+    gap: 0.5rem;
+    padding: 0.5rem;
     min-height: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -479,12 +484,12 @@
 .combined-section {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
-    padding: 6px;
-    border-radius: 6px;
+    gap: 0.25rem;
+    padding: 0.375rem;
+    border-radius: 0.375rem;
     justify-content: center;
     align-items: center;
-    min-height: 80px;
+    min-height: 5rem;
     flex: 1;
     align-self: stretch;
 }
@@ -501,8 +506,8 @@
 
 /* Smaller portrait size for combined view */
 .combined-section .char-portrait.small {
-    width: 52px;
-    height: 52px;
+    width: 3.25rem;
+    height: 3.25rem;
     border-radius: 50%;
 }
 
@@ -514,9 +519,9 @@
 
 /* Disc portraits - square style matching disc matrix */
 .disc-portrait-square {
-    width: 68px;
-    height: 68px;
-    border-radius: 8px;
+    width: 4.25rem;
+    height: 4.25rem;
+    border-radius: 0.5rem;
     border: 2px solid var(--border-light, #44475a);
     object-fit: cover;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -533,65 +538,76 @@
 
 /* Combined matrix specific adjustments */
 #combined-advance-matrix td {
-    min-width: 240px;
-    min-height: 120px;
+    min-width: 15rem;
+    min-height: 7.5rem;
     padding: 0;
     vertical-align: stretch;
 }
 
 #combined-advance-matrix-4star td {
-    min-width: 240px;
-    min-height: 120px;
+    min-width: 15rem;
+    min-height: 7.5rem;
     padding: 0;
     vertical-align: stretch;
 }
 
 #combined-advance-matrix th {
-    min-width: 120px;
+    min-width: 7.5rem;
 }
 
 /* Responsive adjustments for combined matrix */
 @media (max-width: 768px) {
     .combined-material-header {
         flex-direction: row;
-        gap: 4px;
+        gap: 0.1875rem;
     }
     
     .combined-material-header .material-icon-wrapper {
-        width: 35px;
-        height: 35px;
+        width: 2rem;
+        height: 2rem;
+    }
+    
+    .combined-material-header .material-icon {
+        width: 1.25rem;
+        height: 1.25rem;
     }
     
     .combined-portraits-container {
-        gap: 6px;
-        padding: 6px;
-        min-height: 120px;
+        gap: 0.25rem;
+        padding: 0.25rem;
+        min-height: 6.25rem;
     }
     
     .combined-section {
-        gap: 3px;
-        padding: 4px;
-        min-height: 50px;
+        gap: 0.1875rem;
+        padding: 0.1875rem;
+        min-height: 2.8125rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-content: start;
     }
     
     .combined-section .char-portrait.small {
-        width: 42px;
-        height: 42px;
+        width: 2.375rem;
+        height: 2.375rem;
     }
     
     .disc-portrait-square {
-        width: 56px;
-        height: 56px;
+        width: 2.375rem;
+        height: 2.375rem;
     }
     
-    #combined-advance-matrix td {
-        min-width: 140px;
-        min-height: 140px;
-        padding: 4px;
+    #combined-advance-matrix td,
+    #combined-advance-matrix-4star td {
+        min-width: 6.875rem;
+        min-height: 6.875rem;
+        padding: 0.125rem;
     }
     
-    #combined-advance-matrix th {
-        min-width: 90px;
+    #combined-advance-matrix th,
+    #combined-advance-matrix-4star th {
+        min-width: 4.375rem;
+        padding: 0.1875rem;
     }
 }
 

@@ -10,6 +10,24 @@
     --font-korean: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
 }
 
+/* Global base font-size for rem calculations */
+html {
+    font-size: 16px; /* Change this to scale entire UI: 14px = smaller, 18px = larger */
+}
+
+/* Responsive font-size for mobile devices */
+@media (max-width: 768px) {
+    html {
+        font-size: 15px; /* Slightly smaller for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 14px; /* Smaller for mobile phones */
+    }
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -23,7 +41,7 @@ textarea,
 button,
 select {
     font-family: var(--font-main);
-    font-size: 16px;
+    font-size: 1rem; /* Inherits from html base (16px by default) */
     line-height: 1.6;
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
@@ -36,7 +54,7 @@ body {
 
 /* Main Container */
 .container {
-    max-width: 1400px;
+    max-width: 87.5rem;
     margin: 0 auto;
     padding: 1.25rem;
     width: 100%;
@@ -103,8 +121,8 @@ header .subtitle {
 }
 
 .page-title-icon {
-    width: 48px;
-    height: 48px;
+    width: 3rem;
+    height: 3rem;
     object-fit: contain;
     flex-shrink: 0;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.12));

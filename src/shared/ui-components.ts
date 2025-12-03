@@ -345,9 +345,21 @@ export function initGlobalHeader(activePage: string): void {
     const menu = document.getElementById('navbar-menu');
     
     if (hamburger && menu) {
-      hamburger.addEventListener('click', () => {
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent triggering document click
         menu.classList.toggle('open');
         hamburger.setAttribute('aria-expanded', menu.classList.contains('open').toString());
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        const target = e.target as Node;
+        if (menu.classList.contains('open') && 
+            !menu.contains(target) && 
+            !hamburger.contains(target)) {
+          menu.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
       });
     }
   }
