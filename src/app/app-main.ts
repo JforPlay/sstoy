@@ -41,7 +41,7 @@ import * as appDmgCalc from '../modules/app-dmgcalc';
 
     // 5. Initialize Dependent Modules
     // These modules might rely on GameData or window.state being ready
-    appDisc.init();
+    await appDisc.init();
     appSummary.init();
     appPreset.init();
     appDmgCalc.init();

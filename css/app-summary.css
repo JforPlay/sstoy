@@ -826,7 +826,7 @@
     font-weight: 600;
     font-size: 0.95rem;
     color: var(--text-primary);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.25rem;
 }
 
 .potential-hint {

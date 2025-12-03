@@ -972,7 +972,9 @@ function generateDiscSlot(slotId: DiscSlotId, slotNumber: number, isMain: boolea
     }
 
     return `
-      <div class="disc-slot-card filled ${isMain ? 'main-disc' : 'sub-disc'}">
+      <div class="disc-slot-card filled ${isMain ? 'main-disc' : 'sub-disc'}"
+           data-action="disc-open-selector"
+           data-slot-id="${slotId}">
         <div class="disc-slot-header">
           <span class="disc-slot-number">${slotNumber}</span>
           <div class="disc-slot-name-group">
@@ -1206,12 +1208,21 @@ export function renderDiscs(preserveFocusId: string | null = null): void {
     if (target) {
       const value = target.value || '';
       target.focus();
-      if (target.setSelectionRange) {
+      // setSelectionRange throws an error on input type="number"
+      if (target.setSelectionRange && target.type !== 'number') {
         const len = value.length;
-        target.setSelectionRange(len, len);
+        try {
+          target.setSelectionRange(len, len);
+        } catch (e) {
+          console.warn('Failed to set selection range:', e);
+        }
       }
     }
   }
+
+  // Reset modal instances since DOM elements were replaced
+  discModal = null;
+  imageViewerModal = null;
 }
 
 // =============================================================================
@@ -1528,16 +1539,6 @@ export function closeDiscSelector(): void {
 export function openImageViewer(imagePath: string, title: string): void {
   if (!imageViewerModal) {
     imageViewerModal = new Modal('disc-image-viewer');
-    // Add ESC key handler if needed, though Modal doesn't handle ESC by default yet. 
-    // But existing code had it. Let's keep the existing logic simplified or just use modal.
-    // The existing logic had an ESC handler on document.
-    
-    // We can add the ESC handler once
-    document.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && imageViewerModal?.isOpen()) {
-        imageViewerModal.close();
-      }
-    });
   }
 
   const image = document.getElementById('viewer-image') as HTMLImageElement | null;
@@ -1656,30 +1657,50 @@ export function toggleNotesSidebar(): void {
 let discsEventDelegationInitialized = false;
 
 function handleDiscsAction(element: HTMLElement, action: string, event: Event): void {
+  // Helper to safely get slot ID
+  const getSlotId = (): DiscSlotId | null => {
+    const slotId = element.dataset.slotId as DiscSlotId;
+    if (!slotId) {
+      console.warn('[App-Disc] Missing slotId for action:', action);
+      return null;
+    }
+    return slotId;
+  };
+
   switch (action) {
-    case 'disc-open-selector':
-      openDiscSelector(element.dataset.slotId as DiscSlotId);
+    case 'disc-open-selector': {
+      const slotId = getSlotId();
+      if (slotId) openDiscSelector(slotId);
       break;
+    }
 
-    case 'disc-remove':
-      removeDisc(element.dataset.slotId as DiscSlotId);
+    case 'disc-remove': {
+      const slotId = getSlotId();
+      if (slotId) removeDisc(slotId);
       break;
+    }
 
-    case 'disc-select-option':
-      selectDiscOption(element.dataset.discId!);
+    case 'disc-select-option': {
+      const discId = element.dataset.discId;
+      if (discId) selectDiscOption(discId);
       break;
+    }
 
     case 'disc-close-selector':
       closeDiscSelector();
       break;
 
     case 'disc-filter-element':
-      filterDiscsByElement(element.dataset.element!);
+      if (element.dataset.element) {
+        filterDiscsByElement(element.dataset.element);
+      }
       break;
 
     case 'disc-open-image-viewer':
       event.stopPropagation();
-      openImageViewer(element.dataset.imagePath!, element.dataset.discName!);
+      if (element.dataset.imagePath && element.dataset.discName) {
+        openImageViewer(element.dataset.imagePath, element.dataset.discName);
+      }
       break;
 
     case 'disc-close-image-viewer':
@@ -1687,16 +1708,21 @@ function handleDiscsAction(element: HTMLElement, action: string, event: Event): 
       break;
 
     case 'disc-adjust-limit-break': {
-      const slotId = element.dataset.slotId as DiscSlotId;
+      const slotId = getSlotId();
       const delta = parseInt(element.dataset.delta!, 10);
-      adjustLimitBreak(slotId, delta);
+      if (slotId && !isNaN(delta)) {
+        adjustLimitBreak(slotId, delta);
+      }
       break;
     }
 
     case 'disc-adjust-sub-level': {
-      const slotId = element.dataset.slotId as 'sub1' | 'sub2' | 'sub3';
+      const slotId = getSlotId();
       const delta = parseInt(element.dataset.delta!, 10);
-      adjustSubDiscLevel(slotId, delta);
+      // Ensure slotId is a sub slot (though typing suggests it might be any, runtime check is safer)
+      if (slotId && slotId.startsWith('sub') && !isNaN(delta)) {
+        adjustSubDiscLevel(slotId as 'sub1' | 'sub2' | 'sub3', delta);
+      }
       break;
     }
 
@@ -1706,9 +1732,11 @@ function handleDiscsAction(element: HTMLElement, action: string, event: Event): 
       break;
 
     case 'disc-adjust-note-level': {
-      const noteId = element.dataset.noteId!;
+      const noteId = element.dataset.noteId;
       const delta = parseInt(element.dataset.delta!, 10);
-      adjustTotalNoteLevel(noteId, delta);
+      if (noteId && !isNaN(delta)) {
+        adjustTotalNoteLevel(noteId, delta);
+      }
       break;
     }
 
@@ -1732,13 +1760,20 @@ function setupDiscsEventDelegation(): void {
       handleDiscsAction(button, action, e);
     }
   });
+
+  // Global ESC listener for Image Viewer
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && imageViewerModal?.isOpen()) {
+      imageViewerModal.close();
+    }
+  });
 }
 
 // =============================================================================
 // INITIALIZATION
 // =============================================================================
 
-export function init(): void {
+export async function init(): Promise<void> {
   setupDiscsEventDelegation();
 
   // Listen for language changes
@@ -1751,7 +1786,7 @@ export function init(): void {
 
   // Auto-load if container exists
   if (document.getElementById('discs-container')) {
-    loadDiscData();
+    await loadDiscData();
   }
   
   log('[App-Disc] Initialized');

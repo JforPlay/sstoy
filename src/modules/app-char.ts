@@ -1154,11 +1154,13 @@ export function togglePotential(potentialId: number, position: Position): void {
     delete state.potentialMarks[position][potentialId];
   } else {
     // Check if specific potential limit reached
-    const potential = GameData.potentials[potentialId];
-    if (potential?.Stype === 42) {
+    // Use GameData.items because Stype is defined there
+    const itemData = GameData.items?.[potentialId];
+    if (itemData?.Stype === 42) {
       const specificCount = selected.filter(
-        (id) => GameData.potentials[id]?.Stype === 42
+        (id) => GameData.items?.[id]?.Stype === 42
       ).length;
+
       if (specificCount >= 2) {
         const t = (key: string): string => window.i18n?.t(key) ?? key;
         window.showToast?.(t('builder.maxSpecificPotentials'));
