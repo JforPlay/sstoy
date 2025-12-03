@@ -33,14 +33,13 @@
     <title>여행가 DB</title>
     <link rel="icon" type="image/png" href="assets/others/favicon.png">
 
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <!-- Font Awesome 7 Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="css/utils.css">
     <link rel="stylesheet" href="css/components/ui-components.css">
-    <link rel="stylesheet" href="css/app-char.css">
     <link rel="stylesheet" href="css/characterdb.css">
 
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
@@ -48,55 +47,12 @@
 </head>
 
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <a href="index.html" class="navbar-brand">
-            <span class="navbar-logo"><i class="fa-solid fa-star"></i></span>
-            <span class="navbar-title" data-i18n="nav.title">스소 도우미</span>
-        </a>
-        <button class="navbar-hamburger" id="navbar-hamburger" aria-label="Toggle menu">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-        <div class="navbar-menu" id="navbar-menu">
-            <div class="navbar-links">
-                <a href="characterdb.html" class="navbar-link" data-page="characterdb">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-book"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.characterdb">여행가 도감</span>
-                </a>
-                <a href="discdb.html" class="navbar-link" data-page="discdb">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-compact-disc"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.discdb">레코드 도감</span>
-                </a>
-                <a href="app.html" class="navbar-link" data-page="app">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-medal"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.builder">도자기 공방</span>
-                </a>
-                <a href="tasks.html" class="navbar-link" data-page="tasks">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-clipboard-list"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.tasks">의뢰 도우미</span>
-                </a>
-                <a href="resources.html" class="navbar-link" data-page="resources">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-box"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.resources">자원 도우미</span>
-                </a>
-            </div>
-            <button id="theme-toggle" class="theme-toggle" onclick="window.toggleTheme()">
-                <i class="theme-icon fa-solid fa-sun"></i>
-                <span class="theme-text" data-i18n="nav.themeLight">라이트</span>
-            </button>
-            <select id="language-select" class="language-select"
-                onchange="if(window.i18n) window.i18n.setLanguage(this.value)">
-                <option value="KR">KR | 한국어</option>
-                <option value="JP">JP | 日本語</option>
-                <option value="EN">EN | English</option>
-                <option value="CN">CN | 中文</option>
-            </select>
-        </div>
-    </nav>
+    <!-- Navigation Bar (Dynamic) -->
+    <div id="global-navigation"></div>
 
     <div class="container">
         <header>
-            <h1><i class="fa-solid fa-book"></i> <span data-i18n="characterdb.title"></span></h1>
+            <h1><img src="assets/others/btn_main_system_character_1.png" alt="Character DB Icon" class="page-title-icon"> <span data-i18n="characterdb.title"></span></h1>
             <p class="subtitle" data-i18n="characterdb.selectCharacter"></p>
         </header>
 
@@ -106,6 +62,33 @@
                 <span class="section-icon"><i class="fa-solid fa-users"></i></span>
                 <span data-i18n="characterdb.characterSelect"></span>
             </h2>
+            
+            <div class="selector-controls" style="background: transparent; border: none; padding: 0 0 1rem 0; box-shadow: none;">
+                <div class="element-filters" style="justify-content: center;">
+                    <button class="element-filter-btn active" data-element="all" onclick="window.filterCharactersByElement('all', event)">
+                        <i class="fa-solid fa-border-all"></i> <span data-i18n="disc.allElements">All</span>
+                    </button>
+                    <button class="element-filter-btn" data-element="1" onclick="window.filterCharactersByElement('1', event)">
+                        <img src="assets/icon_common_property_1.png" alt="Water" class="element-icon" onerror="this.style.display='none'"> <span data-i18n="disc.waterElement">Water</span>
+                    </button>
+                    <button class="element-filter-btn" data-element="2" onclick="window.filterCharactersByElement('2', event)">
+                        <img src="assets/icon_common_property_2.png" alt="Fire" class="element-icon" onerror="this.style.display='none'"> <span data-i18n="disc.fireElement">Fire</span>
+                    </button>
+                    <button class="element-filter-btn" data-element="3" onclick="window.filterCharactersByElement('3', event)">
+                        <img src="assets/icon_common_property_3.png" alt="Earth" class="element-icon" onerror="this.style.display='none'"> <span data-i18n="disc.earthElement">Earth</span>
+                    </button>
+                    <button class="element-filter-btn" data-element="4" onclick="window.filterCharactersByElement('4', event)">
+                        <img src="assets/icon_common_property_4.png" alt="Wind" class="element-icon" onerror="this.style.display='none'"> <span data-i18n="disc.windElement">Wind</span>
+                    </button>
+                    <button class="element-filter-btn" data-element="5" onclick="window.filterCharactersByElement('5', event)">
+                        <img src="assets/icon_common_property_5.png" alt="Light" class="element-icon" onerror="this.style.display='none'"> <span data-i18n="disc.lightElement">Light</span>
+                    </button>
+                    <button class="element-filter-btn" data-element="6" onclick="window.filterCharactersByElement('6', event)">
+                        <img src="assets/icon_common_property_6.png" alt="Dark" class="element-icon" onerror="this.style.display='none'"> <span data-i18n="disc.darkElement">Dark</span>
+                    </button>
+                </div>
+            </div>
+
             <div id="character-selector" class="character-selector-grid"></div>
         </div>
 
