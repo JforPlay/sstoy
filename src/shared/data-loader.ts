@@ -3,7 +3,7 @@
  * Loads only essential data upfront, then lazy-loads feature-specific data
  */
 
-import { fetchJSON } from './index';
+import { fetchJSON } from './network';
 import { GameData } from './game-data';
 
 /**

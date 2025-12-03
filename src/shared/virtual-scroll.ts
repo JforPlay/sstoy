@@ -3,7 +3,7 @@
  * Renders only visible items for better performance with large lists
  */
 
-import { debounce } from './index';
+import { debounce } from './utils';
 
 export interface VirtualScrollConfig<T> {
   container: HTMLElement;
