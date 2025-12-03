@@ -178,6 +178,16 @@
         <!-- Glance Tab Content -->
         <div class="resources-tab-content" id="resources-tab-glance">
             <div class="section-header">
+                <h2>통합 승급 매트릭스 (5성 전용)</h2>
+                <p class="subtitle">행: 속성, 열: 던전별 재료 (여행가 5★ + 레코드 5★)</p>
+            </div>
+            <div id="combined-advance-matrix-container"></div>
+            <div class="section-header matrix-section-header">
+                <h2>통합 승급 매트릭스 (4성 + 5성)</h2>
+                <p class="subtitle">행: 속성, 열: 던전별 재료 (여행가 4★ + 레코드 5★)</p>
+            </div>
+            <div id="combined-advance-matrix-4star-container"></div>
+            <div class="section-header matrix-section-header">
                 <h2 data-i18n="resources.characterMaterialMatrix">여행가 육성 재료 매트릭스</h2>
                 <p class="subtitle" data-i18n="resources.characterMaterialMatrixDesc">행: 승급 재료, 열: 스킬 재료</p>
             </div>
@@ -194,11 +204,6 @@
                 <p class="subtitle" data-i18n="resources.characterBadgeMatrixDesc">행: 레벨, 열: 뱃지</p>
             </div>
             <div id="character-badge-matrix-container"></div>
-            <div class="section-header matrix-section-header">
-                <h2 data-i18n="resources.discAdvanceMatrix">레코드 승급 매트릭스</h2>
-                <p class="subtitle" data-i18n="resources.discAdvanceMatrixDesc">행: 속성, 열: 재료</p>
-            </div>
-            <div id="disc-advance-matrix-container"></div>
         </div>
 
         <!-- Modals -->
@@ -230,25 +235,25 @@
                             <i class="fa-solid fa-border-all"></i> <span data-i18n="disc.allElements">전체</span>
                         </button>
                         <button class="element-filter-btn" data-element="1" onclick="window.filterResourceCharactersByElement('1')">
-                            <img src="assets/icon_common_property_1.png" alt="빛" class="element-icon" loading="lazy">
+                            <img src="assets/icon_common_property_1.png" alt="빛" class="element-icon" loading="lazy"> <span data-i18n="disc.waterElement">물 속성</span>
                         </button>
                         <button class="element-filter-btn" data-element="2" onclick="window.filterResourceCharactersByElement('2')">
-                            <img src="assets/icon_common_property_2.png" alt="어둠" class="element-icon" loading="lazy">
+                            <img src="assets/icon_common_property_2.png" alt="어둠" class="element-icon" loading="lazy"> <span data-i18n="disc.fireElement">불 속성</span>
                         </button>
                         <button class="element-filter-btn" data-element="3" onclick="window.filterResourceCharactersByElement('3')">
-                            <img src="assets/icon_common_property_3.png" alt="물" class="element-icon" loading="lazy">
+                            <img src="assets/icon_common_property_3.png" alt="물" class="element-icon" loading="lazy"> <span data-i18n="disc.earthElement">땅 속성</span>
                         </button>
                         <button class="element-filter-btn" data-element="4" onclick="window.filterResourceCharactersByElement('4')">
-                            <img src="assets/icon_common_property_4.png" alt="불" class="element-icon" loading="lazy">
+                            <img src="assets/icon_common_property_4.png" alt="불" class="element-icon" loading="lazy"> <span data-i18n="disc.windElement">바람 속성</span>
                         </button>
                         <button class="element-filter-btn" data-element="5" onclick="window.filterResourceCharactersByElement('5')">
-                            <img src="assets/icon_common_property_5.png" alt="번개" class="element-icon" loading="lazy">
+                            <img src="assets/icon_common_property_5.png" alt="번개" class="element-icon" loading="lazy"> <span data-i18n="disc.lightElement">빛 속성</span>
                         </button>
                         <button class="element-filter-btn" data-element="6" onclick="window.filterResourceCharactersByElement('6')">
-                            <img src="assets/icon_common_property_6.png" alt="바람" class="element-icon" loading="lazy">
+                            <img src="assets/icon_common_property_6.png" alt="바람" class="element-icon" loading="lazy"> <span data-i18n="disc.darkElement">어둠 속성</span>
                         </button>
                         <button class="element-filter-btn" data-element="7" onclick="window.filterResourceCharactersByElement('7')">
-                            <img src="assets/icon_common_property_7.png" alt="얼음" class="element-icon" loading="lazy">
+                            <img src="assets/icon_common_property_7.png" alt="얼음" class="element-icon" loading="lazy"> <span data-i18n="disc.noElementFilter">무속성</span>
                         </button>
                     </div>
                 </div>
@@ -274,25 +279,25 @@
                             <i class="fa-solid fa-border-all"></i> <span data-i18n="disc.allElements">전체</span>
                         </button>
                         <button class="element-filter-btn" data-element="1" onclick="window.filterResourceDiscsByElement('1')">
-                            <img src="assets/icon_common_property_1.png" alt="빛" class="element-icon" loading="lazy">
+                            <img src="assets/icon_common_property_1.png" alt="빛" class="element-icon" loading="lazy"> <span data-i18n="disc.waterElement">물 속성</span>
                         </button>
                         <button class="element-filter-btn" data-element="2" onclick="window.filterResourceDiscsByElement('2')">
-                            <img src="assets/icon_common_property_2.png" alt="어둠" class="element-icon" loading="lazy">
+                            <img src="assets/icon_common_property_2.png" alt="어둠" class="element-icon" loading="lazy"> <span data-i18n="disc.fireElement">불 속성</span>
                         </button>
                         <button class="element-filter-btn" data-element="3" onclick="window.filterResourceDiscsByElement('3')">
-                            <img src="assets/icon_common_property_3.png" alt="물" class="element-icon" loading="lazy">
+                            <img src="assets/icon_common_property_3.png" alt="물" class="element-icon" loading="lazy"> <span data-i18n="disc.earthElement">땅 속성</span>
                         </button>
                         <button class="element-filter-btn" data-element="4" onclick="window.filterResourceDiscsByElement('4')">
-                            <img src="assets/icon_common_property_4.png" alt="불" class="element-icon" loading="lazy">
+                            <img src="assets/icon_common_property_4.png" alt="불" class="element-icon" loading="lazy"> <span data-i18n="disc.windElement">바람 속성</span>
                         </button>
                         <button class="element-filter-btn" data-element="5" onclick="window.filterResourceDiscsByElement('5')">
-                            <img src="assets/icon_common_property_5.png" alt="번개" class="element-icon" loading="lazy">
+                            <img src="assets/icon_common_property_5.png" alt="번개" class="element-icon" loading="lazy"> <span data-i18n="disc.lightElement">빛 속성</span>
                         </button>
                         <button class="element-filter-btn" data-element="6" onclick="window.filterResourceDiscsByElement('6')">
-                            <img src="assets/icon_common_property_6.png" alt="바람" class="element-icon" loading="lazy">
+                            <img src="assets/icon_common_property_6.png" alt="바람" class="element-icon" loading="lazy"> <span data-i18n="disc.darkElement">어둠 속성</span>
                         </button>
                         <button class="element-filter-btn" data-element="7" onclick="window.filterResourceDiscsByElement('7')">
-                            <img src="assets/icon_common_property_7.png" alt="얼음" class="element-icon" loading="lazy">
+                            <img src="assets/icon_common_property_7.png" alt="얼음" class="element-icon" loading="lazy"> <span data-i18n="disc.noElementFilter">무속성</span>
                         </button>
                     </div>
                 </div>

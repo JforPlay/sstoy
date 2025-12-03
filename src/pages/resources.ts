@@ -18,10 +18,6 @@ import {
   renderCharacterResourceGrid,
   openCharacterResourceSelect,
   closeCharacterResourceSelect,
-  selectCharacterForResources,
-  updateCharacterLevel,
-  updateCharacterSkillLevel,
-  removeCharacterFromResources,
   clearAllResources,
   showResourceHelp,
   closeResourceHelp,
@@ -32,9 +28,6 @@ import {
   renderDiscResourceSummary,
   openDiscResourceSelect,
   closeDiscResourceSelect,
-  selectDisc,
-  updateDiscLevel,
-  removeDiscFromResources,
   clearAllDiscResources as clearDiscs, 
   showDiscResourceHelp as showDiscHelp, 
   closeDiscResourceHelp as closeDiscHelp,
@@ -47,8 +40,7 @@ import {
   showLoadingState,
   openMyMaterialsModal,
   closeMyMaterialsModal,
-  updateOwnedMaterial,
-  updateOwnedMaterial as updateOwned
+  updateOwnedMaterial
 } from '../modules/resources-ui-common';
 
 // =============================================================================
@@ -163,7 +155,7 @@ window.closeMyMaterialsModal = () => closeMyMaterialsModal(() => {
     renderResourceSummary();
     renderDiscResourceSummary();
 });
-window.updateOwnedMaterial = updateOwned;
+window.updateOwnedMaterial = updateOwnedMaterial;
 
 declare global {
   interface Window {
@@ -182,6 +174,6 @@ declare global {
     closeDiscResourceHelp: typeof closeDiscHelp;
     openMyMaterialsModal: typeof openMyMaterialsModal;
     closeMyMaterialsModal: typeof closeMyMaterialsModal;
-    updateOwnedMaterial: typeof updateOwned;
+    updateOwnedMaterial: typeof updateOwnedMaterial;
   }
 }
