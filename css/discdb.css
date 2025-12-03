@@ -454,12 +454,13 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.25rem 0.75rem;
-    background: var(--primary-color);
+    background: rgba(52, 152, 219, 0.2);
+    border: 2px solid var(--accent-interactive);
     border-radius: 0.5rem;
     font-size: 0.875rem;
     font-weight: 700;
-    color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: var(--accent-interactive);
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.2);
     margin-left: 0.5rem;
 }
 

@@ -126,6 +126,7 @@ header .subtitle {
     --primary-color: #6B9BD1;
     --secondary-color: #E88AAD;
     --accent: #7ED7C1;
+    --accent-interactive: #3498db; /* Better contrast for white text on active states */
     --success: #7ED7C1;
     --danger: #E88AAD;
     --warning: #F4C6A0;
@@ -208,9 +209,9 @@ header .subtitle {
     height: 3.25rem;
 }
 
-/* Star icon styling - golden yellow color */
+/* Star icon styling - bright gold color */
 .fa-star {
-    color: #fbbf24;
+    color: #f0c419;
 }
 
 /* Ensure star icons maintain color in different contexts */
@@ -220,7 +221,7 @@ header .subtitle {
 .task-tag .fa-star,
 .build-stat-icon .fa-star,
 .summary-potential-section-title .fa-star {
-    color: #fbbf24;
+    color: #f0c419;
 }
 
 /* ================================
@@ -607,6 +608,7 @@ header .subtitle {
     --primary-color: #6BB6D8;
     --secondary-color: #E89FB0;
     --accent: #8FD9CF;
+    --accent-interactive: #3498db; /* Better contrast for white text on active states */
     --success: #8FD9CF;
     --danger: #E89FB0;
     --warning: #E8C4A3;

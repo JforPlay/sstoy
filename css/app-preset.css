@@ -225,8 +225,8 @@
 }
 
 .tag-filter-btn.active {
-    background: var(--accent);
-    border-color: var(--accent);
+    background: var(--accent-interactive);
+    border-color: var(--accent-interactive);
     color: white;
     padding-right: 2rem;
 }
@@ -300,8 +300,8 @@
 }
 
 .preset-filters .element-filter-btn.active {
-    background: var(--accent);
-    border-color: var(--accent);
+    background: var(--accent-interactive);
+    border-color: var(--accent-interactive);
     color: white;
 }
 
@@ -622,6 +622,8 @@
     }
 
     .tag-filter-btn.active {
+        background: var(--accent-interactive);
+        border-color: var(--accent-interactive);
         padding-right: 1.75rem;
     }
 
@@ -779,6 +781,8 @@
     }
 
     .tag-filter-btn.active {
+        background: var(--accent-interactive);
+        border-color: var(--accent-interactive);
         padding-right: 1.5rem;
     }
 

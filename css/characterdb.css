@@ -39,13 +39,6 @@
     line-height: 1.2;
 }
 
-.character-selector-grid .character-selector-grade {
-    font-size: 0.75rem;
-    color: var(--accent);
-    font-weight: 700;
-    letter-spacing: 0.05em;
-}
-
 .character-selector-grid .character-element-icon {
     width: 1.75rem;
     height: 1.75rem;
@@ -244,6 +237,7 @@
     display: inline-flex;
     align-items: center;
     line-height: 1;
+    color: #f0c419;
     filter: drop-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.3));
 }
 
@@ -786,11 +780,11 @@
     margin-left: 0.75rem;
     padding: 0.375rem 0.75rem;
     background: rgba(245, 158, 11, 0.2);
-    border: 2px solid var(--accent);
+    border: 2px solid var(--accent-interactive);
     border-radius: 0.5rem;
     font-size: 0.813rem;
     font-weight: 700;
-    color: var(--accent);
+    color: var(--accent-interactive);
     box-shadow: 0 0.125rem 0.5rem rgba(245, 158, 11, 0.2);
     animation: pulse 2s ease-in-out infinite;
 }
@@ -1952,13 +1946,13 @@
 }
 
 .talent-section-badge {
-    background: var(--accent);
+    background: var(--accent-interactive);
     color: white;
     padding: 0.25rem 0.75rem;
     border-radius: 1rem;
     font-size: 0.75rem;
     font-weight: 700;
-    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.125rem 0.5rem rgba(52, 152, 219, 0.3);
 }
 
 .talent-subnodes {
@@ -2175,7 +2169,7 @@
 }
 
 .skill-card-desc .param-value {
-    color: var(--accent);
+    color: var(--sky-blue);
     font-weight: 700;
 }
 

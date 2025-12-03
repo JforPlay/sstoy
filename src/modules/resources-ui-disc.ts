@@ -243,7 +243,7 @@ export function renderSelectedDiscsList(): void {
           <div class="character-resource-name" style="display: flex; align-items: center; gap: 8px;">
             <span>${currentName}</span>
             ${elementIcon ? `<img src="${elementIcon}" alt="${elementName}" class="element-icon-inline" style="width: 22px; height: 22px;" onerror="this.style.display='none'">` : ''}
-            <span style="color: #ffd700;">${'⭐'.repeat(disc.rarity)}</span>
+            <span style="color: #f0c419;">${'⭐'.repeat(disc.rarity)}</span>
           </div>
           <div class="character-resource-levels">
             ID: ${disc.id}
