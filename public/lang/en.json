@@ -2,7 +2,7 @@
   "nav": {
     "title": "SS Tools",
     "home": "Home",
-    "builder": "Party Builder",
+    "app": "Party Builder",
     "characterdb": "Trekker DB",
     "discdb": "Disc DB",
     "resources": "Resource Calculator",
@@ -96,7 +96,12 @@
       "skill": "Skill",
       "assistSkill": "Assist Skill",
       "ultimate": "Ultimate"
-    }
+    },
+    "seconds": "s",
+    "statBoost": "Stat Boost",
+    "loadingTalents": "Loading ascension data...",
+    "noTalentInfo": "No ascension information.",
+    "limitBreakLabel": "Limit Break"
   },
   "discdb": {
     "title": "Disc Archive",
@@ -183,7 +188,36 @@
     "discHelpTitle": "Disc Resource Calculation Method",
     "discHelpAdvanceTitle": "Disc Advance Item Stamina Calculation",
     "discHelpAdvanceDaily": "Math.ceil(17 + 3.5 × 0.5) = Daily yield converted to lowest material",
-    "discHelpAdvanceDungeon": "Math.ceil(0.5×3×3 + 0.5×3 + 10) = Per 30 stamina converted to lowest material"
+    "discHelpAdvanceDungeon": "Math.ceil(0.5×3×3 + 0.5×3 + 10) = Per 30 stamina converted to lowest material",
+    "loadingData": "Loading data...",
+    "characterRemoved": "Character removed",
+    "characterLevel": "Character Level",
+    "current": "Current",
+    "target": "Target",
+    "skillLevel": "Skill Level",
+    "tooltipComplete": "Complete!\nRequired: ${required}\nOwned: ${owned}",
+    "tooltipRequired": "Required: ${required}\nOwned: ${owned}",
+    "advanceItemsCharacter": "Advance Items (Trekker)",
+    "skillEnhanceItems": "Skill Enhancement Items",
+    "experience": "Experience",
+    "doraTotal": "Dora (Total)",
+    "noDataToReset": "No data to reset",
+    "allDataReset": "All data has been reset",
+    "discN": "Disc ${id}",
+    "discRemoved": "Disc removed",
+    "currentLevel": "Current Level",
+    "targetLevel": "Target Level",
+    "advanceItemsDisc": "Advance Items (Disc)",
+    "confirmResetDiscs": "Are you sure you want to reset all selected discs and calculated resources?",
+    "characterDataNotLoaded": "Required character data not loaded.",
+    "badgeDataNotLoaded": "Required character badge data not loaded.",
+    "errorGeneratingBadgeMatrix": "Error generating character badge matrix: ${error}",
+    "discDataNotLoaded": "Required disc data not loaded.",
+    "errorGeneratingDiscMatrix": "Error generating disc advance matrix: ${error}",
+    "cannotLoad5StarDiscs": "Cannot load 5-star disc data.",
+    "no5StarDiscs": "No 5-star discs to display.",
+    "dataLoadingFailed": "Data loading failed",
+    "categoryAdvanceItemsCharacter": "Advance Items (Character)"
   },
   "tasks": {
     "title": "Task Helper",
@@ -213,7 +247,17 @@
     "confirm": "Confirm",
     "confirmMessage": "Do you want to proceed?",
     "cancel": "Cancel",
-    "noSelectedTasks": "No tasks selected"
+    "noSelectedTasks": "No tasks selected",
+    "selectTaskHint": "Please select a task from the left",
+    "base": "Base",
+    "extra": "Extra",
+    "baseTag": "Base Tag",
+    "extraTag": "Extra Tag",
+    "usefulForTasks": "Useful for ${count} tasks (${tags} tags matched)",
+    "ownedLabel": "Owned",
+    "completedLabel": "Completed",
+    "addCharacter": "Add Character",
+    "selectingCharacter": "Selecting Character"
   },
   "builder": {
     "title": "Stella Sora Build Helper",
@@ -281,10 +325,10 @@
     "buildLevel": "Build Level",
     "totalPotentials": "Total Potentials",
     "marks": {
-      "essential": "Essential",
-      "recommended": "Recommended",
-      "minimum": "Minimum",
-      "low": "Low Priority"
+      "essential": "Must",
+      "recommended": "High Prio",
+      "minimum": "Lv 1",
+      "low": "Low Prio"
     }
   },
   "disc": {
@@ -423,71 +467,35 @@
   },
   "landing": {
     "title": "Stella Sora Tools & DB",
-    "tagline": "Language : Currently adding support for UI text & full support for in-game text.",
-    "brandTitle": "Stella Sora",
-    "brandSubtitle": "Comprehensive Tools & Database",
-    "recommended": "RECOMMENDED",
-    "database": "DATABASE",
-    "equipment": "EQUIPMENT",
-    "calculator": "CALCULATOR",
-    "optimizer": "OPTIMIZER",
-    "badgeHot": "HOT",
-    "badgeNew": "NEW",
-    "badgePopular": "Popular",
     "heroDesc1": "Create optimal Stella Sora builds quickly and easily!",
     "heroDesc2": "Manage characters, potentials, and records all in one place.",
-    "btnCharDB": "Browse Characters",
-    "btnDiscDB": "Browse Discs",
     "btnBuilder": "Start Building",
-    "btnTasks": "Optimize Tasks",
-    "btnResources": "Calculate Resources",
-    "featuresTitle": "Key Features",
     "featureCharDB": {
       "title": "Character Database",
-      "shortDesc": "Complete Encyclopedia",
       "desc": "View detailed character stats, archives, and dating guides at a glance."
     },
     "featureDiscDB": {
       "title": "Disc Database",
-      "shortDesc": "Disc Encyclopedia",
-      "desc": "Check disc details, skill effects, sounds, and stories."
-    },
-    "featureBuilder": {
-      "title": "Build Helper",
-      "shortDesc": "Create Optimal Teams",
-      "desc": "Create your own builds and view them at a glance with the summary feature. Share builds with other players using URL sharing."
+      "shortDesc": "Disc Encyclopedia"
     },
     "featureTasks": {
       "title": "Task Helper",
-      "shortDesc": "Mission Optimizer",
-      "desc": "Assign optimal characters to level 70 missions and optimize tags."
+      "shortDesc": "Mission Optimizer"
     },
     "featureResources": {
       "title": "Resource Calculator",
-      "shortDesc": "Material Calculator",
-      "desc": "Select characters/discs to upgrade and check required resources."
+      "shortDesc": "Material Calculator"
     },
-    "linksTitle": "Other Links",
     "linkGithub": {
-      "title": "GitHub Repo",
-      "short": "GitHub",
-      "desc": "Check out the source code here",
-      "action": "Visit Repository"
+      "short": "GitHub"
     },
     "linkFeedback": {
-      "title": "Bug Reports & Feedback",
-      "short": "Bug Reports",
-      "desc": "Found a bug or have suggestions? Leave your feedback here!",
-      "action": "Leave Feedback"
+      "short": "Bug Reports"
     },
     "linkPatchNotes": {
-      "title": "Patch Notes",
-      "short": "Patch Notes",
-      "desc": "Check recent updates and changes",
-      "action": "View Patch Notes"
+      "short": "Patch Notes"
     },
     "patchNotesModal": "Patch Notes",
-    "patchNotesLoading": "Loading...",
-    "disclaimerTitle": "Disclaimer"
+    "patchNotesLoading": "Loading..."
   }
 }

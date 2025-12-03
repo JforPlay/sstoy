@@ -2,7 +2,7 @@
   "nav": {
     "title": "스소 도우미",
     "home": "메인 페이지",
-    "builder": "도자기 공방",
+    "app": "도자기 공방",
     "characterdb": "여행가 DB",
     "discdb": "레코드 DB",
     "resources": "자원 도우미",
@@ -96,7 +96,12 @@
       "skill": "스킬",
       "assistSkill": "지원 스킬",
       "ultimate": "필살기"
-    }
+    },
+    "seconds": "초",
+    "statBoost": "스탯 증가",
+    "loadingTalents": "돌파 데이터를 불러오는 중...",
+    "noTalentInfo": "돌파 정보가 없습니다.",
+    "limitBreakLabel": "돌파"
   },
   "discdb": {
     "title": "레코드 도감",
@@ -183,7 +188,36 @@
     "discHelpTitle": "레코드 자원 계산 방법",
     "discHelpAdvanceTitle": "레코드 승급 아이템 스태미나 계산",
     "discHelpAdvanceDaily": "Math.ceil(17 + 3.5 × 0.5) = 하루치 획득량 가장 낮은 재료로 치환",
-    "discHelpAdvanceDungeon": "Math.ceil(0.5×3×3 + 0.5×3 + 10) = 스태 30당 획득량 가장 낮은 재료로 치환"
+    "discHelpAdvanceDungeon": "Math.ceil(0.5×3×3 + 0.5×3 + 10) = 스태 30당 획득량 가장 낮은 재료로 치환",
+    "loadingData": "데이터를 불러오는 중...",
+    "characterRemoved": "캐릭터가 제거되었습니다",
+    "characterLevel": "캐릭터 레벨",
+    "current": "현재",
+    "target": "목표",
+    "skillLevel": "스킬 레벨",
+    "tooltipComplete": "완료!\n필요: ${required}\n보유: ${owned}",
+    "tooltipRequired": "필요: ${required}\n보유: ${owned}",
+    "advanceItemsCharacter": "승급 아이템 (여행가)",
+    "skillEnhanceItems": "스킬 강화 아이템",
+    "experience": "경험치",
+    "doraTotal": "도라 (총합)",
+    "noDataToReset": "초기화할 데이터가 없습니다",
+    "allDataReset": "모든 데이터가 초기화되었습니다",
+    "discN": "레코드 ${id}",
+    "discRemoved": "레코드가 제거되었습니다",
+    "currentLevel": "현재 레벨",
+    "targetLevel": "목표 레벨",
+    "advanceItemsDisc": "승급 아이템 (레코드)",
+    "confirmResetDiscs": "모든 선택된 레코드와 계산된 자원을 초기화하시겠습니까?",
+    "characterDataNotLoaded": "필요한 캐릭터 데이터가 로드되지 않았습니다.",
+    "badgeDataNotLoaded": "필요한 캐릭터 뱃지 데이터가 로드되지 않았습니다.",
+    "errorGeneratingBadgeMatrix": "캐릭터 뱃지 매트릭스 생성 중 오류: ${error}",
+    "discDataNotLoaded": "필요한 레코드 데이터가 로드되지 않았습니다.",
+    "errorGeneratingDiscMatrix": "레코드 승급 매트릭스 생성 중 오류: ${error}",
+    "cannotLoad5StarDiscs": "5성 레코드 데이터를 불러올 수 없습니다.",
+    "no5StarDiscs": "표시할 5성 레코드가 없습니다.",
+    "dataLoadingFailed": "데이터 로딩 실패",
+    "categoryAdvanceItemsCharacter": "승급 아이템 (캐릭터)"
   },
   "tasks": {
     "title": "의뢰 도우미",
@@ -213,7 +247,17 @@
     "confirm": "확인",
     "confirmMessage": "작업을 진행하시겠습니까?",
     "cancel": "취소",
-    "noSelectedTasks": "선택된 과제가 없습니다"
+    "noSelectedTasks": "선택된 과제가 없습니다",
+    "selectTaskHint": "옆에서 과제를 선택해주세요",
+    "base": "필수",
+    "extra": "추가",
+    "baseTag": "필수 태그",
+    "extraTag": "추가 태그",
+    "usefulForTasks": "${count}개 의뢰에 유용 (${tags}개 태그 충족)",
+    "ownedLabel": "보유",
+    "completedLabel": "완료",
+    "addCharacter": "캐릭터 추가",
+    "selectingCharacter": "캐릭터 선택 중"
   },
   "builder": {
     "title": "스텔라 소라 빌드 도우미",
@@ -423,71 +467,35 @@
   },
   "landing": {
     "title": "스텔라 소라 도우미",
-    "tagline": "Stella Sora Tools & DB",
-    "brandTitle": "스소 도우미",
-    "brandSubtitle": "각종 도우미 & DB",
-    "recommended": "추천",
-    "database": "DB",
-    "equipment": "DISC",
-    "calculator": "CALCULATOR",
-    "optimizer": "OPTIMIZER",
-    "badgeHot": "HOT",
-    "badgeNew": "NEW",
-    "badgePopular": "인기",
     "heroDesc1": "스텔라 소라의 최적 빌드를 쉽고 빠르게 만들어보세요!",
     "heroDesc2": "여행가, 잠재력, 레코드를 한 곳에서 관리하세요.",
-    "btnCharDB": "캐릭터DB 보러가기",
-    "btnDiscDB": "레코드DB 보러가기",
     "btnBuilder": "빌드 시작하기",
-    "btnTasks": "의뢰 도우미 보러가기",
-    "btnResources": "자원 도우미 보러가기",
-    "featuresTitle": "주요 기능",
     "featureCharDB": {
       "title": "여행가 DB",
-      "shortDesc": "정보와 호감도 공략 등 확인",
       "desc": "캐릭터의 상세 스탯, 아카이브, 데이트 공략 정보를 한눈에 확인하세요."
     },
     "featureDiscDB": {
       "title": "레코드 DB",
-      "shortDesc": "정보와 스킬 효과 등 확인",
-      "desc": "레코드의 상세 정보, 스킬 효과, 소리, 스토리를 확인하세요."
-    },
-    "featureBuilder": {
-      "title": "빌드 도우미",
-      "shortDesc": "최고의 도자기 만들기",
-      "desc": "직접 빌드도 짜보고 추천빌드/요약보기를 통해 한 눈에 빌드를 확인해보세요."
+      "shortDesc": "정보와 스킬 효과 등 확인"
     },
     "featureTasks": {
       "title": "의뢰 도우미",
-      "shortDesc": "고급 의뢰 최적화 도구",
-      "desc": "레벨 70 의뢰에 최적의 캐릭터를 배치하고 자동배치를 활용해 태그 최적화를 해보세요."
+      "shortDesc": "고급 의뢰 최적화 도구"
     },
     "featureResources": {
       "title": "자원 도우미",
-      "shortDesc": "육성 재화 계산기",
-      "desc": "육성할 캐릭터/레코드를 선택하고 육성 자원을 확인해보세요."
+      "shortDesc": "육성 재화 계산기"
     },
-    "linksTitle": "기타 링크",
     "linkGithub": {
-      "title": "GitHub Repo",
-      "short": "Github",
-      "desc": "원본 소스코드가 궁금하다면 여기서 확인해주세요",
-      "action": "저장소 방문"
+      "short": "Github"
     },
     "linkFeedback": {
-      "title": "버그 리포트 & 피드백",
-      "short": "버그 제보",
-      "desc": "버그/건의사항이 있으신가요? 여기를 눌러 피드백을 남겨주세요!",
-      "action": "피드백 남기기"
+      "short": "버그 제보"
     },
     "linkPatchNotes": {
-      "title": "패치 노트",
-      "short": "패치 노트",
-      "desc": "최근 업데이트 내역과 변경 사항을 확인하세요",
-      "action": "패치 노트 보기"
+      "short": "패치 노트"
     },
     "patchNotesModal": "패치 노트",
-    "patchNotesLoading": "로딩 중...",
-    "disclaimerTitle": "Disclaimer"
+    "patchNotesLoading": "로딩 중..."
   }
 }

@@ -6,8 +6,8 @@
  * - JP, EN, CN use English UI
  */
 
-import type { GameLanguage, UILanguage, I18n } from '@/types';
-import { fetchJSON, log } from '@/shared';
+import type { GameLanguage, UILanguage, I18n } from './types';
+import { fetchJSON, log } from './shared';
 
 // =============================================================================
 // TYPES
@@ -53,6 +53,12 @@ class I18nManager implements I18n {
     // Load from localStorage or use provided/default
     const storedLang = localStorage.getItem('gameLang') as GameLanguage | null;
     this.currentLang = lang ?? storedLang ?? 'KR';
+    
+    // Ensure default is persisted if nothing was stored
+    if (!storedLang && !lang) {
+      localStorage.setItem('gameLang', 'KR');
+    }
+
     this.uiLang = this.getUILang(this.currentLang);
 
     await this.loadUILanguage(this.uiLang);
