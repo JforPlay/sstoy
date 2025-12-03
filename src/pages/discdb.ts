@@ -718,11 +718,11 @@ function generateNotesDisplay(disc: Disc): string {
                     <i class="fa-solid fa-music"></i> ${window.i18n?.t('discdb.notePhase')}
                   </label>
                   <div class="level-adjuster">
-                    <button class="level-btn" onclick="adjustPhaseLevel(-1)">
+                    <button class="level-btn" data-phase-delta="-1">
                       <i class="fa-solid fa-minus"></i>
                     </button>
                     <span id="phase-level-display" class="level-display">${phaseLabels[discDBState.phaseLevel]}</span>
-                    <button class="level-btn" onclick="adjustPhaseLevel(1)">
+                    <button class="level-btn" data-phase-delta="1">
                       <i class="fa-solid fa-plus"></i>
                     </button>
                   </div>
@@ -863,6 +863,21 @@ function setupSearchHandler(): void {
   });
 }
 
+function setupEventDelegation(): void {
+  // Event delegation for phase level adjustment buttons
+  document.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+
+    // Phase level adjustment buttons
+    const levelBtn = target.closest('.level-btn[data-phase-delta]') as HTMLElement | null;
+    if (levelBtn) {
+      const delta = parseInt(levelBtn.dataset.phaseDelta || '0');
+      if (delta !== 0) adjustPhaseLevel(delta);
+      return;
+    }
+  });
+}
+
 // =============================================================================
 // INITIALIZATION
 // =============================================================================
@@ -884,6 +899,7 @@ async function initPage(): Promise<void> {
 
   await loadDiscData();
   setupSearchHandler();
+  setupEventDelegation();
 }
 
 if (document.readyState === 'loading') {
@@ -896,7 +912,7 @@ if (document.readyState === 'loading') {
 window.filterDiscsByElement = filterDiscsByElement;
 window.adjustDiscLevelSlider = adjustDiscLevelSlider;
 window.adjustSkillLevel = adjustSkillLevel;
-window.adjustPhaseLevel = adjustPhaseLevel;
+// adjustPhaseLevel now handled by event delegation
 
 // Type declarations
 declare global {
@@ -904,7 +920,6 @@ declare global {
     filterDiscsByElement?: (element: string) => void;
     adjustDiscLevelSlider?: () => void;
     adjustSkillLevel?: (delta: number) => void;
-    adjustPhaseLevel?: (delta: number) => void;
   }
 }
 
