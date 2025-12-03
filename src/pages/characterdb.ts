@@ -7,12 +7,22 @@
  */
 
 // Import shared utilities first (auto-initializes)
-import '@/shared';
-import { parseElementTags, debounce, showError, showWarning, handleImageError, createEmptyState } from '@/shared';
-import { i18n } from '@/i18n';
-import { parseParamValue, formatValue, parseDescriptionParams } from '@/modules/param-parser';
-import { saveToLocalStorage, loadFromLocalStorage, removeFromLocalStorage } from '@/utils/storage';
-import type { ParamParserState } from '@/types';
+import { parseElementTags, debounce, handleImageError } from '../shared';
+import { i18n } from '../i18n';
+import { initGlobalHeader } from '../shared/ui-components';
+import { parseParamValue, formatValue, parseDescriptionParams } from '../modules/param-parser';
+import { ELEMENT_COLORS, STAT_ICONS, MAIN_STATS, STAT_TO_EFFECT_ID, GameData } from '../shared/game-data';
+import { loadCoreData, loadFeatureData, loadLanguageData } from '../shared/data-loader';
+import { saveToLocalStorage, loadFromLocalStorage, removeFromLocalStorage } from '../utils/storage';
+
+import type {
+  Position,
+  FileType,
+  LevelType,
+  FormatType,
+  ParseResult,
+  ParamParserState,
+} from '../types';
 
 // =============================================================================
 // STATE & INTERFACES
@@ -62,6 +72,7 @@ interface CharacterDBState extends ParamParserState {
     shieldValue: Record<string, any>;
     currentPotentialType: string;
     potentialLevel: number;
+    currentElementFilter: string;
 }
 
 // Character Database State
@@ -110,52 +121,9 @@ const dbState: CharacterDBState = {
     buffValue: {},
     shieldValue: {},
     currentPotentialType: 'main',
-    potentialLevel: 1
+    potentialLevel: 1,
+    currentElementFilter: 'all'
 };
-
-// Element colors
-const ELEMENT_COLORS = {
-    1: { bg: 'rgba(59, 130, 246, 0.15)', border: '#3b82f6', color: '#3b82f6', name: '물' },   // Water - Blue
-    2: { bg: 'rgba(239, 68, 68, 0.15)', border: '#ef4444', color: '#ef4444', name: '불' },     // Fire - Red
-    3: { bg: 'rgba(120, 53, 15, 0.15)', border: '#92400e', color: '#92400e', name: '땅' },    // Earth - Brown
-    4: { bg: 'rgba(34, 197, 94, 0.15)', border: '#22c55e', color: '#22c55e', name: '바람' },  // Wind - Green
-    5: { bg: 'rgba(234, 179, 8, 0.15)', border: '#eab308', color: '#eab308', name: '빛' },    // Light - Yellow
-    6: { bg: 'rgba(139, 92, 246, 0.15)', border: '#8b5cf6', color: '#8b5cf6', name: '어둠' }  // Dark - Purple
-};
-
-// Stat display names (Korean)
-const STAT_NAMES = {
-    'Atk': '공격력',
-    'Hp': '생명력',
-    'Def': '방어력',
-    'HitRate': '명중률',
-    'CritRate': '치명타 확률',
-    'CritPower': '치명타 위력',
-    'ToughnessDamageAdjust': '강인도 데미지 배율',
-    'WEE': '물 원소 강화',
-    'FEE': '불 원소 강화',
-    'SEE': '땅 원소 강화',
-    'AEE': '바람 원소 강화',
-    'LEE': '빛 원소 강화',
-    'DEE': '어둠 원소 강화'
-};
-
-// Stat icons (for display) - Using Font Awesome via window.getIcon?.()
-const STAT_ICONS = {
-    'Atk': 'attack',
-    'Hp': 'hp',
-    'Def': 'defense',
-    'HitRate': 'accuracy',
-    'CritRate': 'critRate',
-    'CritPower': 'critPower',
-    'ToughnessDamageAdjust': 'toughness'
-};
-
-// Main stats to display (in order)
-const MAIN_STATS = ['Atk', 'Hp', 'Def', 'HitRate', 'CritRate', 'CritPower', 'ToughnessDamageAdjust'];
-
-// Data version for cache invalidation
-const DATA_VERSION = '1.1.=10'; // update 11/18
 
 /**
  * Cache DOM elements for better performance
@@ -205,183 +173,106 @@ function buildTagToGiftsMap() {
 }
 
 /**
- * Save data to localStorage with version
- */
-function saveDataToCache(data: any): void {
-    const cacheData = {
-        version: DATA_VERSION,
-        timestamp: Date.now(),
-        data: data
-    };
-    saveToLocalStorage('characterdb_data', cacheData);
-}
-
-/**
- * Load data from localStorage if valid
- */
-function loadDataFromCache() {
-    const cacheData = loadFromLocalStorage<{ version: string; timestamp: number; data: any }>('characterdb_data');
-    if (!cacheData) return null;
-
-    // Check version and age (cache for 24 hours)
-    const age = Date.now() - cacheData.timestamp;
-    const maxAge = 24 * 60 * 60 * 1000; // 24 hours
-
-    if (cacheData.version === DATA_VERSION && age < maxAge) {
-        return cacheData.data;
-    }
-
-    // Clear old cache
-    removeFromLocalStorage('characterdb_data');
-    return null;
-}
-
-/**
  * Load all required data files
  */
 async function loadData() {
-    // Try to load from cache first (but only if language hasn't changed)
-    const cachedData = loadDataFromCache();
-    const currentLang = window.i18n?.currentLang || 'KR';
-    if (cachedData && cachedData.language === currentLang) {
-        Object.assign(dbState, cachedData);
-        cacheDOMElements();
-        buildTagToGiftsMap();
-        renderCharacterSelector();
-        await loadPotentialData();
-        return;
-    }
     try {
         // Get current language from i18n
         const gameLang = window.i18n?.currentLang || 'KR';
-        const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
 
-        const [
-            charactersData,
-            charactersKRData,
-            characterDesData,
-            characterDesKRData,
-            characterTagKRData,
-            affinityGiftsData,
-            itemsData,
-            itemsKRData,
-            attributesData,
-            archiveData,
-            archiveContentData,
-            archiveContentKRData,
-            datingData,
-            datingLandmarkData,
-            datingBranchData,
-            charGetLinesData,
-            charGetLinesKRData,
-            enumsData,
-            talentGroupsData,
-            talentGroupsKRData,
-            talentsData,
-            talentsKRData,
-            uiTextData
-        ] = await Promise.all([
-            fetch('data/Character.json').then(r => r.json()),
-            fetch(`${dataPath}/Character.json`).then(r => r.json()),
-            fetch('data/CharacterDes.json').then(r => r.json()),
-            fetch(`${dataPath}/CharacterDes.json`).then(r => r.json()),
-            fetch(`${dataPath}/CharacterTag.json`).then(r => r.json()),
-            fetch('data/AffinityGift.json').then(r => r.json()),
-            fetch('data/Item.json').then(r => r.json()),
-            fetch(`${dataPath}/Item.json`).then(r => r.json()),
-            fetch('data/Attribute.json').then(r => r.json()),
-            fetch('data/CharacterArchive.json').then(r => r.json()),
-            fetch('data/CharacterArchiveContent.json').then(r => r.json()),
-            fetch(`${dataPath}/CharacterArchiveContent.json`).then(r => r.json()),
-            fetch('data/DatingCharacterEvent.json').then(r => r.json()),
-            fetch(`${dataPath}/DatingLandmark.json`).then(r => r.json()),
-            fetch(`${dataPath}/DatingBranch.json`).then(r => r.json()),
-            fetch('data/CharGetLines.json').then(r => r.json()),
-            fetch(`${dataPath}/CharGetLines.json`).then(r => r.json()),
-            fetch('data/GameEnums.json').then(r => r.json()),
-            fetch('data/TalentGroup.json').then(r => r.json()),
-            fetch(`${dataPath}/TalentGroup.json`).then(r => r.json()),
-            fetch('data/Talent.json').then(r => r.json()),
-            fetch(`${dataPath}/Talent.json`).then(r => r.json()),
-            fetch(`${dataPath}/UIText.json`).then(r => r.json())
-        ]);
+        // Load Core Data (Characters, Items, Enums)
+        await loadCoreData();
 
-        dbState.characters = charactersData;
-        dbState.charactersKR = charactersKRData;
-        dbState.characterDes = characterDesData;
-        dbState.characterDesKR = characterDesKRData;
-        dbState.characterTagKR = characterTagKRData;
-        dbState.affinityGifts = affinityGiftsData;
-        dbState.items = itemsData;
-        dbState.itemsKR = itemsKRData;
-        dbState.attributes = attributesData;
-        dbState.characterArchive = archiveData;
-        dbState.characterArchiveContent = archiveContentData;
-        dbState.characterArchiveContentKR = archiveContentKRData;
-        dbState.datingEvents = datingData;
-        dbState.datingLandmarkKR = datingLandmarkData;
-        dbState.datingBranchKR = datingBranchData;
-        dbState.charGetLines = charGetLinesData;
-        dbState.charGetLinesKR = charGetLinesKRData;
-        dbState.gameEnums = enumsData;
-        dbState.talentGroups = talentGroupsData;
-        dbState.talentGroupsKR = talentGroupsKRData;
-        dbState.talents = talentsData;
-        dbState.talentsKR = talentsKRData;
-        dbState.uiText = uiTextData;
+        // Load Character DB Feature Data (includes potentials, talents, etc.)
+        await loadFeatureData('characterDB');
 
-        // Save to cache with language info
-        const dataToCache = {
-            language: gameLang,
-            characters: dbState.characters,
-            charactersKR: dbState.charactersKR,
-            characterDes: dbState.characterDes,
-            characterDesKR: dbState.characterDesKR,
-            characterTagKR: dbState.characterTagKR,
-            affinityGifts: dbState.affinityGifts,
-            items: dbState.items,
-            itemsKR: dbState.itemsKR,
-            attributes: dbState.attributes,
-            characterArchive: dbState.characterArchive,
-            characterArchiveContent: dbState.characterArchiveContent,
-            characterArchiveContentKR: dbState.characterArchiveContentKR,
-            datingEvents: dbState.datingEvents,
-            datingLandmarkKR: dbState.datingLandmarkKR,
-            datingBranchKR: dbState.datingBranchKR,
-            charGetLines: dbState.charGetLines,
-            charGetLinesKR: dbState.charGetLinesKR,
-            gameEnums: dbState.gameEnums,
-            talentGroups: dbState.talentGroups,
-            talentGroupsKR: dbState.talentGroupsKR,
-            talents: dbState.talents,
-            talentsKR: dbState.talentsKR,
-            uiText: dbState.uiText
-        };
-        saveDataToCache(dataToCache);
+        // Load Language Specific Data
+        const langFiles = [
+            'Character.json',
+            'CharacterDes.json',
+            'CharacterTag.json',
+            'Item.json',
+            'CharacterArchiveContent.json',
+            'DatingLandmark.json',
+            'DatingBranch.json',
+            'CharGetLines.json',
+            'TalentGroup.json',
+            'Talent.json',
+            'UIText.json',
+            'Potential.json',
+            'Skill.json'
+        ];
+        await loadLanguageData(gameLang, langFiles);
+
+        // Sync GameData to local dbState (for compatibility with existing code)
+        dbState.characters = GameData.characters;
+        dbState.charactersKR = GameData.charactersKR as any;
+        dbState.characterDes = GameData.characterDes;
+        dbState.characterDesKR = GameData.characterDesKR;
+        dbState.characterTagKR = GameData.characterTagKR;
+        dbState.affinityGifts = GameData.affinityGifts;
+        dbState.items = GameData.items;
+        dbState.itemsKR = GameData.itemsKR as any;
+        dbState.attributes = GameData.attributes;
+        dbState.characterArchive = GameData.characterArchive;
+        dbState.characterArchiveContent = GameData.characterArchiveContent;
+        dbState.characterArchiveContentKR = GameData.characterArchiveContentKR;
+        dbState.datingEvents = GameData.datingEvents;
+        dbState.datingLandmarkKR = GameData.datingLandmarkKR;
+        dbState.datingBranchKR = GameData.datingBranchKR;
+        dbState.charGetLines = GameData.charGetLines;
+        dbState.charGetLinesKR = GameData.charGetLinesKR;
+        dbState.gameEnums = GameData.gameEnums;
+        dbState.talentGroups = GameData.talentGroups;
+        dbState.talentGroupsKR = GameData.talentGroupsKR;
+        dbState.talents = GameData.talents;
+        dbState.talentsKR = GameData.talentsKR;
+        dbState.uiText = GameData.uiText;
+        
+        // Potentials and Skills (previously in loadPotentialData)
+        dbState.charPotentials = GameData.charPotentials;
+        dbState.potentials = GameData.potentials;
+        dbState.potentialsKR = GameData.potentialsKR as any;
+        dbState.skills = GameData.skills;
+        dbState.skillsKR = GameData.skillsKR as any;
+        dbState.effectValue = GameData.effectValue;
+        dbState.hitDamage = GameData.hitDamage;
+        dbState.onceAdditionalAttributeValue = GameData.onceAdditionalAttributeValue;
+        dbState.scriptParameterValue = GameData.scriptParameterValue;
+        dbState.buffValue = GameData.buffValue;
+        dbState.shieldValue = GameData.shieldValue;
 
         // Cache DOM elements and build maps
         cacheDOMElements();
         buildTagToGiftsMap();
 
         renderCharacterSelector();
+        
+        // We don't need to call loadPotentialData anymore as it's included above
 
-        // Load potential data
-        await loadPotentialData();
     } catch (error) {
         console.error('Error loading data:', error);
         window.showError?.(window.i18n?.t('messages.error_loading') || 'Error loading data');
-
-        // Try to load from cache as fallback
-        const cachedData = loadDataFromCache();
-        if (cachedData) {
-            console.log('Falling back to cached data');
-            Object.assign(dbState, cachedData);
-            cacheDOMElements();
-            buildTagToGiftsMap();
-            renderCharacterSelector();
-            window.showWarning?.(window.i18n?.t('messages.warning_offline') || 'Using offline data');
-        }
     }
+}
+
+/**
+ * Filter characters by element
+ */
+function filterCharactersByElement(element: string, event?: Event): void {
+    dbState.currentElementFilter = element;
+    
+    // Update UI
+    document.querySelectorAll('.element-filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    if (event?.currentTarget) {
+        (event.currentTarget as HTMLElement).classList.add('active');
+    } else {
+        document.querySelector(`.element-filter-btn[data-element="${element}"]`)?.classList.add('active');
+    }
+
+    renderCharacterSelector();
 }
 
 /**
@@ -395,9 +286,15 @@ function renderCharacterSelector() {
     const fragment = document.createDocumentFragment();
 
     // Filter visible and available characters
-    const availableCharacters = Object.values(dbState.characters)
-        .filter(char => char.Visible && char.Available)
-        .sort((a, b) => a.Id - b.Id);
+    let availableCharacters = Object.values(dbState.characters)
+        .filter(char => char.Visible && char.Available);
+
+    // Apply element filter
+    if (dbState.currentElementFilter !== 'all') {
+        availableCharacters = availableCharacters.filter(char => String(char.EET) === dbState.currentElementFilter);
+    }
+
+    availableCharacters.sort((a, b) => a.Id - b.Id);
 
     availableCharacters.forEach(char => {
         const charNameKey = `Character.${char.Id}.1`;
@@ -411,19 +308,57 @@ function renderCharacterSelector() {
         card.dataset.charId = char.Id; // Store char ID for event delegation
         card.onclick = (e) => selectCharacter(char.Id, e);
 
+        // Get element icon using EET (Element Enum Type)
+        const elementId = char.EET;
+        const elementIconPath = elementId ? `assets/icon_common_property_${elementId}.png` : '';
+
+        // Image wrapper with circle background
+        const imgWrapper = document.createElement('div');
+        imgWrapper.className = 'character-selector-img-wrapper';
+
         const img = document.createElement('img');
         img.className = 'character-selector-img';
         const charIdStr = String(char.Id);
         img.src = `assets/char/avg1_${charIdStr}_002.png`;
         img.alt = charName;
+        img.loading = 'lazy';
         img.onerror = function() { handleImageError(this); };
 
+        imgWrapper.appendChild(img);
+
+        // Add element icon if available
+        if (elementIconPath) {
+            const elementIcon = document.createElement('img');
+            elementIcon.className = 'character-element-icon';
+            elementIcon.src = elementIconPath;
+            elementIcon.alt = 'Element';
+            elementIcon.loading = 'lazy';
+            elementIcon.onerror = function() { handleImageError(this); };
+            imgWrapper.appendChild(elementIcon);
+        }
+
+        // Character info container
+        const info = document.createElement('div');
+        info.className = 'character-selector-info';
+
+        // Character name
         const name = document.createElement('div');
         name.className = 'character-selector-name';
         name.textContent = charName;
 
-        card.appendChild(img);
-        card.appendChild(name);
+        // Grade stars
+        const grade = document.createElement('div');
+        grade.className = 'character-selector-grade';
+        const gradeNum = Number(char.Grade) || 3;
+        const gradeData = dbState.gameEnums?.characterGrade?.[gradeNum];
+        const stars = gradeData?.stars ? '★'.repeat(gradeData.stars) : '★'.repeat(gradeNum);
+        grade.textContent = stars;
+
+        info.appendChild(name);
+        info.appendChild(grade);
+
+        card.appendChild(imgWrapper);
+        card.appendChild(info);
         fragment.appendChild(card);
     });
 
@@ -910,14 +845,36 @@ function renderStats(charId: string, level: number, limitBreak: number): void {
 
             const name = document.createElement('div');
             name.className = 'stat-name';
-            name.textContent = (STAT_NAMES as any)[statKey] || statKey;
+
+            // Dynamic stat name lookup with UIText translation
+            let statName = statKey;
+            // Use the STAT_TO_EFFECT_ID mapping to get the correct effectAttributeType ID
+            const effectId = STAT_TO_EFFECT_ID[statKey];
+            if (effectId && dbState.uiText) {
+                // Look up translation in UIText using the ID
+                const uiTextKey = `UIText.Enums_Effect_${effectId}.1`;
+                statName = dbState.uiText[uiTextKey];
+
+                // Fallback to GameEnums if UIText is not available
+                if (!statName && GameData.gameEnums?.effectAttributeType) {
+                    const enumEntry = GameData.gameEnums.effectAttributeType[effectId];
+                    statName = enumEntry?.name || statKey;
+                }
+            }
+
+            // Final fallback to original key if no translation found
+            if (!statName) {
+                statName = statKey;
+            }
+
+            name.textContent = statName;
 
             const value = document.createElement('div');
             value.className = 'stat-value';
 
             // Format value
             let displayValue = attrData[statKey];
-            if (statKey === 'CritPower' || statKey === 'HitRate' || statKey === 'CritRate' || statKey === 'ToughnessDamageAdjust') {
+            if (statKey === 'CritPower' || statKey === 'HitRate' || statKey === 'CritRate') {
                 // These are stored as per-10000 values, convert to percentage
                 displayValue = (attrData[statKey] / 100).toFixed(1) + '%';
             } else if (statKey === 'Hp') {
@@ -1227,6 +1184,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Initialize i18n first
     await i18n.init();
 
+    // Initialize Global Header after i18n is ready
+    initGlobalHeader('characterdb');
+
     const levelSlider = document.getElementById('level-slider');
     const currentLevelDisplay = document.getElementById('current-level');
     const currentLimitBreakDisplay = document.getElementById('current-limitbreak');
@@ -1294,83 +1254,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadData();
 });
 
+// Expose functions to window for HTML onclick handlers
+(window as any).changeCharacterType = changeCharacterType;
+(window as any).switchCharDbTab = switchCharDbTab;
+(window as any).switchPotentialType = switchPotentialType;
+(window as any).updatePotentialLevel = updatePotentialLevel;
+(window as any).adjustPotentialLevel = adjustPotentialLevel;
+(window as any).updateSkillLevel = updateSkillLevelDB;
+(window as any).adjustSkillLevel = adjustSkillLevel;
+(window as any).filterCharactersByElement = filterCharactersByElement;
+(window as any).selectCharacter = selectCharacter; // Ensure selectCharacter is also exposed if needed by generated HTML
+
+
 // =============================================================================
 // POTENTIALS SECTION
 // =============================================================================
-
-// Add potential data to dbState
-dbState.charPotentials = {};
-dbState.potentials = {};
-dbState.potentialsKR = {};
-dbState.items = {};
-dbState.itemsKR = {};
-dbState.skills = {};
-dbState.skillsKR = {};
-dbState.effectValue = {};
-dbState.hitDamage = {};
-dbState.onceAdditionalAttributeValue = {};
-dbState.scriptParameterValue = {};
-dbState.buffValue = {};
-dbState.shieldValue = {};
-dbState.currentPotentialType = 'main'; // 'main' or 'assist'
-dbState.potentialLevel = 1; // Global potential level (1-9)
 
 // Debounced render function for potentials (150ms delay)
 const debouncedRenderPotentials = debounce((charId: string) => {
     renderPotentials(charId);
 }, 150);
-
-// Load potential data (called after main data is loaded)
-async function loadPotentialData() {
-    try {
-        // Get current language from i18n
-        const gameLang = window.i18n?.currentLang || 'KR';
-        const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
-
-        const [
-            charPotentials,
-            potentials,
-            potentialsKR,
-            skills,
-            skillsKR,
-            effectValue,
-            hitDamage,
-            onceAdditionalAttributeValue,
-            scriptParameterValue,
-            buffValue,
-            shieldValue
-        ] = await Promise.all([
-            fetch('data/CharPotential.json').then(r => r.json()),
-            fetch('data/Potential.json').then(r => r.json()),
-            fetch(`${dataPath}/Potential.json`).then(r => r.json()),
-            fetch('data/Skill.json').then(r => r.json()),
-            fetch(`${dataPath}/Skill.json`).then(r => r.json()),
-            fetch('data/EffectValue.json').then(r => r.json()),
-            fetch('data/HitDamage.json').then(r => r.json()),
-            fetch('data/OnceAdditionalAttributeValue.json').then(r => r.json()),
-            fetch('data/ScriptParameterValue.json').then(r => r.json()),
-            fetch('data/BuffValue.json').then(r => r.json()),
-            fetch('data/ShieldValue.json').then(r => r.json())
-        ]);
-
-        dbState.charPotentials = charPotentials;
-        dbState.potentials = potentials;
-        dbState.potentialsKR = potentialsKR;
-        dbState.skills = skills;
-        dbState.skillsKR = skillsKR;
-        dbState.effectValue = effectValue;
-        dbState.hitDamage = hitDamage;
-        dbState.onceAdditionalAttributeValue = onceAdditionalAttributeValue;
-        dbState.scriptParameterValue = scriptParameterValue;
-        dbState.buffValue = buffValue;
-        dbState.shieldValue = shieldValue;
-
-        console.log('Potential data loaded successfully');
-    } catch (error) {
-        console.error('Error loading potential data:', error);
-        window.showError?.(window.i18n?.t('messages.error_loadingPotentials') || 'Error loading potentials');
-    }
-}
 
 // =============================================================================
 // POTENTIAL SYSTEM
@@ -1390,7 +1293,12 @@ function processDescription(desc: any, level: any, skillLevel?: number): string 
     const effectiveSkillLevel = skillLevel ?? dbState.skillLevel;
 
     // Use the shared parameter parser with dbState context
-    return parseDescriptionParams(desc, currentPotentialData, level, effectiveSkillLevel, dbState as any);
+    let parsedDesc = parseDescriptionParams(desc, currentPotentialData, level, effectiveSkillLevel, dbState as any);
+
+    // Replace \u000b (vertical tab) with line breaks
+    parsedDesc = parsedDesc.replace(/\u000b/g, '<br>');
+
+    return parsedDesc;
 }
 
 /**
@@ -1696,8 +1604,17 @@ function switchCharDbTab(tabName: string, event?: Event): void {
     document.querySelectorAll('.chardb-tab-btn').forEach(btn => {
         btn.classList.remove('active');
     });
-    if (event?.target) {
-        (event.target as HTMLElement).closest('.chardb-tab-btn')?.classList.add('active');
+
+    // Try to find the button either from event or by attribute
+    let activeBtn = event?.target ? (event.target as HTMLElement).closest('.chardb-tab-btn') : null;
+    
+    if (!activeBtn) {
+        // Fallback: find by onclick attribute
+        activeBtn = document.querySelector(`.chardb-tab-btn[onclick*="'${tabName}'"]`);
+    }
+
+    if (activeBtn) {
+        activeBtn.classList.add('active');
     }
 
     // Update tab panels
@@ -1788,7 +1705,7 @@ function renderSkills(charId: string): void {
                     <div class="skill-card-title">${title}</div>
                     <div class="skill-card-meta">
                         <span class="skill-label">${label}</span>
-                        ${skill.SkillCD > 0 ? `<span class="skill-label">CD: ${(skill.SkillCD / 10000).toFixed(1)}초</span>` : ''}
+                        ${skill.SkillCD > 0 ? `<span class="skill-label">CD: ${(skill.SkillCD / 10000).toFixed(1)}${window.i18n?.t('characterdb.seconds')}</span>` : ''}
                     </div>
                 </div>
             </div>
@@ -1852,7 +1769,7 @@ function renderTalents(charId: string): void {
     // Check if talent data is loaded
     if (!dbState.talentGroups || Object.keys(dbState.talentGroups).length === 0 ||
         !dbState.talents || Object.keys(dbState.talents).length === 0) {
-        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⏳</div><div class="empty-state-text">돌파 데이터를 불러오는 중...</div></div>';
+        container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">⏳</div><div class="empty-state-text">${window.i18n?.t('characterdb.loadingTalents')}</div></div>`;
         return;
     }
 
@@ -1862,7 +1779,7 @@ function renderTalents(charId: string): void {
         .sort((a, b) => a.Background - b.Background);
 
     if (talentGroups.length === 0) {
-        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">✨</div><div class="empty-state-text">돌파 정보가 없습니다.</div></div>';
+        container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">✨</div><div class="empty-state-text">${window.i18n?.t('characterdb.noTalentInfo')}</div></div>`;
         return;
     }
 
@@ -1871,7 +1788,7 @@ function renderTalents(charId: string): void {
     talentGroups.forEach(group => {
         // Get title for this limit break phase
         const titleKey = group.Title;
-        const title = dbState.talentGroupsKR[titleKey] || `돌파 ${group.Background}`;
+        const title = dbState.talentGroupsKR[titleKey] || `${window.i18n?.t('characterdb.limitBreakLabel')} ${group.Background}`;
 
         // Create section for this limit break
         const section = document.createElement('div');
@@ -1885,7 +1802,7 @@ function renderTalents(charId: string): void {
                 <span class="talent-section-icon">🌟</span>
                 ${title}
             </div>
-            <div class="talent-section-badge">돌파 ${group.Background}</div>
+            <div class="talent-section-badge">${window.i18n?.t('characterdb.limitBreakLabel')} ${group.Background}</div>
         `;
         section.appendChild(header);
 
@@ -1905,7 +1822,7 @@ function renderTalents(charId: string): void {
 
             const subNodesTitle = document.createElement('div');
             subNodesTitle.className = 'talent-subnodes-title';
-            subNodesTitle.textContent = '스탯 증가';
+            subNodesTitle.textContent = window.i18n?.t('characterdb.statBoost') || '스탯 증가';
             subNodesContainer.appendChild(subNodesTitle);
 
             // Aggregate stats by effectAttributeType (the actual stat ID)
@@ -1958,9 +1875,10 @@ function renderTalents(charId: string): void {
                 const statItem = document.createElement('div');
                 statItem.className = 'talent-stat-item';
 
-                // Get stat name from GameEnums effectAttributeType
+                // Get stat name from UIText with fallback to GameEnums
                 const statEnum = dbState.gameEnums?.effectAttributeType?.[statTypeId];
-                const statName = statEnum?.name || `Stat ${statTypeId}`;
+                const uiTextKey = `UIText.Enums_Effect_${statTypeId}.1`;
+                const statName = dbState.uiText?.[uiTextKey] || statEnum?.name || `Stat ${statTypeId}`;
 
                 // Format the value
                 const data = (statAggregation as any)[statTypeId] as any;

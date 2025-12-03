@@ -18,7 +18,7 @@ import type {
   DescriptionMode,
   MainTab,
   ActionElement,
-} from '@/types';
+} from '../types';
 
 import {
   fetchJSON,
@@ -32,7 +32,18 @@ import {
   querySelector,
   querySelectorAll,
   processDescriptionText,
-} from '@/shared';
+  loadCoreData,
+  loadFeatureData,
+  loadLanguageData
+} from '../shared';
+
+import {
+  GameData,
+  getCharacterName,
+  getItemName
+} from '../shared/game-data';
+
+import { generatePotentialIconHTML, Modal } from '../shared/ui-components';
 
 import {
   parseParamValue,
@@ -72,88 +83,229 @@ interface CharacterSelectorState {
   currentFilter: string;
 }
 
-interface AppCharState extends CharacterState {
+interface AppCharState extends Omit<CharacterState, 'characters' | 'characterNames' | 'potentials' | 'potentialNames' | 'items' | 'itemNames' | 'skills' | 'skillNames' | 'gameEnums' | 'effectValue' | 'buffValue' | 'shieldValue' | 'hitDamage' | 'onceAdditionalAttributeValue' | 'scriptParameterValue' | 'uiText'> {
   currentPosition: Position | null;
   activeTab: Position;
   party: Record<Position, PartyMember | null>;
   characterSelector: CharacterSelectorState;
-  itemNames: Record<string, string>;
-  uiText: Record<string, string>;
 }
 
 // Initialize state
 const state: AppCharState = {
-  // Data caches
-  characters: {},
-  characterNames: {},
-  potentials: {},
-  potentialNames: {},
-  itemNames: {},
-  skills: {},
-  skillNames: {},
-  effectValue: {},
-  buffValue: {},
-  shieldValue: {},
-  hitDamage: {},
-  onceAdditionalAttributeValue: {},
-  scriptParameterValue: {},
-  gameEnums: {},
-  uiText: {},
-
-  // UI state
-  currentPosition: null,
-  activeTab: 'master',
+  // User selection state
+  selectedPotentials: { master: [], assist1: [], assist2: [] },
+  potentialLevels: { master: {}, assist1: {}, assist2: {} },
+  skillLevels: { master: {}, assist1: {}, assist2: {} },
+  characterLevelPhase: { master: 8, assist1: 8, assist2: 8 },
+  potentialMarks: { master: {}, assist1: {}, assist2: {} },
+  
   descriptionMode: 'brief',
 
-  // Party state
+  currentPosition: null,
+  activeTab: 'master',
   party: {
     master: null,
     assist1: null,
     assist2: null,
   },
-
-  // Potential state
-  selectedPotentials: {
-    master: [],
-    assist1: [],
-    assist2: [],
-  },
-  potentialLevels: {
-    master: {},
-    assist1: {},
-    assist2: {},
-  },
-  potentialMarks: {
-    master: {},
-    assist1: {},
-    assist2: {},
-  },
-
-  // Skill state
-  skillLevels: {
-    master: {},
-    assist1: {},
-    assist2: {},
-  },
-
-  // Character level phase (0-8)
-  characterLevelPhase: {
-    master: 8,
-    assist1: 8,
-    assist2: 8,
-  },
-
-  // Character selector
   characterSelector: {
     allCharacters: [],
     fuse: null,
     selectedElement: 'all',
     currentFilter: '',
   },
-
-  // Items data
-  items: {},
 };
+
+let characterModal: Modal | null = null;
+
+// Expose state for debugging
+if (typeof window !== 'undefined') {
+  (window as any).state = state;
+  (window as any).GameData = GameData; // Expose GameData too
+}
+
+// =============================================================================
+// DATA LOADING
+// =============================================================================
+
+export async function loadData(): Promise<void> {
+  try {
+    // Load core data
+    await loadCoreData();
+    
+    // Load builder-specific data
+    await loadFeatureData('characterBuilder');
+    
+    // Load current language data
+    const lang = window.i18n?.currentLang || 'KR';
+    // Load localized names
+    await loadLanguageData(lang, ['Character.json', 'Item.json', 'Skill.json', 'Potential.json']);
+
+    initializeCharacterSelector();
+    log('[AppChar] Data loaded successfully');
+  } catch (error) {
+    console.error('Failed to load data:', error);
+    showError('Failed to load game data. Please refresh.');
+  }
+}
+
+export function isDataLoaded(): boolean {
+  return !!GameData.characters && Object.keys(GameData.characters).length > 0;
+}
+
+function renderCharacterGrid(): void {
+  const grid = getElement<HTMLDivElement>('character-grid');
+  if (!grid) return;
+
+  grid.innerHTML = '';
+
+  const fragment = document.createDocumentFragment();
+  // Filter based on current selector state (search/element)
+  let charsToDisplay = state.characterSelector.allCharacters;
+  
+  // Apply Element Filter
+  if (state.characterSelector.selectedElement !== 'all') {
+      charsToDisplay = charsToDisplay.filter(c =>
+          String(c.EET) === state.characterSelector.selectedElement
+      );
+  }
+  
+  // Apply Search Filter
+  if (state.characterSelector.currentFilter) {
+      if (state.characterSelector.fuse) {
+          const results = (state.characterSelector.fuse as any).search(state.characterSelector.currentFilter);
+          charsToDisplay = results.map((r: any) => r.item);
+      } else {
+          const lower = state.characterSelector.currentFilter.toLowerCase();
+          charsToDisplay = charsToDisplay.filter(c => 
+              getCharacterName(c.Id).toLowerCase().includes(lower)
+          );
+      }
+  }
+
+  charsToDisplay.forEach((char) => {
+    const card = document.createElement('div');
+    card.className = 'character-selector-card';
+    card.dataset.charId = char.Id;
+    card.onclick = () => selectCharacter(char.Id);
+
+    const name = getCharacterName(char.Id);
+    const imagePath = `assets/char/avg1_${char.Id}_002.png`;
+
+    // Get grade (rarity) as stars
+    const gradeNum = Number(char.Grade) || 3;
+    const gradeData = GameData.gameEnums?.characterGrade?.[gradeNum];
+    const stars = gradeData?.stars ? '★'.repeat(gradeData.stars) : '★'.repeat(gradeNum);
+
+    // Get element icon using EET (Element Enum Type)
+    const elementId = char.EET;
+    const elementIconPath = elementId ? `assets/icon_common_property_${elementId}.png` : '';
+
+    card.innerHTML = `
+      <div class="character-selector-img-wrapper">
+        <img src="${imagePath}" alt="${name}" class="character-selector-img" loading="lazy" onerror="this.style.display='none'">
+        ${elementIconPath ? `<img src="${elementIconPath}" alt="Element" class="character-element-icon" loading="lazy" onerror="this.style.display='none'">` : ''}
+      </div>
+      <div class="character-selector-info">
+        <div class="character-selector-name">${name}</div>
+        <div class="character-selector-grade">${stars}</div>
+      </div>
+    `;
+    fragment.appendChild(card);
+  });
+
+  grid.appendChild(fragment);
+}
+
+export function closeCharacterSelect(): void {
+  if (characterModal) {
+    characterModal.close();
+  }
+  state.currentPosition = null;
+}
+
+export function removeCharacter(position: Position): void {
+  state.party[position] = null;
+  state.selectedPotentials[position] = [];
+  state.potentialLevels[position] = {};
+  state.skillLevels[position] = {};
+  state.potentialMarks[position] = {};
+
+  updateCharacterCard(position);
+  updatePotentialsDisplay(position);
+}
+
+function initializeCharacterSelector(): void {
+  if (!GameData.characters) return;
+
+  state.characterSelector.allCharacters = Object.values(GameData.characters).filter(
+    (c) => c.Visible
+  );
+  
+  // Sort by ID
+  state.characterSelector.allCharacters.sort((a, b) => parseInt(a.Id) - parseInt(b.Id));
+
+  // Initialize Fuse.js if available
+  if (typeof (window as any).Fuse !== 'undefined') {
+    state.characterSelector.fuse = new (window as any).Fuse(state.characterSelector.allCharacters, {
+      keys: ['Name'],
+      threshold: 0.3,
+    });
+  }
+}
+
+// =============================================================================
+// CHARACTER SELECTION
+// =============================================================================
+
+export function openCharacterSelect(position: Position): void {
+  state.currentPosition = position;
+
+  if (!characterModal) {
+    characterModal = new Modal('character-modal');
+    characterModal.onClose(() => {
+      state.currentPosition = null;
+    });
+  }
+
+  characterModal.open();
+  renderCharacterGrid(); // Renders using GameData.characters
+
+  // Focus search input
+  const searchInput = getElement<HTMLInputElement>('character-search');
+  if (searchInput) {
+    searchInput.value = '';
+    searchInput.focus();
+  }
+}
+
+export function selectCharacter(characterId: string): void {
+  const character = GameData.characters[characterId]; // Use GameData
+  if (!character || !state.currentPosition) return;
+
+  const position = state.currentPosition;
+  const name = getCharacterName(characterId); // Use helper
+
+  // Clear old character data when switching
+  if (state.party[position]?.id !== characterId) {
+    state.selectedPotentials[position] = [];
+    state.potentialLevels[position] = {};
+    state.skillLevels[position] = {};
+    state.potentialMarks[position] = {};
+  }
+
+  state.party[position] = {
+    id: characterId,
+    name,
+    data: character,
+  };
+
+  updateCharacterCard(position);
+  updatePotentialsDisplay(position);
+  closeCharacterSelect();
+}
+
+
 
 // Description cache
 const descriptionCache = new LRUCache<string, string>(500);
@@ -186,202 +338,15 @@ export function getCacheStats(): {
 }
 
 // =============================================================================
-// DATA LOADING
-// =============================================================================
-
-let dataLoaded = false;
-
-export function isDataLoaded(): boolean {
-  return dataLoaded;
-}
-
-async function loadData(): Promise<void> {
-  try {
-    const gameLang = window.i18n?.currentLang ?? 'KR';
-    const dataPath = window.i18n?.getDataPath(gameLang) ?? 'data/KR';
-
-    log('[App-Char] Loading data for language:', gameLang);
-
-    // Load all data in parallel
-    const [
-      characters,
-      characterNames,
-      charPotentials,
-      potentials,
-      potentialNames,
-      items,
-      itemNames,
-      gameEnums,
-      skills,
-      skillNames,
-      effectValue,
-      hitDamage,
-      onceAdditionalAttributeValue,
-      scriptParameterValue,
-      buffValue,
-      shieldValue,
-      uiText,
-    ] = await Promise.all([
-      fetchJSON<Record<string, CharacterData>>('data/Character.json'),
-      fetchJSON<Record<string, string>>(`${dataPath}/Character.json`),
-      fetchJSON<Record<string, unknown>>('data/CharPotential.json'),
-      fetchJSON<Record<string, PotentialData>>('data/Potential.json'),
-      fetchJSON<Record<string, string>>(`${dataPath}/Potential.json`),
-      fetchJSON<Record<string, unknown>>('data/Item.json'),
-      fetchJSON<Record<string, string>>(`${dataPath}/Item.json`),
-      fetchJSON<Record<string, unknown>>('data/GameEnums.json'),
-      fetchJSON<Record<string, SkillData>>('data/Skill.json'),
-      fetchJSON<Record<string, string>>(`${dataPath}/Skill.json`),
-      fetchJSON<Record<string, unknown>>('data/EffectValue.json'),
-      fetchJSON<Record<string, unknown>>('data/HitDamage.json'),
-      fetchJSON<Record<string, unknown>>('data/OnceAdditionalAttributeValue.json'),
-      fetchJSON<Record<string, unknown>>('data/ScriptParameterValue.json'),
-      fetchJSON<Record<string, unknown>>('data/BuffValue.json'),
-      fetchJSON<Record<string, unknown>>('data/ShieldValue.json'),
-      fetchJSON<Record<string, string>>(`${dataPath}/UIText.json`),
-    ]);
-
-    // Update state
-    Object.assign(state, {
-      characters,
-      characterNames,
-      potentials,
-      potentialNames,
-      itemNames,
-      items,
-      gameEnums,
-      skills,
-      skillNames,
-      effectValue,
-      hitDamage,
-      onceAdditionalAttributeValue,
-      scriptParameterValue,
-      buffValue,
-      shieldValue,
-      uiText,
-    });
-
-    // Store charPotentials separately for lookup
-    (state as unknown as { charPotentials: Record<string, unknown> }).charPotentials = charPotentials;
-
-    // Initialize character selector
-    initializeCharacterSelector();
-
-    // Clear description cache when data changes
-    clearDescriptionCache();
-
-    dataLoaded = true;
-    log('[App-Char] Data loaded successfully');
-  } catch (error) {
-    console.error('[App-Char] Failed to load data:', error);
-    showError('Failed to load character data');
-    throw error;
-  }
-}
-
-// =============================================================================
-// CHARACTER SELECTOR
-// =============================================================================
-
-function initializeCharacterSelector(): void {
-  // Filter to only visible and available characters
-  const playableCharacters = Object.entries(state.characters)
-    .filter(([_, data]) => data.Visible && data.Available)
-    .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
-    .map(([id, data]) => ({
-      id,
-      name: state.characterNames[(data as unknown as { Name: string }).Name] ?? (data as unknown as { Name: string }).Name ?? id,
-      data,
-    }));
-
-  state.characterSelector.allCharacters = playableCharacters.map((c) => ({
-    ...c.data,
-    Id: c.id,
-    Name: c.name,
-  }));
-
-  // Initialize Fuse.js for search (if available)
-  if (typeof Fuse !== 'undefined') {
-    state.characterSelector.fuse = new Fuse(state.characterSelector.allCharacters, {
-      keys: ['Name'],
-      threshold: 0.3,
-    });
-  }
-}
-
-// =============================================================================
-// CHARACTER SELECTION
-// =============================================================================
-
-export function openCharacterSelect(position: Position): void {
-  state.currentPosition = position;
-
-  const modal = getElement<HTMLDivElement>('character-modal');
-  if (!modal) return;
-
-  modal.classList.add('active');
-  renderCharacterGrid();
-
-  // Focus search input
-  const searchInput = getElement<HTMLInputElement>('character-search');
-  if (searchInput) {
-    searchInput.value = '';
-    searchInput.focus();
-  }
-}
-
-export function closeCharacterSelect(): void {
-  const modal = getElement<HTMLDivElement>('character-modal');
-  if (modal) {
-    modal.classList.remove('active');
-  }
-  state.currentPosition = null;
-}
-
-export function selectCharacter(characterId: string): void {
-  const character = state.characters[characterId];
-  if (!character || !state.currentPosition) return;
-
-  const position = state.currentPosition;
-  const name = state.characterNames[`Character.${characterId}.1`] ?? characterId;
-
-  // Clear old character data when switching
-  if (state.party[position]?.id !== characterId) {
-    state.selectedPotentials[position] = [];
-    state.potentialLevels[position] = {};
-    state.skillLevels[position] = {};
-    state.potentialMarks[position] = {};
-  }
-
-  state.party[position] = {
-    id: characterId,
-    name,
-    data: character,
-  };
-
-  updateCharacterCard(position);
-  updatePotentialsDisplay(position);
-  closeCharacterSelect();
-}
-
-export function removeCharacter(position: Position): void {
-  state.party[position] = null;
-  state.selectedPotentials[position] = [];
-  state.potentialLevels[position] = {};
-  state.skillLevels[position] = {};
-  state.potentialMarks[position] = {};
-
-  updateCharacterCard(position);
-  updatePotentialsDisplay(position);
-}
-
-// =============================================================================
 // CHARACTER CARD RENDERING
 // =============================================================================
 
 function updateCharacterCard(position: Position): void {
   const card = getElement<HTMLDivElement>(`${position}-card`);
-  if (!card) return;
+  if (!card) {
+    console.warn(`[App-Char] Card element not found: ${position}-card`);
+    return;
+  }
 
   const character = state.party[position];
 
@@ -425,14 +390,14 @@ function renderFilledCharacterCard(
   // Get character info from enums
   const gradeNum = Number(character.data.Grade);
   const classNum = Number(character.data.Class);
-  const rarityInfo = (state.gameEnums.itemRarity as Record<number, any>)?.[gradeNum] as { stars?: number } | undefined;
+  const rarityInfo = (GameData.gameEnums.itemRarity as Record<number, any>)?.[gradeNum] as { stars?: number } | undefined;
   const stars = rarityInfo?.stars ?? gradeNum;
 
-  const elementInfo = (state.gameEnums.elementType as Record<number, any>)?.[character.data.EET] as { name?: string; icon?: string } | undefined;
+  const elementInfo = (GameData.gameEnums.elementType as Record<number, any>)?.[character.data.EET] as { name?: string; icon?: string } | undefined;
   const elementName = elementInfo?.name ?? String(character.data.EET);
   const elementIcon = elementInfo?.icon ?? '';
 
-  const jobClassInfo = (state.gameEnums.characterJobClass as Record<number, any>)?.[classNum] as { name?: string } | undefined;
+  const jobClassInfo = (GameData.gameEnums.characterJobClass as Record<number, any>)?.[classNum] as { name?: string } | undefined;
   const jobClassName = jobClassInfo?.name ?? String(character.data.Class);
 
   // Get skills
@@ -559,11 +524,11 @@ function buildSkillsHtml(
       const elementBgPath = `assets/skill_icons/skill_btn_b_type_${elementId}.png`;
 
       // Get skill title (localized)
-      const title = state.skillNames[skill.title] || skill.name;
+      const title = GameData.skillsKR[skill.title] || skill.name;
 
       // Get skill description
       const descKey = state.descriptionMode === 'brief' ? skill.briefDesc : skill.desc;
-      let description = state.skillNames[descKey ?? ''] ?? '';
+      let description = GameData.skillsKR[descKey ?? ''] ?? '';
 
       if (description && skill.data) {
         description = parseDescriptionParams(
@@ -571,7 +536,7 @@ function buildSkillsHtml(
           skill.data as Record<string, string>,
           currentLevel,
           currentLevel,
-          state as CharacterState,
+          { ...GameData, ...state } as unknown as CharacterState,
           position,
           false,
           levelPhase
@@ -674,7 +639,7 @@ function getCharacterSkills(
   const skills: Record<string, EnrichedSkill | undefined> = {};
   for (const [key, skillId] of Object.entries(skillIds)) {
     if (skillId) {
-      const skillData = (state.skills as unknown as Record<string, Record<string, unknown>>)[String(skillId)];
+      const skillData = (GameData.skills as unknown as Record<string, Record<string, unknown>>)[String(skillId)];
       if (skillData) {
         const titleKey = (skillData.Title as string) ?? '';
         const briefKey = (skillData.BriefDesc as string) ?? '';
@@ -684,7 +649,7 @@ function getCharacterSkills(
           id: String(skillId),
           data: skillData,
           title: titleKey,
-          name: state.skillNames[briefKey] ?? `Skill ${skillId}`,
+          name: GameData.skillsKR[briefKey] ?? `Skill ${skillId}`,
           briefDesc: briefKey,
           desc: descKey,
           cd: (skillData.SkillCD as number) ?? 0,
@@ -728,87 +693,6 @@ export function updateCharacterLevelPhase(position: Position, phase: number): vo
 // CHARACTER GRID RENDERING
 // =============================================================================
 
-const renderCharacterGrid = debounce((...args: unknown[]): void => {
-  const searchQuery = String(args[0] || '');
-  const grid = getElement<HTMLDivElement>('character-grid');
-  if (!grid) return;
-
-  grid.innerHTML = '';
-
-  let charactersToDisplay = state.characterSelector.allCharacters;
-
-  // Apply element filter first
-  if (state.characterSelector.selectedElement !== 'all') {
-    charactersToDisplay = charactersToDisplay.filter((item: any) =>
-      String(item.char?.EET || item.EET) === state.characterSelector.selectedElement
-    );
-  }
-
-  // Apply search filter
-  if (searchQuery && searchQuery.trim() !== '') {
-    if (state.characterSelector.fuse) {
-      const fuse = state.characterSelector.fuse as { search: (q: string) => Array<{ item: any }> };
-      const results = fuse.search(searchQuery);
-      const searchIds = new Set(results.map((r) => r.item.id || r.item.Id));
-      charactersToDisplay = charactersToDisplay.filter((item: any) => 
-        searchIds.has(item.id || item.Id)
-      );
-    } else {
-      // Fallback to simple string matching
-      const lowerQuery = searchQuery.toLowerCase();
-      charactersToDisplay = charactersToDisplay.filter((item: any) => {
-        const name = item.name || item.Name || '';
-        const id = String(item.id || item.Id || '');
-        return name.toLowerCase().includes(lowerQuery) || id.includes(lowerQuery);
-      });
-    }
-  }
-
-  // Check if empty
-  if (charactersToDisplay.length === 0) {
-    grid.innerHTML = `<div class="empty-search-state"><p>${window.i18n?.t('builder.noSearchResults') ?? 'No search results'}</p></div>`;
-    return;
-  }
-
-  // Render characters
-  const t = (key: string): string => window.i18n?.t(key) ?? key;
-  charactersToDisplay.forEach((item: any) => {
-    const id = item.id || item.Id;
-    const char = item.char || item;
-    const name = item.name || item.Name;
-    const charImagePath = `assets/char/avg1_${id}_002.png`;
-
-    // Get star rating from GameEnums
-    const rarityInfo = (state.gameEnums.itemRarity as Record<number, any>)?.[char.Grade];
-    const stars = rarityInfo?.stars || char.Grade || 5;
-
-    // Get element info
-    const elementInfo = (state.gameEnums.elementType as Record<number, any>)?.[char.EET] || {};
-
-    const itemDiv = document.createElement('div');
-    itemDiv.className = 'character-item';
-    itemDiv.dataset.action = 'select-character';
-    itemDiv.dataset.characterId = String(id);
-    itemDiv.innerHTML = `
-      <div class="character-item-header">
-        <img src="${charImagePath}"
-             alt="${name}"
-             class="character-item-image"
-             width="${IMAGE_SIZES.CHARACTER_GRID_ITEM.width}"
-             height="${IMAGE_SIZES.CHARACTER_GRID_ITEM.height}"
-             loading="lazy"
-             onerror="this.style.display='none'">
-        ${elementInfo.icon ? `<img src="${elementInfo.icon}" alt="${elementInfo.name}" class="character-element-badge" width="24" height="24" loading="lazy" onerror="this.style.display='none'">` : ''}
-        <div class="character-item-info">
-          <div class="character-item-name">${name}</div>
-          <div class="character-item-id">ID: ${id}</div>
-        </div>
-      </div>
-      <div class="character-item-id">${t('builder.grade')}: ${window.getIcon?.('star').repeat(stars) ?? '★'.repeat(stars)}</div>
-    `;
-    grid.appendChild(itemDiv);
-  });
-}, 150);
 
 export function filterCharactersByElement(element: string): void {
   state.characterSelector.selectedElement = element;
@@ -843,7 +727,7 @@ function updatePotentialsDisplay(position: Position): void {
   }
 
   const charId = character.id;
-  const charPotential = (state as unknown as { charPotentials: Record<string, any> }).charPotentials[charId];
+  const charPotential = GameData.charPotentials?.[charId];
 
   if (!charPotential) {
     const t = (key: string): string => window.i18n?.t(key) ?? key;
@@ -899,7 +783,7 @@ function updatePotentialsDisplay(position: Position): void {
 
 // Create potential card HTML - matches JS version
 function createPotentialCard(potId: number, position: Position): string {
-  const potential = state.potentials[potId];
+  const potential = GameData.potentials[potId];
   if (!potential) return '';
 
   const t = (key: string): string => window.i18n?.t(key) ?? key;
@@ -913,10 +797,10 @@ function createPotentialCard(potId: number, position: Position): string {
   // Convert Potential.XXXXX.1 to Item.XXXXX.1 for itemNames lookup
   const briefDescKey = potential.BriefDesc;
   const itemKey = briefDescKey ? String(briefDescKey).replace('Potential.', 'Item.') : null;
-  const name = itemKey ? (state.itemNames[itemKey] || `Potential ${potId}`) : `Potential ${potId}`;
+  const name = itemKey ? (GameData.itemsKR[itemKey] || `Potential ${potId}`) : `Potential ${potId}`;
 
   // Get item data for icon and background
-  const itemData = (state.items as Record<string, any>)?.[potId];
+  const itemData = (GameData.items as Record<string, any>)?.[potId];
   let backgroundImage = '';
   let iconPath = '';
 
@@ -972,8 +856,8 @@ function createPotentialCard(potId: number, position: Position): string {
     skillLevelForParams = currentLevel;
   }
 
-  let briefDesc = state.potentialNames[briefKey] || t('builder.briefDesc');
-  let detailedDesc = state.potentialNames[detailedKey] || t('builder.detailedDesc');
+  let briefDesc = GameData.potentialsKR[briefKey] || t('builder.briefDesc');
+  let detailedDesc = GameData.potentialsKR[detailedKey] || t('builder.detailedDesc');
 
   // Get character level phase
   const charLevelPhase = state.characterLevelPhase[position] || 8;
@@ -984,7 +868,7 @@ function createPotentialCard(potId: number, position: Position): string {
     potential as unknown as Record<string, string>,
     effectiveLevel,
     skillLevelForParams,
-    state as CharacterState,
+    { ...GameData, ...state } as unknown as CharacterState,
     position,
     isSpecificPotential,
     charLevelPhase
@@ -994,7 +878,7 @@ function createPotentialCard(potId: number, position: Position): string {
     potential as unknown as Record<string, string>,
     effectiveLevel,
     skillLevelForParams,
-    state as CharacterState,
+    { ...GameData, ...state } as unknown as CharacterState,
     position,
     isSpecificPotential,
     charLevelPhase
@@ -1008,7 +892,7 @@ function createPotentialCard(potId: number, position: Position): string {
 
   // Get build label
   const buildNumber = (potential as any).Build || 0;
-  const buildInfo = (state.gameEnums.potentialBuild as Record<number, any>)?.[buildNumber];
+  const buildInfo = (GameData.gameEnums.potentialBuild as Record<number, any>)?.[buildNumber];
   const buildLabel = buildInfo?.name || '';
 
   // Calculate score for this potential if selected
@@ -1111,12 +995,12 @@ function renderPotentialCard(potential: PotentialData, position: Position): stri
 
   // Get potential name
   const nameKey = potential.Name ?? `Name_${potential.Id}`;
-  const name = state.potentialNames[nameKey] ?? `Potential ${potential.Id}`;
+  const name = GameData.potentialsKR[nameKey] ?? `Potential ${potential.Id}`;
 
   // Get description
   const descKey =
     state.descriptionMode === 'brief' ? potential.BriefDesKey : potential.DesKey;
-  let description = state.potentialNames[descKey ?? ''] ?? '';
+  let description = GameData.potentialsKR[descKey ?? ''] ?? '';
 
   if (description && potential) {
     const levelPhase = state.characterLevelPhase[position] ?? 8;
@@ -1125,7 +1009,7 @@ function renderPotentialCard(potential: PotentialData, position: Position): stri
       potential as unknown as Record<string, string>,
       currentLevel,
       currentLevel,
-      state as CharacterState,
+      { ...GameData, ...state } as unknown as CharacterState,
       position,
       potential.Stype === 42,
       levelPhase
@@ -1191,11 +1075,11 @@ function getMarkBadge(mark: PotentialMark): string {
  * Calculate score for a potential based on its level
  */
 export function calculatePotentialScore(potentialId: number, position: Position): number {
-  const potential = state.potentials[potentialId];
+  const potential = GameData.potentials[potentialId];
   if (!potential || !(potential as unknown as { BuildScore?: number[] }).BuildScore) return 0;
 
   // Get item data to check if it's a specific potential
-  const itemData = (state.items as Record<string, { Stype?: number }>)?.[potentialId];
+  const itemData = (GameData.items as Record<string, { Stype?: number }>)?.[potentialId];
   const isSpecificPotential = itemData && itemData.Stype === 42;
 
   if (isSpecificPotential) {
@@ -1270,11 +1154,13 @@ export function togglePotential(potentialId: number, position: Position): void {
     delete state.potentialMarks[position][potentialId];
   } else {
     // Check if specific potential limit reached
-    const potential = state.potentials[potentialId];
-    if (potential?.Stype === 42) {
+    // Use GameData.items because Stype is defined there
+    const itemData = GameData.items?.[potentialId];
+    if (itemData?.Stype === 42) {
       const specificCount = selected.filter(
-        (id) => state.potentials[id]?.Stype === 42
+        (id) => GameData.items?.[id]?.Stype === 42
       ).length;
+
       if (specificCount >= 2) {
         const t = (key: string): string => window.i18n?.t(key) ?? key;
         window.showToast?.(t('builder.maxSpecificPotentials'));
@@ -1295,7 +1181,7 @@ export function updatePotentialLevel(
   position: Position,
   value: number
 ): void {
-  const potential = state.potentials[potentialId];
+  const potential = GameData.potentials[potentialId];
   if (!potential) return;
 
   const maxLevel = (potential.MaxLevel ?? 6) + 6;
@@ -1550,16 +1436,6 @@ function setupEventListeners(): void {
     }
   });
 
-  // ESC to close modals
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      const modal = getElement<HTMLDivElement>('character-modal');
-      if (modal?.classList.contains('active')) {
-        closeCharacterSelect();
-      }
-    }
-  });
-
   // Search input
   const searchInput = getElement<HTMLInputElement>('character-search');
   if (searchInput) {
@@ -1567,13 +1443,14 @@ function setupEventListeners(): void {
       'input',
       debounce((...args: unknown[]) => {
         const e = args[0] as Event;
-        renderCharacterGrid((e.target as HTMLInputElement).value);
+        state.characterSelector.currentFilter = (e.target as HTMLInputElement).value;
+        renderCharacterGrid();
       }, 150) as EventListener
     );
   }
 }
 
-async function init(): Promise<void> {
+export async function init(): Promise<void> {
   log('[App-Char] Initializing...');
 
   // Show loading spinner
@@ -1587,10 +1464,14 @@ async function init(): Promise<void> {
     setupEventListeners();
 
     // Initialize empty character cards
-    (['master', 'assist1', 'assist2'] as Position[]).forEach((position) => {
-      updateCharacterCard(position);
-      updatePotentialsDisplay(position);
-    });
+    try {
+      (['master', 'assist1', 'assist2'] as Position[]).forEach((position) => {
+        updateCharacterCard(position);
+        updatePotentialsDisplay(position);
+      });
+    } catch (err) {
+      console.error('[App-Char] Error initializing character cards:', err);
+    }
 
     // Register for language changes
     onLanguageChange(async () => {
@@ -1638,13 +1519,6 @@ if (typeof window !== 'undefined') {
   (window as unknown as Record<string, unknown>).selectCharacter = selectCharacter;
   (window as unknown as Record<string, unknown>).openCharacterSelect = openCharacterSelect;
   (window as unknown as Record<string, unknown>).closeCharacterSelect = closeCharacterSelect;
-
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
 }
 
 // Declare global augmentations

@@ -1,5 +1,21 @@
 [
     {
+        "version": "v1.3.1",
+        "date": "2025.12.3",
+        "changes": [
+            {
+                "category": "✨ Codebase Improvements",
+                "items": [
+                    "Data rendering function optimization / refactoring",
+                    "English support for UI texts throughout the page is now almost complete",
+                    "Fixed bug in resource page",
+                    "추천 빌드에 파티원 전부 표시",
+                    "자원 도우미 - 한눈에 보기에 캐릭터+레코드 같이 보는 표 추가"
+                ]
+            }
+        ]
+    },
+    {
         "version": "v1.3.0",
         "date": "2025.11.26",
         "changes": [

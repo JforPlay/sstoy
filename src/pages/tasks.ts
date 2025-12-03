@@ -4,12 +4,15 @@
  */
 
 // Import shared utilities first (auto-initializes)
-import '@/shared';
-import { debounce, showError, showWarning, showSuccess, createEmptyState } from '@/shared';
-import '@/i18n';
-import { saveToLocalStorage, loadFromLocalStorage } from '@/utils/storage';
+import '../shared';
+import { debounce, showError, showWarning, showSuccess, createEmptyState } from '../shared';
+import '../i18n';
+import { initGlobalHeader } from '../shared/ui-components';
+import { saveToLocalStorage, loadFromLocalStorage } from '../utils/storage';
+import { loadCoreData, loadFeatureData, loadLanguageData } from '../shared/data-loader';
+import { GameData } from '../shared/game-data';
 
-import type { CharacterData } from '@/types';
+import type { CharacterData } from '../types';
 
 // =============================================================================
 // INTERFACES
@@ -271,7 +274,7 @@ function updateOwnershipCount(): void {
   const owned = tasksState.ownedCharacters.size;
   const countElement = document.getElementById('ownership-count');
   if (countElement) {
-    countElement.textContent = `보유: ${owned} / ${total}`;
+    countElement.textContent = `${window.i18n?.t('tasks.ownedLabel')}: ${owned} / ${total}`;
   }
 }
 
@@ -358,7 +361,7 @@ function updateHeaderStats(): void {
       return name !== '???';
     }).length;
     const ownedChars = tasksState.ownedCharacters.size;
-    ownedCountElement.textContent = `보유: ${ownedChars}/${totalChars}`;
+    ownedCountElement.textContent = `${window.i18n?.t('tasks.ownedLabel')}: ${ownedChars}/${totalChars}`;
   }
 
   const completionElement = document.getElementById('header-completion');
@@ -372,7 +375,7 @@ function updateHeaderStats(): void {
       });
       if (allRequiredFilled) completedTasks++;
     });
-    completionElement.textContent = `완료: ${completedTasks}/${tasksState.selectedTasks.length}`;
+    completionElement.textContent = `${window.i18n?.t('tasks.completedLabel')}: ${completedTasks}/${tasksState.selectedTasks.length}`;
   }
 }
 
@@ -430,10 +433,11 @@ function updateRecommendations(): void {
       const taskCount = priority.tasks.length;
       const totalTags = priority.tasks.reduce((sum, t) => sum + t.canFillTagsCount, 0);
 
+      const usefulText = window.i18n?.t('tasks.usefulForTasks')?.replace('${count}', taskCount.toString()).replace('${tags}', totalTags.toString()) || `${taskCount}개 의뢰에 유용 (${totalTags}개 태그 충족)`;
       return `
       <div class="recommendation-item">
         <i class="fa-solid fa-star"></i>
-        <strong>${name}</strong>: ${taskCount}개 의뢰에 유용 (${totalTags}개 태그 충족)
+        <strong>${name}</strong>: ${usefulText}
       </div>
     `;
     })
@@ -491,7 +495,7 @@ function renderTasks(): void {
           (task.Tags || []).length > 0
             ? `
         <div class="task-tags-row">
-          <div class="task-tags-label">필수</div>
+          <div class="task-tags-label">${window.i18n?.t('tasks.base')}</div>
           <div class="task-tags">
             ${(task.Tags || [])
               .map((tag) => {
@@ -508,7 +512,7 @@ function renderTasks(): void {
           (task.ExtraTags || []).length > 0
             ? `
         <div class="task-tags-row">
-          <div class="task-tags-label">추가</div>
+          <div class="task-tags-label">${window.i18n?.t('tasks.extra')}</div>
           <div class="task-tags">
             ${(task.ExtraTags || [])
               .map((tag) => {
@@ -534,7 +538,7 @@ function renderSelectedTasks(): void {
   if (tasksState.selectedTasks.length === 0) {
     container.innerHTML = `
       ${createEmptyState('memo', window.i18n?.t('tasks.noSelectedTasks') || '선택된 과제가 없습니다')}
-    `.replace('</div>', '<div class="empty-state-hint">옆에서 과제를 선택해주세요</div></div>');
+    `.replace('</div>', `<div class="empty-state-hint">${window.i18n?.t('tasks.selectTaskHint')}</div></div>`);
     return;
   }
 
@@ -568,7 +572,7 @@ function renderSelectedTasks(): void {
             <div class="selected-task-subtitle">${subtitle}</div>
           </div>
           <div class="selected-task-actions">
-            ${isActive ? '<span class="task-active-badge">캐릭터 선택 중</span>' : ''}
+            ${isActive ? `<span class="task-active-badge">${window.i18n?.t('tasks.selectingCharacter')}</span>` : ''}
             <button class="remove-task-btn" data-remove-task-id="${task.Id}">×</button>
           </div>
         </div>
@@ -582,7 +586,7 @@ function renderSelectedTasks(): void {
             requiredTags.length > 0
               ? `
             <div class="requirement-group">
-              <div class="requirement-label">필수 태그</div>
+              <div class="requirement-label">${window.i18n?.t('tasks.baseTag')}</div>
               <div class="requirement-tags">
                 ${requiredTags
                   .map((tag) => {
@@ -602,7 +606,7 @@ function renderSelectedTasks(): void {
             extraTags.length > 0
               ? `
             <div class="requirement-group">
-              <div class="requirement-label">추가 태그</div>
+              <div class="requirement-label">${window.i18n?.t('tasks.extraTag')}</div>
               <div class="requirement-tags">
                 ${extraTags
                   .map((tag) => {
@@ -665,7 +669,7 @@ function renderCharacterSlots(taskId: number, assignedChars: (number | null)[]):
       slots.push(`
         <div class="character-slot" data-add-char-task="${taskId}" data-add-char-slot="${i}">
           <div class="slot-placeholder">+</div>
-          <div class="slot-text">캐릭터 추가</div>
+          <div class="slot-text">${window.i18n?.t('tasks.addCharacter')}</div>
         </div>
       `);
     }
@@ -1990,41 +1994,30 @@ function calculateInsights(): {
 async function loadTasksData(): Promise<void> {
   try {
     const gameLang = window.i18n?.currentLang || 'KR';
-    const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
-
     console.log(`[Tasks] Loading data for language: ${gameLang}`);
 
-    const [agentData, agentKR, characterData, characterDesData, characterTagKR] = await Promise.all(
-      [
-        fetch('data/Agent.json').then((r) => r.json()),
-        fetch(`${dataPath}/Agent.json`).then((r) => r.json()),
-        fetch('data/Character.json').then((r) => r.json()),
-        fetch('data/CharacterDes.json').then((r) => r.json()),
-        fetch(`${dataPath}/CharacterTag.json`).then((r) => r.json()),
-      ]
+    await loadCoreData();
+    await loadFeatureData('taskSystem');
+    await loadFeatureData('characterDB');
+
+    await loadLanguageData(gameLang, ['Agent.json', 'Character.json', 'CharacterTag.json']);
+
+    // Load only level 70 agents (endgame tasks)
+    tasksState.allTasks = Object.values(GameData.agents || {}).filter((t: any) => t && t.Id && t.Level === 70);
+    tasksState.taskStrings = GameData.agentsKR as any;
+
+    tasksState.characters = Object.values(GameData.characters).filter(
+        (c: any) => c.Visible && c.Available
     );
+    tasksState.characterNames = GameData.charactersKR as any;
+    tasksState.characterTags = GameData.characterDes;
+    tasksState.tagStrings = GameData.characterTagKR as any;
 
-    tasksState.allTasks = (Object.values(agentData) as Task[]).filter((task) => task.Level === 70);
-    tasksState.taskStrings = agentKR;
-    tasksState.tagStrings = characterTagKR;
-    tasksState.characters = (Object.values(characterData) as CharacterData[]).filter(
-      (char) => char.Visible && char.Available
-    );
-    tasksState.characterNames = await fetch(`${dataPath}/Character.json`).then((r) => r.json());
-    tasksState.characterTags = characterDesData;
+    console.log('[Tasks] Characters count:', tasksState.characters.length);
 
-    loadOwnership();
-    clearLookupCaches();
-
-    renderTasks();
-    renderSelectedTasks();
-    renderCharacters();
-    updateHeaderStats();
-    updateTaskPoolCount();
-    updateRecommendations();
   } catch (error) {
     console.error('Error loading tasks data:', error);
-    showError('데이터를 불러오는데 실패했습니다.');
+    throw error;
   }
 }
 
@@ -2269,18 +2262,37 @@ async function initTasksPage(): Promise<void> {
 
   await window.i18n?.init();
 
+  // Initialize Global Header after i18n is ready
+  initGlobalHeader('tasks');
+
   window.addEventListener('languageChanged', async () => {
     console.log('[Tasks] Language changed, reloading data');
     clearLookupCaches();
     await loadTasksData();
     updateTaskCounter();
+    updateTaskPoolCount();
+    updateHeaderStats();
+    updateOwnershipCount();
     renderTasks();
     renderSelectedTasks();
     renderCharacters();
   });
 
   await loadTasksData();
+
+  // Load saved ownership data
+  loadOwnership();
+
+  // Render all sections
+  updateTaskPoolCount();
   updateTaskCounter();
+  renderTasks();
+  renderSelectedTasks();
+  renderCharacters();
+  updateHeaderStats();
+  updateClearAllButton();
+
+  // Setup event handlers
   setupEventDelegation();
   setupTaskSearch();
   setupKeyboardShortcuts();

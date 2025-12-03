@@ -1,306 +1,10 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ================================
+   APP.HTML SPECIFIC STYLES
+   Character Builder Page
+   ================================ */
 
-/* Base font-size for rem calculations */
-html {
-    font-size: 16px; /* 1rem = 16px on desktop */
-}
-
-/* Colors are now inherited from global utils.css */
-:root {
-    /* Common sizes */
-    --icon-size-sm: 1rem;
-    --icon-size-md: 2rem;
-    --icon-size-lg: 3rem;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-display: swap; /* Prevent FOIT (Flash of Invisible Text) */
-    background: var(--background);
-    color: var(--text-primary);
-    min-height: 100vh;
-    padding: 0;
-}
-
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 1.25rem;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding: 1.25rem 1rem;
-    background: var(--surface);
-    border-radius: 1rem;
-    box-shadow: 0 0.5rem 2rem var(--shadow);
-}
-
-h1 {
-    font-size: 2.25rem;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-.subtitle {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-}
-
-/* Compact Combined Tab Navigation */
-.compact-tab-navigation {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
-    background: var(--surface);
-    padding: 1rem 1.25rem;
-    border-radius: 1rem;
-    box-shadow: 0 0.25rem 1.25rem var(--shadow);
-    flex-wrap: wrap;
-}
-
-.main-tabs-group {
-    display: flex;
-    align-items: center;
-    gap: 0;
-}
-
-.compact-main-tab {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.875rem 1.5rem;
-    background: var(--surface-light);
-    border: 2px solid transparent;
-    border-radius: 0.625rem;
-    color: var(--text-secondary);
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    white-space: nowrap;
-}
-
-.compact-main-tab:hover {
-    background: var(--primary-color);
-    color: var(--text-primary);
-    transform: translateY(-0.125rem);
-    box-shadow: 0 0.25rem 1rem var(--shadow-primary-medium);
-}
-
-.compact-main-tab.active {
-    background: var(--primary-color);
-    color: var(--text-primary);
-    border-color: var(--accent);
-    box-shadow: 0 0.25rem 1.25rem var(--shadow-primary-strong);
-}
-
-.compact-tab-icon {
-    font-size: 1.5rem;
-}
-
-.compact-tab-label {
-    font-size: 1rem;
-    letter-spacing: 0.3px;
-}
-
-/* Position Tabs Inline */
-.position-tabs-inline {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    margin-left: 0.25rem;
-    transition: all 0.3s ease;
-    opacity: 1;
-    max-height: 6.25rem;
-    overflow: hidden;
-}
-
-.position-tabs-inline.hidden {
-    display: none;
-    opacity: 0;
-    max-height: 0;
-}
-
-.position-separator {
-    color: var(--text-secondary);
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0 8px 0 4px;
-}
-
-.position-divider {
-    color: var(--border);
-    font-size: 1rem;
-    margin: 0 4px;
-}
-
-.position-tab {
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding: 0.625rem 16px;
-    background: transparent;
-    border: 2px solid transparent;
-    border-radius: 0.5rem;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-}
-
-.position-tab:hover {
-    background: var(--surface-light);
-    color: var(--text-primary);
-}
-
-.position-tab.active {
-    background: var(--accent);
-    color: #1e293b;
-    border-color: #fbbf24;
-    font-weight: 600;
-}
-
-.position-tab-icon {
-    font-size: 1.1rem;
-}
-
-.position-tab-label {
-    font-size: 0.9rem;
-}
-
-/* Old main tab navigation - keep for fallback */
-.main-tab-navigation {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    background: var(--surface);
-    padding: 1rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 20px var(--shadow);
-}
-
-.main-tab-button {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: 1.5rem 20px;
-    background: var(--surface-light);
-    border: 3px solid transparent;
-    border-radius: 0.75rem;
-    color: var(--text-secondary);
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.main-tab-button:hover {
-    background: var(--primary-color);
-    color: var(--text-primary);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px var(--shadow-primary-medium);
-}
-
-.main-tab-button.active {
-    background: var(--primary-color);
-    color: var(--text-primary);
-    border-color: var(--accent);
-    box-shadow: 0 8px 28px var(--shadow-primary-strong);
-    transform: translateY(-2px);
-}
-
-.main-tab-icon {
-    font-size: 2.5rem;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-}
-
-.main-tab-label {
-    font-size: 1.1rem;
-    letter-spacing: 0.5px;
-}
-
-/* Main Tab Content */
-.main-tab-content {
-    display: none;
-    animation: fadeInUp 0.4s ease;
-}
-
-.main-tab-content.active {
-    display: block;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Tab Navigation */
-.tab-navigation {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    background: var(--surface);
-    padding: 0.75rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 16px var(--shadow);
-}
-
-.tab-button {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1rem 24px;
-    background: var(--surface-light);
-    border: 2px solid transparent;
-    border-radius: 0.5rem;
-    color: var(--text-secondary);
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.tab-button:hover {
-    background: var(--primary-color);
-    color: var(--text-primary);
-    transform: translateY(-2px);
-}
-
-.tab-button.active {
-    background: var(--primary-color);
-    color: var(--text-primary);
-    border-color: var(--accent);
-    box-shadow: 0 4px 12px var(--shadow-primary-medium);
-}
-
-.tab-icon {
-    font-size: 1.5rem;
-}
-
-.tab-label {
-    font-size: 1rem;
-}
+/* NOTE: Shared styles (tabs, character selector, filters)
+   are now in css/components/ui-components.css */
 
 /* Hide non-active tabs */
 .character-slot {
@@ -1035,6 +739,10 @@ h1 {
     transform: translateY(0);
 }
 
+/* ================================
+   POTENTIAL LAYOUT STYLES (App Builder)
+   ================================ */
+
 .potential-category {
     margin-bottom: 1.25rem;
 }
@@ -1086,166 +794,7 @@ h1 {
     gap: 0.625rem;
 }
 
-.potential-card {
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 0.625rem;
-    overflow: hidden;
-    border: 2px solid var(--border);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    backdrop-filter: blur(8px);
-}
-
-[data-theme="dark"] .potential-card {
-    background: rgba(20, 20, 20, 0.4);
-}
-
-/* Build Badge */
-.build-badge {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    color: #000000;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 0.75rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    z-index: 10;
-    letter-spacing: 0.5px;
-}
-
-[data-theme="dark"] .build-badge {
-    color: #000000;
-}
-
-/* Score Badge */
-.score-badge {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    background: var(--primary-color);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 0.75rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    z-index: 10;
-    letter-spacing: 0.5px;
-}
-
-/* Different colors for each build */
-.potential-card[data-build="1"] .build-badge {
-    background: var(--peach);
-}
-
-.potential-card[data-build="2"] .build-badge {
-    background: var(--lavender);
-}
-
-.potential-card[data-build="3"] .build-badge {
-    background: var(--mint-green);
-}
-
-.potential-card:hover {
-    border-color: var(--pastel-pink);
-    border-width: 3px;
-    transform: translateY(-3px);
-    box-shadow: 0 0 0 3px rgba(232, 138, 173, 0.1), 0 4px 12px rgba(232, 138, 173, 0.2);
-}
-
-.potential-card.selected {
-    border-color: var(--mint-green);
-    border-width: 3px;
-    background: rgba(126, 215, 193, 0.08);
-    box-shadow: 0 0 0 3px rgba(126, 215, 193, 0.15), var(--shadow-soft);
-}
-
-[data-theme="dark"] .potential-card.selected {
-    background: rgba(143, 217, 207, 0.12);
-}
-
-.potential-card-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-}
-
-.potential-card-image {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    font-size: 2.5rem;
-    border-bottom: 2px solid var(--border);
-    overflow: hidden;
-    padding-top: 10px;
-}
-
-.potential-bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-    top: 0;
-    left: 0;
-}
-
-.potential-icon {
-    position: relative;
-    width: 70%;
-    height: 70%;
-    object-fit: contain;
-    z-index: 2;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-}
-
-.potential-placeholder {
-    position: relative;
-    z-index: 2;
-}
-
-.potential-card-info {
-    width: 100%;
-    padding: 0.625rem;
-}
-
-.potential-card-name {
-    font-weight: 600;
-    margin-bottom: 6px;
-    font-size: 0.9rem;
-    color: var(--text-primary);
-    line-height: 1.3;
-    text-align: center;
-}
-
-.potential-card-meta {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: 0.7rem;
-    color: var(--text-secondary);
-    flex-wrap: wrap;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-}
-
-.potential-card-body {
-    padding: 0.625rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
+/* Potential Level Controls (Builder) */
 .potential-level-selector {
     display: flex;
     flex-direction: column;
@@ -1327,23 +876,7 @@ h1 {
     appearance: textfield;
 }
 
-.potential-card-desc {
-    color: var(--text-primary);
-    font-size: 0.8125rem;
-    line-height: 1.65;
-    background: var(--surface-light);
-    padding: 0.75rem 0.5rem;
-    border-radius: 0.5rem;
-    min-height: 3em;
-    letter-spacing: 0.01em;
-    word-spacing: 0.05em;
-}
-
-[data-theme="dark"] .potential-card-desc {
-    background: rgba(40, 40, 40, 0.6);
-    color: var(--text-primary);
-}
-
+/* Buff Metadata Display */
 .buff-metadata {
     display: flex;
     flex-wrap: wrap;
@@ -1408,252 +941,46 @@ h1 {
     font-weight: 600;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-    backdrop-filter: blur(4px);
-    align-items: center;
-    justify-content: center;
-}
+/* ================================
+   Responsive Font Size Control
+   ================================ */
 
-.modal.active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.modal-content {
-    background: var(--surface);
-    border-radius: 1rem;
-    max-width: 90vw;
-    max-height: 90vh;
-    width: 900px;
-    overflow: hidden;
-    box-shadow: 0 16px 48px var(--shadow);
-    animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--border);
-}
-
-.modal-header h2 {
-    font-size: 1.8rem;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 2rem;
-    color: var(--text-secondary);
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.5rem;
-    transition: all 0.3s ease;
-}
-
-.close-btn:hover {
-    background: var(--surface-light);
-    color: var(--text-primary);
-}
-
-.character-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-    padding: 1.5rem;
-    max-height: calc(90vh - 280px); /* Account for modal header + selector-controls with wrapped filters */
-    overflow-y: auto;
-}
-
-/* Character item extends card-base pattern (components/cards.css) */
-.character-item {
-    background: var(--surface-light);
-    padding: 1rem;
-    border-radius: 0.75rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.character-item:hover {
-    border-color: var(--primary-color);
-    transform: translateY(-4px);
-    box-shadow: 0 0.5rem 1.5rem var(--shadow);
-}
-
-.character-item-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.5rem;
-    position: relative; /* For absolute positioning of element badge */
-}
-
-.character-item-image {
-    width: 3.125rem;
-    height: 3.125rem;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-/* Element badge overlay on character portrait */
-.character-element-badge {
-    position: absolute;
-    top: 0.375rem;
-    right: 0.375rem;
-    width: 1.5rem;
-    height: 1.5rem;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-    pointer-events: none;
-}
-
-.character-item-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.character-item-name {
-    font-weight: 600;
-    margin-bottom: 4px;
-}
-
-.character-item-id {
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-}
-
-
-@media (max-width: 1200px) {
-    .compact-tab-navigation {
-        padding: 0.75rem 16px;
-        gap: 0.5rem;
+/* Tablet - slightly smaller */
+@media (max-width: 1024px) {
+    html {
+        font-size: 15px; /* 1rem = 15px */
     }
     
-    .position-tabs-inline {
-        flex-wrap: wrap;
-        gap: 0.375rem;
-    }
-    
-    .position-separator {
-        display: none;
-    }
-    
-    .position-divider {
-        display: none;
-    }
-    
-    .character-and-specific {
-        flex-direction: column;
-    }
-    
-    .character-section {
-        width: 100%;
-    }
-    
-    .specific-potentials-row {
-        width: 100%;
-    }
-    
-    .slot-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .normal-common-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    .compact-tab-navigation {
+    .potential-controls {
         flex-direction: column;
         align-items: stretch;
     }
-    
-    .main-tabs-group {
-        flex-direction: column;
-        width: 100%;
+
+    .potential-type-toggle {
+        min-width: 100%;
     }
-    
-    .compact-main-tab {
-        width: 100%;
-        justify-content: center;
+
+    .potential-level-control {
+        min-width: 100%;
     }
-    
-    .position-tabs-inline {
-        justify-content: center;
-        width: 100%;
-        margin-left: 0;
-        margin-top: 8px;
-        padding-top: 8px;
-        border-top: 1px solid var(--border);
+
+    .potentials-display {
+        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+        gap: 1rem;
     }
-    
-    .compact-tab-label {
-        font-size: 0.95rem;
-    }
-    
-    .position-tab-label {
-        font-size: 0.85rem;
+
+    .potential-group {
+        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+        gap: 1rem;
     }
 }
 
-@media (max-width: 900px) {
-    .normal-common-grid {
-        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    }
-}
-
-@media (max-width: 1200px) {
-    .two-column-layout {
-        flex-direction: column;
-    }
-    
-    .character-column {
-        flex: 0 0 auto;
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    
-    .potentials-column {
-        width: 100%;
-    }
-    
-    .specific-potentials-section .potential-card {
-        flex: 0 1 calc(33.333% - 10px);
-    }
-}
-
+/* Mobile - significantly smaller */
 @media (max-width: 768px) {
+    html {
+        font-size: 14px; /* 1rem = 14px */
+    }
+    
     h1 {
         font-size: 2rem;
     }
@@ -1705,85 +1032,140 @@ h1 {
     .specific-grid {
         grid-template-columns: 1fr;
     }
-}
-
-@media (max-width: 480px) {
-    .specific-potentials-section .potential-card {
-        flex: 0 1 calc(50% - 8px);
+    
+    .compact-tab-navigation {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .main-tabs-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .compact-main-tab {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .position-tabs-inline {
+        justify-content: center;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: 1px solid var(--border);
+    }
+    
+    .compact-tab-label {
+        font-size: 0.95rem;
+    }
+    
+    .position-tab-label {
+        font-size: 0.85rem;
+    }
+    
+    .character-potentials-section {
+        padding: 1.25rem;
     }
 
+    .potential-controls {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .potential-type-toggle {
+        flex-direction: column;
+    }
+
+    .potential-type-btn {
+        font-size: 0.875rem;
+        padding: 0.75rem 1.25rem;
+    }
+
+    .potential-level-label {
+        font-size: 0.875rem;
+    }
+
+    .potential-level-display {
+        font-size: 1.125rem;
+    }
+
+    .potentials-display {
+        gap: 1rem;
+        grid-template-columns: 1fr;
+    }
+
+    .potential-group {
+        gap: 1rem;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1200px) {
+    .compact-tab-navigation {
+        padding: 0.75rem 16px;
+        gap: 0.5rem;
+    }
+    
+    .position-tabs-inline {
+        flex-wrap: wrap;
+        gap: 0.375rem;
+    }
+    
+    .position-separator {
+        display: none;
+    }
+    
+    .position-divider {
+        display: none;
+    }
+    
+    .character-and-specific {
+        flex-direction: column;
+    }
+    
+    .character-section {
+        width: 100%;
+    }
+    
+    .specific-potentials-row {
+        width: 100%;
+    }
+    
+    .slot-content {
+        grid-template-columns: 1fr;
+    }
+    
     .normal-common-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
-}
-
-/* ================================
-   NOTE: Disc and Summary specific styles 
-   have been moved to their respective CSS files:
-   - discs.css: All disc-related styles
-   - summary.css: All summary-related styles
-   
-   Search/Filter controls remain here as they are
-   shared across Character and Disc selector modals.
-   ================================ */
-
-/* ================================
-   Search and Filter Controls (SHARED)
-   Used in Character Selector and Disc Selector
-   ================================ */
-
-.selector-controls {
-    padding: 1rem;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-/* Search and Filter Controls - extends components/filters.css */
-/* Element filter button icon sizes and whitespace (unique to this page) */
-.element-filter-btn {
-    white-space: nowrap;
-}
-
-.element-filter-btn .element-icon {
-    width: 1.25rem;
-    height: 1.25rem;
-    object-fit: contain;
-}
-
-.element-filter-btn i {
-    font-size: 0.95rem;
-}
-
-.empty-search-state {
-    grid-column: 1 / -1;
-    padding: 3rem 1rem;
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 1rem;
-}
-
-.empty-search-state p {
-    margin: 0;
-}
-
-/* ================================
-   Responsive Font Size Control
-   ================================ */
-
-/* Tablet - slightly smaller */
-@media (max-width: 1024px) {
-    html {
-        font-size: 15px; /* 1rem = 15px */
+    
+    .two-column-layout {
+        flex-direction: column;
     }
-}
+    
+    .character-column {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .potentials-column {
+        width: 100%;
+    }
+    
+    .specific-potentials-section .potential-card {
+        flex: 0 1 calc(33.333% - 10px);
+    }
+    
+    .potentials-display {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-/* Mobile - significantly smaller */
-@media (max-width: 768px) {
-    html {
-        font-size: 14px; /* 1rem = 14px */
+    .potential-group {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -1792,10 +1174,107 @@ h1 {
     html {
         font-size: 13px; /* 1rem = 13px */
     }
+    
+    .specific-potentials-section .potential-card {
+        flex: 0 1 calc(50% - 8px);
+    }
+
+    .normal-common-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .element-filters,
+    .preset-filters {
+        gap: 0.375rem;
+    }
+
+    .element-filter-btn,
+    .filter-btn {
+        padding: 0.375rem 0.625rem;
+        font-size: 0.75rem;
+    }
 }
 
+@media (max-width: 900px) {
+    .normal-common-grid {
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    }
+}
 
+/* ================================
+   Compact Potential Card (App Builder Specific)
+   ================================ */
+.specific-potentials-section .potential-card,
+.other-potentials-section .potential-card {
+    padding: 0.5rem;
+}
 
+.specific-potentials-section .potential-card-header,
+.other-potentials-section .potential-card-header {
+    padding: 0;
+}
 
+.specific-potentials-section .potential-card-image,
+.other-potentials-section .potential-card-image {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    margin-bottom: 0.25rem;
+    padding-top: 0;
+    border-bottom: none;
+}
 
+.specific-potentials-section .potential-bg,
+.other-potentials-section .potential-bg {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.specific-potentials-section .potential-icon,
+.other-potentials-section .potential-icon {
+    width: 70%;
+    height: 70%;
+}
+
+.specific-potentials-section .potential-card-info,
+.other-potentials-section .potential-card-info {
+    padding: 0.25rem;
+}
+
+.specific-potentials-section .potential-card-name,
+.other-potentials-section .potential-card-name {
+    font-size: 0.8rem;
+    margin-bottom: 0.125rem;
+}
+
+.specific-potentials-section .potential-card-meta,
+.other-potentials-section .potential-card-meta {
+    font-size: 0.65rem;
+    padding-bottom: 0.25rem;
+}
+
+.specific-potentials-section .potential-card-body,
+.other-potentials-section .potential-card-body {
+    padding: 0.25rem;
+}
+
+.specific-potentials-section .potential-card-desc,
+.other-potentials-section .potential-card-desc {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    min-height: auto;
+    line-height: 1.75;
+}
+
+.specific-potentials-section .potential-level-selector,
+.other-potentials-section .potential-level-selector {
+    padding: 0.375rem;
+}
+
+.specific-potentials-section .potential-level-input,
+.other-potentials-section .potential-level-input {
+    height: 1.5rem;
+    width: 2.5rem;
+    font-size: 0.85rem;
+}
 

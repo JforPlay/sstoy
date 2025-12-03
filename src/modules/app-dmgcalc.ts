@@ -11,9 +11,10 @@
  * - CSV export functionality
  */
 
-import type { Position, CharacterState, ParamParserState } from '@/types';
-import { parseParamValue } from '@/modules/param-parser';
-import { showSuccess, showError } from '@/shared';
+import type { Position, CharacterState, ParamParserState } from '../types';
+import { parseParamValue } from './param-parser';
+import { showSuccess, showError } from '../shared';
+import { GameData } from '../shared/game-data';
 
 // =============================================================================
 // TYPES & INTERFACES
@@ -106,27 +107,25 @@ const STAT_CATEGORIES = {
   special: ['ToughnessDamageAdjust', 'DamageBonus', 'FinalDamageBonus']
 };
 
-const STAT_NAMES: Record<string, string> = {
-  'Atk': '공격력',
-  'Hp': '생명력',
-  'Def': '방어력',
-  'HitRate': '명중률',
-  'CritRate': '치명타 확률',
-  'CritPower': '치명타 피해',
-  'ToughnessDamageAdjust': '강인도 데미지',
-  'WEE': '물 원소 강화',
-  'FEE': '불 원소 강화',
-  'SEE': '땅 원소 강화',
-  'AEE': '바람 원소 강화',
-  'LEE': '빛 원소 강화',
-  'DEE': '어둠 원소 강화',
-  'DamageBonus': '데미지 증가',
-  'FinalDamageBonus': '최종 데미지 증가'
-};
-
 // =============================================================================
 // STAT AGGREGATION
 // =============================================================================
+
+function getStatDisplayName(statKey: string): string {
+  if (GameData.gameEnums?.effectAttributeType) {
+    const enumEntries = Object.entries(GameData.gameEnums.effectAttributeType);
+    const matchingEntry = enumEntries.find(([id, entry]: [string, any]) =>
+      entry.key && entry.key.toLowerCase() === statKey.toLowerCase()
+    );
+
+    if (matchingEntry) {
+      const [statId, entry] = matchingEntry as [string, any];
+      const uiTextKey = `UIText.Enums_Effect_${statId}.1`;
+      return GameData.uiText?.[uiTextKey] || entry.name || statKey;
+    }
+  }
+  return statKey;
+}
 
 function initializeStats(): void {
   dmgCalcState.stats.clear();
@@ -134,7 +133,7 @@ function initializeStats(): void {
   // Initialize all stat categories
   Object.values(STAT_CATEGORIES).flat().forEach(statKey => {
     dmgCalcState.stats.set(statKey, {
-      name: STAT_NAMES[statKey] || statKey,
+      name: getStatDisplayName(statKey),
       baseValue: 0,
       sources: [],
       manualAdjustment: 0,
@@ -811,99 +810,88 @@ function getDiscName(discId: number): string {
 }
 
 // =============================================================================
-// WINDOW EXPORTS
+// INITIALIZATION
 // =============================================================================
 
-declare global {
-  interface Window {
-    renderDamageCalculator?: () => void;
-    recalculateDamage?: () => void;
-    exportDamageCSV?: () => void;
-    toggleManualMode?: () => void;
-    toggleStatDetails?: (statKey: string) => void;
-    toggleStatSource?: (statKey: string, sourceName: string, active: boolean) => void;
-    setManualStatAdjustment?: (statKey: string, value: number) => void;
-    toggleBuff?: (index: number, active: boolean) => void;
-    setEnemyLevel?: (level: number) => void;
-    setEnemyDefense?: (defense: number) => void;
-    setEnemyResistance?: (resistance: number) => void;
+export function init(): void {
+  if (typeof window !== 'undefined') {
+    window.renderDamageCalculator = renderDamageCalculator;
+    window.recalculateDamage = () => {
+      renderDamageCalculator();
+      showSuccess?.('재계산 완료');
+    };
+    window.exportDamageCSV = exportToCSV;
+
+    window.toggleManualMode = () => {
+      dmgCalcState.manualMode = !dmgCalcState.manualMode;
+      renderDamageCalculator();
+    };
+
+    window.toggleStatDetails = (statKey: string) => {
+      const statItem = document.querySelector(`[data-stat="${statKey}"]`);
+      if (!statItem) return;
+
+      const details = statItem.querySelector('.stat-details');
+      const icon = statItem.querySelector('.stat-expand-icon');
+
+      if (details && icon) {
+        details.classList.toggle('hidden');
+        icon.classList.toggle('rotated');
+      }
+    };
+
+    window.toggleStatSource = (statKey: string, sourceName: string, active: boolean) => {
+      const stat = dmgCalcState.stats.get(statKey);
+      if (!stat) return;
+
+      const source = stat.sources.find(s => s.source === sourceName);
+      if (source) {
+        source.active = active;
+        calculateStatTotals();
+        calculateAllDamage();
+        renderDamageCalculator();
+      }
+    };
+
+    window.setManualStatAdjustment = (statKey: string, value: number) => {
+      const stat = dmgCalcState.stats.get(statKey);
+      if (stat) {
+        stat.manualAdjustment = value || 0;
+        calculateStatTotals();
+        calculateAllDamage();
+        renderDamageCalculator();
+      }
+    };
+
+    window.toggleBuff = (index: number, active: boolean) => {
+      if (dmgCalcState.buffs[index]) {
+        dmgCalcState.buffs[index]!.active = active;
+        // Buffs would modify stat sources - re-aggregate
+        aggregateStatsFromBuild();
+        calculateAllDamage();
+        renderDamageCalculator();
+      }
+    };
+
+    window.setEnemyLevel = (level: number) => {
+      dmgCalcState.enemy.level = Math.max(1, Math.min(100, level));
+      calculateAllDamage();
+      renderDamageCalculator();
+    };
+
+    window.setEnemyDefense = (defense: number) => {
+      dmgCalcState.enemy.defense = Math.max(0, defense);
+      calculateAllDamage();
+      renderDamageCalculator();
+    };
+
+    window.setEnemyResistance = (resistance: number) => {
+      dmgCalcState.enemy.resistance = Math.max(-100, Math.min(100, resistance));
+      calculateAllDamage();
+      renderDamageCalculator();
+    };
   }
+  console.log('[App-DmgCalc] Initialized');
 }
-
-window.renderDamageCalculator = renderDamageCalculator;
-window.recalculateDamage = () => {
-  renderDamageCalculator();
-  showSuccess?.('재계산 완료');
-};
-window.exportDamageCSV = exportToCSV;
-
-window.toggleManualMode = () => {
-  dmgCalcState.manualMode = !dmgCalcState.manualMode;
-  renderDamageCalculator();
-};
-
-window.toggleStatDetails = (statKey: string) => {
-  const statItem = document.querySelector(`[data-stat="${statKey}"]`);
-  if (!statItem) return;
-
-  const details = statItem.querySelector('.stat-details');
-  const icon = statItem.querySelector('.stat-expand-icon');
-
-  if (details && icon) {
-    details.classList.toggle('hidden');
-    icon.classList.toggle('rotated');
-  }
-};
-
-window.toggleStatSource = (statKey: string, sourceName: string, active: boolean) => {
-  const stat = dmgCalcState.stats.get(statKey);
-  if (!stat) return;
-
-  const source = stat.sources.find(s => s.source === sourceName);
-  if (source) {
-    source.active = active;
-    calculateStatTotals();
-    calculateAllDamage();
-    renderDamageCalculator();
-  }
-};
-
-window.setManualStatAdjustment = (statKey: string, value: number) => {
-  const stat = dmgCalcState.stats.get(statKey);
-  if (stat) {
-    stat.manualAdjustment = value || 0;
-    calculateStatTotals();
-    calculateAllDamage();
-    renderDamageCalculator();
-  }
-};
-
-window.toggleBuff = (index: number, active: boolean) => {
-  if (dmgCalcState.buffs[index]) {
-    dmgCalcState.buffs[index]!.active = active;
-    // Buffs would modify stat sources - re-aggregate
-    aggregateStatsFromBuild();
-    calculateAllDamage();
-    renderDamageCalculator();
-  }
-};
-
-window.setEnemyLevel = (level: number) => {
-  dmgCalcState.enemy.level = Math.max(1, Math.min(100, level));
-  calculateAllDamage();
-  renderDamageCalculator();
-};
-
-window.setEnemyDefense = (defense: number) => {
-  dmgCalcState.enemy.defense = Math.max(0, defense);
-  calculateAllDamage();
-  renderDamageCalculator();
-};
-
-window.setEnemyResistance = (resistance: number) => {
-  dmgCalcState.enemy.resistance = Math.max(-100, Math.min(100, resistance));
-  calculateAllDamage();
-  renderDamageCalculator();
-};
 
 export { renderDamageCalculator, dmgCalcState };

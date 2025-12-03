@@ -19,7 +19,9 @@ import type {
   FormatType,
   ParseResult,
   ParamParserState,
-} from '@/types';
+} from '../types';
+
+import { parseElementTags } from '../shared';
 
 // =============================================================================
 // FILE TYPE MAPPING
@@ -635,10 +637,8 @@ export function parseDescriptionParams<T extends ParamParserState>(
     }
   }
 
-  // Parse element tags (##빛 속성 표식#1015#) if parseElementTags is available
-  if (typeof window !== 'undefined' && window.parseElementTags) {
-    result = window.parseElementTags(result);
-  }
+  // Parse element tags (##빛 속성 표식#1015#)
+  result = parseElementTags(result);
 
   return result;
 }
@@ -745,4 +745,62 @@ export function processTextForDisplay<T extends ParamParserState>(
   }
 
   return result;
+}
+
+/**
+ * Parse Main Skill description
+ * Replaces {0} through {9} with Param1 through Param10
+ */
+export function parseSkillDescription(description: string, skill: Record<string, unknown>): string {
+  if (!description || !skill) return description;
+
+  let result = description;
+
+  // Main Skills use {0} to {9} placeholders
+  for (let i = 0; i < 10; i++) {
+    const placeholder = `{${i}}`;
+    // Params are 1-indexed in data (Param1, Param2, etc.)
+    const paramKey = `Param${i + 1}`;
+    const paramValue = skill[paramKey];
+
+    if (result.includes(placeholder) && paramValue !== undefined && paramValue !== null) {
+      const styledValue = `<span class="param-value">${paramValue}</span>`;
+      result = result.replaceAll(placeholder, styledValue);
+    }
+  }
+
+  // Parse element tags
+  return parseElementTags(result);
+}
+
+// =============================================================================
+// SIMPLE PARAMETER SUBSTITUTION
+// =============================================================================
+
+/**
+ * Simple parameter substitution for Secondary Skills
+ * Replaces {1} through {10} with Param1...Param10 values directly.
+ * Used when parameters are simple values/strings rather than lookup keys.
+ */
+export function substituteSkillParams(
+  description: string,
+  skill: Record<string, unknown>
+): string {
+  if (!description || !skill) return description;
+
+  let result = description;
+
+  for (let i = 1; i <= 10; i++) {
+    const placeholder = `{${i}}`;
+    const paramKey = `Param${i}`;
+    const paramValue = skill[paramKey];
+
+    if (result.includes(placeholder) && paramValue !== undefined && paramValue !== null) {
+      const styledValue = `<span class="param-value">${paramValue}</span>`;
+      result = result.replaceAll(placeholder, styledValue);
+    }
+  }
+
+  // Parse element tags
+  return parseElementTags(result);
 }

@@ -3,7 +3,10 @@
  * Handles disc selection and management for main and sub discs
  */
 
-import { fetchJSON, debounce, log, onLanguageChange } from '@/shared';
+import { fetchJSON, debounce, log, onLanguageChange, loadFeatureData, loadLanguageData } from '../shared';
+import { GameData, getDiscRarityInfo } from '../shared/game-data';
+import { Modal } from '../shared/ui-components';
+import { substituteSkillParams } from './param-parser';
 import Fuse from 'fuse.js';
 import type {
   GameLanguage,
@@ -19,7 +22,7 @@ import type {
   EffectValue,
   GameEnums,
   ToastType,
-} from '@/types';
+} from '../types';
 
 // =============================================================================
 // TYPES
@@ -142,6 +145,10 @@ let notesCacheKey: string | null = null;
 let discsRenderScheduled = false;
 let pendingFocusId: string | null = null;
 
+// Modal instances
+let discModal: Modal | null = null;
+let imageViewerModal: Modal | null = null;
+
 // =============================================================================
 // CACHE FUNCTIONS
 // =============================================================================
@@ -182,62 +189,44 @@ function scheduleRenderDiscs(options: ScheduleRenderOptions = {}): void {
 export async function loadDiscData(): Promise<void> {
   try {
     const gameLang = window.i18n?.currentLang || 'KR';
-    const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
-
     log(`[App-Disc] Loading data for language: ${gameLang}`);
 
-    const [
-      discData,
-      discIPData,
-      discKRData,
-      itemData,
-      mainSkillData,
-      secondarySkillData,
-      mainSkillKRData,
-      secondarySkillKRData,
-      subNoteSkillPromoteData,
-      subNoteSkillData,
-      subNoteSkillKRData,
-      effectValueData,
-      gameEnums,
-    ] = await Promise.all([
-      fetchJSON<Record<string, Disc>>('data/Disc.json'),
-      fetchJSON<Record<string, DiscIP>>('data/DiscIP.json'),
-      fetchJSON<Record<string, string>>(`${dataPath}/DiscIP.json`),
-      fetchJSON<Record<string, Item>>('data/Item.json'),
-      fetchJSON<Record<string, MainSkill>>('data/MainSkill.json'),
-      fetchJSON<Record<string, SecondarySkill>>('data/SecondarySkill.json'),
-      fetchJSON<Record<string, string>>(`${dataPath}/MainSkill.json`),
-      fetchJSON<Record<string, string>>(`${dataPath}/SecondarySkill.json`),
-      fetchJSON<Record<string, SubNoteSkillPromoteGroup>>('data/SubNoteSkillPromoteGroup.json'),
-      fetchJSON<Record<string, SubNoteSkill>>('data/SubNoteSkill.json'),
-      fetchJSON<Record<string, string>>(`${dataPath}/SubNoteSkill.json`),
-      fetchJSON<Record<string, EffectValue>>('data/EffectValue.json'),
-      fetchJSON<GameEnums>('data/GameEnums.json'),
-    ]);
+    // Load disc system data
+    await loadFeatureData('discSystem');
+    
+    // Load language specific data
+    await loadLanguageData(gameLang, ['DiscIP.json', 'MainSkill.json', 'SecondarySkill.json', 'SubNoteSkill.json']);
 
-    discsState.itemData = itemData;
-    discsState.mainSkillData = mainSkillData;
-    discsState.secondarySkillData = secondarySkillData;
-    discsState.mainSkillKRData = mainSkillKRData;
-    discsState.secondarySkillKRData = secondarySkillKRData;
-    discsState.subNoteSkillPromoteData = subNoteSkillPromoteData;
-    discsState.subNoteSkillData = subNoteSkillData;
-    discsState.subNoteSkillKRData = subNoteSkillKRData;
-    discsState.effectValueData = effectValueData;
-    discsState.gameEnums = gameEnums;
+    // Populate local state from GameData
+    // Core data (Items, Enums) and EffectValue are assumed to be loaded by app-char (core/characterBuilder)
+    discsState.itemData = GameData.items;
+    discsState.gameEnums = GameData.gameEnums;
+    discsState.effectValueData = GameData.effectValue;
+
+    discsState.mainSkillData = GameData.mainSkills;
+    discsState.secondarySkillData = GameData.secondarySkills;
+    discsState.subNoteSkillPromoteData = GameData.subNoteSkillPromote;
+    discsState.subNoteSkillData = GameData.subNoteSkills;
+    
+    // Localization maps
+    discsState.mainSkillKRData = GameData.mainSkillsKR || {};
+    discsState.secondarySkillKRData = GameData.secondarySkillsKR || {};
+    discsState.subNoteSkillKRData = GameData.subNoteSkillsKR || {};
 
     // Process disc data
-    discsState.allDiscs = Object.values(discData).filter((disc) => disc.Visible);
+    const discData = GameData.discs;
+    if (discData) {
+        discsState.allDiscs = Object.values(discData).filter((disc: any) => disc.Visible);
 
-    // Create disc names mapping
-    discsState.allDiscs.forEach((disc) => {
-      const discIP = discIPData[disc.Id];
-      if (discIP && discIP.StoryName) {
-        const koreanName = discKRData[discIP.StoryName];
-        discsState.discNames[disc.Id] = koreanName || discIP.StoryName;
-      }
-    });
+        // Create disc names mapping
+        discsState.allDiscs.forEach((disc) => {
+          const discIP = GameData.discIP?.[disc.Id];
+          if (discIP && discIP.StoryName) {
+            const koreanName = GameData.discIPKR?.[discIP.StoryName];
+            discsState.discNames[disc.Id] = koreanName || discIP.StoryName;
+          }
+        });
+    }
 
     renderDiscs();
   } catch (error) {
@@ -274,29 +263,6 @@ function getDiscElementInfo(disc: Disc | null): ElementInfo {
   return {
     name: elementInfo?.name || noElement,
     icon: elementInfo?.icon || '',
-  };
-}
-
-function getDiscRarityInfo(disc: Disc | null): RarityInfo {
-  if (!disc || !disc.Id) return { key: 'N', stars: 1, borderClass: 'rarity-n' };
-  const item = discsState.itemData[disc.Id];
-  if (!item || !item.Rarity) return { key: 'N', stars: 1, borderClass: 'rarity-n' };
-
-  const rarityInfo = discsState.gameEnums.itemRarity?.[item.Rarity];
-  if (!rarityInfo) return { key: 'N', stars: 1, borderClass: 'rarity-n' };
-
-  const rarityClassMap: Record<string, string> = {
-    SSR: 'rarity-ssr',
-    SR: 'rarity-sr',
-    R: 'rarity-r',
-    M: 'rarity-m',
-    N: 'rarity-n',
-  };
-
-  return {
-    key: rarityInfo.key,
-    stars: rarityInfo.stars,
-    borderClass: rarityClassMap[rarityInfo.key] || 'rarity-n',
   };
 }
 
@@ -460,27 +426,6 @@ function parseElementTags(description: string): string {
   return window.parseElementTags ? window.parseElementTags(description) : description;
 }
 
-function parseSkillDescription(description: string, skill: MainSkill | SecondarySkill): string {
-  if (!description || !skill) return description;
-
-  let parsedDesc = description;
-
-  for (let i = 1; i <= 10; i++) {
-    const placeholder = `{${i}}`;
-    const paramKey = `Param${i}` as keyof typeof skill;
-    const paramValue = skill[paramKey];
-
-    if (parsedDesc.includes(placeholder) && paramValue) {
-      const styledValue = `<span class="param-value">${paramValue}</span>`;
-      parsedDesc = parsedDesc.replaceAll(placeholder, styledValue);
-    }
-  }
-
-  parsedDesc = parseElementTags(parsedDesc);
-
-  return parsedDesc;
-}
-
 function getSkillTranslation(
   skill: MainSkill | SecondarySkill | null,
   isMainSkill: boolean
@@ -493,7 +438,7 @@ function getSkillTranslation(
 
   return {
     name,
-    desc: parseSkillDescription(desc, skill),
+    desc: substituteSkillParams(desc, skill as unknown as Record<string, unknown>),
   };
 }
 
@@ -1027,7 +972,9 @@ function generateDiscSlot(slotId: DiscSlotId, slotNumber: number, isMain: boolea
     }
 
     return `
-      <div class="disc-slot-card filled ${isMain ? 'main-disc' : 'sub-disc'}">
+      <div class="disc-slot-card filled ${isMain ? 'main-disc' : 'sub-disc'}"
+           data-action="disc-open-selector"
+           data-slot-id="${slotId}">
         <div class="disc-slot-header">
           <span class="disc-slot-number">${slotNumber}</span>
           <div class="disc-slot-name-group">
@@ -1261,12 +1208,21 @@ export function renderDiscs(preserveFocusId: string | null = null): void {
     if (target) {
       const value = target.value || '';
       target.focus();
-      if (target.setSelectionRange) {
+      // setSelectionRange throws an error on input type="number"
+      if (target.setSelectionRange && target.type !== 'number') {
         const len = value.length;
-        target.setSelectionRange(len, len);
+        try {
+          target.setSelectionRange(len, len);
+        } catch (e) {
+          console.warn('Failed to set selection range:', e);
+        }
       }
     }
   }
+
+  // Reset modal instances since DOM elements were replaced
+  discModal = null;
+  imageViewerModal = null;
 }
 
 // =============================================================================
@@ -1293,12 +1249,19 @@ function setupDiscSearchInput(slotId: DiscSlotId): void {
 export function openDiscSelector(slotId: DiscSlotId): void {
   discsState.currentSlot = slotId;
 
-  const modal = document.getElementById('disc-modal');
+  // Initialize modal if needed
+  if (!discModal) {
+    discModal = new Modal('disc-modal');
+    discModal.onClose(() => {
+      discsState.currentSlot = null;
+    });
+  }
+
   const slotType = document.getElementById('modal-slot-type');
   const slotNumber = document.getElementById('modal-slot-number');
   const searchInput = document.getElementById('disc-search') as HTMLInputElement | null;
 
-  if (!modal || !slotType || !slotNumber) return;
+  if (!slotType || !slotNumber) return;
 
   const isMain = slotId.startsWith('main');
   const num = slotId.replace(/\D/g, '');
@@ -1335,19 +1298,7 @@ export function openDiscSelector(slotId: DiscSlotId): void {
   setupDiscSearchInput(slotId);
   renderDiscGrid('', slotId);
 
-  modal.style.display = 'flex';
-
-  const handleDiscModalClick = (e: MouseEvent): void => {
-    if (e.target === modal) {
-      closeDiscSelector();
-    }
-  };
-
-  (modal as HTMLElement & { _discModalClickHandler?: (e: MouseEvent) => void })._discModalClickHandler = handleDiscModalClick;
-
-  setTimeout(() => {
-    modal.addEventListener('click', handleDiscModalClick as EventListener);
-  }, 0);
+  discModal.open();
 }
 
 function renderDiscGrid(searchQuery = '', slotId: DiscSlotId): void {
@@ -1575,14 +1526,8 @@ export function removeDisc(slotId: DiscSlotId): void {
 }
 
 export function closeDiscSelector(): void {
-  const modal = document.getElementById('disc-modal') as HTMLElement & { _discModalClickHandler?: (e: MouseEvent) => void } | null;
-  if (modal) {
-    modal.style.display = 'none';
-
-    if (modal._discModalClickHandler) {
-      modal.removeEventListener('click', modal._discModalClickHandler as EventListener);
-      modal._discModalClickHandler = undefined;
-    }
+  if (discModal) {
+    discModal.close();
   }
   discsState.currentSlot = null;
 }
@@ -1592,55 +1537,23 @@ export function closeDiscSelector(): void {
 // =============================================================================
 
 export function openImageViewer(imagePath: string, title: string): void {
-  const modal = document.getElementById('disc-image-viewer') as HTMLElement & {
-    _imageViewerClickHandler?: (e: MouseEvent) => void;
-    _imageViewerEscHandler?: (e: KeyboardEvent) => void;
-  } | null;
+  if (!imageViewerModal) {
+    imageViewerModal = new Modal('disc-image-viewer');
+  }
+
   const image = document.getElementById('viewer-image') as HTMLImageElement | null;
   const titleEl = document.getElementById('viewer-title');
 
-  if (!modal || !image || !titleEl) return;
+  if (!image || !titleEl) return;
 
   image.src = imagePath;
   titleEl.textContent = title;
-  modal.style.display = 'flex';
-
-  const handleImageViewerClick = (e: MouseEvent): void => {
-    if (e.target === modal) {
-      closeImageViewer();
-    }
-  };
-
-  const handleEscKey = (e: KeyboardEvent): void => {
-    if (e.key === 'Escape') {
-      closeImageViewer();
-    }
-  };
-
-  modal._imageViewerClickHandler = handleImageViewerClick;
-  modal._imageViewerEscHandler = handleEscKey;
-
-  modal.addEventListener('click', handleImageViewerClick as EventListener);
-  document.addEventListener('keydown', handleEscKey as EventListener);
+  imageViewerModal.open();
 }
 
 export function closeImageViewer(): void {
-  const modal = document.getElementById('disc-image-viewer') as HTMLElement & {
-    _imageViewerClickHandler?: (e: MouseEvent) => void;
-    _imageViewerEscHandler?: (e: KeyboardEvent) => void;
-  } | null;
-  if (modal) {
-    modal.style.display = 'none';
-
-    if (modal._imageViewerClickHandler) {
-      modal.removeEventListener('click', modal._imageViewerClickHandler as EventListener);
-      modal._imageViewerClickHandler = undefined;
-    }
-
-    if (modal._imageViewerEscHandler) {
-      document.removeEventListener('keydown', modal._imageViewerEscHandler as EventListener);
-      modal._imageViewerEscHandler = undefined;
-    }
+  if (imageViewerModal) {
+    imageViewerModal.close();
   }
 }
 
@@ -1744,30 +1657,50 @@ export function toggleNotesSidebar(): void {
 let discsEventDelegationInitialized = false;
 
 function handleDiscsAction(element: HTMLElement, action: string, event: Event): void {
+  // Helper to safely get slot ID
+  const getSlotId = (): DiscSlotId | null => {
+    const slotId = element.dataset.slotId as DiscSlotId;
+    if (!slotId) {
+      console.warn('[App-Disc] Missing slotId for action:', action);
+      return null;
+    }
+    return slotId;
+  };
+
   switch (action) {
-    case 'disc-open-selector':
-      openDiscSelector(element.dataset.slotId as DiscSlotId);
+    case 'disc-open-selector': {
+      const slotId = getSlotId();
+      if (slotId) openDiscSelector(slotId);
       break;
+    }
 
-    case 'disc-remove':
-      removeDisc(element.dataset.slotId as DiscSlotId);
+    case 'disc-remove': {
+      const slotId = getSlotId();
+      if (slotId) removeDisc(slotId);
       break;
+    }
 
-    case 'disc-select-option':
-      selectDiscOption(element.dataset.discId!);
+    case 'disc-select-option': {
+      const discId = element.dataset.discId;
+      if (discId) selectDiscOption(discId);
       break;
+    }
 
     case 'disc-close-selector':
       closeDiscSelector();
       break;
 
     case 'disc-filter-element':
-      filterDiscsByElement(element.dataset.element!);
+      if (element.dataset.element) {
+        filterDiscsByElement(element.dataset.element);
+      }
       break;
 
     case 'disc-open-image-viewer':
       event.stopPropagation();
-      openImageViewer(element.dataset.imagePath!, element.dataset.discName!);
+      if (element.dataset.imagePath && element.dataset.discName) {
+        openImageViewer(element.dataset.imagePath, element.dataset.discName);
+      }
       break;
 
     case 'disc-close-image-viewer':
@@ -1775,16 +1708,21 @@ function handleDiscsAction(element: HTMLElement, action: string, event: Event): 
       break;
 
     case 'disc-adjust-limit-break': {
-      const slotId = element.dataset.slotId as DiscSlotId;
+      const slotId = getSlotId();
       const delta = parseInt(element.dataset.delta!, 10);
-      adjustLimitBreak(slotId, delta);
+      if (slotId && !isNaN(delta)) {
+        adjustLimitBreak(slotId, delta);
+      }
       break;
     }
 
     case 'disc-adjust-sub-level': {
-      const slotId = element.dataset.slotId as 'sub1' | 'sub2' | 'sub3';
+      const slotId = getSlotId();
       const delta = parseInt(element.dataset.delta!, 10);
-      adjustSubDiscLevel(slotId, delta);
+      // Ensure slotId is a sub slot (though typing suggests it might be any, runtime check is safer)
+      if (slotId && slotId.startsWith('sub') && !isNaN(delta)) {
+        adjustSubDiscLevel(slotId as 'sub1' | 'sub2' | 'sub3', delta);
+      }
       break;
     }
 
@@ -1794,9 +1732,11 @@ function handleDiscsAction(element: HTMLElement, action: string, event: Event): 
       break;
 
     case 'disc-adjust-note-level': {
-      const noteId = element.dataset.noteId!;
+      const noteId = element.dataset.noteId;
       const delta = parseInt(element.dataset.delta!, 10);
-      adjustTotalNoteLevel(noteId, delta);
+      if (noteId && !isNaN(delta)) {
+        adjustTotalNoteLevel(noteId, delta);
+      }
       break;
     }
 
@@ -1821,12 +1761,10 @@ function setupDiscsEventDelegation(): void {
     }
   });
 
+  // Global ESC listener for Image Viewer
   document.addEventListener('keydown', (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      const discModal = document.getElementById('disc-modal');
-      if (discModal && discModal.style.display !== 'none') {
-        closeDiscSelector();
-      }
+    if (e.key === 'Escape' && imageViewerModal?.isOpen()) {
+      imageViewerModal.close();
     }
   });
 }
@@ -1834,6 +1772,25 @@ function setupDiscsEventDelegation(): void {
 // =============================================================================
 // INITIALIZATION
 // =============================================================================
+
+export async function init(): Promise<void> {
+  setupDiscsEventDelegation();
+
+  // Listen for language changes
+  onLanguageChange(async () => {
+    log('[App-Disc] Language changed, reloading data');
+    if (document.getElementById('discs-container')) {
+      await loadDiscData();
+    }
+  });
+
+  // Auto-load if container exists
+  if (document.getElementById('discs-container')) {
+    await loadDiscData();
+  }
+  
+  log('[App-Disc] Initialized');
+}
 
 // Make functions globally available for legacy compatibility
 if (typeof window !== 'undefined') {
@@ -1855,34 +1812,6 @@ if (typeof window !== 'undefined') {
   window.calculateDiscScore = calculateDiscScore;
   window.updateRequiredNotes = updateRequiredNotes;
   window.discsState = discsState;
-}
-
-// Setup event delegation
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', setupDiscsEventDelegation);
-} else {
-  setupDiscsEventDelegation();
-}
-
-// Listen for language changes
-onLanguageChange(async () => {
-  log('[App-Disc] Language changed, reloading data');
-  if (document.getElementById('discs-container')) {
-    await loadDiscData();
-  }
-});
-
-// Auto-load on page load
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    if (document.getElementById('discs-container')) {
-      loadDiscData();
-    }
-  });
-} else {
-  if (document.getElementById('discs-container')) {
-    loadDiscData();
-  }
 }
 
 export default {

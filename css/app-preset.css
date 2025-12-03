@@ -4,9 +4,8 @@
 
 /* Container Layout */
 .preset-layout {
-    padding: 0.75rem 1.5rem 1.5rem 1.5rem;
-    max-width: 1400px;
-    margin: 0 auto;
+    padding: 0.75rem 0 1.5rem 0;
+    width: 100%;
 }
 
 /* Empty/Error States */
@@ -81,51 +80,79 @@
 }
 
 /* ============================================================================
-   TAG FILTERS - Modern Toggle Buttons
+   TAG FILTERS - Modern Toggle Buttons with Search
    ============================================================================ */
 
-.tag-filter-buttons {
+.tag-filter-group {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.375rem;
-    align-items: center;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.875rem;
 }
 
-.tag-filter-btn {
-    padding: 0.25rem 0.625rem;
+.tag-filter-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.tag-filter-header .filter-group-label {
+    flex-shrink: 0;
+}
+
+/* Tag Search Input */
+.tag-search-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    max-width: 320px;
+}
+
+.tag-search-input {
+    width: 100%;
+    padding: 0.5rem 0.875rem 0.5rem 2.25rem;
     border: 1.5px solid var(--border);
-    border-radius: 1rem;
+    border-radius: 1.25rem;
     background: var(--background);
-    color: var(--text-secondary);
+    color: var(--text-primary);
+    font-size: 0.8rem;
     font-weight: 500;
-    font-size: 0.75rem;
-    cursor: pointer;
     transition: all 0.2s ease;
 }
 
-.tag-filter-btn:hover {
+.tag-search-input:focus {
+    outline: none;
     border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(var(--accent-rgb, 52, 152, 219), 0.08);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(var(--accent-rgb, 52, 152, 219), 0.1);
 }
 
-.tag-filter-btn.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
+.tag-search-input::placeholder {
+    color: var(--text-tertiary);
+}
+
+.tag-search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+    font-size: 0.8rem;
+    pointer-events: none;
 }
 
 .tag-filter-clear {
-    padding: 0.25rem 0.5rem;
+    padding: 0.5rem 0.875rem;
     border: 1.5px solid var(--border);
-    border-radius: 1rem;
+    border-radius: 1.25rem;
     background: transparent;
     color: var(--text-tertiary);
-    font-weight: 500;
-    font-size: 0.7rem;
+    font-weight: 600;
+    font-size: 0.75rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    margin-left: 0.25rem;
+    white-space: nowrap;
 }
 
 .tag-filter-clear:hover {
@@ -134,7 +161,124 @@
     background: rgba(231, 76, 60, 0.08);
 }
 
-.element-filter-btn {
+/* Active Tags Section */
+.active-tags-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: rgba(var(--accent-rgb, 52, 152, 219), 0.05);
+    border: 1.5px solid rgba(var(--accent-rgb, 52, 152, 219), 0.15);
+    border-radius: 0.75rem;
+}
+
+.active-tags-label {
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.active-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Available Tags Section */
+.available-tags-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tag-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+/* Tag Filter Buttons */
+.tag-filter-btn {
+    padding: 0.375rem 0.75rem;
+    border: 1.5px solid var(--border);
+    border-radius: 1.25rem;
+    background: var(--background);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    position: relative;
+}
+
+.tag-filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(var(--accent-rgb, 52, 152, 219), 0.08);
+    transform: translateY(-1px);
+}
+
+.tag-filter-btn.active {
+    background: var(--accent-interactive);
+    border-color: var(--accent-interactive);
+    color: white;
+    padding-right: 2rem;
+}
+
+.tag-filter-btn.active:hover {
+    background: #2980b9;
+    border-color: #2980b9;
+}
+
+/* Tag Count Badge */
+.tag-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    padding: 0 0.25rem;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 0.625rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+}
+
+.tag-filter-btn.active .tag-count {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Tag Remove Icon */
+.tag-remove {
+    position: absolute;
+    right: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.tag-filter-btn.active:hover .tag-remove {
+    opacity: 1;
+}
+
+/* No Tags Found */
+.no-tags-found {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-tertiary);
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.preset-filters .element-filter-btn {
     padding: 0.375rem 0.875rem;
     border: 1.5px solid var(--border);
     border-radius: 1.25rem;
@@ -149,20 +293,20 @@
     gap: 0.25rem;
 }
 
-.element-filter-btn:hover {
+.preset-filters .element-filter-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
     background: rgba(var(--accent-rgb, 52, 152, 219), 0.08);
 }
 
-.element-filter-btn.active {
-    background: var(--accent);
-    border-color: var(--accent);
+.preset-filters .element-filter-btn.active {
+    background: var(--accent-interactive);
+    border-color: var(--accent-interactive);
     color: white;
 }
 
 /* Element Filter Icon */
-.element-filter-icon {
+.preset-filters .element-filter-icon {
     width: 20px;
     height: 20px;
     vertical-align: middle;
@@ -434,18 +578,64 @@
         height: 16px;
     }
 
-    .tag-filter-buttons {
-        gap: 0.25rem;
+    /* Tag filters on mobile */
+    .tag-filter-header {
+        gap: 0.5rem;
     }
 
-    .tag-filter-btn {
-        padding: 0.2rem 0.5rem;
-        font-size: 0.7rem;
+    .tag-search-wrapper {
+        min-width: 100%;
+        max-width: 100%;
+        order: 2;
+    }
+
+    .tag-search-input {
+        padding: 0.425rem 0.75rem 0.425rem 2rem;
+        font-size: 0.75rem;
+    }
+
+    .tag-search-icon {
+        left: 0.625rem;
+        font-size: 0.75rem;
     }
 
     .tag-filter-clear {
-        padding: 0.2rem 0.4rem;
-        font-size: 0.65rem;
+        padding: 0.425rem 0.75rem;
+        font-size: 0.7rem;
+    }
+
+    .active-tags-section {
+        padding: 0.625rem;
+    }
+
+    .active-tags-label {
+        font-size: 0.7rem;
+    }
+
+    .tag-filter-buttons {
+        gap: 0.375rem;
+    }
+
+    .tag-filter-btn {
+        padding: 0.3rem 0.625rem;
+        font-size: 0.7rem;
+    }
+
+    .tag-filter-btn.active {
+        background: var(--accent-interactive);
+        border-color: var(--accent-interactive);
+        padding-right: 1.75rem;
+    }
+
+    .tag-count {
+        min-width: 1.125rem;
+        height: 1.125rem;
+        font-size: 0.6rem;
+    }
+
+    .tag-remove {
+        right: 0.425rem;
+        font-size: 1rem;
     }
 
     .preset-builds-section .preset-builds-grid {
@@ -561,12 +751,50 @@
 
     .preset-filter-group {
         flex-direction: column;
-        align-items: center;
-        gap: 0.375rem;
+        align-items: stretch;
+        gap: 0.625rem;
+    }
+
+    .tag-filter-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
     }
 
     .filter-group-label {
         min-width: auto;
+        text-align: center;
+    }
+
+    .tag-search-wrapper {
+        order: 0;
+    }
+
+    .tag-filter-clear {
+        width: 100%;
+        text-align: center;
+    }
+
+    .tag-filter-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.65rem;
+    }
+
+    .tag-filter-btn.active {
+        background: var(--accent-interactive);
+        border-color: var(--accent-interactive);
+        padding-right: 1.5rem;
+    }
+
+    .tag-count {
+        min-width: 1rem;
+        height: 1rem;
+        font-size: 0.55rem;
+    }
+
+    .tag-remove {
+        right: 0.375rem;
+        font-size: 0.9rem;
     }
 
     .preset-builds-section .preset-thumbnail {

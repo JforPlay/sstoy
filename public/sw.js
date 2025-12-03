@@ -92,6 +92,16 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
+  // Ignore Vite dev server requests
+  if (
+    url.pathname.includes('@vite') ||
+    url.pathname.includes('src/') ||
+    url.pathname.includes('node_modules') ||
+    url.pathname.endsWith('.hot-update.json')
+  ) {
+    return;
+  }
+
   // Only handle GET requests
   if (request.method !== 'GET') {
     return;

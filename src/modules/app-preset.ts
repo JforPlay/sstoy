@@ -3,8 +3,8 @@
  * Handles preset build browsing and loading
  */
 
-import { log, onLanguageChange } from '@/shared';
-import type { MainTab } from '@/types';
+import { log, onLanguageChange } from '../shared';
+import type { MainTab } from '../types';
 
 // =============================================================================
 // TYPES
@@ -52,6 +52,7 @@ const ELEMENT_ORDER = ['Water', 'Fire', 'Earth', 'Wind', 'Light', 'Dark', 'Norma
 let currentElementFilter = 'all';
 let currentTagFilters = new Set<string>();
 let allTags = new Set<string>();
+let tagSearchQuery = '';
 let currentPage = 1;
 let allPresetsData: PresetBuild[] = [];
 let elementsData: Record<string, ElementData> = {};
@@ -142,6 +143,30 @@ function sortPresets(presets: PresetBuild[]): PresetBuild[] {
 
     return elementIndexA - elementIndexB;
   });
+}
+
+/**
+ * Get count of presets for each tag
+ */
+function getTagCounts(): Map<string, number> {
+  const tagCounts = new Map<string, number>();
+  allPresetsData.forEach((preset) => {
+    (preset.tags || []).forEach((tag) => {
+      tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+    });
+  });
+  return tagCounts;
+}
+
+/**
+ * Filter tags based on search query
+ */
+function getFilteredTags(): string[] {
+  const query = tagSearchQuery.toLowerCase().trim();
+  if (!query) {
+    return [...allTags].sort();
+  }
+  return [...allTags].filter((tag) => tag.toLowerCase().includes(query)).sort();
 }
 
 // =============================================================================
@@ -256,7 +281,7 @@ function renderPagination(totalItems: number, totalPages: number): void {
 
   // Previous button
   html += `<button class="pagination-btn pagination-prev ${currentPage === 1 ? 'disabled' : ''}"
-              onclick="goToPresetPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+              data-page="${currentPage - 1}" ${currentPage === 1 ? 'disabled' : ''}>
               <i class="fa-solid fa-chevron-left"></i>
           </button>`;
 
@@ -265,7 +290,7 @@ function renderPagination(totalItems: number, totalPages: number): void {
 
   // Always show first page
   if (currentPage > 3) {
-    html += `<button class="pagination-num" onclick="goToPresetPage(1)">1</button>`;
+    html += `<button class="pagination-num" data-page="1">1</button>`;
     if (currentPage > 4) {
       html += `<span class="pagination-ellipsis">...</span>`;
     }
@@ -277,7 +302,7 @@ function renderPagination(totalItems: number, totalPages: number): void {
     i <= Math.min(totalPages, currentPage + 2);
     i++
   ) {
-    html += `<button class="pagination-num ${i === currentPage ? 'active' : ''}" onclick="goToPresetPage(${i})">${i}</button>`;
+    html += `<button class="pagination-num ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
   }
 
   // Always show last page
@@ -285,14 +310,14 @@ function renderPagination(totalItems: number, totalPages: number): void {
     if (currentPage < totalPages - 3) {
       html += `<span class="pagination-ellipsis">...</span>`;
     }
-    html += `<button class="pagination-num" onclick="goToPresetPage(${totalPages})">${totalPages}</button>`;
+    html += `<button class="pagination-num" data-page="${totalPages}">${totalPages}</button>`;
   }
 
   html += '</div>';
 
   // Next button
   html += `<button class="pagination-btn pagination-next ${currentPage === totalPages ? 'disabled' : ''}"
-              onclick="goToPresetPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+              data-page="${currentPage + 1}" ${currentPage === totalPages ? 'disabled' : ''}>
               <i class="fa-solid fa-chevron-right"></i>
           </button>`;
 
@@ -346,9 +371,9 @@ export function goToPresetPage(page: number): void {
 }
 
 /**
- * Filter presets by element
+ * Filter presets by element (internal)
  */
-export function filterPresetsByElement(element: string): void {
+function filterPresetsByElement(element: string): void {
   currentElementFilter = element;
   const filterBtns = document.querySelectorAll('.element-filter-btn');
 
@@ -362,31 +387,86 @@ export function filterPresetsByElement(element: string): void {
 }
 
 /**
- * Toggle tag filter
+ * Toggle tag filter (internal)
  */
-export function toggleTagFilter(tag: string): void {
-  const btn = document.querySelector(`.tag-filter-btn[data-tag="${tag}"]`);
-
+function toggleTagFilter(tag: string): void {
   if (currentTagFilters.has(tag)) {
     currentTagFilters.delete(tag);
-    if (btn) btn.classList.remove('active');
   } else {
     currentTagFilters.add(tag);
-    if (btn) btn.classList.add('active');
   }
 
+  renderTagFilters();
   applyFilters();
 }
 
 /**
- * Clear all tag filters
+ * Clear all tag filters (internal)
  */
-export function clearTagFilters(): void {
+function clearTagFilters(): void {
   currentTagFilters.clear();
-  document.querySelectorAll('.tag-filter-btn').forEach((btn) => {
-    btn.classList.remove('active');
-  });
+  renderTagFilters();
   applyFilters();
+}
+
+/**
+ * Handle tag search input (internal)
+ */
+function searchTags(query: string): void {
+  tagSearchQuery = query;
+  renderTagFilters();
+}
+
+/**
+ * Render tag filters section
+ */
+function renderTagFilters(): void {
+  const container = document.querySelector('.tag-filter-section-dynamic');
+  if (!container) return;
+
+  const filteredTags = getFilteredTags();
+  const tagCounts = getTagCounts();
+
+  let html = '';
+
+  // Show active filters if any
+  if (currentTagFilters.size > 0) {
+    html += '<div class="active-tags-section">';
+    html += `<span class="active-tags-label">${window.i18n?.t('preset.activeTags') || 'Active filters'}:</span>`;
+    html += '<div class="active-tags-list">';
+    [...currentTagFilters].forEach((tag) => {
+      const count = tagCounts.get(tag) || 0;
+      html += `
+        <button class="tag-filter-btn active" data-tag="${tag}">
+          ${tag}
+          <span class="tag-count">${count}</span>
+          <span class="tag-remove">×</span>
+        </button>
+      `;
+    });
+    html += '</div></div>';
+  }
+
+  // Show available tags
+  const availableTags = filteredTags.filter((tag) => !currentTagFilters.has(tag));
+  if (availableTags.length > 0) {
+    html += '<div class="available-tags-section">';
+    html += '<div class="tag-filter-buttons">';
+    availableTags.forEach((tag) => {
+      const count = tagCounts.get(tag) || 0;
+      html += `
+        <button class="tag-filter-btn" data-tag="${tag}">
+          ${tag}
+          <span class="tag-count">${count}</span>
+        </button>
+      `;
+    });
+    html += '</div></div>';
+  } else if (tagSearchQuery && availableTags.length === 0 && currentTagFilters.size === 0) {
+    html += `<div class="no-tags-found">${window.i18n?.t('preset.noTagsFound') || 'No tags found'}</div>`;
+  }
+
+  container.innerHTML = html;
 }
 
 // =============================================================================
@@ -394,87 +474,137 @@ export function clearTagFilters(): void {
 // =============================================================================
 
 /**
- * Setup preset load button event delegation
- * Implements two-step confirmation + smooth loading animation
+ * Setup all event delegation for the preset tab
  */
-function setupPresetLoadButtons(): void {
+function setupEventDelegation(): void {
+  // Use single event listener on document for all preset interactions
   document.addEventListener('click', (e: MouseEvent) => {
-    const btn = (e.target as HTMLElement).closest('.preset-load-btn') as HTMLButtonElement | null;
-    if (!btn) return;
+    const target = e.target as HTMLElement;
 
-    const confirmState = btn.dataset.confirmState;
-    const buildUrl = btn.dataset.buildUrl || '';
-    const buildTitle = btn.dataset.buildTitle || '';
+    // Element filter buttons
+    const elementBtn = target.closest('.element-filter-btn') as HTMLElement | null;
+    if (elementBtn) {
+      const element = elementBtn.dataset.element;
+      if (element) filterPresetsByElement(element);
+      return;
+    }
 
-    if (confirmState === 'initial') {
-      // First click - Show confirmation
-      btn.dataset.confirmState = 'confirm';
-      btn.textContent = window.i18n?.t('preset.loadBuild') || 'Load';
-      btn.style.background = '#e67e22';
+    // Tag filter buttons
+    const tagBtn = target.closest('.tag-filter-btn') as HTMLElement | null;
+    if (tagBtn) {
+      const tag = tagBtn.dataset.tag;
+      if (tag) toggleTagFilter(tag);
+      return;
+    }
 
-      // Auto-revert after 3 seconds
-      setTimeout(() => {
-        if (btn.dataset.confirmState === 'confirm') {
-          btn.dataset.confirmState = 'initial';
-          btn.textContent = window.i18n?.t('preset.viewBuild') || 'View';
-          btn.style.background = '';
-        }
-      }, 3000);
-    } else if (confirmState === 'confirm') {
-      // Second click - Actually load with animation
-      btn.dataset.confirmState = 'loading';
-      btn.innerHTML = '<span class="loading-spinner">...</span>';
-      btn.disabled = true;
+    // Clear filters button
+    const clearBtn = target.closest('.tag-filter-clear');
+    if (clearBtn) {
+      clearTagFilters();
+      return;
+    }
 
-      // Smooth fade-out transition
-      const presetContainer = document.getElementById('preset-container');
-      if (presetContainer) {
-        presetContainer.style.transition = 'opacity 0.3s ease';
-        presetContainer.style.opacity = '0.3';
-      }
+    // Pagination buttons
+    const paginationBtn = target.closest('.pagination-btn, .pagination-num') as HTMLElement | null;
+    if (paginationBtn && !paginationBtn.classList.contains('disabled')) {
+      const page = parseInt(paginationBtn.dataset.page || '0');
+      if (page > 0) goToPresetPage(page);
+      return;
+    }
 
-      // Load the preset after brief delay
-      setTimeout(() => {
-        try {
-          // Extract hash from full URL
-          const buildHash = extractHashFromUrl(buildUrl);
-          window.loadPresetBuild?.(buildHash, buildTitle);
-
-          // Fade back in
-          if (presetContainer) {
-            presetContainer.style.opacity = '1';
-          }
-
-          // Reset button state
-          btn.dataset.confirmState = 'initial';
-          btn.textContent = window.i18n?.t('preset.viewBuild') || 'View';
-          btn.disabled = false;
-          btn.style.background = '';
-
-          // Switch to summary tab to see the loaded build
-          setTimeout(() => {
-            if (typeof window.switchMainTab === 'function') {
-              window.switchMainTab('summary');
-            }
-          }, 500);
-        } catch (error) {
-          console.error('Error loading preset:', error);
-          if (presetContainer) {
-            presetContainer.style.opacity = '1';
-          }
-          btn.dataset.confirmState = 'initial';
-          btn.textContent = window.i18n?.t('preset.loadFailed') || 'Failed';
-          btn.disabled = false;
-          btn.style.background = '#e74c3c';
-
-          setTimeout(() => {
-            btn.textContent = window.i18n?.t('preset.viewBuild') || 'View';
-            btn.style.background = '';
-          }, 2000);
-        }
-      }, 400);
+    // Preset load buttons
+    const loadBtn = target.closest('.preset-load-btn') as HTMLButtonElement | null;
+    if (loadBtn) {
+      handlePresetLoadClick(loadBtn);
+      return;
     }
   });
+
+  // Tag search input
+  document.addEventListener('input', (e: Event) => {
+    const target = e.target as HTMLElement;
+    if (target.classList.contains('tag-search-input')) {
+      searchTags((target as HTMLInputElement).value);
+    }
+  });
+}
+
+/**
+ * Handle preset load button click with two-step confirmation
+ */
+function handlePresetLoadClick(btn: HTMLButtonElement): void {
+  const confirmState = btn.dataset.confirmState;
+  const buildUrl = btn.dataset.buildUrl || '';
+  const buildTitle = btn.dataset.buildTitle || '';
+
+  if (confirmState === 'initial') {
+    // First click - Show confirmation
+    btn.dataset.confirmState = 'confirm';
+    btn.textContent = window.i18n?.t('preset.loadBuild') || 'Load';
+    btn.style.background = '#e67e22';
+
+    // Auto-revert after 3 seconds
+    setTimeout(() => {
+      if (btn.dataset.confirmState === 'confirm') {
+        btn.dataset.confirmState = 'initial';
+        btn.textContent = window.i18n?.t('preset.viewBuild') || 'View';
+        btn.style.background = '';
+      }
+    }, 3000);
+  } else if (confirmState === 'confirm') {
+    // Second click - Actually load with animation
+    btn.dataset.confirmState = 'loading';
+    btn.innerHTML = '<span class="loading-spinner">...</span>';
+    btn.disabled = true;
+
+    // Smooth fade-out transition
+    const presetContainer = document.getElementById('preset-container');
+    if (presetContainer) {
+      presetContainer.style.transition = 'opacity 0.3s ease';
+      presetContainer.style.opacity = '0.3';
+    }
+
+    // Load the preset after brief delay
+    setTimeout(() => {
+      try {
+        // Extract hash from full URL
+        const buildHash = extractHashFromUrl(buildUrl);
+        window.loadPresetBuild?.(buildHash, buildTitle);
+
+        // Fade back in
+        if (presetContainer) {
+          presetContainer.style.opacity = '1';
+        }
+
+        // Reset button state
+        btn.dataset.confirmState = 'initial';
+        btn.textContent = window.i18n?.t('preset.viewBuild') || 'View';
+        btn.disabled = false;
+        btn.style.background = '';
+
+        // Switch to summary tab to see the loaded build
+        setTimeout(() => {
+          if (typeof window.switchMainTab === 'function') {
+            window.switchMainTab('summary');
+          }
+        }, 500);
+      } catch (error) {
+        console.error('Error loading preset:', error);
+        if (presetContainer) {
+          presetContainer.style.opacity = '1';
+        }
+        btn.dataset.confirmState = 'initial';
+        btn.textContent = window.i18n?.t('preset.loadFailed') || 'Failed';
+        btn.disabled = false;
+        btn.style.background = '#e74c3c';
+
+        setTimeout(() => {
+          btn.textContent = window.i18n?.t('preset.viewBuild') || 'View';
+          btn.style.background = '';
+        }, 2000);
+      }
+    }, 400);
+  }
 }
 
 // =============================================================================
@@ -498,6 +628,7 @@ export async function renderPresets(): Promise<void> {
   currentElementFilter = 'all';
   currentTagFilters.clear();
   allTags.clear();
+  tagSearchQuery = '';
   currentPage = 1;
 
   try {
@@ -533,13 +664,13 @@ export async function renderPresets(): Promise<void> {
     html += '<div class="preset-filter-group">';
     html += `<span class="filter-group-label">${window.i18n?.t('preset.filterByElement') || 'Filter by Element'}</span>`;
     html += '<div class="preset-filters">';
-    html += `<button class="element-filter-btn active" data-element="all" onclick="filterPresetsByElement('all')">${window.i18n?.t('disc.allElements') || 'All'}</button>`;
+    html += `<button class="element-filter-btn active" data-element="all">${window.i18n?.t('disc.allElements') || 'All'}</button>`;
 
     Object.keys(elementsData).forEach((elementKey) => {
       const element = elementsData[elementKey];
       if (!element) return;
       html += `
-        <button class="element-filter-btn" data-element="${elementKey}" onclick="filterPresetsByElement('${elementKey}')">
+        <button class="element-filter-btn" data-element="${elementKey}">
           <img src="${element.iconPath}" class="element-filter-icon" alt="${element.name}" onerror="this.style.display='none'" />
           ${element.name}
         </button>
@@ -549,14 +680,20 @@ export async function renderPresets(): Promise<void> {
 
     // Tag filters
     if (allTags.size > 0) {
-      html += '<div class="preset-filter-group">';
+      html += '<div class="preset-filter-group tag-filter-group">';
+      html += '<div class="tag-filter-header">';
       html += `<span class="filter-group-label">${window.i18n?.t('preset.filterByTag') || 'Filter by Tag'}</span>`;
-      html += '<div class="tag-filter-buttons">';
-      [...allTags].sort().forEach((tag) => {
-        html += `<button class="tag-filter-btn" data-tag="${tag}" onclick="toggleTagFilter('${tag}')">${tag}</button>`;
-      });
-      html += `<button class="tag-filter-clear" onclick="clearTagFilters()">${window.i18n?.t('preset.clearFilters') || 'Clear Filters'}</button>`;
-      html += '</div></div>';
+      html += '<div class="tag-search-wrapper">';
+      html += `<input type="text"
+        class="tag-search-input"
+        placeholder="${window.i18n?.t('preset.searchTags') || 'Search tags...'}"
+      />`;
+      html += '<i class="fa-solid fa-search tag-search-icon"></i>';
+      html += '</div>';
+      html += `<button class="tag-filter-clear">${window.i18n?.t('preset.clearFilters') || 'Clear All'}</button>`;
+      html += '</div>';
+      html += '<div class="tag-filter-section-dynamic"></div>';
+      html += '</div>';
     }
 
     html += '</div>'; // Close preset-filters-section
@@ -572,6 +709,9 @@ export async function renderPresets(): Promise<void> {
 
     // Initial render with pagination
     updateDisplay();
+
+    // Render tag filters
+    renderTagFilters();
   } catch (error) {
     console.error('Error rendering preset builds:', error);
     container.innerHTML = `
@@ -588,16 +728,9 @@ export async function renderPresets(): Promise<void> {
 // INITIALIZATION
 // =============================================================================
 
-function initPresetTab(): void {
-  setupPresetLoadButtons();
+export function init(): void {
+  setupEventDelegation();
   log('[Preset] Tab initialized');
-}
-
-// Setup on DOM ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initPresetTab);
-} else {
-  initPresetTab();
 }
 
 // Listen for language changes
@@ -609,19 +742,13 @@ onLanguageChange(async () => {
   }
 });
 
-// Make functions globally available
+// Make only necessary functions globally available for programmatic access
 if (typeof window !== 'undefined') {
   window.renderPresets = renderPresets;
-  window.goToPresetPage = goToPresetPage;
-  window.filterPresetsByElement = filterPresetsByElement;
-  window.toggleTagFilter = toggleTagFilter;
-  window.clearTagFilters = clearTagFilters;
+  // Internal functions now handled by event delegation
 }
 
 export default {
   renderPresets,
-  goToPresetPage,
-  filterPresetsByElement,
-  toggleTagFilter,
-  clearTagFilters,
+  init,
 };

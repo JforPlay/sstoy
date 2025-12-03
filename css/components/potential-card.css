@@ -1,0 +1,238 @@
+/* Potential Card Styles (Shared Component) */
+.potential-card {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 0.625rem;
+    overflow: hidden;
+    border: 2px solid var(--border);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .potential-card {
+    background: rgba(20, 20, 20, 0.4);
+}
+
+.potential-card:hover {
+    border-color: var(--pastel-pink);
+    border-width: 3px;
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 3px rgba(232, 138, 173, 0.1), 0 4px 12px rgba(232, 138, 173, 0.2);
+}
+
+.potential-card.selected {
+    border-color: var(--mint-green);
+    border-width: 3px;
+    background: rgba(126, 215, 193, 0.08);
+    box-shadow: 0 0 0 3px rgba(126, 215, 193, 0.15), var(--shadow-soft);
+}
+
+[data-theme="dark"] .potential-card.selected {
+    background: rgba(143, 217, 207, 0.12);
+}
+
+.potential-card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+
+.potential-card-image {
+    width: 100%;
+    aspect-ratio: 0.7;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: 2.5rem;
+    border-bottom: 2px solid var(--border);
+    overflow: hidden;
+    padding-top: 10px;
+}
+
+.potential-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+.potential-icon {
+    position: relative;
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    z-index: 2;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.potential-placeholder {
+    position: relative;
+    z-index: 2;
+}
+
+.potential-card-info {
+    width: 100%;
+    padding: 0.625rem;
+}
+
+.potential-card-name {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.3;
+    text-align: center;
+}
+
+.potential-card-meta {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+}
+
+.potential-card-body {
+    padding: 0.625rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.potential-card-desc {
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    background: var(--surface-light);
+    padding: 0.75rem 0.5rem;
+    border-radius: 0.5rem;
+    min-height: 3em;
+    letter-spacing: 0.01em;
+    word-spacing: 0.05em;
+}
+
+[data-theme="dark"] .potential-card-desc {
+    background: rgba(40, 40, 40, 0.6);
+    color: var(--text-primary);
+}
+
+/* Badges */
+.build-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: #000000;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    letter-spacing: 0.5px;
+}
+
+.potential-card[data-build="1"] .build-badge { background: var(--peach); }
+.potential-card[data-build="2"] .build-badge { background: var(--lavender); }
+.potential-card[data-build="3"] .build-badge { background: var(--mint-green); }
+
+.score-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: var(--primary-color);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    letter-spacing: 0.5px;
+}
+
+/* Level Controls */
+.potential-level-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: var(--surface);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.potential-level-label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.potential-level-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.level-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.level-btn:hover {
+    background: var(--primary-hover);
+    transform: scale(1.05);
+}
+
+.level-btn:active {
+    transform: scale(0.95);
+}
+
+.potential-level-input {
+    width: 3.5rem;
+    height: 2rem;
+    text-align: center;
+    border: 2px solid var(--border-color);
+    border-radius: 0.375rem;
+    background: var(--background);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0;
+}
+
+.potential-level-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+/* Parameter Highlighting */
+.param-value { font-weight: 700; color: var(--pastel-pink); }
+.param-no-level { color: var(--sky-blue); font-weight: 700; }
+.param-red { color: var(--danger); font-weight: 700; }

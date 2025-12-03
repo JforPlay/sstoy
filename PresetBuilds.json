@@ -9,7 +9,7 @@
       "authorLink": "https://arca.live/b/stellasora/154417298",
       "element": "Fire",
       "characterId": 134,
-      "tags": ["후유카", "유파 2"],
+      "tags": ["유파 2", "후유카", "치시아", "플로라"],
       "new": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokCNrgCccC5zABAEw6AwywYB6NggbWAyfYDstKIAxlKALasgCWmMAzABZGABygBtAKz8BCAJzIpghAA4F0-msEwYmmX10IBumEQC6qYQBtOimcqgA2VLbmPn6mFH0hbJr+60+RwBfCw5IUBdPaEARVcAMIcYXIkx4xOkVFISAmVlMtK1o7EAcIcAQcfyBP2gsUvL+TEATpvrAV3HAAkGQYNCQAENo0B5oGAqRcSkKoh1Rk31JvmnBk3lJogk1MYB2cxArG3nlqBWfXdzIA5mgyAdO4XDI3YkG5rb3dcxAUK7AC1XAGc60seOQRtaP3453+j3anS6yQi3F4RAcw0gkhMDnGajhRDWaJRi2RRFUUnRKwJDj4E1xZgs1mhxL2kG8NLW-kO6PsJ3ccNJXiuN2ZKPuVRq7JRjIFZSFeIegPFfw+3yFnNFaThQ0VHU6ABNOABnThsLpcNDRcYyGSoPUGqHGhAwTEgc1oc5WmCyTpU9j6w0hDpAA"
     },
@@ -21,7 +21,7 @@
       "authorLink": "https://arca.live/b/stellasora/154204071",
       "element": "Fire",
       "characterId": 134,
-      "tags": ["후유카", "유파 1", "하이브리드"],
+      "tags": ["유파 1", "하이브리드", "후유카", "치시아", "플로라"],
       "new": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokCNrgCccC5zABDDoDDLBgGquAu44DB9gNZ2A7LSiAMZSgC2bIAlpjAMwAWJgAcoAbQCsAwQhjJpQhACYFMhAE41SgGzbZAdn0D9CSaYAcAXVQiANl0WydUPSCcIDr1B42uAvrackKAeMJiAIquAGENMHsqRMT7qkpiAoV2AFquAM52x6i7Q0TlKXvmJ7uoWaVmFsn4l1QKYgCdNjYCu44AEgyD+gSAAhuEhPHyC4bYS0sPK8uMwyvxqw-xz08pay+bLBjYg9o4wEymQbsu1R3sC-AFBuxP9IAVJExd1DzMHIM3tORPFIBnZLysmq0Oi9FglOt0evEBrxoDMXKNIFJ4ZM1ModMpVNJ0coLGiMet4fwpijVijNrYHANsQTvGUcRVDt0RMFQijbvd6RjoXdSjTlG9Ofyfn8cgzwUkcbVflVJTpiUDPnLhpgsIAcIcAIOMQrpAA"
     },
@@ -33,7 +33,7 @@
       "authorLink": "https://arca.live/b/stellasora/154166699",
       "element": "Fire",
       "characterId": 134,
-      "tags": ["후유카", "유파 2"],
+      "tags": ["유파 2", "후유카", "치시아", "플로라"],
       "new": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokKcNXABy4DTmACQEbXACccBc5lEAYylAFs6QBLTGAZgBYqAHKAbQCsHTgnbJhXBJwkiEADllSAnEs6dxkzhzUwATLpgBdVD0aRQWsZkAiq4Awhqle7R7jufNsPUV5Z7dcYGExAE6bgwFdxwAJB-209EPCo7xEOOMjojRSogF9M1ABDIIsWNj0ANl4BYVK9GFkqwVqSvQB2Br1VSsaDDvYajr15ExAzJj6CkFdEqtiXLxA+wT9JxqbFuf1Gj2hQ1KW21e6x7ayckFzp0FZoGG1yyCFr-V6HvU1n+uFtdleYlo-9doe7D0g2GhT+1X2z3YkJiCxmbh+GQR-yRiU+0xAgFCuwAWq4AZzuRXz82ROABMmABnJj0XLMNAFaqiUSoam06YMhAwFogFloaGQdk6EDkgCuACN6dcEM1UCLRWzJQh6kKxXyBcpiUA"
     },
@@ -45,7 +45,7 @@
       "authorLink": "https://arca.live/b/stellasora/153956280",
       "element": "Water",
       "characterId": 144,
-      "tags": ["평타", "치토세"],
+      "tags": ["평타", "치토세", "테레사", "프리지아"],
       "meta": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokI8tgagYASCTy4ClzegGnOAFi4ByDgMn2A7LSiAMZSgC2LIAlpjACy8MADlADaAVj68EMZBP4IATLMkIA7Mv4wAzBt4wZcqQDZdCMQF1UggDYdDCI1CUh7qqCZeT9UHZ81b3AF8rdkhQezFMQFCuwAtVwBnOhntHaEATppTAV3HAAkHElTdoQBFVwAwhnM0YTDSskr0A1IzswOCQAEMysK4eBTcrUQlOhQMYPp1e1QUATmVOrWHB0bFJ1S0BvqNLEBs7WYVIyF5UEfH3fdmlqD3PKZqjRsFQ8K2dkArs45Xo+Jy+gA53hNfRsaYIqfRZIaCxP4XRatJ51EHTcpw-56IHFBqoJoKDjcaCDSLdSDiPEKJS9MTTSZibaUrQIGnLKlaNYbNpk7ZHC7kq43O6c9kFYqvclgkAQz5c1EgBqNAAmHAAzhxWE1OGhWv0pAoPMrVVjIBqEGZUDq0DUDf1UPKAK4AI3VfAQS0ttr1Bv0zptZodWmuDSAA"
     },
@@ -57,7 +57,7 @@
       "authorLink": "https://arca.live/b/stellasora/153536269",
       "element": "Light",
       "characterId": 155,
-      "tags": ["평타", "시아"],
+      "tags": ["평타", "시아", "미네르바", "틸리아"],
       "meta": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokJPLgUuYASA7Q4CKjgMn2A7LSiAMZSgC2tIAlpjAKxuUAOUA2m+zYIYyARwQAmUYIQA2aeLYKhAdmUwAzOqli2AFg0BdVFwA2jXQk6R5IS7Ki3LKx6l2bHAXxMNIoS9YggCKrgBhDlPaYoeEyLtBRboIwEpiAoV2AFquAM53RHB5xYZ7eIACGMIws0JrJJnwCGhISetJ19U0SGgitGlq19QAcxiBmFpXtrnYjGlBshVy+-pUSvamZ0XWjeattk9CAJ007gK7jgASDIAWoRcl+zKwILtWQ-DA3EiICTzqPKhJKr5+90k-yH4SACc-0+KgGQ0uQOsTg+EgckEa4yeS0gWhRn2BUD0MzmmK+kTCCQBmD2R2iT1iIHSWRJvzJB2O9JBjIpBUKABNGABnRh0IpMNClSDPPQIDR-EACoUXMUIG6oGVobbyiQdEA8gCuACMRfL2qhtTq5TBxRpQZrdaqzcIEBygA"
     },
@@ -69,7 +69,7 @@
       "authorLink": "https://arca.live/b/stellasora/152946680",
       "element": "Earth",
       "characterId": 156,
-      "tags": ["표식", "나즈나"],
+      "tags": ["표식", "나즈나", "그레이", "틸리아"],
       "meta": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBkNgIyawAkB0VwXaHBHZpRAGMpQBbGkAS0xgFYA2CgBygG1W27BAGZkAjggAsYwTABMMiQA5F7GKPFD2qmAlWSY+jbJgBdVFwA2DTQk6RtITbqiPnMKKKey5r1M+E-bw4DT39BSUDIYQBfC3pIUFt7EEARVcAMIYpbJUxAUK7AC1XAGc6s2SRoDJKOGA9oQBOm2sBXccACQcq1X3LM8KqotM7g9lC6xpaugZ765pAYuJAAQxrQZmgYSQBObj4BNblDLdW5YzXhXZXV4QU94T1Lw9XI8xArG1PjoMv2txeorz3IzxmuAkki8yiACsVwkcar0Skd2jDIWdxsNYXdkZNpqhZu1FiwEAB2DaQfi6fFyC6knYyAlybQCGmran4+4WayJbw0+yfBlhDnM74AoF82mYCrhHlDSbi-mYCYtabTIA"
     },
@@ -81,7 +81,7 @@
       "authorLink": "https://arca.live/b/stellasora/153681506",
       "element": "Water",
       "characterId": 144,
-      "tags": ["평타", "치토세", "안즈"],
+      "tags": ["평타", "치토세", "안즈", "테레사"],
       "meta": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBpzgCxcByDgEqOARkyiAMZSgC2lIAlpjACxOkAOUA2gKzNMIxkvFggBMQvggDsEljADMspjEHD+ANiUJuAXVRsANrTXaomkCfVnUJqdYt8V9tQrMBffTUigT3TIFCuwAtVwBnO0ktMQBOmiMBXccACQbDJO2hAEVXADCGEuRhImPibR3lsuITublMU9LyShCty4tKkkDS6mFFC3IcS11q3DxAAQyzvekZRAv0uXlHRVRb5UXFJuc1F0RlFuYkpgE49EENjWdEa8xWkk9m5908DqZrGiocphqa87YCQhNHL2tf1I-fQr9VpgXo8-gAOEHpHqoPqtIYMaAtOzjSA8ZHTTZSUZY0RbXHcLHyRSTbHgokwXb7Iak0R+SDnVaiSEM17YrbOZHEq57Lw+GDSOlQhKCu5BQEOQUNKJFPKCln3EXstpK+SDEAy9q0+kanKfbFij5s5kq40cn6PKRq02W7nQTUgHo9IA"
     },
@@ -93,7 +93,7 @@
       "authorLink": "https://arca.live/b/stellasora/153639677",
       "element": "Light",
       "characterId": 155,
-      "tags": ["평타", "시아", "플로라"],
+      "tags": ["평타", "시아", "플로라", "틸리아"],
       "meta": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokDCrgdDsD7tgO0OAioyiAMZSgC2lIAlpjAKxOkAOUA2k80wgEzIeLBDCG8EANnEiA7DL5MFMAMzLBwpgBYVAXVRsANrU0JWkaSFOSol07NupNq2wF8DNSKFPmQgEVXADCHSa0xA4IkHaDCnXhh+TEBQrsALVcAZzvCWFyigmJYdTEARtcAcIcAQcZBXdxAAQxhaBmg4mwMuHn5JfjUWtrFO-nkegA5xVtb9ECMTBt7HK0n+tw8J4ZtoZLSY4cj-bJnhuayyisr4r3pGBAcmyG4Yc-5um9l+DQf+JR5bwffHgE5xW76XtIvioYKNxicvq9ppDInYXns4bdvtCHiD5mNPN4Xr5ojNbssQIATpsJgFdxwAEg+F-phieTKY89ls6fxkdAaRSYuc0dAiqVyuUgA"
     },
@@ -105,7 +105,7 @@
       "authorLink": "https://arca.live/b/stellasora/153828865",
       "element": "Light",
       "characterId": 155,
-      "tags": ["평타", "시아", "코제트"],
+      "tags": ["평타", "시아", "코제트", "틸리아"],
       "meta": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokCrzgcCcB1LgO0OAioyiAMZSgC2lIAlpjAKxOkAOUA2k80wjMh4sEAJkG8EANnHCmMvgHZ5MAMzKxQpgBYVAXVRsANrU0JWkaSFOSol0wtupNq2wF8DNSKFPmQgEVXADCHSa0xA4IkHaDCnXhgRTEBQrsALVcAZzvCWFyigmJYdTEARtcAcIcAQcZBXdxAAQxhaBmgYLXiDLh5GkTVWkREtcTaADl6u6U6VGH0QIxMGoccraZE+2ZGaiwq2T295myzw-tDsucbR-bKKyvivekYEB2bIbhgbkQEeJ41HhRE5V8+Bn5EAJziJ5Kf7DD6jcaTS7-cx2D4LJYIgFuDxTJ6+aJzJ7bECAE6a8YBXccABIPhEGYAkksm-E4xJ4o6CU0l0hTHaBFUrlcpAA"
     },
@@ -117,7 +117,7 @@
       "authorLink": "https://arca.live/b/stellasora/153848414",
       "element": "Dark",
       "characterId": 142,
-      "tags": ["코제트", "미스티"],
+      "tags": ["코제트", "미스티", "크루니스"],
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokCrzgcCcB1LABICpdgHuMGAto4AYtgjs0ogDGUoAtkyAJaYwAsATHQAcoAbQCsPXgm7JxfBDBkSEoxXIAcq3n00IA7AF1UAgDZtZk0VABsqcwjXXbEvtYC+R1pFB3L0QCKrgBhDdHa6mIChXYAWq4AzncFKDtCAJ00JgK7jgASDsXwu-kGu7iAAhjBsnNAwAMyWRiLiFby8irUKNaK8Ks28Nu26DS0AnIYgJmblLb42IO1WjhMjvKGQ4+29bh7Dtb4ggbG1U9nbLfObQU61y3u5qPn8XhxcMA5VkGIw97xNL2p1ivdlZd9qZQQ-14-SMphu4h+SAWTh+ZRWg083g+IPC0ViUMwW1hAPh51yriAA"
     },
     {
@@ -128,7 +128,7 @@
       "authorLink": "https://arca.live/b/stellasora/153229177",
       "element": "Dark",
       "characterId": 135,
-      "tags": ["캐러멜", "미스티"],
+      "tags": ["캐러멜", "미스티", "코제트"],
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokB-dgSocA9LABIAOTgC2MGAto4AYtgjs0ogDGUoAtkyAJaYwAsA7HQAdWkUAFYYogGwJJmQCKrgDCG64qQgAcmQKFdgC1XAM53KJkmEmiKDUmDEyATpuuBXccAEg+aMAmeUtQqjAZnfPuVtC2jv6+QfZOAL6RqACGgaCc0DDeooJQANriqS4uyNmiLjD5KYWiJTmSFYW81S4AnAC6qAIANmwFLmmQVSCdsj2epS78g33D9VCSMSBCHTz13iYgOvpD3IuBIGbri26mHuMb3mEgwU673KfnINFx+4lc3G4tmeLPLt4lH9zfLs9-Lp-E6AtSAyTNWbtERHXLdXrvT5hBE8f77aYtYRiYy8FwDbaHcQIXGTcIhIbEq42CIGD7dAm03L41aMlwaaAs9ZI6nk2HPPzRaJAA"
     },
     {
@@ -139,7 +139,7 @@
       "authorLink": "https://arca.live/b/stellasora/151288616",
       "element": "Water",
       "characterId": 144,
-      "tags": ["스킬", "치토세"],
+      "tags": ["스킬", "치토세", "아야메", "테레사"],
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBpzgCxcByDABICVDgNQsGAyfYDstKIAxlKALYMgCWmMALJzQA5QBtAKxdOCAMzIR3BJymiYCedxiTpYgBzKxATm0wY+gEzbOh9ZxMXxAXVS8ANi3UINUAGyoXOj14VJITxB1AyhJYIUjML8VcQ8AX3tmSFAXN2hAE6aMwFdxwAJBmm9MLLyC-0xAEVXADCHSlRginPyYsyjMhpqzOOgq9rNMQBG1wBwhwBBxnpaQQZGmzk7x4ZB4xJAAQzqUtg5Q+0ERAyNzAxgjKwOjAHZ5XaELw88dw6078SU76evxW3snNbuz3wjd9LhR4BIEHaZhRa8ZKpE5CTCAUK7ABargBnO0q7dwIlFow6nCrVPwA+olAmqAIgYqNf6qGYTbHg1olBaoJYtUDsaA4vjbHF7eRnI5807vQVGK4iM7ifb89x2ECOZw8uGBPwS1ZBcVCzruSHQiL8pXktoq05GDHQJGo42SomUjXvPHzJkgAAmLAAzixGEtWGhVnsnopUF6fS1-QgYBoFvEgA"
     },
     {
@@ -150,7 +150,7 @@
       "authorLink": "https://arca.live/b/stellasora/153751072",
       "element": "Wind",
       "characterId": 119,
-      "tags": ["스킬", "나노하", "틸리아"],
+      "tags": ["스킬", "나노하", "안즈", "틸리아"],
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokC5NgSRsCRjABIBkNgHo2AaqyiAMZSgC2tIAlpjDAJyUAOUA2gKxt2bZII4IAHKKEJ208QGZ57BABZlqhQF1UXADaMxKiVABsqI7LMWhbMwF9dDSKEv9MgEVXAGEOVLJ6N6+MpwBPjYcdqFBHJqYgCNrgDhDgCDjIPaOIACGMIws0DAATArcfIKF+TDSZUqlCvnmNQoIlQotzflSDfk6IPqGBbWm1iA17UMNSJDmw-0tDk59ZYNRNmX+IIErLRPrYdOFtfHJQftFUWmoGfk5rAgA7MWQAjB3+fnSL9XPt+3v33KCdwUMG6vRc0xe-imAL+cx6zlcX1G0EAJ03IwCu44ACQaCLxCIFRmOxtyBhxSaXSABNGABnRh0DJMNDZSDlVQIH4gOkMq7MmCs2SoTloU4shBs1BUgCuACMmSKYFIQJKpdyRQh+OLpcLeaLTGSgA"
     },
     {
@@ -161,7 +161,7 @@
       "authorLink": "https://arca.live/b/stellasora/151940574",
       "element": "Wind",
       "characterId": 119,
-      "tags": ["스킬", "나노하"],
+      "tags": ["스킬", "나노하", "안즈", "카나체"],
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBMDgdDsC1jABIDJ9gOy0ogDGUoAttSAJaYwwCc5ADlANoCsLrFsn5sYCYQIQBmCWwQAWWawQAOJQlZL5AJi0yRg7QF1UHADb0DqqADZUV9pDsgDY2-YEtbAX1N1IoFYqmIAiq4AYQ+QOoREeokjQ4ZGeMNFJotqYgCNrgDhDgCDjaaw6mIChXYAWq4AznQXyUiUVIN6+IACGKQGMzNo1pjz8ndo2JiDmljB9Nj5+I2OpDahNGW1M0KNI3ZB8K50S2gjair27mgfaagdSCIMc-oGbwdCAJ033gK7jgASDSTvajiCPr+-S8d9nm8Gg0gA"
     },
     {
@@ -172,7 +172,7 @@
       "authorLink": "https://arca.live/b/stellasora/152244437",
       "element": "Light",
       "characterId": 155,
-      "tags": ["하이브리드", "시아"],
+      "tags": ["하이브리드", "시아", "미네르바", "틸리아"],
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokBqrgXccDB9gNZ2A7LYDtDgIqMogDGUoAtrSAJaYwCsblADlANpvs2CAEzIBHBABYxghADYZHGAkVCA7KpgBmVZJ3i2k0QZjCAuqi4AbRgflQFIO2oeoTSSI5NaHAX0sMkKB2nNCAIquAGEOUdnKYkdGyLuFRbrIAnHEpToLKmQlKwpiAoV2AFquAM535Aj7QgCdNNYCu44AEg5VGxeUt1SClFb7+IACGMIws0NqFlnxVwtMyWsJa+mPCAByz09JTWiqbMBYg1rZLy67Zc1snm9VyfVyBwUux0N0JcyttFalnHiDxn-NDT3afwWeV6qH6hSCzFYCBcE0g-GUanmMlhwg2SOEbFRyIUAjRq3xyLSOK0u0sNihRKxF0xjy8mOOnlSaIyzOysLJfgChzRoR+WWpjwFCTRSRAdSaouRTIlDWaLOJmElCo5ai5tXlIF6vSAA"
     }
   ],
