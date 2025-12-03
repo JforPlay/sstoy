@@ -600,6 +600,12 @@
   font-size: 0.95rem;
 }
 
+.element-filter-btn span {
+  display: inline;
+  font-size: inherit;
+  color: inherit;
+}
+
 .empty-search-state {
   grid-column: 1 / -1;
   padding: 3rem 1rem;

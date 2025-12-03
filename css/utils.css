@@ -278,7 +278,7 @@ header .subtitle {
     font-size: 1.2rem;
     font-weight: 700;
     line-height: 1.5rem;  /* Explicit line height */
-    color: var(--primary-color);
+    color: var(--sky-blue);
 }
 
 .navbar-menu {
