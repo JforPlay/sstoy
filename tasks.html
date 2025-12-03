@@ -47,57 +47,14 @@
 </head>
 
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <a href="index.html" class="navbar-brand">
-            <span class="navbar-logo"><i class="fa-solid fa-star"></i></span>
-            <span class="navbar-title" data-i18n="nav.title">스소 도우미</span>
-        </a>
-        <button class="navbar-hamburger" id="navbar-hamburger" aria-label="Toggle menu">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-        <div class="navbar-menu" id="navbar-menu">
-            <div class="navbar-links">
-                <a href="characterdb.html" class="navbar-link" data-page="characterdb">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-book"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.characterdb">여행가 도감</span>
-                </a>
-                <a href="discdb.html" class="navbar-link" data-page="discdb">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-compact-disc"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.discdb">레코드 도감</span>
-                </a>
-                <a href="app.html" class="navbar-link" data-page="app">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-medal"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.builder">도자기 공방</span>
-                </a>
-                <a href="tasks.html" class="navbar-link" data-page="tasks">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-clipboard-list"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.tasks">의뢰 도우미</span>
-                </a>
-                <a href="resources.html" class="navbar-link" data-page="resources">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-box"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.resources">자원 도우미</span>
-                </a>
-            </div>
-            <button id="theme-toggle" class="theme-toggle" onclick="window.toggleTheme()">
-                <i class="theme-icon fa-solid fa-sun"></i>
-                <span class="theme-text" data-i18n="nav.themeLight">라이트</span>
-            </button>
-            <select id="language-select" class="language-select"
-                onchange="if(window.i18n) window.i18n.setLanguage(this.value)">
-                <option value="KR">KR | 한국어</option>
-                <option value="JP">JP | 日本語</option>
-                <option value="EN">EN | English</option>
-                <option value="CN">CN | 中文</option>
-            </select>
-        </div>
-    </nav>
+    <!-- Navigation Bar (Dynamic) -->
+    <div id="global-navigation"></div>
 
     <div class="tasks-app">
         <!-- Page Header with Stats -->
         <header class="page-header">
             <div class="header-title">
-                <h1><i class="fa-solid fa-bullseye"></i> <span data-i18n="tasks.title">의뢰 도우미</span></h1>
+                <h1><img src="assets/others/btn_main_system_task.png" alt="Tasks Icon" class="page-title-icon"> <span data-i18n="tasks.title">의뢰 도우미</span></h1>
                 <p class="subtitle" data-i18n="tasks.subtitle">최대 4개의 의뢰를 선택하고 캐릭터로 태그를 채워보세요</p>
             </div>
             <div class="header-stats">
