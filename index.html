@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Theme Initialization (must run before any rendering to prevent flash) -->
+    <!-- Theme Initialization -->
     <script>
         (function () {
             const savedTheme = localStorage.getItem('theme') || 'light';
@@ -13,7 +13,7 @@
         })();
     </script>
 
-    <!-- Hide i18n elements until translations load to prevent text flash -->
+    <!-- Hide i18n elements until translations load -->
     <style>
         html.i18n-loading [data-i18n],
         html.i18n-loading [data-i18n-placeholder],
@@ -35,13 +35,13 @@
     <title data-i18n="landing.title">Stella Sora Tools & DB</title>
     <link rel="icon" type="image/png" href="assets/others/favicon.png">
 
-    <!-- DNS Prefetch & Preconnect for CDN Performance -->
+    <!-- DNS Prefetch & Preconnect -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Font Awesome 7 Icons -->
+    <!-- Font Awesome 7 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -56,278 +56,189 @@
 </head>
 
 <body>
-    <!-- Animated Background Blobs -->
+    <!-- Background Elements -->
     <div class="background-blob blob-1"></div>
     <div class="background-blob blob-2"></div>
     <div class="background-blob blob-3"></div>
+    <div class="background-overlay"></div>
 
-    <!-- Controls Header -->
-    <div class="page-controls">
+    <!-- Floating Toggle Bar (Top Right) -->
+    <div class="floating-controls">
         <select id="language-select" class="language-select" onchange="window.i18n.setLanguage(this.value)">
             <option value="KR">KR | 한국어</option>
             <option value="JP">JP | 日本語</option>
             <option value="EN">EN | English</option>
             <option value="CN">CN | 中文</option>
         </select>
-        <button id="theme-toggle" class="theme-toggle" onclick="window.toggleTheme()">
+        <button id="theme-toggle" class="theme-toggle" onclick="window.toggleTheme()" aria-label="Toggle Theme">
             <span class="theme-icon"></span>
         </button>
     </div>
 
-    <div class="split-container">
-        <!-- Left Side - Navigation Pane -->
-        <div class="left-side">
-            <div class="brand">
-                <h1 class="brand-title" data-i18n="landing.brandTitle">Stella Sora</h1>
-                <p class="brand-subtitle" data-i18n="landing.brandSubtitle">Comprehensive Tools & Database</p>
-            </div>
-
-            <div class="nav-links">
-                <a href="app.html" class="nav-item" data-slide="0">
-                    <div class="nav-icon"><img src="assets/others/btn_main_system_build.png" alt="Build" loading="lazy">
-                    </div>
-                    <div class="nav-content">
-                        <h3><span data-i18n="landing.featureBuilder.title">빌드 도우미</span> <span
-                                class="feature-badge badge-hot" data-i18n="landing.badgeHot">HOT</span></h3>
-                        <p data-i18n="landing.featureBuilder.shortDesc">최적의 팀 구성 만들기</p>
-                    </div>
-                    <div class="nav-indicator"><i class="fa-solid fa-chevron-right"></i></div>
-                </a>
-
-                <a href="characterdb.html" class="nav-item" data-slide="1">
-                    <div class="nav-icon"><img src="assets/others/btn_main_system_character_1.png" alt="Character DB"
-                            loading="lazy"></div>
-                    <div class="nav-content">
-                        <h3><span data-i18n="landing.featureCharDB.title">여행가 DB</span>
-                            <p data-i18n="landing.featureCharDB.shortDesc">여행가 정보와 호감도 공략 등</p>
-                    </div>
-                    <div class="nav-indicator"><i class="fa-solid fa-chevron-right"></i></div>
-                </a>
-
-                <a href="discdb.html" class="nav-item" data-slide="2">
-                    <div class="nav-icon"><img src="assets/others/btn_main_system_outfit_1.png" alt="Disc DB"
-                            loading="lazy"></div>
-                    <div class="nav-content">
-                        <h3 data-i18n="landing.featureDiscDB.title">레코드 DB</h3>
-                        <p data-i18n="landing.featureDiscDB.shortDesc">레코드 백과사전</p>
-                    </div>
-                    <div class="nav-indicator"><i class="fa-solid fa-chevron-right"></i></div>
-                </a>
-
-                <a href="resources.html" class="nav-item" data-slide="3">
-                    <div class="nav-icon"><img src="assets/others/btn_main_system_shop.png" alt="Resources"
-                            loading="lazy"></div>
-                    <div class="nav-content">
-                        <h3><span data-i18n="landing.featureResources.title">자원 계산기</span>
-                            <p data-i18n="landing.featureResources.shortDesc">재료 계산 도구</p>
-                    </div>
-                    <div class="nav-indicator"><i class="fa-solid fa-chevron-right"></i></div>
-                </a>
-
-                <a href="tasks.html" class="nav-item" data-slide="4">
-                    <div class="nav-icon"><img src="assets/others/btn_main_system_task.png" alt="Tasks" loading="lazy">
-                    </div>
-                    <div class="nav-content">
-                        <h3 data-i18n="landing.featureTasks.title">의뢰 도우미</h3>
-                        <p data-i18n="landing.featureTasks.shortDesc">임무 최적화 도구</p>
-                    </div>
-                    <div class="nav-indicator"><i class="fa-solid fa-chevron-right"></i></div>
-                </a>
-            </div>
-        </div>
-
-        <!-- Right Side - Vertical Carousel -->
-        <div class="right-side">
-            <div class="carousel-container" id="carousel">
-                <!-- Slide 1: Build Summary -->
-                <div class="carousel-slide active-slide" data-index="0">
-                    <div class="slide-content">
-                        <div class="slide-header">
-                            <div class="slide-label" data-i18n="landing.recommended">추천</div>
-                            <h2 class="slide-title" data-i18n="landing.featureBuilder.title">빌드 도우미</h2>
-                            <p class="slide-description" data-i18n="landing.featureBuilder.desc">직접 빌드를 짜보고, 요약보기를 통해 한
-                                눈에 빌드를 확인해보세요. URL 공유 기능으로 다른 유저와 빌드 공유도 할 수 있어요.</p>
-                        </div>
-
-                        <a href="app.html" class="slide-cta">
-                            <i class="fa-solid fa-medal"></i>
-                            <span data-i18n="landing.btnBuilder">빌드 시작하기</span>
-                            <i class="fa-solid fa-arrow-right arrow-icon"></i>
-                        </a>
-
-                        <div class="build-preview-image">
-                            <img src="assets/others/build_light.png" alt="Build Summary Preview" class="img-light">
-                            <img src="assets/others/build_dark.png" alt="Build Summary Preview" class="img-dark">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 2: Characters -->
-                <div class="carousel-slide" data-index="1">
-                    <div class="slide-content">
-                        <div class="slide-header">
-                            <div class="slide-label" data-i18n="landing.database">데이터베이스</div>
-                            <h2 class="slide-title" data-i18n="landing.featureCharDB.title">캐릭터 백과사전</h2>
-                            <p class="slide-description" data-i18n="landing.featureCharDB.desc">캐릭터의 상세 스탯, 아카이브, 데이트 공략
-                                정보를 한눈에 확인하세요.</p>
-                        </div>
-
-                        <a href="characterdb.html" class="slide-cta">
-                            <i class="fa-solid fa-book"></i>
-                            <span data-i18n="landing.btnCharDB">캐릭터 보러가기</span>
-                            <i class="fa-solid fa-arrow-right arrow-icon"></i>
-                        </a>
-
-                        <div class="slide-image">
-                            <img src="assets/others/chardb_light.png" alt="Character Database Preview" class="img-light">
-                            <img src="assets/others/chardb_dark.png" alt="Character Database Preview" class="img-dark">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 3: Discs -->
-                <div class="carousel-slide" data-index="2">
-                    <div class="slide-content">
-                        <div class="slide-header">
-                            <div class="slide-label" data-i18n="landing.equipment">EQUIPMENT</div>
-                            <h2 class="slide-title" data-i18n="landing.featureDiscDB.title">Disc Database</h2>
-                            <p class="slide-description" data-i18n="landing.featureDiscDB.desc">레코드의 상세 정보, 스킬 효과, 소리,
-                                스토리를 확인하세요.</p>
-                        </div>
-
-                        <a href="discdb.html" class="slide-cta">
-                            <i class="fa-solid fa-compact-disc"></i>
-                            <span data-i18n="landing.btnDiscDB">Browse Discs</span>
-                            <i class="fa-solid fa-arrow-right arrow-icon"></i>
-                        </a>
-
-                        <div class="slide-image">
-                            <img src="assets/others/disc_light.png" alt="Disc Database Preview" class="img-light">
-                            <img src="assets/others/disc_dark.png" alt="Disc Database Preview" class="img-dark">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 4: Resources -->
-                <div class="carousel-slide" data-index="3">
-                    <div class="slide-content">
-                        <div class="slide-header">
-                            <div class="slide-label" data-i18n="landing.calculator">CALCULATOR</div>
-                            <h2 class="slide-title" data-i18n="landing.featureResources.title">Resource Helper</h2>
-                            <p class="slide-description" data-i18n="landing.featureResources.desc">육성할 캐릭터/레코드를 선택하고 육성
-                                자원을 확인해보세요.</p>
-                        </div>
-
-                        <a href="resources.html" class="slide-cta">
-                            <i class="fa-solid fa-box"></i>
-                            <span data-i18n="landing.btnResources">Calculate Resources</span>
-                            <i class="fa-solid fa-arrow-right arrow-icon"></i>
-                        </a>
-
-                        <div class="slide-image">
-                            <img src="assets/others/resources_light.png" alt="Resource Calculator Preview" class="img-light">
-                            <img src="assets/others/resources_dark.png" alt="Resource Calculator Preview" class="img-dark">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 5: Tasks -->
-                <div class="carousel-slide" data-index="4">
-                    <div class="slide-content">
-                        <div class="slide-header">
-                            <div class="slide-label" data-i18n="landing.optimizer">OPTIMIZER</div>
-                            <h2 class="slide-title" data-i18n="landing.featureTasks.title">Task Assignment</h2>
-                            <p class="slide-description" data-i18n="landing.featureTasks.desc">레벨 70 의뢰에 최적의 캐릭터를 배치하고
-                                자동배치 기능을 활용해 태그 최적화를 해보세요.</p>
-                        </div>
-
-                        <a href="tasks.html" class="slide-cta">
-                            <i class="fa-solid fa-clipboard-list"></i>
-                            <span data-i18n="landing.btnTasks">Optimize Tasks</span>
-                            <i class="fa-solid fa-arrow-right arrow-icon"></i>
-                        </a>
-
-                        <div class="slide-image">
-                            <img src="assets/others/tasks_light.png" alt="Task Assignment Preview" class="img-light">
-                            <img src="assets/others/tasks_dark.png" alt="Task Assignment Preview" class="img-dark">
-                        </div>
-                    </div>
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text" data-i18n="landing.title">Stella Sora Tools</span>
+                </h1>
+                <p class="hero-subtitle" data-i18n="landing.heroDesc1">Create optimal Stella Sora builds quickly and easily!</p>
+                <p class="hero-description" data-i18n="landing.heroDesc2">Manage characters, potentials, and records all in one place.</p>
+                
+                <div class="hero-actions">
+                    <a href="app.html" class="btn btn-primary btn-lg">
+                        <i class="fa-solid fa-medal"></i>
+                        <span data-i18n="landing.btnBuilder">Start Building</span>
+                    </a>
                 </div>
             </div>
-
-            <div class="scroll-indicator">
-                <div class="scroll-dot active"></div>
-                <div class="scroll-dot"></div>
-                <div class="scroll-dot"></div>
-                <div class="scroll-dot"></div>
-                <div class="scroll-dot"></div>
+            
+            <div class="hero-visual">
+                <div class="app-preview-card">
+                    <img src="assets/others/build_light.png" alt="Build Preview" class="preview-img img-light" loading="eager">
+                    <img src="assets/others/build_dark.png" alt="Build Preview" class="preview-img img-dark" loading="eager">
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- Footer Links -->
-    <div class="footer-links">
-        <a href="https://github.com/JforPlay/sstoy" target="_blank" rel="noopener" class="footer-link">
-            <i class="fa-brands fa-github"></i>
-            <span data-i18n="landing.linkGithub.short">깃허브</span>
-        </a>
-        <a href="https://github.com/JforPlay/sstoy/issues" target="_blank" rel="noopener" class="footer-link">
-            <i class="fa-solid fa-bug"></i>
-            <span data-i18n="landing.linkFeedback.short">버그 제보</span>
-        </a>
-        <div class="footer-link" onclick="window.openPatchNotesModal()" style="cursor: pointer;">
-            <i class="fa-solid fa-note-sticky"></i>
-            <span data-i18n="landing.linkPatchNotes.short">패치 노트</span>
-        </div>
-    </div>
+        <!-- Features Bento Grid -->
+        <section class="features-section">
+            <div class="bento-grid">
+                
+                <!-- Task Helper (Large Card) - Position 1 -->
+                <a href="tasks.html" class="bento-card card-large card-tasks">
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <div class="card-icon"><img src="assets/others/btn_main_system_task.png" alt="Tasks" loading="lazy"></div>
+                            <div class="card-text-col">
+                                <h3 data-i18n="landing.featureTasks.title">Task Assignment</h3>
+                                <p data-i18n="landing.featureTasks.shortDesc">Mission Optimizer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-bg-img">
+                        <img src="assets/others/tasks_light.png" alt="Tasks Preview" class="img-light" loading="lazy">
+                        <img src="assets/others/tasks_dark.png" alt="Tasks Preview" class="img-dark" loading="lazy">
+                    </div>
+                </a>
+
+                <!-- Character DB (Large Card) - Position 2 -->
+                <a href="characterdb.html" class="bento-card card-large card-chardb">
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <div class="card-icon"><img src="assets/others/btn_main_system_character_1.png" alt="Char DB" loading="lazy"></div>
+                            <div class="card-text-col">
+                                <h3 data-i18n="landing.featureCharDB.title">Character Database</h3>
+                                <p data-i18n="landing.featureCharDB.desc">View detailed character stats, archives, and dating guides.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-bg-img">
+                        <img src="assets/others/chardb_light.png" alt="Character DB Preview" class="img-light" loading="lazy">
+                        <img src="assets/others/chardb_dark.png" alt="Character DB Preview" class="img-dark" loading="lazy">
+                    </div>
+                </a>
+
+                <!-- Disc DB (Wide Card) - Position 3 -->
+                <a href="discdb.html" class="bento-card card-wide card-discdb">
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <div class="card-icon"><img src="assets/others/btn_main_system_outfit_1.png" alt="Disc DB" loading="lazy"></div>
+                            <div class="card-text-col">
+                                <h3 data-i18n="landing.featureDiscDB.title">Disc Database</h3>
+                                <p data-i18n="landing.featureDiscDB.shortDesc">Disc Encyclopedia</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-bg-img">
+                        <img src="assets/others/disc_light.png" alt="Disc DB Preview" class="img-light" loading="lazy">
+                        <img src="assets/others/disc_dark.png" alt="Disc DB Preview" class="img-dark" loading="lazy">
+                    </div>
+                </a>
+
+                <!-- Resources (Wide Card) - Position 4 -->
+                <a href="resources.html" class="bento-card card-wide card-resources">
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <div class="card-icon"><img src="assets/others/btn_main_system_shop.png" alt="Resources" loading="lazy"></div>
+                            <div class="card-text-col">
+                                <h3 data-i18n="landing.featureResources.title">Resources</h3>
+                                <p data-i18n="landing.featureResources.shortDesc">Material Calculator</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-bg-img">
+                        <img src="assets/others/resources_light.png" alt="Resources Preview" class="img-light" loading="lazy">
+                        <img src="assets/others/resources_dark.png" alt="Resources Preview" class="img-dark" loading="lazy">
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Small Links Row -->
+            <div class="links-grid">
+                <!-- Patch Notes -->
+                <div class="link-card" onclick="window.openPatchNotesModal()">
+                    <i class="fa-solid fa-note-sticky"></i>
+                    <span data-i18n="landing.linkPatchNotes.short">Patch Notes</span>
+                </div>
+                
+                <!-- GitHub Link -->
+                <a href="https://github.com/JforPlay/sstoy" target="_blank" rel="noopener" class="link-card">
+                    <i class="fa-brands fa-github"></i>
+                    <span data-i18n="landing.linkGithub.short">GitHub</span>
+                </a>
+                
+                <!-- Bug Report -->
+                <a href="https://github.com/JforPlay/sstoy/issues" target="_blank" rel="noopener" class="link-card">
+                    <i class="fa-solid fa-bug"></i>
+                    <span data-i18n="landing.linkFeedback.short">Feedback</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="disclaimer-content">
+                <h3><i class="fa-solid fa-triangle-exclamation"></i><strong>Disclaimer</strong></h3>
+                <p>
+                    <strong>sstoy</strong> is a non-profit fan project for the game <strong>Stella Sora</strong>.
+                    <br>All assets, data, images, and text used in this project are the property of <strong>Yostar
+                        Inc.</strong>
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.8;">
+                    <copyright>©</copyright> Yostar Inc. All rights reserved. <br><br>
+                </p>
+                <p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.6;">
+                    Last Updated : <strong>2025.12.3</strong>
+                </p>
+            </div>
+        </footer>
+    </main>
 
     <!-- Patch Notes Modal -->
     <div id="patch-notes-modal" class="patch-modal">
         <div class="patch-modal-content">
             <div class="patch-modal-header">
-                <h2><i class="fa-solid fa-clipboard-list"></i> <span data-i18n="landing.patchNotesModal">패치 노트</span>
-                </h2>
+                <h2><i class="fa-solid fa-clipboard-list"></i> <span data-i18n="landing.patchNotesModal">Patch Notes</span></h2>
                 <button class="patch-modal-close" onclick="window.closePatchNotesModal()">&times;</button>
             </div>
             <div class="patch-modal-body">
-                <p style="color: var(--text-secondary); padding: 2rem; text-align: center;"
-                    data-i18n="landing.patchNotesLoading">로딩 중...</p>
+                <p style="color: var(--text-secondary); padding: 2rem; text-align: center;" data-i18n="landing.patchNotesLoading">Loading...</p>
             </div>
         </div>
     </div>
 
-    <!-- Disclaimer Section -->
-    <div class="disclaimer-section">
-        <div class="disclaimer-content">
-            <h3><i class="fa-solid fa-triangle-exclamation"></i><strong>Disclaimer</strong></h3>
-            <p>
-                <strong>sstoy</strong> is a non-profit fan project<br>
-                for the game <strong>Stella Sora</strong>.<br>
-                <br>All assets, data, images, and text used in this project are the property of <strong>Yostar
-                    Inc.</strong>
-            </p>
-            <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.8;">
-                <copyright>©</copyright> Yostar Inc. All rights reserved. <br><br>
-            </p>
-            <p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.6;">Last Updated : <strong>2025.11.26</strong>
-            </p>
-        </div>
-    </div>
-
-    <!-- Service Worker Registration -->
+    <!-- Service Worker -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 const swUrl = new URL('sw.js', window.location.href).pathname;
                 navigator.serviceWorker.register(swUrl)
-                    .then(reg => console.log('[SW] Registered:', reg.scope))
                     .catch(err => console.warn('[SW] Registration failed:', err));
             });
         }
     </script>
 
-    <!-- Main Entry Point -->
     <script type="module" src="src/pages/mainpage.ts"></script>
 </body>
-
 </html>

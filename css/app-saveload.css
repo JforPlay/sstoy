@@ -220,7 +220,7 @@
 .load-item-title {
     font-size: 1.1rem;
     font-weight: 600;
-    color: white;
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
     overflow: hidden;
     text-overflow: ellipsis;

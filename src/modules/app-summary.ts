@@ -3,8 +3,10 @@
  * Displays party overview and build statistics
  */
 
-import { fetchJSON, log, onLanguageChange } from '@/shared';
-import type { DiscSlotId, Position, PotentialMark, CharacterData } from '@/types';
+import { fetchJSON, log, onLanguageChange } from '../shared';
+import { GameData } from '../shared/game-data';
+import { generatePotentialIconHTML } from '../shared/ui-components';
+import type { DiscSlotId, Position, PotentialMark, CharacterData } from '../types';
 
 // =============================================================================
 // TYPES
@@ -148,7 +150,7 @@ function generateSkillsSummaryCompact(charData: CharacterData, position: Positio
 
   skillMapping.forEach(({ key, label }) => {
     const skillId = charData[key] as number | undefined;
-    if (skillId && window.state?.skills?.[skillId]) {
+    if (skillId && GameData.skills?.[skillId]) {
       const level = window.state?.skillLevels?.[position]?.[skillId] || 1;
       html += `<div class="skill-badge-inline">${label} Lv.${level}</div>`;
     }
@@ -176,7 +178,7 @@ function generatePotentialsSummary(position: Position): string {
   const normalCommonPots: number[] = [];
 
   selectedPotentials.forEach((potId) => {
-    const itemData = window.state?.items?.[potId];
+    const itemData = GameData.items?.[potId];
     if (itemData && itemData.Stype === 42) {
       specificPots.push(potId);
     } else {
@@ -186,7 +188,7 @@ function generatePotentialsSummary(position: Position): string {
 
   let totalPotentialLevels = 0;
   selectedPotentials.forEach((potId) => {
-    const itemData = window.state?.items?.[potId];
+    const itemData = GameData.items?.[potId];
     const isSpecificPotential = itemData && itemData.Stype === 42;
 
     if (isSpecificPotential) {
@@ -222,9 +224,7 @@ function generatePotentialsSummary(position: Position): string {
              data-position="${position}"
              data-potential-id="${potId}">`;
 
-      if (typeof window.generatePotentialIconHTML === 'function') {
-        html += window.generatePotentialIconHTML(potId, position, level, mark as PotentialMark);
-      }
+      html += generatePotentialIconHTML(potId, position, level, mark as PotentialMark);
 
       html += `</div></div>`;
     });
@@ -244,9 +244,7 @@ function generatePotentialsSummary(position: Position): string {
              data-position="${position}"
              data-potential-id="${potId}">`;
 
-      if (typeof window.generatePotentialIconHTML === 'function') {
-        html += window.generatePotentialIconHTML(potId, position, level, mark as PotentialMark);
-      }
+      html += generatePotentialIconHTML(potId, position, level, mark as PotentialMark);
 
       html += `</div></div>`;
     });
@@ -579,7 +577,7 @@ function generateBuildStats(): string {
     const selectedPotentials = window.state?.selectedPotentials?.[pos] || [];
 
     selectedPotentials.forEach((potId) => {
-      const itemData = window.state?.items?.[potId];
+      const itemData = GameData.items?.[potId];
       const isSpecificPotential = itemData && itemData.Stype === 42;
 
       if (isSpecificPotential) {
@@ -787,7 +785,7 @@ export async function renderSummary(): Promise<void> {
       <div class="summary-section">
         <div class="summary-section-header-row">
           <h3 class="summary-section-title">${window.getIcon?.('people') || ''} ${window.i18n?.t('builder.characters') || 'Characters'}</h3>
-          <button class="star-tower-btn" onclick="openStarTowerModal()">
+          <button class="star-tower-btn">
             <span class="btn-icon">⭐</span>
             <span class="btn-text">별의 탑 정답지</span>
           </button>
@@ -831,10 +829,10 @@ export async function renderSummary(): Promise<void> {
       <div class="star-tower-modal-content">
         <div class="star-tower-modal-header">
           <h2>⭐ 별의 탑 정답지</h2>
-          <button class="star-tower-close" onclick="closeStarTowerModal()">&times;</button>
+          <button class="star-tower-close">&times;</button>
         </div>
         <div class="star-tower-search">
-          <input type="text" id="star-tower-search" placeholder="질문 검색..." oninput="filterStarTowerQA(this.value)">
+          <input type="text" id="star-tower-search" placeholder="질문 검색...">
         </div>
         <div class="star-tower-qa-list" id="star-tower-qa-list">
           ${generateStarTowerQA()}
@@ -934,14 +932,34 @@ function setupSummaryEventDelegation(): void {
 }
 
 function setupStarTowerModalEvents(): void {
-  // Close modal when clicking outside
+  // Event delegation for modal interactions
   document.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+
+    // Open modal button
+    if (target.closest('.star-tower-btn')) {
+      openStarTowerModal();
+      return;
+    }
+
+    // Close modal button
+    if (target.closest('.star-tower-close')) {
+      closeStarTowerModal();
+      return;
+    }
+
+    // Close modal when clicking outside
     const modal = document.getElementById('star-tower-modal');
-    if (modal && modal.style.display === 'flex') {
-      const target = e.target as HTMLElement;
-      if (target === modal) {
-        closeStarTowerModal();
-      }
+    if (modal && modal.style.display === 'flex' && target === modal) {
+      closeStarTowerModal();
+    }
+  });
+
+  // Search input for filtering QA items
+  document.addEventListener('input', (e: Event) => {
+    const target = e.target as HTMLElement;
+    if (target.id === 'star-tower-search') {
+      filterStarTowerQA((target as HTMLInputElement).value);
     }
   });
 
@@ -1124,20 +1142,17 @@ function reorderPotentialsWithDirection(
 // INITIALIZATION
 // =============================================================================
 
+export function init(): void {
+  setupSummaryEventDelegation();
+  log('[App-Summary] Initialized');
+}
+
 if (typeof window !== 'undefined') {
   window.renderSummary = renderSummary;
   window.updateSummary = updateSummary;
   window.saveBuildNotes = saveBuildNotes;
   window.cyclePotentialMark = cyclePotentialMark;
-  window.openStarTowerModal = openStarTowerModal;
-  window.closeStarTowerModal = closeStarTowerModal;
-  window.filterStarTowerQA = filterStarTowerQA;
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', setupSummaryEventDelegation);
-} else {
-  setupSummaryEventDelegation();
+  // Star tower modal functions now handled by event delegation
 }
 
 onLanguageChange(async () => {

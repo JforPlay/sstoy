@@ -3,8 +3,9 @@
  * Handles saving, loading, and sharing build data
  */
 
-import { fetchJSON, log, onLanguageChange, showToast } from '@/shared';
-import type { Position, MainTab, PotentialMark, Disc } from '@/types';
+import { fetchJSON, log, onLanguageChange, showToast } from '../shared';
+import { GameData } from '../shared/game-data';
+import type { Position, MainTab, PotentialMark, Disc } from '../types';
 import * as LZString from 'lz-string';
 import * as fflate from 'fflate';
 
@@ -409,10 +410,10 @@ async function restoreCharactersData(
       const charId = charData.i;
 
       if (charId) {
-        const character = window.state.characters[charId];
+        const character = GameData.characters[charId];
         if (character) {
           const nameKey = character.Name || '';
-          const name = window.state.characterNames[nameKey] || nameKey;
+          const name = GameData.charactersKR[nameKey] || nameKey;
 
           window.state.party[position] = {
             id: charId,
@@ -740,11 +741,11 @@ function buildIdMaps(): IdMaps {
     return { toIdx, fromIdx };
   }
 
-  const charIds = window.state?.characters
-    ? Object.keys(window.state.characters).map(toNum)
+  const charIds = GameData.characters
+    ? Object.keys(GameData.characters).map(toNum)
     : [];
-  const potIds = window.state?.potentials
-    ? Object.keys(window.state.potentials).map(toNum)
+  const potIds = GameData.potentials
+    ? Object.keys(GameData.potentials).map(toNum)
     : [];
   const discIds = window.discsState?.allDiscs
     ? window.discsState.allDiscs.map((d) => toNum(d.Id))
@@ -1366,27 +1367,16 @@ export function loadPresetBuild(buildHash: string, presetTitle: string): void {
 // INITIALIZATION
 // =============================================================================
 
-function initSaveLoadSystem(): void {
+export function init(): void {
   const hasBuildParam = window.location.hash && window.location.hash.includes('build=');
 
   if (hasBuildParam) {
+    // Data is guaranteed to be loaded by app-main.ts before this init is called
     if (window.isDataLoaded && window.isDataLoaded()) {
       loadFromURL();
     } else {
-      const handleDataLoaded = (): void => {
-        window.removeEventListener('appDataLoaded', handleDataLoaded);
-        requestAnimationFrame(() => {
-          loadFromURL();
-        });
-      };
-      window.addEventListener('appDataLoaded', handleDataLoaded);
-
-      setTimeout(() => {
-        window.removeEventListener('appDataLoaded', handleDataLoaded);
-        if (window.state?.characters && Object.keys(window.state.characters).length > 0) {
-          loadFromURL();
-        }
-      }, 15000);
+      console.warn('[App-SaveLoad] Data should be loaded but check failed. Attempting load anyway.');
+      loadFromURL();
     }
   }
 
@@ -1494,13 +1484,6 @@ if (typeof window !== 'undefined') {
   window.loadPresetBuilds = loadPresetBuilds;
   window.loadPresetBuild = loadPresetBuild;
   window.buildState = buildState;
-}
-
-// Initialize when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initSaveLoadSystem);
-} else {
-  initSaveLoadSystem();
 }
 
 export default {

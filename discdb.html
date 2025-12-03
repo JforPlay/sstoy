@@ -34,13 +34,13 @@
     <link rel="icon" type="image/png" href="assets/others/favicon.png">
 
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <!-- Font Awesome 7 Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="css/utils.css">
     <link rel="stylesheet" href="css/components/ui-components.css">
-    <link rel="stylesheet" href="css/app-char.css">
     <link rel="stylesheet" href="css/discdb.css">
 
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
@@ -48,55 +48,12 @@
 </head>
 
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <a href="index.html" class="navbar-brand">
-            <span class="navbar-logo"><i class="fa-solid fa-star"></i></span>
-            <span class="navbar-title" data-i18n="nav.title">스소 도우미</span>
-        </a>
-        <button class="navbar-hamburger" id="navbar-hamburger" aria-label="Toggle menu">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-        <div class="navbar-menu" id="navbar-menu">
-            <div class="navbar-links">
-                <a href="characterdb.html" class="navbar-link" data-page="characterdb">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-book"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.characterdb">여행가 도감</span>
-                </a>
-                <a href="discdb.html" class="navbar-link" data-page="discdb">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-compact-disc"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.discdb">레코드 도감</span>
-                </a>
-                <a href="app.html" class="navbar-link" data-page="app">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-medal"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.builder">도자기 공방</span>
-                </a>
-                <a href="tasks.html" class="navbar-link" data-page="tasks">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-clipboard-list"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.tasks">의뢰 도우미</span>
-                </a>
-                <a href="resources.html" class="navbar-link" data-page="resources">
-                    <span class="navbar-link-icon"><i class="fa-solid fa-box"></i></span>
-                    <span class="navbar-link-text" data-i18n="nav.resources">자원 도우미</span>
-                </a>
-            </div>
-            <button id="theme-toggle" class="theme-toggle" onclick="window.toggleTheme()">
-                <i class="theme-icon fa-solid fa-sun"></i>
-                <span class="theme-text" data-i18n="nav.themeLight">라이트</span>
-            </button>
-            <select id="language-select" class="language-select"
-                onchange="if(window.i18n) window.i18n.setLanguage(this.value)">
-                <option value="KR">KR | 한국어</option>
-                <option value="JP">JP | 日本語</option>
-                <option value="EN">EN | English</option>
-                <option value="CN">CN | 中文</option>
-            </select>
-        </div>
-    </nav>
+    <!-- Navigation Bar (Dynamic) -->
+    <div id="global-navigation"></div>
 
     <div class="container">
         <header>
-            <h1><i class="fa-solid fa-compact-disc"></i> <span data-i18n="discdb.pageTitle"></span></h1>
+            <h1><img src="assets/others/btn_main_system_outfit_1.png" alt="Disc DB Icon" class="page-title-icon"> <span data-i18n="discdb.pageTitle"></span></h1>
             <p class="subtitle" data-i18n="discdb.subtitle"></p>
         </header>
 

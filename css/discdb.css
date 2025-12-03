@@ -3,10 +3,17 @@
 /* Disc Selector Section */
 .disc-select-section {
     margin-bottom: 1.5rem;
-    background: var(--surface);
-    padding: 1.25rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 0.5rem 2rem var(--shadow);
+    background: var(--surface-light);
+    border-radius: 0.625rem;
+    border: 2px solid var(--border);
+    padding: 1rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.disc-select-section:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
 }
 
 .disc-selector-scroll {
@@ -404,11 +411,18 @@
 
 /* Disc Attributes Section */
 .disc-attributes-section {
-    background: var(--surface);
-    padding: 1.5rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 0.5rem 2rem var(--shadow);
-    margin-bottom: 2rem;
+    background: var(--surface-light);
+    border-radius: 0.625rem;
+    border: 2px solid var(--border);
+    padding: 1rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.disc-attributes-section:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
 }
 
 .disc-level-control {
@@ -440,12 +454,13 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.25rem 0.75rem;
-    background: var(--primary-color);
+    background: rgba(52, 152, 219, 0.2);
+    border: 2px solid var(--accent-interactive);
     border-radius: 0.5rem;
     font-size: 0.875rem;
     font-weight: 700;
-    color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: var(--accent-interactive);
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.2);
     margin-left: 0.5rem;
 }
 
@@ -567,11 +582,18 @@
 
 /* Skills Section */
 .skills-section {
-    margin-bottom: 2rem;
-    background: var(--surface);
-    padding: 1.5rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 0.5rem 2rem var(--shadow);
+    margin-bottom: 1.5rem;
+    background: var(--surface-light);
+    border-radius: 0.625rem;
+    border: 2px solid var(--border);
+    padding: 1rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.skills-section:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
 }
 
 .skill-level-control {
@@ -934,11 +956,18 @@
 
 /* Archive Section */
 .archive-section {
-    margin-bottom: 2rem;
-    background: var(--surface);
-    padding: 1.5rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 0.5rem 2rem var(--shadow);
+    margin-bottom: 1.5rem;
+    background: var(--surface-light);
+    border-radius: 0.625rem;
+    border: 2px solid var(--border);
+    padding: 1rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.archive-section:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
 }
 
 .archive-container {
@@ -988,31 +1017,17 @@
     font-style: italic;
 }
 
-/* Section Headers */
-.section-header {
-    margin-bottom: 1rem;
-}
-
-.section-title {
-    font-size: 1.5rem;
+/* Section Headers - Unified Style */
+.disc-select-section .section-title,
+.disc-attributes-section .section-title,
+.skills-section .section-title,
+.archive-section .section-title {
+    font-size: 0.938rem;
     font-weight: 700;
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin: 0;
-}
-
-.section-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    background: var(--primary-color);
-    border-radius: 0.75rem;
-    color: white;
-    font-size: 1.25rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.625rem;
+    border-bottom: 2px solid var(--border);
 }
 
 /* Responsive Design */
@@ -1128,3 +1143,4 @@
 .disc-selector-scroll::-webkit-scrollbar-thumb:hover {
     background: var(--primary-color);
 }
+

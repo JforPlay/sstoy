@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import fs from 'fs';
 import compression from 'vite-plugin-compression';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import viteImagemin from 'vite-plugin-imagemin';
 
 // __dirname replacement for ESM
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -22,6 +23,35 @@ export default defineConfig(({ command, mode }) => ({
           description: 'Stella Sora character builder, database, and resource calculator',
         }
       }
+    }),
+
+    // Image compression
+    viteImagemin({
+      gifsicle: {
+        optimizationLevel: 7,
+        interlaced: false,
+      },
+      optipng: {
+        optimizationLevel: 7,
+      },
+      mozjpeg: {
+        quality: 80,
+      },
+      pngquant: {
+        quality: [0.8, 0.9],
+        speed: 4,
+      },
+      svgo: {
+        plugins: [
+          {
+            name: 'removeViewBox',
+          },
+          {
+            name: 'removeEmptyAttrs',
+            active: false,
+          },
+        ],
+      },
     }),
 
     // Brotli compression for production builds

@@ -489,19 +489,25 @@ declare global {
     cyclePotentialMark?: (position: Position, potId: number) => void;
     calculateCharacterScore?: (position: Position) => number;
     generatePotentialIconHTML?: (potId: number, position: Position, level: number, mark: PotentialMark) => string;
-    openStarTowerModal?: () => void;
-    closeStarTowerModal?: () => void;
-    filterStarTowerQA?: (searchTerm: string) => void;
-    
+
     // Preset module functions
     renderPresets?: () => void;
     loadPresetBuilds?: () => Promise<unknown>;
     loadPresetBuild?: (hash: string, title: string) => void;
-    goToPresetPage?: (page: number) => void;
-    filterPresetsByElement?: (element: string) => void;
-    toggleTagFilter?: (tag: string) => void;
-    clearTagFilters?: () => void;
     
+    // Damage Calculator functions
+    renderDamageCalculator?: () => void;
+    recalculateDamage?: () => void;
+    exportDamageCSV?: () => void;
+    toggleManualMode?: () => void;
+    toggleStatDetails?: (statKey: string) => void;
+    toggleStatSource?: (statKey: string, sourceName: string, active: boolean) => void;
+    setManualStatAdjustment?: (statKey: string, value: number) => void;
+    toggleBuff?: (index: number, active: boolean) => void;
+    setEnemyLevel?: (level: number) => void;
+    setEnemyDefense?: (defense: number) => void;
+    setEnemyResistance?: (resistance: number) => void;
+
     // Toast notification
     showToast?: (message: string, type?: ToastType) => void;
     showError?: (message: string) => void;
@@ -517,6 +523,7 @@ declare global {
     // Theme utility
     toggleTheme?: () => void;
     setTheme?: (theme: 'light' | 'dark') => void;
+    initTheme?: () => void;
     
     // Element tag and description parser
     parseElementTags?: (description: string) => string;

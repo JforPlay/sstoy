@@ -25,7 +25,7 @@
     gap: 1.5rem;
 }
 
-.section-title {
+#discs-container .section-title {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -1147,7 +1147,7 @@
     top: 50%;
     right: 1rem;
     transform: translateY(-50%);
-    background: var(--primary);
+    background: var(--primary-color);
     border: none;
     border-radius: 1rem;
     padding: 0.75rem 1rem;
@@ -1186,7 +1186,6 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #000000;
 }
 
 .toggle-badge {
@@ -1597,7 +1596,7 @@
 
     .notes-sidebar-toggle {
         top: auto;
-        bottom: 1rem;
+        bottom: 5rem;
         right: 1rem;
         transform: none;
     }

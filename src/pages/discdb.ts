@@ -4,12 +4,16 @@
  */
 
 // Import shared utilities (auto-initializes)
-import '@/shared';
-import '@/i18n';
+import '../shared';
+import '../i18n';
+import { initGlobalHeader } from '../shared/ui-components';
+import { GameData, getDiscRarityInfo } from '../shared/game-data';
+import { loadCoreData, loadFeatureData, loadLanguageData } from '../shared/data-loader';
+import { substituteSkillParams, parseSkillDescription } from '../modules/param-parser';
 
-import { showError, parseElementTags } from '@/shared';
+import { showError, parseElementTags } from '../shared';
 import Fuse from 'fuse.js';
-import type { Disc, MainSkill, SecondarySkill, SubNoteSkill, SubNoteSkillPromoteGroup, GameEnums, Item } from '@/types';
+import type { Disc, MainSkill, SecondarySkill, SubNoteSkill, SubNoteSkillPromoteGroup, GameEnums, Item } from '../types';
 
 // =============================================================================
 // TYPES
@@ -24,6 +28,7 @@ interface DiscDBState {
   itemData: Record<string, Item>;
   itemKRData: Record<string, string>;
   gameEnums: GameEnums;
+  uiText: Record<string, string>;
   mainSkillData: Record<string, MainSkill>;
   secondarySkillData: Record<string, SecondarySkill>;
   mainSkillKRData: Record<string, string>;
@@ -58,6 +63,7 @@ const discDBState: DiscDBState = {
   itemData: {},
   itemKRData: {},
   gameEnums: {},
+  uiText: {},
   mainSkillData: {},
   secondarySkillData: {},
   mainSkillKRData: {},
@@ -96,71 +102,49 @@ function extractFilename(path: string): string {
 async function loadDiscData(): Promise<void> {
   try {
     const gameLang = window.i18n?.currentLang || 'KR';
-    const dataPath = window.i18n?.getDataPath(gameLang) || 'data/KR';
-
     console.log(`[DiscDB] Loading data for language: ${gameLang}`);
 
-    const [
-      discData,
-      discIPData,
-      discIPKRData,
-      itemData,
-      itemKRData,
-      gameEnums,
-      mainSkillData,
-      secondarySkillData,
-      mainSkillKRData,
-      secondarySkillKRData,
-      subNoteSkillData,
-      subNoteSkillKRData,
-      subNoteSkillPromoteData,
-      discTagKRData,
-      attributeData,
-      discExtraAttributeData,
-    ] = await Promise.all([
-      fetch('data/Disc.json').then((r) => r.json()),
-      fetch('data/DiscIP.json').then((r) => r.json()),
-      fetch(`${dataPath}/DiscIP.json`).then((r) => r.json()),
-      fetch('data/Item.json').then((r) => r.json()),
-      fetch(`${dataPath}/Item.json`).then((r) => r.json()),
-      fetch('data/GameEnums.json').then((r) => r.json()),
-      fetch('data/MainSkill.json').then((r) => r.json()),
-      fetch('data/SecondarySkill.json').then((r) => r.json()),
-      fetch(`${dataPath}/MainSkill.json`).then((r) => r.json()),
-      fetch(`${dataPath}/SecondarySkill.json`).then((r) => r.json()),
-      fetch('data/SubNoteSkill.json').then((r) => r.json()),
-      fetch(`${dataPath}/SubNoteSkill.json`).then((r) => r.json()),
-      fetch('data/SubNoteSkillPromoteGroup.json').then((r) => r.json()),
-      fetch(`${dataPath}/DiscTag.json`).then((r) => r.json()),
-      fetch('data/Attribute.json').then((r) => r.json()),
-      fetch('data/DiscExtraAttribute.json').then((r) => r.json()),
-    ]);
+    await loadCoreData();
+    await loadFeatureData('discSystem');
 
-    discDBState.discData = discData;
-    discDBState.discIPData = discIPData;
-    discDBState.discIPKRData = discIPKRData;
-    discDBState.itemData = itemData;
-    discDBState.itemKRData = itemKRData;
-    discDBState.gameEnums = gameEnums;
-    discDBState.mainSkillData = mainSkillData;
-    discDBState.secondarySkillData = secondarySkillData;
-    discDBState.mainSkillKRData = mainSkillKRData;
-    discDBState.secondarySkillKRData = secondarySkillKRData;
-    discDBState.subNoteSkillData = subNoteSkillData;
-    discDBState.subNoteSkillKRData = subNoteSkillKRData;
-    discDBState.subNoteSkillPromoteData = subNoteSkillPromoteData;
-    discDBState.discTagKRData = discTagKRData;
-    discDBState.attributeData = attributeData;
-    discDBState.discExtraAttributeData = discExtraAttributeData;
+    const langFiles = [
+      'DiscIP.json',
+      'Item.json',
+      'MainSkill.json',
+      'SecondarySkill.json',
+      'SubNoteSkill.json',
+      'DiscTag.json',
+      'UIText.json'
+    ];
+    await loadLanguageData(gameLang, langFiles);
+
+    // Sync GameData to local state
+    discDBState.discData = GameData.discs;
+    discDBState.discIPData = GameData.discIP;
+    discDBState.discIPKRData = GameData.discIPKR;
+    discDBState.itemData = GameData.items;
+    discDBState.itemKRData = GameData.itemsKR as any;
+    discDBState.gameEnums = GameData.gameEnums as any;
+    discDBState.uiText = GameData.uiText as any;
+    discDBState.mainSkillData = GameData.mainSkills;
+    discDBState.secondarySkillData = GameData.secondarySkills;
+    discDBState.mainSkillKRData = GameData.mainSkillsKR as any;
+    discDBState.secondarySkillKRData = GameData.secondarySkillsKR as any;
+    discDBState.subNoteSkillData = GameData.subNoteSkills;
+    discDBState.subNoteSkillKRData = GameData.subNoteSkillsKR as any;
+    discDBState.subNoteSkillPromoteData = GameData.subNoteSkillPromote as any;
+    discDBState.discTagKRData = GameData.discTagKR;
+    discDBState.attributeData = GameData.attributes as any;
+    discDBState.discExtraAttributeData = GameData.discExtraAttribute as any;
 
     // Build disc names map
-    Object.entries(discData as Record<string, Disc>).forEach(([id, disc]) => {
+    Object.entries(discDBState.discData).forEach(([id, disc]) => {
       if (disc.Visible && (disc as Record<string, unknown>).Available) {
-        const discIPEntry = discIPData[id];
+        const discIPEntry = discDBState.discIPData[id];
         if (discIPEntry) {
           const storyName = discIPEntry.StoryName;
           discDBState.discNames[id] =
-            discIPKRData[storyName] || storyName || window.i18n?.t('discdb.discNameDefault') || `Disc ${id}`;
+            discDBState.discIPKRData[storyName] || storyName || window.i18n?.t('discdb.discNameDefault') || `Disc ${id}`;
         } else {
           discDBState.discNames[id] = window.i18n?.t('discdb.discNameDefault') || `Disc ${id}`;
         }
@@ -168,7 +152,7 @@ async function loadDiscData(): Promise<void> {
     });
 
     // Build allDiscs array
-    discDBState.allDiscs = Object.entries(discData as Record<string, Disc>)
+    discDBState.allDiscs = Object.entries(discDBState.discData)
       .filter(([, disc]) => disc.Visible && (disc as Record<string, unknown>).Available)
       .map(([id, disc]) => ({
         id,
@@ -264,29 +248,6 @@ function renderDiscSelector(searchQuery: string = ''): void {
   container.appendChild(fragment);
 }
 
-function getDiscRarityInfo(disc: Disc): { key: string; stars: number; borderClass: string } {
-  if (!disc || !disc.Id) return { key: 'N', stars: 1, borderClass: 'rarity-n' };
-  const item = discDBState.itemData[disc.Id];
-  if (!item || !item.Rarity) return { key: 'N', stars: 1, borderClass: 'rarity-n' };
-
-  const rarityInfo = discDBState.gameEnums.itemRarity?.[item.Rarity];
-  if (!rarityInfo) return { key: 'N', stars: 1, borderClass: 'rarity-n' };
-
-  const rarityClassMap: Record<string, string> = {
-    SSR: 'rarity-ssr',
-    SR: 'rarity-sr',
-    R: 'rarity-r',
-    M: 'rarity-m',
-    N: 'rarity-n',
-  };
-
-  return {
-    key: rarityInfo.key,
-    stars: rarityInfo.stars,
-    borderClass: rarityClassMap[rarityInfo.key] || 'rarity-n',
-  };
-}
-
 function renderDiscTags(disc: Disc): void {
   const tagsContainer = document.getElementById('disc-tags');
   if (!tagsContainer) return;
@@ -357,15 +318,18 @@ function renderDiscAttributes(discId: string, level: number, limitBreak: number)
 
     let attrName = key;
 
-    if (discDBState.gameEnums.effectAttributeType) {
-      for (const [, enumValue] of Object.entries(discDBState.gameEnums.effectAttributeType)) {
-        if (
-          (enumValue as { key?: string; name?: string }).key &&
-          (enumValue as { key: string }).key.toUpperCase() === key.toUpperCase()
-        ) {
-          attrName = (enumValue as { name: string }).name;
-          break;
-        }
+    if (GameData.gameEnums?.effectAttributeType) {
+      // Find the enum entry by matching the key
+      const enumEntries = Object.entries(GameData.gameEnums.effectAttributeType);
+      const matchingEntry = enumEntries.find(([id, entry]: [string, any]) =>
+        entry.key && entry.key.toLowerCase() === key.toLowerCase()
+      );
+
+      if (matchingEntry) {
+        const [statId, entry] = matchingEntry as [string, any];
+        // Look up translation in UIText using the ID
+        const uiTextKey = `UIText.Enums_Effect_${statId}.1`;
+        attrName = discDBState.uiText?.[uiTextKey] || entry.name || key;
       }
     }
 
@@ -387,12 +351,14 @@ function renderDiscAttributes(discId: string, level: number, limitBreak: number)
       extraAttrs.sort((a, b) => a.Break - b.Break);
 
       statsHTML.push('<div class="stat-divider"></div>');
-      statsHTML.push(`<div class="stat-section-title">${window.i18n?.t('discdb.breakBonus')}</div>`);
+      const breakTitle = window.i18n?.t('discdb.breakBonus') || 'Break Bonus';
+      statsHTML.push(`<div class="stat-section-title">${breakTitle}</div>`);
 
       extraAttrs.forEach((attr) => {
+        const breakLabel = window.i18n?.t('discdb.break') || 'Break';
         statsHTML.push(`
           <div class="stat-item extra-stat">
-            <span class="stat-name">${window.i18n?.t('discdb.break')} ${attr.Break}</span>
+            <span class="stat-name">${breakLabel} ${attr.Break}</span>
             <span class="stat-value">+${attr.Atk}</span>
           </div>
         `);
@@ -538,28 +504,6 @@ function getSkillIconPath(iconPath: string | undefined): string | null {
   return `assets/skill_icons/${filename}.png`;
 }
 
-function parseSkillDescription(description: string, skill: MainSkill | SecondarySkill): string {
-  if (!description || !skill) return description;
-
-  let parsedDesc = description;
-
-  // Replace {1} through {10} with actual Param values
-  for (let i = 1; i <= 10; i++) {
-    const placeholder = `{${i}}`;
-    const paramValue = (skill as Record<string, unknown>)[`Param${i}`];
-
-    if (parsedDesc.includes(placeholder) && paramValue) {
-      const styledValue = `<span class="param-value">${paramValue}</span>`;
-      parsedDesc = parsedDesc.replaceAll(placeholder, styledValue);
-    }
-  }
-
-  // Parse element tag patterns
-  parsedDesc = parseElementTags(parsedDesc);
-
-  return parsedDesc;
-}
-
 // parseElementTags is imported from @/shared
 
 function updateDiscSkills(disc: Disc): void {
@@ -615,7 +559,7 @@ function updateDiscSkills(disc: Disc): void {
     if (secondarySkill) {
       const skillName = discDBState.secondarySkillKRData[secondarySkill.Name] || secondarySkill.Name || '협주 스킬';
       const rawDesc = discDBState.secondarySkillKRData[secondarySkill.Desc] || secondarySkill.Desc || '';
-      const parsedDesc = parseSkillDescription(rawDesc, secondarySkill);
+      const parsedDesc = substituteSkillParams(rawDesc, secondarySkill as unknown as Record<string, unknown>);
       const iconBgPath = getSkillIconPath(secondarySkill.IconBg);
       const iconPath = getSkillIconPath(secondarySkill.Icon);
 
@@ -774,11 +718,11 @@ function generateNotesDisplay(disc: Disc): string {
                     <i class="fa-solid fa-music"></i> ${window.i18n?.t('discdb.notePhase')}
                   </label>
                   <div class="level-adjuster">
-                    <button class="level-btn" onclick="adjustPhaseLevel(-1)">
+                    <button class="level-btn" data-phase-delta="-1">
                       <i class="fa-solid fa-minus"></i>
                     </button>
                     <span id="phase-level-display" class="level-display">${phaseLabels[discDBState.phaseLevel]}</span>
-                    <button class="level-btn" onclick="adjustPhaseLevel(1)">
+                    <button class="level-btn" data-phase-delta="1">
                       <i class="fa-solid fa-plus"></i>
                     </button>
                   </div>
@@ -919,12 +863,30 @@ function setupSearchHandler(): void {
   });
 }
 
+function setupEventDelegation(): void {
+  // Event delegation for phase level adjustment buttons
+  document.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+
+    // Phase level adjustment buttons
+    const levelBtn = target.closest('.level-btn[data-phase-delta]') as HTMLElement | null;
+    if (levelBtn) {
+      const delta = parseInt(levelBtn.dataset.phaseDelta || '0');
+      if (delta !== 0) adjustPhaseLevel(delta);
+      return;
+    }
+  });
+}
+
 // =============================================================================
 // INITIALIZATION
 // =============================================================================
 
 async function initPage(): Promise<void> {
   await window.i18n?.init();
+
+  // Initialize Global Header after i18n is ready
+  initGlobalHeader('discdb');
 
   window.addEventListener('languageChanged', async () => {
     console.log('[DiscDB] Language changed, reloading data');
@@ -937,6 +899,7 @@ async function initPage(): Promise<void> {
 
   await loadDiscData();
   setupSearchHandler();
+  setupEventDelegation();
 }
 
 if (document.readyState === 'loading') {
@@ -949,7 +912,7 @@ if (document.readyState === 'loading') {
 window.filterDiscsByElement = filterDiscsByElement;
 window.adjustDiscLevelSlider = adjustDiscLevelSlider;
 window.adjustSkillLevel = adjustSkillLevel;
-window.adjustPhaseLevel = adjustPhaseLevel;
+// adjustPhaseLevel now handled by event delegation
 
 // Type declarations
 declare global {
@@ -957,7 +920,6 @@ declare global {
     filterDiscsByElement?: (element: string) => void;
     adjustDiscLevelSlider?: () => void;
     adjustSkillLevel?: (delta: number) => void;
-    adjustPhaseLevel?: (delta: number) => void;
   }
 }
 
