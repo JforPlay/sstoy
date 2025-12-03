@@ -1,8 +1,8 @@
 # Stella Sora Toy (sstoy)
-- Last updated 2025/11/26
+- Last updated 2025/12/3
 - This repo is the source to build the github pages to view related tools for the game Stella Sora.
 - sstoy is a non-profit fan project for the game Stella Sora.
-- Currently adding multi-language support. Full support for in-game text (KR, EN, JP, CN), partial support for UI text which I only plan to use only English for non-KR languages. UI text are currently in-progress for the implementation and will take some time (~90% done).
+- Added multi-language support. Full support for in-game text (KR, EN, JP, CN), and full English UI text support for other languages, except for the preset builds.
 - Please file an issue if you come across any bugs, or have any wanted/suggested features. I can't guarantee to implement all wanted/suggested features, but I will put priority on the ones I find interesting.
 
 # Disclaimer
