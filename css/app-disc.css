@@ -379,6 +379,15 @@
     transition: all 0.3s ease;
 }
 
+/* Ensure images inside note preview icons are properly sized */
+.disc-note-preview-icon img,
+.disc-note-preview-icon picture {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
 .disc-note-preview-icon:hover {
     opacity: 1;
 }
