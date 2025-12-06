@@ -373,7 +373,7 @@ export interface PresetBuild {
 // =============================================================================
 
 export type GameLanguage = 'KR' | 'EN' | 'JP' | 'CN';
-export type UILanguage = 'ko' | 'en';
+export type UILanguage = 'ko' | 'en' | 'jp';
 
 export interface I18n {
   currentLang: GameLanguage;
