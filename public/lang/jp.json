@@ -62,7 +62,7 @@
     "noGiftInfo": "プレゼント情報なし",
     "preferredGifts": "好みのプレゼント",
     "hatedGifts": "嫌がるプレゼント",
-    "noSkin": "このキャラはまだアナザーイメージがありません、、、",
+    "noSkin": "このキャラはまだアナザーイメージがございません...",
     "imageLabels": {
       "cg": "CG",
       "banner": "バナー",
@@ -75,7 +75,7 @@
     "archiveCondition": "条件を満たすと情報変更",
     "chatLines": "キャラクターのセリフ",
     "chatLineTypes": {
-      "1": "新しく入手した時",
+      "1": "初めて入手した時",
       "2": "再入手した時",
       "3": "覚醒時",
       "4": "信頼10達成時"
@@ -161,8 +161,8 @@
     "addDisc": "ロスレコ追加",
     "selectDiscEmpty": "ロスレコを選択し、素材の計算をしてみましょう。",
     "noDiscSelected": "選択されたロスレコがございません。",
-    "characterMaterialMatrix": "여행가 육성 재료 매트릭스",
-    "characterMaterialMatrixDesc": "행: 승급 재료, 열: 스킬 재료",
+    "characterMaterialMatrix": "巡遊者育成素材マトリックス",
+    "characterMaterialMatrixDesc": "行: 昇格素材, 列: スキル素材",
     "characterBadgeMatrix": "캐릭터 뱃지 매트릭스",
     "characterBadgeMatrixDesc": "행: 레벨, 열: 뱃지",
     "discAdvanceMatrix": "레코드 승급 매트릭스",
