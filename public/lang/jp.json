@@ -494,7 +494,7 @@
     "btnBuilder": "ビルドを始める",
     "featureCharDB": {
       "title": "巡遊者 DB",
-      "desc": "キャラクターの詳細ステータス、アーカイブ、デート攻略情報がひとめ "totalBuilds": "総ビルド数",
+      "desc": "キャラクターの詳細ステータス、アーカイブ、デート攻略情報がひとめ "totalBuilds": "総ビルド数"
     "loadBuild": "ロード",
     "loadFailed": "失敗",
     "noPresets": "プリセットビルドがございません",
