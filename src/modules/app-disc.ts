@@ -1,9 +1,24 @@
 /**
- * Discs Tab Module
- * Handles disc selection and management for main and sub discs
+ * @module app-disc
+ * @description Disc System Module - Manages main discs (melody skills), sub discs (notes), and note collection
+ *
+ * **Features:**
+ * - Main Disc Selection: 3 slots with limit break levels (1-6), melody skills, element typing
+ * - Sub Disc Selection: 3 slots with phase levels (0-8), note contribution, passive skills
+ * - Note System: Auto-calculate notes from sub discs, track required notes from main disc skills
+ * - Score Calculation: Harmony skill score + note score = total disc score
+ * - Search & Filter: Fuzzy search by name/ID, filter by element, prioritize by note overlap
+ *
+ * **Architecture:**
+ * - Event delegation for all disc interactions (selection, level adjustment, note management)
+ * - RAF-throttled rendering to prevent excessive re-renders
+ * - Note calculation caching with cache key = "discId:level|..."
+ * - Modal system for disc selection with search and filtering
+ *
+ * @see {@link https://github.com/JforPlay/sstoy} - Project Repository
  */
 
-import { fetchJSON, debounce, log, onLanguageChange, loadFeatureData, loadLanguageData } from '../shared';
+import { fetchJSON, debounce, log, onLanguageChange, loadFeatureData, loadLanguageData, createResponsiveImage } from '../shared';
 import { GameData, getDiscRarityInfo } from '../shared/game-data';
 import { Modal } from '../shared/ui-components';
 import { substituteSkillParams } from './param-parser';
@@ -186,10 +201,29 @@ function scheduleRenderDiscs(options: ScheduleRenderOptions = {}): void {
 // DATA LOADING
 // =============================================================================
 
+/**
+ * Load all disc-related data (discs, skills, notes) for current language
+ *
+ * @async
+ * @returns {Promise<void>}
+ *
+ * @description
+ * Loads disc system data using progressive data loader:
+ * 1. Core disc data (Disc, MainSkill, SecondarySkill, SubNoteSkill, SubNoteSkillPromote)
+ * 2. Language-specific localization (DiscIP, MainSkill, SecondarySkill, SubNoteSkill names)
+ * 3. Populates discsState with data from GameData singleton
+ * 4. Renders initial disc display
+ *
+ * @example
+ * ```typescript
+ * await loadDiscData();
+ * // Now discsState is populated with all disc data
+ * ```
+ */
 export async function loadDiscData(): Promise<void> {
   try {
     const gameLang = window.i18n?.currentLang || 'KR';
-    log(`[App-Disc] Loading data for language: ${gameLang}`);
+    console.info(`[AppDisc] Loading data for language: ${gameLang}`);
 
     // Load disc system data
     await loadFeatureData('discSystem');
@@ -281,6 +315,26 @@ function getMainSkillData(disc: Disc | null, limitBreak: number): MainSkill | nu
 // NOTE CALCULATIONS
 // =============================================================================
 
+/**
+ * Calculate total note contributions from all selected sub discs
+ *
+ * @returns {Record<string, number>} Map of noteId → level contributed by sub discs
+ *
+ * @description
+ * For each selected sub disc:
+ * 1. Get SubNoteSkillGroupId from disc
+ * 2. Look up SubNoteSkillPromote entry for current phase level
+ * 3. Parse SubNoteSkills JSON to get note contributions
+ * 4. Sum up contributions across all sub discs
+ *
+ * **Caching:** Results are cached with key = "discId:level|..." for performance
+ *
+ * @example
+ * ```typescript
+ * const notes = calculateNotesFromSubDiscs();
+ * // { "1001": 3, "1002": 2 } means note 1001 has +3 from sub discs, note 1002 has +2
+ * ```
+ */
 export function calculateNotesFromSubDiscs(): Record<string, number> {
   const currentKey = getNotesCacheKey();
   if (notesFromDiscsCache !== null && notesCacheKey === currentKey) {
@@ -560,6 +614,16 @@ function calculateNotesScore(): number {
   return totalScore;
 }
 
+/**
+ * Calculate total disc score (harmony skills + notes)
+ *
+ * @returns {number} Total disc score
+ *
+ * @description
+ * Disc score = secondary skill score + notes score
+ * - Secondary skills contribute score based on active harmony skill levels
+ * - Notes contribute score based on total note levels (from discs + acquired)
+ */
 export function calculateDiscScore(): number {
   const secondarySkillScore = calculateSecondarySkillsScore();
   const notesScore = calculateNotesScore();
@@ -596,6 +660,16 @@ function getSecondarySkillNoteRequirements(disc: Disc | null): string[] {
   return Array.from(uniqueNotes);
 }
 
+/**
+ * Update the set of required notes based on selected main discs
+ *
+ * @returns {void}
+ *
+ * @description
+ * Scans all selected main discs to find which notes are required for their secondary skills.
+ * Updates discsState.requiredNotes with the union of all required notes.
+ * Used to highlight which notes are actually needed for the current build.
+ */
 export function updateRequiredNotes(): void {
   const requiredNotes = new Set<string>();
 
@@ -661,7 +735,7 @@ function generateNotesDisplay(): string {
     return `
       <div class="disc-note-card ${isUsed ? 'used-note' : 'unused-note'}">
         <div class="note-header">
-          ${iconPath ? `<img src="${iconPath}" alt="${krName}" class="note-icon" width="${IMAGE_SIZES.NOTE_ICON.width}" height="${IMAGE_SIZES.NOTE_ICON.height}" loading="lazy" onerror="this.style.display='none'">` : ''}
+          ${iconPath ? createResponsiveImage(iconPath, krName, 'note-icon') : ''}
           <div class="note-title">
             <h4>${krName}</h4>
             <p class="note-brief">${krBriefDesc}</p>
@@ -746,7 +820,7 @@ function generateDiscNotesDisplay(disc: Disc, phase: number): string {
 
         return `
           <div class="disc-card-note-item">
-            ${noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="disc-card-note-icon" width="${IMAGE_SIZES.NOTE_ICON.width}" height="${IMAGE_SIZES.NOTE_ICON.height}" loading="lazy" onerror="this.style.display='none'">` : ''}
+            ${noteIconPath ? createResponsiveImage(noteIconPath, noteName, 'disc-card-note-icon') : ''}
             <div class="disc-card-note-info">
               <div class="disc-card-note-name">${noteName}</div>
               <div class="disc-card-note-count">+${count}</div>
@@ -791,8 +865,8 @@ function generateSkillsDisplay(
     html += `
       <div class="disc-skill-item main-skill">
         <div class="skill-icon-container">
-          ${iconBgPath ? `<img src="${iconBgPath}" alt="skill bg" class="skill-icon-bg" width="80" height="80" loading="lazy" onerror="this.style.display='none'">` : ''}
-          ${iconPath ? `<img src="${iconPath}" alt="${translation.name}" class="skill-icon" width="60" height="60" loading="lazy" onerror="this.style.display='none'">` : ''}
+          ${iconBgPath ? createResponsiveImage(iconBgPath, 'skill bg', 'skill-icon-bg') : ''}
+          ${iconPath ? createResponsiveImage(iconPath, translation.name, 'skill-icon') : ''}
         </div>
         <div class="skill-content">
           <div class="skill-header">
@@ -821,8 +895,8 @@ function generateSkillsDisplay(
         html += `
           <div class="disc-skill-item secondary-skill">
             <div class="skill-icon-container">
-              ${iconBgPath ? `<img src="${iconBgPath}" alt="skill bg" class="skill-icon-bg" width="80" height="80" loading="lazy" onerror="this.style.display='none'">` : ''}
-              ${iconPath ? `<img src="${iconPath}" alt="${translation.name}" class="skill-icon" width="60" height="60" loading="lazy" onerror="this.style.display='none'">` : ''}
+              ${iconBgPath ? createResponsiveImage(iconBgPath, 'skill bg', 'skill-icon-bg') : ''}
+              ${iconPath ? createResponsiveImage(iconPath, translation.name, 'skill-icon') : ''}
             </div>
             <div class="skill-content">
               <div class="skill-header">
@@ -870,7 +944,7 @@ function generateNoteRequirementsDisplay(disc: Disc): string {
 
       return `
         <div class="required-note-item">
-          ${noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="required-note-icon" width="${IMAGE_SIZES.NOTE_ICON.width}" height="${IMAGE_SIZES.NOTE_ICON.height}" loading="lazy" onerror="this.style.display='none'">` : ''}
+          ${noteIconPath ? createResponsiveImage(noteIconPath, noteName, 'required-note-icon') : ''}
           <span class="required-note-name">${noteName}</span>
         </div>
       `;
@@ -945,7 +1019,7 @@ function generateDiscSlot(slotId: DiscSlotId, slotNumber: number, isMain: boolea
 
       let exceedIconsHtml = '';
       for (let i = 0; i < limitBreak; i++) {
-        exceedIconsHtml += `<img src="${exceedIconPath}" alt="${window.i18n?.t('disc.breakthrough') || 'Breakthrough'}" class="exceed-icon" width="32" height="32" loading="lazy" onerror="this.style.display='none'">`;
+        exceedIconsHtml += createResponsiveImage(exceedIconPath, window.i18n?.t('disc.breakthrough') || 'Breakthrough', 'exceed-icon');
       }
 
       levelControlHtml = `
@@ -980,7 +1054,7 @@ function generateDiscSlot(slotId: DiscSlotId, slotNumber: number, isMain: boolea
           <div class="disc-slot-name-group">
             <div class="disc-name-with-element">
               <span class="disc-slot-name">${discName}</span>
-              ${elementInfo.icon ? `<img src="${elementInfo.icon}" alt="${elementInfo.name}" class="disc-element-icon" title="${elementInfo.name}" width="20" height="20" loading="lazy" onerror="this.style.display='none'">` : `<span class="disc-element-name">${elementInfo.name}</span>`}
+              ${elementInfo.icon ? createResponsiveImage(elementInfo.icon, elementInfo.name, 'disc-element-icon') : `<span class="disc-element-name">${elementInfo.name}</span>`}
             </div>
             <span class="disc-slot-id">ID: ${selectedDisc.Id}</span>
           </div>
@@ -991,8 +1065,7 @@ function generateDiscSlot(slotId: DiscSlotId, slotNumber: number, isMain: boolea
                data-image-path="${largePath}"
                data-disc-name="${discName}"
                title="클릭하여 크게 보기">
-            <img src="${iconPath}" alt="${discName}" class="disc-icon" width="${IMAGE_SIZES.DISC_ICON.width}" height="${IMAGE_SIZES.DISC_ICON.height}" loading="lazy"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            ${createResponsiveImage(iconPath, discName, 'disc-icon')}
             <div class="disc-placeholder" style="display: none;">
               <span class="disc-placeholder-icon">${window.getIcon?.('disc') || ''}</span>
             </div>
@@ -1047,6 +1120,23 @@ function generateDiscSlot(slotId: DiscSlotId, slotNumber: number, isMain: boolea
 // MAIN RENDER
 // =============================================================================
 
+/**
+ * Render the main disc tab UI with all slots, notes sidebar, and modals
+ *
+ * @param {string | null} preserveFocusId - Optional element ID to restore focus after render
+ * @returns {void}
+ *
+ * @description
+ * Generates complete disc tab HTML:
+ * - Disc score banner (harmony + notes)
+ * - Main disc slots (3) with melody skills, harmony skills, note requirements
+ * - Sub disc slots (3) with phase levels, note contributions
+ * - Notes sidebar with used/unused notes, level adjustment
+ * - Disc selector modal with search and filtering
+ * - Image viewer modal for disc portraits
+ *
+ * **Performance:** Uses RAF-throttled rendering via scheduleRenderDiscs()
+ */
 export function renderDiscs(preserveFocusId: string | null = null): void {
   const container = document.getElementById('discs-container');
   if (!container) return;
@@ -1166,25 +1256,25 @@ export function renderDiscs(preserveFocusId: string | null = null): void {
               <i class="fa-solid fa-border-all"></i> ${window.i18n?.t('disc.allElements') || 'All'}
             </button>
             <button class="element-filter-btn" data-element="1" data-action="disc-filter-element">
-              <img src="assets/icon_common_property_1.png" alt="${window.i18n?.t('disc.waterElement') || 'Water'}" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> ${window.i18n?.t('disc.waterElement') || 'Water'}
+              ${createResponsiveImage('assets/icon_common_property_1.png', window.i18n?.t('disc.waterElement') || 'Water', 'element-icon')} ${window.i18n?.t('disc.waterElement') || 'Water'}
             </button>
             <button class="element-filter-btn" data-element="2" data-action="disc-filter-element">
-              <img src="assets/icon_common_property_2.png" alt="${window.i18n?.t('disc.fireElement') || 'Fire'}" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> ${window.i18n?.t('disc.fireElement') || 'Fire'}
+              ${createResponsiveImage('assets/icon_common_property_2.png', window.i18n?.t('disc.fireElement') || 'Fire', 'element-icon')} ${window.i18n?.t('disc.fireElement') || 'Fire'}
             </button>
             <button class="element-filter-btn" data-element="3" data-action="disc-filter-element">
-              <img src="assets/icon_common_property_3.png" alt="${window.i18n?.t('disc.earthElement') || 'Earth'}" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> ${window.i18n?.t('disc.earthElement') || 'Earth'}
+              ${createResponsiveImage('assets/icon_common_property_3.png', window.i18n?.t('disc.earthElement') || 'Earth', 'element-icon')} ${window.i18n?.t('disc.earthElement') || 'Earth'}
             </button>
             <button class="element-filter-btn" data-element="4" data-action="disc-filter-element">
-              <img src="assets/icon_common_property_4.png" alt="${window.i18n?.t('disc.windElement') || 'Wind'}" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> ${window.i18n?.t('disc.windElement') || 'Wind'}
+              ${createResponsiveImage('assets/icon_common_property_4.png', window.i18n?.t('disc.windElement') || 'Wind', 'element-icon')} ${window.i18n?.t('disc.windElement') || 'Wind'}
             </button>
             <button class="element-filter-btn" data-element="5" data-action="disc-filter-element">
-              <img src="assets/icon_common_property_5.png" alt="${window.i18n?.t('disc.lightElement') || 'Light'}" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> ${window.i18n?.t('disc.lightElement') || 'Light'}
+              ${createResponsiveImage('assets/icon_common_property_5.png', window.i18n?.t('disc.lightElement') || 'Light', 'element-icon')} ${window.i18n?.t('disc.lightElement') || 'Light'}
             </button>
             <button class="element-filter-btn" data-element="6" data-action="disc-filter-element">
-              <img src="assets/icon_common_property_6.png" alt="${window.i18n?.t('disc.darkElement') || 'Dark'}" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> ${window.i18n?.t('disc.darkElement') || 'Dark'}
+              ${createResponsiveImage('assets/icon_common_property_6.png', window.i18n?.t('disc.darkElement') || 'Dark', 'element-icon')} ${window.i18n?.t('disc.darkElement') || 'Dark'}
             </button>
             <button class="element-filter-btn" data-element="7" data-action="disc-filter-element">
-              <img src="assets/icon_common_property_7.png" alt="${window.i18n?.t('disc.noElementFilter') || 'No Element'}" class="element-icon" width="20" height="20" loading="lazy" onerror="this.style.display='none'"> ${window.i18n?.t('disc.noElementFilter') || 'No Element'}
+              ${createResponsiveImage('assets/icon_common_property_7.png', window.i18n?.t('disc.noElementFilter') || 'No Element', 'element-icon')} ${window.i18n?.t('disc.noElementFilter') || 'No Element'}
             </button>
           </div>
         </div>
@@ -1197,7 +1287,7 @@ export function renderDiscs(preserveFocusId: string | null = null): void {
     <div class="modal" id="disc-image-viewer">
       <div class="image-viewer-content">
         <button class="close-btn" data-action="disc-close-image-viewer">&times;</button>
-        <img id="viewer-image" src="" alt="Disc Image" width="${IMAGE_SIZES.DISC_PORTRAIT.width}" height="${IMAGE_SIZES.DISC_PORTRAIT.height}" loading="lazy">
+        <img id="viewer-image" src="" alt="Disc Image" loading="lazy">
         <div class="viewer-title" id="viewer-title"></div>
       </div>
     </div>
@@ -1389,7 +1479,7 @@ function renderDiscGrid(searchQuery = '', slotId: DiscSlotId): void {
                 const noteName = discsState.subNoteSkillKRData[noteData.Name] || noteData.Name || '';
                 const isRequired = discsState.requiredNotes.has(noteId);
                 return noteIconPath
-                  ? `<img src="${noteIconPath}" alt="${noteName}" class="disc-note-preview-icon ${isRequired ? 'required-match' : ''}" title="${noteName} +${noteContributions[noteId]}" width="${IMAGE_SIZES.NOTE_ICON.width}" height="${IMAGE_SIZES.NOTE_ICON.height}" loading="lazy" onerror="this.style.display='none'">`
+                  ? `<div class="disc-note-preview-icon ${isRequired ? 'required-match' : ''}" title="${noteName} +${noteContributions[noteId]}">${createResponsiveImage(noteIconPath, noteName, 'disc-note-icon-img')}</div>`
                   : '';
               })
               .filter((i) => i)
@@ -1414,8 +1504,7 @@ function renderDiscGrid(searchQuery = '', slotId: DiscSlotId): void {
 
       discOption.innerHTML = `
         <div class="disc-option-image ${rarityInfo.borderClass}">
-          <img src="${iconPath}" alt="${discName}" width="${IMAGE_SIZES.DISC_ICON.width}" height="${IMAGE_SIZES.DISC_ICON.height}" loading="lazy"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          ${createResponsiveImage(iconPath, discName, 'disc-option-img')}
           <div class="disc-placeholder" style="display: none;">
             <span class="disc-placeholder-icon">${window.getIcon?.('disc') || ''}</span>
           </div>
@@ -1425,7 +1514,7 @@ function renderDiscGrid(searchQuery = '', slotId: DiscSlotId): void {
           <div class="disc-option-name">${discName}</div>
           <div class="disc-option-details">
             <span class="disc-option-id">ID: ${disc.Id}</span>
-            ${elementInfo.icon ? `<img src="${elementInfo.icon}" alt="${elementInfo.name}" class="disc-option-element-icon" title="${elementInfo.name}" width="20" height="20" loading="lazy" onerror="this.style.display='none'">` : `<span class="disc-option-element">${elementInfo.name}</span>`}
+            ${elementInfo.icon ? createResponsiveImage(elementInfo.icon, elementInfo.name, 'disc-option-element-icon') : `<span class="disc-option-element">${elementInfo.name}</span>`}
           </div>
           ${notesInfo}
         </div>

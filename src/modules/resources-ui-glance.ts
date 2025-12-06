@@ -1,15 +1,46 @@
 /**
- * Resources Module - Glance Tab UI
+ * Resources UI Glance Module
+ *
+ * Provides "at-a-glance" matrix views showing material requirements across characters and discs.
+ * Displays interactive matrices that help users quickly see which characters/discs need which materials.
+ *
+ * Key Features:
+ * - Character material matrix (advancement vs skill materials)
+ * - Character badge matrix (badges required by level milestone)
+ * - Combined 5-star character + disc advancement matrix (organized by element and material type)
+ * - Combined 4-star character + disc advancement matrix
+ * - Interactive hover highlighting for rows/columns
+ * - Lazy rendering (only renders once per session)
+ *
+ * @module modules/resources-ui-glance
+ * @see {@link modules/resources-state} For shared state and material groups
  */
 
 import { resourcesState, MATERIAL_GROUPS } from './resources-state';
 import type { CharacterData, Disc } from './resources-types';
+import { createResponsiveImage } from '../shared';
 
+// =============================================================================
+// STATE
+// =============================================================================
+
+/** Track whether glance tab has been rendered to avoid re-rendering */
 let isGlanceTabRendered = false;
+
+// =============================================================================
+// MAIN RENDER FUNCTION
+// =============================================================================
 
 /**
  * Main function to render all content on the "Glance" tab
- * This function calls individual renderers for each matrix
+ *
+ * Renders four matrices:
+ * 1. Combined 5-star character + disc advancement matrix
+ * 2. Combined 4-star character + disc advancement matrix
+ * 3. Character material matrix (advance vs skill)
+ * 4. Character badge matrix
+ *
+ * Only renders once per session (lazy loading).
  */
 export function renderGlanceTabContent(): void {
   if (isGlanceTabRendered) {
@@ -27,7 +58,7 @@ export function renderGlanceTabContent(): void {
 
     isGlanceTabRendered = true;
   } catch (error) {
-    console.error('Error rendering glance tab content:', error);
+    console.error('[ResourcesGlance] Error rendering glance tab content:', error);
     const container = document.getElementById('glance-matrix-container');
     if (container) {
       const errorMsg = error instanceof Error ? error.message : String(error);
@@ -38,8 +69,17 @@ export function renderGlanceTabContent(): void {
   }
 }
 
+// =============================================================================
+// CHARACTER MATERIAL MATRIX
+// =============================================================================
+
 /**
- * Render character material matrix (advancement vs skill materials)
+ * Renders character material matrix (advancement vs skill materials)
+ *
+ * Creates a matrix showing which characters use which material combinations.
+ * Rows: Advancement material groups
+ * Columns: Skill material groups
+ * Cells: Character portraits that use both materials
  */
 function renderAtAGlanceMatrix(): void {
   const container = document.getElementById('glance-matrix-container');
@@ -59,12 +99,15 @@ function renderAtAGlanceMatrix(): void {
     container.innerHTML = matrixHtml;
     initGlanceMatrixInteractions();
   } catch (error) {
-    console.error('Error rendering glance matrix:', error);
+    console.error('[ResourcesGlance] Error rendering character material matrix:', error);
     const errorMsg = error instanceof Error ? error.message : String(error);
     container.innerHTML = `<p>육성 재료 매트릭스 생성 중 오류: ${errorMsg}</p>`;
   }
 }
 
+/**
+ * Maps character IDs to their required material group indices
+ */
 interface CharacterMaterialMap {
   [charId: string]: {
     advanceGroups: Set<number>;
@@ -72,6 +115,14 @@ interface CharacterMaterialMap {
   };
 }
 
+/**
+ * Builds a map of characters to their required material groups
+ *
+ * Analyzes each character's advancement and skill upgrade data to determine
+ * which material groups they require.
+ *
+ * @returns Map of character IDs to material group sets
+ */
 function buildCharacterMaterialMap(): CharacterMaterialMap {
   const charMap: CharacterMaterialMap = {};
   const advanceGroupMap = new Map(MATERIAL_GROUPS.advance?.map((g, i) => [i, g.items]) || []);
@@ -124,6 +175,12 @@ function buildCharacterMaterialMap(): CharacterMaterialMap {
   return charMap;
 }
 
+/**
+ * Generates HTML for character material matrix table
+ *
+ * @param charMaterialMap - Map of characters to material groups
+ * @returns HTML string for the matrix table
+ */
 function generateMatrixHtml(charMaterialMap: CharacterMaterialMap): string {
   const advanceGroups = MATERIAL_GROUPS.advance || [];
   const skillGroups = MATERIAL_GROUPS.skill || [];
@@ -134,7 +191,7 @@ function generateMatrixHtml(charMaterialMap: CharacterMaterialMap): string {
     const itemName = item?.Title ? resourcesState.itemNames[item.Title as string] || '' : '';
     const iconPath = item?.Icon ? `assets/items/${item.Icon.split('/').pop()}.png` : '';
     headerHtml += `<th data-col-index="${skillIndex}"><div class="material-icon-wrapper" title="${itemName}">
-                   <img src="${iconPath}" class="material-icon" loading="lazy" alt="${itemName}"></div></th>`;
+                   ${createResponsiveImage(iconPath, itemName, 'material-icon')}</div></th>`;
   });
   headerHtml += '</tr></thead>';
 
@@ -145,7 +202,7 @@ function generateMatrixHtml(charMaterialMap: CharacterMaterialMap): string {
     const iconPath = item?.Icon ? `assets/items/${item.Icon.split('/').pop()}.png` : '';
     bodyHtml += `<tr data-row-index="${advIndex}">`;
     bodyHtml += `<th data-row-index="${advIndex}"><div class="material-icon-wrapper" title="${itemName}">
-                 <img src="${iconPath}" class="material-icon" loading="lazy" alt="${itemName}"></div></th>`;
+                 ${createResponsiveImage(iconPath, itemName, 'material-icon')}</div></th>`;
 
     skillGroups.forEach((_, skillIndex) => {
       const matchingChars = Object.keys(charMaterialMap).filter(
@@ -159,7 +216,7 @@ function generateMatrixHtml(charMaterialMap: CharacterMaterialMap): string {
         const charName = char?.Name
           ? resourcesState.characterNames[char.Name as string] || ''
           : '';
-        bodyHtml += `<img src="assets/char/avg1_${charId}_002.png" class="char-portrait" loading="lazy" title="${charName}" onerror="this.src='assets/char/${charId}_icon.png'">`;
+        bodyHtml += createResponsiveImage(`assets/char/avg1_${charId}_002.png`, charName, 'char-portrait');
       });
       bodyHtml += '</div></td>';
     });
@@ -170,14 +227,26 @@ function generateMatrixHtml(charMaterialMap: CharacterMaterialMap): string {
   return `<table id="glance-matrix">${headerHtml}${bodyHtml}</table>`;
 }
 
+/**
+ * Initializes interactions for the main character material matrix
+ */
 function initGlanceMatrixInteractions(): void {
   initMatrixInteractions(document.getElementById('glance-matrix'));
 }
 
+// =============================================================================
+// MATRIX INTERACTION SYSTEM
+// =============================================================================
+
 /**
- * Initialize hover interactions for a matrix using event delegation
+ * Initializes hover interactions for a matrix using event delegation
+ *
+ * Highlights entire rows/columns when hovering over header cells.
+ * Uses event delegation for performance with large matrices.
+ *
+ * @param matrix - Matrix table element to attach interactions to
  */
-function initMatrixInteractions(matrix: HTMLElement | null): void {
+function initMatrixInteractions(matrix: HTMLElement | null): void{
   if (!matrix) return;
 
   let highlightedCells: HTMLElement[] = [];
@@ -221,8 +290,17 @@ function initMatrixInteractions(matrix: HTMLElement | null): void {
   matrix.addEventListener('mouseleave', clearHighlights);
 }
 
+// =============================================================================
+// CHARACTER BADGE MATRIX
+// =============================================================================
+
 /**
- * Render character badge matrix
+ * Renders character badge matrix
+ *
+ * Shows badges required for each character at level 70/80/90 milestones.
+ * Rows: Level milestones (70, 80, 90)
+ * Columns: Badge item types
+ * Cells: Character portraits requiring that badge at that level
  */
 function renderCharacterBadgeMatrix(): void {
   const container = document.getElementById('character-badge-matrix-container');
@@ -239,12 +317,15 @@ function renderCharacterBadgeMatrix(): void {
     container.innerHTML = matrixHtml;
     initMatrixInteractions(document.getElementById('character-badge-matrix'));
   } catch (error) {
-    console.error('Error rendering character badge matrix:', error);
+    console.error('[ResourcesGlance] Error rendering character badge matrix:', error);
     const errorMsg = error instanceof Error ? error.message : String(error);
     container.innerHTML = `<p>캐릭터 뱃지 매트릭스 생성 중 오류: ${errorMsg}</p>`;
   }
 }
 
+/**
+ * Badge matrix data structure
+ */
 interface BadgeMapData {
   matrix: {
     70: Map<number, CharacterData[]>;
@@ -254,6 +335,11 @@ interface BadgeMapData {
   badgeItems: number[];
 }
 
+/**
+ * Builds a map of badge requirements by level milestone
+ *
+ * @returns Badge map data with matrices and item list
+ */
 function buildCharacterBadgeMap(): BadgeMapData {
   const badgeMap = {
     70: new Map<number, CharacterData[]>(),
@@ -295,6 +381,12 @@ function buildCharacterBadgeMap(): BadgeMapData {
   };
 }
 
+/**
+ * Generates HTML for character badge matrix table
+ *
+ * @param badgeMapData - Badge map data
+ * @returns HTML string for the matrix table
+ */
 function generateCharacterBadgeMatrixHtml(badgeMapData: BadgeMapData): string {
   const { matrix, badgeItems } = badgeMapData;
   const levels = [70, 80, 90] as const;
@@ -307,7 +399,7 @@ function generateCharacterBadgeMatrixHtml(badgeMapData: BadgeMapData): string {
       : `Item ${itemId}`;
     const iconPath = `assets/items/item_${itemId}.png`;
     headerHtml += `<th data-col-index="${index}"><div class="material-icon-wrapper" title="${itemName}">
-                   <img src="${iconPath}" class="material-icon" loading="lazy" alt="${itemName}" onerror="this.style.display='none'">
+                   ${createResponsiveImage(iconPath, itemName, 'material-icon')}
                  </div></th>`;
   });
   headerHtml += '</tr></thead>';
@@ -324,7 +416,7 @@ function generateCharacterBadgeMatrixHtml(badgeMapData: BadgeMapData): string {
           const charName = char.Name
             ? resourcesState.characterNames[char.Name as string] || ''
             : '';
-          bodyHtml += `<img src="assets/char/avg1_${char.Id}_002.png" class="char-portrait" loading="lazy" title="${charName}" onerror="this.src='assets/char/${char.Id}_icon.png'">`;
+          bodyHtml += createResponsiveImage(`assets/char/avg1_${char.Id}_002.png`, charName, 'char-portrait');
         });
       }
       bodyHtml += '</div></td>';
@@ -336,9 +428,19 @@ function generateCharacterBadgeMatrixHtml(badgeMapData: BadgeMapData): string {
   return `<table class="glance-sub-matrix" id="character-badge-matrix">${headerHtml}${bodyHtml}</table>`;
 }
 
+// =============================================================================
+// COMBINED ADVANCEMENT MATRICES (5-STAR)
+// =============================================================================
+
 /**
- * Render combined character and disc advancement matrix
- * Groups materials by first digit (same dungeon source)
+ * Renders combined character (5-star) and disc advancement matrix
+ *
+ * Shows which 5-star characters and discs share the same advancement material groups,
+ * organized by element type. Helps identify farming efficiency opportunities.
+ *
+ * Material pairing:
+ * - Character advance materials (20071-73, 20081-83, 20091-93)
+ * - Disc advance materials (21071-73, 21081-83, 21091-93)
  */
 function renderCombinedAdvanceMatrix(): void {
   const container = document.getElementById('combined-advance-matrix-container');
@@ -357,18 +459,29 @@ function renderCombinedAdvanceMatrix(): void {
     container.innerHTML = matrixHtml;
     initMatrixInteractions(document.getElementById('combined-advance-matrix'));
   } catch (error) {
-    console.error('Error rendering combined advance matrix:', error);
+    console.error('[ResourcesGlance] Error rendering combined advance matrix (5-star):', error);
     const errorMsg = error instanceof Error ? error.message : String(error);
     container.innerHTML = `<p>통합 승급 매트릭스 생성 중 오류: ${errorMsg}</p>`;
   }
 }
 
+/**
+ * Combined advancement matrix data structure
+ */
 interface CombinedAdvanceData {
   characters: Map<number, Map<number, CharacterData[]>>;
   discs: Map<number, Map<number, Disc[]>>;
   materialGroups: Array<{ charGroup: number; discGroup: number }>;
 }
 
+/**
+ * Builds combined advancement map for 5-star characters and discs
+ *
+ * Analyzes material requirements and groups characters/discs by element type
+ * and material group. Only processes 5-star (Grade 1) characters.
+ *
+ * @returns Combined advance data with character/disc maps
+ */
 function buildCombinedAdvanceMap(): CombinedAdvanceData {
   const characterMap = new Map<number, Map<number, CharacterData[]>>();
   const discMap = new Map<number, Map<number, Disc[]>>();
@@ -469,6 +582,12 @@ function buildCombinedAdvanceMap(): CombinedAdvanceData {
   return { characters: characterMap, discs: discMap, materialGroups };
 }
 
+/**
+ * Generates HTML for combined advancement matrix table (5-star)
+ *
+ * @param data - Combined advancement data
+ * @returns HTML string for the matrix table
+ */
 function generateCombinedAdvanceMatrixHtml(data: CombinedAdvanceData): string {
   const { characters, discs, materialGroups } = data;
   const gameEnums = resourcesState.gameEnums as unknown as {
@@ -497,10 +616,10 @@ function generateCombinedAdvanceMatrixHtml(data: CombinedAdvanceData): string {
     headerHtml += `<th data-col-index="${pairIndex}">
       <div class="combined-material-header">
         <div class="material-icon-wrapper material-char" title="${charName}">
-          <img src="${charIconPath}" class="material-icon" loading="lazy" alt="${charName}">
+          ${createResponsiveImage(charIconPath, charName, 'material-icon')}
         </div>
         <div class="material-icon-wrapper material-disc" title="${discName}">
-          <img src="${discIconPath}" class="material-icon" loading="lazy" alt="${discName}">
+          ${createResponsiveImage(discIconPath, discName, 'material-icon')}
         </div>
       </div>
     </th>`;
@@ -513,7 +632,7 @@ function generateCombinedAdvanceMatrixHtml(data: CombinedAdvanceData): string {
     const elementId = elementType.id!;
     bodyHtml += `<tr data-row-index="${rowIndex}">`;
     bodyHtml += `<th data-row-index="${rowIndex}">
-      <img src="${elementType.icon}" class="element-icon" loading="lazy" title="${elementType.name}">
+      ${createResponsiveImage(elementType.icon, elementType.name, 'element-icon')}
     </th>`;
 
     const elementCharMap = characters.get(elementId);
@@ -531,7 +650,7 @@ function generateCombinedAdvanceMatrixHtml(data: CombinedAdvanceData): string {
           const charName = char.Name
             ? resourcesState.characterNames[char.Name as string] || ''
             : '';
-          bodyHtml += `<img src="assets/char/avg1_${char.Id}_002.png" class="char-portrait small" loading="lazy" title="[여행가] ${charName}" onerror="this.src='assets/char/${char.Id}_icon.png'">`;
+          bodyHtml += createResponsiveImage(`assets/char/avg1_${char.Id}_002.png`, `[여행가] ${charName}`, 'char-portrait small');
         });
       }
       bodyHtml += '</div>';
@@ -548,7 +667,7 @@ function generateCombinedAdvanceMatrixHtml(data: CombinedAdvanceData): string {
             : `Disc ${disc.Id}`;
           const iconFile = disc.DiscBg ? String(disc.DiscBg).split('/').pop() : '';
           const iconPath = `assets/disc_icons/outfit_${iconFile}.png`;
-          bodyHtml += `<img src="${iconPath}" class="disc-portrait-square" loading="lazy" title="[레코드] ${discName}" onerror="this.style.display='none'">`;
+          bodyHtml += createResponsiveImage(iconPath, `[레코드] ${discName}`, 'disc-portrait-square');
         });
       }
       bodyHtml += '</div>';
@@ -562,8 +681,15 @@ function generateCombinedAdvanceMatrixHtml(data: CombinedAdvanceData): string {
   return `<table class="glance-sub-matrix combined-matrix" id="combined-advance-matrix">${headerHtml}${bodyHtml}</table>`;
 }
 
+// =============================================================================
+// COMBINED ADVANCEMENT MATRICES (4-STAR)
+// =============================================================================
+
 /**
- * Render combined character (4-star) and disc (5-star) advancement matrix
+ * Renders combined character (4-star) and disc advancement matrix
+ *
+ * Shows which 4-star characters and discs share the same advancement material groups.
+ * Similar to 5-star matrix but for Grade 2 (4-star) characters.
  */
 function renderCombinedAdvanceMatrix4Star(): void {
   const container = document.getElementById('combined-advance-matrix-4star-container');
@@ -582,12 +708,19 @@ function renderCombinedAdvanceMatrix4Star(): void {
     container.innerHTML = matrixHtml;
     initMatrixInteractions(document.getElementById('combined-advance-matrix-4star'));
   } catch (error) {
-    console.error('Error rendering 4-star combined advance matrix:', error);
+    console.error('[ResourcesGlance] Error rendering combined advance matrix (4-star):', error);
     const errorMsg = error instanceof Error ? error.message : String(error);
     container.innerHTML = `<p>통합 승급 매트릭스 (4성) 생성 중 오류: ${errorMsg}</p>`;
   }
 }
 
+/**
+ * Builds combined advancement map for 4-star characters and discs
+ *
+ * Similar to 5-star version but filters for Grade 2 (4-star) characters only.
+ *
+ * @returns Combined advance data with character/disc maps
+ */
 function buildCombinedAdvanceMap4Star(): CombinedAdvanceData {
   const characterMap = new Map<number, Map<number, CharacterData[]>>();
   const discMap = new Map<number, Map<number, Disc[]>>();
@@ -687,6 +820,12 @@ function buildCombinedAdvanceMap4Star(): CombinedAdvanceData {
   return { characters: characterMap, discs: discMap, materialGroups };
 }
 
+/**
+ * Generates HTML for combined advancement matrix table (4-star)
+ *
+ * @param data - Combined advancement data
+ * @returns HTML string for the matrix table
+ */
 function generateCombinedAdvanceMatrixHtml4Star(data: CombinedAdvanceData): string {
   const { characters, discs, materialGroups } = data;
   const gameEnums = resourcesState.gameEnums as unknown as {
@@ -713,10 +852,10 @@ function generateCombinedAdvanceMatrixHtml4Star(data: CombinedAdvanceData): stri
     headerHtml += `<th data-col-index="${pairIndex}">
       <div class="combined-material-header">
         <div class="material-icon-wrapper material-char" title="${charName}">
-          <img src="${charIconPath}" class="material-icon" loading="lazy" alt="${charName}">
+          ${createResponsiveImage(charIconPath, charName, 'material-icon')}
         </div>
         <div class="material-icon-wrapper material-disc" title="${discName}">
-          <img src="${discIconPath}" class="material-icon" loading="lazy" alt="${discName}">
+          ${createResponsiveImage(discIconPath, discName, 'material-icon')}
         </div>
       </div>
     </th>`;
@@ -728,7 +867,7 @@ function generateCombinedAdvanceMatrixHtml4Star(data: CombinedAdvanceData): stri
     const elementId = elementType.id!;
     bodyHtml += `<tr data-row-index="${rowIndex}">`;
     bodyHtml += `<th data-row-index="${rowIndex}">
-      <img src="${elementType.icon}" class="element-icon" loading="lazy" title="${elementType.name}">
+      ${createResponsiveImage(elementType.icon, elementType.name, 'element-icon')}
     </th>`;
 
     const elementCharMap = characters.get(elementId);
@@ -745,7 +884,7 @@ function generateCombinedAdvanceMatrixHtml4Star(data: CombinedAdvanceData): stri
           const charName = char.Name
             ? resourcesState.characterNames[char.Name as string] || ''
             : '';
-          bodyHtml += `<img src="assets/char/avg1_${char.Id}_002.png" class="char-portrait small" loading="lazy" title="[여행가 4★] ${charName}" onerror="this.src='assets/char/${char.Id}_icon.png'">`;
+          bodyHtml += createResponsiveImage(`assets/char/avg1_${char.Id}_002.png`, `[여행가 4★] ${charName}`, 'char-portrait small');
         });
       }
       bodyHtml += '</div>';
@@ -761,7 +900,7 @@ function generateCombinedAdvanceMatrixHtml4Star(data: CombinedAdvanceData): stri
             : `Disc ${disc.Id}`;
           const iconFile = disc.DiscBg ? String(disc.DiscBg).split('/').pop() : '';
           const iconPath = `assets/disc_icons/outfit_${iconFile}.png`;
-          bodyHtml += `<img src="${iconPath}" class="disc-portrait-square" loading="lazy" title="[레코드 5★] ${discName}" onerror="this.style.display='none'">`;
+          bodyHtml += createResponsiveImage(iconPath, `[레코드 5★] ${discName}`, 'disc-portrait-square');
         });
       }
       bodyHtml += '</div>';

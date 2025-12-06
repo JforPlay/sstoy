@@ -1,6 +1,38 @@
 /**
- * Save/Load System Module
- * Handles saving, loading, and sharing build data
+ * @module app-saveload
+ * @description Save/Load/Share System - Build persistence with aggressive compression for URL sharing
+ *
+ * **Features:**
+ * - Local Save: Up to 20 builds in localStorage with LZ-String compression
+ * - URL Sharing: Deflate + Base91 encoding (70-85% size reduction)
+ * - Preset Loading: Load community builds from PresetBuilds.json
+ * - Build Title & Memo: Metadata for build organization
+ *
+ * **Compression Strategy (v2):**
+ * 1. Data Optimization:
+ *    - ID mapping: Character/Potential/Disc IDs → sequential indices
+ *    - Shortened keys: `i` (id), `p` (potentials), `pl` (potential levels), `sl` (skill levels), `pm` (marks)
+ *    - Omit defaults: level 1 potentials, level 0 sub discs, empty fields
+ *    - Delta encoding: Store differences for sorted keys (prevKey = 0, write key - prevKey)
+ *
+ * 2. Binary Packing:
+ *    - Varint encoding for variable-length integers
+ *    - Bit masks for slot presence (6 bits for disc slots, 3 bits for character slots)
+ *    - Packed bytes: `((limitBreak & 0x07) << 3) | (subLevel & 0x07)` = 1 byte for both
+ *
+ * 3. String Compression:
+ *    - Small payloads (<24 bytes): Base32768 encoding (raw mode) - 2 bytes per char
+ *    - Large payloads: Deflate level 9 → Base91 encoding (deflate mode)
+ *    - Choose best: Compare sizes, use smaller result
+ *
+ * **Results:** 200 bytes → 50 bytes (char-only), 800 → 200 (full build)
+ *
+ * **URL Format:**
+ * - v2r-{base32768} = Raw binary (small builds)
+ * - v2d-{base91} = Deflated binary (large builds)
+ * - Legacy: LZ-String (backwards compatible)
+ *
+ * @see {@link https://github.com/JforPlay/sstoy} - Project Repository
  */
 
 import { fetchJSON, log, onLanguageChange, showToast } from '../shared';
@@ -630,6 +662,15 @@ async function restoreBuildData(data: BuildData | undefined): Promise<void> {
 // LOCAL STORAGE OPERATIONS
 // =============================================================================
 
+/**
+ * Retrieve saved builds from localStorage
+ *
+ * @returns {BuildData[]} Array of saved builds
+ *
+ * @description
+ * Reads builds from localStorage with LZ-String decompression.
+ * Handles both compressed (new) and plain JSON (legacy) formats.
+ */
 function getLocalStorageBuilds(): BuildData[] {
   try {
     const data = localStorage.getItem(LOCALSTORAGE_KEY);
@@ -651,6 +692,26 @@ function getLocalStorageBuilds(): BuildData[] {
   }
 }
 
+/**
+ * Save current build to localStorage (max 20 builds)
+ *
+ * @returns {void}
+ *
+ * @description
+ * Collects current build data and saves to localStorage:
+ * 1. Check cooldown (3 seconds between saves)
+ * 2. Collect build data (characters, discs, notes, title, memo)
+ * 3. Add to beginning of builds array
+ * 4. Trim to MAX_SAVED_BUILDS (20)
+ * 5. Compress with LZ-String and save
+ * 6. Start cooldown timer on Save button
+ *
+ * @example
+ * ```typescript
+ * saveToLocalStorage();
+ * // Build saved, toast shown, cooldown started
+ * ```
+ */
 export function saveToLocalStorage(): void {
   const now = Date.now();
   if (now < saveCooldownEnd) {
@@ -1137,6 +1198,29 @@ function decodeBuildFromURL(encoded: string): BuildData {
   }
 }
 
+/**
+ * Generate shareable URL with compressed build data
+ *
+ * @returns {void}
+ *
+ * @description
+ * Creates a shareable URL with aggressively compressed build data:
+ * 1. Check cooldown (3 seconds)
+ * 2. Collect and clean build data (remove memo, timestamps, notes, skills)
+ * 3. Pack into binary format with varint encoding and bit masks
+ * 4. Compress: Try deflate + Base91, fallback to raw Base32768, choose smaller
+ * 5. Generate URL: `app.html#build=v2d-{encoded}` or `app.html#build=v2r-{encoded}`
+ * 6. Copy to clipboard or show modal if clipboard API fails
+ * 7. Warn if URL > 4000 chars (may not work in some browsers)
+ *
+ * **Note:** Skill levels are reset to 1 in shared builds (excluded from URL)
+ *
+ * @example
+ * ```typescript
+ * generateShareURL();
+ * // URL copied to clipboard, e.g. https://example.com/app.html#build=v2d-AbC123...
+ * ```
+ */
 export function generateShareURL(): void {
   const now = Date.now();
   if (now < shareCooldownEnd) {
@@ -1369,6 +1453,26 @@ export async function loadPresetBuilds(): Promise<PresetData> {
   }
 }
 
+/**
+ * Load a preset build from hash string
+ *
+ * @param {string} buildHash - Encoded build hash (v2r/v2d or legacy LZ-String)
+ * @param {string} presetTitle - Display name for toast message
+ * @returns {void}
+ *
+ * @description
+ * Loads a preset build from PresetBuilds.json:
+ * 1. Decode URI component if needed (handles % encoding from JSON)
+ * 2. Decode build from hash (v2r/v2d/legacy formats)
+ * 3. Restore build data to current state
+ * 4. Show success toast with preset title
+ *
+ * @example
+ * ```typescript
+ * loadPresetBuild('v2d-AbC123...', 'Zhu Yuan DPS Build');
+ * // Build loaded, toast: "Preset 'Zhu Yuan DPS Build' loaded!"
+ * ```
+ */
 export function loadPresetBuild(buildHash: string, presetTitle: string): void {
   try {
     if (!buildHash) {

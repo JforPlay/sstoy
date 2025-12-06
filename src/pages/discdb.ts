@@ -1,10 +1,26 @@
 ﻿/**
- * Disc Database Module
- * Handles disc selection, details display, and skill information
+ * Disc Database Page Module - Entry Point
+ *
+ * Comprehensive disc encyclopedia with detailed information about discs (records/pottery),
+ * including skills, attributes, notes, and story content. Uses event delegation pattern
+ * for all dynamic UI interactions.
+ *
+ * Key Features:
+ * - Disc browsing with search and element filtering
+ * - Detailed disc information (skills, stats, story)
+ * - Dynamic level and limit break adjustments
+ * - Main skill, secondary skill, and note system display
+ * - Event delegation for phase level controls
+ * - Responsive stat calculations based on level/break
+ *
+ * @module pages/discdb
+ * @see {@link shared/game-data} For disc data access
+ * @see {@link modules/param-parser} For skill description parsing
  */
 
 // Import shared utilities (auto-initializes)
 import '../shared';
+import { createResponsiveImage } from '../shared';
 import '../i18n';
 import { initGlobalHeader } from '../shared/ui-components';
 import { GameData, getDiscRarityInfo } from '../shared/game-data';
@@ -89,6 +105,12 @@ const discDBState: DiscDBState = {
 // UTILITY FUNCTIONS
 // =============================================================================
 
+/**
+ * Extracts filename from a file path
+ *
+ * @param path - Full file path (e.g., "assets/icons/disc_icon.png")
+ * @returns Filename without path (e.g., "disc_icon.png")
+ */
 function extractFilename(path: string): string {
   if (!path) return '';
   const parts = path.split('/');
@@ -99,10 +121,19 @@ function extractFilename(path: string): string {
 // DATA LOADING
 // =============================================================================
 
+/**
+ * Loads all disc-related data from game files
+ *
+ * Loads core data, disc system features, and language-specific translations.
+ * Builds disc names map, filters visible/available discs, and initializes
+ * Fuse.js search functionality.
+ *
+ * @throws {Error} If data loading fails
+ */
 async function loadDiscData(): Promise<void> {
   try {
     const gameLang = window.i18n?.currentLang || 'KR';
-    console.log(`[DiscDB] Loading data for language: ${gameLang}`);
+    console.info(`[DiscDB] Loading data for language: ${gameLang}`);
 
     await loadCoreData();
     await loadFeatureData('discSystem');
@@ -181,6 +212,14 @@ async function loadDiscData(): Promise<void> {
 // RENDERING
 // =============================================================================
 
+/**
+ * Renders disc selector grid with search and filter applied
+ *
+ * Displays all discs matching current element filter and search query.
+ * Uses document fragment for efficient DOM manipulation.
+ *
+ * @param searchQuery - Search text to filter discs by name or ID (default: '')
+ */
 function renderDiscSelector(searchQuery: string = ''): void {
   const container = document.getElementById('disc-selector');
   if (!container) return;
@@ -233,8 +272,8 @@ function renderDiscSelector(searchQuery: string = ''): void {
 
     card.innerHTML = `
       <div class="disc-card-image ${rarityInfo.borderClass}">
-        <img src="${iconPath}" alt="${name}" loading="lazy" onerror="this.style.display='none'">
-        ${elementInfo.icon ? `<img src="${elementInfo.icon}" alt="${elementInfo.name || ''}" class="disc-card-element-badge" loading="lazy" onerror="this.style.display='none'">` : ''}
+        ${createResponsiveImage(iconPath, name, 'disc-card-icon')}
+        ${elementInfo.icon ? createResponsiveImage(elementInfo.icon, elementInfo.name || '', 'disc-card-element-badge') : ''}
       </div>
       <div class="disc-card-info">
         <div class="disc-card-name">${name}</div>
@@ -248,6 +287,11 @@ function renderDiscSelector(searchQuery: string = ''): void {
   container.appendChild(fragment);
 }
 
+/**
+ * Renders tag badges for a disc
+ *
+ * @param disc - Disc data containing tag IDs
+ */
 function renderDiscTags(disc: Disc): void {
   const tagsContainer = document.getElementById('disc-tags');
   if (!tagsContainer) return;
@@ -269,6 +313,20 @@ function renderDiscTags(disc: Disc): void {
   tagsContainer.innerHTML = tagsHTML;
 }
 
+/**
+ * Calculates disc level and limit break from slider value
+ *
+ * Slider advancement thresholds: 11, 22, 33, 44, 55, 66, 77, 88
+ * Each threshold represents a limit break level.
+ *
+ * @param sliderValue - Slider value (1-95)
+ * @returns Object containing calculated level and limitBreak values
+ *
+ * @example
+ * ```typescript
+ * getDiscStatsFromSlider(55); // { level: 48, limitBreak: 5 }
+ * ```
+ */
 function getDiscStatsFromSlider(sliderValue: number): { level: number; limitBreak: number } {
   const advancements = [11, 22, 33, 44, 55, 66, 77, 88];
 
@@ -286,6 +344,16 @@ function getDiscStatsFromSlider(sliderValue: number): { level: number; limitBrea
   return { level, limitBreak };
 }
 
+/**
+ * Renders disc attributes (stats) based on level and limit break
+ *
+ * Calculates attribute key from GroupId, level, and limit break,
+ * then displays all stats with translated names.
+ *
+ * @param discId - Disc ID to get attributes for
+ * @param level - Current disc level
+ * @param limitBreak - Current limit break level (0-8)
+ */
 function renderDiscAttributes(discId: string, level: number, limitBreak: number): void {
   const statsContainer = document.getElementById('disc-stats-grid');
   if (!statsContainer) return;
@@ -373,6 +441,15 @@ function renderDiscAttributes(discId: string, level: number, limitBreak: number)
 // DISC SELECTION
 // =============================================================================
 
+/**
+ * Selects a disc and displays its detailed information
+ *
+ * Shows disc details container, updates all disc information sections
+ * (name, ID, tags, rarity, element, description, image, skills, archive),
+ * and scrolls to the details section.
+ *
+ * @param discId - ID of disc to select and display
+ */
 function selectDisc(discId: string): void {
   discDBState.currentDiscId = discId;
   const disc = discDBState.discData[discId] as Disc & { DiscBg?: string; PromoteGroupId?: number };
@@ -506,6 +583,14 @@ function getSkillIconPath(iconPath: string | undefined): string | null {
 
 // parseElementTags is imported from @/shared
 
+/**
+ * Updates and renders all disc skills
+ *
+ * Displays main skill, secondary skills (concerto), and note information
+ * based on current skill level. Includes skill icons, names, and parsed descriptions.
+ *
+ * @param disc - Disc data containing skill group IDs
+ */
 function updateDiscSkills(disc: Disc): void {
   const container = document.getElementById('skills-container');
   if (!container) return;
@@ -534,8 +619,8 @@ function updateDiscSkills(disc: Disc): void {
       skillsHTML.push(`
         <div class="skill-card main-skill">
           <div class="skill-icon-container">
-            ${iconBgPath ? `<img src="${iconBgPath}" alt="skill bg" class="skill-icon-bg" loading="lazy" onerror="this.style.display='none'">` : ''}
-            ${iconPath ? `<img src="${iconPath}" alt="${skillName}" class="skill-icon" loading="lazy" onerror="this.style.display='none'">` : ''}
+            ${iconBgPath ? createResponsiveImage(iconBgPath, 'skill bg', 'skill-icon-bg') : ''}
+            ${iconPath ? createResponsiveImage(iconPath, skillName, 'skill-icon') : ''}
           </div>
           <div class="skill-content">
             <div class="skill-header">
@@ -566,8 +651,8 @@ function updateDiscSkills(disc: Disc): void {
       skillsHTML.push(`
         <div class="skill-card secondary-skill">
           <div class="skill-icon-container">
-            ${iconBgPath ? `<img src="${iconBgPath}" alt="skill bg" class="skill-icon-bg" loading="lazy" onerror="this.style.display='none'">` : ''}
-            ${iconPath ? `<img src="${iconPath}" alt="${skillName}" class="skill-icon" loading="lazy" onerror="this.style.display='none'">` : ''}
+            ${iconBgPath ? createResponsiveImage(iconBgPath, 'skill bg', 'skill-icon-bg') : ''}
+            ${iconPath ? createResponsiveImage(iconPath, skillName, 'skill-icon') : ''}
           </div>
           <div class="skill-content">
             <div class="skill-header">
@@ -620,6 +705,15 @@ function getNoteIconPath(noteData: SubNoteSkill): string {
   return `assets/${filename}_S.png`;
 }
 
+/**
+ * Generates HTML for note system display
+ *
+ * Shows both required notes (for secondary skills) and provided notes
+ * (from sub disc) with phase level controls.
+ *
+ * @param disc - Disc data with SubNoteSkillGroupId
+ * @returns HTML string for notes section, or empty string if no notes
+ */
 function generateNotesDisplay(disc: Disc): string {
   const extDisc = disc as Disc & { SubNoteSkillGroupId?: number };
   if (!disc || !extDisc.SubNoteSkillGroupId) return '';
@@ -644,7 +738,7 @@ function generateNotesDisplay(disc: Disc): string {
 
         return `
           <div class="note-item">
-            ${noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="note-icon" loading="lazy" onerror="this.style.display='none'">` : ''}
+            ${noteIconPath ? createResponsiveImage(noteIconPath, noteName, 'note-icon') : ''}
             <div class="note-info">
               <div class="note-name">${noteName}</div>
               <div class="note-count">+${count}</div>
@@ -665,7 +759,7 @@ function generateNotesDisplay(disc: Disc): string {
 
         return `
           <div class="note-item">
-            ${noteIconPath ? `<img src="${noteIconPath}" alt="${noteName}" class="note-icon" loading="lazy" onerror="this.style.display='none'">` : ''}
+            ${noteIconPath ? createResponsiveImage(noteIconPath, noteName, 'note-icon') : ''}
             <div class="note-info">
               <div class="note-name">${noteName}</div>
             </div>
@@ -772,6 +866,14 @@ function updateDiscArchive(discId: string, discIP: { StoryName: string; StoryDes
 // EVENT HANDLERS
 // =============================================================================
 
+/**
+ * Filters displayed discs by element type
+ *
+ * Updates UI to show only discs of selected element, or all if 'all' selected.
+ * Updates active state of filter buttons.
+ *
+ * @param element - Element type ID as string, or 'all' for no filter
+ */
 function filterDiscsByElement(element: string): void {
   discDBState.selector.selectedElement = element;
 
@@ -863,6 +965,13 @@ function setupSearchHandler(): void {
   });
 }
 
+/**
+ * Sets up event delegation for dynamically generated UI elements
+ *
+ * Uses event delegation pattern to handle phase level adjustment buttons
+ * without polluting global namespace. Listens on document level and uses
+ * closest() to find target elements.
+ */
 function setupEventDelegation(): void {
   // Event delegation for phase level adjustment buttons
   document.addEventListener('click', (e: MouseEvent) => {
@@ -882,6 +991,16 @@ function setupEventDelegation(): void {
 // INITIALIZATION
 // =============================================================================
 
+/**
+ * Initializes the disc database page
+ *
+ * Workflow:
+ * 1. Initialize i18n system
+ * 2. Initialize global navigation header
+ * 3. Set up language change listener
+ * 4. Load disc data
+ * 5. Set up search and event handlers
+ */
 async function initPage(): Promise<void> {
   await window.i18n?.init();
 
@@ -889,7 +1008,7 @@ async function initPage(): Promise<void> {
   initGlobalHeader('discdb');
 
   window.addEventListener('languageChanged', async () => {
-    console.log('[DiscDB] Language changed, reloading data');
+    console.info('[DiscDB] Language changed, reloading data');
     await loadDiscData();
     window.i18n?.updatePage();
     if (discDBState.currentDiscId) {

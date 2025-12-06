@@ -1,15 +1,36 @@
 /**
  * Parameter Parser Module
  *
- * Refactored from the monolithic parseParamValue function into smaller,
- * focused functions for better maintainability and testability.
+ * Dynamic parameter parsing system for skill and potential descriptions. Parses
+ * parameter strings that reference game data files and converts them into display
+ * values, with level-based scaling and special format handling.
  *
- * Parameter format: "fileType,levelType,baseId[,fieldKey][,formatType][,enumType]"
+ * Key Features:
+ * - Three parsing modes: LevelUp (scaled), NoLevel (static), DamageNum (array-indexed)
+ * - Multiple format types: percentages, enum lookups, fixed values
+ * - Level-based damage calculations with complex indexing strategies
+ * - Description parameter replacement (&Param1& through &Param10&)
+ * - LRU caching for parsed descriptions (500 entries)
  *
- * LevelTypes:
- * - LevelUp: Adds (level × 10) to base ID for level-scaled lookups
- * - NoLevel: Direct ID lookup
- * - DamageNum: Fetches skill damage arrays with skill level indexing
+ * Parameter Format: "fileType,levelType,baseId[,fieldKey][,formatType][,enumType]"
+ *
+ * @module modules/param-parser
+ * @see {@link shared/game-data} For data source definitions
+ * @see {@link modules/app-char} For usage in character descriptions
+ *
+ * @example
+ * ```typescript
+ * // Parse a level-scaled effect value
+ * const result = parseParamValue('effect,LevelUp,90201,Value,10KPct', 3, 1, 'master', state);
+ * // Looks up ID 90231 (90201 + 3*10), returns value as percentage
+ *
+ * // Parse description with multiple parameters
+ * const desc = parseDescriptionParams(
+ *   "Deals &Param1& damage",
+ *   { Param1: "damage,DamageNum,10001" },
+ *   level, skillLevel, state, position
+ * );
+ * ```
  */
 
 import type {
@@ -73,7 +94,19 @@ interface ParserContext<T extends ParamParserState = ParamParserState> {
 // =============================================================================
 
 /**
- * Parse the parameter string into its component elements
+ * Parses parameter string into structured components
+ *
+ * Splits comma-separated parameter string and validates required fields.
+ * Returns null if parameter is invalid or missing required components.
+ *
+ * @param paramString - Parameter string to parse
+ * @returns Parsed elements or null if invalid
+ *
+ * @example
+ * ```typescript
+ * const parsed = parseElements('effect,LevelUp,90201,Value,10KPct');
+ * // { fileType: 'effect', levelType: 'LevelUp', baseId: '90201', fieldKey: 'Value', formatType: '10KPct', enumType: null }
+ * ```
  */
 function parseElements(paramString: string): ParsedElements | null {
   if (!paramString || typeof paramString !== 'string') {
@@ -107,8 +140,20 @@ function parseElements(paramString: string): ParsedElements | null {
 // =============================================================================
 
 /**
- * Parse LevelUp type parameters
- * Adds (level × 10) to base ID, with special handling for Buff type
+ * Parses LevelUp type parameters with level-based ID adjustment
+ *
+ * Calculates lookup ID by adding (level × 10) to base ID. Buff type has special
+ * handling - only applies level adjustment if tens digit is 0.
+ *
+ * @param elements - Parsed parameter components
+ * @param ctx - Parser context with state and level information
+ * @returns Parse result with formatted value and level type
+ *
+ * @example
+ * ```typescript
+ * // At level 3: ID 90201 → 90231 (90201 + 3*10)
+ * const result = parseLevelUp({ fileType: 'effect', levelType: 'LevelUp', baseId: '90201', ... }, ctx);
+ * ```
  */
 function parseLevelUp<T extends ParamParserState>(
   elements: ParsedElements,
@@ -170,8 +215,14 @@ function parseLevelUp<T extends ParamParserState>(
 // =============================================================================
 
 /**
- * Parse NoLevel type parameters
- * Direct ID lookup without level adjustment
+ * Parses NoLevel type parameters with direct ID lookup
+ *
+ * Performs direct lookup using base ID without any level adjustments.
+ * Used for static values that don't scale with level.
+ *
+ * @param elements - Parsed parameter components
+ * @param ctx - Parser context with state information
+ * @returns Parse result with formatted value and level type
  */
 function parseNoLevel<T extends ParamParserState>(
   elements: ParsedElements,
@@ -218,8 +269,25 @@ interface DamageEntry {
 }
 
 /**
- * Parse DamageNum type parameters
- * Handles skill damage arrays with various level indexing strategies
+ * Parses DamageNum type parameters for skill damage calculations
+ *
+ * Handles complex skill damage arrays with multiple indexing strategies:
+ * - levelTypeData === 4: Uses character level phase
+ * - levelTypeData === 3: Uses specific skill based on LevelData
+ * - DamageType present: Uses skill type (normal/skill/ultimate)
+ * - Default: Uses skill level - 1 as index
+ *
+ * Supports both SkillPercentAmend (percentage) and SkillAbsAmend (absolute) damage.
+ *
+ * @param elements - Parsed parameter components
+ * @param ctx - Parser context with state, levels, and character information
+ * @returns Parse result with combined damage string and optional red color flag
+ *
+ * @example
+ * ```typescript
+ * // Returns "25.5% + 100" for skill at level 5
+ * const result = parseDamageNum({ fileType: 'damage', levelType: 'DamageNum', baseId: '10001', ... }, ctx);
+ * ```
  */
 function parseDamageNum<T extends ParamParserState>(
   elements: ParsedElements,
@@ -271,7 +339,15 @@ function parseDamageNum<T extends ParamParserState>(
 }
 
 /**
- * Calculate the array index for damage values
+ * Calculates appropriate array index for damage value lookup
+ *
+ * Determines which element of SkillPercentAmend/SkillAbsAmend arrays to use
+ * based on levelTypeData and character state. Returns red color flag for
+ * invalid/unsupported cases.
+ *
+ * @param dataEntry - Damage data entry from HitDamage.json
+ * @param ctx - Parser context with character and level information
+ * @returns Object containing array index and red color flag
  */
 function calculateDamageIndex<T extends ParamParserState>(
   dataEntry: DamageEntry,
@@ -304,7 +380,18 @@ function calculateDamageIndex<T extends ParamParserState>(
 }
 
 /**
- * Calculate index for levelTypeData === 3
+ * Calculates index for levelTypeData === 3 (skill-specific damage)
+ *
+ * Uses LevelData field to determine which skill to reference:
+ * - 5: Normal attack skill
+ * - 2: Main/assist skill (based on MainOrSupport)
+ * - 4: Ultimate skill
+ * - Other: Returns maxIndex with red color warning
+ *
+ * @param dataEntry - Damage data entry
+ * @param ctx - Parser context with character state
+ * @param maxIndex - Maximum valid array index
+ * @returns Object containing calculated index and red color flag
  */
 function calculateLevelData3Index<T extends ParamParserState>(
   dataEntry: DamageEntry,
@@ -360,7 +447,15 @@ function calculateLevelData3Index<T extends ParamParserState>(
 }
 
 /**
- * Calculate index based on DamageType for specific potentials
+ * Calculates index based on DamageType for specific potentials (Stype 42)
+ *
+ * Maps DamageType enum to appropriate skill (NORMAL/SKILL/ULTIMATE) and
+ * uses that skill's current level as the array index.
+ *
+ * @param dataEntry - Damage data entry with DamageType field
+ * @param ctx - Parser context with character and enum data
+ * @param maxIndex - Maximum valid array index
+ * @returns Object containing calculated index and red color flag
  */
 function calculateDamageTypeIndex<T extends ParamParserState>(
   dataEntry: DamageEntry,
@@ -421,7 +516,29 @@ function calculateDamageTypeIndex<T extends ParamParserState>(
 // =============================================================================
 
 /**
- * Format a value based on format type
+ * Formats parsed value according to specified format type
+ *
+ * Supported Format Types:
+ * - HdPct: Multiply by 100, add % (0.25 → 25%)
+ * - 10KHdPct: Divide by 100, add % (2500 → 25%)
+ * - 10K: Divide by 10000 (10000 → 1.0)
+ * - 10KPct: Divide by 10000, add % (10000 → 1.0%)
+ * - Enum: Look up enum value from GameEnums
+ * - Text: Look up skill name from translations
+ * - Fixed: Return as-is
+ *
+ * @param value - Raw value to format
+ * @param formatType - Format type identifier
+ * @param enumType - Enum type for enum lookups (e.g., 'EAT', 'SAT')
+ * @param fileType - Source file type for context
+ * @param state - Parser state with game data
+ * @returns Formatted value as string or number
+ *
+ * @example
+ * ```typescript
+ * formatValue(2500, '10KPct', null, 'effect', state); // '0.3%'
+ * formatValue(5, 'Enum', 'EAT', 'effect', state); // '공격력' (localized)
+ * ```
  */
 export function formatValue<T extends ParamParserState>(
   value: unknown,
@@ -480,7 +597,16 @@ export function formatValue<T extends ParamParserState>(
 }
 
 /**
- * Format an enum value using GameEnums
+ * Formats enum value by looking up localized name from GameEnums
+ *
+ * Supports abbreviated enum types (EAT, SAT, ET, PAT, PT) which are mapped
+ * to full enum names. Tries UI text first for EAT type, then falls back to
+ * GameEnums.
+ *
+ * @param value - Enum numeric value
+ * @param enumType - Enum type abbreviation
+ * @param state - Parser state with game enums and UI text
+ * @returns Localized enum name or original value if not found
  */
 function formatEnumValue<T extends ParamParserState>(
   value: unknown,
@@ -522,7 +648,10 @@ function formatEnumValue<T extends ParamParserState>(
 // =============================================================================
 
 /**
- * Check if an array has non-zero elements
+ * Checks if array contains any non-zero values
+ *
+ * @param arr - Array to check
+ * @returns True if array exists and has at least one non-zero element
  */
 function hasNonZeroArray(arr: number[] | undefined): boolean {
   return Array.isArray(arr) && arr.some((v) => v !== 0);
@@ -533,15 +662,33 @@ function hasNonZeroArray(arr: number[] | undefined): boolean {
 // =============================================================================
 
 /**
- * Parse a parameter value string and return the computed value
+ * Parses parameter value string and returns computed value with formatting
  *
- * @param paramString - Format: "fileType,levelType,baseId[,fieldKey][,formatType][,enumType]"
+ * Main entry point for parameter parsing. Dispatches to appropriate parser
+ * (parseLevelUp, parseNoLevel, or parseDamageNum) based on levelType.
+ *
+ * Parameter Format: "fileType,levelType,baseId[,fieldKey][,formatType][,enumType]"
+ *
+ * Examples:
+ * - "effect,LevelUp,90201,Value,10KPct" - Effect value scaled by level
+ * - "buff,NoLevel,5001,Time,Fixed" - Static buff duration
+ * - "damage,DamageNum,10001" - Skill damage array lookup
+ *
+ * @param paramString - Parameter string in comma-separated format
  * @param level - Current potential/skill level (1-13)
- * @param skillLevel - Character's skill level
+ * @param skillLevel - Character's skill level for damage calculations
  * @param position - Character position (master/assist1/assist2)
- * @param state - Character state containing all data sources
+ * @param state - Parser state containing all game data sources
  * @param isSpecificPotential - Whether this is a specific potential (Stype 42)
- * @param characterLevelPhase - Character level phase (0-8)
+ * @param characterLevelPhase - Character level phase (0-8 for 1+, 10+, ..., 80+)
+ * @returns Parse result with formatted value, level type, and optional color
+ *
+ * @example
+ * ```typescript
+ * // Parse level-scaled effect at level 5
+ * const result = parseParamValue('effect,LevelUp,90201,Value,10KPct', 5, 1, 'master', state);
+ * // Returns: { value: '2.5%', levelType: 'LevelUp' }
+ * ```
  */
 export function parseParamValue<T extends ParamParserState>(
   paramString: string,
@@ -589,9 +736,33 @@ export function parseParamValue<T extends ParamParserState>(
 // =============================================================================
 
 /**
- * Parse and replace parameter placeholders in descriptions
- * Replaces &Param1& through &Param10& with parsed values
- * Also processes element tags like ##빛 속성 표식#1015#
+ * Parses and replaces parameter placeholders in descriptions
+ *
+ * Replaces &Param1& through &Param10& placeholders with parsed values from
+ * the params object. Each placeholder is parsed using parseParamValue() and
+ * wrapped in styled span tags with appropriate CSS classes.
+ *
+ * Also processes element tags like ##빛 속성 표식#1015# using parseElementTags().
+ *
+ * @param description - Raw description string with &ParamN& placeholders
+ * @param params - Object mapping Param1...Param10 to parameter strings
+ * @param level - Current potential/skill level
+ * @param skillLevel - Character's skill level
+ * @param state - Parser state with game data
+ * @param position - Character position for skill lookups
+ * @param isSpecificPotential - Whether this is specific potential (Stype 42)
+ * @param characterLevelPhase - Character level phase (0-8)
+ * @returns Description with placeholders replaced by styled HTML
+ *
+ * @example
+ * ```typescript
+ * const desc = parseDescriptionParams(
+ *   "Increases ATK by &Param1& for &Param2& seconds",
+ *   { Param1: "effect,LevelUp,90201,Value,10KPct", Param2: "buff,NoLevel,5001,Time,Fixed" },
+ *   5, 1, state, 'master'
+ * );
+ * // Returns: "Increases ATK by <span class="param-value">2.5%</span> for <span class="param-value">10</span> seconds"
+ * ```
  */
 export function parseDescriptionParams<T extends ParamParserState>(
   description: string,
@@ -653,7 +824,21 @@ interface BuffMetadata {
 }
 
 /**
- * Extract buff metadata from parameters
+ * Extracts buff duration metadata from parameter definitions
+ *
+ * Searches through Param1...Param10 for buff-type parameters and extracts
+ * Time and TimeSuperposition fields from BuffValue data.
+ *
+ * @param params - Object containing Param1...Param10 definitions
+ * @param level - Current level for LevelUp adjustments
+ * @param state - Parser state with buffValue data
+ * @returns Object with time and timeSuperposition values, or null if no buff found
+ *
+ * @example
+ * ```typescript
+ * const metadata = extractBuffMetadata({ Param1: "buff,LevelUp,5001" }, 3, state);
+ * // Returns: { time: 10, timeSuperposition: 5 }
+ * ```
  */
 export function extractBuffMetadata<T extends ParamParserState>(
   params: Record<string, string>,
@@ -703,8 +888,14 @@ export function extractBuffMetadata<T extends ParamParserState>(
 // =============================================================================
 
 /**
- * Process text containing skill name references like 「[skill]」
- * Replaces [skill] with actual skill name from data
+ * Processes text containing skill name placeholders [skill]
+ *
+ * Note: Currently a stub function. Skill name replacement requires context
+ * about which skill to reference. Use processTextForDisplay() instead.
+ *
+ * @param text - Text to process
+ * @param state - Parser state with skill data
+ * @returns Original text (unmodified in current implementation)
  */
 export function processSkillNameReferences<T extends ParamParserState>(
   text: string,
@@ -723,7 +914,21 @@ export function processSkillNameReferences<T extends ParamParserState>(
 }
 
 /**
- * Process text for display - handles skill references and element tags
+ * Processes text for display by replacing skill placeholders with actual names
+ *
+ * Replaces [skill] placeholders with localized skill names from skillsKR data.
+ * Requires skillId to be provided for proper name lookup.
+ *
+ * @param text - Text containing [skill] placeholders
+ * @param state - Parser state with skills and skillsKR data
+ * @param skillId - Optional skill ID to look up skill name
+ * @returns Text with [skill] replaced by skill name
+ *
+ * @example
+ * ```typescript
+ * const text = processTextForDisplay("Enhances [skill] damage", state, 10001);
+ * // Returns: "Enhances 빛의 격류 damage"
+ * ```
  */
 export function processTextForDisplay<T extends ParamParserState>(
   text: string,
@@ -748,8 +953,21 @@ export function processTextForDisplay<T extends ParamParserState>(
 }
 
 /**
- * Parse Main Skill description
- * Replaces {0} through {9} with Param1 through Param10
+ * Parses Main Skill descriptions with {N} placeholders
+ *
+ * Main Skills use {0} through {9} placeholders that map to Param1...Param10
+ * in the skill data. This function performs simple string replacement and
+ * wraps values in styled spans.
+ *
+ * @param description - Skill description with {0}...{9} placeholders
+ * @param skill - Skill data object containing Param1...Param10 values
+ * @returns Description with placeholders replaced and element tags parsed
+ *
+ * @example
+ * ```typescript
+ * const desc = parseSkillDescription("Deals {0} damage", { Param1: "150%" });
+ * // Returns: "Deals <span class=\"param-value\">150%</span> damage"
+ * ```
  */
 export function parseSkillDescription(description: string, skill: Record<string, unknown>): string {
   if (!description || !skill) return description;
@@ -778,9 +996,21 @@ export function parseSkillDescription(description: string, skill: Record<string,
 // =============================================================================
 
 /**
- * Simple parameter substitution for Secondary Skills
- * Replaces {1} through {10} with Param1...Param10 values directly.
- * Used when parameters are simple values/strings rather than lookup keys.
+ * Performs simple parameter substitution for Secondary Skills
+ *
+ * Secondary Skills use {1} through {10} placeholders that map directly to
+ * Param1...Param10 values. Unlike Main Skills, these are already formatted
+ * values rather than lookup keys.
+ *
+ * @param description - Skill description with {1}...{10} placeholders
+ * @param skill - Skill data object containing Param1...Param10 values
+ * @returns Description with placeholders replaced and element tags parsed
+ *
+ * @example
+ * ```typescript
+ * const desc = substituteSkillParams("Increases ATK by {1}", { Param1: "25%" });
+ * // Returns: "Increases ATK by <span class=\"param-value\">25%</span>"
+ * ```
  */
 export function substituteSkillParams(
   description: string,

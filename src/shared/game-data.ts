@@ -1,14 +1,44 @@
 /**
- * Game Data Store
- * Centralized singleton to hold all static game data.
- * Removes the need for every module to maintain its own copy of the database.
+ * Centralized Game Data Store
+ *
+ * Single source of truth for all game data loaded from JSON files. This singleton
+ * eliminates duplicate data loading across modules and provides type-safe access
+ * to character stats, skills, potentials, discs, and localized content.
+ *
+ * Key Features:
+ * - Singleton pattern prevents duplicate memory usage
+ * - Language-specific data with *KR suffix (supports KR, JP, EN, CN)
+ * - Type-safe helpers for common data access patterns
+ * - Organized data categories (characters, discs, upgrades, etc.)
+ * - Global accessibility via window.GameData for debugging
+ *
+ * Data Organization:
+ * - Base data: Character, Item, Skill, Potential (IDs and stats)
+ * - Localized data: *KR properties contain translated names/descriptions
+ * - Calculation data: EffectValue, BuffValue, HitDamage for skill formulas
+ * - Upgrade data: CharacterUpgrade, DiscPromote, etc.
+ * - Meta data: GameEnums, UIText for enums and UI strings
+ *
+ * @module shared/game-data
+ * @see {@link shared/data-loader} For loading data into this store
+ * @see {@link types/index} For TypeScript interfaces
  */
 
 import type { CharacterData, Item, PotentialData, SkillData, Disc } from '../types';
 
-// Define a flexible interface for the data store
-// We use 'any' for complex types not yet fully defined in centralized types
-// to avoid type errors during the refactoring transition.
+// =============================================================================
+// GAME DATA INTERFACE
+// =============================================================================
+
+/**
+ * GameDataStore interface defining all game data properties
+ *
+ * Properties with *KR suffix contain localized data for the selected language.
+ * The "KR" naming is historical - these properties hold data for whichever
+ * language is currently active (KR, JP, EN, or CN).
+ *
+ * @interface GameDataStore
+ */
 export interface GameDataStore {
   characters: Record<string, CharacterData>;
   charactersKR: Record<string, string>; // Localized names
@@ -78,11 +108,28 @@ export interface GameDataStore {
   discPromote: Record<string, any>;
   discExtraAttribute: Record<string, any>;
   
-  // Other
+  /** Allows dynamic property access for unknown data fields */
   [key: string]: any;
 }
 
-// Initialize with empty objects
+// =============================================================================
+// SINGLETON INSTANCE
+// =============================================================================
+
+/**
+ * Global game data singleton
+ *
+ * Populated by data-loader module. Access in console: window.GameData
+ *
+ * @example
+ * ```typescript
+ * import { GameData } from '@/shared/game-data';
+ *
+ * // Access character data
+ * const char = GameData.characters['1001'];
+ * const name = GameData.charactersKR['Character.1001.1'];
+ * ```
+ */
 export const GameData: GameDataStore = {
   characters: {},
   charactersKR: {},
@@ -143,8 +190,26 @@ export const GameData: GameDataStore = {
   discExtraAttribute: {},
 };
 
+// =============================================================================
+// DATA ACCESS HELPERS
+// =============================================================================
+
 /**
- * Helper to get localized character name safely
+ * Gets localized character name with fallback chain
+ *
+ * Lookup order:
+ * 1. Localized name from charactersKR (current language)
+ * 2. English name from base characters data
+ * 3. Fallback string with ID
+ *
+ * @param id - Character ID (e.g., '1001')
+ * @returns Localized character name or fallback
+ *
+ * @example
+ * ```typescript
+ * const name = getCharacterName('1001');
+ * // Returns: "아야" (KR) or "Aya" (EN) or "Character 1001"
+ * ```
  */
 export function getCharacterName(id: string): string {
   const key = `Character.${id}.1`;
@@ -152,7 +217,19 @@ export function getCharacterName(id: string): string {
 }
 
 /**
- * Helper to get localized item name safely
+ * Gets localized item name with fallback chain
+ *
+ * Supports both direct ID lookup and Item.{ID}.1 format.
+ * Commonly used for potentials, materials, and equipment.
+ *
+ * @param id - Item ID or key (e.g., '20001' or 'Item.20001.1')
+ * @returns Localized item name or fallback
+ *
+ * @example
+ * ```typescript
+ * const name = getItemName('20001');
+ * // Returns localized potential name
+ * ```
  */
 export function getItemName(id: string): string {
   // Try direct ID lookup or Item.ID.1 format
@@ -165,7 +242,22 @@ export function getItemName(id: string): string {
 // SHARED CONSTANTS
 // =============================================================================
 
-// Element colors
+/**
+ * Element color mappings for visual styling
+ *
+ * Maps element IDs to color schemes with background, border, and text colors.
+ * Used throughout the UI for element-based theming.
+ *
+ * Element IDs:
+ * - 1: Water (물) - Sky Blue
+ * - 2: Fire (불) - Pastel Pink
+ * - 3: Earth (땅) - Peach
+ * - 4: Wind (바람) - Mint Green
+ * - 5: Light (빛) - Soft Yellow
+ * - 6: Dark (어둠) - Lavender
+ *
+ * @constant
+ */
 export const ELEMENT_COLORS = {
     1: { bg: 'rgba(107, 155, 209, 0.15)', border: '#6B9BD1', color: '#6B9BD1', name: '물' },   // Water - Sky Blue
     2: { bg: 'rgba(232, 138, 173, 0.15)', border: '#E88AAD', color: '#E88AAD', name: '불' },     // Fire - Pastel Pink
@@ -175,7 +267,14 @@ export const ELEMENT_COLORS = {
     6: { bg: 'rgba(197, 184, 224, 0.15)', border: '#C5B8E0', color: '#C5B8E0', name: '어둠' }  // Dark - Lavender
 };
 
-// Stat icons (for display) - Using Font Awesome via window.getIcon?.()
+/**
+ * Stat icon mappings for UI display
+ *
+ * Maps stat names to icon identifiers used by getIcon() function.
+ * Icons are rendered using Font Awesome classes.
+ *
+ * @constant
+ */
 export const STAT_ICONS = {
     'Atk': 'attack',
     'Hp': 'hp',
@@ -185,12 +284,25 @@ export const STAT_ICONS = {
     'CritPower': 'critPower'
 };
 
-// Main stats to display (in order)
+/**
+ * Main character stats to display (in preferred order)
+ *
+ * Used for rendering stat cards and summaries. Order determines display priority.
+ *
+ * @constant
+ */
 export const MAIN_STATS = ['Atk', 'Hp', 'Def', 'HitRate', 'CritRate', 'CritPower'];
 
-// Mapping from Attribute data keys to effectAttributeType enum IDs
-// This is needed because the attribute keys (Hp, HitRate, etc.) don't match
-// the effectAttributeType keys (MAXHP, HITRATE, etc.)
+/**
+ * Stat name to effect attribute type ID mapping
+ *
+ * Bridges the gap between Attribute data keys (Hp, HitRate) and
+ * effectAttributeType enum IDs (3, 4) used in effect calculations.
+ *
+ * Required because attribute keys don't directly match effectAttributeType enum keys.
+ *
+ * @constant
+ */
 export const STAT_TO_EFFECT_ID: Record<string, string> = {
     'Atk': '1',          // ATK
     'Hp': '3',           // MAXHP
@@ -200,14 +312,39 @@ export const STAT_TO_EFFECT_ID: Record<string, string> = {
     'CritPower': '8'     // CRITPOWER_P
 };
 
+// =============================================================================
+// RARITY UTILITIES
+// =============================================================================
+
+/**
+ * Disc rarity information
+ *
+ * @interface RarityInfo
+ */
 export interface RarityInfo {
+  /** Rarity key (SSR, SR, R, M, N) */
   key: string;
+  /** Number of stars (1-5) */
   stars: number;
+  /** CSS class for rarity border styling */
   borderClass: string;
 }
 
 /**
- * Get rarity info for a disc
+ * Extracts rarity information from disc data
+ *
+ * Looks up disc item data, extracts rarity enum, and returns formatted
+ * rarity info including CSS class for styling.
+ *
+ * @param disc - Disc data object or null
+ * @returns Rarity info with key, stars, and CSS class
+ *
+ * @example
+ * ```typescript
+ * const disc = GameData.discs['101'];
+ * const rarity = getDiscRarityInfo(disc);
+ * // { key: 'SSR', stars: 5, borderClass: 'rarity-ssr' }
+ * ```
  */
 export function getDiscRarityInfo(disc: Disc | null): RarityInfo {
   if (!disc || !disc.Id) return { key: 'N', stars: 1, borderClass: 'rarity-n' };

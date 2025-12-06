@@ -1,9 +1,23 @@
 /**
- * Summary Tab Module
- * Displays party overview and build statistics
+ * @module app-summary
+ * @description Build Summary Module - Displays complete party overview with build stats and Star Tower integration
+ *
+ * **Features:**
+ * - Character Summary: Portrait, name, skills with level badges, potential display with marks
+ * - Disc Summary: Main/sub discs with skills, limit breaks, phase levels, note contributions
+ * - Build Stats: Total score, build level (1-10), potential count
+ * - Star Tower Q&A: Searchable answer sheet modal for Star Tower questions
+ * - Build Notes: Local-only memo field for build documentation
+ *
+ * **Architecture:**
+ * - Event delegation for all modal interactions (Star Tower modal, potential marking)
+ * - Drag-and-drop potential reordering with visual placeholders
+ * - Build level calculation from StarTowerBuildRank.json based on total score
+ *
+ * @see {@link https://github.com/JforPlay/sstoy} - Project Repository
  */
 
-import { fetchJSON, log, onLanguageChange } from '../shared';
+import { fetchJSON, log, onLanguageChange, createResponsiveImage } from '../shared';
 import { GameData } from '../shared/game-data';
 import { generatePotentialIconHTML } from '../shared/ui-components';
 import type { DiscSlotId, Position, PotentialMark, CharacterData } from '../types';
@@ -107,11 +121,7 @@ function generateSummaryCard(position: Position, title: string, badgeClass: stri
         <div class="summary-character-preview">
           <div class="summary-character-info">
             <div class="summary-char-basic">
-              <img src="assets/char/avg1_${charId}_002.png"
-                   alt="${charName}"
-                   class="summary-char-image"
-                   loading="lazy"
-                   onerror="this.style.display='none'">
+              ${createResponsiveImage(`assets/char/avg1_${charId}_002.png`, charName, 'summary-char-image')}
               <div class="summary-char-name-section">
                 <div class="summary-card-badge ${badgeClass}">${title}</div>
                 <div class="summary-char-name">${charName}</div>
@@ -361,7 +371,7 @@ function generateAllDiscsSection(): string {
       html += `
         <div class="summary-disc-card">
           <div class="disc-card-icon-row">
-            ${iconPath ? `<img src="${iconPath}" alt="${discName}" class="disc-card-icon" loading="lazy" onerror="this.style.display='none'">` : `<div class="disc-card-icon-placeholder">${window.getIcon?.('disc') || ''}</div>`}
+            ${iconPath ? createResponsiveImage(iconPath, discName, 'disc-card-icon') : `<div class="disc-card-icon-placeholder">${window.getIcon?.('disc') || ''}</div>`}
             <div class="disc-card-info">
               <div class="disc-card-name">${discName}</div>
               <div class="disc-card-lb">${window.i18n?.t('summary.breakthrough') || 'Breakthrough'} ${limitBreak}</div>
@@ -429,7 +439,7 @@ function generateAllDiscsSection(): string {
       html += `
         <div class="summary-disc-card sub-disc">
           <div class="disc-card-icon-row">
-            ${iconPath ? `<img src="${iconPath}" alt="${discName}" class="disc-card-icon" loading="lazy" onerror="this.style.display='none'">` : `<div class="disc-card-icon-placeholder">${window.getIcon?.('disc') || ''}</div>`}
+            ${iconPath ? createResponsiveImage(iconPath, discName, 'disc-card-icon') : `<div class="disc-card-icon-placeholder">${window.getIcon?.('disc') || ''}</div>`}
             <div class="disc-card-info">
               <div class="disc-card-name">${discName}</div>
               <div class="disc-card-lb">${window.i18n?.t('summary.level') || 'Level'} ${phaseLabel}</div>
@@ -519,7 +529,7 @@ function generateNotesSummary(): string {
     usedNotes.forEach((note) => {
       html += `
         <div class="note-compact-card used" title="${note.name}">
-          ${note.icon ? `<img src="${note.icon}" alt="${note.name}" class="note-compact-icon" loading="lazy" onerror="this.style.display='none'">` : '<div class="note-compact-icon-placeholder">🎵</div>'}
+          ${note.icon ? createResponsiveImage(note.icon, note.name, 'note-compact-icon') : '<div class="note-compact-icon-placeholder">🎵</div>'}
           <div class="note-compact-level">${note.total}</div>
         </div>
       `;
@@ -536,7 +546,7 @@ function generateNotesSummary(): string {
     unusedNotes.forEach((note) => {
       html += `
         <div class="note-compact-card unused" title="${note.name}">
-          ${note.icon ? `<img src="${note.icon}" alt="${note.name}" class="note-compact-icon" loading="lazy" onerror="this.style.display='none'">` : '<div class="note-compact-icon-placeholder">🎵</div>'}
+          ${note.icon ? createResponsiveImage(note.icon, note.name, 'note-compact-icon') : '<div class="note-compact-icon-placeholder">🎵</div>'}
           <div class="note-compact-level">${note.total}</div>
         </div>
       `;
@@ -592,7 +602,7 @@ function generateBuildStats(): string {
   return `
     <div class="build-stat-card highlight build-level-card">
       <div class="build-level-icon-container">
-        <img src="${buildIconPath}" alt="Build Level ${buildLevel}" class="build-level-icon" loading="lazy" onerror="this.style.display='none'">
+        ${createResponsiveImage(buildIconPath, `Build Level ${buildLevel}`, 'build-level-icon')}
       </div>
       <div class="build-stat-info">
         <span class="build-stat-label">${window.i18n?.t('builder.buildLevel') || 'Build Level'}</span>
@@ -741,6 +751,27 @@ function filterStarTowerQA(searchTerm: string): void {
 // MAIN RENDER
 // =============================================================================
 
+/**
+ * Render the complete build summary tab
+ *
+ * @async
+ * @returns {Promise<void>}
+ *
+ * @description
+ * Generates full summary HTML including:
+ * 1. Build info section (name input, save/load/share buttons)
+ * 2. Party overview cards (master + 2 assists) with skills and potentials
+ * 3. Discs and notes section (main discs, sub discs, note summary)
+ * 4. Build stats panel (build level icon, total score, potential count)
+ * 5. Build notes textarea (local-only memo)
+ * 6. Star Tower Q&A modal (hidden until opened)
+ *
+ * @example
+ * ```typescript
+ * await renderSummary();
+ * // Summary tab now displays complete build overview
+ * ```
+ */
 export async function renderSummary(): Promise<void> {
   const container = document.getElementById('summary-container');
   if (!container) return;
@@ -849,6 +880,23 @@ export async function renderSummary(): Promise<void> {
 // POTENTIAL MARKING
 // =============================================================================
 
+/**
+ * Cycle through potential priority marks on click
+ *
+ * @param {Position} position - Character position (master/assist1/assist2)
+ * @param {number} potId - Potential ID to mark
+ * @returns {void}
+ *
+ * @description
+ * Mark cycle: none → essential (필수) → recommended (다다익선) → minimum (명함만) → low (후순위) → none
+ * - Handles legacy mark migration (Korean → English keys)
+ * - Updates state and re-renders summary
+ *
+ * @example
+ * ```typescript
+ * cyclePotentialMark('master', 10101); // Cycles mark for potential 10101
+ * ```
+ */
 export function cyclePotentialMark(position: Position, potId: number): void {
   if (!window.state.potentialMarks) {
     window.state.potentialMarks = {} as Record<Position, Record<number, PotentialMark>>;

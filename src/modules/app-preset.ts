@@ -1,9 +1,24 @@
 /**
- * Preset Builds Tab Module
- * Handles preset build browsing and loading
+ * @module app-preset
+ * @description Preset Builds Module - Browse, filter, and load community-contributed preset builds
+ *
+ * **Features:**
+ * - Preset Browsing: Paginated grid (9 items/page) with element badges, NEW/Meta tags
+ * - Tag System: Live search, preset counts per tag, active/available sections
+ * - Element Filtering: Filter by Water/Fire/Earth/Wind/Light/Dark/Normal
+ * - Two-step Load: View (1st click) → Load (2nd click) with confirmation + animation
+ * - Info Banner: Last updated, Boss Rush, Joint Drill, total builds count
+ *
+ * **Architecture:**
+ * - Full event delegation (no window function pollution)
+ * - Tag search with real-time filtering
+ * - Smooth page transitions with scroll-to-top
+ * - Preset sorting: NEW → Meta → Others, each group sorted by element order
+ *
+ * @see {@link https://github.com/JforPlay/sstoy} - Project Repository
  */
 
-import { log, onLanguageChange } from '../shared';
+import { log, onLanguageChange, createResponsiveImage } from '../shared';
 import type { MainTab } from '../types';
 
 // =============================================================================
@@ -277,7 +292,7 @@ function renderPresetCards(presets: PresetBuild[]): void {
           thumbnailPath
             ? `
           <div class="preset-thumbnail">
-            <img src="${thumbnailPath}" alt="${preset.title}" loading="lazy" onerror="this.parentElement.style.display='none'" />
+            ${createResponsiveImage(thumbnailPath, preset.title, 'preset-thumbnail-img')}
           </div>
         `
             : ''
@@ -285,7 +300,7 @@ function renderPresetCards(presets: PresetBuild[]): void {
         <div class="preset-info">
           <div class="preset-header-inline">
             <span class="preset-element-tag" style="background-color: ${element.color}">
-              <img src="${element.iconPath}" class="element-tag-icon" alt="${element.name}" onerror="this.style.display='none'" />
+              ${createResponsiveImage(element.iconPath, element.name, 'element-tag-icon')}
               ${element.name}
             </span>
             ${preset.new ? '<span class="preset-new-badge">NEW</span>' : ''}
@@ -687,17 +702,36 @@ function handlePresetLoadClick(btn: HTMLButtonElement): void {
 // =============================================================================
 
 /**
- * Render preset builds tab content
+ * Render the preset builds tab with all filters and pagination
+ *
+ * @async
+ * @returns {Promise<void>}
+ *
+ * @description
+ * Main entry point for preset tab rendering:
+ * 1. Load PresetBuilds.json (via window.loadPresetBuilds)
+ * 2. Sort presets (NEW → Meta → Others, by element)
+ * 3. Generate info banner (last updated, boss rush, joint drill, total builds)
+ * 4. Render element filters (all + 7 elements)
+ * 5. Render tag filters with search input
+ * 6. Display first page of filtered presets
+ * 7. Render pagination controls
+ *
+ * @example
+ * ```typescript
+ * await renderPresets();
+ * // Preset tab now shows paginated grid with filters
+ * ```
  */
 export async function renderPresets(): Promise<void> {
-  log('[Preset] renderPresets called');
+  console.info('[AppPreset] renderPresets called');
   const container = document.getElementById('preset-container');
   if (!container) {
     console.error('[Preset] Container #preset-container not found');
     return;
   }
 
-  log('[Preset] Container found, loading preset data...');
+  console.info('[AppPreset] Container found, loading preset data...');
 
   // Reset filter and pagination state
   currentElementFilter = 'all';
@@ -708,7 +742,7 @@ export async function renderPresets(): Promise<void> {
 
   try {
     const presetData = (await window.loadPresetBuilds?.()) as PresetData | undefined;
-    log('[Preset] Data loaded:', presetData);
+    console.info('[AppPreset] Data loaded:', presetData);
 
     if (!presetData || !presetData.presets || presetData.presets.length === 0) {
       container.innerHTML = `
@@ -751,7 +785,7 @@ export async function renderPresets(): Promise<void> {
       if (!element) return;
       html += `
         <button class="element-filter-btn" data-element="${elementKey}">
-          <img src="${element.iconPath}" class="element-filter-icon" alt="${element.name}" onerror="this.style.display='none'" />
+          ${createResponsiveImage(element.iconPath, element.name, 'element-filter-icon')}
           ${element.name}
         </button>
       `;

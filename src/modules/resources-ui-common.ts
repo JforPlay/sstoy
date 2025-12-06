@@ -1,14 +1,45 @@
 /**
- * Resources Module - UI Common
+ * Resources UI Common Module
+ *
+ * Provides shared UI utilities for the resource calculator feature. Handles common
+ * UI operations like loading states, tab switching, resource item rendering, and
+ * material inventory management modal.
+ *
+ * Key Features:
+ * - Centralized loading state management
+ * - Tab navigation for resource calculator
+ * - Resource item card rendering with character/disc usage indicators
+ * - Material inventory modal for tracking owned resources
+ *
+ * @module modules/resources-ui-common
+ * @see {@link modules/resources-ui-char} For character resource UI
+ * @see {@link modules/resources-ui-disc} For disc resource UI
  */
 
 import { resourcesState, saveResourcesState, MATERIAL_GROUPS } from './resources-state';
 import type { Item, MaterialGroup } from './resources-types';
 import { getCharactersUsingItem, getDiscsUsingItem } from './resources-calc';
-import { Modal } from '../shared/ui-components';
+import { Modal, createResponsiveImage } from '../shared/ui-components';
 
+// =============================================================================
+// STATE
+// =============================================================================
+
+/** Modal instance for material inventory management */
 let myMaterialsModal: Modal | null = null;
 
+// =============================================================================
+// LOADING STATE
+// =============================================================================
+
+/**
+ * Shows or hides loading overlay for resource calculator
+ *
+ * Creates a loading spinner overlay on first use and toggles visibility.
+ * Used during async data loading operations.
+ *
+ * @param show - True to show loading overlay, false to hide
+ */
 export function showLoadingState(show: boolean): void {
   let loader = document.getElementById('resources-loader');
   if (!loader && show) {
@@ -31,6 +62,19 @@ export function showLoadingState(show: boolean): void {
   }
 }
 
+// =============================================================================
+// TAB NAVIGATION
+// =============================================================================
+
+/**
+ * Switches between resource calculator tabs
+ *
+ * Updates active tab state in UI and triggers glance tab callback if applicable.
+ * Manages tab button and content visibility.
+ *
+ * @param tabName - Tab identifier ('char', 'disc', 'glance')
+ * @param onGlanceTab - Optional callback executed when glance tab is activated
+ */
 export function switchResourceTab(tabName: string, onGlanceTab?: () => void): void {
   document.querySelectorAll('.resources-tab-btn').forEach((btn) => {
     btn.classList.remove('active');
@@ -47,6 +91,34 @@ export function switchResourceTab(tabName: string, onGlanceTab?: () => void): vo
   }
 }
 
+// =============================================================================
+// RESOURCE ITEM RENDERING
+// =============================================================================
+
+/**
+ * Creates a resource item card element with usage indicators
+ *
+ * Renders a material item card showing quantity needed, with visual completion state
+ * and character/disc usage icons. Displays up to 3 usage icons with overflow indicator.
+ *
+ * @param item - Item data from resources state
+ * @param netQty - Remaining quantity needed (after subtracting owned)
+ * @param requiredQty - Total quantity required
+ * @param ownedQty - Currently owned quantity
+ * @param itemId - Item identifier for usage lookup
+ * @returns HTMLElement representing the resource item card
+ *
+ * @example
+ * ```typescript
+ * const itemCard = createResourceItemElement(
+ *   itemData,
+ *   50,   // Need 50 more
+ *   100,  // Total needed 100
+ *   50,   // Own 50
+ *   '20071'
+ * );
+ * ```
+ */
 export function createResourceItemElement(
   item: Item,
   netQty: number,
@@ -95,12 +167,7 @@ export function createResourceItemElement(
         ${visibleCharacters
           .map(
             (char) => `
-          <img src="assets/char/avg1_${char.id}_002.png"
-               class="character-icon-small"
-               alt="${char.name}"
-               title="${char.name}"
-               loading="lazy"
-               onerror="this.style.display='none'">
+          ${createResponsiveImage(`assets/char/avg1_${char.id}_002.png`, char.name, 'character-icon-small')}
         `
           )
           .join('')}
@@ -112,12 +179,7 @@ export function createResourceItemElement(
               discIconPath = `assets/disc_icons/outfit_${fileId}.png`;
             }
             return `
-            <img src="${discIconPath}"
-                 class="character-icon-small"
-                 alt="${disc.name}"
-                 title="${disc.name}"
-                 loading="lazy"
-                 onerror="this.style.display='none'">
+            ${createResponsiveImage(discIconPath, disc.name, 'character-icon-small')}
           `;
           })
           .join('')}
@@ -128,8 +190,8 @@ export function createResourceItemElement(
 
   div.innerHTML = `
     <div class="resource-item-icon-wrapper">
-      <img src="${bgImage}" class="resource-item-bg" alt="" loading="lazy" onerror="this.style.display='none'">
-      <img src="${iconPath}" class="resource-item-icon" alt="${itemName}" loading="lazy" onerror="this.style.display='none'">
+      ${createResponsiveImage(bgImage, '', 'resource-item-bg')}
+      ${createResponsiveImage(iconPath, itemName, 'resource-item-icon')}
       ${characterIconsHTML}
     </div>
     <div class="resource-item-name">${itemName}</div>
@@ -143,9 +205,25 @@ export function createResourceItemElement(
   return div;
 }
 
-export function openMyMaterialsModal(): void {
+// =============================================================================
+// MATERIAL INVENTORY MODAL
+// =============================================================================
+
+/**
+ * Opens the material inventory modal
+ *
+ * Displays a modal allowing users to input their currently owned materials.
+ * Materials are organized by category (character advance, disc advance, skill).
+ * Creates modal instance on first use.
+ */
+export function openMyMaterialsModal(onCloseCallback?: () => void): void {
   if (!myMaterialsModal) {
     myMaterialsModal = new Modal('my-materials-modal');
+
+    // Register onClose callback to update UI when modal closes (including clicking outside)
+    if (onCloseCallback) {
+      myMaterialsModal.onClose(onCloseCallback);
+    }
   }
 
   const content = document.getElementById('my-materials-content');
@@ -208,13 +286,26 @@ export function openMyMaterialsModal(): void {
   myMaterialsModal.open();
 }
 
-export function closeMyMaterialsModal(renderCallback: () => void): void {
+/**
+ * Closes the material inventory modal
+ *
+ * The registered onClose callback will automatically trigger re-render when modal closes.
+ */
+export function closeMyMaterialsModal(): void {
   if (myMaterialsModal) {
     myMaterialsModal.close();
   }
-  renderCallback();
 }
 
+/**
+ * Updates owned material quantity in state
+ *
+ * Removes material entry if quantity is 0 or invalid, otherwise updates the quantity.
+ * Automatically saves state to localStorage.
+ *
+ * @param itemId - Material item identifier
+ * @param quantity - String representation of quantity (parsed to integer)
+ */
 export function updateOwnedMaterial(itemId: string, quantity: string): void {
   const numQty = parseInt(quantity);
   if (isNaN(numQty) || numQty <= 0) {

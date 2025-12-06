@@ -1,9 +1,47 @@
 /**
- * Simple virtual scrolling component
- * Renders only visible items for better performance with large lists
+ * @module shared/virtual-scroll
+ * @description Virtual scrolling components for efficiently rendering large lists and grids.
+ *
+ * Key Features:
+ * - VirtualScroller class for 1D lists (renders only visible items)
+ * - VirtualGrid class for 2D grids (responsive column layout)
+ * - Configurable overscan buffer for smooth scrolling
+ * - Automatic height calculation and viewport management
+ * - Debounced scroll handling for performance
+ * - Dynamic item updates without full re-render
+ *
+ * @see {@link VirtualScroller} - Efficiently render large lists (1000+ items)
+ * @see {@link VirtualGrid} - Efficiently render large grids
+ *
+ * @example
+ * ```typescript
+ * // List with 10,000 items - only renders ~20 visible items
+ * const scroller = new VirtualScroller({
+ *   container: document.getElementById('list'),
+ *   items: characters, // Array of 10,000 characters
+ *   itemHeight: 100,
+ *   renderItem: (char, index) => `
+ *     <div class="char-item">${char.name}</div>
+ *   `,
+ *   overscan: 3 // Render 3 extra items above/below viewport
+ * });
+ *
+ * // Update items
+ * scroller.updateItems(filteredCharacters);
+ *
+ * // Scroll to specific item
+ * scroller.scrollToIndex(50);
+ *
+ * // Cleanup
+ * scroller.destroy();
+ * ```
  */
 
 import { debounce } from './utils';
+
+// =============================================================================
+// TYPES & INTERFACES
+// =============================================================================
 
 export interface VirtualScrollConfig<T> {
   container: HTMLElement;
@@ -13,8 +51,28 @@ export interface VirtualScrollConfig<T> {
   overscan?: number; // Number of extra items to render above/below viewport
 }
 
+// =============================================================================
+// VIRTUAL SCROLLER (1D LIST)
+// =============================================================================
+
 /**
- * VirtualScroller - Efficiently renders large lists by only rendering visible items
+ * VirtualScroller - Efficiently renders large lists by only rendering visible items.
+ *
+ * Handles 1000+ items smoothly by rendering only the visible portion plus overscan buffer.
+ * Typical viewport shows ~20 items instead of thousands, dramatically improving performance.
+ *
+ * @template T - Item type
+ *
+ * @example
+ * ```typescript
+ * const scroller = new VirtualScroller({
+ *   container: document.getElementById('list'),
+ *   items: largeArray,
+ *   itemHeight: 80,
+ *   renderItem: (item, i) => `<div class="item">${item.name}</div>`,
+ *   overscan: 5
+ * });
+ * ```
  */
 export class VirtualScroller<T> {
   private container: HTMLElement;
@@ -95,7 +153,15 @@ export class VirtualScroller<T> {
   }
 
   /**
-   * Update items and re-render
+   * Update items and re-render.
+   *
+   * @param {T[]} items - New items array
+   *
+   * @example
+   * ```typescript
+   * // Update after filtering
+   * scroller.updateItems(filteredCharacters);
+   * ```
    */
   public updateItems(items: T[]): void {
     this.items = items;
@@ -105,7 +171,15 @@ export class VirtualScroller<T> {
   }
 
   /**
-   * Scroll to specific index
+   * Scroll to specific item index.
+   *
+   * @param {number} index - Item index to scroll to
+   *
+   * @example
+   * ```typescript
+   * // Scroll to 100th item
+   * scroller.scrollToIndex(100);
+   * ```
    */
   public scrollToIndex(index: number): void {
     const offset = index * this.itemHeight;
@@ -113,14 +187,22 @@ export class VirtualScroller<T> {
   }
 
   /**
-   * Get current scroll position
+   * Get current scroll position in pixels.
+   *
+   * @returns {number} Scroll position
    */
   public getScrollTop(): number {
     return this.viewport.scrollTop;
   }
 
   /**
-   * Destroy and clean up
+   * Destroy scroller and clean up event listeners.
+   *
+   * @example
+   * ```typescript
+   * // Cleanup when component unmounts
+   * scroller.destroy();
+   * ```
    */
   public destroy(): void {
     if (this.onScroll) {
@@ -130,9 +212,32 @@ export class VirtualScroller<T> {
   }
 }
 
+// =============================================================================
+// VIRTUAL GRID (2D GRID)
+// =============================================================================
+
 /**
- * Simple helper to enable virtual scrolling on a grid
- * For character/disc selection grids
+ * VirtualGrid - Efficiently renders large grids with responsive column layout.
+ *
+ * Automatically calculates columns based on container width and handles resize.
+ * Uses VirtualScroller internally to render rows of items.
+ *
+ * @template T - Item type
+ *
+ * @example
+ * ```typescript
+ * const grid = new VirtualGrid({
+ *   container: document.getElementById('grid'),
+ *   items: characters,
+ *   itemWidth: 150,
+ *   itemHeight: 200,
+ *   renderItem: (char, i) => `<div class="char-card">${char.name}</div>`
+ * });
+ *
+ * // Automatically handles window resize
+ * // Cleanup
+ * grid.destroy();
+ * ```
  */
 export class VirtualGrid<T> {
   private container: HTMLElement;
@@ -203,12 +308,30 @@ export class VirtualGrid<T> {
     }
   }
 
+  /**
+   * Update grid items and re-render.
+   *
+   * @param {T[]} items - New items array
+   *
+   * @example
+   * ```typescript
+   * grid.updateItems(filteredCharacters);
+   * ```
+   */
   public updateItems(items: T[]): void {
     this.items = items;
     const rows = this.groupIntoRows(items, this.columns);
     this.scroller.updateItems(rows);
   }
 
+  /**
+   * Destroy grid and clean up event listeners.
+   *
+   * @example
+   * ```typescript
+   * grid.destroy();
+   * ```
+   */
   public destroy(): void {
     this.scroller.destroy();
     if (this.onResize) {

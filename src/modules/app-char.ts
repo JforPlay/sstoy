@@ -1,11 +1,29 @@
 /**
- * Character Builder Module (app-char.ts)
+ * Character Builder Module
  *
- * Main module for the character builder functionality:
- * - Character selection and display
- * - Potential selection and management
- * - Skill level management
- * - Description parsing and display
+ * Core module for the character party builder system. Manages character selection,
+ * potential configuration, skill levels, and dynamic description rendering with
+ * parameter parsing. Uses event delegation pattern for all UI interactions.
+ *
+ * Key Features:
+ * - Three-slot party system (master + 2 assists)
+ * - Fuzzy search character selection with element filtering
+ * - Dynamic potential selection with level management (specific max 2, normal unlimited)
+ * - Skill level tracking per character (normal, skill, ultimate)
+ * - Character level phase system (1+ through 80+, 9 phases)
+ * - Build score calculation from potential levels
+ * - Description parsing with level-based parameter substitution
+ * - LRU cache for parsed descriptions (500 entries, ~90% hit rate)
+ *
+ * State Management:
+ * - Centralized state object with party, potentials, skills, levels, marks
+ * - Event delegation for all UI interactions (no global handlers)
+ * - Responsive rendering with RAF throttling
+ *
+ * @module modules/app-char
+ * @see {@link modules/param-parser} For description parameter parsing
+ * @see {@link shared/game-data} For character and potential data
+ * @see {@link modules/app-saveload} For state persistence
  */
 
 import type {
@@ -32,6 +50,7 @@ import {
   querySelector,
   querySelectorAll,
   processDescriptionText,
+  createResponsiveImage,
   loadCoreData,
   loadFeatureData,
   loadLanguageData
@@ -128,48 +147,72 @@ if (typeof window !== 'undefined') {
 // DATA LOADING
 // =============================================================================
 
+/**
+ * Loads all required game data for character builder
+ *
+ * Loading sequence:
+ * 1. Core data (Character, Item, GameEnums)
+ * 2. Builder-specific data (Potential, Skill, EffectValue, etc.)
+ * 3. Language-specific translations
+ * 4. Initialize character selector with Fuse.js
+ *
+ * @throws {Error} If data loading fails
+ */
 export async function loadData(): Promise<void> {
   try {
     // Load core data
     await loadCoreData();
-    
+
     // Load builder-specific data
     await loadFeatureData('characterBuilder');
-    
+
     // Load current language data
     const lang = window.i18n?.currentLang || 'KR';
     // Load localized names
     await loadLanguageData(lang, ['Character.json', 'Item.json', 'Skill.json', 'Potential.json']);
 
     initializeCharacterSelector();
-    log('[AppChar] Data loaded successfully');
+    console.info('[AppChar] Data loaded successfully');
   } catch (error) {
-    console.error('Failed to load data:', error);
+    console.error('[AppChar] Failed to load data:', error);
     showError('Failed to load game data. Please refresh.');
   }
 }
 
+/**
+ * Checks if core character data has been loaded
+ *
+ * @returns True if GameData.characters is populated
+ */
 export function isDataLoaded(): boolean {
   return !!GameData.characters && Object.keys(GameData.characters).length > 0;
 }
+
+// Track current render request to cancel old ones
+let currentRenderRequest: number | null = null;
 
 function renderCharacterGrid(): void {
   const grid = getElement<HTMLDivElement>('character-grid');
   if (!grid) return;
 
+  // Cancel previous render if still in progress
+  if (currentRenderRequest !== null) {
+    cancelIdleCallback(currentRenderRequest);
+    currentRenderRequest = null;
+  }
+
   grid.innerHTML = '';
 
-  const fragment = document.createDocumentFragment();
   // Filter based on current selector state (search/element)
   let charsToDisplay = state.characterSelector.allCharacters;
-  
+
   // Apply Element Filter
   if (state.characterSelector.selectedElement !== 'all') {
       charsToDisplay = charsToDisplay.filter(c =>
           String(c.EET) === state.characterSelector.selectedElement
       );
   }
-  
+
   // Apply Search Filter
   if (state.characterSelector.currentFilter) {
       if (state.characterSelector.fuse) {
@@ -177,44 +220,69 @@ function renderCharacterGrid(): void {
           charsToDisplay = results.map((r: any) => r.item);
       } else {
           const lower = state.characterSelector.currentFilter.toLowerCase();
-          charsToDisplay = charsToDisplay.filter(c => 
+          charsToDisplay = charsToDisplay.filter(c =>
               getCharacterName(c.Id).toLowerCase().includes(lower)
           );
       }
   }
 
-  charsToDisplay.forEach((char) => {
-    const card = document.createElement('div');
-    card.className = 'character-selector-card';
-    card.dataset.charId = char.Id;
-    card.onclick = () => selectCharacter(char.Id);
+  // Render in chunks for better INP
+  const CHUNK_SIZE = 12; // Render 12 characters at a time
+  const charsToRender = [...charsToDisplay];
+  let currentIndex = 0;
 
-    const name = getCharacterName(char.Id);
-    const imagePath = `assets/char/avg1_${char.Id}_002.png`;
+  const renderChunk = (): void => {
+    const chunk = charsToRender.slice(currentIndex, currentIndex + CHUNK_SIZE);
+    const fragment = document.createDocumentFragment();
 
-    // Get grade (rarity) as stars
-    const gradeNum = Number(char.Grade) || 3;
-    const gradeData = GameData.gameEnums?.characterGrade?.[gradeNum];
-    const stars = gradeData?.stars ? '★'.repeat(gradeData.stars) : '★'.repeat(gradeNum);
+    chunk.forEach((char) => {
+      const card = document.createElement('div');
+      card.className = 'character-selector-card';
+      card.dataset.charId = char.Id;
+      card.onclick = () => selectCharacter(char.Id);
 
-    // Get element icon using EET (Element Enum Type)
-    const elementId = char.EET;
-    const elementIconPath = elementId ? `assets/icon_common_property_${elementId}.png` : '';
+      const name = getCharacterName(char.Id);
+      const imagePath = `assets/char/avg1_${char.Id}_002.png`;
 
-    card.innerHTML = `
-      <div class="character-selector-img-wrapper">
-        <img src="${imagePath}" alt="${name}" class="character-selector-img" loading="lazy" onerror="this.style.display='none'">
-        ${elementIconPath ? `<img src="${elementIconPath}" alt="Element" class="character-element-icon" loading="lazy" onerror="this.style.display='none'">` : ''}
-      </div>
-      <div class="character-selector-info">
-        <div class="character-selector-name">${name}</div>
-        <div class="character-selector-grade">${stars}</div>
-      </div>
-    `;
-    fragment.appendChild(card);
-  });
+      // Get grade (rarity) as stars
+      const gradeNum = Number(char.Grade) || 3;
+      const gradeData = GameData.gameEnums?.characterGrade?.[gradeNum];
+      const stars = gradeData?.stars ? '★'.repeat(gradeData.stars) : '★'.repeat(gradeNum);
 
-  grid.appendChild(fragment);
+      // Get element icon using EET (Element Enum Type)
+      const elementId = char.EET;
+      const elementIconPath = elementId ? `assets/icon_common_property_${elementId}.png` : '';
+
+      card.innerHTML = `
+        <div class="character-selector-img-wrapper">
+          ${createResponsiveImage(imagePath, name, 'character-selector-img')}
+          ${elementIconPath ? createResponsiveImage(elementIconPath, 'Element', 'character-element-icon') : ''}
+        </div>
+        <div class="character-selector-info">
+          <div class="character-selector-name">${name}</div>
+          <div class="character-selector-grade">${stars}</div>
+        </div>
+      `;
+      fragment.appendChild(card);
+    });
+
+    grid.appendChild(fragment);
+    currentIndex += CHUNK_SIZE;
+
+    // Schedule next chunk
+    if (currentIndex < charsToRender.length) {
+      if ('requestIdleCallback' in window) {
+        currentRenderRequest = requestIdleCallback(renderChunk, { timeout: 100 });
+      } else {
+        currentRenderRequest = setTimeout(renderChunk, 0) as unknown as number;
+      }
+    } else {
+      currentRenderRequest = null;
+    }
+  };
+
+  // Start rendering
+  renderChunk();
 }
 
 export function closeCharacterSelect(): void {
@@ -258,6 +326,14 @@ function initializeCharacterSelector(): void {
 // CHARACTER SELECTION
 // =============================================================================
 
+/**
+ * Opens character selection modal for specified position
+ *
+ * Creates modal if doesn't exist, renders filtered character grid,
+ * and focuses search input for immediate typing.
+ *
+ * @param position - Party position to select character for (master/assist1/assist2)
+ */
 export function openCharacterSelect(position: Position): void {
   state.currentPosition = position;
 
@@ -279,6 +355,14 @@ export function openCharacterSelect(position: Position): void {
   }
 }
 
+/**
+ * Selects character for current position and updates UI
+ *
+ * Clears previous character's data (potentials, skills, marks) if switching
+ * to different character. Updates card and potentials display, then closes modal.
+ *
+ * @param characterId - ID of character to select
+ */
 export function selectCharacter(characterId: string): void {
   const character = GameData.characters[characterId]; // Use GameData
   if (!character || !state.currentPosition) return;
@@ -316,12 +400,28 @@ let cacheMisses = 0;
 // CACHE UTILITIES
 // =============================================================================
 
+/**
+ * Clears description cache and resets hit/miss counters
+ *
+ * Use when language changes or data is reloaded to ensure fresh parsing.
+ */
 export function clearDescriptionCache(): void {
   descriptionCache.clear();
   cacheHits = 0;
   cacheMisses = 0;
 }
 
+/**
+ * Gets description cache performance statistics
+ *
+ * @returns Cache statistics including size, hits, misses, and hit rate percentage
+ *
+ * @example
+ * ```typescript
+ * const stats = getCacheStats();
+ * console.log(`Cache: ${stats.size} entries, ${stats.hitRate}% hit rate`);
+ * ```
+ */
 export function getCacheStats(): {
   size: number;
   hits: number;
@@ -420,13 +520,7 @@ function renderFilledCharacterCard(
   const skillsHtml = buildSkillsHtml(skills, position, skillLabels, currentLevelPhase);
 
   card.innerHTML = `
-    <img src="assets/char/avg1_${character.id}_002.png"
-         alt="${character.name}"
-         class="character-card-image"
-         width="${IMAGE_SIZES.CHARACTER_PORTRAIT.width}"
-         height="${IMAGE_SIZES.CHARACTER_PORTRAIT.height}"
-         loading="lazy"
-         onerror="this.style.display='none'">
+    ${createResponsiveImage(`assets/char/avg1_${character.id}_002.png`, character.name, 'character-card-image', true)}
     <div class="character-info">
       <div class="character-action-buttons">
         <button class="change-character-btn" data-action="open-character-select" data-position="${position}">
@@ -548,14 +642,8 @@ function buildSkillsHtml(
       return `
         <div class="skill-item" data-skill-id="${skill.id}">
           <div class="skill-icon-wrapper">
-            <img src="${elementBgPath}"
-                 alt=""
-                 class="skill-icon-bg"
-                 width="${IMAGE_SIZES.SKILL_ICON.width}"
-                 height="${IMAGE_SIZES.SKILL_ICON.height}"
-                 loading="lazy"
-                 onerror="this.style.display='none'">
-            ${iconPath ? `<img src="${iconPath}" alt="${skill.name}" class="skill-icon" width="${IMAGE_SIZES.SKILL_ICON.width}" height="${IMAGE_SIZES.SKILL_ICON.height}" loading="lazy" onerror="this.style.display='none'">` : ''}
+            ${createResponsiveImage(elementBgPath, '', 'skill-icon-bg')}
+            ${iconPath ? createResponsiveImage(iconPath, skill.name, 'skill-icon') : ''}
           </div>
           <div class="skill-info">
             <div class="skill-title">${title}</div>
@@ -663,6 +751,17 @@ function getCharacterSkills(
   return skills;
 }
 
+/**
+ * Updates skill level for character at position
+ *
+ * Clamps value between 1 and maxLevel, then triggers re-render of
+ * character card and potentials (to update damage calculations).
+ *
+ * @param position - Character position
+ * @param skillId - Skill ID (string or number)
+ * @param value - New skill level
+ * @param maxLevel - Maximum allowed level for this skill
+ */
 export function updateSkillLevel(
   position: Position,
   skillId: string | number,
@@ -683,6 +782,15 @@ export function updateSkillLevel(
   updatePotentialsDisplay(position);
 }
 
+/**
+ * Updates character level phase (0-8 for 1+, 10+, ..., 80+)
+ *
+ * Character level phase affects damage calculations in param-parser
+ * for DamageNum type parameters with levelTypeData === 4.
+ *
+ * @param position - Character position
+ * @param phase - Level phase index (0=1+, 1=10+, ..., 8=80+)
+ */
 export function updateCharacterLevelPhase(position: Position, phase: number): void {
   state.characterLevelPhase[position] = phase;
   updateCharacterCard(position);
@@ -694,6 +802,14 @@ export function updateCharacterLevelPhase(position: Position, phase: number): vo
 // =============================================================================
 
 
+/**
+ * Filters character grid by element type
+ *
+ * Updates active filter button styling and re-renders grid with
+ * characters matching selected element (or 'all' for no filter).
+ *
+ * @param element - Element ID or 'all' for no filter
+ */
 export function filterCharactersByElement(element: string): void {
   state.characterSelector.selectedElement = element;
 
@@ -907,8 +1023,8 @@ function createPotentialCard(potId: number, position: Position): string {
            data-potential-id="${potId}"
            data-position="${position}">
         <div class="potential-card-image">
-          ${backgroundImage ? `<img src="${backgroundImage}" alt="" class="potential-bg" width="${IMAGE_SIZES.POTENTIAL_ICON.width}" height="${IMAGE_SIZES.POTENTIAL_ICON.height}" loading="lazy" onerror="this.style.display='none'">` : ''}
-          ${iconPath ? `<img src="${iconPath}" alt="${name}" class="potential-icon" width="${IMAGE_SIZES.POTENTIAL_ICON.width}" height="${IMAGE_SIZES.POTENTIAL_ICON.height}" loading="lazy" onerror="this.style.display='none'">` : `<span class="potential-placeholder">${window.getIcon?.('target') ?? '🎯'}</span>`}
+          ${backgroundImage ? createResponsiveImage(backgroundImage, '', 'potential-bg') : ''}
+          ${iconPath ? createResponsiveImage(iconPath, name, 'potential-icon') : `<span class="potential-placeholder">${window.getIcon?.('target') ?? '🎯'}</span>`}
         </div>
         <div class="potential-card-info">
           <div class="potential-card-name">${name}</div>
@@ -1143,6 +1259,16 @@ export function updateScoreDisplay(position: Position): void {
 // POTENTIAL MANAGEMENT
 // =============================================================================
 
+/**
+ * Toggles potential selection for character
+ *
+ * If already selected, removes from list and clears level/marks.
+ * If not selected, checks specific potential limit (max 2 with Stype 42)
+ * before adding to list with default level 1.
+ *
+ * @param potentialId - Potential ID to toggle
+ * @param position - Character position
+ */
 export function togglePotential(potentialId: number, position: Position): void {
   const selected = state.selectedPotentials[position];
   const index = selected.indexOf(potentialId);
@@ -1176,6 +1302,16 @@ export function togglePotential(potentialId: number, position: Position): void {
   updatePotentialsDisplay(position);
 }
 
+/**
+ * Updates potential level for character
+ *
+ * Max level is calculated as (MaxLevel from data + 6). Value is clamped
+ * between 1 and maxLevel before updating state and display.
+ *
+ * @param potentialId - Potential ID
+ * @param position - Character position
+ * @param value - New level value
+ */
 export function updatePotentialLevel(
   potentialId: number,
   position: Position,
@@ -1210,6 +1346,13 @@ export function cyclePotentialMark(potentialId: number, position: Position): voi
 // TAB SWITCHING
 // =============================================================================
 
+/**
+ * Switches active character position tab
+ *
+ * Updates tab button styling and shows/hides corresponding slot content.
+ *
+ * @param position - Position to switch to (master/assist1/assist2)
+ */
 export function switchTab(position: Position): void {
   state.activeTab = position;
 
@@ -1255,6 +1398,12 @@ export function switchMainTab(tab: MainTab): void {
 // DESCRIPTION MODE
 // =============================================================================
 
+/**
+ * Toggles between brief and detailed description modes
+ *
+ * Brief mode shows BriefDesc, detailed mode shows full Desc.
+ * Re-renders all active character cards and potentials with new descriptions.
+ */
 export function toggleDescriptionMode(): void {
   state.descriptionMode = state.descriptionMode === 'brief' ? 'detailed' : 'brief';
 
@@ -1450,8 +1599,21 @@ function setupEventListeners(): void {
   }
 }
 
+/**
+ * Initializes character builder module
+ *
+ * Initialization sequence:
+ * 1. Show loading spinner
+ * 2. Load all required game data
+ * 3. Set up event delegation for UI interactions
+ * 4. Render empty character cards for all positions
+ * 5. Register language change handler for data reloading
+ * 6. Hide loading spinner
+ *
+ * @throws {Error} If data loading or initialization fails
+ */
 export async function init(): Promise<void> {
-  log('[App-Char] Initializing...');
+  console.info('[AppChar] Initializing...');
 
   // Show loading spinner
   const spinner = getElement<HTMLDivElement>('spinner-loading');
@@ -1470,12 +1632,12 @@ export async function init(): Promise<void> {
         updatePotentialsDisplay(position);
       });
     } catch (err) {
-      console.error('[App-Char] Error initializing character cards:', err);
+      console.error('[AppChar] Error initializing character cards:', err);
     }
 
     // Register for language changes
     onLanguageChange(async () => {
-      log('[App-Char] Language changed, reloading data');
+      console.info('[AppChar] Language changed, reloading data');
       await loadData();
 
       // Re-render all characters
@@ -1487,9 +1649,9 @@ export async function init(): Promise<void> {
       });
     });
 
-    log('[App-Char] Initialized successfully');
+    console.info('[AppChar] Initialized successfully');
   } catch (error) {
-    console.error('[App-Char] Initialization failed:', error);
+    console.error('[AppChar] Initialization failed:', error);
   } finally {
     // Hide loading spinner
     if (spinner) {

@@ -1,16 +1,40 @@
 /**
- * UI Component Renderer
- * Centralized logic for rendering common UI elements like cards, icons, and headers.
- * Ensures consistency and easier styling updates.
+ * UI Component Rendering System
+ *
+ * Centralized rendering functions for all common UI components including character
+ * cards, potential icons, navigation headers, and modals. Ensures visual consistency,
+ * reduces code duplication, and provides a single source for UI updates.
+ *
+ * Key Features:
+ * - Character card rendering (grid and builder layouts)
+ * - Potential icon generation with level and mark badges
+ * - Global navigation header with i18n support
+ * - Reusable Modal class with keyboard shortcuts
+ * - Event delegation-friendly HTML generation (data attributes instead of onclick)
+ *
+ * Rendering Strategy:
+ * - Generate HTML strings with data attributes for event handling
+ * - Use optimized image loading (lazy, eager, decoding)
+ * - Include i18n attributes for automatic translation updates
+ * - Support both selected and empty states
+ *
+ * @module shared/ui-components
+ * @see {@link shared/game-data} For data access helpers
+ * @see {@link shared/index} For utility functions (getIcon, parseElementTags)
  */
 
 import { GameData, getCharacterName, getItemName } from './game-data';
-import { getIcon, parseElementTags, createOptimizedImage, ICONS } from './index';
+import { getIcon, parseElementTags, createOptimizedImage, createResponsiveImage, ICONS } from './index';
 
 // =============================================================================
 // TYPES
 // =============================================================================
 
+/**
+ * Configuration options for character builder cards
+ *
+ * @interface CharacterCardOptions
+ */
 export interface CharacterCardOptions {
   showRemove?: boolean;
   showChange?: boolean;
@@ -26,7 +50,27 @@ export interface CharacterCardOptions {
 // =============================================================================
 
 /**
- * Renders a compact character card (used in Character Selector grid)
+ * Renders a compact character card for grid displays
+ *
+ * Used in character selector modals and database views. Shows character
+ * portrait, name, rarity stars, and element icon in a compact layout.
+ *
+ * Features:
+ * - Element icon overlay on portrait
+ * - Rarity displayed as stars (★)
+ * - Selected state styling
+ * - Event delegation via data-char-id attribute
+ * - Lazy image loading for performance
+ *
+ * @param charId - Character ID to render
+ * @param selected - Whether this character is currently selected
+ * @returns HTML string for character card
+ *
+ * @example
+ * ```typescript
+ * const html = renderCharacterGridItem('1001', true);
+ * grid.innerHTML += html;
+ * ```
  */
 export function renderCharacterGridItem(charId: string, selected = false): string {
   const char = GameData.characters[charId];
@@ -49,8 +93,8 @@ export function renderCharacterGridItem(charId: string, selected = false): strin
   return `
     <div class="character-selector-card ${selectedClass}" data-char-id="${charId}" role="button" tabindex="0">
       <div class="character-selector-img-wrapper">
-        ${createOptimizedImage(imagePath, name, 'character-selector-img')}
-        ${elementIconPath ? `<img src="${elementIconPath}" alt="Element" class="character-element-icon" loading="lazy" onerror="this.style.display='none'">` : ''}
+        ${createResponsiveImage(imagePath, name, 'character-selector-img')}
+        ${elementIconPath ? createResponsiveImage(elementIconPath, 'Element', 'character-element-icon') : ''}
       </div>
       <div class="character-selector-info">
         <div class="character-selector-name">${name}</div>
@@ -61,7 +105,34 @@ export function renderCharacterGridItem(charId: string, selected = false): strin
 }
 
 /**
- * Renders a detailed character card (used in Builder)
+ * Renders a detailed character card for the builder interface
+ *
+ * Shows full character information including portrait, stats, level selector,
+ * and action buttons (Change/Remove). Used in the main builder for master
+ * and assist positions.
+ *
+ * Features:
+ * - Configurable action buttons (change/remove)
+ * - Optional level phase selector (1+, 10+, 20+, etc.)
+ * - Character stats display with icons
+ * - Empty state for unselected positions
+ * - Event delegation via data-action and data-position attributes
+ *
+ * @param position - Character position (master, assist1, assist2)
+ * @param charId - Character ID or null for empty state
+ * @param options - Configuration options for card behavior
+ * @returns HTML string for character builder card
+ *
+ * @example
+ * ```typescript
+ * const html = renderCharacterBuilderCard('master', '1001', {
+ *   showChange: true,
+ *   showRemove: true,
+ *   showLevelSelect: true,
+ *   isMaster: true,
+ *   levelPhase: 8
+ * });
+ * ```
  */
 export function renderCharacterBuilderCard(
   position: string,
@@ -85,9 +156,9 @@ export function renderCharacterBuilderCard(
   const stars = '★'.repeat(grade); // Replace with icons if needed
   
   // Skills (Placeholder logic - in real app, this needs GameData.skills)
-  
+
   return `
-    <img src="${imagePath}" alt="${name}" class="character-card-image">
+    ${createResponsiveImage(imagePath, name, 'character-card-image', true)}
     <div class="character-info">
       <div class="character-action-buttons">
         ${showChange ? `<button class="change-character-btn" data-action="open-character-select" data-position="${position}">
@@ -119,6 +190,16 @@ export function renderCharacterBuilderCard(
   `;
 }
 
+/**
+ * Renders an empty character card placeholder
+ *
+ * Shows a "+" icon and prompt text for empty character slots.
+ * Clicking opens the character selector modal.
+ *
+ * @param position - Character position identifier
+ * @param isMaster - Whether this is a master position (changes text)
+ * @returns HTML string for empty card
+ */
 function renderEmptyCard(position: string, isMaster: boolean = false): string {
   const text = isMaster ? 'Select Master' : 'Select Assist';
   return `
@@ -129,6 +210,16 @@ function renderEmptyCard(position: string, isMaster: boolean = false): string {
   `;
 }
 
+/**
+ * Renders a level phase selector dropdown
+ *
+ * Generates a select element with phase options (1+, 10+, 20+, ... 80+).
+ * Phase 0 = 1+, Phase 1 = 10+, etc.
+ *
+ * @param position - Character position for event delegation
+ * @param currentPhase - Currently selected phase (0-8)
+ * @returns HTML string for level selector
+ */
 function renderLevelSelector(position: string, currentPhase: number): string {
   const options = [0, 1, 2, 3, 4, 5, 6, 7, 8].map(val => 
     `<option value="${val}" ${currentPhase === val ? 'selected' : ''}>${val === 0 ? '1+' : val * 10 + '+'}</option>`
@@ -149,7 +240,37 @@ function renderLevelSelector(position: string, currentPhase: number): string {
 // =============================================================================
 
 /**
- * Generate HTML for potential icon (used in summary view)
+ * Generates HTML for a potential icon with level and mark badges
+ *
+ * Renders a styled potential icon with:
+ * - Background image based on Stype (specific vs normal)
+ * - Skill icon overlay
+ * - Level badge (Lv.1-7)
+ * - Mark badge (필수, 다다익선, 명함만, 후순위)
+ * - Localized name label
+ *
+ * Signature Compatibility:
+ * - Old: (potId, position, level, mark)
+ * - New: (potId, position, state, charId) - auto-extracts level/mark from state
+ *
+ * Mark Migration:
+ * - Automatically migrates old mark values (권장 → 다다익선)
+ * - Supports both Korean and English mark names
+ *
+ * @param potId - Potential ID
+ * @param position - Character position (master, assist1, assist2)
+ * @param stateOrLevel - Either level number (old) or state object (new)
+ * @param charIdOrMark - Either mark string (old) or charId (new)
+ * @returns HTML string for potential icon with badges
+ *
+ * @example
+ * ```typescript
+ * // New signature
+ * const html = generatePotentialIconHTML(20001, 'master', state, '1001');
+ *
+ * // Old signature (still supported)
+ * const html = generatePotentialIconHTML(20001, 'master', 3, '필수');
+ * ```
  */
 export function generatePotentialIconHTML(
   potId: number,
@@ -245,12 +366,12 @@ export function generatePotentialIconHTML(
                  data-position="${position}">
                 ${
                   backgroundImage
-                    ? `<img src="${backgroundImage}" alt="" class="pot-bg-img" loading="lazy" onerror="this.style.display='none'">`
+                    ? createResponsiveImage(backgroundImage, '', 'pot-bg-img')
                     : ''
                 }
                 ${
                   iconPath
-                    ? `<img src="${iconPath}" alt="${name}" class="pot-icon-img" loading="lazy" onerror="this.style.display='none'">`
+                    ? createResponsiveImage(iconPath, name, 'pot-icon-img')
                     : '<span class="pot-icon-placeholder">✦</span>'
                 }
                 <div class="pot-level-badge">Lv.${level}</div>
@@ -266,7 +387,29 @@ export function generatePotentialIconHTML(
 // =============================================================================
 
 /**
- * Renders the global navigation header
+ * Renders the global navigation header with all nav links and controls
+ *
+ * Generates the complete navbar HTML including:
+ * - Logo and title with home link
+ * - Navigation links with active state highlighting
+ * - Theme toggle button (dark/light mode)
+ * - Language selector dropdown (KR, EN, JP, CN)
+ * - Mobile hamburger menu
+ *
+ * Features:
+ * - Automatic i18n attribute injection for translation updates
+ * - Active page highlighting
+ * - Current theme/language detection from localStorage
+ * - Responsive mobile menu support
+ *
+ * @param activePage - Current page ID for active state ('app', 'characterdb', etc.)
+ * @returns HTML string for complete navigation header
+ *
+ * @example
+ * ```typescript
+ * const navbar = renderGlobalHeader('characterdb');
+ * document.getElementById('global-navigation').innerHTML = navbar;
+ * ```
  */
 export function renderGlobalHeader(activePage: string): string {
   const navItems = [
@@ -333,7 +476,24 @@ export function renderGlobalHeader(activePage: string): string {
 }
 
 /**
- * Initialize the global header by injecting it into the DOM
+ * Initializes the global navigation header with event handlers
+ *
+ * Injects the navbar HTML into #global-navigation container and sets up:
+ * - Hamburger menu toggle for mobile
+ * - Click-outside-to-close behavior
+ * - ARIA attributes for accessibility
+ *
+ * Should be called once on page load after DOM is ready.
+ *
+ * @param activePage - Current page ID for active state highlighting
+ *
+ * @example
+ * ```typescript
+ * // In page initialization
+ * document.addEventListener('DOMContentLoaded', () => {
+ *   initGlobalHeader('characterdb');
+ * });
+ * ```
  */
 export function initGlobalHeader(activePage: string): void {
   const headerContainer = document.getElementById('global-navigation');
@@ -369,11 +529,57 @@ export function initGlobalHeader(activePage: string): void {
 // MODAL
 // =============================================================================
 
+/**
+ * Reusable Modal component with lifecycle hooks
+ *
+ * Provides a flexible modal interface with:
+ * - Open/close methods with CSS class-based animations
+ * - Escape key to close
+ * - Click backdrop to close
+ * - onOpen/onClose callbacks for custom logic
+ * - Automatic cleanup of event listeners
+ *
+ * Modal Structure:
+ * - Uses .active class to trigger CSS display: flex
+ * - Supports multiple close buttons (.close-btn, .load-modal-close, etc.)
+ * - Prevents event bubbling for proper backdrop clicks
+ *
+ * @class Modal
+ *
+ * @example
+ * ```typescript
+ * const modal = new Modal('character-select-modal');
+ *
+ * modal.onOpen(() => {
+ *   console.info('[Modal] Character selector opened');
+ * });
+ *
+ * modal.onClose(() => {
+ *   console.info('[Modal] Character selector closed');
+ * });
+ *
+ * // Open modal
+ * modal.open();
+ *
+ * // Close modal (or press ESC, click backdrop)
+ * modal.close();
+ *
+ * // Check state
+ * if (modal.isOpen()) {
+ *   // Modal is currently visible
+ * }
+ * ```
+ */
 export class Modal {
   private element: HTMLElement | null;
   private onOpenCallbacks: Array<() => void> = [];
   private onCloseCallbacks: Array<() => void> = [];
 
+  /**
+   * Creates a new Modal instance
+   *
+   * @param elementId - DOM element ID of the modal container
+   */
   constructor(elementId: string) {
     this.element = document.getElementById(elementId);
     if (!this.element) {
@@ -383,12 +589,18 @@ export class Modal {
     }
   }
 
+  /**
+   * Handles ESC key press to close modal
+   */
   private handleEsc = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       this.close();
     }
   };
 
+  /**
+   * Initializes close button and backdrop click handlers
+   */
   private initHandlers(): void {
     if (!this.element) return;
 
@@ -409,6 +621,12 @@ export class Modal {
     });
   }
 
+  /**
+   * Opens the modal
+   *
+   * Adds .active class to trigger CSS animation and registers ESC key handler.
+   * Calls all onOpen callbacks.
+   */
   public open(): void {
     if (this.element) {
       // Clear inline display if it was set by legacy code
@@ -422,6 +640,12 @@ export class Modal {
     }
   }
 
+  /**
+   * Closes the modal
+   *
+   * Removes .active class to trigger CSS animation and unregisters ESC key handler.
+   * Calls all onClose callbacks.
+   */
   public close(): void {
     if (this.element) {
       this.element.classList.remove('active');
@@ -430,16 +654,38 @@ export class Modal {
     }
   }
 
+  /**
+   * Registers a callback to run when modal opens
+   *
+   * @param callback - Function to call on modal open
+   */
   public onOpen(callback: () => void): void {
     this.onOpenCallbacks.push(callback);
   }
 
+  /**
+   * Registers a callback to run when modal closes
+   *
+   * @param callback - Function to call on modal close
+   */
   public onClose(callback: () => void): void {
     this.onCloseCallbacks.push(callback);
   }
-  
+
+  /**
+   * Checks if modal is currently open
+   *
+   * @returns True if modal has .active class, false otherwise
+   */
   public isOpen(): boolean {
       return this.element ? this.element.classList.contains('active') : false;
   }
 }
+
+// =============================================================================
+// RE-EXPORTS FOR BACKWARD COMPATIBILITY
+// =============================================================================
+
+// Re-export createResponsiveImage for modules that import from ui-components
+export { createResponsiveImage } from './dom';
 

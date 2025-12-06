@@ -1,15 +1,47 @@
 /**
- * Resources Module - Character Tab UI
+ * Resources UI Character Module
+ *
+ * Handles character resource calculator UI including character selection, level configuration,
+ * skill level management, and resource summary rendering. Calculates required materials for
+ * character advancement (levels, skills) and displays stamina estimates.
+ *
+ * Key Features:
+ * - Character selection with element filtering and fuzzy search
+ * - Level range configuration (1-90) for characters
+ * - Individual skill level management (Normal, Main, Assist, Ultimate)
+ * - Real-time resource calculation with owned material deduction
+ * - Stamina and day estimates for farming materials
+ * - Badge requirements display (70/80/90 level milestones)
+ *
+ * @module modules/resources-ui-char
+ * @see {@link modules/resources-calc} For calculation logic
+ * @see {@link modules/resources-state} For shared state management
  */
 
 import { resourcesState, saveResourcesState, MATERIAL_GROUPS } from './resources-state';
 import { calculateCharacterResources, buildItemUsageIndex, calculateNetResourcesWithMerging, calculateStaminaEstimate, calculateTotalOwnedExp, isGroupedMaterial } from './resources-calc';
 import { createResourceItemElement } from './resources-ui-common';
-import { Modal } from '../shared/ui-components';
+import { Modal, createResponsiveImage } from '../shared/ui-components';
 import type { SelectedCharacter, TotalResources, CharacterData, CharacterAdvance } from './resources-types';
 
+// =============================================================================
+// STATE
+// =============================================================================
+
+/** Modal instance for character selection */
 let characterModal: Modal | null = null;
 
+// =============================================================================
+// CHARACTER SELECTION GRID
+// =============================================================================
+
+/**
+ * Renders the character selection grid with filtering
+ *
+ * Displays available characters in a grid layout, applying active element and search filters.
+ * Already selected characters are shown as disabled.
+ * Uses Fuse.js for fuzzy search when available.
+ */
 export function renderCharacterResourceGrid(): void {
   const grid = document.getElementById('character-resource-grid');
   if (!grid) return;
@@ -53,7 +85,7 @@ export function renderCharacterResourceGrid(): void {
     charItem.className = `character-selector-card ${isSelected ? 'disabled' : ''}`;
     charItem.dataset.characterId = id;
 
-    const charName = resourcesState.characterNames[char.Name as string] || char.Name;
+    const charName = resourcesState.characterNames[char.Name as string] || char.Name || 'Unknown';
 
     // Get grade (rarity) as stars
     const gradeNum = Number(char.Grade) || 3;
@@ -66,12 +98,8 @@ export function renderCharacterResourceGrid(): void {
 
     charItem.innerHTML = `
       <div class="character-selector-img-wrapper">
-        <img src="assets/char/avg1_${id}_002.png"
-             alt="${charName}"
-             class="character-selector-img"
-             loading="lazy"
-             onerror="this.style.display='none'">
-        ${elementIconPath ? `<img src="${elementIconPath}" alt="Element" class="character-element-icon" loading="lazy" onerror="this.style.display='none'">` : ''}
+        ${createResponsiveImage(`assets/char/avg1_${id}_002.png`, charName, 'character-selector-img')}
+        ${elementIconPath ? createResponsiveImage(elementIconPath, 'Element', 'character-element-icon') : ''}
       </div>
       <div class="character-selector-info">
         <div class="character-selector-name">${charName}</div>
@@ -90,6 +118,12 @@ export function renderCharacterResourceGrid(): void {
   grid.appendChild(fragment);
 }
 
+/**
+ * Opens the character selection modal
+ *
+ * Resets filters, creates modal instance if needed, and opens the selection UI.
+ * Automatically focuses the search input for quick filtering.
+ */
 export function openCharacterResourceSelect(): void {
   if (!characterModal) {
     characterModal = new Modal('character-resource-modal');
@@ -115,13 +149,28 @@ export function openCharacterResourceSelect(): void {
   }
 }
 
+/**
+ * Closes the character selection modal
+ */
 export function closeCharacterResourceSelect(): void {
   if (characterModal) {
     characterModal.close();
   }
 }
 
-export function selectCharacterForResources(characterId: string): void {
+// =============================================================================
+// CHARACTER MANAGEMENT
+// =============================================================================
+
+/**
+ * Adds a character to the resource calculator
+ *
+ * Creates a new character entry with default values (level 1->90, skill levels 1->10).
+ * Triggers resource calculation, updates UI, and shows success toast.
+ *
+ * @param characterId - Character ID to add
+ */
+export function selectCharacterForResources(characterId: string): void{
   const character = resourcesState.characters[characterId];
   if (!character) return;
 
@@ -153,6 +202,16 @@ export function selectCharacterForResources(characterId: string): void {
   window.showToast?.(addedMessage, 'success');
 }
 
+/**
+ * Updates character level field
+ *
+ * Validates and clamps input to 1-90 range. Recalculates resources and updates UI.
+ * Shows toast if value is adjusted due to clamping.
+ *
+ * @param characterId - Character ID to update
+ * @param field - Field name ('currentLevel' or 'targetLevel')
+ * @param value - New value as string
+ */
 export function updateCharacterLevel(characterId: string, field: string, value: string): void {
   const selectedChar = resourcesState.selectedCharacters.find((c) => c.id === characterId);
   if (!selectedChar) return;
@@ -174,6 +233,17 @@ export function updateCharacterLevel(characterId: string, field: string, value: 
   saveResourcesState();
 }
 
+/**
+ * Updates character skill level
+ *
+ * Validates and clamps input to 1-10 range. Recalculates resources and updates UI.
+ * Shows toast if value is adjusted due to clamping.
+ *
+ * @param characterId - Character ID to update
+ * @param skillType - Skill type ('normal', 'main', 'assist', 'ultimate')
+ * @param field - Field name ('current' or 'target')
+ * @param value - New value as string
+ */
 export function updateCharacterSkillLevel(
   characterId: string,
   skillType: 'normal' | 'main' | 'assist' | 'ultimate',
@@ -200,6 +270,13 @@ export function updateCharacterSkillLevel(
   saveResourcesState();
 }
 
+/**
+ * Removes a character from the resource calculator
+ *
+ * Deletes character data, recalculates resources, updates UI, and shows info toast.
+ *
+ * @param characterId - Character ID to remove
+ */
 export function removeCharacterFromResources(characterId: string): void {
   resourcesState.selectedCharacters = resourcesState.selectedCharacters.filter(
     (c) => c.id !== characterId
@@ -214,6 +291,21 @@ export function removeCharacterFromResources(characterId: string): void {
   window.showToast?.(window.i18n?.t('resources.characterRemoved') || '캐릭터가 제거되었습니다', 'info');
 }
 
+// =============================================================================
+// CHARACTER LIST RENDERING
+// =============================================================================
+
+/**
+ * Renders the list of selected characters with level/skill controls
+ *
+ * Displays each selected character as a card with:
+ * - Character portrait, name, element icon, and rarity stars
+ * - Level range inputs (current -> target)
+ * - Skill level inputs for all 4 skill types
+ * - Remove button
+ *
+ * Attaches event listeners for all input changes.
+ */
 export function renderSelectedCharactersList(): void {
   const container = document.getElementById('selected-characters-list');
   if (!container) return;
@@ -244,15 +336,11 @@ export function renderSelectedCharactersList(): void {
     card.dataset.characterId = char.id;
     card.innerHTML = `
       <div class="character-resource-header">
-        <img src="assets/char/avg1_${char.id}_002.png"
-             alt="${currentName}"
-             class="character-resource-avatar"
-             loading="lazy"
-             onerror="this.src='assets/char/${char.id}_icon.png'">
+        ${createResponsiveImage(`assets/char/avg1_${char.id}_002.png`, currentName, 'character-resource-avatar')}
         <div class="character-resource-info">
           <div class="character-resource-name" style="display: flex; align-items: center; gap: 8px;">
             <span>${currentName}</span>
-            ${elementIcon ? `<img src="${elementIcon}" alt="${elementName}" class="element-icon-inline" style="width: 22px; height: 22px;" onerror="this.style.display='none'">` : ''}
+            ${elementIcon ? createResponsiveImage(elementIcon, elementName, 'element-icon-inline') : ''}
             <span style="color: #f0c419;">${'⭐'.repeat(gradeStars)}</span>
           </div>
         </div>
@@ -370,6 +458,23 @@ export function renderSelectedCharactersList(): void {
   });
 }
 
+// =============================================================================
+// RESOURCE SUMMARY
+// =============================================================================
+
+/**
+ * Renders the resource summary showing all required materials
+ *
+ * Displays:
+ * - Advancement materials (organized by tier groups)
+ * - Skill enhancement materials
+ * - Experience books breakdown
+ * - Gold (Dora) requirements
+ * - Badge requirements for level 70/80/90 milestones
+ * - Stamina and farming day estimates
+ *
+ * Subtracts owned materials to show net requirements.
+ */
 export function renderResourceSummary(): void {
   const container = document.getElementById('resource-summary-content');
   if (!container) return;
@@ -548,6 +653,16 @@ export function renderResourceSummary(): void {
   renderBadgeRequirements();
 }
 
+// =============================================================================
+// INTERNAL RENDERING HELPERS
+// =============================================================================
+
+/**
+ * Renders advancement items organized by material groups
+ *
+ * @param netItems - Net quantity needed after subtracting owned materials
+ * @param totalItems - Total quantity required
+ */
 function renderAdvanceItems(
   netItems: Record<number, number>,
   totalItems: Record<number, number>
@@ -606,6 +721,12 @@ function renderAdvanceItems(
   }
 }
 
+/**
+ * Renders skill enhancement items organized by material groups
+ *
+ * @param netItems - Net quantity needed after subtracting owned materials
+ * @param totalItems - Total quantity required
+ */
 function renderSkillItems(
   netItems: Record<number, number>,
   totalItems: Record<number, number>
@@ -660,6 +781,14 @@ function renderSkillItems(
   }
 }
 
+/**
+ * Renders experience items breakdown
+ *
+ * Calculates optimal distribution of experience books to reach required exp.
+ * Uses greedy algorithm: largest books first, then fills remainder.
+ *
+ * @param netExp - Net experience points needed
+ */
 function renderExpItems(netExp: number): void {
   const grid = document.getElementById('exp-items-grid');
   if (!grid) return;
@@ -697,6 +826,12 @@ function renderExpItems(netExp: number): void {
   });
 }
 
+/**
+ * Renders badge requirements for level 70/80/90 milestones
+ *
+ * Shows character-specific badges required at each level milestone.
+ * Badges are grouped by level and displayed with character portraits.
+ */
 function renderBadgeRequirements(): void {
   const container = document.getElementById('resource-summary-content');
   if (!container || resourcesState.selectedCharacters.length === 0) return;
@@ -787,7 +922,7 @@ function renderBadgeRequirements(): void {
         .map(
           (character) => `
         <div class="badge-character-icon">
-          <img src="assets/char/avg1_${character.Id}_002.png" alt="${resourcesState.characterNames[character.Name as string] || character.Name}" loading="lazy" onerror="this.style.display='none'">
+          ${createResponsiveImage(`assets/char/avg1_${character.Id}_002.png`, resourcesState.characterNames[character.Name as string] || character.Name || 'Unknown', 'badge-character-icon-img')}
         </div>
       `
         )
@@ -795,10 +930,10 @@ function renderBadgeRequirements(): void {
 
       badgeElement.innerHTML = `
         <div class="badge-item-background">
-          <img src="assets/items/rare_item_a_3.png" alt="Badge Background" loading="lazy" onerror="this.style.display='none'">
+          ${createResponsiveImage('assets/items/rare_item_a_3.png', 'Badge Background', 'badge-bg-img')}
         </div>
         <div class="badge-item-icon">
-          <img src="assets/items/item_${badgeData.itemId}.png" alt="Badge Item" loading="lazy" onerror="this.style.display='none'">
+          ${createResponsiveImage(`assets/items/item_${badgeData.itemId}.png`, 'Badge Item', 'badge-item-icon-img')}
         </div>
         <div class="badge-character-icons-container">
           ${characterIconsHTML}
@@ -809,6 +944,17 @@ function renderBadgeRequirements(): void {
   });
 }
 
+// =============================================================================
+// FILTERING & UTILITY FUNCTIONS
+// =============================================================================
+
+/**
+ * Filters character selection grid by element type
+ *
+ * Updates active element filter state and re-renders the character grid.
+ *
+ * @param element - Element filter value ('all', '1'-'7')
+ */
 export function filterResourceCharactersByElement(element: string): void {
   resourcesState.currentElementFilter = element;
 
@@ -824,6 +970,12 @@ export function filterResourceCharactersByElement(element: string): void {
   renderCharacterResourceGrid();
 }
 
+/**
+ * Clears all selected characters and resource data
+ *
+ * Prompts for confirmation, then resets all character selections and calculated resources.
+ * Shows appropriate toast messages.
+ */
 export function clearAllResources(): void {
   if (resourcesState.selectedCharacters.length === 0) {
     window.showToast?.(window.i18n?.t('resources.noDataToReset') || '초기화할 데이터가 없습니다', 'info');
@@ -843,11 +995,17 @@ export function clearAllResources(): void {
   }
 }
 
+/**
+ * Opens the resource calculator help modal
+ */
 export function showResourceHelp(): void {
   const modal = document.getElementById('resource-help-modal');
   modal?.classList.add('active');
 }
 
+/**
+ * Closes the resource calculator help modal
+ */
 export function closeResourceHelp(): void {
   const modal = document.getElementById('resource-help-modal');
   modal?.classList.remove('active');

@@ -1,17 +1,47 @@
 /**
- * Resources Module - Disc Tab UI
+ * Resources UI Disc Module
+ *
+ * Handles disc (record) resource calculator UI including disc selection, level configuration,
+ * and resource summary rendering. Calculates required materials for disc advancement and
+ * displays stamina estimates for farming materials.
+ *
+ * Key Features:
+ * - Disc selection with element filtering and search
+ * - Level range configuration (1-90) for discs
+ * - Real-time resource calculation with owned material deduction
+ * - Stamina and day estimates for farming disc materials
+ * - Disc-specific advancement material groups
+ *
+ * @module modules/resources-ui-disc
+ * @see {@link modules/resources-calc} For calculation logic
+ * @see {@link modules/resources-state} For shared state management
  */
 
 import { resourcesState, saveResourcesState, MATERIAL_GROUPS } from './resources-state';
 import { calculateDiscResources, buildItemUsageIndex, calculateNetResourcesWithMerging, calculateStaminaEstimate, calculateTotalOwnedExp, isGroupedMaterial } from './resources-calc';
 import { createResourceItemElement } from './resources-ui-common';
 import { getDiscRarityInfo } from '../shared/game-data';
-import { Modal } from '../shared/ui-components';
+import { Modal, createResponsiveImage } from '../shared/ui-components';
 import type { SelectedDisc, DiscPromote, TotalResources } from './resources-types';
 
+// =============================================================================
+// STATE
+// =============================================================================
+
+/** Modal instance for disc selection */
 let discModal: Modal | null = null;
 
-export function renderDiscResourceGrid(): void {
+// =============================================================================
+// DISC SELECTION GRID
+// =============================================================================
+
+/**
+ * Renders the disc selection grid with filtering
+ *
+ * Displays available discs in a grid layout, applying active element and search filters.
+ * Already selected discs are shown as disabled.
+ */
+export function renderDiscResourceGrid(): void{
   const grid = document.getElementById('disc-resource-grid');
   if (!grid) return;
 
@@ -70,12 +100,12 @@ export function renderDiscResourceGrid(): void {
 
     discItem.innerHTML = `
       <div class="disc-item-image ${rarityInfo.borderClass}">
-        <img src="${discIconPath}" alt="Disc ${id}" loading="lazy" onerror="this.style.display='none'">
+        ${createResponsiveImage(discIconPath, `Disc ${id}`, 'disc-item-img')}
       </div>
       <div class="disc-item-info">
         <div class="disc-item-name">
           ${discName}
-          ${elementIcon ? `<img src="${elementIcon}" alt="Element" class="element-icon-inline" style="width: 20px; height: 20px; margin-left: 6px; vertical-align: middle;" onerror="this.style.display='none'">` : ''}
+          ${elementIcon ? createResponsiveImage(elementIcon, 'Element', 'element-icon-inline') : ''}
         </div>
         <div class="disc-item-id">ID: ${id}</div>
       </div>
@@ -91,6 +121,12 @@ export function renderDiscResourceGrid(): void {
   grid.appendChild(fragment);
 }
 
+/**
+ * Opens the disc selection modal
+ *
+ * Resets filters, creates modal instance if needed, and opens the selection UI.
+ * Automatically focuses the search input.
+ */
 export function openDiscResourceSelect(): void {
   if (!discModal) {
     discModal = new Modal('disc-resource-modal');
@@ -118,7 +154,12 @@ export function openDiscResourceSelect(): void {
   discModal.open();
 }
 
-export function filterResourceDiscsByElement(element: string): void {
+/**
+ * Filters disc selection grid by element type
+ *
+ * @param element - Element filter value ('all', '1'-'7')
+ */
+export function filterResourceDiscsByElement(element: string): void{
   resourcesState.currentElementFilter = element;
 
   const modalContainer = document.getElementById('disc-resource-modal');
@@ -134,10 +175,26 @@ export function filterResourceDiscsByElement(element: string): void {
   renderDiscResourceGrid();
 }
 
+/**
+ * Closes the disc selection modal
+ */
 export function closeDiscResourceSelect(): void {
   document.getElementById('disc-resource-modal')?.classList.remove('active');
 }
 
+// =============================================================================
+// DISC MANAGEMENT
+// =============================================================================
+
+/**
+ * Adds a disc to the resource calculator
+ *
+ * Creates a new disc entry with default values (level 1->90).
+ * Triggers resource calculation, updates UI, and closes modal.
+ *
+ * @param discId - Disc ID to add
+ * @param name - Disc display name
+ */
 export function selectDisc(discId: string, name: string): void {
   const disc = resourcesState.discs[discId];
   const rarityInfo = getDiscRarityInfo(disc || null);
@@ -159,6 +216,16 @@ export function selectDisc(discId: string, name: string): void {
   closeDiscResourceSelect();
 }
 
+/**
+ * Updates disc level field
+ *
+ * Validates and clamps input to 1-90 range. Ensures currentLevel <= targetLevel.
+ * Recalculates resources and updates UI.
+ *
+ * @param discId - Disc ID to update
+ * @param field - Field name ('currentLevel' or 'targetLevel')
+ * @param value - New value as string
+ */
 export function updateDiscLevel(discId: string, field: string, value: string): void {
   const disc = resourcesState.selectedDiscs.find((d) => d.id === discId);
   if (!disc) return;
@@ -186,6 +253,11 @@ export function updateDiscLevel(discId: string, field: string, value: string): v
   saveResourcesState();
 }
 
+/**
+ * Removes a disc from the resource calculator
+ *
+ * @param discId - Disc ID to remove
+ */
 export function removeDiscFromResources(discId: string): void {
   resourcesState.selectedDiscs = resourcesState.selectedDiscs.filter((d) => d.id !== discId);
   delete resourcesState.discResources[discId];
@@ -198,6 +270,16 @@ export function removeDiscFromResources(discId: string): void {
   window.showToast?.(window.i18n?.t('resources.discRemoved') || '레코드가 제거되었습니다', 'info');
 }
 
+// =============================================================================
+// DISC LIST RENDERING
+// =============================================================================
+
+/**
+ * Renders the list of selected discs with level controls
+ *
+ * Displays each selected disc as a card with portrait, name, element icon,
+ * rarity stars, level inputs, and remove button.
+ */
 export function renderSelectedDiscsList(): void {
   const container = document.getElementById('selected-discs-list');
   if (!container) return;
@@ -238,11 +320,11 @@ export function renderSelectedDiscsList(): void {
 
     card.innerHTML = `
       <div class="character-resource-header">
-        <img src="${discIconPath}" class="character-resource-avatar" alt="Disc ${disc.id}" loading="lazy" onerror="this.style.display='none'">
+        ${createResponsiveImage(discIconPath, `Disc ${disc.id}`, 'character-resource-avatar')}
         <div class="character-resource-info">
           <div class="character-resource-name" style="display: flex; align-items: center; gap: 8px;">
             <span>${currentName}</span>
-            ${elementIcon ? `<img src="${elementIcon}" alt="${elementName}" class="element-icon-inline" style="width: 22px; height: 22px;" onerror="this.style.display='none'">` : ''}
+            ${elementIcon ? createResponsiveImage(elementIcon, elementName, 'element-icon-inline') : ''}
             <span style="color: #f0c419;">${'⭐'.repeat(disc.rarity)}</span>
           </div>
           <div class="character-resource-levels">
@@ -306,6 +388,16 @@ export function renderSelectedDiscsList(): void {
   });
 }
 
+// =============================================================================
+// DISC RESOURCE SUMMARY
+// =============================================================================
+
+/**
+ * Renders the disc resource summary showing all required materials
+ *
+ * Displays disc advancement materials, experience books, and gold requirements.
+ * Includes stamina and farming day estimates.
+ */
 export function renderDiscResourceSummary(): void {
   const container = document.getElementById('disc-resource-summary-content');
   if (!container) return;
@@ -452,6 +544,16 @@ export function renderDiscResourceSummary(): void {
   }
 }
 
+// =============================================================================
+// INTERNAL RENDERING HELPERS
+// =============================================================================
+
+/**
+ * Renders disc advancement items organized by material groups
+ *
+ * @param netItems - Net quantity needed after subtracting owned materials
+ * @param totalItems - Total quantity required
+ */
 function renderDiscAdvanceItems(
   netItems: Record<number, number>,
   totalItems: Record<number, number>
@@ -509,6 +611,13 @@ function renderDiscAdvanceItems(
   }
 }
 
+/**
+ * Renders disc experience items breakdown
+ *
+ * Calculates optimal distribution of disc experience items.
+ *
+ * @param netExp - Net experience points needed
+ */
 function renderDiscExpItems(netExp: number): void {
   const grid = document.getElementById('disc-exp-items-grid');
   if (!grid) return;
@@ -546,6 +655,15 @@ function renderDiscExpItems(netExp: number): void {
   });
 }
 
+// =============================================================================
+// UTILITY FUNCTIONS
+// =============================================================================
+
+/**
+ * Clears all selected discs and resource data
+ *
+ * Prompts for confirmation, then resets all disc selections and calculated resources.
+ */
 export function clearAllDiscResources(): void {
   if (resourcesState.selectedDiscs.length === 0) {
     window.showToast?.(window.i18n?.t('resources.noDataToReset') || '초기화할 데이터가 없습니다', 'info');
@@ -565,11 +683,17 @@ export function clearAllDiscResources(): void {
   }
 }
 
+/**
+ * Opens the disc resource calculator help modal
+ */
 export function showDiscResourceHelp(): void {
   const modal = document.getElementById('disc-resource-help-modal');
   modal?.classList.add('active');
 }
 
+/**
+ * Closes the disc resource calculator help modal
+ */
 export function closeDiscResourceHelp(): void {
   const modal = document.getElementById('disc-resource-help-modal');
   modal?.classList.remove('active');

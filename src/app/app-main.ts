@@ -1,7 +1,26 @@
 /**
- * App Main Entry Point
- * Loads all modules for the character builder application
+ * App Main Entry Point Module
+ *
+ * Main entry point for the character builder application. Orchestrates the loading
+ * and initialization of all app modules in the correct sequence to ensure data
+ * dependencies are satisfied.
+ *
+ * Key Features:
+ * - Sequential module initialization with dependency management
+ * - i18n system initialization
+ * - Event-based communication between modules
+ * - Global header navigation setup
+ * - URL state restoration support
+ *
+ * @module app/app-main
+ * @see {@link modules/app-char} Character builder module
+ * @see {@link modules/app-disc} Disc system module
+ * @see {@link i18n} Internationalization system
  */
+
+// =============================================================================
+// IMPORTS
+// =============================================================================
 
 // Import shared utilities first (auto-initializes)
 import '../shared';
@@ -16,7 +35,26 @@ import * as appPreset from '../modules/app-preset';
 import * as appSaveLoad from '../modules/app-saveload';
 import * as appDmgCalc from '../modules/app-dmgcalc';
 
-// Initialize i18n and load modules
+// =============================================================================
+// INITIALIZATION SEQUENCE
+// =============================================================================
+
+/**
+ * Main initialization sequence
+ *
+ * Initializes all app modules in the correct order to satisfy dependencies:
+ * 1. Wait for DOM ready
+ * 2. Initialize i18n (load language files)
+ * 3. Set up global navigation header
+ * 4. Load core game data (Character, Item, GameEnums)
+ * 5. Initialize dependent modules (disc, summary, preset, dmgcalc)
+ * 6. Initialize save/load system (restore URL state if present)
+ *
+ * The initialization order is critical - later modules depend on earlier ones.
+ * For example, disc system requires character data to be loaded first.
+ *
+ * @throws {Error} If any critical initialization step fails
+ */
 (async () => {
   try {
     // Ensure DOM is ready
@@ -50,8 +88,8 @@ import * as appDmgCalc from '../modules/app-dmgcalc';
     // Now safe to check for URL params and restore data
     appSaveLoad.init();
 
-    console.log('[App] All modules loaded and initialized');
+    console.info('[AppMain] All modules loaded and initialized');
   } catch (error) {
-    console.error('[App] Critical initialization error:', error);
+    console.error('[AppMain] Critical initialization error:', error);
   }
 })();

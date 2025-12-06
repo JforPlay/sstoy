@@ -1,6 +1,36 @@
 /**
- * UI Utilities Module
- * Themes, Icons, Toasts, and Navbar
+ * @module shared/ui
+ * @description UI utility functions for themes, icons, toasts, navbar, and empty states.
+ *
+ * Key Features:
+ * - Icon system with 60+ Font Awesome 7 mappings
+ * - Dark/light theme management with localStorage persistence
+ * - Toast notification system (success, error, warning, info)
+ * - Responsive navbar with hamburger menu
+ * - Empty state and loading state helpers
+ * - Scroll-to-top button with auto show/hide
+ *
+ * @see {@link getIcon} - Get icon HTML string by name
+ * @see {@link setTheme} - Set light or dark theme
+ * @see {@link showToast} - Display toast notification
+ * @see {@link initNavbarToggle} - Initialize responsive navbar
+ *
+ * @example
+ * ```typescript
+ * // Icons
+ * const searchIcon = getIcon('search'); // <i class="fa-solid fa-magnifying-glass"></i>
+ *
+ * // Theme
+ * setTheme('dark'); // Apply dark theme
+ * toggleTheme(); // Switch between light/dark
+ *
+ * // Toasts
+ * showToast('Saved successfully', 'success');
+ * showError('Failed to load data');
+ *
+ * // Empty states
+ * container.innerHTML = createEmptyState('search', 'No results found');
+ * ```
  */
 
 // =============================================================================
@@ -61,7 +91,18 @@ export const ICONS: Record<string, string> = {
 };
 
 /**
- * Get icon HTML string
+ * Get Font Awesome 7 icon HTML string by name.
+ *
+ * @param {string} iconName - Icon name from ICONS constant
+ * @param {string} [additionalClasses=''] - Optional CSS classes to add
+ * @returns {string} HTML string for icon element
+ *
+ * @example
+ * ```typescript
+ * const icon = getIcon('search'); // <i class="fa-solid fa-magnifying-glass"></i>
+ * const largeIcon = getIcon('star', 'fa-2x'); // <i class="fa-solid fa-star fa-2x"></i>
+ * const unknown = getIcon('invalid'); // Falls back to star icon
+ * ```
  */
 export function getIcon(iconName: string, additionalClasses = ''): string {
   const iconClass = ICONS[iconName] || ICONS.star;
@@ -69,7 +110,17 @@ export function getIcon(iconName: string, additionalClasses = ''): string {
 }
 
 /**
- * Create icon element
+ * Create icon DOM element.
+ *
+ * @param {string} iconName - Icon name from ICONS constant
+ * @param {string} [additionalClasses=''] - Optional CSS classes to add
+ * @returns {HTMLElement} Icon element ready to append
+ *
+ * @example
+ * ```typescript
+ * const icon = createIconElement('search', 'icon-large');
+ * button.appendChild(icon);
+ * ```
  */
 export function createIconElement(iconName: string, additionalClasses = ''): HTMLElement {
   const i = document.createElement('i');
@@ -83,7 +134,17 @@ export function createIconElement(iconName: string, additionalClasses = ''): HTM
 // =============================================================================
 
 /**
- * Set theme
+ * Set application theme (light or dark).
+ *
+ * Updates the DOM, localStorage, and theme toggle button state.
+ *
+ * @param {'light' | 'dark'} theme - Theme to apply
+ *
+ * @example
+ * ```typescript
+ * setTheme('dark'); // Apply dark theme
+ * setTheme('light'); // Apply light theme
+ * ```
  */
 export function setTheme(theme: 'light' | 'dark'): void {
   document.documentElement.setAttribute('data-theme', theme);
@@ -116,7 +177,13 @@ export function setTheme(theme: 'light' | 'dark'): void {
 }
 
 /**
- * Toggle theme
+ * Toggle between light and dark themes.
+ *
+ * @example
+ * ```typescript
+ * // In button click handler
+ * button.addEventListener('click', toggleTheme);
+ * ```
  */
 export function toggleTheme(): void {
   const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
@@ -143,8 +210,30 @@ interface ToastConfig {
 }
 
 /**
- * Show a toast notification
- * Supports both: showToast("message") and showToast("message", "type") for backwards compatibility
+ * Show a toast notification with auto-dismiss.
+ *
+ * Supports two call signatures for backwards compatibility:
+ * - showToast("message", "type") - Legacy string params
+ * - showToast({ message, type, duration }) - Object config
+ *
+ * @param {ToastConfig | string} config - Toast configuration or message string
+ * @param {ToastType} [typeOverride] - Type override for legacy string signature
+ *
+ * @example
+ * ```typescript
+ * // Object config (recommended)
+ * showToast({ message: 'Saved!', type: 'success', duration: 5000 });
+ *
+ * // Legacy string format
+ * showToast('Error occurred', 'error');
+ * showToast('Loading data'); // Defaults to 'info' type
+ *
+ * // Helper functions
+ * showSuccess('Build saved');
+ * showError('Network error');
+ * showWarning('Unsaved changes');
+ * showInfo('Tip: Use Ctrl+S to save');
+ * ```
  */
 export function showToast(config: ToastConfig | string, typeOverride?: ToastType): void {
   let message: string;
@@ -221,6 +310,18 @@ export const showInfo = (msg: string): void => showToast({ message: msg, type: '
 // NAVBAR
 // =============================================================================
 
+/**
+ * Initialize responsive navbar with hamburger menu toggle.
+ *
+ * Sets up click handlers for mobile menu, closes on navigation, and handles outside clicks.
+ * Automatically called on DOM load.
+ *
+ * @example
+ * ```typescript
+ * // Automatically initialized, but can be called manually if needed
+ * initNavbarToggle();
+ * ```
+ */
 export function initNavbarToggle(): void {
   const hamburger = document.getElementById('navbar-hamburger');
   const menu = document.getElementById('navbar-menu');
@@ -283,7 +384,20 @@ if (document.readyState === 'loading') {
 // =============================================================================
 
 /**
- * Create an empty state HTML element
+ * Create an empty state HTML element with icon and message.
+ *
+ * @param {string} iconName - Icon name from ICONS constant
+ * @param {string} message - Message to display
+ * @returns {string} HTML string for empty state
+ *
+ * @example
+ * ```typescript
+ * // No search results
+ * container.innerHTML = createEmptyState('search', 'No characters found');
+ *
+ * // No saved builds
+ * container.innerHTML = createEmptyState('star', 'No saved builds yet');
+ * ```
  */
 export function createEmptyState(iconName: string, message: string): string {
   const icon = getIcon(iconName);
@@ -296,7 +410,15 @@ export function createEmptyState(iconName: string, message: string): string {
 }
 
 /**
- * Create a loading state HTML element
+ * Create a loading state HTML element.
+ *
+ * @param {string} [message='Loading...'] - Loading message
+ * @returns {string} HTML string for loading state
+ *
+ * @example
+ * ```typescript
+ * container.innerHTML = createLoadingState('Loading characters...');
+ * ```
  */
 export function createLoadingState(message: string = 'Loading...'): string {
   return createEmptyState('spinner', message);
@@ -307,7 +429,16 @@ export function createLoadingState(message: string = 'Loading...'): string {
 // =============================================================================
 
 /**
- * Initialize scroll-to-top button
+ * Initialize scroll-to-top button with auto show/hide on scroll.
+ *
+ * Creates a floating button that appears when scrolled down >300px.
+ * Button smoothly scrolls to top when clicked.
+ *
+ * @example
+ * ```typescript
+ * // Call once on page load
+ * initScrollToTop();
+ * ```
  */
 export function initScrollToTop(): void {
   // Create button

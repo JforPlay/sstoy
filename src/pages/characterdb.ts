@@ -1,13 +1,28 @@
 ﻿/**
- * Character Database
- * Displays character stats, skills, talents, and dating information
+ * Character Database Page Module - Entry Point
  *
- * Sections: State & Cache | Data Loading | Character Selection | Stats & Archive |
- *           Dating | Potentials | Skills | Talents | Image Gallery | Event Handlers
+ * Comprehensive character encyclopedia displaying detailed information about characters
+ * including stats, skills, potentials, talents, archives, and dating guides. Features
+ * dynamic level/limit break calculations and multi-tab navigation.
+ *
+ * Key Features:
+ * - Character browsing with element filtering and fuzzy search
+ * - Dynamic stat calculation based on level and limit break (0-8)
+ * - Potential display with type switching (main/assist) and level control
+ * - Skill display with parameter parsing and level scaling
+ * - Talent progression (limit break rewards)
+ * - Archive and dating guide information
+ * - Character type switching (normal/awakened/skin)
+ * - Gift preference display
+ * - Character image gallery with lightbox
+ *
+ * @module pages/characterdb
+ * @see {@link shared/game-data} For character data access
+ * @see {@link modules/param-parser} For skill/potential description parsing
  */
 
 // Import shared utilities first (auto-initializes)
-import { parseElementTags, debounce, handleImageError } from '../shared';
+import { parseElementTags, debounce, handleImageError, createResponsiveImage } from '../shared';
 import { i18n } from '../i18n';
 import { initGlobalHeader } from '../shared/ui-components';
 import { parseParamValue, formatValue, parseDescriptionParams } from '../modules/param-parser';
@@ -173,7 +188,13 @@ function buildTagToGiftsMap() {
 }
 
 /**
- * Load all required data files
+ * Loads all required data files for the character database
+ *
+ * Loads core data, feature-specific data (potentials, talents, archives),
+ * and language-specific data based on current i18n language setting.
+ * Syncs GameData to local dbState and builds helper maps.
+ *
+ * @throws {Error} If data loading fails
  */
 async function loadData() {
     try {
@@ -257,7 +278,13 @@ async function loadData() {
 }
 
 /**
- * Filter characters by element
+ * Filters character selector by element type
+ *
+ * Updates the current element filter and re-renders the character selector grid.
+ * Updates active state of filter buttons in UI.
+ *
+ * @param element - Element type ID ('all' or element enum value)
+ * @param event - Optional event object from button click
  */
 function filterCharactersByElement(element: string, event?: Event): void {
     dbState.currentElementFilter = element;
@@ -276,7 +303,11 @@ function filterCharactersByElement(element: string, event?: Event): void {
 }
 
 /**
- * Render character selector grid
+ * Renders the character selector grid
+ *
+ * Displays all available characters (filtered by element if applicable)
+ * as clickable cards with portrait, name, grade, and element icon.
+ * Uses DocumentFragment for optimized DOM manipulation.
  */
 function renderCharacterSelector() {
     const container = dbState.domCache.characterSelector || document.getElementById('character-selector');
@@ -366,7 +397,13 @@ function renderCharacterSelector() {
 }
 
 /**
- * Select a character and display details
+ * Selects a character and displays detailed information
+ *
+ * Updates state with selected character, resets level/type to defaults,
+ * and renders all information sections. Scrolls the details into view.
+ *
+ * @param charId - Character ID to select
+ * @param event - Click event from character card
  */
 function selectCharacter(charId: string, event: Event): void {
     dbState.selectedCharacterId = charId;
@@ -426,7 +463,12 @@ function selectCharacter(charId: string, event: Event): void {
 }
 
 /**
- * Render character header card
+ * Renders the character header section
+ *
+ * Displays character name, element icon, grade, tags, birthday,
+ * and gift preferences. Applies theme color based on element type.
+ *
+ * @param charId - Character ID to render
  */
 function renderCharacterHeader(charId: string): void {
     const char = dbState.characters[charId];
@@ -502,7 +544,12 @@ function renderCharacterHeader(charId: string): void {
 }
 
 /**
- * Render gift preferences in hero section
+ * Renders gift preferences section in character header
+ *
+ * Displays preferred and hated gifts based on character tags.
+ * Uses pre-computed tag-to-gifts map for efficient lookups.
+ *
+ * @param charId - Character ID to render gifts for
  */
 function renderGiftPreferences(charId: string): void {
     const container = dbState.domCache.charQuickStats || document.getElementById('char-quick-stats');
@@ -569,14 +616,27 @@ function renderGiftPreferences(charId: string): void {
 }
 
 /**
- * Find gifts by tag (optimized with pre-computed map)
+ * Finds gifts by tag using pre-computed map
+ *
+ * Optimized O(1) lookup using pre-built tagToGiftsMap instead of
+ * iterating through all gifts each time.
+ *
+ * @param tag - Tag ID to search for
+ * @returns Array of gift objects matching the tag
  */
 function findGiftsByTag(tag: any): any[] {
     return dbState.tagToGiftsMap[tag] || [];
 }
 
 /**
- * Create gift icon element
+ * Creates a gift icon element with tooltip
+ *
+ * Renders gift with rarity background and item icon.
+ * Applies special styling for hated gifts.
+ *
+ * @param gift - Gift object from AffinityGift data
+ * @param isHate - Whether this is a hated gift (affects styling)
+ * @returns HTML element containing the gift icon
  */
 function createGiftIcon(gift: any, isHate: any): HTMLElement {
     const wrapper = document.createElement('div');
@@ -586,7 +646,7 @@ function createGiftIcon(gift: any, isHate: any): HTMLElement {
     // Get item data (note: gift.Id not gift.ID)
     const item = dbState.items[gift.Id];
     if (!item) {
-        console.log('Item not found for gift:', gift.Id);
+        console.info('[CharacterDB] Item not found for gift:', gift.Id);
         return wrapper;
     }
 
@@ -607,9 +667,9 @@ function createGiftIcon(gift: any, isHate: any): HTMLElement {
     // Create icon structure
     wrapper.innerHTML = `
         <div class="gift-icon-bg">
-            <img src="${rarityBg}" class="gift-rarity-bg" loading="lazy" onerror="handleImageError(this)">
+            ${createResponsiveImage(rarityBg, '', 'gift-rarity-bg')}
         </div>
-        <img src="${iconPath}" class="gift-item-icon" loading="lazy" onerror="handleImageError(this)" alt="${itemName}">
+        ${createResponsiveImage(iconPath, itemName, 'gift-item-icon')}
         <div class="gift-tooltip">${itemName}</div>
     `;
 
@@ -617,7 +677,12 @@ function createGiftIcon(gift: any, isHate: any): HTMLElement {
 }
 
 /**
- * Render character images with type selection
+ * Renders character portrait and image gallery
+ *
+ * Updates main portrait based on selected type (normal/awakened/skin)
+ * and triggers gallery rendering. Handles missing skin images gracefully.
+ *
+ * @param charId - Character ID to render images for
  */
 function renderCharacterImages(charId: string): void {
     const charIdStr = String(charId);
@@ -666,7 +731,13 @@ function renderCharacterImages(charId: string): void {
 }
 
 /**
- * Render character image gallery
+ * Renders the character image gallery
+ *
+ * Displays all available character images (CG, banner, face, SD, SDQ)
+ * with labeled badges. CG images only available for base type.
+ * Images are clickable to open lightbox view.
+ *
+ * @param charId - Character ID to render gallery for
  */
 function renderCharacterImageGallery(charId: string): void {
     const container = dbState.domCache.charImageGallery || document.getElementById('char-image-gallery');
@@ -726,7 +797,13 @@ function renderCharacterImageGallery(charId: string): void {
 }
 
 /**
- * Open image lightbox
+ * Opens image lightbox modal for full-size viewing
+ *
+ * Creates lightbox if it doesn't exist, displays image with title,
+ * and prevents body scrolling.
+ *
+ * @param src - Image source URL
+ * @param title - Image title to display
  */
 function openImageLightbox(src: string, title: string): void {
     // Create lightbox if doesn't exist
@@ -739,7 +816,7 @@ function openImageLightbox(src: string, title: string): void {
             <div class="lightbox-backdrop" onclick="closeImageLightbox()"></div>
             <div class="lightbox-content">
                 <button class="lightbox-close" onclick="closeImageLightbox()">✕</button>
-                <img class="lightbox-img" src="" alt="">
+                <img class="lightbox-img" src="" alt="" loading="lazy">
                 <div class="lightbox-title"></div>
             </div>
         `;
@@ -754,7 +831,7 @@ function openImageLightbox(src: string, title: string): void {
 }
 
 /**
- * Close image lightbox
+ * Closes image lightbox modal and restores body scrolling
  */
 function closeImageLightbox() {
     const lightbox = document.getElementById('image-lightbox');
@@ -765,7 +842,13 @@ function closeImageLightbox() {
 }
 
 /**
- * Change character type (일반/각성/스킨)
+ * Changes character display type (normal/awakened/skin)
+ *
+ * Updates selected type in state, updates button UI states,
+ * and re-renders character images for the new type.
+ *
+ * @param type - Character type ('01'=normal, '02'=awakened, '03'=skin)
+ * @param event - Click event from type selector button
  */
 function changeCharacterType(type: string, event: Event): void {
     dbState.selectedCharacterType = type;
@@ -785,7 +868,18 @@ function changeCharacterType(type: string, event: Event): void {
 }
 
 /**
- * Render character stats
+ * Renders character stats for specified level and limit break
+ *
+ * Looks up attribute data using GroupId and constructed attribute ID.
+ * Displays main stats (HP, Attack, Defense, Crit, etc.) with proper formatting.
+ * Uses dynamic stat name lookup from UIText translations.
+ *
+ * Attribute ID format: {GroupId}{(limitBreak * 1000 + level) padded to 5 digits}
+ * Example: Character 101, LB 1, Level 12 = "10101012"
+ *
+ * @param charId - Character ID to display stats for
+ * @param level - Character level (1-90)
+ * @param limitBreak - Limit break level (0-8)
  */
 function renderStats(charId: string, level: number, limitBreak: number): void {
     const container = dbState.domCache.statsGrid || document.getElementById('stats-grid');
@@ -895,7 +989,12 @@ function renderStats(charId: string, level: number, limitBreak: number): void {
 }
 
 /**
- * Render character archive
+ * Renders character archive entries
+ *
+ * Displays all archive entries for the character sorted by Sort field.
+ * Archives are collapsible/expandable. Shows unlock conditions if available.
+ *
+ * @param charId - Character ID to display archives for
  */
 function renderArchive(charId: string): void {
     const container = dbState.domCache.archiveList || document.getElementById('archive-list');
@@ -964,15 +1063,25 @@ function renderArchive(charId: string): void {
 }
 
 /**
- * Toggle archive item expansion
+ * Toggles archive item expanded/collapsed state
+ *
+ * @param item - Archive item DOM element to toggle
  */
 function toggleArchive(item: any): void {
     item.classList.toggle('expanded');
 }
 
 /**
- * Get character chat lines for a specific character
- * Type 1 = '신규 입수시', 2 = '재 입수시', 3 = '각성 시', 4 = '호감도 10 달성시'
+ * Gets character chat lines (acquisition voice lines)
+ *
+ * Returns all chat lines for the character with type labels:
+ * - Type 1: First acquisition
+ * - Type 2: Re-acquisition
+ * - Type 3: Awakening
+ * - Type 4: Affinity level 10
+ *
+ * @param charId - Character ID to get chat lines for
+ * @returns Array of chat line objects with type, typeLabel, and text
  */
 function getCharacterChatLines(charId: string): any[] {
     // Ensure charId is a number for comparison
@@ -1008,7 +1117,10 @@ function getCharacterChatLines(charId: string): any[] {
 }
 
 /**
- * Render character chat lines as HTML
+ * Renders chat lines as HTML string
+ *
+ * @param chatLines - Array of chat line objects from getCharacterChatLines
+ * @returns HTML string of formatted chat lines or empty string if none
  */
 function renderChatLinesHTML(chatLines: any): string {
     if (!chatLines || chatLines.length === 0) {
@@ -1031,7 +1143,12 @@ function renderChatLinesHTML(chatLines: any): string {
 }
 
 /**
- * Render dating information
+ * Renders dating event information and chat lines
+ *
+ * Displays character acquisition lines and dating event locations with correct answers.
+ * Creates responsive layout with chat lines section and dating cards.
+ *
+ * @param charId - Character ID to display dating info for
  */
 function renderDating(charId: string): void {
     const container = dbState.domCache.datingList || document.getElementById('dating-list');
@@ -1224,7 +1341,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Listen for language changes
     window.addEventListener('languageChanged', async (event) => {
-        console.log('[CharacterDB] Language changed, reloading data');
+        console.info('[CharacterDB] Language changed, reloading data');
         // Update static i18n elements
         window.i18n?.updatePage();
         // Clear cache when language changes
@@ -1283,8 +1400,16 @@ const debouncedRenderPotentials = debounce((charId: string) => {
 let currentPotentialData: any = null; // Store current potential for description processing
 
 /**
- * Process description with parameter parsing for characterdb context
- * Note: skillLevel should be the actual skill level from dbState, not defaulting to 1
+ * Processes description with parameter parsing for characterdb context
+ *
+ * Uses shared parameter parser with dbState context. Replaces parameter
+ * placeholders with calculated values based on level and skill level.
+ * Converts vertical tabs to HTML line breaks.
+ *
+ * @param desc - Raw description string with parameter placeholders
+ * @param level - Potential/talent level for parsing
+ * @param skillLevel - Optional skill level (defaults to dbState.skillLevel)
+ * @returns Parsed description with parameters replaced
  */
 function processDescription(desc: any, level: any, skillLevel?: number): string {
     if (!desc) return '';
@@ -1302,18 +1427,25 @@ function processDescription(desc: any, level: any, skillLevel?: number): string 
 }
 
 /**
- * Create a potential card element
+ * Creates a potential card element with icon, name, and description
+ *
+ * Applies appropriate rarity background based on Stype (42=specific, 41=normal).
+ * Uses detailed description (.2 suffix) with parameter parsing.
+ *
+ * @param potId - Potential ID to render
+ * @param level - Potential level (1-9) for description parsing
+ * @returns HTML element containing potential card or null if data not found
  */
 function createPotentialCard(potId: any, level: any): HTMLElement | null {
     const potential = dbState.potentials[potId];
     if (!potential) {
-        console.log('[Potentials] Potential not found:', potId);
+        console.info('[CharacterDB] Potential not found:', potId);
         return null;
     }
 
     const item = dbState.items[potId];
     if (!item) {
-        console.log('[Potentials] Item not found:', potId);
+        console.info('[CharacterDB] Item not found:', potId);
         return null;
     }
 
@@ -1359,8 +1491,8 @@ function createPotentialCard(potId: any, level: any): HTMLElement | null {
     card.innerHTML = `
         <div class="potential-card-header">
             <div class="potential-card-image">
-                ${backgroundImage ? `<img src="${backgroundImage}" class="potential-bg" loading="lazy" onerror="this.style.display='none'">` : ''}
-                ${iconPath ? `<img src="${iconPath}" class="potential-icon" loading="lazy" onerror="this.style.display='none'">` : '<span class="potential-placeholder">✨</span>'}
+                ${backgroundImage ? createResponsiveImage(backgroundImage, '', 'potential-bg') : ''}
+                ${iconPath ? createResponsiveImage(iconPath, '', 'potential-icon') : '<span class="potential-placeholder">✨</span>'}
             </div>
             <div class="potential-card-info">
                 <div class="potential-card-name">${name}</div>
@@ -1376,7 +1508,13 @@ function createPotentialCard(potId: any, level: any): HTMLElement | null {
 }
 
 /**
- * Render potentials for the selected character
+ * Renders potentials section for selected character
+ *
+ * Displays potentials grouped by Build (유파): Style 1, Style 2, Common.
+ * Separates Specific potentials (Stype 42) from Normal potentials (Stype 41).
+ * Shows build titles and descriptions from CharacterDes translations.
+ *
+ * @param charId - Character ID to display potentials for
  */
 function renderPotentials(charId: string) {
     const container = dbState.domCache.potentialsDisplay || document.getElementById('potentials-display');
@@ -1545,7 +1683,12 @@ function renderPotentials(charId: string) {
 }
 
 /**
- * Switch between main and assist potentials
+ * Switches between main and assist potential types
+ *
+ * Updates button states and re-renders potentials for selected type.
+ *
+ * @param type - Potential type ('main' or 'assist')
+ * @param event - Click event from type selector button
  */
 function switchPotentialType(type: string, event: Event): void {
     dbState.currentPotentialType = type;
@@ -1565,7 +1708,12 @@ function switchPotentialType(type: string, event: Event): void {
 }
 
 /**
- * Update global potential level
+ * Updates global potential level (affects all displayed potentials)
+ *
+ * Clamps level to valid range (1-9), updates UI displays,
+ * and re-renders potentials with debouncing to reduce DOM updates.
+ *
+ * @param newLevel - New potential level (1-9)
  */
 function updatePotentialLevel(newLevel: number) {
     dbState.potentialLevel = Math.max(1, Math.min(9, newLevel));
@@ -1589,7 +1737,9 @@ function updatePotentialLevel(newLevel: number) {
 }
 
 /**
- * Adjust potential level by delta
+ * Adjusts potential level by relative amount (+1 or -1)
+ *
+ * @param delta - Amount to adjust level by
  */
 function adjustPotentialLevel(delta: number) {
     const newLevel = dbState.potentialLevel + delta;
@@ -1597,7 +1747,13 @@ function adjustPotentialLevel(delta: number) {
 }
 
 /**
- * Switch between character database tabs
+ * Switches between character database tabs (potentials/skills/talents)
+ *
+ * Updates active tab button and panel states. Lazy-renders tab content
+ * only when first viewed.
+ *
+ * @param tabName - Tab name to switch to ('potentials', 'skills', 'talents')
+ * @param event - Optional click event from tab button
  */
 function switchCharDbTab(tabName: string, event?: Event): void {
     // Update tab buttons
@@ -1636,7 +1792,12 @@ function switchCharDbTab(tabName: string, event?: Event): void {
 // =============================================================================
 
 /**
- * Render character skills
+ * Renders character skills section
+ *
+ * Displays normal attack, skill, assist skill, and ultimate with icons,
+ * descriptions, and cooldowns. Parses skill parameters based on global skill level.
+ *
+ * @param charId - Character ID to display skills for
  */
 function renderSkills(charId: string): void {
     const container = dbState.domCache.skillsDisplay || document.getElementById('skills-display');
@@ -1698,8 +1859,8 @@ function renderSkills(charId: string): void {
         card.innerHTML = `
             <div class="skill-card-header">
                 <div class="skill-card-icon-wrapper">
-                    <img src="${elementBgPath}" alt="" class="skill-icon-bg" loading="lazy" onerror="this.style.display='none'">
-                    ${iconPath ? `<img src="${iconPath}" alt="${title}" class="skill-icon" loading="lazy" onerror="this.style.display='none'">` : '<span class="skill-placeholder">⚡</span>'}
+                    ${createResponsiveImage(elementBgPath, '', 'skill-icon-bg')}
+                    ${iconPath ? createResponsiveImage(iconPath, title, 'skill-icon') : '<span class="skill-placeholder">⚡</span>'}
                 </div>
                 <div class="skill-card-info">
                     <div class="skill-card-title">${title}</div>
@@ -1723,7 +1884,12 @@ function renderSkills(charId: string): void {
 }
 
 /**
- * Update global skill level
+ * Updates global skill level (affects skills and potentials)
+ *
+ * Clamps level to valid range (1-13), updates UI displays,
+ * and re-renders both skills and potentials sections.
+ *
+ * @param newLevel - New skill level (1-13)
  */
 function updateSkillLevelDB(newLevel: number) {
     dbState.skillLevel = Math.max(1, Math.min(13, newLevel));
@@ -1748,7 +1914,9 @@ function updateSkillLevelDB(newLevel: number) {
 }
 
 /**
- * Adjust skill level by delta
+ * Adjusts skill level by relative amount (+1 or -1)
+ *
+ * @param delta - Amount to adjust level by
  */
 function adjustSkillLevel(delta: number): void {
     const newLevel = dbState.skillLevel + delta;
@@ -1760,7 +1928,15 @@ function adjustSkillLevel(delta: number): void {
 // =============================================================================
 
 /**
- * Render character talents (limit break progression)
+ * Renders character talents (limit break progression rewards)
+ *
+ * Displays talent groups by limit break phase (1-8). Each group shows:
+ * - Aggregated stat increases from sub nodes (Type 2)
+ * - Main effect description from main node (Type 1)
+ *
+ * Stats are aggregated by effectAttributeType to avoid duplicate display.
+ *
+ * @param charId - Character ID to display talents for
  */
 function renderTalents(charId: string): void {
     const container = dbState.domCache.talentsDisplay || document.getElementById('talents-display');
