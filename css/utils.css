@@ -34,6 +34,24 @@ html {
     padding: 0;
 }
 
+/* ================================
+   WebP Picture Element Support
+   ================================ */
+/* Make picture elements transparent in layout so img styles apply correctly */
+picture {
+    display: contents;
+}
+
+/* Fallback for browsers that don't support display: contents */
+@supports not (display: contents) {
+    picture {
+        display: inline-block;
+    }
+    picture img {
+        display: block;
+    }
+}
+
 /* Apply fonts only to text elements, not icons */
 body,
 input,
@@ -61,11 +79,12 @@ body {
 }
 
 /* Korean language support - only for text, not icons */
-:lang(ko) body,
-:lang(ko) input,
-:lang(ko) textarea,
-:lang(ko) button,
-:lang(ko) select {
+/* Optimized: Use attribute selector instead of :lang() for better performance */
+html[lang="ko"] body,
+html[lang="ko"] input,
+html[lang="ko"] textarea,
+html[lang="ko"] button,
+html[lang="ko"] select {
     font-family: var(--font-main), var(--font-korean);
 }
 
@@ -256,15 +275,24 @@ header .subtitle {
     position: sticky;
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(16px);
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Only apply backdrop-filter on desktop for better mobile performance */
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+    .navbar {
+        backdrop-filter: blur(16px);
+    }
+
+    [data-theme="light"] .navbar {
+        backdrop-filter: blur(12px) saturate(180%);
+    }
 }
 
 [data-theme="light"] .navbar {
     background: rgba(255, 255, 255, 0.92);
     border-bottom: 1px solid rgba(107, 155, 209, 0.15);
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-    backdrop-filter: blur(12px) saturate(180%);
 }
 
 .navbar-brand {
@@ -320,9 +348,15 @@ header .subtitle {
     gap: 0.5rem;
     padding: 0.35rem 0.5rem;
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 0.75rem;
+}
+
+/* Only apply backdrop-filter on desktop for better mobile performance */
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+    .navbar-controls {
+        backdrop-filter: blur(8px);
+    }
 }
 
 [data-theme="light"] .navbar-controls {
@@ -482,7 +516,7 @@ header .subtitle {
         margin-left: auto;
     }
 
-    /* Hide menu by default on mobile */
+    /* Hide menu by default on mobile - optimized for performance */
     .navbar-menu {
         position: absolute;
         top: 100%;
@@ -492,17 +526,21 @@ header .subtitle {
         border-bottom: none;
         flex-direction: column;
         gap: 0;
-        max-height: 0;
         overflow: hidden;
-        transition: max-height 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+        /* Use transform instead of max-height for better performance */
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
         box-shadow: none;
         visibility: hidden;
         opacity: 0;
+        /* Reserve space to prevent CLS */
+        min-height: 0;
     }
 
     /* Show menu when open */
     .navbar-menu.open {
-        max-height: 500px;
+        transform: scaleY(1);
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
         border-bottom: 2px solid var(--border);
         visibility: visible;
@@ -742,7 +780,13 @@ header .subtitle {
     transform: translateX(400px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: auto;
-    backdrop-filter: blur(0.625rem);
+}
+
+/* Only apply backdrop-filter on desktop for better mobile performance */
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+    .toast {
+        backdrop-filter: blur(0.625rem);
+    }
 }
 
 .toast-show {
@@ -894,11 +938,17 @@ header .subtitle {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
+}
+
+/* Only apply backdrop-filter on desktop for better mobile performance */
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+    .spinner-overlay {
+        backdrop-filter: blur(4px);
+    }
 }
 
 [data-theme="light"] .spinner-overlay {

@@ -13,18 +13,19 @@
         })();
     </script>
 
-    <!-- Hide i18n elements until translations load -->
+    <!-- Hide i18n elements until translations load - optimized to prevent CLS -->
     <style>
         html.i18n-loading [data-i18n],
         html.i18n-loading [data-i18n-placeholder],
         html.i18n-loading [data-i18n-title] {
-            opacity: 0;
+            visibility: hidden;
+            min-height: 1.5em; /* Reserve space to prevent layout shift */
         }
 
         html:not(.i18n-loading) [data-i18n],
         html:not(.i18n-loading) [data-i18n-placeholder],
         html:not(.i18n-loading) [data-i18n-title] {
-            opacity: 1;
+            visibility: visible;
             transition: opacity 0.15s ease-in;
         }
     </style>
@@ -35,16 +36,30 @@
     <title data-i18n="landing.title">Stella Sora Tools & DB</title>
     <link rel="icon" type="image/png" href="assets/others/favicon.png">
 
-    <!-- DNS Prefetch & Preconnect -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <!-- DNS Prefetch & Preconnect - Performance optimized -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://static.cloudflareinsights.com">
 
-    <!-- Font Awesome 7 -->
+    <!-- Font Awesome 7 - Optimized loading -->
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer">
+    </noscript>
+
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="assets/others/favicon.png">
+    <link rel="preload" as="image" href="assets/others/build_light.png">
+    <link rel="preload" as="image" href="assets/others/build_dark.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/utils.css">
@@ -95,8 +110,8 @@
             
             <div class="hero-visual">
                 <div class="app-preview-card">
-                    <img src="assets/others/build_light.png" alt="Build Preview" class="preview-img img-light" loading="eager">
-                    <img src="assets/others/build_dark.png" alt="Build Preview" class="preview-img img-dark" loading="eager">
+                    <img src="assets/others/build_light.png" alt="Build Preview" class="preview-img img-light" loading="eager" width="600" height="400">
+                    <img src="assets/others/build_dark.png" alt="Build Preview" class="preview-img img-dark" loading="eager" width="600" height="400">
                 </div>
             </div>
         </section>

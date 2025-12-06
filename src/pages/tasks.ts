@@ -1,11 +1,32 @@
 ﻿/**
- * Tasks Page Module
- * Handles task assignment optimization matching characters to missions
+ * Task Assignment Page Module - Entry Point
+ *
+ * Advanced task assignment optimizer that matches characters to missions (agents)
+ * based on tag requirements. Uses sophisticated algorithms for optimal character
+ * allocation across multiple tasks, with auto-fill functionality and ownership tracking.
+ *
+ * Key Features:
+ * - Task selection and character assignment (max 4 tasks, 3 chars per task)
+ * - Tag-based matching with required and extra tags
+ * - Auto-fill algorithm with greedy optimization
+ * - Character ownership management
+ * - Event delegation pattern for all UI interactions
+ * - Acquisition priority recommendations
+ * - Completion statistics and insights
+ *
+ * Algorithm Approach:
+ * - Combinatorial team generation with tag coverage scoring
+ * - Global optimization across all tasks
+ * - Greedy completion for remaining tasks
+ * - Partial assignment for incomplete coverage
+ *
+ * @module pages/tasks
+ * @see {@link shared/game-data} For character and agent data
  */
 
 // Import shared utilities first (auto-initializes)
 import '../shared';
-import { debounce, showError, showWarning, showSuccess, createEmptyState } from '../shared';
+import { debounce, showError, showWarning, showSuccess, createEmptyState, createResponsiveImage } from '../shared';
 import '../i18n';
 import { initGlobalHeader } from '../shared/ui-components';
 import { saveToLocalStorage, loadFromLocalStorage } from '../utils/storage';
@@ -124,6 +145,15 @@ let confirmCallback: (() => void) | null = null;
 // UTILITY FUNCTIONS
 // =============================================================================
 
+/**
+ * Calculates tag counts for a task
+ *
+ * Counts both required tags (must be filled) and extra tags (optional bonus).
+ * Results are cached for performance.
+ *
+ * @param task - Task to analyze
+ * @returns Object with required and extra tag counts
+ */
 function getTagCounts(task: Task): TagCounts {
   const cacheKey = task.Id;
   if (lookupCache.taskTagCounts.has(cacheKey)) {
@@ -214,6 +244,11 @@ function canCharacterFillTag(charId: number, taskId: number, tag: number): boole
   return currentFilled < totalRequired;
 }
 
+/**
+ * Clears all lookup caches
+ *
+ * Called when language changes to force cache refresh with new translations.
+ */
 function clearLookupCaches(): void {
   lookupCache.taskTitles.clear();
   lookupCache.taskSubtitles.clear();
@@ -336,7 +371,7 @@ function renderOwnershipGrid(): void {
 
       return `
       <div class="ownership-card ${isOwned ? 'owned' : ''}" data-ownership-char-id="${char.Id}">
-        <img src="${imagePath}" alt="${name}" class="ownership-card-image" loading="lazy" onerror="this.style.display='none'">
+        ${createResponsiveImage(imagePath, name, 'ownership-card-image')}
         <div class="ownership-card-name">${name}</div>
       </div>
     `;
@@ -471,7 +506,7 @@ function renderTasks(): void {
               const iconPath = `assets/items/item_${itemId}.png`;
               rewardIconHtml = `
               <div class="task-reward-icon-wrapper">
-                <img src="${iconPath}" alt="Reward Icon" class="task-reward-icon" loading="lazy" onerror="this.style.display='none'">
+                ${createResponsiveImage(iconPath, 'Reward Icon', 'task-reward-icon')}
               </div>
             `;
             }
@@ -648,7 +683,7 @@ function renderCharacterSlots(taskId: number, assignedChars: (number | null)[]):
         slots.push(`
           <div class="character-slot filled">
             <button class="remove-character-btn" data-remove-char-task="${taskId}" data-remove-char-slot="${i}">×</button>
-            <img src="${imagePath}" alt="${name}" class="slot-image" loading="lazy" onerror="this.style.display='none'">
+            ${createResponsiveImage(imagePath, name, 'slot-image')}
             <div class="slot-info">
               <div class="slot-name">${name}</div>
               <div class="character-slot-tags">
@@ -801,7 +836,7 @@ function renderCharacters(): void {
 
       return `
       <div class="character-card-small ${isOwned ? 'owned' : ''} ${isAssignedToActiveTask ? 'selected' : ''} ${isAssignedToOtherTask ? 'disabled' : ''} ${canFillRemainingSlots ? 'highlighted' : ''} ${cursorClass}" data-character-id="${char.Id}">
-        <img src="${imagePath}" alt="${name}" class="character-image-small" loading="lazy" onerror="this.style.display='none'">
+        ${createResponsiveImage(imagePath, name, 'character-image-small')}
         <div class="character-name-small">${name}</div>
         <div class="character-tags-small">
           ${tags
@@ -1102,7 +1137,20 @@ function removeCharacterFromTask(taskId: number, slotIndex: number): void {
 // =============================================================================
 // AUTO-FILL ALGORITHM
 // =============================================================================
+// Advanced optimization algorithm for automatic character assignment
+// Approach: Generate candidate teams, score by tag coverage and rarity,
+// use DFS to find optimal global assignment across all tasks
 
+/**
+ * Calculates rarity scores for tags based on character availability
+ *
+ * Rarity = 1 / (number of characters with this tag)
+ * Rare tags get higher priority in assignment decisions.
+ *
+ * @param tasks - List of tasks to analyze
+ * @param availableChars - List of characters to consider
+ * @returns Tag rarity map with count and rarity score
+ */
 function calculateTagRarity(
   tasks: Task[],
   availableChars: CharacterData[]
@@ -1225,6 +1273,19 @@ function calculateGlobalExtraNeedFromInfos(taskInfos: TaskInfo[]): Record<number
   return need;
 }
 
+/**
+ * Generates all possible valid teams for a task
+ *
+ * Creates teams of size 1 to maxCharactersPerTask that fully cover required tags.
+ * Scores teams based on extra tag coverage, rarity bonus, and efficiency.
+ * Returns top 40 teams sorted by score.
+ *
+ * @param taskInfo - Task requirements and tag information
+ * @param availableChars - Characters to consider for teams
+ * @param tagRarity - Tag rarity scores for prioritization
+ * @param globalExtraNeed - Global extra tag demand across all tasks
+ * @returns Array of valid teams sorted by quality score
+ */
 function generateTaskTeams(
   taskInfo: TaskInfo,
   availableChars: CharacterData[],
@@ -1375,6 +1436,18 @@ function generateTaskTeams(
   return teams.slice(0, 40);
 }
 
+/**
+ * Chooses optimal team assignments across all tasks
+ *
+ * Uses depth-first search to find the best global assignment that:
+ * 1. Maximizes tasks completed (required tags filled)
+ * 2. Maximizes extra tags filled
+ * 3. Avoids character conflicts (each character used once)
+ *
+ * @param taskInfos - Array of task requirements
+ * @param taskTeams - Pre-generated teams for each task
+ * @returns Best assignment with completion statistics
+ */
 function chooseBestTeams(
   taskInfos: TaskInfo[],
   taskTeams: Team[][]
@@ -1749,6 +1822,17 @@ function calculateCompletionStats(
   return { tasksCompleted, extrasFullTasks, partiallyFilledTasks };
 }
 
+/**
+ * Automatically assigns characters to tasks using optimization algorithm
+ *
+ * Multi-phase approach:
+ * 1. Generate and score teams for all tasks
+ * 2. Find optimal global assignment (DFS)
+ * 3. Greedily fill remaining tasks
+ * 4. Assign partial teams to incomplete tasks
+ *
+ * Displays completion statistics after assignment.
+ */
 function autoFillCharacters(): void {
   if (tasksState.selectedTasks.length === 0) {
     showWarning('먼저 의뢰를 선택해주세요.');
@@ -1991,10 +2075,18 @@ function calculateInsights(): {
 // DATA LOADING
 // =============================================================================
 
+/**
+ * Loads task and character data from game files
+ *
+ * Loads level 70 agents (endgame tasks), character data, and translations.
+ * Only visible/available characters are included.
+ *
+ * @throws {Error} If data loading fails
+ */
 async function loadTasksData(): Promise<void> {
   try {
     const gameLang = window.i18n?.currentLang || 'KR';
-    console.log(`[Tasks] Loading data for language: ${gameLang}`);
+    console.info(`[Tasks] Loading data for language: ${gameLang}`);
 
     await loadCoreData();
     await loadFeatureData('taskSystem');
@@ -2013,7 +2105,7 @@ async function loadTasksData(): Promise<void> {
     tasksState.characterTags = GameData.characterDes;
     tasksState.tagStrings = GameData.characterTagKR as any;
 
-    console.log('[Tasks] Characters count:', tasksState.characters.length);
+    console.info('[Tasks] Characters loaded:', tasksState.characters.length);
 
   } catch (error) {
     console.error('Error loading tasks data:', error);
@@ -2025,6 +2117,11 @@ async function loadTasksData(): Promise<void> {
 // EVENT HANDLING
 // =============================================================================
 
+/**
+ * Sets up task search functionality with debouncing
+ *
+ * Filters task cards by matching search term against title and subtitle.
+ */
 function setupTaskSearch(): void {
   const searchInput = document.getElementById('task-search') as HTMLInputElement | null;
   if (!searchInput) return;
@@ -2049,6 +2146,18 @@ function setupTaskSearch(): void {
   });
 }
 
+/**
+ * Sets up event delegation for all dynamic UI elements
+ *
+ * Uses event delegation pattern to handle:
+ * - Task selection/deselection
+ * - Character assignment/removal
+ * - Character ownership toggling
+ * - Modal interactions
+ * - Filter buttons
+ *
+ * Single listeners per container for better performance.
+ */
 function setupEventDelegation(): void {
   const tasksContainer = document.getElementById('tasks-list');
   if (tasksContainer) {
@@ -2255,6 +2364,18 @@ function setupKeyboardShortcuts(): void {
 // INITIALIZATION
 // =============================================================================
 
+/**
+ * Initializes the tasks page
+ *
+ * Workflow:
+ * 1. Initialize theme and i18n
+ * 2. Initialize global navigation header
+ * 3. Set up language change listener
+ * 4. Load task and character data
+ * 5. Load ownership data from localStorage
+ * 6. Render all UI sections
+ * 7. Set up event delegation and handlers
+ */
 async function initTasksPage(): Promise<void> {
   if (typeof window.initTheme === 'function') {
     window.initTheme();
@@ -2266,7 +2387,7 @@ async function initTasksPage(): Promise<void> {
   initGlobalHeader('tasks');
 
   window.addEventListener('languageChanged', async () => {
-    console.log('[Tasks] Language changed, reloading data');
+    console.info('[Tasks] Language changed, reloading data');
     clearLookupCaches();
     await loadTasksData();
     updateTaskCounter();
