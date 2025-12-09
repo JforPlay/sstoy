@@ -10,6 +10,18 @@
   "presets": [
     {
       "id": "preset-build",
+      "title": "(12/9) 나츠카 발사대 나노하덱",
+      "description": "나츠카의 딜 + 틸리아를 활용한 나노하 메인덱입니다. 메인레코드의 대낮의 화원은 이번 이벤 레코드와 자리 바꾸기 가능",
+      "author": "나츠카 발사대 나노하덱",
+      "authorLink": "https://arca.live/b/stellasora/156262667",
+      "element": "Wind",
+      "characterId": 133,
+      "tags": ["표식", "스킬", "나노하", "틸리아", "나츠카"],
+      "new": true,
+      "buildHash": "v2d-%25G)hQlLhkpN%3Eo%5DW%26b%3Ag%26%2464jVW%2B%5EN%5Dq1i05QG%7BDb.*%60NDrqNI%22MigMefsE%5E(jL%3FvIT%5D%5B%2F(%25*1ju29(nB93%3BarzY%7Db!pJ%2Fm%25%40Zf82%5Dpgo%24Px%25.H%3BR1H%7BWiSI7bxWi%7CRi%5Eu(n%26%25%5BzC%7CItDt%25xWhbr%3F)B%2BEA"
+    },
+    {
+      "id": "preset-build",
       "title": "(12/3) 연합용 후유카 궁빌드",
       "description": "필살기 접대 연합용 최신덱입니다",
       "author": "거장용' 후유카 궁빌드 (실험중)",
