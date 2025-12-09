@@ -494,42 +494,6 @@
     "btnBuilder": "ビルドを始める",
     "featureCharDB": {
       "title": "巡遊者 DB",
-      "desc": "キャラクターの詳細ステータス、アーカイブ、デート攻略情報が一目で確認できます。"
-    "totalBuilds": "総ビルド数",
-    "loadBuild": "ロード",
-    "loadFailed": "失敗",
-    "noPresets": "プリセットビルドがございません",
-    "noPresetsDesc": "data/PresetBuilds.jsonにプリセットを追加してください",
-    "filterByElement": "属性別に探す",
-    "filterByTag": "タグで探す",
-    "clearFilters": "選択をリセット",
-    "presetLoadFailed": "プリセットのロードに失敗",
-    "searchTags": "タグ検索...",
-    "activeTags": "選択されたフィルター",
-    "noTagsFound": "タグが見つかりません",
-    "lastUpdated": "最近のアップデート",
-    "bossRush": "연합 토벌",
-    "jointDrill": "종언의 노래"
-  },
-  "messages": {
-    "saved": "セーブできました",
-    "loaded": "呼び込みました",
-    "deleted": "削除されました",
-    "copied": "コピーされました",
-    "error": "エラーが発生しました",
-    "noData": "データがございません",
-    "loading": "呼び込み中...",
-    "error_loading": "データを呼び込んでいる間にエラーが発生しました。ウェブページを更新してください。",
-    "warning_offline": "オフラインモード: キャッシュされたデータを使用しています。",
-    "error_loadingPotentials": "素質データを呼び込んでいる間にエラーが発生しました。"
-  },
-  "landing": {
-    "title": "ステラソラ　ヘルパー",
-    "heroDesc1": "最適の記録ビルドを確認し、自分のビルドを作ることができます。",
-    "heroDesc2": "巡遊者、素質、ロスレコを一か所で管理できます。",
-    "btnBuilder": "ビルドを始める",
-    "featureCharDB": {
-      "title": "巡遊者 DB",
       "desc": "キャラクターの詳細ステータス、アーカイブ、デート攻略情報が一目で見ることができます。"
     },
     "featureDiscDB": {
