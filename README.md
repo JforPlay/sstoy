@@ -1,5 +1,6 @@
 # Stella Sora Toy (sstoy)
 - Last updated 2025/12/9
+- https://jforplay.github.io/sstoy/ or https://sstoy.pages.dev/
 - This repo is the source to build the github pages to view related tools for the game Stella Sora.
 - **sstoy** is a non-profit fan project for the game Stella Sora.
 - The repo contains
