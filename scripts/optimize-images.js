@@ -28,7 +28,8 @@ const CONFIG = {
     'public/assets/others/**/*.{png,jpg,jpeg}',
     'public/assets/items/**/*.{png,jpg,jpeg}',
     'public/assets/buildrank/**/*.{png,jpg,jpeg}',
-    'public/assets/dating/**/*.{png,jpg,jpeg}'
+    'public/assets/dating/**/*.{png,jpg,jpeg}',
+    'public/assets/talent_icons/**/*.{png,jpg,jpeg}'
   ],
 
   // Minification settings
