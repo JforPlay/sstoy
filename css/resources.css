@@ -137,6 +137,16 @@
     box-shadow: 0 0.5rem 1rem rgba(220, 38, 38, 0.3);
 }
 
+/* Element Icon Inline */
+.element-icon-inline {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 2px;
+}
+
 /* Selected Characters List */
 .selected-characters-list {
     display: grid;
