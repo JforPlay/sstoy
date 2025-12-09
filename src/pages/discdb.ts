@@ -25,7 +25,7 @@ import '../i18n';
 import { initGlobalHeader } from '../shared/ui-components';
 import { GameData, getDiscRarityInfo } from '../shared/game-data';
 import { loadCoreData, loadFeatureData, loadLanguageData } from '../shared/data-loader';
-import { substituteSkillParams, parseSkillDescription } from '../modules/param-parser';
+import { substituteSkillParams } from '../modules/param-parser';
 
 import { showError, parseElementTags } from '../shared';
 import Fuse from 'fuse.js';
@@ -612,7 +612,7 @@ function updateDiscSkills(disc: Disc): void {
     if (mainSkill) {
       const skillName = discDBState.mainSkillKRData[mainSkill.Name] || mainSkill.Name || '메인 스킬';
       const rawDesc = discDBState.mainSkillKRData[mainSkill.Desc] || mainSkill.Desc || '';
-      const parsedDesc = parseSkillDescription(rawDesc, mainSkill);
+      const parsedDesc = substituteSkillParams(rawDesc, mainSkill as unknown as Record<string, unknown>);
       const iconBgPath = getSkillIconPath(mainSkill.IconBg);
       const iconPath = getSkillIconPath(mainSkill.Icon);
 
