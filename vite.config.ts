@@ -10,8 +10,9 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(({ command, mode }) => ({
-  // Use '/sstoy/' for production (GitHub Pages), '/' for development
-  base: command === 'build' ? '/sstoy/' : '/',
+  // Use '/sstoy/' for GitHub Pages, '/' for Cloudflare Pages or dev
+  // Set CF_PAGES=1 environment variable for Cloudflare deployment
+  base: command === 'build' && !process.env.CF_PAGES ? '/sstoy/' : '/',
 
   plugins: [
     // HTML processing plugin for better template support
