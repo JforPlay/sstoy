@@ -10,6 +10,42 @@
   "presets": [
     {
       "id": "preset-build",
+      "title": "(12/10) 나노하 바람덱 - 나츠카 꽃밭",
+      "description": "나츠카의 꽃밭(유파2)을 활용한 빌드. 보스의 투사체 여부에 따라 안즈의 핵심잠재 견고한 바람장벽 / 순풍의 항해 중 택1",
+      "author": "풀덱",
+      "authorLink": "https://arca.live/b/stellasora/156342729",
+      "element": "Wind",
+      "characterId": 133,
+      "tags": ["표식", "스킬", "나노하", "안즈", "나츠카"],
+      "new": true,
+      "buildHash": "v2d-5c99oua*k)%2CNb60O2U%7C25TV_%7CtBV%5E%23Ky.y%2F7rn(X0rR1%24%3E%5Dd%40%60z*2p06K%5Bg%40iuD)Ge%5B5~TZSsG.%2B%7D33mmD%2CiU1RrqpD)%60%24%3EpN*K7wTOakcr4W7CGEf%22v5tFRCqH3uC%24Lq%2C)!%241blB%22y%2C%5EEr_b%60k%2619FJ3.B!g%3BqAhT%2ByI%22zSukR(677%3E7axeaz%2Cl%25sB"
+    },
+    {
+      "id": "preset-build",
+      "title": "(12/10) 나노하 바람덱 - 나츠카 꽃잎",
+      "description": "나츠카의 꽃잎(유파1)을 활용한 빌드",
+      "author": "풍덱 빌드 깎아봤음",
+      "authorLink": "https://arca.live/b/stellasora/156318956",
+      "element": "Wind",
+      "characterId": 133,
+      "tags": ["표식", "스킬", "나노하", "안즈", "나츠카"],
+      "new": true,
+      "buildHash": "v2d-pc99(AO5KivoE%2BUaVzM0%3A8%24ciSSw%224%2BkiGwH8Gffd%7CBIaHu%24s%255%3CF.%3D1%25Rs%2F%7DJZ%3FeRxq%7D.u5O8_%3F%24z0%3C%3FZ%5E8Gzl%227_isgIlu%5BQ%7B%25lSaLZ0lX%23%7BJWlky)!%7Coo%7C*J2%22V~M%7CenxfiiY*A%3F%3C%23%25%3Fm~Uih%3Cj37ZgP(hOB"
+    },
+    {
+      "id": "preset-build",
+      "title": "(12/10) 카나체 메인 바람덱",
+      "description": "나노하 --> 카나체로 대체해서 쓰는 빌드입니다. 틸리아는 안즈로도 사용가능, 이때 받피증 잠재 위주로 선택",
+      "author": "나노하 없는 분들을 위한 나츠카덱",
+      "authorLink": "https://arca.live/b/stellasora/156336374",
+      "element": "Wind",
+      "characterId": 120,
+      "tags": ["표식", "스킬", "카나체", "틸리아", "나츠카"],
+      "new": true,
+      "buildHash": "v2d-%22hhxou_X~4L%2F%7C%7D4PGl6L%7D%23~tf%60MEQT~HFlQP.ZD*!Xu%2Fc%5D%23ydIu%2BR(Hk*JPVrz%3Cm%40ed6h2%3F~%3F%25%23oM%7Ckm%5E)Kl%24%25f7%26CbMn0Q6ipE%3BNt%3Cu4XpAlHVVHvg%60M%3EhIK%3FS%5EyC7I%7CeFZRVM%7DQ5%7C!_%3F%23%2C!F%3CD2w%5B%3B_EjBA"
+    },
+    {
+      "id": "preset-build",
       "title": "(12/9) 나츠카 발사대 나노하덱",
       "description": "나츠카의 딜 + 틸리아를 활용한 나노하 메인덱입니다. 메인레코드의 대낮의 화원은 이번 이벤 레코드와 자리 바꾸기 가능",
       "author": "나츠카 발사대 나노하덱",
