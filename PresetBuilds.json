@@ -58,6 +58,18 @@
     },
     {
       "id": "preset-build",
+      "title": "(12/6) 일섭 - 거장용 후유카 궁빌드",
+      "description": "일섭발 연합토벌 거장용 후유카 궁빌드입니다.",
+      "author": "나만 볼거야 저장소",
+      "authorLink": "https://gall.dcinside.com/stellasora/153148",
+      "element": "Fire",
+      "characterId": 134,
+      "tags": ["필살기", "후유카", "치시아", "플로라"],
+      "meta": true,
+      "buildHash": "v2d-ofhxou_X~4i_%7C%7D%7DksS0GLzoG%5Ba7Om)KM)M%26.*H~LrXY%3B_C%5BDR%22VX4ki8otr%3DMiNRER(7KMv%3C%23Ngapa%3FE%7C8B2hIY%3A5)%40*Yb%3D2L%3D)4BnxVk%5D%2B%40O*w%7CmhiuA%60YEJZ%3CC%5D*rAv%2Bq1bORN9%23PKMIZQq%2CRo3nMG%2CLYQG68I26eP%7D*F!P1Cul)1%236f.Ghw(bl%7CIr%25%7DQCT~DA"
+    },
+    {
+      "id": "preset-build",
       "title": "(12/3) 연합용 후유카 궁빌드",
       "description": "필살기 접대 연합용 최신덱입니다",
       "author": "거장용' 후유카 궁빌드 (실험중)",
