@@ -10,6 +10,30 @@
   "presets": [
     {
       "id": "preset-build",
+      "title": "(12/16) 나노나츠카덱 - 필수압축판",
+      "description": "나노하+나츠카 덱 정리본, 나츠카의 잠재를 신경쓰며 나머진 필수위주로 챙겨주세요. 레코드 관련 내용은 링크글 참조",
+      "author": "쉽고 간단하게 도자기를 굽자! 나노나츠카덱",
+      "authorLink": "https://arca.live/b/stellasora/156930436",
+      "element": "Wind",
+      "characterId": 119,
+      "tags": ["표식", "스킬", "나노하", "안즈", "나츠카"],
+      "meta": true,
+      "buildHash": "v2d-%26zVhQlLhkpItq%3EK%2BM%26%25.%23qj%3EcjVWP_N%5Dq1i0%40bG%7BDbeG7jPPL4gwmxbj%25zA%3C6v%5Dpho%2BP%60%2BprR%25%2B06j7%5D(!zH2q3LUtGS%2354W%3Fj3!%7BIyT%26qD2A17asE%2FBhJB%23fZJODk7R3~I%3D8%2CKyy_d%3F%24trr95uDA%7DstYA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(12/16) 나노나츠카덱 - 카나체 대체",
+      "description": "나노하를 카나체로 대체한 빌드입니다, 기타내용은 나노나츠카덱과 동일",
+      "author": "쉽고 간단하게 도자기를 굽자! 나노나츠카덱",
+      "authorLink": "https://arca.live/b/stellasora/156930436",
+      "element": "Wind",
+      "characterId": 120,
+      "tags": ["표식", "스킬", "카나체", "안즈", "나츠카"],
+      "meta": true,
+      "buildHash": "v2d-pcWyou%2BBO5%5B%7Dk8P%2F%5D0Ti%26%3Bg%24EGJbN%3CN%3AsiBGzz*ns%2F%5B(OTZ1%3Bt%2Ca9Z%3DzORc%5BA2.bm1T%7DcU%3DRw9MQ5%3E6G%40HuFN%5BC.%2Cg.oefW9%3DE%3B06BWUtSUo%5B%2Fq%3D%3EfWW6%24g6%5B%5Dcl3%3A%40Y%3B2%5EaZJ%23RoK*N0fS0HCcsOC%40pu%2F~~%2F)9ZHR%7CD%3DuKv%5E)ZBA"
+    },
+    {
+      "id": "preset-build",
       "title": "(12/10) 나노하 바람덱 - 나츠카 꽃밭",
       "description": "나츠카의 꽃밭(유파2)을 활용한 빌드. 보스의 투사체 여부에 따라 안즈의 핵심잠재 견고한 바람장벽 / 순풍의 항해 중 택1",
       "author": "풀덱",
@@ -17,7 +41,6 @@
       "element": "Wind",
       "characterId": 133,
       "tags": ["표식", "스킬", "나노하", "안즈", "나츠카"],
-      "new": true,
       "buildHash": "v2d-5c99oua*k)%2CNb60O2U%7C25TV_%7CtBV%5E%23Ky.y%2F7rn(X0rR1%24%3E%5Dd%40%60z*2p06K%5Bg%40iuD)Ge%5B5~TZSsG.%2B%7D33mmD%2CiU1RrqpD)%60%24%3EpN*K7wTOakcr4W7CGEf%22v5tFRCqH3uC%24Lq%2C)!%241blB%22y%2C%5EEr_b%60k%2619FJ3.B!g%3BqAhT%2ByI%22zSukR(677%3E7axeaz%2Cl%25sB"
     },
     {
@@ -29,7 +52,6 @@
       "element": "Wind",
       "characterId": 133,
       "tags": ["표식", "스킬", "나노하", "안즈", "나츠카"],
-      "new": true,
       "buildHash": "v2d-pcd9ou%2BBO5E%3EiVO%3A%3Fv4PEd%3E%7CMH%2Bt~)kG%7BuzP%60XDDTi%3E5eW%2Cu%2CH%3BZ%5B%243q%3D%3B1bprpn0)lUQrW%2C%7DT%23%3C%7C%7B%3B2X%2B%22t%2C!%7DjWgR4mI%60(7pk%7B%5DKSP%267%7C.3%5E%7BgMe%3FEQz%3Dp9t%5E_23MEVu%25WaDl43Bj*CK38Q.jF4My%3Fm%7C_%26%7D.%7By~!H*g2lSwvl%2C%605G%22%60%23%2BfRTEQ1MrS%5BZ2P%2BZD%7BH"
     },
     {
@@ -41,7 +63,6 @@
       "element": "Wind",
       "characterId": 120,
       "tags": ["표식", "스킬", "카나체", "틸리아", "나츠카"],
-      "new": true,
       "buildHash": "v2d-%22hhxou_X~4L%2F%7C%7D4PGl6L%7D%23~tf%60MEQT~HFlQP.ZD*!Xu%2Fc%5D%23ydIu%2BR(Hk*JPVrz%3Cm%40ed6h2%3F~%3F%25%23oM%7Ckm%5E)Kl%24%25f7%26CbMn0Q6ipE%3BNt%3Cu4XpAlHVVHvg%60M%3EhIK%3FS%5EyC7I%7CeFZRVM%7DQ5%7C!_%3F%23%2C!F%3CD2w%5B%3B_EjBA"
     },
     {
@@ -53,7 +74,6 @@
       "element": "Wind",
       "characterId": 133,
       "tags": ["표식", "스킬", "나노하", "틸리아", "나츠카"],
-      "new": true,
       "buildHash": "v2d-%25G)hQlLhkpN%3Eo%5DW%26b%3Ag%26%2464jVW%2B%5EN%5Dq1i05QG%7BDb.*%60NDrqNI%22MigMefsE%5E(jL%3FvIT%5D%5B%2F(%25*1ju29(nB93%3BarzY%7Db!pJ%2Fm%25%40Zf82%5Dpgo%24Px%25.H%3BR1H%7BWiSI7bxWi%7CRi%5Eu(n%26%25%5BzC%7CItDt%25xWhbr%3F)B%2BEA"
     },
     {
