@@ -1,13 +1,37 @@
 {
   "version": "1.0",
   "metadata": {
-    "lastUpdated": "2025-12-03",
+    "lastUpdated": "2025-12-17",
     "bossRush": "미의 거장/심층의 주인 (~12/31)",
     "jointDrill": "X",
     "totalBuilds": 0,
     "notes": "메타덱은 진행중인 연합/종언 컨텐츠에 맞춰 주기적으로 갱신됩니다."
   },
   "presets": [
+    {
+      "id": "preset-build",
+      "title": "(12/23) 클라루 후유카 궁(거장) 빌드",
+      "description": "클라루의 거장용 빌드, 클라루의 궁이 12초로 후유카의 10초보다 길기에, 클라루 궁 먼저 깔아두고 후유카 궁을 쓰면 좋습니다",
+      "author": " 클라루 후유카 궁(거장) 빌드",
+      "authorLink": "https://arca.live/b/stellasora/157618284",
+      "element": "Fire",
+      "characterId": 158,
+      "tags": ["필살기", "클라루", "후유카", "플로라"],
+      "new": true,
+      "buildHash": "v2d-hcWyou%2BBO5D%5B%2C*Yb%22u%24P%255%5D%248D0%2B%7D%3E)B*tndVJS90Dtc%2C%7Cyi%60hmHp%261.!t%26%5E!IH%2CUWEgt%5E%24131%5DHs%3EQ%60%5D%5Ee.Sf%7D3%7Bi3Sw%2Bi%60%3Cr%5Bp%3FOy%2C4%3F(Hva)f%60GoupjSg%5E0%3FRt%3Am%3Che%3CK3d1j2dYJbXlN%3C%3CyMhXbj%2Ftun%25MK0uprS7%5Bd%2B*F%5BYL%26%5D)Fh%7Cik~A"
+    },
+    {
+      "id": "preset-build",
+      "title": "(12/23) 클라루 후유카 통상 빌드",
+      "description": ".",
+      "author": "클라루 후유카 통상 빌드",
+      "authorLink": "https://arca.live/b/stellasora/157609025",
+      "element": "Fire",
+      "characterId": 158,
+      "tags": ["클라루", "후유카", "플로라"],
+      "new": true,
+      "buildHash": "v2d-HiH%23nBZYV)Q3e%25D%25oLKewBxH%7DSdYtkWW44mlPg5%5BKdt%2Fi%5DfiS%24q%25%3E%26Bk%60RxqqQP%3EAq%3E%25%7BLq%24t)82%3C3QZG1j%3C%7CGp%7B1U2h%40O_Pd%40D%5Dae%25H%3A%23%5Dy%7BRXG%5DgBGEX0u%22a%3FkHs1C!927e%606SoM%24HjTV%3A1~%60%24%2BB%3CWq%3D%24DXi5(%26%26!BQ%26SQfnHB~%2F%7Dk%3FTYJ%60%60EP%24%7DD"
+    },
     {
       "id": "preset-build",
       "title": "(12/16) 나노나츠카덱 - 필수압축판",
