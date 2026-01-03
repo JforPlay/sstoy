@@ -41,6 +41,17 @@
       "characterId": 135,
       "tags": ["캐러멜", "코제트", "미스티", "스킬", "범위딜", "재앙의전선"],
       "buildHash": "v2d-%26z9hX.g%26i%60Q%26s%2C%3COk.%2CP%5D%5DB%3C%3Fu2%5Em2q3HJ%26en%2CP!.PrQx%5EF%3C%2C(mOk%7B%3B%23(8%26(%24Of3b%3BYjo%2C%60920%23WpNLfxB%5BQ9cIKj)Y%2BIsY%3Bbk0rF(8%5D9!%7DS_1QK%60djr.y%22Q%221_%2CWi)GAJAA"
+    },
+    {
+      "id": "preset-arena",
+      "title": "아레나 잡몹용 사슬 그레이",
+      "description": "아레나 11까진 편안하게 클리어 가능한 스킬 그레이",
+      "author": "아레나 잡몹용 사슬 그레이 추천핢",
+      "authorLink": "https://arca.live/b/stellasora/152867826",
+      "element": "Earth",
+      "characterId": 149,
+      "tags": ["그레이", "나즈나", "레이센", "스킬", "범위딜", "아레나"],
+      "buildHash": "v2d-%22h%3Dzou%2BBxAr3S%3Ewc%5D6%7B%3E989tTV%7Dom%5B%224*J%7CDjWHC%24O%23!YZ3b7Q%3A%3F%5E%7DuMr_rs%3B30R%7BQ_Iw8xVgTi%3BD3K%23zfe7oTu9%40%60l9xTBMp%3CuS43cAF%5D%5BJ%24wz!ypWG%3EwNZBY%60%4030%7D_%3CGA"
     }
   ],
   "elements": {
