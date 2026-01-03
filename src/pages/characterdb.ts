@@ -232,7 +232,7 @@ function processVoicelineText(segments: string[]): string {
  * Get tag label translation
  */
 function getVoicelineTagLabel(category: string, tag: string): string {
-    const key = `chardb.voicelines.tags.${tag}`;
+    const key = `characterdb.voicelines.tags.${tag}`;
     const translated = window.i18n?.t(key);
     
     // If translation not found, return formatted tag name
@@ -338,7 +338,7 @@ function renderVolumeControl(volume: number): string {
                     min="0"
                     max="100"
                     value="${volume}"
-                    title="${window.i18n?.t('chardb.voicelines.volume') || '볼륨'}"
+                    title="${window.i18n?.t('characterdb.voicelines.volume') || '볼륨'}"
                 />
                 <span class="volume-percentage">${volume}%</span>
             </div>
@@ -361,7 +361,7 @@ function renderVoicelinePlayer(line: VoicelineLine, currentTrack: string | null)
             <button
                 class="voice-play-btn ${playingClass}"
                 data-audio-file="${line.audioFile}"
-                title="${isPlaying ? (window.i18n?.t('chardb.voicelines.pause') || '일시정지') : (window.i18n?.t('chardb.voicelines.play') || '재생')}"
+                title="${isPlaying ? (window.i18n?.t('characterdb.voicelines.pause') || '일시정지') : (window.i18n?.t('characterdb.voicelines.play') || '재생')}"
                 ${disabled ? 'disabled' : ''}
             >
                 <i class="fa-solid ${playIcon}"></i>
@@ -404,7 +404,7 @@ function renderVoicelineCategory(groups: VoicelineGroup[], categoryName: string,
     }).join('');
 
     const categoryIcon = categoryName === 'ui' ? 'fa-comments' : 'fa-shield';
-    const categoryLabel = window.i18n?.t(`chardb.voicelines.${categoryName}`) || categoryName;
+    const categoryLabel = window.i18n?.t(`characterdb.voicelines.${categoryName}`) || categoryName;
 
     return `
         <div class="voiceline-category ${expandedClass}">
@@ -436,7 +436,7 @@ function renderVoicelines(charId: number): void {
         container.innerHTML = `
             <div class="empty-state">
                 <i class="fa-solid fa-music empty-icon"></i>
-                <p>${window.i18n?.t('chardb.voicelines.noVoicelines') || '보이스 데이터가 없습니다'}</p>
+                <p>${window.i18n?.t('characterdb.voicelines.noVoicelines') || '보이스 데이터가 없습니다'}</p>
             </div>
         `;
         return;
@@ -565,8 +565,8 @@ function updatePlayButton(btn: HTMLElement, isPlaying: boolean): void {
     }
 
     btn.title = isPlaying
-        ? (window.i18n?.t('chardb.voicelines.pause') || '일시정지')
-        : (window.i18n?.t('chardb.voicelines.play') || '재생');
+        ? (window.i18n?.t('characterdb.voicelines.pause') || '일시정지')
+        : (window.i18n?.t('characterdb.voicelines.play') || '재생');
 }
 
 /**
