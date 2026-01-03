@@ -343,6 +343,7 @@ export async function loadLanguageData(lang: string, files: string[]): Promise<v
     else if (file === 'CharGetLines.json') GameData.charGetLinesKR = data as any;
     else if (file === 'CharacterArchiveContent.json') GameData.characterArchiveContentKR = data as any;
     else if (file === 'Agent.json') GameData.agentsKR = data as any;
+    else if (file === 'BubbleData.json') GameData.bubbleData = data as any;
   });
   await Promise.all(promises);
 }

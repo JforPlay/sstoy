@@ -1,0 +1,377 @@
+/**
+ * Audio Player / Voicelines Component Styles
+ * Clean, modern design for character voiceline playback
+ */
+
+/* ============================================================================
+   VOICELINES CONTAINER
+   ============================================================================ */
+
+.character-voicelines-section {
+    padding: 1rem;
+}
+
+.voicelines-display {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Empty State */
+.voicelines-display .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-secondary);
+}
+
+.voicelines-display .empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* ============================================================================
+   VOLUME CONTROL (Sticky Header)
+   ============================================================================ */
+
+.voicelines-controls {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg-primary);
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.volume-icon {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    min-width: 1.5rem;
+}
+
+.volume-slider {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--bg-secondary);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s;
+}
+
+.volume-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+.volume-percentage {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 3rem;
+    text-align: right;
+}
+
+/* ============================================================================
+   VOICELINES CONTENT
+   ============================================================================ */
+
+.voicelines-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ============================================================================
+   CATEGORY SECTIONS (UI / Combat)
+   ============================================================================ */
+
+.voiceline-category {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--bg-tertiary);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+}
+
+.category-header:hover {
+    background: var(--bg-hover);
+}
+
+.category-header i:first-child {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+}
+
+.category-label {
+    flex: 1;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.category-count {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.category-chevron {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: transform 0.3s;
+}
+
+.voiceline-category.expanded .category-chevron {
+    transform: rotate(0deg);
+}
+
+.category-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.voiceline-category.expanded .category-content {
+    max-height: 10000px; /* Large enough for all content */
+}
+
+/* ============================================================================
+   TAG GROUPS (Subdivisions within categories)
+   ============================================================================ */
+
+.voiceline-tag-group {
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.voiceline-tag-group:first-child {
+    border-top: none;
+}
+
+.tag-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.tag-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: capitalize;
+}
+
+.tag-count {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.tag-voicelines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* ============================================================================
+   VOICELINE CARDS
+   ============================================================================ */
+
+.voiceline-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.875rem 1rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.voiceline-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.voiceline-card.playing {
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg,
+        var(--bg-primary) 0%,
+        rgba(var(--primary-color-rgb), 0.05) 100%);
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+}
+
+.voiceline-text {
+    flex: 1;
+    line-height: 1.6;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+/* ============================================================================
+   PLAY BUTTON
+   ============================================================================ */
+
+.voice-play-btn {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    background: var(--bg-primary);
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 1rem;
+}
+
+.voice-play-btn:hover:not(:disabled) {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+.voice-play-btn:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.voice-play-btn.playing {
+    background: var(--primary-color);
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+.voice-play-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border-color: var(--text-tertiary);
+    color: var(--text-tertiary);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(var(--primary-color-rgb), 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(var(--primary-color-rgb), 0);
+    }
+}
+
+/* ============================================================================
+   MOBILE RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .voicelines-controls {
+        position: relative; /* Not sticky on mobile */
+    }
+
+    .volume-control {
+        max-width: 100%;
+    }
+
+    .category-header {
+        padding: 0.875rem 1rem;
+    }
+
+    .category-label {
+        font-size: 1rem;
+    }
+
+    .voiceline-tag-group {
+        padding: 0.75rem;
+    }
+
+    .voiceline-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .voice-play-btn {
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 480px) {
+    .character-voicelines-section {
+        padding: 0.5rem;
+    }
+
+    .voicelines-controls {
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .volume-control {
+        gap: 0.75rem;
+    }
+
+    .volume-icon {
+        font-size: 1.1rem;
+    }
+
+    .voiceline-card {
+        padding: 0.75rem;
+    }
+
+    .voiceline-text {
+        font-size: 0.9rem;
+    }
+}

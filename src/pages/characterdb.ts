@@ -30,6 +30,7 @@ import { ELEMENT_COLORS, STAT_ICONS, MAIN_STATS, STAT_TO_EFFECT_ID, GameData } f
 import { loadCoreData, loadFeatureData, loadLanguageData } from '../shared/data-loader';
 import { saveToLocalStorage, loadFromLocalStorage, removeFromLocalStorage } from '../utils/storage';
 
+import { AudioPlayer } from '../shared/audio-player';
 import type {
   Position,
   FileType,
@@ -38,6 +39,10 @@ import type {
   ParseResult,
   ParamParserState,
 } from '../types';
+
+// Verify AudioPlayer is loaded
+console.log('[CharacterDB] AudioPlayer loaded:', AudioPlayer);
+console.log('[CharacterDB] window.AudioPlayer available:', !!window.AudioPlayer);
 
 // =============================================================================
 // STATE & INTERFACES
@@ -61,6 +66,7 @@ interface CharacterDBState extends ParamParserState {
     datingBranchKR: Record<string, any>;
     charGetLines: Record<string, any>;
     charGetLinesKR: Record<string, any>;
+    bubbleData: Record<string, any>;
     gameEnums: Record<string, any>;
     uiText: Record<string, any>;
     selectedCharacterId: string | null;
@@ -109,6 +115,7 @@ const dbState: CharacterDBState = {
     datingBranchKR: {},
     charGetLines: {},
     charGetLinesKR: {},
+    bubbleData: {},
     gameEnums: {},
     uiText: {},
     selectedCharacterId: null,
@@ -187,6 +194,410 @@ function buildTagToGiftsMap() {
     }
 }
 
+
+// =============================================================================
+// VOICELINE PROCESSING HELPERS
+// =============================================================================
+
+interface VoicelineLine {
+    key: string;
+    audioFile: string;
+    text: string;
+    hasAudio: boolean;
+}
+
+interface VoicelineGroup {
+    category: 'ui' | 'combat';
+    tag: string;
+    tagLabel: string;
+    lines: VoicelineLine[];
+}
+
+/**
+ * Process voiceline text segments
+ * Removes empty segments, strips ==RT== markers, and joins with <br>
+ */
+function processVoicelineText(segments: string[]): string {
+    // 1. Filter out empty strings
+    const nonEmpty = segments.filter(s => s && s.trim() !== '');
+    
+    // 2. Remove ==RT== markers from each segment
+    const cleaned = nonEmpty.map(s => s.replace(/==RT==/g, ''));
+    
+    // 3. Join with <br> tags for line breaks
+    return cleaned.join('<br>');
+}
+
+/**
+ * Get tag label translation
+ */
+function getVoicelineTagLabel(category: string, tag: string): string {
+    const key = `chardb.voicelines.tags.${tag}`;
+    const translated = window.i18n?.t(key);
+    
+    // If translation not found, return formatted tag name
+    if (translated === key || !translated) {
+        // Convert camelCase to Title Case
+        return tag.replace(/([A-Z])/g, ' $1').trim();
+    }
+    
+    return translated;
+}
+
+/**
+ * Get and organize character voicelines by category
+ */
+function getCharacterVoicelines(charId: number): VoicelineGroup[] {
+    if (!dbState.bubbleData || Object.keys(dbState.bubbleData).length === 0) {
+        return [];
+    }
+    
+    const voicelineMap = new Map<string, VoicelineGroup>();
+    const charIdStr = charId.toString();
+    
+    // Parse all voiceline keys for this character
+    for (const key in dbState.bubbleData) {
+        // Match pattern: vo_{charId}_{category}_{tag}_{number}
+        const match = key.match(/^vo_(\d+)_(ui|combat)_([^_]+)_(\d+)$/);
+        
+        if (!match) continue;
+        
+        const [, voiceCharId, category, tag, number] = match;
+        
+        // Skip if not for this character or missing data
+        if (!voiceCharId || !category || !tag || voiceCharId !== charIdStr) continue;
+        
+        const bubbleEntry = dbState.bubbleData[key];
+        if (!bubbleEntry || !bubbleEntry.text || !bubbleEntry.text.female_jp) continue;
+        
+        // Process text segments
+        const text = processVoicelineText(bubbleEntry.text.female_jp);
+        
+        // Skip if no text
+        if (!text) continue;
+        
+        // Create voiceline entry
+        const line: VoicelineLine = {
+            key,
+            audioFile: `audio/${key}_jp.ogg`,
+            text,
+            hasAudio: true // Assume exists, will handle errors during playback
+        };
+        
+        // Group by category and tag
+        const groupKey = `${category}_${tag}`;
+        
+        if (!voicelineMap.has(groupKey)) {
+            voicelineMap.set(groupKey, {
+                category: category as 'ui' | 'combat',
+                tag,
+                tagLabel: getVoicelineTagLabel(category, tag),
+                lines: []
+            });
+        }
+        
+        voicelineMap.get(groupKey)!.lines.push(line);
+    }
+    
+    // Convert map to array and sort
+    const groups = Array.from(voicelineMap.values());
+    
+    // Sort groups: UI first, then Combat
+    groups.sort((a, b) => {
+        if (a.category !== b.category) {
+            return a.category === 'ui' ? -1 : 1;
+        }
+        return a.tag.localeCompare(b.tag);
+    });
+    
+    return groups;
+}
+
+
+// =============================================================================
+// VOICELINE UI RENDERERS
+// =============================================================================
+
+/**
+ * Render volume control slider
+ */
+function renderVolumeControl(volume: number): string {
+    // Volume icon changes based on level (2 stages)
+    let volumeIcon = 'fa-volume-low'; // 0-50%
+    if (volume > 50) {
+        volumeIcon = 'fa-volume-high'; // 51-100%
+    }
+
+    return `
+        <div class="voicelines-controls">
+            <div class="volume-control">
+                <i class="fa-solid ${volumeIcon} volume-icon"></i>
+                <input
+                    type="range"
+                    class="volume-slider"
+                    min="0"
+                    max="100"
+                    value="${volume}"
+                    title="${window.i18n?.t('chardb.voicelines.volume') || '볼륨'}"
+                />
+                <span class="volume-percentage">${volume}%</span>
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * Render single voiceline card with play button
+ */
+function renderVoicelinePlayer(line: VoicelineLine, currentTrack: string | null): string {
+    const isPlaying = currentTrack === line.audioFile;
+    const playIcon = isPlaying ? 'fa-pause' : 'fa-play';
+    const playingClass = isPlaying ? 'playing' : '';
+    const disabled = !line.hasAudio;
+
+    return `
+        <div class="voiceline-card ${playingClass}" data-audio-key="${line.key}">
+            <div class="voiceline-text">${line.text}</div>
+            <button
+                class="voice-play-btn ${playingClass}"
+                data-audio-file="${line.audioFile}"
+                title="${isPlaying ? (window.i18n?.t('chardb.voicelines.pause') || '일시정지') : (window.i18n?.t('chardb.voicelines.play') || '재생')}"
+                ${disabled ? 'disabled' : ''}
+            >
+                <i class="fa-solid ${playIcon}"></i>
+            </button>
+        </div>
+    `;
+}
+
+/**
+ * Render voiceline category section (UI or Combat)
+ */
+function renderVoicelineCategory(groups: VoicelineGroup[], categoryName: string, isExpanded: boolean, currentTrack: string | null): string {
+    if (groups.length === 0) return '';
+
+    const expandedClass = isExpanded ? 'expanded' : '';
+    const chevronClass = isExpanded ? 'fa-chevron-down' : 'fa-chevron-right';
+
+    // Group voicelines by tag
+    const tagGroups = new Map<string, VoicelineGroup>();
+    groups.forEach(group => {
+        tagGroups.set(group.tag, group);
+    });
+
+    const tagSectionsHTML = Array.from(tagGroups.values()).map(group => {
+        const linesHTML = group.lines.map(line =>
+            renderVoicelinePlayer(line, currentTrack)
+        ).join('');
+
+        return `
+            <div class="voiceline-tag-group">
+                <div class="tag-header">
+                    <span class="tag-label">${group.tagLabel}</span>
+                    <span class="tag-count">${group.lines.length}</span>
+                </div>
+                <div class="tag-voicelines">
+                    ${linesHTML}
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    const categoryIcon = categoryName === 'ui' ? 'fa-comments' : 'fa-shield';
+    const categoryLabel = window.i18n?.t(`chardb.voicelines.${categoryName}`) || categoryName;
+
+    return `
+        <div class="voiceline-category ${expandedClass}">
+            <div class="category-header" data-category="${categoryName}">
+                <i class="fa-solid ${categoryIcon}"></i>
+                <span class="category-label">${categoryLabel}</span>
+                <span class="category-count">${groups.reduce((sum, g) => sum + g.lines.length, 0)}</span>
+                <i class="fa-solid ${chevronClass} category-chevron"></i>
+            </div>
+            <div class="category-content">
+                ${tagSectionsHTML}
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * Render voicelines tab content
+ */
+function renderVoicelines(charId: number): void {
+    const container = document.getElementById('voicelines-display');
+    if (!container) return;
+
+    // Get voicelines for character
+    const allVoicelines = getCharacterVoicelines(charId);
+
+    // Check if character has voicelines
+    if (allVoicelines.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fa-solid fa-music empty-icon"></i>
+                <p>${window.i18n?.t('chardb.voicelines.noVoicelines') || '보이스 데이터가 없습니다'}</p>
+            </div>
+        `;
+        return;
+    }
+
+    // Get current playing track
+    const currentTrack = window.AudioPlayer?.getCurrentTrack() || null;
+
+    // Separate by category
+    const uiVoicelines = allVoicelines.filter(v => v.category === 'ui');
+    const combatVoicelines = allVoicelines.filter(v => v.category === 'combat');
+
+    // Render volume control
+    const volume = window.AudioPlayer?.getVolume() || 5;
+    const volumeHTML = renderVolumeControl(volume);
+
+    // Render categories (UI expanded by default, Combat collapsed)
+    const uiHTML = renderVoicelineCategory(uiVoicelines, 'ui', true, currentTrack);
+    const combatHTML = renderVoicelineCategory(combatVoicelines, 'combat', false, currentTrack);
+
+    container.innerHTML = `
+        ${volumeHTML}
+        <div class="voicelines-content">
+            ${uiHTML}
+            ${combatHTML}
+        </div>
+    `;
+}
+
+/**
+ * Setup voiceline event delegation
+ */
+function setupVoicelineEvents(): void {
+    // Click delegation for play/pause buttons and category headers
+    document.addEventListener('click', (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+
+        // Handle play/pause buttons
+        const playBtn = target.closest('.voice-play-btn') as HTMLElement;
+        if (playBtn && !playBtn.hasAttribute('disabled')) {
+            console.log('[Voicelines] Play button detected via event delegation');
+            handleVoicelinePlay(playBtn);
+            return;
+        }
+
+        // Handle category header toggle
+        const categoryHeader = target.closest('.category-header') as HTMLElement;
+        if (categoryHeader) {
+            const category = categoryHeader.closest('.voiceline-category');
+            if (category) {
+                category.classList.toggle('expanded');
+                const chevron = categoryHeader.querySelector('.category-chevron');
+                if (chevron) {
+                    chevron.classList.toggle('fa-chevron-down');
+                    chevron.classList.toggle('fa-chevron-right');
+                }
+            }
+            return;
+        }
+    });
+
+    // Volume control
+    document.addEventListener('input', (e: Event) => {
+        const target = e.target as HTMLElement;
+        if (target.classList.contains('volume-slider')) {
+            const volume = parseInt((target as HTMLInputElement).value);
+            window.AudioPlayer?.setVolume(volume);
+            updateVolumeDisplay(volume);
+        }
+    });
+
+    // Listen for audio playback end
+    if (window.AudioPlayer) {
+        window.AudioPlayer.onPlaybackEnd(() => {
+            updateAllPlayButtons();
+        });
+    }
+}
+
+/**
+ * Handle voiceline play/pause
+ */
+function handleVoicelinePlay(btn: HTMLElement): void {
+    const audioFile = btn.dataset.audioFile;
+    console.log('[Voicelines] Play button clicked, audioFile:', audioFile);
+    console.log('[Voicelines] AudioPlayer exists:', !!window.AudioPlayer);
+    if (!audioFile || !window.AudioPlayer) {
+        console.error('[Voicelines] Early return - audioFile:', audioFile, 'AudioPlayer:', window.AudioPlayer);
+        return;
+    }
+
+    const isCurrentlyPlaying = window.AudioPlayer.getCurrentTrack() === audioFile
+        && window.AudioPlayer.isPlaying();
+
+    if (isCurrentlyPlaying) {
+        window.AudioPlayer.pause();
+        updatePlayButton(btn, false);
+    } else {
+        window.AudioPlayer.play(audioFile).then(() => {
+            updateAllPlayButtons(); // Reset all to play state
+            updatePlayButton(btn, true);
+        }).catch(err => {
+            console.error('Audio playback error:', err);
+            window.showToast?.(`음성 파일을 찾을 수 없습니다`, 'error');
+        });
+    }
+}
+
+/**
+ * Update single play button state
+ */
+function updatePlayButton(btn: HTMLElement, isPlaying: boolean): void {
+    const icon = btn.querySelector('i');
+    const card = btn.closest('.voiceline-card');
+
+    if (icon) {
+        icon.className = isPlaying ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+    }
+
+    if (isPlaying) {
+        btn.classList.add('playing');
+        card?.classList.add('playing');
+    } else {
+        btn.classList.remove('playing');
+        card?.classList.remove('playing');
+    }
+
+    btn.title = isPlaying
+        ? (window.i18n?.t('chardb.voicelines.pause') || '일시정지')
+        : (window.i18n?.t('chardb.voicelines.play') || '재생');
+}
+
+/**
+ * Update all play buttons to play state (not playing)
+ */
+function updateAllPlayButtons(): void {
+    document.querySelectorAll('.voice-play-btn').forEach(btn => {
+        updatePlayButton(btn as HTMLElement, false);
+    });
+}
+
+/**
+ * Update volume display (icon and percentage)
+ */
+function updateVolumeDisplay(volume: number): void {
+    const volumeIcon = document.querySelector('.volume-icon');
+    const volumePercentage = document.querySelector('.volume-percentage');
+
+    if (volumeIcon) {
+        // 2-stage volume icon (same as renderVolumeControl)
+        let iconClass = 'fa-volume-low'; // 0-50%
+        if (volume > 50) {
+            iconClass = 'fa-volume-high'; // 51-100%
+        }
+        volumeIcon.className = `fa-solid ${iconClass} volume-icon`;
+    }
+
+    if (volumePercentage) {
+        volumePercentage.textContent = `${volume}%`;
+    }
+}
 /**
  * Loads all required data files for the character database
  *
@@ -217,6 +628,7 @@ async function loadData() {
             'DatingLandmark.json',
             'DatingBranch.json',
             'CharGetLines.json',
+            'BubbleData.json',
             'TalentGroup.json',
             'Talent.json',
             'UIText.json',
@@ -243,6 +655,7 @@ async function loadData() {
         dbState.datingBranchKR = GameData.datingBranchKR;
         dbState.charGetLines = GameData.charGetLines;
         dbState.charGetLinesKR = GameData.charGetLinesKR;
+        dbState.bubbleData = GameData.bubbleData;
         dbState.gameEnums = GameData.gameEnums;
         dbState.talentGroups = GameData.talentGroups;
         dbState.talentGroupsKR = GameData.talentGroupsKR;
@@ -1367,6 +1780,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
+    // Setup voiceline event delegation
+    setupVoicelineEvents();
+
     // Load data when page loads
     await loadData();
 });
@@ -1784,6 +2200,8 @@ function switchCharDbTab(tabName: string, event?: Event): void {
         renderSkills(dbState.selectedCharacterId);
     } else if (tabName === 'talents' && dbState.selectedCharacterId) {
         renderTalents(dbState.selectedCharacterId);
+    } else if (tabName === 'voicelines' && dbState.selectedCharacterId) {
+        renderVoicelines(parseInt(dbState.selectedCharacterId));
     }
 }
 

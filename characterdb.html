@@ -56,6 +56,7 @@
 
     <link rel="stylesheet" href="css/utils.css">
     <link rel="stylesheet" href="css/components/ui-components.css">
+    <link rel="stylesheet" href="css/components/audio-player.css">
     <link rel="stylesheet" href="css/characterdb.css">
 
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
@@ -175,6 +176,10 @@
                     <i class="fa-solid fa-sitemap"></i>
                     <span data-i18n="characterdb.talents"></span>
                 </button>
+                <button class="chardb-tab-btn" onclick="window.switchCharDbTab('voicelines')">
+                    <i class="fa-solid fa-music"></i>
+                    <span data-i18n="characterdb.voicelines.title"></span>
+                </button>
             </div>
 
             <!-- Tab Content -->
@@ -274,6 +279,12 @@
                 <div id="tab-talents" class="chardb-tab-panel">
                     <div class="character-talents-section">
                         <div id="talents-display" class="talents-display"></div>
+                    </div>
+                </div>
+
+                <div id="tab-voicelines" class="chardb-tab-panel">
+                    <div class="character-voicelines-section">
+                        <div id="voicelines-display" class="voicelines-display"></div>
                     </div>
                 </div>
             </div>

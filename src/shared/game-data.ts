@@ -69,6 +69,7 @@ export interface GameDataStore {
   affinityGifts: Record<string, any>;
   agents: Record<string, any>;
   agentsKR: Record<string, any>;
+  bubbleData: Record<string, any>; // Character voiceline text data
 
   // Character Upgrade System
   characterUpgrade: Record<string, any>;
@@ -158,6 +159,7 @@ export const GameData: GameDataStore = {
   affinityGifts: {},
   agents: {},
   agentsKR: {},
+  bubbleData: {},
   characterUpgrade: {},
   characterSkillUpgrade: {},
   characterAdvance: {},

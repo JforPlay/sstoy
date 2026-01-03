@@ -452,6 +452,18 @@ declare global {
       debounce: <T extends (...args: unknown[]) => unknown>(fn: T, wait?: number) => T;
     };
 
+    // Audio player
+    AudioPlayer?: {
+      play: (audioPath: string) => Promise<void>;
+      pause: () => void;
+      stop: () => void;
+      setVolume: (volume: number) => void;
+      getVolume: () => number;
+      getCurrentTrack: () => string | null;
+      isPlaying: () => boolean;
+      onPlaybackEnd: (callback: () => void) => void;
+      clearEndCallbacks: () => void;
+    };
     // Data loading functions
     loadFeatureData?: (feature: string) => Promise<void>;
 
