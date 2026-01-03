@@ -323,6 +323,7 @@ function parseDamageNum<T extends ParamParserState>(
 
   if (hasPercentData && dataEntry.SkillPercentAmend) {
     const percentValue = dataEntry.SkillPercentAmend[index] ?? 0;
+    // HitDamage skill percentages are stored in per-10000 format (1720000 = 172%)
     displayParts.push((percentValue / 10000).toFixed(1) + '%');
   }
 
@@ -777,6 +778,9 @@ export function parseDescriptionParams<T extends ParamParserState>(
   if (!description || !params) return description;
 
   let result = description;
+
+  // Normalize _kr suffixes in description (e.g., &Param1_kr1& → &Param1&)
+  result = result.replace(/&Param(\d+)_kr\d+&/g, '&Param$1&');
 
   // Replace &Param1& through &Param10&
   for (let i = 1; i <= 10; i++) {

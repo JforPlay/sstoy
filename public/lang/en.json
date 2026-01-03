@@ -519,5 +519,33 @@
     },
     "patchNotesModal": "Patch Notes",
     "patchNotesLoading": "Loading..."
+  },
+  "dmgcalc": {
+    "statCategories": {
+      "core": "Core Stats",
+      "offense": "Offense Stats",
+      "elemental": "Elemental Mastery",
+      "special": "Special Stats"
+    },
+    "buffsEffects": "Buffs & Effects",
+    "manualAdjustment": "Manual Adjustment",
+    "noActiveBuffs": "No active buffs",
+    "buffsAutoDetected": "Buffs are automatically detected from potentials and records",
+    "conditionalBadge": "Conditional",
+    "statSources": {
+      "characterBase": "Character Base",
+      "mainDisc": "Main Disc: {name}",
+      "subDisc": "Sub Disc: {name}"
+    },
+    "csvDownloaded": "CSV file has been downloaded",
+    "selectMasterCharacter": "Please select a master character first",
+    "title": "Damage Calculator",
+    "subtitle": "Real-time damage calculation based on build (Prototype)",
+    "recalculate": "Recalculate",
+    "exportCSV": "Export CSV",
+    "autoMode": "Auto Mode",
+    "manualMode": "Manual Mode",
+    "statsAggregation": "Stats Aggregation",
+    "buildBasedBadge": "Build-based"
   }
 }

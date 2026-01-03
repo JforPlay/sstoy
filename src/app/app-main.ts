@@ -33,7 +33,7 @@ import * as appDisc from '../modules/app-disc';
 import * as appSummary from '../modules/app-summary';
 import * as appPreset from '../modules/app-preset';
 import * as appSaveLoad from '../modules/app-saveload';
-import * as appDmgCalc from '../modules/app-dmgcalc';
+import * as appDmgCalc from '../modules/dmgcalc';
 
 // =============================================================================
 // INITIALIZATION SEQUENCE

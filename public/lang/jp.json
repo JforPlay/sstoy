@@ -518,6 +518,34 @@
       "short": "パッチノート"
     },
     "patchNotesModal": "パッチノート",
-    "patchNotesLoading": "ローディング中..."
+    "patchNotesLoading": "読み込み中..."
+  },
+  "dmgcalc": {
+    "statCategories": {
+      "core": "基本ステータス",
+      "offense": "攻撃ステータス",
+      "elemental": "元素熟知",
+      "special": "特殊ステータス"
+    },
+    "buffsEffects": "バフ＆効果",
+    "manualAdjustment": "手動調整",
+    "noActiveBuffs": "有効なバフがありません",
+    "buffsAutoDetected": "バフはポテンシャルとレコードから自動的に検出されます",
+    "conditionalBadge": "条件付き",
+    "statSources": {
+      "characterBase": "キャラクター基本",
+      "mainDisc": "メインレコード: {name}",
+      "subDisc": "サブレコード: {name}"
+    },
+    "csvDownloaded": "CSVファイルがダウンロードされました",
+    "selectMasterCharacter": "まずメインキャラクターを選択してください",
+    "title": "ダメージ計算機",
+    "subtitle": "ビルドベースリアルタイムダメージ計算 (プロトタイプ)",
+    "recalculate": "再計算",
+    "exportCSV": "CSVエクスポート",
+    "autoMode": "自動モード",
+    "manualMode": "手動モード",
+    "statsAggregation": "ステータス集計",
+    "buildBasedBadge": "ビルドベース"
   }
 }

@@ -452,6 +452,9 @@ declare global {
       debounce: <T extends (...args: unknown[]) => unknown>(fn: T, wait?: number) => T;
     };
 
+    // Data loading functions
+    loadFeatureData?: (feature: string) => Promise<void>;
+
     // Character module functions
     switchMainTab: (tab: MainTab) => void;
     isDataLoaded: () => boolean;
@@ -496,17 +499,7 @@ declare global {
     loadPresetBuild?: (hash: string, title: string) => void;
     
     // Damage Calculator functions
-    renderDamageCalculator?: () => void;
-    recalculateDamage?: () => void;
-    exportDamageCSV?: () => void;
-    toggleManualMode?: () => void;
-    toggleStatDetails?: (statKey: string) => void;
-    toggleStatSource?: (statKey: string, sourceName: string, active: boolean) => void;
-    setManualStatAdjustment?: (statKey: string, value: number) => void;
-    toggleBuff?: (index: number, active: boolean) => void;
-    setEnemyLevel?: (level: number) => void;
-    setEnemyDefense?: (defense: number) => void;
-    setEnemyResistance?: (resistance: number) => void;
+    renderDamageCalculator?: () => Promise<void>;
 
     // Toast notification
     showToast?: (message: string, type?: ToastType) => void;

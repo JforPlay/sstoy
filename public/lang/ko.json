@@ -518,6 +518,34 @@
       "short": "패치 노트"
     },
     "patchNotesModal": "패치 노트",
-    "patchNotesLoading": "로딩 중..."
+    "patchNotesLoading": "불러오는 중..."
+  },
+  "dmgcalc": {
+    "statCategories": {
+      "core": "기본 스탯",
+      "offense": "공격 스탯",
+      "elemental": "원소 강화",
+      "special": "특수 스탯"
+    },
+    "buffsEffects": "버프 & 효과",
+    "manualAdjustment": "수동 조정",
+    "noActiveBuffs": "활성화된 버프가 없습니다",
+    "buffsAutoDetected": "잠재력과 레코드에서 버프가 자동으로 감지됩니다",
+    "conditionalBadge": "조건부",
+    "statSources": {
+      "characterBase": "캠릭터 기본",
+      "mainDisc": "메인 레코드: {name}",
+      "subDisc": "서브 레코드: {name}"
+    },
+    "csvDownloaded": "CSV 파일이 다운로드되었습니다",
+    "selectMasterCharacter": "메인 캠릭터를 먼저 선택해주세요",
+    "title": "데미지 계산기",
+    "subtitle": "빌드 기반 실시간 데미지 계산 (프로토타입)",
+    "recalculate": "재계산",
+    "exportCSV": "CSV 내보내기",
+    "autoMode": "자동 모드",
+    "manualMode": "수동 모드",
+    "statsAggregation": "스탯 집계",
+    "buildBasedBadge": "빌드 기반"
   }
 }
