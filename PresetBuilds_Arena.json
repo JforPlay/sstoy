@@ -31,6 +31,7 @@
       "tags": ["징린", "틸리아", "안즈", "스킬", "아레나", "빠른전투"],
       "buildHash": "v2d-qZjxEtzXGBR%3DM%2F6bCGYt7GxM6A7RSYKFmlJBm4%25vp%60L0S%3DO!ND%2FXJp%2BwH%26N~V%2CIk%2C(%7CEA%60wQRFvn%5D0yO1w%5ED%5Ey3qtPidu4Rp)%3D%60%7C%7BDqFA"
     },
+  ],
   "elements": {
     "Water": {
       "name": "물 속성",
@@ -104,3 +105,4 @@
       "딜러명"
     ]
   }
+}
