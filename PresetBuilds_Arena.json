@@ -17,10 +17,20 @@
       "authorLink": "https://arca.live/b/stellasora/156790317",
       "element": "Water",
       "characterId": 125,
-      "tags": ["스킬", "아레나", "빠른전투"],
+      "tags": ["프리지아", "나츠카", "아야메", "스킬", "아레나", "빠른전투"],
       "buildHash": "v2d-%26z4%3EQaQhr%3Ck%26i%60Q%26%3B%3AcO%3BvWrlU(%25DS4_p%2C%3D%7CNb0%60DV)%60~zyvwXS%3E%7B%40hkBnASDX)a%22%2C%3C%5DWiFB2fT*MkG%24p!gx%5BhFBAA"
-    }
-  ],
+    },
+     {
+      "id": "preset-arena",
+      "title": "아레나 쌀먹용 4성 빛파티",
+      "description": "빛 아레나 쌀먹용 빌드! 라루빌드보다 강하다!",
+      "author": "아레나 쌀먹용 4성 빛파티2",
+      "authorLink": "https://arca.live/b/stellasora/154688496",
+      "element": "Light",
+      "characterId": 117,
+      "tags": ["징린", "틸리아", "안즈", "스킬", "아레나", "빠른전투"],
+      "buildHash": "v2d-qZjxEtzXGBR%3DM%2F6bCGYt7GxM6A7RSYKFmlJBm4%25vp%60L0S%3DO!ND%2FXJp%2BwH%26N~V%2CIk%2C(%7CEA%60wQRFvn%5D0yO1w%5ED%5Ey3qtPidu4Rp)%3D%60%7C%7BDqFA"
+    },
   "elements": {
     "Water": {
       "name": "물 속성",
