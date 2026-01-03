@@ -30,6 +30,17 @@
       "characterId": 117,
       "tags": ["징린", "틸리아", "안즈", "스킬", "아레나", "빠른전투"],
       "buildHash": "v2d-qZjxEtzXGBR%3DM%2F6bCGYt7GxM6A7RSYKFmlJBm4%25vp%60L0S%3DO!ND%2FXJp%2BwH%26N~V%2CIk%2C(%7CEA%60wQRFvn%5D0yO1w%5ED%5Ey3qtPidu4Rp)%3D%60%7C%7BDqFA"
+    },
+     {
+      "id": "preset-arena",
+      "title": "무지성 유령 투하 어둠덱",
+      "description": "범위 데미지 위주의 빌드지만, 보스전 데미지까지 신경쓴 빌드 (재앙의 전선 강추)",
+      "author": "무지성 유령 투하 어둠덱 빌드 공략",
+      "authorLink": "https://arca.live/b/stellasora/151415293",
+      "element": "Dark",
+      "characterId": 117,
+      "tags": ["캐러멜", "코제트", "미스티", "스킬", "범위딜", "재앙의전선"],
+      "buildHash": "v2d-%26z9hX.g%26i%60Q%26s%2C%3COk.%2CP%5D%5DB%3C%3Fu2%5Em2q3HJ%26en%2CP!.PrQx%5EF%3C%2C(mOk%7B%3B%23(8%26(%24Of3b%3BYjo%2C%60920%23WpNLfxB%5BQ9cIKj)Y%2BIsY%3Bbk0rF(8%5D9!%7DS_1QK%60djr.y%22Q%221_%2CWi)GAJAA"
     }
   ],
   "elements": {
