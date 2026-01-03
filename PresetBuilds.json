@@ -1,13 +1,49 @@
 {
   "version": "1.0",
   "metadata": {
-    "lastUpdated": "2025-12-23",
-    "bossRush": "미의 거장/심층의 주인 (~12/31)",
+    "lastUpdated": "2026-1-3",
+    "bossRush": "선풍의 공주/어웨이크너 (~1/31)",
     "jointDrill": "X",
     "totalBuilds": 0,
     "notes": "메타덱은 진행중인 연합/종언 컨텐츠에 맞춰 주기적으로 갱신됩니다."
   },
   "presets": [
+    {
+      "id": "preset-build",
+      "title": "(1/3) 나노히+나츠카덱 - 연합 어웨이크용",
+      "description": "이번 어웨이크너 연합용 빌드입니다. 나츠카는 1유파가 고점",
+      "author": "연합 어웨이크 바람덱 빌드",
+      "authorLink": "https://arca.live/b/stellasora/158400045",
+      "element": "Wind",
+      "characterId": 119,
+      "tags": ["표식", "스킬", "나노하", "안즈", "나츠카"],
+      "meta": true,
+      "buildHash": "v2d-ZcWyouZY~4W~%26driq%2C*dYM%7D%3CrL%3CuE%7BGH)HXR%3EulZ%5B%24TO%23f6%3AAGV%261StPO6w*0.o.u2h3pgF2%3FSuXsZnC%2Bv%3F%5D%60ZjiocJaQ%23ip5%23jre3)m%2F9%2C%5E%26Cuwp_g%23Tt%23DEA%25d%3Fs%7C3gI%2608%60)roaNT)Fu4Y%24iBKC1dQPdXo%2Fp%23%3CI%4008Y%3ALb%239%5Ep_aYL%260x%3AJeTNjQLA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(1/3) 카나체+나츠카덱 - 연합 어웨이크용",
+      "description": "이번 어웨이크너 연합용 빌드의 나노하 대신 카나체 사용 빌드. 나츠카는 1유파가 고점",
+      "author": "연합 어웨이크 바람덱 빌드",
+      "authorLink": "https://arca.live/b/stellasora/158400045",
+      "element": "Wind",
+      "characterId": 119,
+      "tags": ["표식", "스킬", "카나체", "안즈", "나츠카"],
+      "meta": true,
+      "buildHash": "v2d-yZJ%23%26Ae5wAgU~%5D0lJ%5EQUqzlgighO%3FHG%5DGz%7Du%26G9XHIbT8Ep%2B8(z%3CjfqSak1bwV%7Bbl!%3EpOs%23V%60Uv%3BunZ5mWGW%22%3A%22JZK1D_Y_m%5B%238%3Dkm%2C%5D7xES(%2Bq%7Cwp%40I4asE9YSGMA%3CwH2a%3Fu%7C1bxF%260UD5W%26P1%2FSOaEOOhe91%3E4%5Bk%60cEQ6d%24X0kw%3AX_ZE0rr8p827%2F%5DvCA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(1/3) 클라루 후유카 1월 연합용 궁빌드",
+      "description": "클라루가 공증 주는게 많아서 공증 잠재보단 다른 것들 우선적으로 챙기는걸 추천합니다 + 클라루 궁 먼저 깔아두기",
+      "author": " 클라루 후유카 궁(거장) 빌드",
+      "authorLink": "https://arca.live/b/stellasora/158566114",
+      "element": "Fire",
+      "characterId": 158,
+      "tags": ["필살기", "클라루", "후유카", "플로라"],
+      "meta": true,
+      "buildHash": "v2d-Hi%7B.nBZY%3C%3FBV%3F.n%7BsYn%2FTT%7Ddt2(tn%2FGwq%26%25t.%3AgCgLB%2F_%227X%2C%26JXcS3%2BV%23b%2BW%7CQZp)1pj8o%3Fw4Oki%24j%3E%22x%26%249.~0M%25BcE%2CeXtq%5E%25ue8%5Bq0V%60%3Br5x%60ZvOJhLii%24N%5D%5EyUP%23(RdHY%3C43g%24%5B%2Bfx%3E%3C6_8EmcM_OOwh4I%26i%3FJf%5E(gZDKE%3Fmt%3C%3F%7Bzq1T5O%7DGD%7BkG2I%60YSy3XdP%40vA"
+    },
     {
       "id": "preset-build",
       "title": "(12/23) 클라루 후유카 궁(거장) 빌드",
@@ -17,7 +53,6 @@
       "element": "Fire",
       "characterId": 158,
       "tags": ["필살기", "클라루", "후유카", "플로라"],
-      "new": true,
       "buildHash": "v2d-hcWyouZY~47~%7C%23k%2300ruyGeb)H3GU4%5EX9pnZ%5D(tY4LkS%23Q6IA%3Ch*%3D6L3.(upfE%5D%24yFx%2C%2F)U%3A~%7Di!NWy1v%246h8%40j%3C%3CUcjWS%26%2C(_Q35%3E%2FJctFl3Wq%24aLgS%7Bh%40bf8BW50g6(kL6%40O%23LV0F%23Btvlly%5DGGNK%2CQI!0!O(yxN%60c6%7D%40F_7RH6%5BBy0%3AFT.CA"
     },
     {
@@ -29,7 +64,6 @@
       "element": "Fire",
       "characterId": 158,
       "tags": ["클라루", "후유카", "플로라"],
-      "new": true,
       "buildHash": "v2d-Hit9ou_X~4MWb%25%2CG3(%3DH%3EcS%60vEkSpCgt~lQs(LbnkXEMi%3CfaC!%24%3FNoC.b%3FvnC4w%23Ah%22%7B(M%3C2m%3DBvg%253%3FgVh.Y%25vy%3FZm2!n%3A%5EEcqkk~YuUmKCp48YSBXLF0ySApNPy%2CyqAr%3FGzL6k%26%26dp%2BDuvJ%3A!d(Ki2%406Vjr6%3AI%3AxTXWc9)LcEMhZfV*fey~%7CvHC~B"
     },
     {
@@ -109,7 +143,6 @@
       "element": "Fire",
       "characterId": 134,
       "tags": ["필살기", "후유카", "치시아", "플로라"],
-      "meta": true,
       "buildHash": "v2d-ofhxou_X~4i_%7C%7D%7DksS0GLzoG%5Ba7Om)KM)M%26.*H~LrXY%3B_C%5BDR%22VX4ki8otr%3DMiNRER(7KMv%3C%23Ngapa%3FE%7C8B2hIY%3A5)%40*Yb%3D2L%3D)4BnxVk%5D%2B%40O*w%7CmhiuA%60YEJZ%3CC%5D*rAv%2Bq1bORN9%23PKMIZQq%2CRo3nMG%2CLYQG68I26eP%7D*F!P1Cul)1%236f.Ghw(bl%7CIr%25%7DQCT~DA"
     },
     {
@@ -121,7 +154,6 @@
       "element": "Fire",
       "characterId": 134,
       "tags": ["필살기", "후유카", "치시아", "플로라"],
-      "meta": true,
       "buildHash": "v2d-XiUyou%2BB_%7CSk%2CQ%2CGWi%5EW2Odyx4No%3FvD*%2FHFPzdYQ%22yW!6CjXEM)%2BV%26EH%2Cw%3Ajoi%60RX~%5D%3Ac!_r%3DUylP(Gp.Uv)i%3C%3B9vF896%3B2pz%252o%7DWgd%4074Q9Xuz%2BZl*DHCI(2V0%2CR6%7D%24WX%7BFF4Mz)vo%5EVQzFXO(%26S~wJ%2B%24H%3F47RC%2BJO_UFJ%3BPw%2CZ.khEf%3B%5B~JNE6Y~fyD!A"
     },
     {
@@ -166,7 +198,6 @@
       "element": "Water",
       "characterId": 144,
       "tags": ["평타", "치토세", "테레사", "프리지아"],
-      "meta": true,
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokI8tgagYASCTy4ClzegGnOAFi4ByDgMn2A7LSiAMZSgC2LIAlpjACy8MADlADaAVj68EMZBP4IATLMkIA7Mv4wAzBt4wZcqQDZdCMQF1UggDYdDCI1CUh7qqCZeT9UHZ81b3AF8rdkhQezFMQFCuwAtVwBnOhntHaEATppTAV3HAAkHElTdoQBFVwAwhnM0YTDSskr0A1IzswOCQAEMysK4eBTcrUQlOhQMYPp1e1QUATmVOrWHB0bFJ1S0BvqNLEBs7WYVIyF5UEfH3fdmlqD3PKZqjRsFQ8K2dkArs45Xo+Jy+gA53hNfRsaYIqfRZIaCxP4XRatJ51EHTcpw-56IHFBqoJoKDjcaCDSLdSDiPEKJS9MTTSZibaUrQIGnLKlaNYbNpk7ZHC7kq43O6c9kFYqvclgkAQz5c1EgBqNAAmHAAzhxWE1OGhWv0pAoPMrVVjIBqEGZUDq0DUDf1UPKAK4AI3VfAQS0ttr1Bv0zptZodWmuDSAA"
     },
     {
