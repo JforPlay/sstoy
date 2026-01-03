@@ -50,8 +50,8 @@ function renderHeader(): string {
   return `
     <div class="dmgcalc-header">
       <div class="dmgcalc-header-left">
-        <h2>🧮 Damage Calculator</h2>
-        <p class="dmgcalc-subtitle">Build-integrated damage analysis</p>
+        <h2>🧮 데미지 계산기 BETA</h2>
+        <p class="dmgcalc-subtitle">아직 미완성인 상태입니다. 계속 공사중...</p>
       </div>
       <div class="dmgcalc-header-actions">
         <button class="btn-action" data-action="recalculate">
