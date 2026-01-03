@@ -77,7 +77,7 @@ const CATEGORY_FILES = {
 } as const;
 
 const CATEGORY_LABELS = {
-  meta: '연합/종언용',
+  meta: '연합/종언/정상결전용',
   arena: '아레나/전선용',
   general: '범용/대체용',
   meta_backup: '오래된 메타덱들 백업용',
