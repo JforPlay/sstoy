@@ -48,7 +48,14 @@ export default defineConfig(({ command, mode }) => ({
     {
       name: 'copy-preset-builds',
       closeBundle() {
-        const filesToCopy = ['PresetBuilds.json', 'patchnotes.json'];
+        const filesToCopy = [
+          'PresetBuilds.json',
+          'PresetBuilds_Meta.json',
+          'PresetBuilds_Arena.json',
+          'PresetBuilds_General.json',
+          'PresetBuilds_MetaBackup.json',
+          'patchnotes.json'
+        ];
         filesToCopy.forEach((file) => {
           const src = resolve(__dirname, file);
           const dest = resolve(__dirname, 'dist', file);
