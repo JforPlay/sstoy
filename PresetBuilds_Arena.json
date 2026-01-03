@@ -18,11 +18,20 @@
       "element": "Light",
       "characterId": 155,
       "tags": ["평타", "아레나", "빠른전투"],
-      "meta": true,
+      "meta": true
       "buildHash": "v2d-example_hash_here"
     }
   ],
-
+ "id": "arena-example-2",
+      "title": "프리지아 아레나 날먹빌드",
+      "description": "아레나 원거리 스테이지에서 힘을 못쓰는 치토세를 위한 날먹빌드",
+      "author": "작성자",
+      "authorLink": "https://arca.live/b/stellasora/156790317",
+      "element": "Water",
+      "characterId": 125,
+      "tags": ["스킬", "아레나", "빠른전투", "처형"],
+      "buildHash": "v2d-%26z4%3EQaQhr%3Ck%26i%60Q%26%3B%3AcO%3BvWrlU(%25DS4_p%2C%3D%7CNb0%60DV)%60~zyvwXS%3E%7B%40hkBnASDX)a%22%2C%3C%5DWiFB2fT*MkG%24p!gx%5BhFBAA"
+    }
   "elements": {
     "Water": {
       "name": "물 속성",
