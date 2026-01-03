@@ -1,0 +1,77 @@
+{
+  "version": "1.0",
+  "category": "arena",
+  "metadata": {
+    "lastUpdated": "2026-01-03",
+    "bossRush": "-",
+    "jointDrill": "-",
+    "totalBuilds": 0,
+    "notes": "아레나 및 전선 컨텐츠 전용 빌드 모음입니다. 주로 짤몹 처리에 특화된 빌드들이 많습니다."
+  },
+  "presets": [
+    {
+      "id": "arena-example-1",
+      "title": "예시 빌드 - 아레나용 평캔딜러",
+      "description": "이 빌드는 예시입니다. 실제 빌드로 교체하세요.",
+      "author": "작성자",
+      "authorLink": "https://example.com",
+      "element": "Light",
+      "characterId": 155,
+      "tags": ["평타", "아레나", "빠른전투"],
+      "meta": true,
+      "buildHash": "v2d-example_hash_here"
+    }
+  ],
+
+  "elements": {
+    "Water": {
+      "name": "물 속성",
+      "iconPath": "assets/icon_common_property_1.png",
+      "color": "#3498db"
+    },
+    "Fire": {
+      "name": "불 속성",
+      "iconPath": "assets/icon_common_property_2.png",
+      "color": "#e74c3c"
+    },
+    "Earth": {
+      "name": "땅 속성",
+      "iconPath": "assets/icon_common_property_3.png",
+      "color": "#27ae60"
+    },
+    "Wind": {
+      "name": "바람 속성",
+      "iconPath": "assets/icon_common_property_4.png",
+      "color": "#1abc9c"
+    },
+    "Light": {
+      "name": "빛 속성",
+      "iconPath": "assets/icon_common_property_5.png",
+      "color": "#f39c12"
+    },
+    "Dark": {
+      "name": "어둠 속성",
+      "iconPath": "assets/icon_common_property_6.png",
+      "color": "#8e44ad"
+    },
+    "Normal": {
+      "name": "무속성",
+      "iconPath": "assets/icon_common_property_7.png",
+      "color": "#95a5a6"
+    }
+  },
+  "_instructions": {
+    "purpose": "아레나 및 전선 컨텐츠 전용 빌드 모음",
+    "tags_suggestion": [
+      "아레나",
+      "전선",
+      "PvP",
+      "평타",
+      "스킬",
+      "필살기",
+      "빠른전투",
+      "생존형",
+      "딜러명"
+    ]
+  }
+}

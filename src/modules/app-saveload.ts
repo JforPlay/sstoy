@@ -1443,12 +1443,13 @@ function updateButtonCooldown(buttonId: string, cooldownEnd: number): void {
 // PRESET BUILDS
 // =============================================================================
 
-export async function loadPresetBuilds(): Promise<PresetData> {
+export async function loadPresetBuilds(filePath?: string): Promise<PresetData> {
   try {
-    const presetData = await fetchJSON<PresetData>('PresetBuilds.json');
+    const path = filePath || 'PresetBuilds.json';
+    const presetData = await fetchJSON<PresetData>(path);
     return presetData;
   } catch (error) {
-    console.error('Error loading preset builds:', error);
+    console.error(`Error loading preset builds from ${filePath || 'PresetBuilds.json'}:`, error);
     return { presets: [], elements: {} };
   }
 }

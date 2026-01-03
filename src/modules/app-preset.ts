@@ -69,10 +69,27 @@ interface PresetData {
 const ITEMS_PER_PAGE = 9;
 const ELEMENT_ORDER = ['Water', 'Fire', 'Earth', 'Wind', 'Light', 'Dark', 'Normal'];
 
+const CATEGORY_FILES = {
+  meta: 'PresetBuilds_Meta.json',
+  arena: 'PresetBuilds_Arena.json',
+  general: 'PresetBuilds_General.json',
+  meta_backup: 'PresetBuilds_MetaBackup.json',
+} as const;
+
+const CATEGORY_LABELS = {
+  meta: '연합/종언용',
+  arena: '아레나/전선용',
+  general: '범용/대체용',
+  meta_backup: '오래된 메타덱들 백업용',
+} as const;
+
+type PresetCategory = keyof typeof CATEGORY_FILES;
+
 // =============================================================================
 // STATE
 // =============================================================================
 
+let currentCategory: PresetCategory = 'meta';
 let currentElementFilter = 'all';
 let currentTagFilters = new Set<string>();
 let allTags = new Set<string>();
@@ -80,6 +97,8 @@ let tagSearchQuery = '';
 let currentPage = 1;
 let allPresetsData: PresetBuild[] = [];
 let elementsData: Record<string, ElementData> = {};
+let categoryMetadata: PresetMetadata | undefined;
+let categoryCounts: Map<PresetCategory, number> = new Map();
 
 // =============================================================================
 // UTILITY FUNCTIONS
@@ -259,9 +278,66 @@ function getFilteredTags(): string[] {
   return [...allTags].filter((tag) => tag.toLowerCase().includes(query)).sort();
 }
 
+/**
+ * Preload counts for all categories (lightweight - only fetches preset count)
+ */
+async function preloadCategoryCounts(): Promise<void> {
+  const categories: PresetCategory[] = ['meta', 'arena', 'general', 'meta_backup'];
+
+  // Load counts in parallel
+  await Promise.all(
+    categories.map(async (category) => {
+      try {
+        const filePath = CATEGORY_FILES[category];
+        const data = (await window.loadPresetBuilds?.(filePath)) as PresetData | undefined;
+        if (data && data.presets) {
+          categoryCounts.set(category, data.presets.length);
+        }
+      } catch (error) {
+        log(`[Preset] Failed to load count for ${category}`);
+        categoryCounts.set(category, 0);
+      }
+    })
+  );
+}
+
+/**
+ * Get count of presets for a specific category
+ */
+function getCategoryCount(category: PresetCategory): number {
+  return categoryCounts.get(category) || 0;
+}
+
 // =============================================================================
 // RENDERING
 // =============================================================================
+
+/**
+ * Render category tabs
+ */
+function renderCategoryTabs(): string {
+  const categories: PresetCategory[] = ['meta', 'arena', 'general', 'meta_backup'];
+
+  let html = '<div class="preset-category-tabs">';
+
+  categories.forEach((category) => {
+    const isActive = category === currentCategory;
+    const count = getCategoryCount(category);
+
+    html += `
+      <button
+        class="category-tab ${isActive ? 'active' : ''}"
+        data-category="${category}"
+      >
+        ${CATEGORY_LABELS[category]}
+        <span class="category-count">(${count})</span>
+      </button>
+    `;
+  });
+
+  html += '</div>';
+  return html;
+}
 
 /**
  * Render preset cards for current page
@@ -560,6 +636,145 @@ function renderTagFilters(): void {
 }
 
 // =============================================================================
+// CATEGORY SWITCHING
+// =============================================================================
+
+/**
+ * Switch to a different preset category
+ */
+async function switchCategory(category: PresetCategory): Promise<void> {
+  if (category === currentCategory) return;
+
+  log(`[Preset] Switching to category: ${category}`);
+  currentCategory = category;
+
+  // Reset filters and pagination
+  currentElementFilter = 'all';
+  currentTagFilters.clear();
+  allTags.clear();
+  tagSearchQuery = '';
+  currentPage = 1;
+
+  // Show loading state
+  const container = document.getElementById('preset-container');
+  if (container) {
+    container.style.transition = 'opacity 0.3s ease';
+    container.style.opacity = '0.5';
+  }
+
+  // Load category data
+  try {
+    const filePath = CATEGORY_FILES[category];
+    const presetData = (await window.loadPresetBuilds?.(filePath)) as PresetData | undefined;
+
+    if (!presetData || !presetData.presets) {
+      throw new Error('Invalid preset data');
+    }
+
+    // Update global data
+    elementsData = presetData.elements || {};
+    allPresetsData = sortPresets(presetData.presets);
+    categoryMetadata = presetData.metadata;
+
+    // Update count for this category
+    categoryCounts.set(category, allPresetsData.length);
+
+    // Collect tags
+    allPresetsData.forEach((preset) => {
+      (preset.tags || []).forEach((tag) => allTags.add(tag));
+    });
+
+    // Re-render entire tab
+    await renderPresetsContent();
+
+    if (container) {
+      container.style.opacity = '1';
+    }
+
+    log(`[Preset] Category switched successfully: ${allPresetsData.length} builds loaded`);
+  } catch (error) {
+    console.error(`Error loading category ${category}:`, error);
+    if (container) {
+      container.style.opacity = '1';
+    }
+  }
+}
+
+/**
+ * Render preset content (without re-fetching initial data)
+ */
+async function renderPresetsContent(): Promise<void> {
+  const container = document.getElementById('preset-container');
+  if (!container) return;
+
+  let html = '<div class="preset-layout">';
+
+  // Add category tabs at the top
+  html += renderCategoryTabs();
+
+  // Info container
+  html += generateInfoContainer(categoryMetadata, allPresetsData.length);
+
+  html += '<div class="preset-builds-section">';
+
+  // Filters section
+  html += '<div class="preset-filters-section">';
+
+  // Element filters
+  html += '<div class="preset-filter-group">';
+  html += `<span class="filter-group-label">${window.i18n?.t('preset.filterByElement') || 'Filter by Element'}</span>`;
+  html += '<div class="preset-filters">';
+  html += `<button class="element-filter-btn active" data-element="all">${window.i18n?.t('disc.allElements') || 'All'}</button>`;
+
+  Object.keys(elementsData).forEach((elementKey) => {
+    const element = elementsData[elementKey];
+    if (!element) return;
+    html += `
+      <button class="element-filter-btn" data-element="${elementKey}">
+        ${createResponsiveImage(element.iconPath, element.name, 'element-filter-icon')}
+        ${element.name}
+      </button>
+    `;
+  });
+  html += '</div></div>';
+
+  // Tag filters
+  if (allTags.size > 0) {
+    html += '<div class="preset-filter-group tag-filter-group">';
+    html += '<div class="tag-filter-header">';
+    html += `<span class="filter-group-label">${window.i18n?.t('preset.filterByTag') || 'Filter by Tag'}</span>`;
+    html += '<div class="tag-search-wrapper">';
+    html += `<input type="text"
+      class="tag-search-input"
+      placeholder="${window.i18n?.t('preset.searchTags') || 'Search tags...'}"
+    />`;
+    html += '<i class="fa-solid fa-search tag-search-icon"></i>';
+    html += '</div>';
+    html += `<button class="tag-filter-clear">${window.i18n?.t('preset.clearFilters') || 'Clear All'}</button>`;
+    html += '</div>';
+    html += '<div class="tag-filter-section-dynamic"></div>';
+    html += '</div>';
+  }
+
+  html += '</div>'; // Close preset-filters-section
+
+  // Preset cards grid (empty - will be populated by updateDisplay)
+  html += '<div class="preset-builds-grid"></div>';
+
+  // Pagination container
+  html += '<div class="preset-pagination"></div>';
+
+  html += '</div></div>'; // Close preset-builds-section, preset-layout
+  container.innerHTML = html;
+
+  // Initial render with pagination
+  updateDisplay();
+
+  // Render tag filters
+  renderTagFilters();
+}
+
+// =============================================================================
 // PRESET LOAD BUTTONS
 // =============================================================================
 
@@ -570,6 +785,16 @@ function setupEventDelegation(): void {
   // Use single event listener on document for all preset interactions
   document.addEventListener('click', (e: MouseEvent) => {
     const target = e.target as HTMLElement;
+
+    // Category tab buttons
+    const categoryTab = target.closest('.category-tab') as HTMLElement | null;
+    if (categoryTab && !categoryTab.classList.contains('active')) {
+      const category = categoryTab.dataset.category as PresetCategory;
+      if (category) {
+        switchCategory(category);
+      }
+      return;
+    }
 
     // Element filter buttons
     const elementBtn = target.closest('.element-filter-btn') as HTMLElement | null;
@@ -741,7 +966,13 @@ export async function renderPresets(): Promise<void> {
   currentPage = 1;
 
   try {
-    const presetData = (await window.loadPresetBuilds?.()) as PresetData | undefined;
+    // Preload counts for all categories (lightweight)
+    await preloadCategoryCounts();
+    log('[AppPreset] Category counts loaded');
+
+    // Load the default category (meta)
+    const filePath = CATEGORY_FILES[currentCategory];
+    const presetData = (await window.loadPresetBuilds?.(filePath)) as PresetData | undefined;
     console.info('[AppPreset] Data loaded:', presetData);
 
     if (!presetData || !presetData.presets || presetData.presets.length === 0) {
@@ -749,7 +980,7 @@ export async function renderPresets(): Promise<void> {
         <div class="preset-empty-state">
           <div class="empty-icon">📭</div>
           <h3>${window.i18n?.t('preset.noPresets') || 'No preset builds'}</h3>
-          <p>${window.i18n?.t('preset.noPresetsDesc') || 'Add presets to data/PresetBuilds.json'}</p>
+          <p>${window.i18n?.t('preset.noPresetsDesc') || 'Add presets to PresetBuilds_Meta.json'}</p>
         </div>
       `;
       return;
@@ -758,74 +989,15 @@ export async function renderPresets(): Promise<void> {
     // Store data for pagination
     elementsData = presetData.elements || {};
     allPresetsData = sortPresets(presetData.presets);
+    categoryMetadata = presetData.metadata;
 
     // Collect all unique tags
     allPresetsData.forEach((preset) => {
       (preset.tags || []).forEach((tag) => allTags.add(tag));
     });
 
-    let html = '<div class="preset-layout">';
-
-    // Info container
-    html += generateInfoContainer(presetData.metadata, allPresetsData.length);
-
-    html += '<div class="preset-builds-section">';
-
-    // Filters section
-    html += '<div class="preset-filters-section">';
-
-    // Element filters
-    html += '<div class="preset-filter-group">';
-    html += `<span class="filter-group-label">${window.i18n?.t('preset.filterByElement') || 'Filter by Element'}</span>`;
-    html += '<div class="preset-filters">';
-    html += `<button class="element-filter-btn active" data-element="all">${window.i18n?.t('disc.allElements') || 'All'}</button>`;
-
-    Object.keys(elementsData).forEach((elementKey) => {
-      const element = elementsData[elementKey];
-      if (!element) return;
-      html += `
-        <button class="element-filter-btn" data-element="${elementKey}">
-          ${createResponsiveImage(element.iconPath, element.name, 'element-filter-icon')}
-          ${element.name}
-        </button>
-      `;
-    });
-    html += '</div></div>';
-
-    // Tag filters
-    if (allTags.size > 0) {
-      html += '<div class="preset-filter-group tag-filter-group">';
-      html += '<div class="tag-filter-header">';
-      html += `<span class="filter-group-label">${window.i18n?.t('preset.filterByTag') || 'Filter by Tag'}</span>`;
-      html += '<div class="tag-search-wrapper">';
-      html += `<input type="text"
-        class="tag-search-input"
-        placeholder="${window.i18n?.t('preset.searchTags') || 'Search tags...'}"
-      />`;
-      html += '<i class="fa-solid fa-search tag-search-icon"></i>';
-      html += '</div>';
-      html += `<button class="tag-filter-clear">${window.i18n?.t('preset.clearFilters') || 'Clear All'}</button>`;
-      html += '</div>';
-      html += '<div class="tag-filter-section-dynamic"></div>';
-      html += '</div>';
-    }
-
-    html += '</div>'; // Close preset-filters-section
-
-    // Preset cards grid (empty - will be populated by updateDisplay)
-    html += '<div class="preset-builds-grid"></div>';
-
-    // Pagination container
-    html += '<div class="preset-pagination"></div>';
-
-    html += '</div></div>'; // Close preset-builds-section, preset-layout
-    container.innerHTML = html;
-
-    // Initial render with pagination
-    updateDisplay();
-
-    // Render tag filters
-    renderTagFilters();
+    // Render the content with category tabs
+    await renderPresetsContent();
   } catch (error) {
     console.error('Error rendering preset builds:', error);
     container.innerHTML = `

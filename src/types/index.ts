@@ -507,7 +507,7 @@ declare global {
 
     // Preset module functions
     renderPresets?: () => void;
-    loadPresetBuilds?: () => Promise<unknown>;
+    loadPresetBuilds?: (filePath?: string) => Promise<unknown>;
     loadPresetBuild?: (hash: string, title: string) => void;
     
     // Damage Calculator functions

@@ -1,0 +1,96 @@
+{
+  "version": "1.0",
+  "category": "meta_backup",
+  "metadata": {
+    "lastUpdated": "2026-01-03",
+    "bossRush": "-",
+    "jointDrill": "-",
+    "totalBuilds": 0,
+    "notes": "지난 시즌들의 메타 빌드 아카이브입니다. 참고용으로 보관됩니다."
+  },
+  "presets": [
+    {
+      "id": "preset-build",
+      "title": "(12/23) 클라루 후유카 궁(거장) 빌드",
+      "description": "클라루의 거장용 빌드, 클라루의 궁이 12초로 후유카의 10초보다 길기에, 클라루 궁 먼저 깔아두고 후유카 궁을 쓰면 좋습니다",
+      "author": " 클라루 후유카 궁(거장) 빌드",
+      "authorLink": "https://arca.live/b/stellasora/157618284",
+      "element": "Fire",
+      "characterId": 158,
+      "tags": ["필살기", "클라루", "후유카", "플로라"],
+      "buildHash": "v2d-hcWyouZY~47~%7C%23k%2300ruyGeb)H3GU4%5EX9pnZ%5D(tY4LkS%23Q6IA%3Ch*%3D6L3.(upfE%5D%24yFx%2C%2F)U%3A~%7Di!NWy1v%246h8%40j%3C%3CUcjWS%26%2C(_Q35%3E%2FJctFl3Wq%24aLgS%7Bh%40bf8BW50g6(kL6%40O%23LV0F%23Btvlly%5DGGNK%2CQI!0!O(yxN%60c6%7D%40F_7RH6%5BBy0%3AFT.CA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(12/6) 일섭 - 거장용 후유카 궁빌드",
+      "description": "일섭발 연합토벌 거장용 후유카 궁빌드입니다.",
+      "author": "나만 볼거야 저장소",
+      "authorLink": "https://gall.dcinside.com/stellasora/153148",
+      "element": "Fire",
+      "characterId": 134,
+      "tags": ["필살기", "후유카", "치시아", "플로라"],
+      "buildHash": "v2d-ofhxou_X~4i_%7C%7D%7DksS0GLzoG%5Ba7Om)KM)M%26.*H~LrXY%3B_C%5BDR%22VX4ki8otr%3DMiNRER(7KMv%3C%23Ngapa%3FE%7C8B2hIY%3A5)%40*Yb%3D2L%3D)4BnxVk%5D%2B%40O*w%7CmhiuA%60YEJZ%3CC%5D*rAv%2Bq1bORN9%23PKMIZQq%2CRo3nMG%2CLYQG68I26eP%7D*F!P1Cul)1%236f.Ghw(bl%7CIr%25%7DQCT~DA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(12/3) 연합용 후유카 궁빌드",
+      "description": "필살기 접대 연합용 최신덱입니다",
+      "author": "거장용' 후유카 궁빌드 (실험중)",
+      "authorLink": "https://arca.live/b/stellasora/155577779",
+      "element": "Fire",
+      "characterId": 134,
+      "tags": ["필살기", "후유카", "치시아", "플로라"],
+      "buildHash": "v2d-XiUyou%2BB_%7CSk%2CQ%2CGWi%5EW2Odyx4No%3FvD*%2FHFPzdYQ%22yW!6CjXEM)%2BV%26EH%2Cw%3Ajoi%60RX~%5D%3Ac!_r%3DUylP(Gp.Uv)i%3C%3B9vF896%3B2pz%252o%7DWgd%4074Q9Xuz%2BZl*DHCI(2V0%2CR6%7D%24WX%7BFF4Mz)vo%5EVQzFXO(%26S~wJ%2B%24H%3F47RC%2BJO_UFJ%3BPw%2CZ.khEf%3B%5B~JNE6Y~fyD!A"
+    }
+  ],
+
+  "elements": {
+    "Water": {
+      "name": "물 속성",
+      "iconPath": "assets/icon_common_property_1.png",
+      "color": "#3498db"
+    },
+    "Fire": {
+      "name": "불 속성",
+      "iconPath": "assets/icon_common_property_2.png",
+      "color": "#e74c3c"
+    },
+    "Earth": {
+      "name": "땅 속성",
+      "iconPath": "assets/icon_common_property_3.png",
+      "color": "#27ae60"
+    },
+    "Wind": {
+      "name": "바람 속성",
+      "iconPath": "assets/icon_common_property_4.png",
+      "color": "#1abc9c"
+    },
+    "Light": {
+      "name": "빛 속성",
+      "iconPath": "assets/icon_common_property_5.png",
+      "color": "#f39c12"
+    },
+    "Dark": {
+      "name": "어둠 속성",
+      "iconPath": "assets/icon_common_property_6.png",
+      "color": "#8e44ad"
+    },
+    "Normal": {
+      "name": "무속성",
+      "iconPath": "assets/icon_common_property_7.png",
+      "color": "#95a5a6"
+    }
+  },
+  "_instructions": {
+    "purpose": "지난 시즌 메타 빌드 아카이브 - 참고용",
+    "tags_suggestion": [
+      "과거메타",
+      "아카이브",
+      "12월메타",
+      "11월메타",
+      "연합토벌",
+      "종언",
+      "딜러명"
+    ]
+  }
+}
