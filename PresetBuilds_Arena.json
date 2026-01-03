@@ -60,6 +60,28 @@
   },
   "_instructions": {
     "purpose": "아레나 및 전선 컨텐츠 전용 빌드 모음",
+    "how_to_add_preset": [
+      "1. 앱에서 빌드 생성",
+      "2. 요약 탭에서 'URL 공유' 클릭",
+      "3. URL에서 '#build=' 뒤의 해시 부분만 복사",
+      "4. 아래 형식으로 presets 배열에 추가:",
+      "{",
+      "  \"id\": \"unique-id\",",
+      "  \"title\": \"빌드 제목\",",
+      "  \"description\": \"빌드 설명 (전략, 강점 등)\",",
+      "  \"author\": \"작성자 이름\",",
+      "  \"authorLink\": \"https://source-url.com\" (optional),",
+      "  \"element\": \"Fire\" (Water/Fire/Earth/Wind/Light/Dark/Normal),",
+      "  \"characterId\": 100 (3-digit character ID, e.g., 100, 101, 102),",
+      "  \"tags\": [\"태그1\", \"태그2\"],",
+      "  \"new\": true (optional, displays 'NEW' badge - highest priority),",
+      "  \"meta\": true (optional, displays '메타' badge - second priority),",
+      "  \"buildHash\": \"복사한_해시_여기에\"",
+      "}",
+      "",
+      "정렬 순서: new → meta → others (각 그룹 내에서 속성 순서대로)",
+      "태그 필터: 태그를 클릭하면 해당 태그가 포함된 빌드만 표시"
+    ],
     "tags_suggestion": [
       "아레나",
       "전선",
