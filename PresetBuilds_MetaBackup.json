@@ -43,6 +43,19 @@
       "buildHash": "v2d-XiUyou%2BB_%7CSk%2CQ%2CGWi%5EW2Odyx4No%3FvD*%2FHFPzdYQ%22yW!6CjXEM)%2BV%26EH%2Cw%3Ajoi%60RX~%5D%3Ac!_r%3DUylP(Gp.Uv)i%3C%3B9vF896%3B2pz%252o%7DWgd%4074Q9Xuz%2BZl*DHCI(2V0%2CR6%7D%24WX%7BFF4Mz)vo%5EVQzFXO(%26S~wJ%2B%24H%3F47RC%2BJO_UFJ%3BPw%2CZ.khEf%3B%5B~JNE6Y~fyD!A"
     }
   ],
+  {
+      "id": "preset-build",
+      "title": "정상결전 난이도100 플로라 메인/클라루, 치시아덱",
+      "description": "클라루 지원스킬 포탄 딜에 몰빵한 덱 상세 캐릭 스펙 및 운용 방법은 원본 글에서",
+      "author": " 정상결전 난이도100 후유카 없는 플로라 메인덱(클라루, 치시아)",
+      "authorLink": "https://arca.live/b/stellasora/158590219",
+      "element": "Fire",
+      "characterId": 126,
+      "tags": ["클라루", "치시아", "플로라"],
+      "meta": true,
+      "buildHash": "v2d-CRjxMCnu~4D%7C%2C.B3w%3CDl3Uk%24BFaHsX%3Ft3%2C%2CGuptX0w%24H%60tZFg%24I%40)%60z%25)Sy4%7Cq6WcxNh~zY_%7Bh%26%26%605_f%2CX2%23Ui*k%3C4em2nROnWR!~rO%60mU)%60YHM(%3D_2hu%7D.%2FB0Q%2C%26B"
+    }
+    ],
 
   "elements": {
     "Water": {
