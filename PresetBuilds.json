@@ -10,6 +10,18 @@
   "presets": [
     {
       "id": "preset-build",
+      "title": "(1/3) 나즈나+나츠카덱 - 연합 어웨이크너 용",
+      "description": "나즈나와 나츠카를 곁들인 이번 어웨이크너 연합용 빌드입니다. 자세한건 링크 참고",
+      "author": "바람 나즈나 하브덱 공략",
+      "authorLink": "https://arca.live/b/stellasora/158616070",
+      "element": "Earth",
+      "characterId": 156,
+      "tags": ["표식", "스킬", "나즈나", "안즈", "나츠카"],
+      "meta": true,
+      "buildHash": "v2d-hct9oumBO5%7D%5E**sHH%5ER%254P9%402(92%26tuXD%7Dww%3FD~Q%3EulZg%5Ebb!%26FDW%2BmL1Su8_zi%3DyrooV%3DZ)%2FgPPedKFw%25V%3A2)kb)*szGKET~%3F%5Dm~%23XMp%3Cd%24%40.%22%24(iJ%23_GH.%7DTsh%3Ee%60j%7DccaeLnORc!WJ)hi*r%5E33TYy%2BLCZ8y6%403ukz~5%3C6%26y%22SiK%5BB%2FLj!PPq%40Tyj%7Ba~N%7CZs%3CI%2CTk%40W%3F%23"
+    },
+    {
+      "id": "preset-build",
       "title": "(1/3) 나노히+나츠카덱 - 연합 어웨이크용",
       "description": "이번 어웨이크너 연합용 빌드입니다. 나츠카는 1유파가 고점",
       "author": "연합 어웨이크 바람덱 빌드",
