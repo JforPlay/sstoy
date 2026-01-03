@@ -12,7 +12,7 @@
     {
       "id": "arena-example-1",
       "title": "예시 빌드 - 아레나용 평캔딜러",
-      "description": "이 빌드는 예시입니다. 실제 빌드로 교체하세요.",
+      "description": "이 빌드는 테스트용 예시입니다. 아레나덱들은 추후 업데이트 될 예정입니다.",
       "author": "작성자",
       "authorLink": "https://example.com",
       "element": "Light",
