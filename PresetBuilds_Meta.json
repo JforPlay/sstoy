@@ -59,6 +59,18 @@
     },
     {
       "id": "preset-build",
+      "title": "(1/7) 클라루 후유카 종언/연합용 2유파 빌드",
+      "description": "종언 877, 어웨이크너 27만 자세한 캐릭터, 레코드 스펙은 게시물 참조",
+      "author": " 후유카 2유파 877.9",
+      "authorLink": "https://arca.live/b/stellasora/158939175",
+      "element": "Fire",
+      "characterId": 134,
+      "tags": ["스킬", "클라루", "후유카", "플로라"],
+      "meta": true,
+      "buildHash": "=v2d-hcMmoB%7B)%7D4e!1%7B4iAMQG%5BA%3CYHhItDHfGuE(fWFFI7amu%40c!av%60MV%26%25Mp%222fws9tK4%3EbEF1hm8%269QG%23CEyTIx%26Lh.GwxJe%3CCq9t%3Ca%7BGYRIh3e%3FO*wmQc%7DA2*%7DgW%5D)%3BP%5EPbpT%23kY6OO%7DD"
+    },
+    {
+      "id": "preset-build",
       "title": "(1/7) 클라루 후유카 종언용 1유파 하이브리드 빌드",
       "description": "이번 종언 익스트림의 쫄몹 정리 기믹으로 인해 후유카의 1유파 하이브리드/2유파 평타 빌드도 좋은 선택지인데 궁빌드에 비해 후유카의 스펙이 어느정도 요구됩니다. 과거 치시아 버전은 범용/대체덱에서 확인가능",
       "author": "과거 하이브리드덱 재탕, 링크없음",
