@@ -11,8 +11,8 @@
   "presets": [
     {
       "id": "preset-build",
-      "title": "(1/3) 하이브리드 나즈나 - 연합 어웨이크너 용",
-      "description": "땅속인줄 알았지만 바람속성이었던 하이브리드 나즈나 덱입니다. 근데 나츠카를 곁들인..",
+      "title": "(1/3) 하이브리드 나즈나 - 연합 어웨이크너/종언 용",
+      "description": "땅속인줄 알았지만 바람속성이었던 하이브리드 나즈나 덱입니다. 근데 이제 나츠카를 곁들인..",
       "author": "바람 나즈나 하브덱 공략",
       "authorLink": "https://arca.live/b/stellasora/158616070",
       "element": "Wind",
@@ -68,6 +68,29 @@
       "tags": ["필살기", "클라루", "후유카", "플로라"],
       "meta": true,
       "buildHash": "v2d-Hig_gu6Y*)U%3E8%60%40Kdg%7DSnju3%3Bzjeg%3D!eC!ls!nabwLRoo~%5Bywg%7C.RM_D%5Bz%2F.V%7BWSxR%2BN.B%60nYwE%7Bqfv%5D9%23%7D%3Cb%7D%7D%7CY%3E~ZZ%3Ahj3%25~%25qEV%7BRkA%25S%7D6cg%24fLGBr~5CZzQ6R%5DzwRIec_q1_%24!_fXboNqIIBI%22qPGOBVCjkuv%402fqqHg%5Ew%5DMV%60aC%3AyCrs%3DVK)u%5D%3FTq(%5EW%3E%5DkqPQIE%3BHX%3D4aA2%3D4%2BnHE2%407!jC66%40K~IC"
+    },
+    {
+      "id": "preset-build",
+      "title": "(1/7) 클라루 후유카 종언용 1유파 하이브리드 빌드",
+      "description": "이번 종언 익스트림의 쫄몹 정리 기믹으로 인해 후유카의 1유파 빌드들도 고려해볼만 합니다. 과거 치시아 버전은 범용/대체덱에서 확인가능",
+      "author": "과거 하이브리드덱 재탕, 링크없음",
+      "authorLink": "",
+      "element": "Fire",
+      "characterId": 134,
+      "tags": ["평타", "클라루", "후유카", "플로라"],
+      "meta": true,
+      "buildHash": "v2d-%22h_.ou0XO5K_fNcp%60z%40RK97%7D%25%3A%3E%3D0wTP%60J%3ECN%5EI%7Dk5X7.vj%5DMMP%3BBV%3F3wvFa5m%7BDM%7CK1vp4%2BpfH%3DS%25K%3C5_%22RP%401sy%3D%25%23sv%3D)5jN%5B%3CI%3AnFV4*a%25Q(8H%2BjIkP6*%3C!iO%7D%5E_%261ySoedzn%606B%5EqjSI.V)2ws4Ian*fq%7BEi%2FZFeu045%3A%22ECY0H%22CI)P"
+    },
+    {
+      "id": "preset-build",
+      "title": "(11/14) 평캔 시아",
+      "description": "이번 종언에서도 다시 돌아왔습니다. 접대는 없지만 잘깎아둔 도자기가 있다면 여전히 쓸만합니다",
+      "author": "속성별 메타 빌드 모음",
+      "authorLink": "https://arca.live/b/stellasora/153536269",
+      "element": "Light",
+      "characterId": 155,
+      "tags": ["평타", "시아", "미네르바", "틸리아"],
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokJPLgUuYASA7Q4CKjgMn2A7LSiAMZSgC2tIAlpjAKxuUAOUA2m+zYIYyARwQAmUYIQA2aeLYKhAdmUwAzOqli2AFg0BdVFwA2jXQk6R5IS7Ki3LKx6l2bHAXxMNIoS9YggCKrgBhDlPaYoeEyLtBRboIwEpiAoV2AFquAM53RHB5xYZ7eIACGMIws0JrJJnwCGhISetJ19U0SGgitGlq19QAcxiBmFpXtrnYjGlBshVy+-pUSvamZ0XWjeattk9CAJ007gK7jgASDIAWoRcl+zKwILtWQ-DA3EiICTzqPKhJKr5+90k-yH4SACc-0+KgGQ0uQOsTg+EgckEa4yeS0gWhRn2BUD0MzmmK+kTCCQBmD2R2iT1iIHSWRJvzJB2O9JBjIpBUKABNGABnRh0IpMNClSDPPQIDR-EACoUXMUIG6oGVobbyiQdEA8gCuACMRfL2qhtTq5TBxRpQZrdaqzcIEBygA"
     }
   ],
 
