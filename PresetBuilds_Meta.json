@@ -2,11 +2,11 @@
   "version": "1.0",
   "category": "meta",
   "metadata": {
-    "lastUpdated": "2026-01-03",
+    "lastUpdated": "2026-01-07",
     "bossRush": "선풍의 공주/어웨이크너 (~1/31)",
-    "jointDrill": "X",
+    "jointDrill": "극장의 유령-로비나 (~1/13)",
     "totalBuilds": 0,
-    "notes": "연합토벌 및 종언 컨텐츠 전용 빌드입니다. 주기적으로 진행 중인 시즌에 맞춰 업데이트 됩니다."
+    "notes": "연합토벌 및 종언 컨텐츠 전용 빌드들 입니다. 이번 종언의 노래 익스트림에서는 쫄 몹 정리가 중요한 기믹으로 작용합니다."
   },
   "presets": [
     {
@@ -59,15 +59,15 @@
     },
     {
       "id": "preset-build",
-      "title": "정상결전 난이도100 플로라 메인/클라루, 치시아덱",
-      "description": "클라루 지원스킬 포탄 딜에 몰빵한 덱 상세 캐릭 스펙 및 운용 방법은 원본 글에서",
-      "author": " 정상결전 난이도100 후유카 없는 플로라 메인덱(클라루, 치시아)",
-      "authorLink": "https://arca.live/b/stellasora/158590219",
+      "title": "(1/7) 클라루 후유카 연합/종언용 궁빌드",
+      "description": "플로라 - 과거의 잿더미 (저점보완 물나비), 미래희망의 불씨 (고점 불나비), 후유카의 후순위들은 필수 챙기고 난 이후 보이는거 집어주면 되고, 쾌속연타는 공속이 있기때문에 명함은 꼭 챙겨주세요. 종언도 동일, 연합은 링크 영상 참고",
+      "author": " 명함 후유카 어웨이크너 4궁 35만 빌드 소개",
+      "authorLink": "https://arca.live/b/stellasora/158697091",
       "element": "Fire",
-      "characterId": 126,
-      "tags": ["클라루", "치시아", "플로라", "정상결전"],
+      "characterId": 158,
+      "tags": ["필살기", "클라루", "후유카", "플로라"],
       "meta": true,
-      "buildHash": "v2d-CRjxMCnu~4D%7C%2C.B3w%3CDl3Uk%24BFaHsX%3Ft3%2C%2CGuptX0w%24H%60tZFg%24I%40)%60z%25)Sy4%7Cq6WcxNh~zY_%7Bh%26%26%605_f%2CX2%23Ui*k%3C4em2nROnWR!~rO%60mU)%60YHM(%3D_2hu%7D.%2FB0Q%2C%26B"
+      "buildHash": "v2d-Hig_gu6Y*)U%3E8%60%40Kdg%7DSnju3%3Bzjeg%3D!eC!ls!nabwLRoo~%5Bywg%7C.RM_D%5Bz%2F.V%7BWSxR%2BN.B%60nYwE%7Bqfv%5D9%23%7D%3Cb%7D%7D%7CY%3E~ZZ%3Ahj3%25~%25qEV%7BRkA%25S%7D6cg%24fLGBr~5CZzQ6R%5DzwRIec_q1_%24!_fXboNqIIBI%22qPGOBVCjkuv%402fqqHg%5Ew%5DMV%60aC%3AyCrs%3DVK)u%5D%3FTq(%5EW%3E%5DkqPQIE%3BHX%3D4aA2%3D4%2BnHE2%407!jC66%40K~IC"
     }
   ],
 
