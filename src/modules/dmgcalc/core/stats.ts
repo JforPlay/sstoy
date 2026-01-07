@@ -3,11 +3,13 @@
  * Handles aggregation from characters, potentials, and discs
  */
 
-import type { AggregatedStat, StatSource, StatCategory } from '../types';
+import type { AggregatedStat, StatSource, StatCategory, Position } from '../types';
 import { STAT_CATEGORIES, PHASE_TO_LEVEL } from '../constants';
 import { getState, updateState } from './state';
 import { GameData } from '../../../shared/game-data';
 import { formatStatValue as formatStatValueFromEnums } from './enums';
+import { parseAllPartyPotentialEffects, convertPotentialEffectsToStatSources } from './potentials';
+import { initializeBuffs, applyActiveBuffsToStats } from './buffs';
 
 // Re-export formatStatValue for convenience
 export { formatStatValueFromEnums as formatStatValue };
@@ -57,7 +59,11 @@ export function aggregateStatsFromBuild(): void {
   // 4. Stats from discs
   aggregateDiscStats();
 
-  // 5. Calculate totals
+  // 5. Initialize and apply buff system
+  initializeBuffs();
+  applyActiveBuffsToStats(getState().stats);
+
+  // 6. Calculate totals
   calculateStatTotals();
 
   console.log(`[DmgCalc] ========== Stat aggregation complete ==========`);
@@ -212,24 +218,97 @@ function aggregateBaseStats(character: any): void {
 }
 
 // =============================================================================
-// TALENT BONUSES (LIMIT BREAK ANALYSIS)
+// TALENT BONUSES (LIMIT BREAK)
 // =============================================================================
 
 /**
- * Aggregate talent bonuses from limit break analysis
- * Reads from window.__talentBonuses which is set by limitbreak.ts
+ * Aggregate talent bonuses from character's current limit break level
+ * This includes talents unlocked at each LB level (0-8)
  */
 function aggregateTalentBonuses(): void {
-  const talentBonuses = (window as any).__talentBonuses;
-  if (!talentBonuses || Object.keys(talentBonuses).length === 0) {
-    return; // No talent bonuses to apply
+  // First check if there are manual overrides from limitbreak analysis
+  const manualBonuses = (window as any).__talentBonuses;
+  if (manualBonuses && Object.keys(manualBonuses).length > 0) {
+    applyTalentBonusesFromMap(manualBonuses, '한계돌파 재능 (분석)');
+    return;
   }
 
-  console.log(`[DmgCalc] Applying talent bonuses:`, talentBonuses);
+  // Otherwise, calculate from current character's limit break level
+  const masterChar = window.state?.party?.master;
+  if (!masterChar || typeof masterChar === 'string') return;
 
-  // talentBonuses is a map of { statTypeId: rawValue }
-  // We need to convert statTypeId to statKey and apply the bonus
-  Object.entries(talentBonuses).forEach(([statTypeIdStr, rawValue]) => {
+  const charId = String(masterChar.id);
+  const limitBreak = window.state?.characterLevelPhase?.master || 0;
+
+  // Get talent groups for this character
+  const talentGroups = GameData.talentGroups
+    ? Object.values(GameData.talentGroups)
+        .filter((group: any) => String(group.CharId) === charId)
+        .sort((a: any, b: any) => a.Background - b.Background)
+    : [];
+
+  if (talentGroups.length === 0) {
+    console.log(`[DmgCalc] No talent groups found for character ${charId}`);
+    return;
+  }
+
+  // Get talents unlocked up to current LB level (accumulative)
+  const unlockedGroups = talentGroups.filter((group: any) => group.Background <= limitBreak);
+  const unlockedTalents: any[] = [];
+
+  unlockedGroups.forEach((group: any) => {
+    const groupTalents = GameData.talents
+      ? Object.values(GameData.talents).filter((talent: any) => talent.GroupId === group.Id)
+      : [];
+    unlockedTalents.push(...groupTalents);
+  });
+
+  if (unlockedTalents.length === 0) {
+    console.log(`[DmgCalc] No talents unlocked at LB ${limitBreak}`);
+    return;
+  }
+
+  console.log(`[DmgCalc] Processing ${unlockedTalents.length} unlocked talents at LB ${limitBreak}`);
+
+  // Calculate bonuses from talents
+  const bonuses: Record<number, number> = {};
+
+  unlockedTalents.forEach((talent: any) => {
+    // Only process Type 2 talents (sub nodes that give stat bonuses)
+    if (talent.Type !== 2) return;
+    if (!talent.Param1) return;
+
+    // Parse the param to get the effect
+    const paramParts = talent.Param1.split(',');
+    if (paramParts.length < 3) return;
+
+    const effectId = parseInt(paramParts[2]);
+    const effectData = GameData.effectValue?.[effectId];
+
+    if (!effectData) return;
+
+    // Get the stat type ID from EffectTypeFirstSubtype
+    const statTypeId = effectData.EffectTypeFirstSubtype;
+    const rawValue = parseFloat(effectData.EffectTypeParam1 || '0');
+
+    if (statTypeId !== undefined && !isNaN(rawValue) && rawValue !== 0) {
+      bonuses[statTypeId] = (bonuses[statTypeId] || 0) + rawValue;
+    }
+  });
+
+  // Apply calculated bonuses
+  if (Object.keys(bonuses).length > 0) {
+    applyTalentBonusesFromMap(bonuses, '한계돌파 재능');
+  }
+}
+
+/**
+ * Apply talent bonuses from a map to stats
+ */
+function applyTalentBonusesFromMap(bonuses: Record<number, number>, sourceName: string): void {
+  console.log(`[DmgCalc] Applying talent bonuses from ${sourceName}:`, bonuses);
+
+  Object.entries(bonuses).forEach(([statTypeIdStr, rawValue]) => {
     const statTypeId = parseInt(statTypeIdStr);
     if (isNaN(statTypeId) || typeof rawValue !== 'number') return;
 
@@ -241,7 +320,7 @@ function aggregateTalentBonuses(): void {
     }
 
     // Add the talent bonus as a stat source
-    addStatSource(statKey, '한계돌파 재능', rawValue, true);
+    addStatSource(statKey, sourceName, rawValue, true);
     console.log(`[DmgCalc] Applied talent bonus: ${statKey} +${rawValue}`);
   });
 }
@@ -297,32 +376,71 @@ function getStatKeyFromEffectTypeId(effectTypeId: number): string | null {
 // =============================================================================
 
 /**
- * Aggregate stats from potentials
- * TODO: Implement full potential parsing (Requirement #1)
+ * Aggregate stats from potentials for all party members
+ * Uses parsePotentialEffects() to extract and apply stat bonuses
  */
 function aggregatePotentialStats(): void {
-  if (!window.state?.selectedPotentials?.master) return;
+  // Parse potential effects from all party positions (master, assist1, assist2)
+  const allPotentialEffects = parseAllPartyPotentialEffects();
 
-  const masterPotentials = window.state.selectedPotentials.master;
+  if (allPotentialEffects.length === 0) {
+    console.log('[DmgCalc] No potential effects found');
+    return;
+  }
 
-  // Process each selected potential
-  masterPotentials.forEach(potId => {
-    if (!potId) return;
+  console.log(`[DmgCalc] Found ${allPotentialEffects.length} potentials with effects`);
 
-    const level = window.state?.potentialLevels?.master?.[potId] || 1;
-    const potential = window.state?.potentials?.[potId];
+  // Convert to stat sources and add to aggregation
+  const statSources = convertPotentialEffectsToStatSources(allPotentialEffects);
 
-    if (!potential) return;
+  statSources.forEach(({ statKey, source, value, character }) => {
+    // Skip if value is 0 or invalid
+    if (!value || value === 0) return;
 
-    const potentialName = getPotentialName(String(potId));
-
-    // Parse potential effects and extract stat bonuses
-    // This is a placeholder - actual implementation needs to parse
-    // potential descriptions and extract stat modifiers
-
-    // Example: If potential gives +10% ATK
-    // addStatSource('Atk', `잠재력: ${potentialName}`, atkBonus, true);
+    // Add the stat source with character tracking
+    addStatSourceWithCharacter(statKey, source, value, true, character);
   });
+
+  // Log summary of potential contributions
+  const potentialContributions = new Map<string, number>();
+  statSources.forEach(({ statKey, value }) => {
+    const current = potentialContributions.get(statKey) || 0;
+    potentialContributions.set(statKey, current + value);
+  });
+
+  if (potentialContributions.size > 0) {
+    console.log('[DmgCalc] Potential stat contributions:', Object.fromEntries(potentialContributions));
+  }
+}
+
+/**
+ * Add a stat source with character tracking
+ */
+function addStatSourceWithCharacter(
+  statKey: string,
+  source: string,
+  value: number,
+  active: boolean,
+  character?: Position
+): void {
+  const state = getState();
+  let stat = state.stats.get(statKey);
+
+  // If stat doesn't exist in initialized categories, create it dynamically
+  if (!stat) {
+    state.stats.set(statKey, {
+      name: getStatDisplayName(statKey),
+      baseValue: 0,
+      sources: [],
+      manualAdjustment: 0,
+      total: 0
+    });
+    stat = state.stats.get(statKey);
+  }
+
+  if (stat) {
+    stat.sources.push({ source, value, active, character });
+  }
 }
 
 // =============================================================================

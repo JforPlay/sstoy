@@ -78,6 +78,133 @@ function renderSkillCards(): string {
       ${state.results.skill ? renderSkillCard('skill', state.results.skill) : ''}
       ${state.results.ultimate ? renderSkillCard('ultimate', state.results.ultimate) : ''}
     </div>
+    ${renderPotentialSkillCards()}
+  `;
+}
+
+/**
+ * Render potential damage skill cards
+ * These are additional damage skills that come from character potentials
+ */
+function renderPotentialSkillCards(): string {
+  const state = getState();
+  const potentialSkills = state.results.potentialSkills;
+
+  if (!potentialSkills || potentialSkills.length === 0) {
+    return '';
+  }
+
+  return `
+    <div class="dmgcalc-potential-skills">
+      <div class="potential-skills-header">
+        <h3 class="potential-skills-title">
+          <i class="fa-solid fa-sparkles"></i>
+          잠재력 추가 피해
+        </h3>
+        <p class="potential-skills-subtitle">잠재력에서 발동되는 추가 피해 스킬</p>
+      </div>
+      <div class="dmgcalc-skill-cards potential-skill-cards">
+        ${potentialSkills.map(potSkill => renderPotentialSkillCard(potSkill)).join('')}
+      </div>
+    </div>
+  `;
+}
+
+/**
+ * Render a single potential skill card
+ */
+function renderPotentialSkillCard(potSkill: any): string {
+  const positionLabels: Record<string, string> = {
+    master: '주력',
+    assist1: '지원1',
+    assist2: '지원2'
+  };
+
+  const positionColors: Record<string, string> = {
+    master: '#3b82f6',
+    assist1: '#10b981',
+    assist2: '#8b5cf6'
+  };
+
+  const damageTypeNames: Record<number, string> = {
+    1: '일반',
+    2: '스킬',
+    3: '필살기',
+    4: '도트',
+    5: '추가'
+  };
+
+  const elementTypeNames: Record<number, string> = {
+    1: '물리',
+    2: '화염',
+    3: '빙결',
+    4: '전격',
+    5: '바람',
+    6: '암흑'
+  };
+
+  const position = potSkill.character || 'master';
+
+  return `
+    <div class="dmgcalc-skill-card potential-skill-card" style="border-left-color: ${positionColors[position]}">
+      <div class="skill-card-header">
+        <div class="potential-skill-badge" style="background-color: ${positionColors[position]}">
+          ${positionLabels[position]}
+        </div>
+        <h3>${potSkill.potentialName}</h3>
+        <div class="potential-skill-tags">
+          ${potSkill.damageType ? `<span class="damage-type-tag">${damageTypeNames[potSkill.damageType] || '기타'}</span>` : ''}
+          ${potSkill.elementType ? `<span class="element-type-tag">${elementTypeNames[potSkill.elementType] || '무속성'}</span>` : ''}
+        </div>
+      </div>
+
+      <div class="skill-card-body">
+        <div class="damage-summary">
+          <div class="damage-row">
+            <span class="damage-label">기본 피해:</span>
+            <span class="damage-value">${potSkill.totalBaseDamage.toLocaleString()}</span>
+          </div>
+          <div class="damage-row">
+            <span class="damage-label">크리티컬 피해:</span>
+            <span class="damage-value">${potSkill.totalCritDamage.toLocaleString()}</span>
+          </div>
+          <div class="damage-row highlight">
+            <span class="damage-label">평균 피해:</span>
+            <span class="damage-value">${potSkill.totalAverageDamage.toLocaleString()}</span>
+          </div>
+        </div>
+
+        ${potSkill.hitDamages && potSkill.hitDamages.length > 0 ? `
+          <div class="hit-damages-section">
+            <h4 class="section-title">타격 상세 (${potSkill.hitDamages.length}회)</h4>
+            <div class="hit-damages-grid">
+              ${potSkill.hitDamages.map((hit: any, index: number) => `
+                <div class="hit-card">
+                  <div class="hit-card-header">
+                    <span class="hit-index">Hit ${index + 1}</span>
+                    <span class="hit-percent">${hit.skillPercent.toFixed(1)}%</span>
+                  </div>
+                  <div class="hit-card-body">
+                    <div class="hit-stat-row">
+                      <span class="hit-stat-label">기본</span>
+                      <span class="hit-stat-value">${hit.baseDamage.toLocaleString()}</span>
+                    </div>
+                    <div class="hit-stat-row">
+                      <span class="hit-stat-label">크리</span>
+                      <span class="hit-stat-value">${hit.critDamage.toLocaleString()}</span>
+                    </div>
+                    <div class="hit-stat-row hit-highlight">
+                      <span class="hit-stat-label">평균</span>
+                      <span class="hit-stat-value">${hit.averageDamage.toLocaleString()}</span>
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+      </div>
+    </div>
   `;
 }
 

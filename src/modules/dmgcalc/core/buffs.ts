@@ -266,39 +266,145 @@ function calculateEffectId(param: string, level: number): number {
 
 /**
  * Map EffectTypeFirstSubtype to stat name
- * Based on game enum mappings
+ * Based on GameEnums.effectAttributeType (from enums.ts ATTRIBUTE_KEY_TO_ENUM_ID)
  */
-function mapEffectTypeToStat(effectType: number): string {
+function mapEffectTypeToStat(effectSubtype: number): string {
   const map: Record<number, string> = {
-    101: 'Atk',
-    102: 'Def',
-    103: 'Hp',
-    201: 'CritRate',
-    202: 'CritPower',
-    301: 'PhyEE',    // Physical Elemental Enhancement
-    302: 'EtherEE',  // Ether
-    303: 'FrostEE',  // Frost/Ice
-    304: 'ElectricEE', // Electric
-    305: 'FlameEE',  // Flame/Fire
-    306: 'WindEE',   // Wind
-    307: 'LightEE',  // Light
-    308: 'DarkEE',   // Dark
-    // Add more mappings as needed
+    // Basic stats
+    1: 'Atk',           // ATK
+    2: 'Def',           // DEF
+    3: 'Hp',            // MAXHP
+    4: 'HitRate',       // HITRATE
+    5: 'Evd',           // EVD
+    6: 'CritRate',      // CRITRATE
+    7: 'CritResist',    // CRITRESIST
+    8: 'CritPower',     // CRITPOWER_P
+    9: 'Penetrate',     // PENETRATE
+    10: 'DefIgnore',    // DEF_IGNORE
+
+    // Elemental resistance (R = Resistance)
+    11: 'WER',          // Water resistance
+    12: 'FER',          // Fire resistance
+    13: 'SER',          // Stone/Earth resistance
+    14: 'AER',          // Air/Wind resistance
+    15: 'LER',          // Light resistance
+    16: 'DER',          // Dark resistance
+
+    // Elemental efficiency (EE = Elemental Efficiency / 속성 피해)
+    17: 'WEE',          // Water element efficiency
+    18: 'FEE',          // Fire element efficiency
+    19: 'SEE',          // Stone/Earth element efficiency
+    20: 'AEE',          // Air/Wind element efficiency
+    21: 'LEE',          // Light element efficiency
+    22: 'DEE',          // Dark element efficiency
+
+    // Elemental penetration (EP)
+    23: 'WEP',
+    24: 'FEP',
+    25: 'SEP',
+    26: 'AEP',
+    27: 'LEP',
+    28: 'DEP',
+
+    // Elemental resistance ignore (EI)
+    29: 'WEI',
+    30: 'FEI',
+    31: 'SEI',
+    32: 'AEI',
+    33: 'LEI',
+    34: 'DEI',
+
+    // Damage modifiers
+    49: 'GENDMG',       // 가하는 피해 (damage dealt)
+    50: 'DMGPLUS',      // 피해 + (flat damage bonus)
+    51: 'FINALDMG',     // 최종 피해 (final damage multiplier)
+    52: 'FINALDMGPLUS', // 최종 피해 + (final flat damage)
+    53: 'GENDMGRCD',    // 받는 피해 감소 (damage taken reduction)
+    55: 'Suppress',     // 약점 제압 (weakness suppress)
+
+    // Skill type damage (dealt)
+    56: 'NORMALDMG',    // 일반 공격 피해
+    57: 'SKILLDMG',     // 스킬 피해
+    58: 'ULTRADMG',     // 필살기 피해
+    59: 'OTHERDMG',     // 기타 피해
+
+    // Mark/Summon/Projectile damage
+    64: 'MARKDMG',
+    66: 'SUMMONDMG',
+    68: 'PROJECTILEDMG',
+
+    // Skill-specific crit rate
+    70: 'NORMALCRITRATE',
+    71: 'SKILLCRITRATE',
+    72: 'ULTRACRITRATE',
+    73: 'MARKCRITRATE',
+    74: 'SUMMONCRITRATE',
+    75: 'PROJECTILECRITRATE',
+    76: 'OTHERCRITRATE',
+
+    // Skill-specific crit power
+    77: 'NORMALCRITPOWER',
+    78: 'SKILLCRITPOWER',
+    79: 'ULTRACRITPOWER',
+    80: 'MARKCRITPOWER',
+    81: 'SUMMONCRITPOWER',
+    82: 'PROJECTILECRITPOWER',
+    83: 'OTHERCRITPOWER',
+
+    // Advanced modifiers
+    85: 'SKILL_INTENSITY',      // 스킬 위력
+    86: 'TOUGHNESS_BROKEN_DMG'  // 강인도 파괴 피해
   };
 
-  return map[effectType] || '';
+  return map[effectSubtype] || '';
 }
 
 /**
  * Extract stat values from buff entry
- * Buffs affect various stats - extract the relevant ones
+ * Buffs affect various stats - extract the relevant ones using the Effects array
  */
 function extractStatValuesFromBuff(buffEntry: BuffEntry): Record<string, number> {
   const values: Record<string, number> = {};
 
-  // Buffs can contain multiple stat modifications
-  // For now, return empty - will need proper parsing based on buff structure
-  // TODO: Parse buff effects properly
+  // BuffValue contains an Effects array with EffectValue IDs
+  const raw = buffEntry.raw as any;
+  if (!raw) return values;
+
+  // Get Effects array from BuffValue
+  const effectIds = raw.Effects || [];
+  if (!effectIds.length) return values;
+
+  // Parse each effect and extract stat values
+  effectIds.forEach((effectId: number) => {
+    const effectData = GameData.effectValue?.[effectId];
+    if (!effectData) return;
+
+    const effect = effectData as any;
+
+    // Only process stat modification effects (EffectType 12 = ATTR_FIX, 45 = ON_HIT)
+    const effectType = effect.EffectType;
+    if (effectType !== 12 && effectType !== 45) return;
+
+    // Get stat key from EffectTypeFirstSubtype
+    const effectSubtype = effect.EffectTypeFirstSubtype;
+    if (effectSubtype === undefined) return;
+
+    const statKey = mapEffectTypeToStat(effectSubtype);
+    if (!statKey) return;
+
+    // Extract value from EffectTypeParam1
+    let value = 0;
+    if (effect.EffectTypeParam1 !== undefined) {
+      value = typeof effect.EffectTypeParam1 === 'string'
+        ? parseFloat(effect.EffectTypeParam1)
+        : effect.EffectTypeParam1;
+    }
+
+    if (!isNaN(value) && value !== 0) {
+      // Accumulate values for the same stat
+      values[statKey] = (values[statKey] || 0) + value;
+    }
+  });
 
   return values;
 }

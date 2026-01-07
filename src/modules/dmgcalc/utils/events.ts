@@ -156,6 +156,44 @@ function handleClick(e: MouseEvent): void {
     }
     return;
   }
+
+  // Toggle breakdown sections (damage calculation details)
+  const breakdownToggle = target.closest('.breakdown-toggle') as HTMLElement;
+  if (breakdownToggle) {
+    const breakdownId = breakdownToggle.dataset.breakdownId;
+    if (!breakdownId) return;
+
+    const breakdownContent = document.getElementById(breakdownId);
+    const toggleIcon = breakdownToggle.querySelector('.breakdown-toggle-icon');
+    const toggleHint = breakdownToggle.querySelector('.breakdown-toggle-hint');
+
+    if (breakdownContent) {
+      const isVisible = breakdownContent.style.display !== 'none';
+      breakdownContent.style.display = isVisible ? 'none' : 'block';
+
+      if (toggleIcon) {
+        toggleIcon.classList.toggle('rotated', !isVisible);
+      }
+      if (toggleHint) {
+        toggleHint.textContent = isVisible ? '펼치기' : '접기';
+      }
+    }
+    return;
+  }
+
+  // Toggle contribution details section
+  const contributionToggle = target.closest('[data-action="toggle-contribution-details"]') as HTMLElement;
+  if (contributionToggle) {
+    const detailsBody = contributionToggle.nextElementSibling as HTMLElement;
+    const chevron = contributionToggle.querySelector('.details-chevron');
+
+    if (detailsBody && chevron) {
+      const isVisible = detailsBody.style.display !== 'none';
+      detailsBody.style.display = isVisible ? 'none' : 'block';
+      chevron.classList.toggle('rotated', !isVisible);
+    }
+    return;
+  }
 }
 
 // =============================================================================

@@ -275,6 +275,34 @@ export interface SkillResults {
   normalAtk?: SkillDamageResult;
   skill?: SkillDamageResult;
   ultimate?: SkillDamageResult;
+  /** Damage from potential HitDamage skills (additional attacks from potentials) */
+  potentialSkills?: PotentialSkillDamageResult[];
+}
+
+/**
+ * Damage result for a potential-based skill
+ */
+export interface PotentialSkillDamageResult {
+  /** Source potential ID */
+  potentialId: number;
+  /** Potential name */
+  potentialName: string;
+  /** Character position that provides this potential */
+  character: Position;
+  /** Skill type classification */
+  skillType: 'potential_damage';
+  /** Damage type (from HitDamage) */
+  damageType: number;
+  /** Element type (from HitDamage) */
+  elementType: number;
+  /** Calculated hit damages */
+  hitDamages: HitDamageCalculation[];
+  /** Total base damage */
+  totalBaseDamage: number;
+  /** Total crit damage */
+  totalCritDamage: number;
+  /** Total average damage */
+  totalAverageDamage: number;
 }
 
 /**

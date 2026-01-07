@@ -3,11 +3,12 @@
  * Implements the complete damage formula based on decompiled game code
  */
 
-import type { SkillDamageResult, HitDamageCalculation, SkillType, DamageCalcState } from '../types';
-import { PHASE_TO_LEVEL, ELEMENT_TYPE_TO_STAT, DAMAGE_TYPE_TO_CRIT_STAT } from '../constants';
+import type { SkillDamageResult, HitDamageCalculation, SkillType, DamageCalcState, PotentialSkillDamageResult } from '../types';
+import { PHASE_TO_LEVEL, ELEMENT_TYPE_TO_STAT, DAMAGE_TYPE_TO_CRIT_STAT, DAMAGE_TYPE_TO_BONUS_STAT, SKILL_TYPE_TO_DAMAGE_TYPE } from '../constants';
 import { getState } from './state';
 import { getStat, getAllStats } from './stats';
 import { fetchSkillData, aggregateSlotDmgFromEffects } from './skills';
+import { parseAllPartyPotentialHitDamages } from './potential-hitdamage';
 import { GameData } from '../../../shared/game-data';
 
 // =============================================================================
@@ -178,20 +179,21 @@ export function calculateSkillDamage(skillType: SkillType): SkillDamageResult | 
  * - talentGroupAbsAmend = 0 (not used yet)
  * - skillIntensity = 1 (placeholder)
  * - perkIntensity = 1 (not used yet)
- * - generalDmg = 1 (TODO: Add from stats)
- * - dmgPlus = 0 (TODO: Add from stats)
- * - slotCritDmg = 0 (TODO: Add damage-type-specific crit power)
- * - Enemy-related multipliers = 1 (placeholder until enemy system is implemented)
+ * - generalDmg = from GENDMG stat
+ * - dmgPlus = from DMGPLUS stat
+ * - slotDmg = from damage type bonus stat (NORMALDMG, SKILLDMG, etc.)
+ * - slotCritDmg = from damage type crit power stat (NORMALCRITPOWER, etc.)
+ * - Enemy-related multipliers = from enemy config
  * - dmgPlusTaken = 0 (not used yet)
- * - finalDmg = 1 (TODO: Add from stats)
- * - finalDmgPlus = 0 (TODO: Add from stats)
+ * - finalDmg = from FINALDMG stat
+ * - finalDmgPlus = from FINALDMGPLUS stat
  */
 function calculateSingleHitDamage(
   hit: { displayName: string; skillPercent: number; skillAbs: number; damageType?: number },
   atk: number,
   critRate: number, // per-10000 format
   critPower: number, // per-100 format (15000 = 150%)
-  slotDmg: number, // Specific damage increase from effects
+  baseSlotDmg: number, // Base specific damage increase from skill effects
   elementDmg: number // Elemental damage multiplier (1 + elemental%)
 ): HitDamageCalculation {
   // Formula components
@@ -208,6 +210,16 @@ function calculateSingleHitDamage(
   const generalDmg = 1 + (generalDmgRaw / 10000); // Convert per-10000 to multiplier
   const dmgPlus = state.stats.get('DMGPLUS')?.total || 0; // Flat damage bonus
 
+  // Calculate slotDmg from damage type bonus stats (NORMALDMG, SKILLDMG, etc.)
+  // This includes bonuses from potentials and buffs
+  const damageType = hit.damageType || 1; // Default to NORMAL
+  const damageTypeBonusKey = DAMAGE_TYPE_TO_BONUS_STAT[damageType];
+  const damageTypeBonusRaw = damageTypeBonusKey ? (state.stats.get(damageTypeBonusKey)?.total || 0) : 0;
+  const damageTypeBonus = 1 + (damageTypeBonusRaw / 10000); // Convert per-10000 to multiplier
+  
+  // Combine base slot damage with damage type bonus
+  const slotDmg = baseSlotDmg * damageTypeBonus;
+
   // Step 1: Calculate base damage with skill multipliers
   // Atk * ((skillPercentAmend + talentGroupPercentAmend) / 100) + skillAbsAmend + talentGroupAbsAmend
   const percentMultiplier = (skillPercentAmend + talentGroupPercentAmend) / 100;
@@ -220,7 +232,9 @@ function calculateSingleHitDamage(
     percentMultiplier,
     rawDamage,
     slotDmg,
+    damageTypeBonus,
     elementDmg,
+    generalDmg,
     formula: `${atk} * ${percentMultiplier} = ${rawDamage}`
   });
 
@@ -392,11 +406,167 @@ export function calculateResistanceMultiplier(resistance: number): number {
 }
 
 // =============================================================================
+// POTENTIAL SKILL DAMAGE
+// =============================================================================
+
+/**
+ * Calculate damage for all potential HitDamage skills
+ * These are additional damage skills that come from character potentials
+ */
+function calculatePotentialSkillDamages(): PotentialSkillDamageResult[] {
+  const results: PotentialSkillDamageResult[] = [];
+
+  // Parse all potential HitDamage skills from party
+  const potentialSkills = parseAllPartyPotentialHitDamages();
+
+  if (potentialSkills.length === 0) {
+    return results;
+  }
+
+  console.log(`[DmgCalc] Found ${potentialSkills.length} potential damage skills`);
+
+  // Get aggregated stats for damage calculation
+  const stats = getStatsWithBuffs();
+  const atk = stats.Atk || 0;
+  const critRate = stats.CritRate || 0;
+  const critPower = stats.CritPower || 15000;
+
+  // Get character element for elemental damage bonus
+  const masterChar = window.state?.party?.master;
+  let elementDmg = 1;
+  if (masterChar && typeof masterChar !== 'string') {
+    const charData = GameData.characters?.[masterChar.id];
+    if (charData) {
+      const elementType = (charData as any).EET;
+      elementDmg = 1 + (getElementalBonus(elementType) / 10000);
+    }
+  }
+
+  // Calculate damage for each potential skill
+  potentialSkills.forEach(potSkill => {
+    const hitDamageCalculations: HitDamageCalculation[] = [];
+
+    potSkill.hitDamages.forEach(hitDamage => {
+      // Calculate damage for this hit
+      const calc = calculateSingleHitDamageInternal(
+        {
+          displayName: hitDamage.displayName,
+          skillPercent: hitDamage.skillPercent * 100, // Convert from decimal to percentage
+          skillAbs: hitDamage.skillAbs,
+          damageType: hitDamage.damageType
+        },
+        atk, critRate, critPower, 1, elementDmg
+      );
+      hitDamageCalculations.push(calc);
+    });
+
+    // Sum up totals
+    const totalBaseDamage = hitDamageCalculations.reduce((sum, hit) => sum + hit.baseDamage, 0);
+    const totalCritDamage = hitDamageCalculations.reduce((sum, hit) => sum + hit.critDamage, 0);
+    const totalAverageDamage = hitDamageCalculations.reduce((sum, hit) => sum + hit.averageDamage, 0);
+
+    results.push({
+      potentialId: potSkill.potentialId,
+      potentialName: potSkill.potentialName,
+      character: potSkill.character,
+      skillType: 'potential_damage',
+      damageType: potSkill.damageType,
+      elementType: potSkill.elementType,
+      hitDamages: hitDamageCalculations,
+      totalBaseDamage: Math.round(totalBaseDamage),
+      totalCritDamage: Math.round(totalCritDamage),
+      totalAverageDamage: Math.round(totalAverageDamage)
+    });
+
+    console.log(`[DmgCalc] Potential skill "${potSkill.potentialName}": ${totalAverageDamage.toLocaleString()} avg damage`);
+  });
+
+  return results;
+}
+
+/**
+ * Internal version of calculateSingleHitDamage for reuse
+ */
+function calculateSingleHitDamageInternal(
+  hit: { displayName: string; skillPercent: number; skillAbs: number; damageType?: number },
+  atk: number,
+  critRate: number,
+  critPower: number,
+  baseSlotDmg: number,
+  elementDmg: number
+): HitDamageCalculation {
+  // Use the same calculation logic as regular skills
+  const state = getState();
+  const skillPercentAmend = hit.skillPercent;
+  const skillAbsAmend = hit.skillAbs;
+  const skillIntensity = 1;
+  const perkIntensity = 1;
+
+  const generalDmgRaw = state.stats.get('GENDMG')?.total || 0;
+  const generalDmg = 1 + (generalDmgRaw / 10000);
+  const dmgPlus = state.stats.get('DMGPLUS')?.total || 0;
+
+  // Calculate slotDmg from damage type bonus stats
+  const damageType = hit.damageType || 1;
+  const damageTypeBonusKey = DAMAGE_TYPE_TO_BONUS_STAT[damageType];
+  const damageTypeBonusRaw = damageTypeBonusKey ? (state.stats.get(damageTypeBonusKey)?.total || 0) : 0;
+  const damageTypeBonus = 1 + (damageTypeBonusRaw / 10000);
+  const slotDmg = baseSlotDmg * damageTypeBonus;
+
+  const percentMultiplier = skillPercentAmend / 100;
+  const rawDamage = (atk * percentMultiplier) + skillAbsAmend;
+  const amplifiedDamage = (rawDamage * skillIntensity * perkIntensity * slotDmg * elementDmg * generalDmg) + dmgPlus;
+
+  const critDmgMultiplier = critPower / 10000;
+  const slotCritDmg = getDamageTypeCritPowerInternal(hit.damageType || 1, state);
+  const critDamageValue = amplifiedDamage * (critDmgMultiplier + slotCritDmg);
+
+  const enemyDef = state.enemy.defense;
+  const defAmend = atk / (atk + enemyDef);
+  const enemyRes = state.enemy.resistance;
+  const erAmend = 1 - (enemyRes / 10000);
+  const resilienceBreakDmg = state.enemy.toughness === 0 ? 1.5 : 1.0;
+  const enemyMultiplier = erAmend * defAmend * resilienceBreakDmg;
+
+  const baseDamage = amplifiedDamage * enemyMultiplier;
+  const critDmg = critDamageValue * enemyMultiplier;
+
+  const finalDmgRaw = state.stats.get('FINALDMG')?.total || 0;
+  const finalDmg = 1 + (finalDmgRaw / 10000);
+  const finalDmgPlus = state.stats.get('FINALDMGPLUS')?.total || 0;
+
+  const finalBaseDamage = (baseDamage * finalDmg) + finalDmgPlus;
+  const finalCritDamage = (critDmg * finalDmg) + finalDmgPlus;
+
+  const critRateDecimal = Math.min(10000, Math.max(0, critRate)) / 10000;
+  const avgDamage = finalBaseDamage * (1 - critRateDecimal) + finalCritDamage * critRateDecimal;
+
+  return {
+    displayName: hit.displayName,
+    skillPercent: hit.skillPercent,
+    skillAbs: hit.skillAbs,
+    baseDamage: Math.round(finalBaseDamage),
+    critDamage: Math.round(finalCritDamage),
+    averageDamage: Math.round(avgDamage)
+  };
+}
+
+/**
+ * Internal helper for damage type crit power lookup
+ */
+function getDamageTypeCritPowerInternal(damageType: number, state: DamageCalcState): number {
+  const statKey = DAMAGE_TYPE_TO_CRIT_STAT[damageType];
+  if (!statKey) return 0;
+  const critPowerRaw = state.stats.get(statKey)?.total || 0;
+  return critPowerRaw / 10000;
+}
+
+// =============================================================================
 // PUBLIC API
 // =============================================================================
 
 /**
- * Calculate all skill damages (normalAtk, skill, ultimate)
+ * Calculate all skill damages (normalAtk, skill, ultimate, potentialSkills)
  */
 export function calculateAllDamage(): void {
   const state = getState();
@@ -404,7 +574,8 @@ export function calculateAllDamage(): void {
   state.results = {
     normalAtk: calculateSkillDamage('normalAtk') || undefined,
     skill: calculateSkillDamage('skill') || undefined,
-    ultimate: calculateSkillDamage('ultimate') || undefined
+    ultimate: calculateSkillDamage('ultimate') || undefined,
+    potentialSkills: calculatePotentialSkillDamages()
   };
 }
 
