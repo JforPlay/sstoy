@@ -763,24 +763,41 @@
     width: 4rem;
     height: 4rem;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .skill-icon-bg {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
+    z-index: 1;
+}
+
+.skill-icon-bg picture,
+.skill-icon-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .skill-icon {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    z-index: 2;
+}
+
+.skill-icon picture,
+.skill-icon img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    display: block;
 }
 
 .skill-content {

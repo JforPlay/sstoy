@@ -604,6 +604,20 @@ function updateDiscSkills(disc: Disc): void {
     SubNoteSkillGroupId?: number;
   };
 
+  // Add informative note about skill levels
+  skillsHTML.push(`
+    <div class="skill-level-info-banner">
+      <div class="info-item">
+        <i class="fa-solid fa-info-circle"></i>
+        <span><strong>${window.i18n?.t('discdb.mainSkill')}</strong>: ${window.i18n?.t('discdb.mainSkillLevelInfo')}</span>
+      </div>
+      <div class="info-item">
+        <i class="fa-solid fa-info-circle"></i>
+        <span><strong>${window.i18n?.t('discdb.concertoSkills')}</strong>: ${window.i18n?.t('discdb.concertoSkillLevelInfo')}</span>
+      </div>
+    </div>
+  `);
+
   // Main Skill
   if (extDisc.MainSkillGroupId) {
     const skillId = getSkillId(extDisc.MainSkillGroupId, limitBreak);
@@ -625,7 +639,7 @@ function updateDiscSkills(disc: Disc): void {
           <div class="skill-content">
             <div class="skill-header">
               <span class="skill-badge main">${window.i18n?.t('discdb.mainSkill')}</span>
-              <span class="skill-name">${skillName}</span>
+              <span class="skill-name">${skillName} <span class="skill-level-badge">Lv.${limitBreak}</span></span>
             </div>
             <div class="skill-description">${parsedDesc}</div>
           </div>
@@ -634,11 +648,12 @@ function updateDiscSkills(disc: Disc): void {
     }
   }
 
-  // Secondary Skills
+  // Secondary Skills (capped at level 5)
   [extDisc.SecondarySkillGroupId1, extDisc.SecondarySkillGroupId2].forEach((groupId, index) => {
     if (!groupId) return;
 
-    const skillId = getSkillId(groupId, limitBreak);
+    const secondarySkillLevel = Math.min(limitBreak, 5);
+    const skillId = getSkillId(groupId, secondarySkillLevel);
     const secondarySkill = discDBState.secondarySkillData[skillId];
 
     if (secondarySkill) {
@@ -657,7 +672,7 @@ function updateDiscSkills(disc: Disc): void {
           <div class="skill-content">
             <div class="skill-header">
               <span class="skill-badge secondary">${window.i18n?.t(`discdb.concertoSkill${index + 1}`)}</span>
-              <span class="skill-name">${skillName}</span>
+              <span class="skill-name">${skillName} <span class="skill-level-badge">Lv.${secondarySkillLevel}</span></span>
             </div>
             <div class="skill-description">${parsedDesc}</div>
           </div>
@@ -915,7 +930,7 @@ function adjustDiscLevelSlider(): void {
 
 function adjustSkillLevel(delta: number): void {
   const currentLevel = discDBState.skillLevel;
-  const newLevel = Math.max(1, Math.min(5, currentLevel + delta));
+  const newLevel = Math.max(1, Math.min(6, currentLevel + delta));
 
   if (newLevel !== currentLevel) {
     discDBState.skillLevel = newLevel;
