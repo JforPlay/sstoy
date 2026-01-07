@@ -47,18 +47,6 @@
     },
     {
       "id": "preset-build",
-      "title": "(1/3) 클라루 후유카 1월 연합용 궁빌드",
-      "description": "클라루가 공증 주는게 많아서 공증 잠재보단 다른 것들 우선적으로 챙기는걸 추천합니다 + 클라루 궁 먼저 깔아두기",
-      "author": " 클라루 후유카 궁 빌드",
-      "authorLink": "https://arca.live/b/stellasora/158566114",
-      "element": "Fire",
-      "characterId": 158,
-      "tags": ["필살기", "클라루", "후유카", "플로라"],
-      "meta": true,
-      "buildHash": "v2d-Hi%7B.nBZY%3C%3FBV%3F.n%7BsYn%2FTT%7Ddt2(tn%2FGwq%26%25t.%3AgCgLB%2F_%227X%2C%26JXcS3%2BV%23b%2BW%7CQZp)1pj8o%3Fw4Oki%24j%3E%22x%26%249.~0M%25BcE%2CeXtq%5E%25ue8%5Bq0V%60%3Br5x%60ZvOJhLii%24N%5D%5EyUP%23(RdHY%3C43g%24%5B%2Bfx%3E%3C6_8EmcM_OOwh4I%26i%3FJf%5E(gZDKE%3Fmt%3C%3F%7Bzq1T5O%7DGD%7BkG2I%60YSy3XdP%40vA"
-    },
-    {
-      "id": "preset-build",
       "title": "(1/7) 클라루 후유카 연합/종언용 궁빌드",
       "description": "플로라 - 과거의 잿더미 (저점보완 물나비), 미래희망의 불씨 (고점 불나비), 후유카의 후순위들은 필수 챙기고 난 이후 보이는거 집어주면 되고, 쾌속연타는 공속이 있기때문에 명함은 꼭 챙겨주세요. 종언도 동일, 연합은 링크 영상 참고",
       "author": " 명함 후유카 어웨이크너 4궁 35만 빌드 소개",
@@ -80,6 +68,18 @@
       "tags": ["평타", "클라루", "후유카", "플로라"],
       "meta": true,
       "buildHash": "v2d-%22h_.ou0XO5K_fNcp%60z%40RK97%7D%25%3A%3E%3D0wTP%60J%3ECN%5EI%7Dk5X7.vj%5DMMP%3BBV%3F3wvFa5m%7BDM%7CK1vp4%2BpfH%3DS%25K%3C5_%22RP%401sy%3D%25%23sv%3D)5jN%5B%3CI%3AnFV4*a%25Q(8H%2BjIkP6*%3C!iO%7D%5E_%261ySoedzn%606B%5EqjSI.V)2ws4Ian*fq%7BEi%2FZFeu045%3A%22ECY0H%22CI)P"
+    },
+    {
+      "id": "preset-build",
+      "title": "(1/3) 클라루 후유카 1월 연합용 궁빌드",
+      "description": "클라루가 공증 주는게 많아서 공증 잠재보단 다른 것들 우선적으로 챙기는걸 추천합니다 + 클라루 궁 먼저 깔아두기",
+      "author": " 클라루 후유카 궁 빌드",
+      "authorLink": "https://arca.live/b/stellasora/158566114",
+      "element": "Fire",
+      "characterId": 158,
+      "tags": ["필살기", "클라루", "후유카", "플로라"],
+      "meta": true,
+      "buildHash": "v2d-Hi%7B.nBZY%3C%3FBV%3F.n%7BsYn%2FTT%7Ddt2(tn%2FGwq%26%25t.%3AgCgLB%2F_%227X%2C%26JXcS3%2BV%23b%2BW%7CQZp)1pj8o%3Fw4Oki%24j%3E%22x%26%249.~0M%25BcE%2CeXtq%5E%25ue8%5Bq0V%60%3Br5x%60ZvOJhLii%24N%5D%5EyUP%23(RdHY%3C43g%24%5B%2Bfx%3E%3C6_8EmcM_OOwh4I%26i%3FJf%5E(gZDKE%3Fmt%3C%3F%7Bzq1T5O%7DGD%7BkG2I%60YSy3XdP%40vA"
     },
     {
       "id": "preset-build",
