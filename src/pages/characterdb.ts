@@ -24,7 +24,7 @@
 // Import shared utilities first (auto-initializes)
 import { parseElementTags, debounce, handleImageError, createResponsiveImage } from '../shared';
 import { i18n } from '../i18n';
-import { initGlobalHeader } from '../shared/ui-components';
+import { initGlobalHeader, getPotentialCornerIconHTML } from '../shared/ui-components';
 import { parseParamValue, formatValue, parseDescriptionParams } from '../modules/param-parser';
 import { ELEMENT_COLORS, STAT_ICONS, MAIN_STATS, STAT_TO_EFFECT_ID, GameData } from '../shared/game-data';
 import { loadCoreData, loadFeatureData, loadLanguageData } from '../shared/data-loader';
@@ -1894,6 +1894,9 @@ function createPotentialCard(potId: any, level: any): HTMLElement | null {
         }
     }
 
+    // Get corner icon using shared helper
+    const cornerIconHtml = getPotentialCornerIconHTML(potId);
+
     // Get DETAILED description (always use .2 suffix for detailed)
     currentPotentialData = potential;
     const detailedKey = `Potential.${potId}.2`;
@@ -1908,6 +1911,7 @@ function createPotentialCard(potId: any, level: any): HTMLElement | null {
         <div class="potential-card-header">
             <div class="potential-card-image">
                 ${backgroundImage ? createResponsiveImage(backgroundImage, '', 'potential-bg') : ''}
+                ${cornerIconHtml}
                 ${iconPath ? createResponsiveImage(iconPath, '', 'potential-icon') : '<span class="potential-placeholder">✨</span>'}
             </div>
             <div class="potential-card-info">

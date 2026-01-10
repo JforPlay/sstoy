@@ -240,6 +240,71 @@ function renderLevelSelector(position: string, currentPhase: number): string {
 // =============================================================================
 
 /**
+ * Generates HTML for the potential corner icon
+ *
+ * Checks if the potential has a defined 'Corner' property and generates
+ * the appropriate corner badge with masked background color.
+ *
+ * @param potId - Potential ID
+ * @returns HTML string for the corner icon or empty string
+ */
+export function getPotentialCornerIconHTML(potId: number): string {
+  const potential = GameData.potentials?.[potId];
+  const itemData = GameData.items?.[potId];
+  
+  if (!potential || !itemData) return '';
+
+  // Check if this is a specific potential (Stype === 42)
+  const isSpecificPotential = itemData.Stype === 42;
+  
+  // Determine background based on Stype and Rarity to extract color
+  let backgroundImage = '';
+  if (itemData.Stype === 42) {
+    backgroundImage = 'assets/skill_icons/rare_vestige_card_s_7.png';
+  } else if (itemData.Stype === 41) {
+    if (itemData.Rarity === 1) {
+      backgroundImage = 'assets/skill_icons/rare_vestige_card_s_9.png';
+    } else if (itemData.Rarity === 2) {
+      backgroundImage = 'assets/skill_icons/rare_vestige_card_s_8.png';
+    }
+  }
+
+  // Corner Icon Logic
+  // Access Corner property safely (cast to any as it might not be in the type definition yet)
+  const cornerType = (potential as any).Corner;
+  
+  if (cornerType && !isSpecificPotential) {
+    let shape = '';
+    if (cornerType === 1) shape = 'Diamond';
+    else if (cornerType === 2) shape = 'Triangle';
+    else if (cornerType === 3) shape = 'Round';
+
+    let color = '';
+    if (itemData.Rarity === 1) {
+      color = '#8759ff'; // Purple/Blue for Rarity 1
+    } else if (itemData.Rarity === 2) {
+      color = '#e3920e'; // Orange/Gold for Rarity 2
+    }
+
+    if (shape && color) {
+      const maskUrl = `assets/skill_icons/Potential_${shape}_B.png`;
+      const fgUrl = `assets/skill_icons/Potential_${shape}_A.png`;
+      
+      return `
+          <div class="potential-corner-icon">
+              <div class="potential-corner-wrapper">
+                  <div class="potential-corner-mask" style="mask-image: url('${maskUrl}'); -webkit-mask-image: url('${maskUrl}'); background-color: ${color};"></div>
+                  ${createResponsiveImage(fgUrl, '', 'potential-corner-fg')}
+              </div>
+          </div>
+      `;
+    }
+  }
+  
+  return '';
+}
+
+/**
  * Generates HTML for a potential icon with level and mark badges
  *
  * Renders a styled potential icon with:
@@ -330,6 +395,9 @@ export function generatePotentialIconHTML(
       }
     }
   }
+  
+  // Get corner icon HTML
+  const cornerIconHtml = getPotentialCornerIconHTML(potId);
 
   // Migrate old mark values to new ones (support both Korean and English)
   let migratedMark = mark;
@@ -369,6 +437,7 @@ export function generatePotentialIconHTML(
                     ? createResponsiveImage(backgroundImage, '', 'pot-bg-img')
                     : ''
                 }
+                ${cornerIconHtml}
                 ${
                   iconPath
                     ? createResponsiveImage(iconPath, name, 'pot-icon-img')

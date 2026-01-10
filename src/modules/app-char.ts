@@ -62,7 +62,7 @@ import {
   getItemName
 } from '../shared/game-data';
 
-import { generatePotentialIconHTML, Modal } from '../shared/ui-components';
+import { generatePotentialIconHTML, getPotentialCornerIconHTML, Modal } from '../shared/ui-components';
 
 import {
   parseParamValue,
@@ -982,6 +982,9 @@ function createPotentialCard(potId: number, position: Position): string {
   // Check if this is a specific potential (Stype === 42)
   const isSpecificPotential = itemData && itemData.Stype === 42;
 
+  // Get corner icon using shared helper
+  const cornerIconHtml = getPotentialCornerIconHTML(potId);
+
   // Calculate actual max level
   const BASE_POTENTIAL_LEVEL = 6;
   const maxLevelBonus = potential.MaxLevel || 0;
@@ -1060,6 +1063,7 @@ function createPotentialCard(potId: number, position: Position): string {
            data-position="${position}">
         <div class="potential-card-image">
           ${backgroundImage ? createResponsiveImage(backgroundImage, '', 'potential-bg') : ''}
+          ${cornerIconHtml}
           ${iconPath ? createResponsiveImage(iconPath, name, 'potential-icon') : `<span class="potential-placeholder">${window.getIcon?.('target') ?? '🎯'}</span>`}
         </div>
         <div class="potential-card-info">
