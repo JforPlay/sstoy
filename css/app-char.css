@@ -1456,7 +1456,7 @@
     }
     
     .specific-potentials-section .potential-card {
-        flex: 0 1 100%;
+        flex: 0 1 calc(50% - 0.3125rem);
     }
 
     .normal-common-grid {
