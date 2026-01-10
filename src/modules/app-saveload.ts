@@ -342,13 +342,7 @@ function collectCharacterData(position: Position): CharacterBuildData | null {
     }
   });
 
-  // Debug logging
-  console.log(`[collectCharacterData] ${position}:`, {
-    characterId: character.id,
-    rawMarks: rawPotentialMarks,
-    collectedMarks: potentialMarks,
-    markCount: Object.keys(potentialMarks).length
-  });
+
 
   return {
     i: character.id,
@@ -895,14 +889,12 @@ function packSharePayload(cleanedData: BuildData): Uint8Array {
       Object.entries(charData.pm).forEach(([k, v]) => {
         const mapped = potMap.toIdx.get(Number(k)) || 0;
         const code = encodeMark(v);
-        console.log(`[packCharacter] Potential ${k}: mark="${v}", mapped=${mapped}, code=${code}`);
         if (mapped && code) {
           markEntries.push([mapped, code]);
         }
       });
     }
     markEntries.sort((a, b) => a[0] - b[0]);
-    console.log(`[packCharacter] Character ${charData.i}: packing ${markEntries.length} marks`, markEntries);
     writeVarint(writer, markEntries.length);
     let prevMark = 0;
     markEntries.forEach(([idx, code]) => {
@@ -1005,7 +997,6 @@ function unpackSharePayload(bytes: Uint8Array): BuildData {
     offset = markCountRead.next;
     const pm: Record<number, string> = {};
     let prevMark = 0;
-    console.log(`[unpackSharePayload] Reading ${markCountRead.value} marks for character`);
     for (let i = 0; i < markCountRead.value; i++) {
       const deltaRead = readVarint(bytes, offset);
       offset = deltaRead.next;
@@ -1013,7 +1004,6 @@ function unpackSharePayload(bytes: Uint8Array): BuildData {
       const code = bytes[offset++] || 0;
       const restoredPot = potMap.fromIdx[potIdx] ?? potIdx;
       const mark = decodeMark(code);
-      console.log(`[unpackSharePayload] Mark ${i}: potIdx=${potIdx}, code=${code}, restoredPot=${restoredPot}, mark="${mark}"`);
       if (mark) {
         pm[restoredPot] = mark;
       }
@@ -1125,13 +1115,6 @@ function encodeBuildToURL(): string {
   try {
     const buildData = collectBuildData();
 
-    // Debug: log collected data before cleaning
-    console.log('[encodeBuildToURL] Collected build data:', JSON.stringify({
-      master: buildData.c?.m ? { id: buildData.c.m.i, marks: buildData.c.m.pm } : null,
-      assist1: buildData.c?.a1 ? { id: buildData.c.a1.i, marks: buildData.c.a1.pm } : null,
-      assist2: buildData.c?.a2 ? { id: buildData.c.a2.i, marks: buildData.c.a2.pm } : null,
-    }, null, 2));
-
     delete buildData.m;
     delete buildData.t;
 
@@ -1144,13 +1127,6 @@ function encodeBuildToURL(): string {
     delete buildData.nt;
 
     const cleanedData = cleanObject(buildData) || ({} as BuildData);
-
-    // Debug: log cleaned data
-    console.log('[encodeBuildToURL] After cleaning:', JSON.stringify({
-      master: cleanedData.c?.m ? { id: cleanedData.c.m.i, marks: cleanedData.c.m.pm } : null,
-      assist1: cleanedData.c?.a1 ? { id: cleanedData.c.a1.i, marks: cleanedData.c.a1.pm } : null,
-      assist2: cleanedData.c?.a2 ? { id: cleanedData.c.a2.i, marks: cleanedData.c.a2.pm } : null,
-    }, null, 2));
 
     const payloadBytes = packSharePayload(cleanedData);
     const compressed = compressSharePayload(payloadBytes);

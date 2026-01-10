@@ -44,9 +44,9 @@ export function resetState(): void {
 // =============================================================================
 
 /**
- * Get current state (read-only reference)
+ * Ensure state is initialized and return it
  */
-export function getState(): DamageCalcState {
+function ensureState(): DamageCalcState {
   if (!state) {
     init();
   }
@@ -54,16 +54,17 @@ export function getState(): DamageCalcState {
 }
 
 /**
+ * Get current state (read-only reference)
+ */
+export function getState(): DamageCalcState {
+  return ensureState();
+}
+
+/**
  * Update state with partial updates
  */
 export function updateState(updates: Partial<DamageCalcState>): void {
-  if (!state) {
-    init();
-  }
-
-  Object.assign(state, updates);
-
-  // Auto-save to localStorage
+  Object.assign(ensureState(), updates);
   saveStateToStorage();
 }
 
@@ -71,11 +72,7 @@ export function updateState(updates: Partial<DamageCalcState>): void {
  * Update enemy configuration
  */
 export function updateEnemyConfig(config: Partial<EnemyConfig>): void {
-  if (!state) {
-    init();
-  }
-
-  Object.assign(state.enemy, config);
+  Object.assign(ensureState().enemy, config);
   saveStateToStorage();
 }
 
@@ -83,11 +80,7 @@ export function updateEnemyConfig(config: Partial<EnemyConfig>): void {
  * Toggle manual mode
  */
 export function toggleManualMode(enabled: boolean): void {
-  if (!state) {
-    init();
-  }
-
-  state.manualMode = enabled;
+  ensureState().manualMode = enabled;
   saveStateToStorage();
 }
 

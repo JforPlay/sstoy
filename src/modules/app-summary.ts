@@ -53,6 +53,9 @@ interface NoteInfo {
 
 let buildRankData: Record<string, BuildRankEntry> | null = null;
 
+// Cleanup function for document-level event listeners
+let starTowerListenerCleanup: (() => void) | null = null;
+
 // =============================================================================
 // DATA LOADING
 // =============================================================================
@@ -980,8 +983,13 @@ function setupSummaryEventDelegation(): void {
 }
 
 function setupStarTowerModalEvents(): void {
+  // Clean up previous listeners if any
+  if (starTowerListenerCleanup) {
+    starTowerListenerCleanup();
+  }
+
   // Event delegation for modal interactions
-  document.addEventListener('click', (e: MouseEvent) => {
+  const clickHandler = (e: MouseEvent): void => {
     const target = e.target as HTMLElement;
 
     // Open modal button
@@ -1001,23 +1009,34 @@ function setupStarTowerModalEvents(): void {
     if (modal && modal.style.display === 'flex' && target === modal) {
       closeStarTowerModal();
     }
-  });
+  };
 
   // Search input for filtering QA items
-  document.addEventListener('input', (e: Event) => {
+  const inputHandler = (e: Event): void => {
     const target = e.target as HTMLElement;
     if (target.id === 'star-tower-search') {
       filterStarTowerQA((target as HTMLInputElement).value);
     }
-  });
+  };
 
   // Close modal on ESC key
-  document.addEventListener('keydown', (e: KeyboardEvent) => {
+  const keyHandler = (e: KeyboardEvent): void => {
     const modal = document.getElementById('star-tower-modal');
     if (modal && modal.style.display === 'flex' && e.key === 'Escape') {
       closeStarTowerModal();
     }
-  });
+  };
+
+  document.addEventListener('click', clickHandler);
+  document.addEventListener('input', inputHandler);
+  document.addEventListener('keydown', keyHandler);
+
+  // Store cleanup function
+  starTowerListenerCleanup = () => {
+    document.removeEventListener('click', clickHandler);
+    document.removeEventListener('input', inputHandler);
+    document.removeEventListener('keydown', keyHandler);
+  };
 }
 
 function setupPotentialDragAndDrop(container: HTMLElement): void {
