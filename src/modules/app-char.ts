@@ -450,12 +450,52 @@ function updateCharacterCard(position: Position): void {
 
   const character = state.party[position];
 
+  // Update party bar slot
+  updatePartyBarSlot(position, character);
+
   if (!character) {
     renderEmptyCharacterCard(card, position);
     return;
   }
 
   renderFilledCharacterCard(card, position, character);
+}
+
+/**
+ * Updates the party bar slot avatar, name, and element icon for a position
+ */
+function updatePartyBarSlot(position: Position, character: PartyMember | null): void {
+  const avatarContainer = getElement<HTMLDivElement>(`party-avatar-${position}`);
+  const nameElement = getElement<HTMLSpanElement>(`party-name-${position}`);
+  const elementIconContainer = getElement<HTMLDivElement>(`party-element-${position}`);
+  
+  if (avatarContainer) {
+    if (character) {
+      const imagePath = `assets/char/avg1_${character.id}_002.png`;
+      avatarContainer.innerHTML = createResponsiveImage(imagePath, character.name, 'party-avatar-img');
+    } else {
+      avatarContainer.innerHTML = '<div class="party-empty-avatar">+</div>';
+    }
+  }
+  
+  if (nameElement) {
+    nameElement.textContent = character?.name || '-';
+  }
+  
+  // Update element icon
+  if (elementIconContainer) {
+    if (character) {
+      const elementId = character.data.EET;
+      const elementInfo = (GameData.gameEnums.elementType as Record<number, any>)?.[elementId] as { name?: string } | undefined;
+      const elementName = elementInfo?.name ?? '';
+      const elementIconPath = `assets/icon_common_property_${elementId}.png`;
+      elementIconContainer.innerHTML = `<img src="${elementIconPath}" alt="${elementName}" class="party-element-img" title="${elementName}" onerror="this.style.display='none'">`;
+      elementIconContainer.style.display = 'flex';
+    } else {
+      elementIconContainer.innerHTML = '';
+      elementIconContainer.style.display = 'none';
+    }
+  }
 }
 
 function renderEmptyCharacterCard(card: HTMLDivElement, position: Position): void {
@@ -519,67 +559,63 @@ function renderFilledCharacterCard(
   // Build skill HTML
   const skillsHtml = buildSkillsHtml(skills, position, skillLabels, currentLevelPhase);
 
+  // Build element icon path
+  const elementId = character.data.EET;
+  const elementIconPath = elementId ? `assets/icon_common_property_${elementId}.png` : '';
+
   card.innerHTML = `
-    ${createResponsiveImage(`assets/char/avg1_${character.id}_002.png`, character.name, 'character-card-image', true)}
-    <div class="character-info">
-      <div class="character-action-buttons">
-        <button class="change-character-btn" data-action="open-character-select" data-position="${position}">
-          <span class="change-icon">${window.getIcon?.('change') ?? '🔄'}</span>
-          <span>${t('builder.change')}</span>
-        </button>
-        <button class="remove-character-btn" data-action="remove-character" data-position="${position}">
-          <span class="remove-icon">${window.getIcon?.('remove') ?? '❌'}</span>
-          <span>${t('builder.remove')}</span>
-        </button>
+    <div class="character-card-header">
+      <div class="character-portrait-wrapper">
+        ${createResponsiveImage(`assets/char/avg1_${character.id}_002.png`, character.name, 'character-card-image', true)}
       </div>
-      <div class="character-info-header">
-        <div class="character-name">${character.name}</div>
+      <div class="character-header-info">
+        <div class="character-name-row">
+          ${elementIconPath ? `<img src="${elementIconPath}" alt="${elementName}" class="character-element-icon" title="${elementName}" onerror="this.style.display='none'">` : ''}
+          <span class="character-name">${character.name}</span>
+        </div>
         <div class="character-id">ID: ${character.id}</div>
-      </div>
-      <div class="character-level-phase-selector">
-        <label class="level-phase-label">${t('builder.characterLevel')}:</label>
-        <select class="level-phase-select" data-action="update-character-level-phase" data-position="${position}">
-          <option value="0" ${currentLevelPhase === 0 ? 'selected' : ''}>1+</option>
-          <option value="1" ${currentLevelPhase === 1 ? 'selected' : ''}>10+</option>
-          <option value="2" ${currentLevelPhase === 2 ? 'selected' : ''}>20+</option>
-          <option value="3" ${currentLevelPhase === 3 ? 'selected' : ''}>30+</option>
-          <option value="4" ${currentLevelPhase === 4 ? 'selected' : ''}>40+</option>
-          <option value="5" ${currentLevelPhase === 5 ? 'selected' : ''}>50+</option>
-          <option value="6" ${currentLevelPhase === 6 ? 'selected' : ''}>60+</option>
-          <option value="7" ${currentLevelPhase === 7 ? 'selected' : ''}>70+</option>
-          <option value="8" ${currentLevelPhase === 8 ? 'selected' : ''}>80+</option>
-        </select>
-      </div>
-      <div class="character-stats-enhanced">
-        <div class="stat-card stat-grade">
-          <div class="stat-content">
-            <div class="stat-label"><strong>${t('builder.grade')}</strong></div>
-            <div class="stat-value">${window.getIcon?.('star').repeat(stars) ?? '★'.repeat(stars)}</div>
-          </div>
-        </div>
-        <div class="stat-card stat-class">
-          <div class="stat-content">
-            <div class="stat-label"><strong>${t('builder.class')}</strong></div>
-            <div class="stat-value">${jobClassName}</div>
-          </div>
-        </div>
-        <div class="stat-card stat-faction">
-          <div class="stat-content">
-            <div class="stat-label"><strong>${t('builder.faction')}</strong></div>
-            <div class="stat-value">${character.data.Faction}</div>
-          </div>
-        </div>
-        <div class="stat-card stat-element">
-          <div class="stat-content">
-            <div class="stat-label"><strong>${t('builder.element')}</strong></div>
-            <div class="stat-value">${elementIcon ? `<img src="${elementIcon}" alt="${elementName}" class="element-icon-inline" title="${elementName}" onerror="this.style.display='none'">` : elementName}</div>
-          </div>
+        <div class="character-meta-badges">
+          <span class="meta-badge grade-badge">${window.getIcon?.('star').repeat(stars) ?? '★'.repeat(stars)}</span>
+          <span class="meta-badge class-badge">${jobClassName}</span>
         </div>
       </div>
-      <div class="character-skills">
-        <div class="skills-title">${t('builder.skillInfo')}</div>
-        ${skillsHtml}
+    </div>
+    <div class="character-card-body">
+      <div class="character-controls-row">
+        <div class="character-level-phase-selector">
+          <label class="level-phase-label">${t('builder.characterLevel')}:</label>
+          <select class="level-phase-select" data-action="update-character-level-phase" data-position="${position}">
+            <option value="0" ${currentLevelPhase === 0 ? 'selected' : ''}>1+</option>
+            <option value="1" ${currentLevelPhase === 1 ? 'selected' : ''}>10+</option>
+            <option value="2" ${currentLevelPhase === 2 ? 'selected' : ''}>20+</option>
+            <option value="3" ${currentLevelPhase === 3 ? 'selected' : ''}>30+</option>
+            <option value="4" ${currentLevelPhase === 4 ? 'selected' : ''}>40+</option>
+            <option value="5" ${currentLevelPhase === 5 ? 'selected' : ''}>50+</option>
+            <option value="6" ${currentLevelPhase === 6 ? 'selected' : ''}>60+</option>
+            <option value="7" ${currentLevelPhase === 7 ? 'selected' : ''}>70+</option>
+            <option value="8" ${currentLevelPhase === 8 ? 'selected' : ''}>80+</option>
+          </select>
+        </div>
+        <div class="character-action-buttons">
+          <button class="change-character-btn" data-action="open-character-select" data-position="${position}" title="${t('builder.change')}">
+            <span class="change-icon"><i class="fa-solid fa-arrows-rotate"></i></span>
+            <span class="btn-text">${t('builder.change')}</span>
+          </button>
+          <button class="remove-character-btn" data-action="remove-character" data-position="${position}" title="${t('builder.remove')}">
+            <span class="remove-icon"><i class="fa-solid fa-xmark"></i></span>
+            <span class="btn-text">${t('builder.remove')}</span>
+          </button>
+        </div>
       </div>
+      <details class="character-skills-collapsible">
+        <summary class="skills-toggle">
+          <span class="skills-title"><i class="fa-solid fa-wand-magic-sparkles"></i> ${t('builder.skillInfo')}</span>
+          <span class="skills-toggle-icon"><i class="fa-solid fa-chevron-down"></i></span>
+        </summary>
+        <div class="character-skills">
+          ${skillsHtml}
+        </div>
+      </details>
     </div>
   `;
 }
@@ -1349,14 +1385,19 @@ export function cyclePotentialMark(potentialId: number, position: Position): voi
 /**
  * Switches active character position tab
  *
- * Updates tab button styling and shows/hides corresponding slot content.
+ * Updates party bar styling and shows/hides corresponding slot content.
  *
  * @param position - Position to switch to (master/assist1/assist2)
  */
 export function switchTab(position: Position): void {
   state.activeTab = position;
 
-  // Update tab buttons
+  // Update party bar slots
+  querySelectorAll<HTMLDivElement>('.party-slot').forEach((slot) => {
+    slot.classList.toggle('active', slot.dataset.position === position);
+  });
+
+  // Legacy: Update tab buttons if they exist
   querySelectorAll<HTMLButtonElement>('.position-tab').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.position === position);
   });
