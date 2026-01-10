@@ -3,36 +3,245 @@
    Character Builder Page
    ================================ */
 
-/* NOTE: Shared styles (tabs, character selector, filters)
-   are now in css/components/ui-components.css */
+/* NOTE: Shared styles (tabs, character selector, filters, skill items,
+   description toggle, potential cards/levels) are in:
+   - css/components/ui-components.css
+   - css/components/potential-card.css
+   
+   This file contains ONLY app-char specific overrides and unique styles.
+   Do NOT duplicate shared component styles here.
+   ================================ */
+
+/* =============================================================================
+   PARTY BAR - Always-visible party overview
+   ============================================================================= */
+
+.party-bar {
+    display: flex;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--surface);
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px var(--shadow);
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.party-slot {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--surface-light);
+    border: 2px solid var(--border);
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex: 1;
+    min-width: 180px;
+    max-width: 280px;
+}
+
+.party-slot:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.party-slot.active {
+    border-color: var(--accent);
+    background: rgba(126, 215, 193, 0.08);
+    box-shadow: 0 0 0 3px rgba(126, 215, 193, 0.15);
+}
+
+.party-slot-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.party-slot-icon.master {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: white;
+}
+
+.party-slot-icon.assist {
+    background: linear-gradient(135deg, var(--primary-color), var(--sky-blue));
+    color: white;
+}
+
+.party-slot-avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    flex-shrink: 0;
+}
+
+.party-slot-avatar img,
+.party-slot-avatar .party-avatar-img,
+.party-slot-avatar picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.party-empty-avatar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    background: var(--surface-light);
+}
+
+/* Party slot element icon */
+.party-element-icon {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.party-element-icon .party-element-img {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.party-slot-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+    flex: 1;
+}
+
+.party-slot-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.party-slot-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.party-bar-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-left: auto;
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--border);
+}
+
+/* Description Toggle - Simple label + button style */
+.description-toggle-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+}
+
+.description-toggle-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.3px;
+}
+
+[data-theme="dark"] .description-toggle-label {
+    color: var(--text-secondary);
+}
+
+.description-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--surface-light);
+    border: 2px solid var(--border);
+    border-radius: 0.5rem;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .description-toggle {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--text-primary);
+}
+
+.description-toggle:hover {
+    border-color: var(--primary-color);
+    background: var(--surface);
+}
+
+[data-theme="dark"] .description-toggle:hover {
+    background: var(--surface-light);
+    border-color: var(--sky-blue);
+}
+
+.description-toggle i {
+    font-size: 0.9rem;
+    color: var(--sky-blue);
+}
+
+[data-theme="dark"] .description-toggle i {
+    color: var(--mint-green);
+}
+
+/* =============================================================================
+   CHARACTER SLOT LAYOUT
+   ============================================================================= */
 
 /* Hide non-active tabs */
 .character-slot {
     display: none;
-}
-
-.character-slot.active-tab {
-    display: block;
-}
-
-.party-builder {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-bottom: 2.5rem;
-}
-
-.character-slot {
     background: var(--surface);
     border-radius: 1rem;
     padding: 1.5rem;
     box-shadow: 0 4px 16px var(--shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.character-slot:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px var(--shadow);
+.character-slot.active-tab {
+    display: block;
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .master-slot {
@@ -43,25 +252,34 @@
     border: 2px solid var(--primary-color);
 }
 
-/* Two Column Layout */
-.two-column-layout {
-    display: flex;
+/* Character Build Layout - Responsive grid */
+.character-build-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 320px) 1fr;
     gap: 1.5rem;
+    align-items: start;
 }
 
 .character-column {
-    flex: 0 0 25%;
-    min-width: 280px;
     display: flex;
     flex-direction: column;
+    position: sticky;
+    top: 5rem;
 }
 
 .potentials-column {
-    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     min-width: 0;
+}
+
+/* Legacy support for two-column-layout */
+.two-column-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 320px) 1fr;
+    gap: 1.5rem;
+    align-items: start;
 }
 
 .specific-potentials-section {
@@ -314,7 +532,6 @@
     min-height: auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-bottom: 0;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
@@ -337,6 +554,154 @@
     opacity: 1;
 }
 
+/* =============================================================================
+   CHARACTER CARD NEW LAYOUT - Horizontal header with portrait and info
+   ============================================================================= */
+
+.character-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.character-portrait-wrapper {
+    flex-shrink: 0;
+}
+
+.character-portrait-wrapper .character-card-image {
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--border);
+    margin-bottom: 0;
+}
+
+.character-header-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+    flex: 1;
+}
+
+.character-name-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.character-name-row .character-element-icon {
+    position: static;
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.character-name-row .character-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.character-header-info .character-id {
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+    margin: 0;
+}
+
+.character-meta-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-top: 0.25rem;
+}
+
+.meta-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.meta-badge.grade-badge {
+    color: #f0c419;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+}
+
+.meta-badge.class-badge {
+    color: var(--primary-color);
+}
+
+/* Character Card Body - Controls and Skills */
+.character-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.character-controls-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.character-controls-row .character-level-phase-selector {
+    flex: 1;
+    min-width: 0;
+}
+
+.character-controls-row .character-action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0;
+}
+
+/* Action buttons with text */
+.character-controls-row .change-character-btn,
+.character-controls-row .remove-character-btn {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    border-radius: 0.5rem;
+}
+
+.character-controls-row .change-character-btn .btn-text,
+.character-controls-row .remove-character-btn .btn-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.character-controls-row .change-character-btn i,
+.character-controls-row .remove-character-btn i {
+    font-size: 0.85rem;
+}
+
+/* Legacy: standalone character-card-image for empty state or fallback */
 .character-card-image {
     width: 7.5rem;
     height: 7.5rem;
@@ -520,6 +885,106 @@
     margin: 0 2px;
 }
 
+/* Compact Stats Row */
+.character-stats-compact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin: 0.75rem 0;
+}
+
+.stat-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.stat-badge.stat-grade {
+    color: #f0c419;
+}
+
+/* Collapsible Skills Section */
+.character-skills-collapsible {
+    width: 100%;
+    margin-top: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.character-skills-collapsible summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: var(--surface);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s ease;
+    list-style: none;
+}
+
+.character-skills-collapsible summary::-webkit-details-marker {
+    display: none;
+}
+
+.character-skills-collapsible summary:hover {
+    background: var(--surface-light);
+}
+
+.character-skills-collapsible[open] summary {
+    border-bottom: 1px solid var(--border);
+}
+
+.skills-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.skills-toggle .skills-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    border-bottom: none;
+    padding-bottom: 0;
+    line-height: 1;
+    margin-bottom: 0;
+}
+
+.skills-toggle-icon {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    transition: transform 0.3s ease;
+}
+
+.character-skills-collapsible[open] .skills-toggle-icon {
+    transform: rotate(180deg);
+}
+
+.character-skills-collapsible .character-skills {
+    padding: 1rem;
+    margin-top: 0;
+    background: var(--surface-light);
+}
+
+[data-theme="dark"] .character-skills-collapsible .character-skills {
+    background: rgba(15, 15, 15, 0.4);
+}
+
+/* Legacy character-skills for non-collapsible usage */
 .character-skills {
     margin-top: 10px;
     width: 100%;
@@ -600,11 +1065,12 @@
 
 .skill-desc {
     color: var(--text-primary);
-    font-size: 0.8125rem;
-    line-height: 1.6;
-    letter-spacing: 0.01em;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
     grid-row: 2;
     grid-column: 1 / -1;
+    padding: 0.5rem 0;
 }
 
 .param-value {
@@ -688,56 +1154,7 @@
     margin-top: 16px;
 }
 
-.description-toggle-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-left: auto;
-}
-
-.description-toggle-label {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    white-space: nowrap;
-}
-
-.description-toggle {
-    background: var(--surface);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
-    padding: 0.5rem 1.25rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px var(--shadow);
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-[data-theme="dark"] .description-toggle {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    box-shadow: 0 2px 8px rgba(107, 155, 209, 0.3);
-}
-
-.description-toggle:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px var(--shadow);
-}
-
-[data-theme="dark"] .description-toggle:hover {
-    box-shadow: 0 4px 12px rgba(107, 155, 209, 0.4);
-}
-
-.description-toggle:active {
-    transform: translateY(0);
-}
+/* Description Toggle - See css/components/ui-components.css for base styles */
 
 /* ================================
    POTENTIAL LAYOUT STYLES (App Builder)
@@ -794,77 +1211,8 @@
     gap: 0.625rem;
 }
 
-/* Potential Level Controls (Builder) */
-.potential-level-selector {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    background: var(--surface);
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.potential-level-label {
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-align: center;
-}
-
-.potential-level-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.level-btn {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 0.375rem;
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: bold;
-    transition: all 0.2s ease;
-    user-select: none;
-}
-
-.level-btn:hover {
-    background: var(--primary-hover);
-    transform: scale(1.05);
-}
-
-.level-btn:active {
-    transform: scale(0.95);
-}
-
-.potential-level-input {
-    width: 3.5rem;
-    height: 2rem;
-    text-align: center;
-    border: 2px solid var(--border-color);
-    border-radius: 0.375rem;
-    background: var(--background);
-    color: var(--text-primary);
-    font-size: 1rem;
-    font-weight: 600;
-    padding: 0;
-}
-
-.potential-level-input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
-}
-
-/* Remove spinner buttons from number input */
+/* Potential Level Controls - See css/components/potential-card.css for base styles */
+/* App-specific overrides only */
 .potential-level-input::-webkit-outer-spin-button,
 .potential-level-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -942,68 +1290,121 @@
 }
 
 /* ================================
-   Responsive Font Size Control
+   Responsive Styles
    ================================ */
 
-/* Tablet - slightly smaller */
-@media (max-width: 1024px) {
-    html {
-        font-size: 15px; /* 1rem = 15px */
+/* Large tablet / small desktop */
+@media (max-width: 1200px) {
+    .character-build-layout,
+    .two-column-layout {
+        grid-template-columns: 1fr;
     }
     
-    .potential-controls {
-        flex-direction: column;
-        align-items: stretch;
+    .character-column {
+        position: static;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
     }
-
-    .potential-type-toggle {
-        min-width: 100%;
+    
+    .normal-common-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
-
-    .potential-level-control {
-        min-width: 100%;
+    
+    .specific-potentials-section .potential-card {
+        flex: 0 1 calc(33.333% - 10px);
     }
-
-    .potentials-display {
-        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
-        gap: 1rem;
+    
+    .potentials-display,
+    .potential-group {
+        grid-template-columns: repeat(2, 1fr);
     }
+}
 
+/* Tablet */
+@media (max-width: 1024px) {
+    html {
+        font-size: 15px;
+    }
+    
+    .party-bar {
+        gap: 0.5rem;
+        padding: 0.75rem;
+    }
+    
+    .party-slot {
+        min-width: 150px;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .party-bar-controls {
+        flex: 0 0 100%;
+        margin-left: 0;
+        padding-left: 0;
+        padding-top: 0.75rem;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        justify-content: center;
+    }
+    
+    .potentials-display,
     .potential-group {
         grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
         gap: 1rem;
     }
 }
 
-/* Mobile - significantly smaller */
+/* Mobile */
 @media (max-width: 768px) {
     html {
-        font-size: 14px; /* 1rem = 14px */
+        font-size: 14px;
     }
     
     h1 {
-        font-size: 2rem;
+        font-size: 1.75rem;
     }
     
-    .tab-navigation {
+    /* Party bar becomes more compact on mobile */
+    .party-bar {
         flex-direction: column;
         gap: 0.5rem;
     }
     
-    .tab-button {
-        padding: 0.75rem 16px;
+    .party-slot {
+        max-width: none;
+        min-width: auto;
     }
     
-    .tab-icon {
-        font-size: 1.2rem;
+    .party-bar-controls {
+        flex: 0 0 auto;
+        padding-top: 0.5rem;
     }
     
-    .tab-label {
-        font-size: 0.9rem;
+    .character-slot {
+        padding: 1rem;
+    }
+    
+    .slot-header h2 {
+        font-size: 1.25rem;
+    }
+    
+    .compact-tab-navigation {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .compact-main-tab {
+        flex: 1 1 auto;
+        min-width: calc(50% - 0.25rem);
+        justify-content: center;
+    }
+    
+    .compact-tab-label {
+        font-size: 0.85rem;
     }
 
     .character-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     }
 
     .modal-content {
@@ -1011,176 +1412,55 @@
         max-height: 95vh;
     }
     
-    .character-card {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .character-img {
-        margin-right: 0;
-        margin-bottom: 1rem;
-    }
-    
     .specific-potentials-section .potential-card {
         flex: 0 1 calc(50% - 8px);
     }
     
     .normal-common-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
     
-    .specific-grid {
+    .potentials-display,
+    .potential-group {
+        gap: 0.75rem;
         grid-template-columns: 1fr;
     }
-    
-    .compact-tab-navigation {
-        flex-direction: column;
-        align-items: stretch;
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+    html {
+        font-size: 13px;
     }
     
-    .main-tabs-group {
-        flex-direction: column;
-        width: 100%;
+    .party-slot-avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    .party-slot-info {
+        gap: 0;
+    }
+    
+    .party-slot-label {
+        font-size: 0.6rem;
+    }
+    
+    .party-slot-name {
+        font-size: 0.8rem;
     }
     
     .compact-main-tab {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .position-tabs-inline {
-        justify-content: center;
-        width: 100%;
-        margin-left: 0;
-        margin-top: 8px;
-        padding-top: 8px;
-        border-top: 1px solid var(--border);
-    }
-    
-    .compact-tab-label {
-        font-size: 0.95rem;
-    }
-    
-    .position-tab-label {
-        font-size: 0.85rem;
-    }
-    
-    .character-potentials-section {
-        padding: 1.25rem;
-    }
-
-    .potential-controls {
-        padding: 1rem;
-        gap: 1rem;
-    }
-
-    .potential-type-toggle {
-        flex-direction: column;
-    }
-
-    .potential-type-btn {
-        font-size: 0.875rem;
-        padding: 0.75rem 1.25rem;
-    }
-
-    .potential-level-label {
-        font-size: 0.875rem;
-    }
-
-    .potential-level-display {
-        font-size: 1.125rem;
-    }
-
-    .potentials-display {
-        gap: 1rem;
-        grid-template-columns: 1fr;
-    }
-
-    .potential-group {
-        gap: 1rem;
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 1200px) {
-    .compact-tab-navigation {
-        padding: 0.75rem 16px;
-        gap: 0.5rem;
-    }
-    
-    .position-tabs-inline {
-        flex-wrap: wrap;
-        gap: 0.375rem;
-    }
-    
-    .position-separator {
-        display: none;
-    }
-    
-    .position-divider {
-        display: none;
-    }
-    
-    .character-and-specific {
-        flex-direction: column;
-    }
-    
-    .character-section {
-        width: 100%;
-    }
-    
-    .specific-potentials-row {
-        width: 100%;
-    }
-    
-    .slot-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .normal-common-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    }
-    
-    .two-column-layout {
-        flex-direction: column;
-    }
-    
-    .character-column {
-        flex: 0 0 auto;
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    
-    .potentials-column {
-        width: 100%;
+        min-width: 100%;
+        padding: 0.75rem 1rem;
     }
     
     .specific-potentials-section .potential-card {
-        flex: 0 1 calc(33.333% - 10px);
-    }
-    
-    .potentials-display {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .potential-group {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Small mobile - even smaller */
-@media (max-width: 480px) {
-    html {
-        font-size: 13px; /* 1rem = 13px */
-    }
-    
-    .specific-potentials-section .potential-card {
-        flex: 0 1 calc(50% - 8px);
+        flex: 0 1 100%;
     }
 
     .normal-common-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
     
     .element-filters,
@@ -1193,11 +1473,49 @@
         padding: 0.375rem 0.625rem;
         font-size: 0.75rem;
     }
-}
-
-@media (max-width: 900px) {
-    .normal-common-grid {
-        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    
+    /* Character card header - smaller portrait on mobile */
+    .character-card-header {
+        gap: 0.75rem;
+    }
+    
+    .character-portrait-wrapper .character-card-image {
+        width: 4rem;
+        height: 4rem;
+    }
+    
+    .character-element-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    
+    /* Party element icons on small mobile */
+    .party-element-icon .party-element-img {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+    
+    /* Description toggle compact on small mobile */
+    .description-toggle {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.75rem;
+    }
+    
+    .description-toggle .toggle-label {
+        display: none;
+    }
+    
+    .character-name-row .character-name {
+        font-size: 1rem;
+    }
+    
+    .character-controls-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .character-controls-row .character-action-buttons {
+        justify-content: flex-end;
     }
 }
 

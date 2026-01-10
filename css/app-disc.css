@@ -1171,18 +1171,18 @@
 .notes-sidebar-toggle {
     position: fixed;
     top: 50%;
-    right: 1rem;
+    right: 0;
     transform: translateY(-50%);
     background: var(--primary-color);
     border: none;
-    border-radius: 1rem;
-    padding: 0.75rem 1rem;
+    border-radius: 1rem 0 0 1rem;
+    padding: 0.75rem 0.75rem 0.75rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.25rem;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
     z-index: 800;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     color: white;
@@ -1190,14 +1190,15 @@
 }
 
 .notes-sidebar-toggle:hover {
-    transform: translateY(-50%) scale(1.05);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-50%) translateX(-4px);
+    box-shadow: -6px 0 16px rgba(0, 0, 0, 0.25);
+    padding-right: 1rem;
 }
 
 .notes-sidebar-toggle.hidden {
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-50%) translateX(100px);
+    transform: translateY(-50%) translateX(100%);
 }
 
 [data-theme="dark"] .notes-sidebar-toggle {
@@ -1209,15 +1210,17 @@
 }
 
 .toggle-text {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
 }
 
 .toggle-badge {
     position: absolute;
     top: -0.25rem;
-    right: -0.25rem;
+    left: -0.25rem;
     background: #ef4444;
     color: white;
     border-radius: 50%;
@@ -1620,19 +1623,38 @@
         transform: translateY(0);
     }
 
+    /* Mobile: Floating action button at bottom-right, not edge-attached */
     .notes-sidebar-toggle {
         top: auto;
-        bottom: 5rem;
+        bottom: 6rem;
         right: 1rem;
         transform: none;
+        border-radius: 1rem;
+        padding: 0.75rem 1rem;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .notes-sidebar-toggle .toggle-text {
+        writing-mode: horizontal-tb;
+        text-orientation: mixed;
+        font-size: 0.75rem;
     }
 
     .notes-sidebar-toggle:hover {
         transform: scale(1.05);
+        padding-right: 1rem;
     }
 
     .notes-sidebar-toggle.hidden {
-        transform: translateY(150px);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(100px);
+    }
+
+    .notes-sidebar-toggle .toggle-badge {
+        top: -0.25rem;
+        right: -0.25rem;
+        left: auto;
     }
 
     .discs-layout {

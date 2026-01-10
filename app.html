@@ -100,32 +100,11 @@
 
         <!-- Combined Compact Tab Navigation -->
         <div class="compact-tab-navigation">
-            <!-- Main Tabs with integrated character position tabs -->
-            <div class="main-tabs-group">
-                <button class="compact-main-tab active" data-tab="characters" data-action="switch-main-tab">
-                    <span class="compact-tab-icon"><i class="fa-solid fa-medal"></i></span>
-                    <span class="compact-tab-label" data-i18n="builder.characters">여행가</span>
-                </button>
-
-                <!-- Character Position Sub-tabs (only visible when characters tab is active) -->
-                <div class="position-tabs-inline" id="position-tabs-inline">
-                    <span class="position-separator">:</span>
-                    <button class="position-tab active" data-position="master" data-action="switch-position-tab">
-                        <span class="position-tab-icon"><i class="fa-solid fa-crown"></i></span>
-                        <span class="position-tab-label" data-i18n="builder.master">메인</span>
-                    </button>
-                    <span class="position-divider">|</span>
-                    <button class="position-tab" data-position="assist1" data-action="switch-position-tab">
-                        <span class="position-tab-icon"><i class="fa-solid fa-chess-pawn"></i></span>
-                        <span class="position-tab-label" data-i18n="builder.assist1">지원1</span>
-                    </button>
-                    <span class="position-divider">|</span>
-                    <button class="position-tab" data-position="assist2" data-action="switch-position-tab">
-                        <span class="position-tab-icon"><i class="fa-solid fa-chess-pawn"></i></span>
-                        <span class="position-tab-label" data-i18n="builder.assist2">지원2</span>
-                    </button>
-                </div>
-            </div>
+            <!-- Main Tabs -->
+            <button class="compact-main-tab active" data-tab="characters" data-action="switch-main-tab">
+                <span class="compact-tab-icon"><i class="fa-solid fa-medal"></i></span>
+                <span class="compact-tab-label" data-i18n="builder.characters">여행가</span>
+            </button>
 
             <button class="compact-main-tab" data-tab="discs" data-action="switch-main-tab">
                 <span class="compact-tab-icon"><i class="fa-solid fa-compact-disc"></i></span>
@@ -144,25 +123,71 @@
 
             <button class="compact-main-tab" data-tab="dmgcalc" data-action="switch-main-tab">
                 <span class="compact-tab-icon"><i class="fa-solid fa-calculator"></i></span>
-                <!-- <span class="compact-tab-label" data-i18n="builder.dmgcalc">데미지 계산기</span> -->
                 <span class="compact-tab-label">데미지 계산기 (공사중)</span>
             </button>
         </div>
 
         <!-- Characters Tab Content -->
         <div class="main-tab-content active" id="main-tab-characters">
+            <!-- Party Bar - Always visible overview of all 3 characters -->
+            <div class="party-bar">
+                <div class="party-slot active" data-position="master" data-action="switch-position-tab">
+                    <div class="party-slot-icon master">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <div class="party-slot-avatar" id="party-avatar-master">
+                        <div class="party-empty-avatar">+</div>
+                    </div>
+                    <div class="party-element-icon" id="party-element-master"></div>
+                    <div class="party-slot-info">
+                        <span class="party-slot-label" data-i18n="builder.master">메인</span>
+                        <span class="party-slot-name" id="party-name-master">-</span>
+                    </div>
+                </div>
+                <div class="party-slot" data-position="assist1" data-action="switch-position-tab">
+                    <div class="party-slot-icon assist">
+                        <i class="fa-solid fa-chess-pawn"></i>
+                    </div>
+                    <div class="party-slot-avatar" id="party-avatar-assist1">
+                        <div class="party-empty-avatar">+</div>
+                    </div>
+                    <div class="party-element-icon" id="party-element-assist1"></div>
+                    <div class="party-slot-info">
+                        <span class="party-slot-label" data-i18n="builder.assist1">지원1</span>
+                        <span class="party-slot-name" id="party-name-assist1">-</span>
+                    </div>
+                </div>
+                <div class="party-slot" data-position="assist2" data-action="switch-position-tab">
+                    <div class="party-slot-icon assist">
+                        <i class="fa-solid fa-chess-pawn"></i>
+                    </div>
+                    <div class="party-slot-avatar" id="party-avatar-assist2">
+                        <div class="party-empty-avatar">+</div>
+                    </div>
+                    <div class="party-element-icon" id="party-element-assist2"></div>
+                    <div class="party-slot-info">
+                        <span class="party-slot-label" data-i18n="builder.assist2">지원2</span>
+                        <span class="party-slot-name" id="party-name-assist2">-</span>
+                    </div>
+                </div>
+                <!-- Global controls -->
+                <div class="party-bar-controls">
+                    <div class="description-toggle-wrapper">
+                        <label class="description-toggle-label" data-i18n="builder.descriptionView">설명 보기</label>
+                        <button class="description-toggle" data-action="toggle-description" title="Toggle description mode">
+                            <i class="fa-solid fa-note-sticky"></i>
+                            <span data-i18n="builder.briefMode">간략히</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <!-- Master Position -->
             <div class="character-slot master-slot active-tab" id="tab-master">
                 <div class="slot-header">
-                    <h2 data-i18n="builder.master">메인</h2>
-                    <div class="description-toggle-wrapper">
-                        <span class="description-toggle-label" data-i18n="builder.descriptionView">설명 보기:</span>
-                        <button class="description-toggle" data-action="toggle-description"><i
-                                class="fa-solid fa-note-sticky"></i> <span
-                                data-i18n="builder.briefMode">간략히보기</span></button>
-                    </div>
+                    <h2><i class="fa-solid fa-crown"></i> <span data-i18n="builder.master">메인</span></h2>
                 </div>
-                <div class="two-column-layout">
+                <div class="character-build-layout">
                     <div class="character-column">
                         <div class="character-card" id="master-card">
                             <div class="empty-state">
@@ -181,15 +206,9 @@
             <!-- Assist Position 1 -->
             <div class="character-slot assist-slot" id="tab-assist1">
                 <div class="slot-header">
-                    <h2 data-i18n="builder.assist1">지원 1</h2>
-                    <div class="description-toggle-wrapper">
-                        <span class="description-toggle-label" data-i18n="builder.descriptionView">설명 보기:</span>
-                        <button class="description-toggle" data-action="toggle-description"><i
-                                class="fa-solid fa-note-sticky"></i> <span
-                                data-i18n="builder.briefMode">간략히보기</span></button>
-                    </div>
+                    <h2><i class="fa-solid fa-chess-pawn"></i> <span data-i18n="builder.assist1">지원 1</span></h2>
                 </div>
-                <div class="two-column-layout">
+                <div class="character-build-layout">
                     <div class="character-column">
                         <div class="character-card" id="assist1-card">
                             <div class="empty-state">
@@ -208,15 +227,9 @@
             <!-- Assist Position 2 -->
             <div class="character-slot assist-slot" id="tab-assist2">
                 <div class="slot-header">
-                    <h2 data-i18n="builder.assist2">지원 2</h2>
-                    <div class="description-toggle-wrapper">
-                        <span class="description-toggle-label" data-i18n="builder.descriptionView">설명 보기:</span>
-                        <button class="description-toggle" data-action="toggle-description"><i
-                                class="fa-solid fa-note-sticky"></i> <span
-                                data-i18n="builder.briefMode">간략히보기</span></button>
-                    </div>
+                    <h2><i class="fa-solid fa-chess-pawn"></i> <span data-i18n="builder.assist2">지원 2</span></h2>
                 </div>
-                <div class="two-column-layout">
+                <div class="character-build-layout">
                     <div class="character-column">
                         <div class="character-card" id="assist2-card">
                             <div class="empty-state">
