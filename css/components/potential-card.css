@@ -340,12 +340,12 @@
     height: 80%;
 }
 
-.potential-card-horizontal .potential-card-info {
+.potential-card-horizontal.potential-card .potential-card-info {
     padding: 0.75rem 0.5rem 0.375rem 0.5rem;
     width: 100%;
 }
 
-.potential-card-horizontal .potential-card-name {
+.potential-card-horizontal.potential-card .potential-card-name {
     font-weight: 600;
     margin-bottom: 2px;
     font-size: 0.8rem;
