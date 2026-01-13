@@ -928,17 +928,89 @@ function updatePotentialsDisplay(position: Position): void {
     `;
   }
 
-  // Combine normal and common potentials
-  const allNormalCommonPotentials = [...normalPotentials, ...commonPotentials];
+  // Separate normal and common potentials
+  // Group normal potentials by branch (Build property)
+  const groupedByBranch: Record<number, number[]> = {};
+  const commonPotIds: number[] = [];
 
-  // Create single section for normal and common potentials
-  if (allNormalCommonPotentials.length > 0) {
+  // First, separate normal potentials by branch
+  normalPotentials.forEach((potId: number) => {
+    const potential = GameData.potentials[potId];
+    if (potential) {
+      const build = (potential as any).Build || 0;
+      if (!groupedByBranch[build]) {
+        groupedByBranch[build] = [];
+      }
+      groupedByBranch[build].push(potId);
+    }
+  });
+
+  // Create section for branch potentials (Build 1 and 2)
+  const branchPotentials = [...(groupedByBranch[1] || []), ...(groupedByBranch[2] || [])];
+  if (branchPotentials.length > 0) {
     const section = document.createElement('div');
-    section.className = 'potential-category';
+    section.className = 'potential-category branch-potentials';
+
+    // Create 2-column layout grouped by branch
+    const branch1 = groupedByBranch[1] || [];
+    const branch2 = groupedByBranch[2] || [];
+
+    // Interleave cards from both branches for proper grid layout
+    const interleavedCards: string[] = [];
+    const maxLength = Math.max(branch1.length, branch2.length);
+
+    for (let i = 0; i < maxLength; i++) {
+      if (i < branch1.length && branch1[i] !== undefined) {
+        interleavedCards.push(createPotentialCard(branch1[i]!, position, true));
+      }
+      if (i < branch2.length && branch2[i] !== undefined) {
+        interleavedCards.push(createPotentialCard(branch2[i]!, position, true));
+      }
+    }
+
     section.innerHTML = `
       <div class="potential-category-title">${isMaster ? t('builder.masterNormalPotential') : t('builder.assistNormalPotential')}</div>
-      <div class="normal-common-grid">
-        ${allNormalCommonPotentials.map((potId: number) => createPotentialCard(potId, position)).join('')}
+      <div class="branch-potentials-grid">
+        ${interleavedCards.join('')}
+      </div>
+    `;
+    otherContainer.appendChild(section);
+  }
+
+  // Combine common potentials and any other branch (Build 0 or 3)
+  const allCommonPotentials = [
+    ...commonPotentials,
+    ...(groupedByBranch[0] || []),
+    ...(groupedByBranch[3] || [])
+  ];
+
+  // Create section for common potentials with vertical ordering
+  if (allCommonPotentials.length > 0) {
+    const section = document.createElement('div');
+    section.className = 'potential-category common-potentials';
+
+    // Split common potentials into two columns for vertical ordering
+    const midpoint = Math.ceil(allCommonPotentials.length / 2);
+    const commonColumn1 = allCommonPotentials.slice(0, midpoint);
+    const commonColumn2 = allCommonPotentials.slice(midpoint);
+
+    // Interleave cards from both columns for proper grid layout
+    const interleavedCommon: string[] = [];
+    const maxLength = Math.max(commonColumn1.length, commonColumn2.length);
+
+    for (let i = 0; i < maxLength; i++) {
+      if (i < commonColumn1.length && commonColumn1[i] !== undefined) {
+        interleavedCommon.push(createPotentialCard(commonColumn1[i]!, position, true));
+      }
+      if (i < commonColumn2.length && commonColumn2[i] !== undefined) {
+        interleavedCommon.push(createPotentialCard(commonColumn2[i]!, position, true));
+      }
+    }
+
+    section.innerHTML = `
+      <div class="potential-category-title">${t('builder.commonPotential')}</div>
+      <div class="common-potentials-grid">
+        ${interleavedCommon.join('')}
       </div>
     `;
     otherContainer.appendChild(section);
@@ -946,7 +1018,7 @@ function updatePotentialsDisplay(position: Position): void {
 }
 
 // Create potential card HTML - matches JS version
-function createPotentialCard(potId: number, position: Position): string {
+function createPotentialCard(potId: number, position: Position, isHorizontal: boolean = false): string {
   const potential = GameData.potentials[potId];
   if (!potential) return '';
 
@@ -1065,6 +1137,72 @@ function createPotentialCard(potId: number, position: Position): string {
   // Calculate score for this potential if selected
   const score = isSelected ? calculatePotentialScore(potId, position) : 0;
 
+  // Horizontal layout for branch and common potentials
+  if (isHorizontal) {
+    return `
+      <div class="potential-card potential-card-horizontal ${isSelected ? 'selected' : ''}" data-build="${buildNumber}">
+        ${buildLabel ? `<div class="build-badge">${buildLabel}</div>` : ''}
+        ${isSelected ? `<div class="score-badge">${t('builder.score')}: ${score}</div>` : ''}
+        <div class="potential-card-left"
+             data-action="toggle-potential"
+             data-potential-id="${potId}"
+             data-position="${position}">
+          <div class="potential-card-image">
+            ${backgroundImage ? createResponsiveImage(backgroundImage, '', 'potential-bg') : ''}
+            ${cornerIconHtml}
+            ${iconPath ? createResponsiveImage(iconPath, name, 'potential-icon') : `<span class="potential-placeholder">${window.getIcon?.('target') ?? '🎯'}</span>`}
+          </div>
+          <div class="potential-card-info">
+            <div class="potential-card-name">${name}</div>
+            <div class="potential-card-meta">
+              <span>ID: ${potId}</span>
+              ${!isSpecificPotential ? `<span>${t('builder.maxLevel')}: ${actualMaxLevel}</span>` : ''}
+            </div>
+          </div>
+          ${
+            isSelected && !isSpecificPotential && actualMaxLevel > 1
+              ? `
+          <div class="potential-level-selector">
+            <div class="potential-level-label">${t('builder.potentialLevel')}:</div>
+            <div class="potential-level-controls">
+              <button class="level-btn"
+                      data-action="update-potential-level"
+                      data-potential-id="${potId}"
+                      data-position="${position}"
+                      data-max-level="${actualMaxLevel}"
+                      data-delta="-1">\u2212</button>
+              <input
+                type="text"
+                class="potential-level-input"
+                value="${currentLevel}"
+                data-action="update-potential-level"
+                data-potential-id="${potId}"
+                data-position="${position}"
+                data-max-level="${actualMaxLevel}"
+              >
+              <button class="level-btn"
+                      data-action="update-potential-level"
+                      data-potential-id="${potId}"
+                      data-position="${position}"
+                      data-max-level="${actualMaxLevel}"
+                      data-delta="1">+</button>
+            </div>
+          </div>
+        `
+              : ''
+          }
+        </div>
+        <div class="potential-card-right"
+             data-action="toggle-potential"
+             data-potential-id="${potId}"
+             data-position="${position}">
+          <div class="potential-card-desc">${desc}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Vertical layout for specific potentials (original layout)
   return `
     <div class="potential-card ${isSelected ? 'selected' : ''}" data-build="${buildNumber}">
       ${buildLabel ? `<div class="build-badge">${buildLabel}</div>` : ''}

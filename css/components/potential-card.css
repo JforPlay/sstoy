@@ -79,7 +79,7 @@
     bottom: 25%; /* Move up */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%);
-    width: 25%; 
+    width: 23.5%;
     aspect-ratio: 1;
     display: flex;
     justify-content: center;
@@ -101,8 +101,8 @@
 
 .potential-corner-fg {
     position: absolute;
-    width: 85%; /* Slightly smaller */
-    height: 85%; /* Slightly smaller */
+    width: 80%; /* Slightly smaller */
+    height: 80%; /* Slightly smaller */
     object-fit: contain;
     z-index: 2;
 }
@@ -279,3 +279,207 @@
 .param-value { font-weight: 700; color: var(--pastel-pink); }
 .param-no-level { color: var(--sky-blue); font-weight: 700; }
 .param-red { color: var(--danger); font-weight: 700; }
+
+/* ============================================================================
+   HORIZONTAL LAYOUT - For branch and common potentials
+   ============================================================================ */
+
+.potential-card-horizontal {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 100%;
+}
+
+.potential-card-horizontal .potential-card-left {
+    flex-shrink: 0;
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid var(--border);
+    cursor: pointer;
+}
+
+.potential-card-horizontal .potential-card-image {
+    width: 100%;
+    height: 100px;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: 2rem;
+    overflow: hidden;
+    border-bottom: 2px solid var(--border);
+}
+
+.potential-card-horizontal .potential-bg {
+    position: absolute;
+    width: auto !important;
+    height: 100% !important;
+    max-width: none;
+    object-fit: contain;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.potential-card-horizontal .potential-icon {
+    position: relative;
+    width: auto !important;
+    height: 50% !important;
+    max-width: none;
+    object-fit: contain;
+    margin-top: 10px;
+}
+
+.potential-card-horizontal .potential-corner-wrapper {
+    bottom: 18%;
+    width: 18%;
+}
+
+.potential-card-horizontal .potential-corner-fg {
+    width: 80%;
+    height: 80%;
+}
+
+.potential-card-horizontal .potential-card-info {
+    padding: 0.375rem 0.5rem;
+    width: 100%;
+    padding-top: 0.625rem;
+}
+
+.potential-card-horizontal .potential-card-name {
+    font-weight: 600;
+    margin-bottom: 2px;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* Badge positioning for horizontal cards */
+.potential-card-horizontal .build-badge {
+    top: 4px;
+    right: 4px;
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    z-index: 15;
+}
+
+.potential-card-horizontal .score-badge {
+    top: 4px;
+    left: 4px;
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    z-index: 15;
+}
+
+.potential-card-horizontal .potential-card-meta {
+    display: flex;
+    justify-content: center;
+    gap: 0.375rem;
+    font-size: 0.6rem;
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.potential-card-horizontal .potential-level-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.375rem 0.5rem;
+    background: var(--surface);
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+}
+
+.potential-card-horizontal .potential-level-label {
+    font-size: 0.65rem;
+    text-align: center;
+}
+
+.potential-card-horizontal .potential-level-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.potential-card-horizontal .potential-level-input {
+    width: 2.5rem;
+    height: 1.5rem;
+    font-size: 0.8rem;
+}
+
+.potential-card-horizontal .level-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.potential-card-horizontal .potential-card-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 0.625rem 0.5rem 0.625rem;
+    cursor: pointer;
+    min-width: 0;
+}
+
+.potential-card-horizontal .potential-card-desc {
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    min-height: auto;
+    letter-spacing: 0.01em;
+    word-spacing: 0.05em;
+}
+
+/* Responsive - Stack horizontal cards on tablets and below */
+@media (max-width: 1024px) {
+    .potential-card-horizontal .potential-card-left {
+        width: 140px;
+    }
+
+    .potential-card-horizontal .potential-card-image {
+        height: 90px;
+    }
+
+    .potential-card-horizontal .potential-card-name {
+        font-size: 0.75rem;
+    }
+
+    .potential-card-horizontal .potential-card-desc {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .potential-card-horizontal {
+        flex-direction: column;
+    }
+
+    .potential-card-horizontal .potential-card-left {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid var(--border);
+    }
+
+    .potential-card-horizontal .potential-card-image {
+        height: 120px;
+    }
+
+    .potential-card-horizontal .potential-card-right {
+        padding: 0.5rem;
+    }
+
+    .potential-card-horizontal .potential-card-desc {
+        background: var(--surface-light);
+        padding: 0.625rem 0.5rem;
+        border-radius: 0.5rem;
+        font-size: 0.8rem;
+    }
+}

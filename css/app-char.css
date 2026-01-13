@@ -1211,6 +1211,32 @@
     gap: 0.625rem;
 }
 
+/* Branch Potentials - 2 column layout */
+.branch-potentials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    grid-auto-rows: 1fr;
+    align-items: stretch;
+}
+
+.branch-potentials-grid > .potential-card {
+    height: 100%;
+}
+
+/* Common Potentials - 2 column layout with vertical ordering */
+.common-potentials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    grid-auto-rows: 1fr;
+    align-items: stretch;
+}
+
+.common-potentials-grid > .potential-card {
+    height: 100%;
+}
+
 /* Potential Level Controls - See css/components/potential-card.css for base styles */
 /* App-specific overrides only */
 .potential-level-input::-webkit-outer-spin-button,
@@ -1310,6 +1336,8 @@
     .normal-common-grid {
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
+
+    /* Keep 2-column layout on larger tablets */
     
     .specific-potentials-section .potential-card {
         flex: 0 1 calc(33.333% - 10px);
@@ -1415,7 +1443,14 @@
     .specific-potentials-section .potential-card {
         flex: 0 1 calc(50% - 8px);
     }
-    
+
+    /* Keep 2-column layout for branch and common potentials on mobile */
+    .branch-potentials-grid,
+    .common-potentials-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
     .normal-common-grid {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -1457,6 +1492,13 @@
     
     .specific-potentials-section .potential-card {
         flex: 0 1 calc(50% - 0.3125rem);
+    }
+
+    /* Keep 2-column layout for branch and common potentials on small mobile */
+    .branch-potentials-grid,
+    .common-potentials-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.375rem;
     }
 
     .normal-common-grid {
