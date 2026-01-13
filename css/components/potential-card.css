@@ -354,8 +354,9 @@
     text-align: center;
 }
 
-/* Badge positioning for horizontal cards - higher specificity without !important */
-.potential-card.potential-card-horizontal .build-badge {
+/* Badge positioning for horizontal cards - higher specificity for production */
+.potential-card-horizontal.potential-card .build-badge,
+.potential-card-horizontal.potential-card[data-build] .build-badge {
     top: 4px;
     right: 4px;
     font-size: 0.6rem;
@@ -363,7 +364,8 @@
     z-index: 15;
 }
 
-.potential-card.potential-card-horizontal .score-badge {
+.potential-card-horizontal.potential-card .score-badge,
+.potential-card-horizontal.potential-card[data-build] .score-badge {
     top: 4px;
     left: 4px;
     font-size: 0.65rem;
