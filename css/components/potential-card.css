@@ -355,8 +355,7 @@
 }
 
 /* Badge positioning for horizontal cards - higher specificity for production */
-.potential-card-horizontal.potential-card .build-badge,
-.potential-card-horizontal.potential-card[data-build] .build-badge {
+.potential-card-horizontal.potential-card .build-badge {
     top: 4px;
     right: 4px;
     font-size: 0.6rem;
@@ -364,8 +363,7 @@
     z-index: 15;
 }
 
-.potential-card-horizontal.potential-card .score-badge,
-.potential-card-horizontal.potential-card[data-build] .score-badge {
+.potential-card-horizontal.potential-card .score-badge {
     top: 4px;
     left: 4px;
     font-size: 0.65rem;
@@ -434,6 +432,13 @@
     padding: 0.75rem 0.625rem 0.5rem 0.625rem;
     cursor: pointer;
     min-width: 0;
+}
+
+/* Fix for badge overlapping text in horizontal layout */
+@media (min-width: 769px) {
+    .potential-card-horizontal.potential-card[data-build]:not([data-build="0"]) .potential-card-right {
+        padding-top: 1.75rem;
+    }
 }
 
 .potential-card-horizontal .potential-card-desc {
