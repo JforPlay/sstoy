@@ -1522,11 +1522,62 @@ export function updatePotentialLevel(
       
       const card = input.closest('.potential-card');
       if (card) {
+          // Update score badge
           const scoreBadge = card.querySelector('.score-badge');
           if (scoreBadge) {
               const newScore = calculatePotentialScore(potentialId, position);
               const t = (key: string): string => window.i18n?.t(key) ?? key;
               scoreBadge.textContent = `${t('builder.score')}: ${newScore}`;
+          }
+
+          // Update description
+          const descElement = card.querySelector('.potential-card-desc');
+          if (descElement) {
+              const t = (key: string): string => window.i18n?.t(key) ?? key;
+              const briefKey = `Potential.${potentialId}.1`;
+              const detailedKey = `Potential.${potentialId}.2`;
+              
+              let rawDesc = state.descriptionMode === 'brief' 
+                  ? (GameData.potentialsKR[briefKey] || t('builder.briefDesc'))
+                  : (GameData.potentialsKR[detailedKey] || t('builder.detailedDesc'));
+
+              if (rawDesc) {
+                  const itemData = (GameData.items as Record<string, any>)?.[potentialId];
+                  const isSpecificPotential = itemData && itemData.Stype === 42;
+                  
+                  // Calculate effective level (logic from createPotentialCard)
+                  let effectiveLevel = clampedValue;
+                  let skillLevelForParams = clampedValue;
+
+                  if (isSpecificPotential) {
+                      const character = state.party[position];
+                      const isMaster = position === 'master';
+                      const skillId = isMaster ? character?.data.UltimateId : character?.data.AssistSkillId;
+                      if (character && skillId) {
+                          const skillLevel = state.skillLevels[position]?.[skillId as number] || 1;
+                          effectiveLevel = skillLevel;
+                          skillLevelForParams = skillLevel;
+                      } else {
+                          effectiveLevel = 1;
+                          skillLevelForParams = 1;
+                      }
+                  }
+
+                  const charLevelPhase = state.characterLevelPhase[position] || 8;
+                  
+                  let parsedDesc = parseDescriptionParams(
+                      rawDesc,
+                      potential as unknown as Record<string, string>,
+                      effectiveLevel,
+                      skillLevelForParams,
+                      { ...GameData, ...state } as unknown as CharacterState,
+                      position,
+                      isSpecificPotential,
+                      charLevelPhase
+                  );
+                  
+                  descElement.innerHTML = processDescriptionText(parsedDesc);
+              }
           }
       }
       
