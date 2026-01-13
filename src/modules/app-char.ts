@@ -1160,10 +1160,10 @@ function createPotentialCard(potId: number, position: Position, isHorizontal: bo
             </div>
           </div>
           ${
-            isSelected && !isSpecificPotential && actualMaxLevel > 1
+            !isSpecificPotential && actualMaxLevel > 1
               ? `
-          <div class="potential-level-selector">
-            <div class="potential-level-label">${t('builder.potentialLevel')}:</div>
+          <div class="potential-level-selector horizontal-level-selector">
+            <span class="potential-level-label">${t('builder.potentialLevel')}:</span>
             <div class="potential-level-controls">
               <button class="level-btn"
                       data-action="update-potential-level"

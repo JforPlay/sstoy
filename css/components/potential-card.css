@@ -341,9 +341,8 @@
 }
 
 .potential-card-horizontal .potential-card-info {
-    padding: 0.375rem 0.5rem;
+    padding: 0.75rem 0.5rem 0.375rem 0.5rem;
     width: 100%;
-    padding-top: 0.625rem;
 }
 
 .potential-card-horizontal .potential-card-name {
@@ -355,20 +354,20 @@
     text-align: center;
 }
 
-/* Badge positioning for horizontal cards */
-.potential-card-horizontal .build-badge {
+/* Badge positioning for horizontal cards - higher specificity without !important */
+.potential-card.potential-card-horizontal .build-badge {
     top: 4px;
     right: 4px;
-    font-size: 0.65rem;
-    padding: 3px 8px;
+    font-size: 0.6rem;
+    padding: 2px 6px;
     z-index: 15;
 }
 
-.potential-card-horizontal .score-badge {
+.potential-card.potential-card-horizontal .score-badge {
     top: 4px;
     left: 4px;
-    font-size: 0.7rem;
-    padding: 3px 8px;
+    font-size: 0.65rem;
+    padding: 2px 6px;
     z-index: 15;
 }
 
@@ -393,9 +392,18 @@
     margin-top: auto;
 }
 
+/* Horizontal one-line layout for level selector */
+.potential-card-horizontal .horizontal-level-selector {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.5rem;
+}
+
 .potential-card-horizontal .potential-level-label {
     font-size: 0.65rem;
     text-align: center;
+    white-space: nowrap;
 }
 
 .potential-card-horizontal .potential-level-controls {
