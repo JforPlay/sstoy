@@ -1466,8 +1466,7 @@ export function togglePotential(potentialId: number, position: Position): void {
   if (index > -1) {
     // Deselect
     selected.splice(index, 1);
-    delete state.potentialLevels[position][potentialId];
-    delete state.potentialMarks[position][potentialId];
+    // Level and mark are preserved in state for re-selection
   } else {
     // Check if specific potential limit reached
     // Use GameData.items because Stype is defined there
@@ -1486,7 +1485,10 @@ export function togglePotential(potentialId: number, position: Position): void {
 
     // Select
     selected.push(potentialId);
-    state.potentialLevels[position][potentialId] = 1;
+    // Initialize level to 1 only if not already set (preserves previous level)
+    if (!state.potentialLevels[position][potentialId]) {
+      state.potentialLevels[position][potentialId] = 1;
+    }
   }
 
   updatePotentialsDisplay(position);
