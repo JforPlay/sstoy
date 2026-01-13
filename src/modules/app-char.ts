@@ -458,7 +458,19 @@ function updateCharacterCard(position: Position): void {
     return;
   }
 
+  // Preserve details element open state before re-rendering
+  const existingDetails = card.querySelector('.character-skills-collapsible') as HTMLDetailsElement | null;
+  const wasOpen = existingDetails?.open ?? false;
+
   renderFilledCharacterCard(card, position, character);
+
+  // Restore details element open state after re-rendering
+  if (wasOpen) {
+    const newDetails = card.querySelector('.character-skills-collapsible') as HTMLDetailsElement | null;
+    if (newDetails) {
+      newDetails.open = true;
+    }
+  }
 }
 
 /**
