@@ -18,14 +18,12 @@
 
 .potential-card:hover {
     border-color: var(--pastel-pink);
-    border-width: 3px;
     transform: translateY(-3px);
     box-shadow: 0 0 0 3px rgba(232, 138, 173, 0.1), 0 4px 12px rgba(232, 138, 173, 0.2);
 }
 
 .potential-card.selected {
     border-color: var(--mint-green);
-    border-width: 3px;
     background: rgba(126, 215, 193, 0.08);
     box-shadow: 0 0 0 3px rgba(126, 215, 193, 0.15), var(--shadow-soft);
 }
@@ -43,7 +41,7 @@
 
 .potential-card-image {
     width: 100%;
-    aspect-ratio: 0.7;
+    /* aspect-ratio: 0.7; removed in favor of explicit img dims or auto height */
     position: relative;
     display: flex;
     align-items: flex-start;
@@ -62,6 +60,7 @@
     z-index: 1;
     top: 0;
     left: 0;
+    aspect-ratio: 1; /* Fallback aspect ratio */
 }
 
 .potential-corner-icon {
@@ -105,6 +104,7 @@
     height: 80%; /* Slightly smaller */
     object-fit: contain;
     z-index: 2;
+    aspect-ratio: 1;
 }
 
 .potential-icon {
@@ -114,6 +114,7 @@
     object-fit: contain;
     z-index: 3;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    aspect-ratio: 1;
 }
 
 .potential-placeholder {

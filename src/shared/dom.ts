@@ -183,10 +183,14 @@ export function createResponsiveImage(
   basePath: string,
   alt: string,
   className = '',
-  eager = false
+  eager = false,
+  width?: number,
+  height?: number
 ): string {
   const loading = eager ? 'eager' : 'lazy';
   const classes = className ? ` class="${className}"` : '';
+  const widthAttr = width ? ` width="${width}"` : '';
+  const heightAttr = height ? ` height="${height}"` : '';
 
   // Extract path and extension
   const lastDot = basePath.lastIndexOf('.');
@@ -199,7 +203,7 @@ export function createResponsiveImage(
   return `
     <picture>
       <source srcset="${webpPath}" type="image/webp">
-      <img src="${basePath}" alt="${alt}"${classes} loading="${loading}" onerror="${IMAGE_ERROR_HANDLER}">
+      <img src="${basePath}" alt="${alt}"${classes} loading="${loading}"${widthAttr}${heightAttr} onerror="${IMAGE_ERROR_HANDLER}">
     </picture>
   `.trim();
 }

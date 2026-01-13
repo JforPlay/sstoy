@@ -537,7 +537,7 @@ declare global {
     // Image error handling and optimization
     handleImageError?: (img: HTMLImageElement) => void;
     createOptimizedImage?: (src: string, alt: string, className?: string, eager?: boolean) => string;
-    createResponsiveImage?: (basePath: string, alt: string, className?: string, eager?: boolean) => string;
+    createResponsiveImage?: (basePath: string, alt: string, className?: string, eager?: boolean, width?: number, height?: number) => string;
     preloadImage?: (src: string) => void;
     enableLazyLoadingInContainer?: (container: HTMLElement) => void;
 

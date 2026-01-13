@@ -93,7 +93,7 @@ export function renderCharacterGridItem(charId: string, selected = false): strin
   return `
     <div class="character-selector-card ${selectedClass}" data-char-id="${charId}" role="button" tabindex="0">
       <div class="character-selector-img-wrapper">
-        ${createResponsiveImage(imagePath, name, 'character-selector-img')}
+        ${createResponsiveImage(imagePath, name, 'character-selector-img', false, 120, 120)}
         ${elementIconPath ? createResponsiveImage(elementIconPath, 'Element', 'character-element-icon') : ''}
       </div>
       <div class="character-selector-info">
@@ -158,7 +158,7 @@ export function renderCharacterBuilderCard(
   // Skills (Placeholder logic - in real app, this needs GameData.skills)
 
   return `
-    ${createResponsiveImage(imagePath, name, 'character-card-image', true)}
+    ${createResponsiveImage(imagePath, name, 'character-card-image', true, 200, 200)}
     <div class="character-info">
       <div class="character-action-buttons">
         ${showChange ? `<button class="change-character-btn" data-action="open-character-select" data-position="${position}">
@@ -294,7 +294,7 @@ export function getPotentialCornerIconHTML(potId: number): string {
           <div class="potential-corner-icon">
               <div class="potential-corner-wrapper">
                   <div class="potential-corner-mask" style="mask-image: url('${maskUrl}'); -webkit-mask-image: url('${maskUrl}'); background-color: ${color};"></div>
-                  ${createResponsiveImage(fgUrl, '', 'potential-corner-fg')}
+                  ${createResponsiveImage(fgUrl, '', 'potential-corner-fg', false, 64, 64)}
               </div>
           </div>
       `;
@@ -434,13 +434,13 @@ export function generatePotentialIconHTML(
                  data-position="${position}">
                 ${
                   backgroundImage
-                    ? createResponsiveImage(backgroundImage, '', 'pot-bg-img')
+                    ? createResponsiveImage(backgroundImage, '', 'pot-bg-img', false, 64, 64)
                     : ''
                 }
                 ${cornerIconHtml}
                 ${
                   iconPath
-                    ? createResponsiveImage(iconPath, name, 'pot-icon-img')
+                    ? createResponsiveImage(iconPath, name, 'pot-icon-img', false, 64, 64)
                     : '<span class="pot-icon-placeholder">✦</span>'
                 }
                 <div class="pot-level-badge">Lv.${level}</div>

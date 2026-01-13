@@ -255,8 +255,8 @@ function renderCharacterGrid(): void {
 
       card.innerHTML = `
         <div class="character-selector-img-wrapper">
-          ${createResponsiveImage(imagePath, name, 'character-selector-img')}
-          ${elementIconPath ? createResponsiveImage(elementIconPath, 'Element', 'character-element-icon') : ''}
+          ${createResponsiveImage(imagePath, name, 'character-selector-img', false, 120, 120)}
+          ${elementIconPath ? createResponsiveImage(elementIconPath, 'Element', 'character-element-icon', false, 24, 24) : ''}
         </div>
         <div class="character-selector-info">
           <div class="character-selector-name">${name}</div>
@@ -484,7 +484,7 @@ function updatePartyBarSlot(position: Position, character: PartyMember | null): 
   if (avatarContainer) {
     if (character) {
       const imagePath = `assets/char/avg1_${character.id}_002.png`;
-      avatarContainer.innerHTML = createResponsiveImage(imagePath, character.name, 'party-avatar-img');
+      avatarContainer.innerHTML = createResponsiveImage(imagePath, character.name, 'party-avatar-img', false, 48, 48);
     } else {
       avatarContainer.innerHTML = '<div class="party-empty-avatar">+</div>';
     }
@@ -578,7 +578,7 @@ function renderFilledCharacterCard(
   card.innerHTML = `
     <div class="character-card-header">
       <div class="character-portrait-wrapper">
-        ${createResponsiveImage(`assets/char/avg1_${character.id}_002.png`, character.name, 'character-card-image', true)}
+        ${createResponsiveImage(`assets/char/avg1_${character.id}_002.png`, character.name, 'character-card-image', true, 200, 200)}
       </div>
       <div class="character-header-info">
         <div class="character-name-row">
@@ -690,8 +690,8 @@ function buildSkillsHtml(
       return `
         <div class="skill-item" data-skill-id="${skill.id}">
           <div class="skill-icon-wrapper">
-            ${createResponsiveImage(elementBgPath, '', 'skill-icon-bg')}
-            ${iconPath ? createResponsiveImage(iconPath, skill.name, 'skill-icon') : ''}
+            ${createResponsiveImage(elementBgPath, '', 'skill-icon-bg', false, 48, 48)}
+            ${iconPath ? createResponsiveImage(iconPath, skill.name, 'skill-icon', false, 48, 48) : ''}
           </div>
           <div class="skill-info">
             <div class="skill-title">${title}</div>
@@ -1148,9 +1148,9 @@ function createPotentialCard(potId: number, position: Position, isHorizontal: bo
              data-potential-id="${potId}"
              data-position="${position}">
           <div class="potential-card-image">
-            ${backgroundImage ? createResponsiveImage(backgroundImage, '', 'potential-bg') : ''}
+            ${backgroundImage ? createResponsiveImage(backgroundImage, '', 'potential-bg', false, 128, 128) : ''}
             ${cornerIconHtml}
-            ${iconPath ? createResponsiveImage(iconPath, name, 'potential-icon') : `<span class="potential-placeholder">${window.getIcon?.('target') ?? '🎯'}</span>`}
+            ${iconPath ? createResponsiveImage(iconPath, name, 'potential-icon', false, 64, 64) : `<span class="potential-placeholder">${window.getIcon?.('target') ?? '🎯'}</span>`}
           </div>
           <div class="potential-card-info">
             <div class="potential-card-name">${name}</div>
@@ -1514,6 +1514,28 @@ export function updatePotentialLevel(
   const clampedValue = Math.min(Math.max(1, value), maxLevel);
 
   state.potentialLevels[position][potentialId] = clampedValue;
+  
+  // Try to update DOM directly first to avoid full re-render
+  const input = document.querySelector(`.potential-level-input[data-potential-id="${potentialId}"][data-position="${position}"]`) as HTMLInputElement;
+  if (input) {
+      input.value = clampedValue.toString();
+      
+      const card = input.closest('.potential-card');
+      if (card) {
+          const scoreBadge = card.querySelector('.score-badge');
+          if (scoreBadge) {
+              const newScore = calculatePotentialScore(potentialId, position);
+              const t = (key: string): string => window.i18n?.t(key) ?? key;
+              scoreBadge.textContent = `${t('builder.score')}: ${newScore}`;
+          }
+      }
+      
+      // Update header score
+      updateScoreDisplay(position);
+       
+      return; 
+  }
+
   updatePotentialsDisplay(position);
 }
 
