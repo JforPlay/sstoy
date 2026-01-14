@@ -1,5 +1,17 @@
 [
     {
+        "version": "v1.4.1",
+        "date": "2026.1.14",
+        "changes": [
+            {
+                "category": "✨ Minor Update",
+                "items": [
+                    "Minor optimization / UI updates in the build helper page"
+                ]
+            }
+        ]
+    },
+    {
         "version": "v1.4.0",
         "date": "2026.1.3",
         "changes": [
