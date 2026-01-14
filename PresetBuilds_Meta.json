@@ -6,9 +6,33 @@
     "bossRush": "선풍의 공주/어웨이크너 (~1/31)",
     "jointDrill": "X",
     "totalBuilds": 0,
-    "notes": "연합토벌 및 종언 컨텐츠 전용 빌드들 입니다. 피렌덱들은 추후 추가 예정입니다."
+    "notes": "연합토벌 및 종언 컨텐츠 전용 빌드들 입니다. 피렌덱들은 지속적으로 추가 예정입니다."
   },
   "presets": [
+    {
+      "id": "preset-build",
+      "title": "(1/14) 피렌 - 1유파 빌드 참고용",
+      "description": "아직까진 피렌 연구가 더 되어야할 것 같지만, 현재까지 나온 빌드 중 점수가 괜찮게 뽑히는거같은 1유파 빌드의 참고용입니다.",
+      "author": "중국펌 피렌 1,2유파 빌드",
+      "authorLink": "https://gall.dcinside.com/stellasora/184062",
+      "element": "Dark",
+      "characterId": 110,
+      "tags": ["표식", "스킬", "피렌", "코제트", "틸리아"],
+      "new": true,
+      "buildHash": "v2d-%5DhYynB1Xe56%26%7BzMJ%5DbZi*f%7CDZ!cPkX%22uRu(YKw1zxZuJ%60C8FwDSU%3C%229tqK~%2F%3DdDUEo%7D%7B%3C%24d6)9f%3AwvO%2Bj!xm%22bMZZ%3A%5D0%3CgrR%25QlqF9%23%5Ds%3BE%26A%7CKDB)!WxWDw*M8EnSkI%3E(RW2yxB%5DWdB%60%2CzXgufR1acqJU%3Ad%7C%26Cu(Wcc%3A!%7BW%3C%60A"
+    },
+    {
+      "id": "preset-build",
+      "title": "(1/14) 피렌 - 2유파 빌드 참고용",
+      "description": "2유파는 1유파보다도 연구가 더 되어야할 것 같지만, 마찬가지로 참고용입니다. 피렌덱들은 추후 연구되는대로 추가될 예정입니다.",
+      "author": "중국펌 피렌 1,2유파 빌드",
+      "authorLink": "https://gall.dcinside.com/stellasora/184062",
+      "element": "Dark",
+      "characterId": 110,
+      "tags": ["표식", "스킬", "피렌", "코제트", "미스티"],
+      "new": true,
+      "buildHash": "v2d-%2Fc99ou0Xl)k%3E%3E38.jO9%5BckDUAu%5BqWY6%3AyY%2FLjgzLrLFHM%40uO%25Zk%7C%7BQ%245xCH%60g%7C%7CzN%5B%3AsKx63)*T%24!%24eXDgi8zEz%252S%23%25%2FfQV.)dTIdb.chk!Ph%3Fit~wtMPXR6hOJ1%26ZI*%3FVqRxltU)BR%3Ff2u%22ajNrxuS3taldt0L0W%23FBSmZmZZ%7CB"
+    },
     {
       "id": "preset-build",
       "title": "(1/3) 하이브리드 나즈나 - 연합 어웨이크너 용",
