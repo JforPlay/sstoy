@@ -26,6 +26,7 @@
 import '../shared';
 import { i18n } from '../i18n';
 import { initGlobalHeader } from '../shared/ui-components';
+import { initLanguageChangeListener } from '../shared/events';
 
 // Import app modules
 import * as appChar from '../modules/app-char';
@@ -45,10 +46,11 @@ import * as appDmgCalc from '../modules/dmgcalc';
  * Initializes all app modules in the correct order to satisfy dependencies:
  * 1. Wait for DOM ready
  * 2. Initialize i18n (load language files)
- * 3. Set up global navigation header
- * 4. Load core game data (Character, Item, GameEnums)
- * 5. Initialize dependent modules (disc, summary, preset, dmgcalc)
- * 6. Initialize save/load system (restore URL state if present)
+ * 3. Initialize language change listener (enables onLanguageChange handlers)
+ * 4. Set up global navigation header
+ * 5. Load core game data (Character, Item, GameEnums)
+ * 6. Initialize dependent modules (disc, summary, preset, dmgcalc)
+ * 7. Initialize save/load system (restore URL state if present)
  *
  * The initialization order is critical - later modules depend on earlier ones.
  * For example, disc system requires character data to be loaded first.
@@ -65,26 +67,29 @@ import * as appDmgCalc from '../modules/dmgcalc';
     // 1. Initialize i18n
     await i18n.init();
 
-    // 2. Initialize Global Header
+    // 2. Initialize language change listener for centralized handler system
+    initLanguageChangeListener();
+
+    // 3. Initialize Global Header
     initGlobalHeader('app');
 
-    // 3. Initialize Core Data (via app-char)
+    // 4. Initialize Core Data (via app-char)
     // This loads GameData and ensures window.state is populated
     await appChar.init();
 
-    // 4. Signal that Core Data is ready
+    // 5. Signal that Core Data is ready
     // This is for any legacy or external listeners
     const event = new CustomEvent('appDataLoaded');
     window.dispatchEvent(event);
 
-    // 5. Initialize Dependent Modules
+    // 6. Initialize Dependent Modules
     // These modules might rely on GameData or window.state being ready
     await appDisc.init();
     appSummary.init();
     appPreset.init();
     appDmgCalc.init();
 
-    // 6. Initialize Save/Load System
+    // 7. Initialize Save/Load System
     // Now safe to check for URL params and restore data
     appSaveLoad.init();
 
