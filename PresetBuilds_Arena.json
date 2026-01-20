@@ -66,19 +66,19 @@
     },
      {
       "id": "preset-arena",
-      "title": "미네르바 범위피해 표식 빌",
+      "title": "미네르바 범위피해 표식 빌드",
       "description": "미네르바를 활용한 범위딜 (아레나용) 빌드",
       "author": "일단 미네르바 빌드 아직 잘 모르는 애들을 위해 올려줄게",
       "authorLink": "https://arca.live/b/stellasora/152926077",
       "element": "Light",
       "characterId": 132,
-      "tags": ["미네르", "시아", "틸리아", "표식", "범위딜", "아레나"],
+      "tags": ["미네르바", "시아", "틸리아", "표식", "범위딜", "아레나"],
       "buildHash": "v2d-Pin%23Dt%5EX~4S_bm%3Ar5%7DK%26FM%3Esa0%26i%3EfGo)2%3B%3A%3BjyUAuY%2CUfiKN!MP_%3ENV7Ho%5DJ%25v!fPm*ie%7CUKJ.(%3Er%2B2g4V~QM!*l%5Eh9DUmp%24rFXAPO9%26C"
     },
       {
       "id": "preset-arena",
       "title": "메인 카나체 바람 아레나 빌드",
-      "description": "카나체 스킬작 없이 20층 밀기, 보스용 도자기는 본문 참",
+      "description": "카나체 스킬작 없이 20층 밀기, 보스용 도자기는 본문 참조",
       "author": "메인 카나체로 바람 아레나 20까지 쉽게 정복하기",
       "authorLink": "https://arca.live/b/stellasora/156537878",
       "element": "Wind",
