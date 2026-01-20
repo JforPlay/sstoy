@@ -2,13 +2,37 @@
   "version": "1.0",
   "category": "meta",
   "metadata": {
-    "lastUpdated": "2026-01-14",
+    "lastUpdated": "2026-01-20",
     "bossRush": "선풍의 공주/어웨이크너 (~1/31)",
     "jointDrill": "X",
     "totalBuilds": 0,
     "notes": "연합토벌 및 종언 컨텐츠 전용 빌드들 입니다. 피렌덱들은 지속적으로 추가 예정입니다."
   },
   "presets": [
+    {
+      "id": "preset-build",
+      "title": "(1/19) 피렌 - 1유파 빌드",
+      "description": "미스티가 잘키워진 경우엔 미스티 투자 그 외엔 코제트 잠재에 더 신경쓸 것, 배지에서는 속관/치확/스킬뎀/속성데미지를 + 고위험/스핀/섬광/추격 or 스킬 뎀증 같은걸 집어주면 됩니다. 자세한건 링크 참고",
+      "author": "피렌 1유파 빌드 갱신 + 레코드 배지 추가",
+      "authorLink": "https://arca.live/b/stellasora/159971822",
+      "element": "Dark",
+      "characterId": 110,
+      "tags": ["표식", "스킬", "피렌", "미스티", "코제트"],
+      "meta": true,
+      "buildHash": "v2d-%22hhxou_X~4A%22uNGP~c(F%24%26B*%26(!Xu%2F1303%2COcPdl7j%2C56%26rxq%26R0h%3D%2Cii%5EX%3F6)yKeq%3C%24U1Tkjl2t5cTl8jF%3Be%7D%2F72jf9e%3A0%3Dj19%5Ei%25ofa6kjMU~Toj2%3C5ZeGpB%3B%2CbXrG6iOg_i%40JkEv!D%24u%2BlBs2%3DWlN)He%5D%5BV%5BN%60%3FX%26%3FDsB3%22%7BefL%3D%3Du%3Alig%3APW(Y8jjYK~%3Eqp%5B%3A3dq3F"
+    },
+    {
+      "id": "preset-build",
+      "title": "(1/19) 피렌 - 1유파 빌드, 미스티 투자 좀 된 경우",
+      "description": "피렌 1유파 빌드의 틀이 어느 정도 잡힌 것 같고, 보통 차이가 생기면 미스티의 투자 정도로 보입니다. 참고를 위해 몇가지 빌드를 올렸습니다.",
+      "author": "미스티 투자 좀 한 피렌덱 공략 (01/19 갱신)",
+      "authorLink": "https://arca.live/b/stellasora/159815791",
+      "element": "Dark",
+      "characterId": 110,
+      "tags": ["표식", "스킬", "피렌", "미스티", "코제트"],
+      "meta": true,
+      "buildHash": "v2d-5cjxoumBl)KSj.qz%22kDd%3AyaM%2Fbx9%2Cu%7CD_BKJyGqX%3D*s63D_lIDb%3DXD~%3DBM%3CU%3ATru4r1K3YKT3Y.d%7B%25eYV8!iY%23Y%3EGwVyvy%7Cagum%60Oy%5ES9OH%3C40%23Q)sfj%2F%2F.)(y8MsnADbXl1Nddl%3Ee%2CDP!LoSu%3CLzAK3%5DNRD%3BFt9E%3Fn%3D7CWY1I(%3F*%243%22qu6ukJxzQ~5%26s%5BU3Bx4.W%5Ed%5EG%5EL%5EPA"
+    },
     {
       "id": "preset-build",
       "title": "(1/14) 피렌 - 1유파 빌드 참고용",
@@ -18,7 +42,6 @@
       "element": "Dark",
       "characterId": 110,
       "tags": ["표식", "스킬", "피렌", "코제트", "틸리아"],
-      "new": true,
       "buildHash": "v2d-%5DhYynB1Xe56%26%7BzMJ%5DbZi*f%7CDZ!cPkX%22uRu(YKw1zxZuJ%60C8FwDSU%3C%229tqK~%2F%3DdDUEo%7D%7B%3C%24d6)9f%3AwvO%2Bj!xm%22bMZZ%3A%5D0%3CgrR%25QlqF9%23%5Ds%3BE%26A%7CKDB)!WxWDw*M8EnSkI%3E(RW2yxB%5DWdB%60%2CzXgufR1acqJU%3Ad%7C%26Cu(Wcc%3A!%7BW%3C%60A"
     },
     {
@@ -30,7 +53,6 @@
       "element": "Dark",
       "characterId": 110,
       "tags": ["소환", "피렌", "코제트", "미스티"],
-      "new": true,
       "buildHash": "v2d-%2Fc99ou0Xl)k%3E%3E38.jO9%5BckDUAu%5BqWY6%3AyY%2FLjgzLrLFHM%40uO%25Zk%7C%7BQ%245xCH%60g%7C%7CzN%5B%3AsKx63)*T%24!%24eXDgi8zEz%252S%23%25%2FfQV.)dTIdb.chk!Ph%3Fit~wtMPXR6hOJ1%26ZI*%3FVqRxltU)BR%3Ff2u%22ajNrxuS3taldt0L0W%23FBSmZmZZ%7CB"
     },
     {
