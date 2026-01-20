@@ -455,21 +455,22 @@ function updateCharacterCard(position: Position): void {
 
   if (!character) {
     renderEmptyCharacterCard(card, position);
+    clearSkillInfoSection(position);
     return;
   }
 
   // Preserve details element open state before re-rendering
-  const existingDetails = card.querySelector('.character-skills-collapsible') as HTMLDetailsElement | null;
-  const wasOpen = existingDetails?.open ?? false;
+  const skillInfoSection = getElement<HTMLDivElement>(`${position}-skill-info`);
+  const existingDetails = skillInfoSection?.querySelector('.character-skills-collapsible') as HTMLDetailsElement | null;
+  const wasOpen = existingDetails?.open ?? true; // Default to open for new characters
 
   renderFilledCharacterCard(card, position, character);
+  renderSkillInfoSection(position, character);
 
   // Restore details element open state after re-rendering
-  if (wasOpen) {
-    const newDetails = card.querySelector('.character-skills-collapsible') as HTMLDetailsElement | null;
-    if (newDetails) {
-      newDetails.open = true;
-    }
+  const newDetails = skillInfoSection?.querySelector('.character-skills-collapsible') as HTMLDetailsElement | null;
+  if (newDetails) {
+    newDetails.open = wasOpen;
   }
 }
 
@@ -619,17 +620,60 @@ function renderFilledCharacterCard(
           </button>
         </div>
       </div>
-      <details class="character-skills-collapsible">
-        <summary class="skills-toggle">
-          <span class="skills-title"><i class="fa-solid fa-wand-magic-sparkles"></i> ${t('builder.skillInfo')}</span>
-          <span class="skills-toggle-icon"><i class="fa-solid fa-chevron-down"></i></span>
-        </summary>
-        <div class="character-skills">
-          ${skillsHtml}
-        </div>
-      </details>
     </div>
   `;
+}
+
+/**
+ * Renders the skill info section separately from the character card
+ */
+function renderSkillInfoSection(position: Position, character: PartyMember): void {
+  const skillInfoSection = getElement<HTMLDivElement>(`${position}-skill-info`);
+  if (!skillInfoSection) return;
+
+  const t = (key: string): string => window.i18n?.t(key) ?? key;
+  const isMaster = position === 'master';
+
+  // Get skills
+  const skills = getCharacterSkills(character, position);
+  const currentLevelPhase = state.characterLevelPhase[position] ?? 8;
+
+  const skillLabels: Record<string, string> = {
+    normalAtk: t('builder.skills.normalAtk'),
+    skill: isMaster ? t('builder.skills.skill') : t('builder.skills.assist'),
+    ultimate: t('builder.skills.ultimate'),
+    masterSkill: t('builder.skills.skill'),
+  };
+
+  // Initialize skill levels if not set
+  if (!state.skillLevels[position]) {
+    state.skillLevels[position] = {};
+  }
+
+  // Build skill HTML
+  const skillsHtml = buildSkillsHtml(skills, position, skillLabels, currentLevelPhase);
+
+  skillInfoSection.innerHTML = `
+    <details class="character-skills-collapsible" open>
+      <summary class="skills-toggle">
+        <span class="skills-title"><i class="fa-solid fa-wand-magic-sparkles"></i> ${t('builder.skillInfo')}</span>
+        <span class="skills-toggle-icon"><i class="fa-solid fa-chevron-down"></i></span>
+      </summary>
+      <div class="character-skills">
+        ${skillsHtml}
+      </div>
+    </details>
+  `;
+}
+
+/**
+ * Clears the skill info section when character is removed
+ */
+function clearSkillInfoSection(position: Position): void {
+  const skillInfoSection = getElement<HTMLDivElement>(`${position}-skill-info`);
+  if (skillInfoSection) {
+    skillInfoSection.innerHTML = '';
+  }
 }
 
 function buildSkillsHtml(
@@ -923,7 +967,10 @@ function updatePotentialsDisplay(position: Position): void {
   // Display specific potentials in the specific section
   if (specificPotentials.length > 0) {
     specificSection.innerHTML = `
-      <div class="potential-section-title">${isMaster ? t('builder.masterSpecificPotential') : t('builder.assistSpecificPotential')}</div>
+      <div class="potential-section-title">
+        ${isMaster ? t('builder.masterSpecificPotential') : t('builder.assistSpecificPotential')}
+        <span class="section-title-hint">${t('builder.specificPotentialHint')}</span>
+      </div>
       ${specificPotentials.map((potId: number) => createPotentialCard(potId, position)).join('')}
     `;
   }
@@ -1017,6 +1064,74 @@ function updatePotentialsDisplay(position: Position): void {
   }
 }
 
+/**
+ * Determines which skill type a specific potential is influenced by
+ * by analyzing its param strings for DamageType or LevelData references.
+ * Returns null if no skill-scaling params are found.
+ */
+function getSpecificPotentialSkillType(potential: any, _position: Position): string | null {
+  const t = (key: string): string => window.i18n?.t(key) ?? key;
+
+  // Analyze the potential's params to find DamageType
+  // Check Param1 through Param10
+  for (let i = 1; i <= 10; i++) {
+    const paramKey = `Param${i}`;
+    const paramString = potential[paramKey];
+
+    if (!paramString || typeof paramString !== 'string') continue;
+
+    const elements = paramString.split(',').map((e: string) => e.trim());
+    if (elements.length < 3) continue;
+
+    const fileType = elements[0]?.toLowerCase();
+    const levelType = elements[1];
+    const baseId = elements[2];
+
+    if (!baseId) continue;
+
+    // Check if this is a damage/hitdamage param with DamageNum level type
+    if ((fileType === 'damage' || fileType === 'hitdamage') && levelType === 'DamageNum') {
+      // Look up the DamageType from hitDamage data
+      const damageEntry = (GameData.hitDamage as Record<string, any> | undefined)?.[baseId];
+
+      // Check DamageType field first
+      if (damageEntry && damageEntry.DamageType) {
+        const damageType = damageEntry.DamageType;
+        const damageTypeInfo = (GameData.gameEnums?.damageType as Record<number, { key?: string; name?: string }>)?.[damageType];
+
+        if (damageTypeInfo?.key) {
+          switch (damageTypeInfo.key) {
+            case 'NORMAL':
+              return t('builder.skills.normalAtk');
+            case 'SKILL':
+              return t('builder.skills.skill');
+            case 'ULTIMATE':
+              return t('builder.skills.ultimate');
+            case 'OTHER':
+              return t('builder.skills.assist');
+          }
+        }
+      }
+
+      // Also check LevelData field for skill type determination
+      if (damageEntry && damageEntry.LevelData) {
+        const levelData = damageEntry.LevelData;
+        switch (levelData) {
+          case 5: // Normal attack
+            return t('builder.skills.normalAtk');
+          case 2: // Main skill
+            return t('builder.skills.skill');
+          case 4: // Ultimate
+            return t('builder.skills.ultimate');
+        }
+      }
+    }
+  }
+
+  // No skill-scaling params found
+  return null;
+}
+
 // Create potential card HTML - matches JS version
 function createPotentialCard(potId: number, position: Position, isHorizontal: boolean = false): string {
   const potential = GameData.potentials[potId];
@@ -1065,6 +1180,15 @@ function createPotentialCard(potId: number, position: Position, isHorizontal: bo
 
   // Check if this is a specific potential (Stype === 42)
   const isSpecificPotential = itemData && itemData.Stype === 42;
+
+  // Get skill influence label for specific potentials
+  let skillInfluenceBadge = '';
+  if (isSpecificPotential) {
+    const skillType = getSpecificPotentialSkillType(potential, position);
+    if (skillType) {
+      skillInfluenceBadge = `<span class="skill-influence-badge" title="${t('builder.skillInfluenceTooltip')}">${skillType}</span>`;
+    }
+  }
 
   // Get corner icon using shared helper
   const cornerIconHtml = getPotentialCornerIconHTML(potId);
@@ -1220,7 +1344,7 @@ function createPotentialCard(potId: number, position: Position, isHorizontal: bo
           <div class="potential-card-name">${name}</div>
           <div class="potential-card-meta">
             <span>ID: ${potId}</span>
-            ${!isSpecificPotential ? `<span>${t('builder.maxLevel')}: ${actualMaxLevel}</span>` : ''}
+            ${!isSpecificPotential ? `<span>${t('builder.maxLevel')}: ${actualMaxLevel}</span>` : skillInfluenceBadge}
           </div>
         </div>
       </div>

@@ -263,8 +263,19 @@
 .character-column {
     display: flex;
     flex-direction: column;
-    position: sticky;
-    top: 5rem;
+    gap: 1rem;
+}
+
+.skill-info-section {
+    width: 100%;
+}
+
+.skill-info-section .character-skills-collapsible {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border);
 }
 
 .potentials-column {
@@ -304,6 +315,13 @@
 
 [data-theme="dark"] .potential-section-title {
     color: var(--mint-green);
+}
+
+.section-title-hint {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-left: auto;
 }
 
 .potential-section-title::before {
@@ -1645,5 +1663,34 @@
     height: 1.5rem;
     width: 2.5rem;
     font-size: 0.85rem;
+}
+
+/* Skill influence badge for specific potentials */
+.skill-influence-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.5rem;
+    background: linear-gradient(135deg, #5a4a9a 0%, #3d5a80 100%);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 600;
+    border-radius: 4px;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="dark"] .skill-influence-badge {
+    background: linear-gradient(135deg, #4a6fa5 0%, #2d4a6a 100%);
+    color: #e0e0e0;
+}
+
+/* Ensure ID and badge are on same row and vertically centered */
+.specific-potentials-section .potential-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
 }
 
