@@ -24,7 +24,7 @@
 // Import shared utilities first (auto-initializes)
 import { parseElementTags, debounce, handleImageError, createResponsiveImage } from '../shared';
 import { i18n } from '../i18n';
-import { initGlobalHeader, getPotentialCornerIconHTML } from '../shared/ui-components';
+import { initGlobalHeader, getPotentialCornerIconHTML, initInfoModal } from '../shared/ui-components';
 import { parseParamValue, formatValue, parseDescriptionParams } from '../modules/param-parser';
 import { ELEMENT_COLORS, STAT_ICONS, MAIN_STATS, STAT_TO_EFFECT_ID, GameData } from '../shared/game-data';
 import { loadCoreData, loadFeatureData, loadLanguageData } from '../shared/data-loader';
@@ -1716,6 +1716,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Initialize Global Header after i18n is ready
     initGlobalHeader('characterdb');
+
+    // Initialize Page Info Modal
+    initInfoModal();
 
     const levelSlider = document.getElementById('level-slider');
     const currentLevelDisplay = document.getElementById('current-level');

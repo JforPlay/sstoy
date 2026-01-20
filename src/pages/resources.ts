@@ -29,7 +29,7 @@
 // Import shared utilities (auto-initializes)
 import '../shared';
 import { i18n } from '../i18n';
-import { initGlobalHeader } from '../shared/ui-components';
+import { initGlobalHeader, initInfoModal } from '../shared/ui-components';
 import { debounce } from '../shared/index';
 
 // Import modularized resources logic
@@ -85,6 +85,7 @@ import {
 document.addEventListener('DOMContentLoaded', async () => {
   await i18n.init();
   initGlobalHeader('resources');
+  initInfoModal();
   showLoadingState(true);
 
   try {

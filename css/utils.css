@@ -147,6 +147,19 @@ header .subtitle {
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.12));
 }
 
+/* Header Title Row - for pages with info button */
+.header-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.header-title-row h1 {
+    margin-bottom: 0;
+}
+
 /* ================================
    CSS Variables (Theme) - Sky/Pastel Color Scheme
    ================================ */

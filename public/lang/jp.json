@@ -26,7 +26,8 @@
     "all": "全て",
     "reset": "リセット",
     "apply": "当てはめる",
-    "loading": "ローディング中..."
+    "loading": "ローディング中...",
+    "howToUse": "使い方"
   },
   "characterdb": {
     "title": "巡遊者 DB",

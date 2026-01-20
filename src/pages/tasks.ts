@@ -28,7 +28,7 @@
 import '../shared';
 import { debounce, showError, showWarning, showSuccess, createEmptyState, createResponsiveImage } from '../shared';
 import '../i18n';
-import { initGlobalHeader } from '../shared/ui-components';
+import { initGlobalHeader, initInfoModal } from '../shared/ui-components';
 import { saveToLocalStorage, loadFromLocalStorage } from '../utils/storage';
 import { loadCoreData, loadFeatureData, loadLanguageData } from '../shared/data-loader';
 import { GameData } from '../shared/game-data';
@@ -2385,6 +2385,9 @@ async function initTasksPage(): Promise<void> {
 
   // Initialize Global Header after i18n is ready
   initGlobalHeader('tasks');
+
+  // Initialize Page Info Modal
+  initInfoModal();
 
   window.addEventListener('languageChanged', async () => {
     console.info('[Tasks] Language changed, reloading data');

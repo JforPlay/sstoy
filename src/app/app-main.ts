@@ -25,7 +25,7 @@
 // Import shared utilities first (auto-initializes)
 import '../shared';
 import { i18n } from '../i18n';
-import { initGlobalHeader } from '../shared/ui-components';
+import { initGlobalHeader, initInfoModal } from '../shared/ui-components';
 import { initLanguageChangeListener } from '../shared/events';
 
 // Import app modules
@@ -72,6 +72,9 @@ import * as appDmgCalc from '../modules/dmgcalc';
 
     // 3. Initialize Global Header
     initGlobalHeader('app');
+
+    // 3.5. Initialize Page Info Modal
+    initInfoModal();
 
     // 4. Initialize Core Data (via app-char)
     // This loads GameData and ensures window.state is populated

@@ -752,6 +752,113 @@ export class Modal {
 }
 
 // =============================================================================
+// PAGE INFO MODAL SYSTEM
+// =============================================================================
+
+// Cache for loaded instructions
+let instructionsCache: Record<string, Record<string, string>> = {};
+
+/**
+ * Loads page instructions from the separate JSON file
+ * @param lang - Language code (KR, EN, JP, CN)
+ */
+async function loadInstructions(lang: string): Promise<Record<string, string>> {
+  // Map language codes to instruction file names
+  const langMap: Record<string, string> = {
+    'KR': 'ko',
+    'EN': 'en',
+    'JP': 'jp',
+    'CN': 'en' // CN uses English instructions as fallback
+  };
+  const fileLang = langMap[lang] || 'ko';
+
+  if (instructionsCache[fileLang]) {
+    return instructionsCache[fileLang];
+  }
+
+  try {
+    const response = await fetch(`lang/instructions/${fileLang}.json`);
+    if (response.ok) {
+      const data = await response.json();
+      instructionsCache[fileLang] = data;
+      return data;
+    }
+  } catch (error) {
+    console.warn('[InfoModal] Failed to load instructions:', error);
+  }
+
+  return {};
+}
+
+/**
+ * Initializes the info modal event handlers and loads instructions
+ * Call this after the modal HTML is added to the page
+ */
+export function initInfoModal(): void {
+  const modal = document.getElementById('page-info-modal');
+  if (!modal) return;
+
+  const modalBody = modal.querySelector('.info-modal-body');
+  const pageKey = modalBody?.getAttribute('data-i18n-html')?.split('.')[0] || '';
+  let instructionsLoaded = false;
+
+  // Function to load and display instructions
+  async function loadAndDisplayInstructions(): Promise<void> {
+    if (instructionsLoaded || !modalBody || !pageKey) return;
+
+    const lang = window.i18n?.currentLang || 'KR';
+    const instructions = await loadInstructions(lang);
+
+    if (instructions[pageKey]) {
+      modalBody.innerHTML = instructions[pageKey];
+      instructionsLoaded = true;
+    }
+  }
+
+  // Open button handler (delegated)
+  document.addEventListener('click', async (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const openBtn = target.closest('[data-action="open-info-modal"]');
+    if (openBtn) {
+      // Load instructions on first open
+      await loadAndDisplayInstructions();
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
+  // Close button handler
+  const closeBtn = modal.querySelector('[data-action="close-info-modal"]');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+
+  // Click backdrop to close
+  modal.addEventListener('click', (e: MouseEvent) => {
+    if (e.target === modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // ESC key to close
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+}
+
+// Export to window for global access
+if (typeof window !== 'undefined') {
+  (window as any).initInfoModal = initInfoModal;
+}
+
+// =============================================================================
 // RE-EXPORTS FOR BACKWARD COMPATIBILITY
 // =============================================================================
 

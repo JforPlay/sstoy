@@ -70,7 +70,12 @@
         <!-- Page Header with Stats -->
         <header class="page-header">
             <div class="header-title">
-                <h1><img src="assets/others/btn_main_system_task.png" alt="Tasks Icon" class="page-title-icon"> <span data-i18n="tasks.title">의뢰 도우미</span></h1>
+                <div class="header-title-row">
+                    <h1><img src="assets/others/btn_main_system_task.png" alt="Tasks Icon" class="page-title-icon"> <span data-i18n="tasks.title">의뢰 도우미</span></h1>
+                    <button class="page-info-btn" data-action="open-info-modal" title="페이지 도움말">
+                        <i class="fa-solid fa-circle-question"></i>
+                    </button>
+                </div>
                 <p class="subtitle" data-i18n="tasks.subtitle">최대 4개의 의뢰를 선택하고 캐릭터로 태그를 채워보세요</p>
             </div>
             <div class="header-stats">
@@ -87,6 +92,20 @@
                 </button>
             </div>
         </header>
+
+        <!-- Page Info Modal -->
+        <div id="page-info-modal" class="info-modal">
+            <div class="info-modal-content">
+                <div class="info-modal-header">
+                    <h2><i class="fa-solid fa-circle-question"></i> <span data-i18n="common.howToUse">사용 방법</span></h2>
+                    <button class="info-modal-close" data-action="close-info-modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="info-modal-body" data-i18n-html="tasks.instructions">
+                </div>
+            </div>
+        </div>
 
         <!-- Main Layout: Sidebar + Content -->
         <div class="tasks-layout">

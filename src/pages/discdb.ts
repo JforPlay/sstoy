@@ -22,7 +22,7 @@
 import '../shared';
 import { createResponsiveImage } from '../shared';
 import '../i18n';
-import { initGlobalHeader } from '../shared/ui-components';
+import { initGlobalHeader, initInfoModal } from '../shared/ui-components';
 import { GameData, getDiscRarityInfo } from '../shared/game-data';
 import { loadCoreData, loadFeatureData, loadLanguageData } from '../shared/data-loader';
 import { substituteSkillParams } from '../modules/param-parser';
@@ -1021,6 +1021,9 @@ async function initPage(): Promise<void> {
 
   // Initialize Global Header after i18n is ready
   initGlobalHeader('discdb');
+
+  // Initialize Page Info Modal
+  initInfoModal();
 
   window.addEventListener('languageChanged', async () => {
     console.info('[DiscDB] Language changed, reloading data');

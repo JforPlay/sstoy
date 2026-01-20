@@ -26,7 +26,8 @@
     "all": "All",
     "reset": "Reset",
     "apply": "Apply",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "howToUse": "How to Use"
   },
   "characterdb": {
     "title": "Trekker DB",

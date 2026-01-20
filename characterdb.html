@@ -69,9 +69,28 @@
 
     <div class="container">
         <header>
-            <h1><img src="assets/others/btn_main_system_character_1.png" alt="Character DB Icon" class="page-title-icon"> <span data-i18n="characterdb.title"></span></h1>
+            <div class="header-title-row">
+                <h1><img src="assets/others/btn_main_system_character_1.png" alt="Character DB Icon" class="page-title-icon"> <span data-i18n="characterdb.title"></span></h1>
+                <button class="page-info-btn" data-action="open-info-modal" title="페이지 도움말">
+                    <i class="fa-solid fa-circle-question"></i>
+                </button>
+            </div>
             <p class="subtitle" data-i18n="characterdb.selectCharacter"></p>
         </header>
+
+        <!-- Page Info Modal -->
+        <div id="page-info-modal" class="info-modal">
+            <div class="info-modal-content">
+                <div class="info-modal-header">
+                    <h2><i class="fa-solid fa-circle-question"></i> <span data-i18n="common.howToUse">사용 방법</span></h2>
+                    <button class="info-modal-close" data-action="close-info-modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="info-modal-body" data-i18n-html="characterdb.instructions">
+                </div>
+            </div>
+        </div>
 
         <!-- Character Selection Section -->
         <div class="character-select-section">
