@@ -2,7 +2,7 @@
   "version": "1.0",
   "category": "general",
   "metadata": {
-    "lastUpdated": "2026-01-13",
+    "lastUpdated": "2026-01-22",
     "bossRush": "-",
     "jointDrill": "-",
     "totalBuilds": 0,
@@ -11,7 +11,7 @@
   "presets": [
     {
       "id": "preset-build",
-      "title": "(12/23) 클라루 후유카 통상 빌드",
+      "title": "(25/12/23) 클라루 후유카 통상 빌드",
       "description": "높은 공증을 제공하는 클라루의 스킬 + 소환 6마리를 위한 더블예포 채용.",
       "author": "클라루 후유카 통상 빌드",
       "authorLink": "https://arca.live/b/stellasora/157609025",
@@ -22,7 +22,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/21) 후유카 메인 유파2 노궁빌드",
+      "title": "(25/11/21) 후유카 메인 유파2 노궁빌드",
       "description": "후유카의 메인 유파2 를 사용하는 노궁 빌드입니다.",
       "author": "후유카 잠재 계산(2유파 노궁빌드)",
       "authorLink": "https://arca.live/b/stellasora/154417298",
@@ -33,7 +33,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/24) 후유카 메인 유파1 하이브리드",
+      "title": "(25/11/24) 후유카 메인 유파1 하이브리드",
       "description": "후유카의 메인 유파1 을 사용하는 하이브리드 빌드입니다.",
       "author": "후유카 1유파 하이브리드 공략",
       "authorLink": "https://arca.live/b/stellasora/154204071",
@@ -44,7 +44,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/19) 후유카 메인 유파2 빌드",
+      "title": "(25/11/19) 후유카 메인 유파2 빌드",
       "description": "후유카의 메인 유파2 를 사용하는 빌드입니다. 치시아 대체시엔 안즈 사용, 자세한건 링크 참조",
       "author": "머리가 오목해지는 냥냥펀치 후유카 빌드",
       "authorLink": "https://arca.live/b/stellasora/154166699",
@@ -55,7 +55,67 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/16) 등사평캔 치토세",
+      "title": "(1/22) 코하쿠 + 클라루 빌드",
+      "description": "4성 딜러덱들 모음 - 코하쿠 편입니다. 스킬 1타 확인후 대시 꾹으로 스킬 캔슬하는 것이 중요합니다. 자세한건 링크 참조",
+      "author": "4성 딜러 도자기 모음",
+      "authorLink": "https://arca.live/b/stellasora/160249383",
+      "element": "Fire",
+      "characterId": 103,
+      "tags": ["코하쿠", "클라루", "플로라"],
+      "new": true,
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokKcNXABy4DTmACQEbXACccBc5lEAYylAFs6QBLTGAZgBYqAHKAbQCsHTgnbJhXBJwkiEADllSAnEs6dxkzhzUwATLpgBdVD0aRQWsZkAiq4Awhqle7R7jufNsPUV5Z7dcYGExAE6bgwFdxwAJB-209EPCo7xEOOMjojRSogF9M1ABDIIsWNj0ANl4BYVK9GFkqwVqSvQB2Br1VSsaDDvYajr15ExAzJj6CkFdEqtiXLxA+wT9JxqbFuf1Gj2hQ1KW21e6x7ayckFzp0FZoGG1yyCFr-V6HvU1n+uFtdleYlo-9doe7D0g2GhT+1X2z3YkJiCxmbh+GQR-yRiU+0xAgFCuwAWq4AZzuRXz82ROABMmABnJj0XLMNAFaqiUSoam06YMhAwFogFloaGQdk6EDkgCuACN6dcEM1UCLRWzJQh6kKxXyBcpiUA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(1/22) 시먀오 빌드",
+      "description": "4성 딜러덱들 모음 - 시먀오 편입니다. 스킬 사용후 바로 대시로 캔슬해서 공속버프만 챙겨서 평타로 딜. 자세한건 링크 참조",
+      "author": "4성 딜러 도자기 모음",
+      "authorLink": "https://arca.live/b/stellasora/160249383",
+      "element": "Water",
+      "characterId": 113,
+      "tags": ["평타", "시먀오", "테레사", "안즈"],
+      "new": true,
+      "buildHash": "v2d-KRhxou_X~4r~%7Ds%3F8*t%258v5dL%5BDhkFfr%5E%5B(lBQT%3B%5Dl4kO*%269MH%231)%2B%26if%2B%5Ex)Le(7%5BIx%3Bm%5BqX(eZ%7CX)i9%3Fr%24C)uN%3Ezv(_%3B%26iqCi%24p%23DrPi%2BH8Q4L2%3Dx%406CpC%3BS2%24u%7D!)AEzWfnJy)X%3CEqMu)%40pSvbGA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(1/22) 라루 빌드",
+      "description": "4성 딜러덱들 모음 - 라루 편입니다. 레이저 나가는거 확인 후 대시로 후딜 제거 필요, 틸리아는 잘뜨는거 먼저 집으면 됩니다. 자세한건 링크 참조",
+      "author": "4성 딜러 도자기 모음",
+      "authorLink": "https://arca.live/b/stellasora/160249383",
+      "element": "Light",
+      "characterId": 113,
+      "tags": ["라루", "미네르바", "틸리아"],
+      "new": true,
+      "buildHash": "v2d-%26z9h%3E%5Eo%26%2F%3Fhc%5D%5DI3xT%7D%25092jRHVrerVrn%5B%40gM3XiaPF%26f%3E3%7BU!MxvKE41%7BZ%23V6S%5E7jsIIO(HZXq1S*wNM%23%5BU4p%23jaf.ycr%3E!%3AP.%3C%3AH%3BR2HpN012%2BfLAS%26%23h8rMx2l%2Fqe!%3ASPp%7B3%2BlNZXcfS*AAA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(1/22) 세이나+나츠카 빌드",
+      "description": "4성 딜러덱들 모음 - 세이나 편입니다. 나츠카 위주로 잠재력을 챙겨주시고 나츠카의 후순위는 필수 다 챙기고 이후에 나오면 먼저뜨는거 집어주시면 됩니다. 자세한건 링크 참조",
+      "author": "4성 딜러 도자기 모음",
+      "authorLink": "https://arca.live/b/stellasora/160249383",
+      "element": "Wind",
+      "characterId": 112,
+      "tags": ["세이나", "나츠카", "안즈"],
+      "new": true,
+      "buildHash": "v2d-%26za%3E(jN%3E%3B%5Eg%26g%3ASOq%7Bxb%2C2%22%3D.%3B.R2D5%268V4V%25o%24.*0zirju.%3C%3F%3FRLl2IEPeejZ5%60Ffy0kTho2Pf.%7BUR%25%3F0Kj%3DEM!%23NGfS*%26Y%2CLoB!%25%2C%2C)*T%3BRhA%5B%5Dh%24yOc*%2C7jFBAA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(1/22) 캐러멜+미스티 빌드",
+      "description": "4성 딜러덱들 모음 - 캐러멜 편입니다. 캐러멜은 최대한 피하고 미스티+코제트 위주로 집어주시면 됩니다. 미스티는 기억하세요 초흉쌍그. 자세한건 링크 참조",
+      "author": "4성 딜러 도자기 모음",
+      "authorLink": "https://arca.live/b/stellasora/160249383",
+      "element": "Dark",
+      "characterId": 147,
+      "tags": ["캐러멜", "미스티", "코제트"],
+      "new": true,
+      "buildHash": "v2d-%26za%3E(jN%3E%3B%5Eg%26g%3ASOq%7Bxb%2C2%22%3D.%3B.R2D5%268V4V%25o%24.*0zirju.%3C%3F%3FRLl2IEPeejZ5%60Ffy0kTho2Pf.%7BUR%25%3F0Kj%3DEM!%23NGfS*%26Y%2CLoB!%25%2C%2C)*T%3BRhA%5B%5Dh%24yOc*%2C7jFBAA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(25/11/16) 등사평캔 치토세",
       "description": "최신판 평캔 치토세 빌드입니다.",
       "author": "속성별 메타 빌드 모음",
       "authorLink": "https://arca.live/b/stellasora/153956280",
@@ -66,7 +126,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/14) 평캔 시아",
+      "title": "(25/11/14) 평캔 시아",
       "description": "최신판 평캔 시아 빌드입니다.",
       "author": "속성별 메타 빌드 모음",
       "authorLink": "https://arca.live/b/stellasora/153536269",
@@ -77,7 +137,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/6) 표식 메인 나즈나",
+      "title": "(25/11/6) 표식 메인 나즈나",
       "description": "나즈나를 메인으로 쓰는 표식딜 빌드입니다.",
       "author": "메인 나즈나 표식덱에 대한 소개",
       "authorLink": "https://arca.live/b/stellasora/152946680",
@@ -88,7 +148,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/18) 안즈 채용 등사평캔 치토세",
+      "title": "(25/11/18) 안즈 채용 등사평캔 치토세",
       "description": "프리지아-->안즈 대체 빌드입니다.",
       "author": "프없찐들을 위한 종언 치토세안즈덱",
       "authorLink": "https://arca.live/b/stellasora/153681506",
@@ -99,7 +159,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/18) 플로라 평캔시아",
+      "title": "(25/11/18) 플로라 평캔시아",
       "description": "종언에선 미네르바, 평소엔 징린 대신 플로라를 쓰는 빌드입니다.",
       "author": "플로라시아 (링크 설명 읽어보기 권장)",
       "authorLink": "https://arca.live/b/stellasora/153639677",
@@ -110,7 +170,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/18) 코제트 평캔시아",
+      "title": "(25/11/18) 코제트 평캔시아",
       "description": "종언에선 미네르바, 평소엔 징린 대신 코제트를 쓰는 빌드입니다.",
       "author": "코제트시아 (링크 설명 읽어보기 권장)",
       "authorLink": "https://arca.live/b/stellasora/153828865",
@@ -121,7 +181,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/15) 코제트 메인 어둠덱",
+      "title": "(25/11/15) 코제트 메인 어둠덱",
       "description": "기억하세요 미스티는 초흉쌍그, 모든 필수 잠재 6 필수",
       "author": "뉴 코제트메인 어둠덱 공략 최종본 v.1.0.6",
       "authorLink": "https://arca.live/b/stellasora/153848414",
@@ -132,7 +192,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/9) 미스티 지원 어둠덱",
+      "title": "(25/11/9) 미스티 지원 어둠덱",
       "description": "기억하세요 미스티는 초흉쌍그, 캐러멜은 최대한 피할 것",
       "author": "순수 영포티 어둠덱 ver 2 공략",
       "authorLink": "https://arca.live/b/stellasora/153229177",
@@ -143,7 +203,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(10/27) 치토세 여울빛 빌드",
+      "title": "(25/10/27) 치토세 여울빛 빌드",
       "description": "스킬 위주의 치토세 빌드입니다.",
       "author": "쉽게 이해하는 치토세 물덱 - 2. 여울빛 빌드",
       "authorLink": "https://arca.live/b/stellasora/151288616",
@@ -154,7 +214,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/14) 뉴네오 나노하 스킬 빌드",
+      "title": "(25/11/14) 뉴네오 나노하 스킬 빌드",
       "description": "스킬 위주의 나노하 빌드입니다. 자세한 운영법은 링크 참조",
       "author": "뉴네오 나노하덱",
       "authorLink": "https://arca.live/b/stellasora/153751072",
@@ -165,7 +225,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/2) 나노하 스킬 빌드",
+      "title": "(25/11/2) 나노하 스킬 빌드",
       "description": "스킬 위주의 나노하 빌드입니다. 안즈는 바람 장벽 제외 전부 취향껏",
       "author": "섭종기념 나노하 빌드 공략",
       "authorLink": "https://arca.live/b/stellasora/151940574",
@@ -176,7 +236,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(11/18) 시아 하이브리드 빌드",
+      "title": "(25/11/18) 시아 하이브리드 빌드",
       "description": "평타, 스킬을 합친 하이브리드 시아 빌드입니다.",
       "author": "뉴비용) 조합별 빌드, 잠재력 카드 컨닝 페이퍼",
       "authorLink": "https://arca.live/b/stellasora/152244437",
