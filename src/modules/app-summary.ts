@@ -17,10 +17,11 @@
  * @see {@link https://github.com/JforPlay/sstoy} - Project Repository
  */
 
-import { fetchJSON, log, onLanguageChange, createResponsiveImage } from '../shared';
+import { fetchJSON, log, onLanguageChange, createResponsiveImage, processDescriptionText } from '../shared';
 import { GameData } from '../shared/game-data';
 import { generatePotentialIconHTML } from '../shared/ui-components';
-import type { DiscSlotId, Position, PotentialMark, CharacterData } from '../types';
+import { parseDescriptionParams } from './param-parser';
+import type { DiscSlotId, Position, PotentialMark, CharacterData, CharacterState } from '../types';
 
 // =============================================================================
 // TYPES
@@ -55,6 +56,11 @@ let buildRankData: Record<string, BuildRankEntry> | null = null;
 
 // Cleanup function for document-level event listeners
 let starTowerListenerCleanup: (() => void) | null = null;
+
+// Tooltip state
+let tooltipElement: HTMLElement | null = null;
+let longPressTimer: ReturnType<typeof setTimeout> | null = null;
+const LONG_PRESS_DURATION = 400; // ms
 
 // =============================================================================
 // DATA LOADING
@@ -563,6 +569,238 @@ function generateNotesSummary(): string {
 }
 
 // =============================================================================
+// POTENTIAL TOOLTIP
+// =============================================================================
+
+/**
+ * Creates the global tooltip element if it doesn't exist
+ */
+function createTooltipElement(): HTMLElement {
+  if (tooltipElement) return tooltipElement;
+
+  tooltipElement = document.createElement('div');
+  tooltipElement.className = 'potential-tooltip';
+  document.body.appendChild(tooltipElement);
+  return tooltipElement;
+}
+
+/**
+ * Gets the brief description for a potential with parsed parameters
+ */
+function getPotentialBriefDescription(potId: number, position: Position): string {
+  const briefKey = `Potential.${potId}.1`;
+  let description = GameData.potentialsKR?.[briefKey];
+
+  if (!description) {
+    return window.i18n?.t('builder.noDescription') || 'No description available';
+  }
+
+  const potential = GameData.potentials?.[potId];
+  if (!potential) {
+    return description;
+  }
+
+  // Get item data to check if it's a specific potential
+  const itemData = GameData.items?.[potId];
+  const isSpecificPotential = itemData && itemData.Stype === 42;
+
+  // Get current level and skill level
+  let effectiveLevel: number;
+  let skillLevelForParams: number;
+
+  if (isSpecificPotential) {
+    // Specific potentials use skill level instead of potential level
+    const character = window.state?.party?.[position];
+    const isMaster = position === 'master';
+    const skillId = isMaster ? character?.data?.UltimateId : character?.data?.AssistSkillId;
+
+    if (character && skillId) {
+      effectiveLevel = window.state?.skillLevels?.[position]?.[skillId as number] || 1;
+      skillLevelForParams = effectiveLevel;
+    } else {
+      effectiveLevel = 1;
+      skillLevelForParams = 1;
+    }
+  } else {
+    // Normal potentials use potential level
+    effectiveLevel = window.state?.potentialLevels?.[position]?.[potId] || 1;
+    skillLevelForParams = effectiveLevel;
+  }
+
+  // Get character level phase
+  const charLevelPhase = window.state?.characterLevelPhase?.[position] || 8;
+
+  // Parse parameters
+  try {
+    description = parseDescriptionParams(
+      description,
+      potential as unknown as Record<string, string>,
+      effectiveLevel,
+      skillLevelForParams,
+      { ...GameData, ...window.state } as unknown as CharacterState,
+      position,
+      isSpecificPotential,
+      charLevelPhase
+    );
+
+    // Process color tags and element tags for display
+    description = processDescriptionText(description);
+  } catch (error) {
+    console.warn('[Summary] Failed to parse potential description:', error);
+    // Fallback: simple tag removal
+    description = description
+      .replace(/##[^#]+#\d+#/g, '')
+      .replace(/<[^>]+>/g, '')
+      .replace(/&Param\d+&/g, '?')
+      .trim();
+  }
+
+  return description;
+}
+
+/**
+ * Shows tooltip near the target element
+ */
+function showPotentialTooltip(target: HTMLElement, potId: number, position: Position): void {
+  const tooltip = createTooltipElement();
+  const description = getPotentialBriefDescription(potId, position);
+
+  // Get potential name
+  const potential = GameData.potentials?.[potId];
+  const briefDescKey = potential?.BriefDesc as string | undefined;
+  const itemKey = briefDescKey ? String(briefDescKey).replace('Potential.', 'Item.') : null;
+  const name = itemKey ? (GameData.itemsKR?.[itemKey] || `Potential ${potId}`) : `Potential ${potId}`;
+
+  // Get current level for display
+  const itemData = GameData.items?.[potId];
+  const isSpecificPotential = itemData && itemData.Stype === 42;
+  const level = isSpecificPotential ? 1 : (window.state?.potentialLevels?.[position]?.[potId] || 1);
+
+  tooltip.innerHTML = `
+    <div class="tooltip-title">${name} <span style="font-weight: normal; font-size: 0.8em; opacity: 0.8;">Lv.${level}</span></div>
+    <div>${description}</div>
+  `;
+
+  // Position tooltip
+  const rect = target.getBoundingClientRect();
+
+  // Default position: above the element, centered
+  let left = rect.left + (rect.width / 2) - 150; // 150 = half of max-width
+
+  // Adjust if tooltip would go off screen
+  if (left < 10) left = 10;
+  if (left + 300 > window.innerWidth - 10) left = window.innerWidth - 310;
+
+  // Set left position and make visible but transparent to measure height
+  tooltip.style.left = `${left}px`;
+  tooltip.style.top = '0px';
+  tooltip.style.opacity = '0';
+  tooltip.style.display = 'block';
+
+  // Get actual height after content is set
+  const actualHeight = tooltip.offsetHeight;
+
+  // Position above element, accounting for actual height
+  let top = rect.top - actualHeight - 10;
+
+  // If would go above viewport, show below instead
+  if (top < 10) {
+    top = rect.bottom + 10;
+  }
+
+  tooltip.style.top = `${top}px`;
+  tooltip.style.opacity = '1';
+}
+
+/**
+ * Hides the tooltip
+ */
+function hideTooltip(): void {
+  if (tooltipElement) {
+    tooltipElement.style.opacity = '0';
+  }
+  if (longPressTimer) {
+    clearTimeout(longPressTimer);
+    longPressTimer = null;
+  }
+}
+
+/**
+ * Sets up tooltip event listeners for potential icons
+ */
+function setupPotentialTooltips(container: HTMLElement): void {
+  // Track touch state
+  let touchStartPos = { x: 0, y: 0 };
+  let isTouchMoved = false;
+
+  // Desktop: Hover events
+  container.addEventListener('mouseenter', (e: MouseEvent) => {
+    const potIcon = (e.target as HTMLElement).closest('.potential-icon-compact') as HTMLElement | null;
+    if (!potIcon) return;
+
+    const potId = parseInt(potIcon.dataset.potentialId || '0', 10);
+    const position = potIcon.dataset.position as Position | undefined;
+    if (potId && position) {
+      showPotentialTooltip(potIcon, potId, position);
+    }
+  }, true);
+
+  container.addEventListener('mouseleave', (e: MouseEvent) => {
+    const potIcon = (e.target as HTMLElement).closest('.potential-icon-compact') as HTMLElement | null;
+    if (potIcon) {
+      hideTooltip();
+    }
+  }, true);
+
+  // Mobile: Long-press events
+  container.addEventListener('touchstart', (e: TouchEvent) => {
+    const potIcon = (e.target as HTMLElement).closest('.potential-icon-compact') as HTMLElement | null;
+    if (!potIcon) return;
+
+    const touch = e.touches[0];
+    if (!touch) return;
+
+    touchStartPos = { x: touch.clientX, y: touch.clientY };
+    isTouchMoved = false;
+
+    const potId = parseInt(potIcon.dataset.potentialId || '0', 10);
+    const position = potIcon.dataset.position as Position | undefined;
+    if (potId && position) {
+      longPressTimer = setTimeout(() => {
+        if (!isTouchMoved) {
+          showPotentialTooltip(potIcon, potId, position);
+          // Vibrate for haptic feedback if available
+          if (navigator.vibrate) {
+            navigator.vibrate(50);
+          }
+        }
+      }, LONG_PRESS_DURATION);
+    }
+  }, { passive: true });
+
+  container.addEventListener('touchmove', (e: TouchEvent) => {
+    const touch = e.touches[0];
+    if (!touch) return;
+
+    // If moved more than 10px, cancel long press
+    const dx = Math.abs(touch.clientX - touchStartPos.x);
+    const dy = Math.abs(touch.clientY - touchStartPos.y);
+    if (dx > 10 || dy > 10) {
+      isTouchMoved = true;
+      hideTooltip();
+    }
+  }, { passive: true });
+
+  container.addEventListener('touchend', () => {
+    hideTooltip();
+  }, { passive: true });
+
+  container.addEventListener('touchcancel', () => {
+    hideTooltip();
+  }, { passive: true });
+}
+
+// =============================================================================
 // BUILD STATS
 // =============================================================================
 
@@ -979,6 +1217,7 @@ function setupSummaryEventDelegation(): void {
   });
 
   setupPotentialDragAndDrop(summaryContainer);
+  setupPotentialTooltips(summaryContainer);
   setupStarTowerModalEvents();
 }
 

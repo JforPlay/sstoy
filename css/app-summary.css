@@ -1444,3 +1444,45 @@
         padding: 0.875rem 1rem;
     }
 }
+
+/* =============================================================================
+   POTENTIAL TOOLTIP
+   ============================================================================= */
+
+.potential-tooltip {
+    position: fixed;
+    z-index: 10000;
+    max-width: 300px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    word-wrap: break-word;
+}
+
+[data-theme="dark"] .potential-tooltip {
+    background: var(--surface-dark, #1a1a1a);
+    border-color: var(--border-dark, #333);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.potential-tooltip .tooltip-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--primary-color);
+}
+
+/* Mobile hint for long-press */
+@media (hover: none) and (pointer: coarse) {
+    .summary-potential-icons-grid::after {
+        content: '';
+        display: none; /* Hidden by default, can be enabled for hint */
+    }
+}
