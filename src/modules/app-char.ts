@@ -1968,8 +1968,17 @@ function setupEventListeners(): void {
     }
   });
 
-  // Input delegation for real-time updates
-  document.addEventListener('input', (e) => {
+  // Focus delegation - auto-select all text in level inputs for easy editing
+  document.addEventListener('focus', (e) => {
+    const target = e.target as HTMLInputElement;
+    if (target.classList.contains('potential-level-input') ||
+        target.classList.contains('skill-level-input')) {
+      target.select();
+    }
+  }, true); // Use capture phase to ensure we catch focus events
+
+  // Blur delegation - validate and clip level input values when focus leaves
+  document.addEventListener('blur', (e) => {
     const target = e.target as HTMLInputElement & ActionElement;
     const action = target.dataset.action;
 
@@ -1977,7 +1986,7 @@ function setupEventListeners(): void {
       const maxLevel = parseInt(target.dataset.maxLevel ?? '13', 10);
       target.value = String(validateNumericInput(target.value, 1, maxLevel));
     }
-  });
+  }, true); // Use capture phase to ensure we catch blur events
 
   // Search input
   const searchInput = getElement<HTMLInputElement>('character-search');
