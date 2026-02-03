@@ -60134,13 +60134,13 @@
         },
         "time": {
             "female_cn": [
-                3,
+                3.1,
                 0,
                 0,
                 0
             ],
             "female_jp": [
-                2,
+                1.75,
                 0,
                 0,
                 0
@@ -188399,6 +188399,6806 @@
             ]
         }
     },
+    "vo_159_combat_battleClear_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Hehe... Did you feel my \"love\"?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.048,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.476,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_battleClear_002": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Don't you think festivals are best when they're lively?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.9,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.423,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_battleClear_003": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Some illnesses are best treated by the old ways.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.471,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.531,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_chatLvUp_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "The atmosphere is bad... Like we're holding an unexploded bomb.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.498,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.576,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_chatNext_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "This is my first time conducting an experiment in a place like this... Hehe, now I'm a little excited.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6.904,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.848,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_chat_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "... We might find a good sample.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.205,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.378,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_chat_002": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I'd love to take some interesting data back.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.3,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.562,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_chat_003": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Hehe... Are you captivated by this Loong-style outfit?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.78,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.127,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_chat_004": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "This \"patient\" might be ... a bit of a troublemaker.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.915,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.628,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_chat_005": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "If I can find ideas for my research, then coming all this way will be worth it.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.773,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.573,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_dead_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "The festival is over...",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.477,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.717,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_dead_002": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Seems I went a bit too far...",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.149,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.147,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_eventRoom_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "When do those kids ever rest?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                1.944,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.348,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_perk_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Loong's secret medicine ... is truly fascinating.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.352,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.571,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_perk_002": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "With this combination... Hehe, this experiment might be interesting.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.182,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_perk_003": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "The range of treatments has expanded.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.85,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.367,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_restRoom_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I need to recharge my energy for the festival.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.416,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.781,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_shopRoom_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I've got to get ready for the festival.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                1.536,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.209,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_subPerk_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Relax and leave everything to me...",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.8,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.844,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_subPerk_002": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Just relax. I won't hurt you...",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.6,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.692,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_ultskill_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Now... Time to take your medicine.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.122,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.997,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_combat_ultskill_002": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "My \"love\"... Drink it, every last drop.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.4,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.245,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_eventshop_001": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Happy New Year. I hope good things happen.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.724,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.15,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_eventshop_002": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "It's freezing today... Let's just sell everything fast and head home.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.039,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.042,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_eventshop_003": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Hehe. You have a good eye. That's a pretty interesting product.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.6,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.521,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_affchat1_001": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "chat_b",
+                "think_a",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Umm... Why do the kids run and cry when they see me?",
+                "...Hm? I should hide the syringe? I see...",
+                "Kids are afraid of the same things in every town.",
+                ""
+            ],
+            "female_jp": [
+                "Umm... Why do the kids run and cry when they see me?",
+                "...Hm? I should hide the syringe? I see. Kids are afraid of the same things in every town.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6.2,
+                14.2,
+                19.797,
+                0
+            ],
+            "female_jp": [
+                8.6,
+                19.723,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_affchat2_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "presents_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "shy_a",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Want to know what's in the syringe? \"Doctor's Love\"... should I call it? It's easier to understand than a medicine name. Hehe, wanna try one?",
+                "Or... Do you desire something stronger and more stimulating?",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Want to know what's in the syringe? \"Doctor's Love\"... should I call it? It's easier to understand than a medicine name.",
+                "Hehe, wanna try one? Or... Do you desire something stronger and more stimulating? \"Love\"... Is that what you want...?",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                15.7,
+                22.144,
+                0,
+                0
+            ],
+            "female_jp": [
+                11.9,
+                23.449,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_affchat3_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "presents_b",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "You want to take a good look at my outfit? I don't mind, but allow me to record your bio-signs while you do. It's natural, isn't it? Give-and-take ... is what it's called.",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "You want to take a good look at my outfit? I don't mind, but allow me to record your bio-signs while you do.",
+                "It's natural, isn't it? Give-and-take ... is what it's called.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                16.673,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                10.53,
+                15.856,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_affchat4_001": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "presents_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "I don't dislike the bustle of today, but ... sometimes I miss the smell and specimens in the clinic.",
+                "Is this what they call nostalgia?",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I don't dislike the bustle of today, but ... sometimes I miss the smell and specimens in the clinic.",
+                "Is this what they call nostalgia?",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                15.4,
+                19.952,
+                0,
+                0
+            ],
+            "female_jp": [
+                9,
+                16.63,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_affchat5_001": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "The large fireworks blooming in the night sky... They're always so beautiful. Tonight... Shall we go see them together?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                12.848,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                10.964,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_afflv1_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Since it's a rare vacation, I'd like to spend it with you. A walk around town would be nice, or looking for rare specimens wouldn't be bad...",
+                "Hm? You already have plans? A Loong cultural experience, huh... Hehe, that sounds fun. I look forward to it.",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Would you mind spending some time with me? Since it's a rare vacation, I'd like to spend it with you.",
+                "A walk around town would be nice, or looking for rare specimens wouldn't be bad... Hm? You already have plans?",
+                "A Loong cultural experience, huh... Hehe, that sounds fun. I look forward to it.",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                9,
+                20.385,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.43,
+                20.8,
+                29.834,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_afflv2_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I just wanted a little break, but thanks to you, I enjoyed it more than I thought.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                11.639,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.519,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_afflv3_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "The Loong's Springseek Festival is the time when you celebrate the new year with family, right?... So, if I spend the Springseek Festival with you, doesn't that mean we can say we're family as well?",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "The Loong's Springseek Festival is the time when you celebrate the new year with family, right?",
+                "... So, if I spend the Springseek Festival with you, doesn't that mean we can say we're family as well?",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                18.106,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                7,
+                15.611,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_afflv4_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "There are almost too many fascinating things in Cangwu...",
+                "If it's okay with you, can you stay with me a little longer? I want to enjoy every inch of Cangwu, just like how I want to explore your body...",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "There are almost too many fascinating things in Cangwu...",
+                "If it's okay with you, can you stay with me a little longer?",
+                "I want to enjoy every inch of Cangwu, just like how I want to explore your body...",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4,
+                17.811,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.3,
+                11.5,
+                21.324,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_birth_001": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "presents_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "shy_a",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "You want to celebrate my birthday? I don't need cake or a present.",
+                "Instead... Could you let me observe your body a little? That would be the best celebration for me.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6.1,
+                16.154,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.34,
+                16.615,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_charup_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Not just appearance, we need to grow on the inside too.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.79,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.913,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_discuss_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "At Jinglin's mother's request, I am going to look at that kid's homework. Studying even during vacations, young kids have it hard.",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "At Jinglin's mother's request, I am going to look at that kid's homework.",
+                "Studying even during vacations, young kids have it hard.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                11.47,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.8,
+                9.994,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_discuss_002": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "presents_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "chat_b",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "I was thinking of having Chixia teach me about Xuan Shi's alchemy, but it seems that girl is not good at it.",
+                "But she will ask a skilled senior apprentice instead, so I am looking forward to it.",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I was thinking of having Chixia teach me about Xuan Shi's alchemy, but it seems that girl is not good at it.",
+                "But she will ask a skilled senior apprentice instead, so I am looking forward to it.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                8,
+                15,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.76,
+                14.739,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_discuss_003": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "think_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "think_a",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Shimiao? She's smart and inquisitive—I think she's a good kid.",
+                "But... It's a pity we couldn't speak at length because she always seems busy.",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Shimiao? She's smart and inquisitive—I think she's a good kid.",
+                "But... It's a pity we couldn't speak at length because she always seems busy.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7,
+                14.953,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.76,
+                12.78,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_discuss_004": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Cosette? I'm sure that girl has a reason. Hehe... I happen to know someone like her. A disguise like that won't fool my eyes.",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "The name is Cosette, right? I'm sure that girl has a reason.",
+                "Hehe... I happen to know someone like her. A disguise like that won't fool my eyes.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                12.255,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.5,
+                16.946,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_discuss_005": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "think_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "think_a",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I saw a lady with a mysterious aura at the inn. Her name was Danyun, I think.",
+                "She seems to be the innkeeper, but I think she's not an ordinary person. Her eyes held secrets.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                10,
+                16.323,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.3,
+                16.93,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_excharup_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Loong's secret training techniques seem to be quite effective.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.825,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.613,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_exhang_001": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "You're sleeping well. I guess the medicine I mixed is working nicely.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.182,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.535,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_fullscreen_001": {
+        "anim": {
+            "female_cn": [
+                "special_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "special_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Are you tired? If so... Come here. You're an important test subject, so... I'll take care of every single part of your body.",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Are you tired? If so... Come here.",
+                "You're an important test subject, so... I'll take care of every single part of your body.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                10.737,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.9,
+                17.119,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_fullscreen_002": {
+        "anim": {
+            "female_cn": [
+                "special_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "special_b",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Your skill's improved, hasn't it? If you make me feel this good every time... Heh... Could it be you want to make it ... so I can't live without you ... or what?",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Your skill's improved, hasn't it? If you make me feel this good every time...",
+                "Heh... Could it be you want to make it ... so I can't live without you ... or what?",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                11.655,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                8,
+                18.33,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_gachaNew_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "What an interesting coincidence to run into you while traveling. By the way... What do you think about this Loong-style outfit?",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "What an interesting coincidence to run into you while traveling.",
+                "By the way... What do you think about this Loong-style outfit?",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                11.652,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.1,
+                11.759,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_gacha_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "We meet again. Hehe... You couldn't forget my treatment?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7.02,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.013,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_greet_001": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "You look well. I guess it shows proper rest really is necessary.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.259,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.853,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_greet_002": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "chat_b",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "If you're tired, I'll make you some medicinal tea. A fast-acting and invigorating one...",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "If you're tired, I'll make you some medicinal tea.",
+                "A fast-acting and invigorating one...",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7.67,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.4,
+                8.719,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_greetmorn_001": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Were you awakened by the firecracker noise? Hehe, what a coincidence. Me too.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.576,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.543,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_greetnight_001": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "The moon shines bright and clear, the wind blows crisp and brisk... The night in Cangwu is truly charming.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.776,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                11.188,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_greetnoon_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Cangwu is an interesting city. There are a lot of rare things, and the daytime market is bustling with energy and fun.",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Cangwu is an interesting city.",
+                "There are a lot of rare things, and the daytime market is bustling with energy and fun.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7.887,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.5,
+                10.992,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_hang_001": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Even when the city is all hyped up, you just stay at your own pace. That's what I like about you.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                9.584,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.305,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_hang_002": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Shall we walk around the town to kill time? I also want to buy the medical device I found yesterday while I can.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7.258,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                9.371,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_hfc_001": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Yes yes, don't be so flustered.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.805,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.645,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_hfc_002": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Want to be treated quickly? Hehe... I don't mind proactive kids when they behave.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7.631,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.872,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_logo_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Yostar",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_lose_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Long breaks really mess people up...",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.239,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.814,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_lose_002": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Has my intuition gone dull...?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.103,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.397,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_music_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Good music can help with treatment.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.014,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.096,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_newyear_001": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "A new year has begun. If necessary, I can take charge of your health management this year.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7.24,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.044,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_posterchat_001": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "presents_b",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "shy_a",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "The city is livelier than usual because of the festival.",
+                "If you're restless and can't sleep, you should try my new medicine. You'll sleep soundly like a baby... Hehe.",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "The city is livelier than usual because of the festival. If you're restless and can't sleep, you should try my new medicine.",
+                "You'll sleep soundly like a baby... Hehe.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7.3,
+                19.636,
+                0,
+                0
+            ],
+            "female_jp": [
+                11.69,
+                17.488,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_posterchat_002": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "chat_b",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "chat_b",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "It seems this syringe is also suitable for the Loong dish called guan tang bao.",
+                "Just inject the filling into the dough like this... Yes, it's ready. Eating it should give you a boost of energy.",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "It seems this syringe is also suitable for the Loong dish called xiao long bao.",
+                "Just inject the filling into the dough like this... Yes, it's ready. Eating it should give you a boost of energy.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6.9,
+                19.605,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.59,
+                16.282,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_posterchat_003": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "think_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "This outfit is pretty nice, huh? I arranged it to my liking based on a Loong design. The slit makes it easy to move...",
+                "... And it's just right for dealing with unruly \"patients\"... Hehe.",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "This outfit is pretty nice, huh? I arranged it to my liking based on a Loong design.",
+                "The slit makes it easy to move, and it's just right for dealing with unruly \"patients\"... Hehe.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                12.8,
+                18.824,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.8,
+                16.805,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_posterchat_004": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "I never imagined it would be so hard to collect rare specimens at Cangwu's market. All the stall owners were tough negotiators.",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I never imagined it would be so hard to collect rare specimens at Cangwu's market.",
+                "All the stall owners were tough negotiators, and haggling over prices gave me more headaches than I expected.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                11.51,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.49,
+                15.153,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_posterchat_005": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "This month... Already over budget, huh? But it's the middle of vacation, so having fun takes priority over the financial situation, right?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                12.775,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                12.555,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_posterchat_006": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "shy_a",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "It seems the Baize Bureau is inviting experts to hold a health seminar. I am interested. If you like, will you join me?",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "It seems the Baize Bureau is inviting experts to hold a health seminar.",
+                "I am interested. If you like, will you join me?",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                10.127,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                6,
+                11.356,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_standee_001": {
+        "anim": {
+            "female_cn": [
+                "special_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "special_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "This little one is the best pick I found in Cangwu. I put a lot of time and effort into making it this beautiful.",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "This little one is the best pick I found in Cangwu.",
+                "I put a lot of time and effort into making it this beautiful.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                10.69,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.1,
+                12.429,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_standee_002": {
+        "anim": {
+            "female_cn": [
+                "special_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "special_b",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "I learned a New Year's greeting in Cangwu. Umm...",
+                "New year, good medicine. May you find good medicine in the new year.",
+                "...Hm? Did I make a mistake? I thought it was a good greeting.",
+                ""
+            ],
+            "female_jp": [
+                "I learned a New Year's greeting in Cangwu. Umm... New year, good medicine. May you find good medicine in the new year.",
+                "...Hm? Did I make a mistake? I thought it was a good greeting.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7.2,
+                12.8,
+                19.569,
+                0
+            ],
+            "female_jp": [
+                13.6,
+                21.041,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_swap_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "It's time to stretch out.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.083,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_swap_002": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "We've got plenty of medicine in stock.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.717,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_swap_003": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Now, where are the patients?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.394,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_swap_004": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Well, shall we head to the celebration?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.086,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.947,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_thankEx_001": {
+        "anim": {
+            "female_cn": [
+                "shy_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "shy_a",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "You feelings have definitely reached me. In that case... I must return a token of my love that is equally extraordinary.",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Your feelings have definitely reached me.",
+                "In that case... I must return a token of my love that is equally extraordinary.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6.9,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.9,
+                10.64,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_thankSmall_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "That choice is so you.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.05,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1.744,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_thank_001": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "You really understand my tastes... I knew you would.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.076,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.677,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_uniMusic_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I wonder what kind of information is hidden in past memories?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.797,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.468,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_unlockCG_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Now it's your turn to heal me... Heh, don't stop your hands.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                8.107,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.364,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_unlockLook_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Hehe... I'll make your feelings soar even higher.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.8,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.017,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_valentine_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "shy_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "shy_a",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Today is a special day, and on days like that, isn't it okay to be more honest than usual?",
+                "Now, relax... Let me pour every last drop of my love into you... Okay?",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                8.1,
+                20.428,
+                0,
+                0
+            ],
+            "female_jp": [
+                9.52,
+                20.642,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_win_001": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Well, shall we return to the fun festival?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.339,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.497,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_win_002": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I'm glad my outfit didn't get dirty.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.001,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.45,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_xmas_001": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "shy_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "shy_a",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "The snow is heavy... If you're cold, there's warm medicinal tea.",
+                "If you don't like bitter flavors... We could warm you up another way. Heh, which would you prefer?",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "The snow is heavy... If you're cold, there's warm medicinal tea.",
+                "If you don't like bitter flavors... We could warm you up another way. Heh, which would you prefer?",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.2,
+                14.081,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.94,
+                18.751,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_159_ui_yourbirth_001": {
+        "anim": {
+            "female_cn": [
+                "shy_a",
+                "presents_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "chat_b",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "On this day, my most precious and unique experiment subject was born into this life...",
+                "Thinking about such a miraculous coincidence, I feel I can understand why people value their birthdays.",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Happy birthday.",
+                "On this day, you were born into this life with a precious and unique body...",
+                "Thinking about such a miraculous coincidence, I feel I can understand why people value their birthdays.",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7.3,
+                13.826,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.46,
+                9.05,
+                17.185,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_LoginNpc103_ChineseNewYear26_day04": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "presents_b",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "presents_a",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Meow, meow.==RT==Inky said \"thank you for last year.\"",
+                "Let's rest well during the Springseek Festival and make it a good year together.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                10.5,
+                16.235,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.45,
+                13.49,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
     "vo_LoginNpc103_NewYear26_day02": {
         "anim": {
             "female_cn": [
@@ -188462,6 +195262,246 @@
             "female_jp": [
                 6.6,
                 8.22,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_LoginNpc103_Valentine26_day02": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "presents_a",
+                "shy_a",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "presents_a",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I want to go buy chocolate, but talking to the store person is ... difficult.",
+                "Boss, can you come with me? If you do, we can also select what you like.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7.2,
+                13.8,
+                16.573,
+                0
+            ],
+            "female_jp": [
+                8.65,
+                15.411,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_LoginNpc110_Valentine26_day04": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "chat_a",
+                "presents_b",
+                "chat_a"
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "presents_b",
+                "presents_a"
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "You want to hear my words when I give chocolate to someone special?",
+                "I haven't had the chance even once, and I had not even thought about it... Let's see.",
+                "My ... heartfelt gift... I will be happy if you accept it. Savor it well as you eat it.",
+                "Hehehe ♪ You said you wanted to hear it yourself, so why are you turning red?"
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.4,
+                13.3,
+                30,
+                40.323
+            ],
+            "female_jp": [
+                7.15,
+                17.55,
+                28.88,
+                36.257
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_LoginNpc111_ChineseNewYear26_day05": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "presents_b",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "presents_b",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "After calculating last year's expenses, it looks like we have a lot of room in this year's activity budget.",
+                "Let's rest well during the Springseek Festival and make the new year good together!",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6,
+                11.521,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.7,
+                13.625,
                 0,
                 0
             ],
@@ -188559,6 +195599,166 @@
             ]
         }
     },
+    "vo_LoginNpc111_Valentine26_day01": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "presents_a",
+                "shy_a",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "presents_a",
+                "presents_b",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Once I melt the chocolate by double boiling, I pour it into the mold...",
+                "Ahh... this chocolate melted into goo looks delicious... Ah, just one spoon... for a little taste test...",
+                "Ah, the taste of happiness. ♪",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.2,
+                14,
+                18.875,
+                0
+            ],
+            "female_jp": [
+                6,
+                16.7,
+                21.113,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_LoginNpc112_ChineseNewYear26_day06": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "presents_b",
+                "think_a",
+                ""
+            ],
+            "female_jp": [
+                "presents_a",
+                "",
+                "think_a",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Why don't we decorate Loxy in a Springseek Festival style?",
+                "Hang red lanterns, put up red paper cuttings, make the tires red...",
+                "Wait, does that turn Loxy into Ruby?",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.1,
+                9,
+                13.424,
+                0
+            ],
+            "female_jp": [
+                3.7,
+                11,
+                15.8,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
     "vo_LoginNpc112_NewYear26_day03": {
         "anim": {
             "female_cn": [
@@ -188623,6 +195823,246 @@
                 5,
                 13.35,
                 20.99,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_LoginNpc112_Valentine26_day03": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "presents_b",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "presents_a",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "They often say making food and candy are different, but to me, they're the same ♪",
+                "So look forward to the taste of my homemade chocolate!",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.2,
+                10.4,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.5,
+                14.327,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_LoginNpc113_ChineseNewYear26_day03": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "chat_a",
+                "presents_b",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "chat_b",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "This is a time when it's easy to get loose, but please be careful about fire when enjoying the festival.",
+                "If there are any problems, contact me anytime.",
+                "Even during the Springseek Festival period, the Baize Bureau will respond promptly.",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.8,
+                9,
+                13.168,
+                0
+            ],
+            "female_jp": [
+                7.1,
+                12,
+                16.34,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_LoginNpc117_ChineseNewYear26_day01": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "presents_b",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "presents_a",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Are you free tonight?==RT==Come and eat if you like ♪",
+                "After all, for Springseek Festival, everyone should get together and spend a good time!",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.9,
+                10.427,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.1,
+                10.4,
+                0,
                 0
             ],
             "male_cn": [
@@ -188943,6 +196383,166 @@
                 5.15,
                 14.7,
                 25.03,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_LoginNpc135_Valentine26_day05": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "presents_a",
+                "chat_b",
+                "shy_a"
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "shy_a",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "You think I would cover my whole body in chocolate and make myself a gift?",
+                "Oh, come on! Even for big news, Mistique wouldn't go that far.",
+                "Even if it's for someone special...==RT==No, I mean, if it's really for someone special, wouldn't that be ... embarrassing?",
+                "Hehehe ♪ Shutter chance!==RT==I'll take that flustered look on your face★"
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                8.3,
+                13.8,
+                24.1,
+                32
+            ],
+            "female_jp": [
+                7.6,
+                15.45,
+                28.28,
+                35.506
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_LoginNpc141_ChineseNewYear26_day02": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "presents_b",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "",
+                "presents_a",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Uwhaaa?!==RT==That surprised me...==RT==When did you get here?",
+                "I almost set off the firecrackers...",
+                "Well, that's ok. More importantly, I'll give you a special show of famous Cangwu fireworks! Be sure to watch carefully!",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5,
+                14.416,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.97,
+                10.6,
+                20.42,
                 0
             ],
             "male_cn": [
@@ -189343,6 +196943,86 @@
                 6.2,
                 14.2,
                 20.111,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_LoginNpc159_ChineseNewYear26_day07": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "presents_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "chat_b",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "We are on break, so why don't we look around the city celebrating the Springseek Festival?",
+                "For research, we might even find some useful, rare, and valuable items.",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                8,
+                13.198,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.2,
+                13.144,
+                0,
                 0
             ],
             "male_cn": [
@@ -250782,6 +258462,1126 @@
             "female_jp": [
                 2.45,
                 7.975,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_159_001_confirm": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "No problem.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1.117,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_159_002_deny": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Impossible.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_159_003_question": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "What is it?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_159_004_confuse": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Eh...",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_159_005_sad": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "What a pity...",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1.164,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_159_006_excit": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Wow!",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_159_007_angry": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Are you ready?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1.644,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_159_008_happy": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Hehe...",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_159_009_sigh": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Sigh...",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_159_010_catchphrase": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I'm on vacation now.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1.778,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_159_011_catchphrase": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Hehe... How lively.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.223,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.231,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_159_012_catchphrase": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "That... I'll look into it a little.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.4,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.541,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_159_013_catchphrase": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Do you desire special treatment?",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.896,
+                0,
+                0,
+                0
+            ],
+            "male_cn": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "male_jp": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_159_014_catchphrase": {
+        "anim": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "This is a special medicine.",
+                "",
+                "",
+                ""
+            ],
+            "male_cn": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "male_jp": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.385,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.203,
+                0,
                 0,
                 0
             ],

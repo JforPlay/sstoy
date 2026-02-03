@@ -2,11 +2,11 @@
   "version": "1.0",
   "category": "meta",
   "metadata": {
-    "lastUpdated": "2026-01-22",
-    "bossRush": "선풍의 공주/어웨이크너 (~1/31)",
+    "lastUpdated": "2026-02-03",
+    "bossRush": "광기의 요리사/취황의 칼날 (~2/28)",
     "jointDrill": "X",
     "totalBuilds": 0,
-    "notes": "연합토벌 및 종언 컨텐츠 전용 빌드들 입니다. 피렌덱들은 지속적으로 추가 예정입니다."
+    "notes": "연합토벌 및 종언 컨텐츠 전용 빌드들 입니다. 새해 크루니스덱들은 추후 업데이트 예정입니다."
   },
   "presets": [
     {
