@@ -31,12 +31,18 @@ interface ElementData {
   color: string;
 }
 
+interface AuthorInfo {
+  name?: string;
+  link?: string;
+}
+
 interface PresetBuild {
   id: string;
   title: string;
   description?: string;
-  author?: string;
-  authorLink?: string;
+  author?: string;           // Primary author (backward compatible)
+  authorLink?: string;       // Primary author link (backward compatible)
+  authors?: AuthorInfo[];    // Additional authors (up to 3 total)
   element: string;
   characterId?: string;
   tags?: string[];
@@ -123,6 +129,62 @@ function extractHashFromUrl(urlOrHash: string): string {
 
   // Fallback: return as-is
   return urlOrHash;
+}
+
+/**
+ * Render author links for a preset (supports up to 3 authors)
+ */
+function renderPresetAuthors(preset: PresetBuild): string {
+  const authors: AuthorInfo[] = [];
+
+  // Add primary author (backward compatible)
+  if (preset.author || preset.authorLink) {
+    authors.push({
+      name: preset.author,
+      link: preset.authorLink,
+    });
+  }
+
+  // Add additional authors (up to 2 more, for total of 3)
+  if (preset.authors) {
+    preset.authors.slice(0, 2).forEach((author) => {
+      if (author.name || author.link) {
+        authors.push(author);
+      }
+    });
+  }
+
+  // If no authors, show anonymous
+  if (authors.length === 0) {
+    return `
+      <span class="preset-author">
+        <span class="author-icon">@</span>
+        ${window.i18n?.t('preset.anonymous') || 'Anonymous'}
+      </span>
+    `;
+  }
+
+  // Render author links/spans
+  return authors
+    .map((author) => {
+      const name = author.name || (window.i18n?.t('preset.anonymous') || 'Anonymous');
+      if (author.link) {
+        return `
+          <a href="${author.link}" target="_blank" rel="noopener" class="preset-author-link">
+            <span class="author-icon">@</span>
+            <span>${name}</span>
+            <span class="external-icon">&nearr;</span>
+          </a>
+        `;
+      }
+      return `
+        <span class="preset-author">
+          <span class="author-icon">@</span>
+          ${name}
+        </span>
+      `;
+    })
+    .join('');
 }
 
 /**
@@ -394,22 +456,9 @@ function renderPresetCards(presets: PresetBuild[]): void {
               : ''
           }
           <div class="preset-footer">
-            ${
-              preset.authorLink
-                ? `
-              <a href="${preset.authorLink}" target="_blank" rel="noopener" class="preset-author-link">
-                <span class="author-icon">@</span>
-                <span>${preset.author || (window.i18n?.t('preset.anonymous') || 'Anonymous')}</span>
-                <span class="external-icon">&nearr;</span>
-              </a>
-            `
-                : `
-              <span class="preset-author">
-                <span class="author-icon">@</span>
-                ${preset.author || (window.i18n?.t('preset.anonymous') || 'Anonymous')}
-              </span>
-            `
-            }
+            <div class="preset-authors">
+              ${renderPresetAuthors(preset)}
+            </div>
             <button
               class="preset-load-btn"
               data-build-url="${preset.buildUrl || preset.buildHash || ''}"

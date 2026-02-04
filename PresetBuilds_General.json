@@ -11,6 +11,17 @@
   "presets": [
     {
       "id": "preset-build",
+      "title": "(1/14) 피렌 - 2유파 빌드 참고용",
+      "description": "2유파는 1유파보다도 연구가 더 되어야할 것 같지만, 마찬가지로 참고용입니다. 피렌 남는 잠재칸에는 필살기 잠재(결정된 선택+즉시 청산) 혹은 공증 잠재(통보의 순간+어둠의 스핀)등을 집는 경우가 많은 것 같습니다. 피렌덱들은 추후 연구되는대로 추가될 예정입니다.",
+      "author": "중국펌 피렌 1,2유파 빌드",
+      "authorLink": "https://gall.dcinside.com/stellasora/184062",
+      "element": "Dark",
+      "characterId": 110,
+      "tags": ["소환", "피렌", "코제트", "미스티"],
+      "buildHash": "v2d-%2Fc99ou0Xl)k%3E%3E38.jO9%5BckDUAu%5BqWY6%3AyY%2FLjgzLrLFHM%40uO%25Zk%7C%7BQ%245xCH%60g%7C%7CzN%5B%3AsKx63)*T%24!%24eXDgi8zEz%252S%23%25%2FfQV.)dTIdb.chk!Ph%3Fit~wtMPXR6hOJ1%26ZI*%3FVqRxltU)BR%3Ff2u%22ajNrxuS3taldt0L0W%23FBSmZmZZ%7CB"
+    },
+    {
+      "id": "preset-build",
       "title": "(25/12/23) 클라루 후유카 통상 빌드",
       "description": "높은 공증을 제공하는 클라루의 스킬 + 소환 6마리를 위한 더블예포 채용.",
       "author": "클라루 후유카 통상 빌드",
