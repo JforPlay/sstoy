@@ -9,6 +9,18 @@
     "notes": "연합토벌 및 종언 컨텐츠 전용 빌드들 입니다. 새해 크루니스덱들은 추후 업데이트 예정입니다."
   },
   "presets": [
+      {
+      "id": "preset-build",
+      "title": "(2/4) 땅 표식덱 빌드",
+      "description": "그레이 무지개 표식뎀 3개 띄우면 25만 이상도 충분히 가능, 자세한 스펙은 링크 참",
+      "author": "2일차 땅 표식덱 빌드",
+      "authorLink": "https://arca.live/b/stellasora/161446683",
+      "element": "Earth",
+      "characterId": 159,
+      "tags": ["표식", "나즈나", "새해 크루니스", "그레이"],
+      "meta": true,
+      "buildHash": "v3d-hcmyouLC~4%40rB%3EU%40w%2BE.X%2FgGx%24XTq%3COX%22CM!sL%23%60DsE2v%60J%3Fu%25%7BREmk%3D(TZqw_%7B%3ES)Zu7%25%25%23MumljY.k%40Q2p*~7%60i%5B3.i3IVHo6wwO%2Cf%3E8%2F%23g%2FezMQwr%22.0QOh*%3A%242%3A%3AG%24EDEHF6AB"
+    },
     {
       "id": "preset-build",
       "title": "(2/4) 나즈나 + 새해 크루니스 표식덱",
