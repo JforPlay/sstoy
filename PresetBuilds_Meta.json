@@ -2,7 +2,7 @@
   "version": "1.0",
   "category": "meta",
   "metadata": {
-    "lastUpdated": "2026-02-03",
+    "lastUpdated": "2026-02-04",
     "bossRush": "광기의 요리사/취황의 칼날 (~2/28)",
     "jointDrill": "X",
     "totalBuilds": 0,
@@ -70,18 +70,7 @@
     },
     {
       "id": "preset-build",
-      "title": "(1/14) 피렌 - 1유파 빌드 참고용",
-      "description": "아직까진 피렌 연구가 더 되어야할 것 같지만, 현재까지 나온 빌드 중 점수가 괜찮게 뽑히는거같은 1유파 빌드의 참고용입니다.",
-      "author": "중국펌 피렌 1,2유파 빌드",
-      "authorLink": "https://gall.dcinside.com/stellasora/184062",
-      "element": "Dark",
-      "characterId": 110,
-      "tags": ["표식", "스킬", "피렌", "코제트", "틸리아"],
-      "buildHash": "v2d-%5DhYynB1Xe56%26%7BzMJ%5DbZi*f%7CDZ!cPkX%22uRu(YKw1zxZuJ%60C8FwDSU%3C%229tqK~%2F%3DdDUEo%7D%7B%3C%24d6)9f%3AwvO%2Bj!xm%22bMZZ%3A%5D0%3CgrR%25QlqF9%23%5Ds%3BE%26A%7CKDB)!WxWDw*M8EnSkI%3E(RW2yxB%5DWdB%60%2CzXgufR1acqJU%3Ad%7C%26Cu(Wcc%3A!%7BW%3C%60A"
-    },
-    {
-      "id": "preset-build",
-      "title": "(1/7) 클라루 후유카 연합/종언용 궁빌드",
+      "title": "(1/7) 클라루 후유카 연합용 궁빌드",
       "description": "플로라 - 과거의 잿더미 (저점보완 물나비), 미래희망의 불씨 (고점 불나비), 후유카의 후순위들은 필수 챙기고 난 이후 보이는거 집어주면 되고, 쾌속연타는 공속이 있기때문에 명함은 꼭 챙겨주세요. 종언도 동일, 연합은 링크 영상 참고",
       "author": " 명함 후유카 어웨이크너 4궁 35만 빌드 소개",
       "authorLink": "https://arca.live/b/stellasora/158697091",
@@ -93,27 +82,14 @@
     },
     {
       "id": "preset-build",
-      "title": "(1/7) 클라루 후유카 종언/연합용 2유파 빌드",
-      "description": "종언 877, 어웨이크너 27만 자세한 캐릭터, 레코드 스펙은 게시물 참조",
-      "author": " 후유카 2유파 877.9",
-      "authorLink": "https://arca.live/b/stellasora/158939175",
-      "element": "Fire",
-      "characterId": 134,
-      "tags": ["스킬", "클라루", "후유카", "플로라"],
-      "meta": true,
-      "buildHash": "v2d-%22hjxpua*wA%5ETX%60AJhw%3FacA%2BY0%7BHt%3EJtP%5BRn7%22w0y%22.mul9y%250suPL%24W1D%40agEoq%3FT%5En9X_ju%24%3Ad%7B%3F8868%23)S!u%7CjaA%2CG%24.v%40K%5EYz3o%25NRr%23B90%26y~fGOBjp%40y~E%2FW4ngTQmN%25f*f!%2BpmW"
-    },
-    {
-      "id": "preset-build",
-      "title": "(1/3) 클라루 후유카 1월 연합용 궁빌드",
-      "description": "클라루가 공증 주는게 많아서 공증 잠재보단 다른 것들 우선적으로 챙기는걸 추천합니다 + 클라루 궁 먼저 깔아두기",
-      "author": " 클라루 후유카 궁 빌드",
-      "authorLink": "https://arca.live/b/stellasora/158566114",
-      "element": "Fire",
-      "characterId": 158,
-      "tags": ["필살기", "클라루", "후유카", "플로라"],
-      "meta": true,
-      "buildHash": "v2d-Hi%7B.nBZY%3C%3FBV%3F.n%7BsYn%2FTT%7Ddt2(tn%2FGwq%26%25t.%3AgCgLB%2F_%227X%2C%26JXcS3%2BV%23b%2BW%7CQZp)1pj8o%3Fw4Oki%24j%3E%22x%26%249.~0M%25BcE%2CeXtq%5E%25ue8%5Bq0V%60%3Br5x%60ZvOJhLii%24N%5D%5EyUP%23(RdHY%3C43g%24%5B%2Bfx%3E%3C6_8EmcM_OOwh4I%26i%3FJf%5E(gZDKE%3Fmt%3C%3F%7Bzq1T5O%7DGD%7BkG2I%60YSy3XdP%40vA"
+      "title": "(11/14) 평캔 시아",
+      "description": "빛 약점만 있다면 언제든 다시 등장하는 시아. 이번에도 다시 등장했습니다만, 표식 접대로 인해서 나즈나 표식덱이 좀 더 우위를 점하고 있는것 같습니다.",
+      "author": "속성별 메타 빌드 모음",
+      "authorLink": "https://arca.live/b/stellasora/153536269",
+      "element": "Light",
+      "characterId": 155,
+      "tags": ["평타", "시아", "미네르바", "틸리아"],
+      "buildHash": "N4IgbiBcIIwHQAYQBoQDsokJPLgUuYASA7Q4CKjgMn2A7LSiAMZSgC2tIAlpjAKxuUAOUA2m+zYIYyARwQAmUYIQA2aeLYKhAdmUwAzOqli2AFg0BdVFwA2jXQk6R5IS7Ki3LKx6l2bHAXxMNIoS9YggCKrgBhDlPaYoeEyLtBRboIwEpiAoV2AFquAM53RHB5xYZ7eIACGMIws0JrJJnwCGhISetJ19U0SGgitGlq19QAcxiBmFpXtrnYjGlBshVy+-pUSvamZ0XWjeattk9CAJ007gK7jgASDIAWoRcl+zKwILtWQ-DA3EiICTzqPKhJKr5+90k-yH4SACc-0+KgGQ0uQOsTg+EgckEa4yeS0gWhRn2BUD0MzmmK+kTCCQBmD2R2iT1iIHSWRJvzJB2O9JBjIpBUKABNGABnRh0IpMNClSDPPQIDR-EACoUXMUIG6oGVobbyiQdEA8gCuACMRfL2qhtTq5TBxRpQZrdaqzcIEBygA"
     }
   ],
 
