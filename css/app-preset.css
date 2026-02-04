@@ -722,6 +722,21 @@
     opacity: 0.7;
 }
 
+/* Multiple Authors Container */
+.preset-builds-section .preset-authors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.5rem;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+}
+
+.preset-builds-section .preset-authors .preset-author-link,
+.preset-builds-section .preset-authors .preset-author {
+    flex-shrink: 0;
+}
+
 .preset-builds-section .preset-load-btn {
     padding: 0.625rem 1.25rem;
     background: #3498db;
