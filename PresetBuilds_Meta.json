@@ -2,23 +2,36 @@
   "version": "1.0",
   "category": "meta",
   "metadata": {
-    "lastUpdated": "2026-02-04",
-    "bossRush": "광기의 요리사/취황의 칼날 (~2/28)",
+    "lastUpdated": "2026-03-11",
+    "bossRush": "뚜두뚜두 남작/심층의 주인 (~3/31)",
     "jointDrill": "X",
     "totalBuilds": 0,
-    "notes": "연합토벌 및 종언 컨텐츠 전용 빌드들 입니다. 새해 크루니스덱들은 추후 업데이트 예정입니다."
+    "notes": "연합토벌 및 종언 컨텐츠 전용 빌드들 입니다."
   },
   "presets": [
-      {
+    {
+      "id": "preset-build",
+      "title": "(2/28) 레이스 + 나츠카",
+      "description": "레이스 메인의 바람덱입니다. 남은 메인 레코드는 패스/재앙으로. 집중소리는 할인 보이는대로 풀매수.. 자세한건 링크 참조",
+      "author": "바람덱 ㄹㅇ 찐최종본",
+      "authorLink": "https://arca.live/b/stellasora/163622506",
+      "element": "Wind",
+      "characterId": 143,
+      "tags": ["레이스", "나츠카", "안즈"],
+      "meta": true,
+      "buildHash": "v3d-Hi%3BznB2)k)u%23%3F%3CJkeFl%5Bo%3FG%5BqUY!6Y_YS9jZsxYiR%7B5F%7DLLVj%5DA%3FM5bq3%7Cvr4%3C3%609Lchk%25%23%5BJ_%22%2C72%3Eq3h.%7DaD%40N%3ECkGtN%5EPTfk)%2C%2B%7DoNwtNT(%3Fi%24*ex9*Wx%3BIZ%3BY0CWrW%3BoIyZN%40%7Bp%3D%2B_B*TGO%7DGJ%25%5D%40O%3C%7Di%2FZ7pi~dWSDeL%3Bz4n5iI"
+    },
+    {
       "id": "preset-build",
       "title": "(2/4) 땅 표식덱 빌드",
       "description": "그레이 무지개 표식뎀 3개 띄우면 25만 이상도 충분히 가능, 자세한 스펙은 링크 참조",
-      "author": "2일차 땅 표식덱 빌드",
+      "author": "너희들이 알던 땅표식은 다시 깍아야 된다",
       "authorLink": "https://arca.live/b/stellasora/161446683",
       "element": "Earth",
       "characterId": 159,
       "tags": ["표식", "나즈나", "새해 크루니스", "그레이"],
       "meta": true,
+      "new" : true,
       "buildHash": "v3d-hcmyouLC~4%40rB%3EU%40w%2BE.X%2FgGx%24XTq%3COX%22CM!sL%23%60DsE2v%60J%3Fu%25%7BREmk%3D(TZqw_%7B%3ES)Zu7%25%25%23MumljY.k%40Q2p*~7%60i%5B3.i3IVHo6wwO%2Cf%3E8%2F%23g%2FezMQwr%22.0QOh*%3A%242%3A%3AG%24EDEHF6AB"
     },
     {
@@ -41,44 +54,7 @@
       "characterId": 159,
       "tags": ["표식", "나즈나", "새해 크루니스", "그레이"],
       "meta": true,
-      "new": true,
-      "buildHash": "v3d-%22h48oumB~4O%5B%2ClM6%7Bg5%7C*DHB%5Dwdxc)B%3Cf%3E9%3B.%403F%60X%7Buh%22%2Bi9SON%2BPgkfFbxiV%5Bn)sM6j%60~%3C6hiPx2%40%3Fb%5BGyJ%3BAmon%3Aod%23B%5E*%243(_iybS*Xq8yH6B50%3AEk%25q%7Bq%7B%5DJ4RC%2Brmis4zGGPxlGrlGsJQg%23%5ETq%3A%3Eb%22yN(%2F%24bQj%5EzD%5E6%40WJ%22~a%2Cu%23BLCWC"
-    },
-    {
-      "id": "preset-build",
-      "title": "(1/19) 피렌 - 1유파 빌드",
-      "description": "미스티가 잘키워진 경우엔 미스티 투자 그 외엔 코제트 잠재에 더 신경쓸 것, 배지에서는 속관/치확/스킬뎀/속성데미지를 + 고위험/스핀/섬광/추격 or 스킬 뎀증 같은걸 집어주면 됩니다. 자세한건 링크 참고",
-      "author": "피렌 1유파 빌드 갱신 + 레코드 배지 추가",
-      "authorLink": "https://arca.live/b/stellasora/159971822",
-      "element": "Dark",
-      "characterId": 110,
-      "tags": ["표식", "스킬", "피렌", "미스티", "코제트"],
-      "meta": true,
-      "buildHash": "v2d-%22hhxou_X~4A%22uNGP~c(F%24%26B*%26(!Xu%2F1303%2COcPdl7j%2C56%26rxq%26R0h%3D%2Cii%5EX%3F6)yKeq%3C%24U1Tkjl2t5cTl8jF%3Be%7D%2F72jf9e%3A0%3Dj19%5Ei%25ofa6kjMU~Toj2%3C5ZeGpB%3B%2CbXrG6iOg_i%40JkEv!D%24u%2BlBs2%3DWlN)He%5D%5BV%5BN%60%3FX%26%3FDsB3%22%7BefL%3D%3Du%3Alig%3APW(Y8jjYK~%3Eqp%5B%3A3dq3F"
-    },
-    {
-      "id": "preset-build",
-      "title": "(1/19) 피렌 - 1유파 빌드, 미스티 투자 좀 된 경우",
-      "description": "피렌 1유파 빌드의 틀이 어느 정도 잡힌 것 같고, 보통 차이가 생기면 미스티의 투자 정도로 보입니다. 참고를 위해 몇가지 빌드를 올렸습니다. 자세한건 링크 참고",
-      "author": "미스티 투자 좀 한 피렌덱 공략 (01/19 갱신)",
-      "authorLink": "https://arca.live/b/stellasora/159815791",
-      "element": "Dark",
-      "characterId": 110,
-      "tags": ["표식", "스킬", "피렌", "미스티", "코제트"],
-      "meta": true,
-      "buildHash": "v2d-5cjxoumBl)KSB%3E%5EM~cqaUXPxRVL%26JH%3DP%23HokSa%3BDeJ_1oO99hMLnEN%7B!DY9p5n_CW%7CPVTxUm8a1gG%5EpjK9PFe3h8I%23v%5EH%3B%7Cu%24r%40g%40%3AW%25%24STSA%25l%5Be_.FWVHpnDjtTDR7%25mv%3F_5%26SC5PV581B%5DLETlJhDZ*zqBzPDRQJ%7B()vq%2Cb6usPEuZDbXKaIQnO1%3C%7B%3Byr%3D(%23!%3E%3E%23%2C%7B.%5D)%2C*.C"
-    },
-    {
-      "id": "preset-build",
-      "title": "(1/21) 피렌 - 1유파 궁 하이브리드 빌드",
-      "description": "피렌 뱃지에 sp획득이 잘 챙겨져있다면 궁 하이브리드 빌드를 사용해볼만합니다. 미스티의 경우 틸리아 (공증잠재)/크루니스(공증,받피증잠재)로 대체가능. 자세한 사항은 링크 참고",
-      "author": "피렌 1유파+궁 빌드 배지추천",
-      "authorLink": "https://arca.live/b/stellasora/160144462",
-      "element": "Dark",
-      "characterId": 110,
-      "tags": ["궁", "스킬", "하이브리드", "피렌", "미스티", "코제트"],
-      "meta": true,
-      "buildHash": "v2d-%5Dhjxou6*0)Xbus%3Dg%23%5B%22W!e~qUqTO4U0MS%26ggNFKvom%26ti%2FwbRH%5DtBylX%23%24tBS%5B%23z%3Cbaq%2F%243U%22%3DlT%2B%25%3B!%7C%23gDQh%60D%3D6Re%602!90%7B%7CzcT%23kJSTVf..C%3A*qb%3FI%3Ex%26%22%7DE%3CCIh%5B%2F%40T%26WbX%7D0Nu%3FyXR%7Chv8Rw%24T(t%3CWlN6lT%24%25CX*RO%23D%2F_%3Eonu%5DFs%3C*4%3APqm%7B5kr%3AP7TyQ8Tvd%3DeVe9e%2FC"
+      "buildHash": "v3d-Hi%2By)tnB~4.V%3DiQ%22b4%3F3f%60kz3ujvae%7C%5Bz2%2CatCtZAM%40z_g_X%3C986Pd%2Bd%3B(hP(pG%7C%2Fj%3CU9j(.Cxk%260%40%60OP90c48%22anehwJbjdF%25Dwk6e%26C%3F%3F(%2Bt~(%3At%7DB%3E_I3*Vn%3AF~%5EIsRtjQ)Nx%60Uw%2FEd4wyVtu4Fq7yF"
     },
     {
       "id": "preset-build",
@@ -102,6 +78,17 @@
       "characterId": 155,
       "tags": ["평타", "시아", "미네르바", "틸리아"],
       "buildHash": "N4IgbiBcIIwHQAYQBoQDsokJPLgUuYASA7Q4CKjgMn2A7LSiAMZSgC2tIAlpjAKxuUAOUA2m+zYIYyARwQAmUYIQA2aeLYKhAdmUwAzOqli2AFg0BdVFwA2jXQk6R5IS7Ki3LKx6l2bHAXxMNIoS9YggCKrgBhDlPaYoeEyLtBRboIwEpiAoV2AFquAM53RHB5xYZ7eIACGMIws0JrJJnwCGhISetJ19U0SGgitGlq19QAcxiBmFpXtrnYjGlBshVy+-pUSvamZ0XWjeattk9CAJ007gK7jgASDIAWoRcl+zKwILtWQ-DA3EiICTzqPKhJKr5+90k-yH4SACc-0+KgGQ0uQOsTg+EgckEa4yeS0gWhRn2BUD0MzmmK+kTCCQBmD2R2iT1iIHSWRJvzJB2O9JBjIpBUKABNGABnRh0IpMNClSDPPQIDR-EACoUXMUIG6oGVobbyiQdEA8gCuACMRfL2qhtTq5TBxRpQZrdaqzcIEBygA"
+    },
+    {
+      "id": "preset-build",
+      "title": "(3/5) 나즈나 프리지아 + 아야메/틸리아 빌드",
+      "description": "토벌용 고효율 쌀먹덱, 자세한건 링크 참조",
+      "author": "나즈나 프리지아 빌드 원본 + 틸리아",
+      "authorLink": "https://arca.live/b/stellasora/164003428",
+      "element": "Water",
+      "characterId": 111,
+      "tags": ["나즈나", "프리지아", "아야메", "틸리아"],
+      "buildHash": "v3d-Zct9oumBO5~%2BU24!U%5Er%7B)%5B%2B(%2Ctm%7BXOhw%3A1%26C!IB9ZH%26s%3F%2350%22J%26%26KWB%60*6KjX5w%5B%5ETEr%5EZ2%5EV%2C%2CwS7_8l5U8LP0e%3Ae.89JRF%5EN%2F!9k.iB)%7CtHC%2BD5DRHyGSjkjVV%7CKFkZe!%3A_oVV%3Ck%3E%5B8nJQnk%7C%2C%24Fn%3E%7Bt8N%2B%24%2B%2CZ2a%23rWA"
     }
   ],
 
@@ -176,7 +163,6 @@
       "표식",
       "스킬",
       "딜러명"
-    
     ]
   }
 }

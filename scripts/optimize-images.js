@@ -10,44 +10,44 @@
  * node scripts/optimize-images.js
  */
 
-import sharp from "sharp";
-import imagemin from "imagemin";
-import imageminPngquant from "imagemin-pngquant";
-import imageminMozjpeg from "imagemin-mozjpeg";
-import { globSync } from "glob";
-import path from "path";
-import fs from "fs/promises";
+import sharp from 'sharp';
+import imagemin from 'imagemin';
+import imageminPngquant from 'imagemin-pngquant';
+import imageminMozjpeg from 'imagemin-mozjpeg';
+import { globSync } from 'glob';
+import path from 'path';
+import fs from 'fs/promises';
 
 // Configuration
 const CONFIG = {
   inputDirs: [
-    "public/assets/*.{png,jpg,jpeg}", // Root assets folder (notes, element icons, etc.)
-    "public/assets/char/**/*.{png,jpg,jpeg}",
-    "public/assets/disc_icons/**/*.{png,jpg,jpeg}",
-    "public/assets/skill_icons/**/*.{png,jpg,jpeg}",
-    "public/assets/others/**/*.{png,jpg,jpeg}",
-    "public/assets/items/**/*.{png,jpg,jpeg}",
-    "public/assets/buildrank/**/*.{png,jpg,jpeg}",
-    "public/assets/dating/**/*.{png,jpg,jpeg}",
-    "public/assets/talent_icons/**/*.{png,jpg,jpeg}",
+    'public/assets/*.{png,jpg,jpeg}', // Root assets folder (notes, element icons, etc.)
+    'public/assets/char/**/*.{png,jpg,jpeg}',
+    'public/assets/disc_icons/**/*.{png,jpg,jpeg}',
+    'public/assets/skill_icons/**/*.{png,jpg,jpeg}',
+    'public/assets/others/**/*.{png,jpg,jpeg}',
+    'public/assets/items/**/*.{png,jpg,jpeg}',
+    'public/assets/buildrank/**/*.{png,jpg,jpeg}',
+    'public/assets/dating/**/*.{png,jpg,jpeg}',
+    'public/assets/talent_icons/**/*.{png,jpg,jpeg}'
   ],
 
   // Minification settings
   minify: {
     enabled: true,
     pngQuality: [0.7, 0.9], // 70-90% quality for PNG
-    jpegQuality: 85, // 85% quality for JPEG
+    jpegQuality: 85,        // 85% quality for JPEG
   },
 
   // WebP conversion settings
   webp: {
     enabled: true,
-    lossless: false, // Use lossy WebP (better compression)
-    quality: 85, // 85% quality for WebP
+    lossless: false,        // Use lossy WebP (better compression)
+    quality: 85,            // 85% quality for WebP
   },
 
-  skipExisting: true, // Skip if output already exists
-  preserveOriginal: true, // Keep original files
+  skipExisting: true,       // Skip if output already exists
+  preserveOriginal: true,   // Keep original files
   verbose: true,
 };
 
@@ -66,60 +66,55 @@ async function minifyImage(inputPath) {
 
     // Minify based on format
     let minified;
-    if (ext === ".png") {
+    if (ext === '.png') {
       minified = await imagemin.buffer(buffer, {
         plugins: [
           imageminPngquant({
             quality: CONFIG.minify.pngQuality,
             speed: 1, // Slower but better compression
-          }),
-        ],
+          })
+        ]
       });
-    } else if (ext === ".jpg" || ext === ".jpeg") {
+    } else if (ext === '.jpg' || ext === '.jpeg') {
       minified = await imagemin.buffer(buffer, {
         plugins: [
           imageminMozjpeg({
             quality: CONFIG.minify.jpegQuality,
             progressive: true,
-          }),
-        ],
+          })
+        ]
       });
     } else {
-      return { status: "skipped", reason: "unsupported format" };
+      return { status: 'skipped', reason: 'unsupported format' };
     }
 
     // Only overwrite if smaller
     if (minified.length < originalSize) {
       await fs.writeFile(inputPath, minified);
-      const savings = (
-        ((originalSize - minified.length) / originalSize) *
-        100
-      ).toFixed(1);
+      const savings = ((originalSize - minified.length) / originalSize * 100).toFixed(1);
 
       if (CONFIG.verbose) {
         console.log(`🗜️  Minified: ${path.basename(inputPath)}`);
-        console.log(
-          `   ${(originalSize / 1024).toFixed(2)}KB → ${(minified.length / 1024).toFixed(2)}KB (${savings}% smaller)`,
-        );
+        console.log(`   ${(originalSize / 1024).toFixed(2)}KB → ${(minified.length / 1024).toFixed(2)}KB (${savings}% smaller)`);
       }
 
       return {
-        status: "minified",
+        status: 'minified',
         inputPath,
         originalSize,
         minifiedSize: minified.length,
-        savings: parseFloat(savings),
+        savings: parseFloat(savings)
       };
     } else {
       if (CONFIG.verbose) {
         console.log(`⏭️  No minify gain: ${path.basename(inputPath)}`);
       }
-      return { status: "skipped", reason: "no size reduction" };
+      return { status: 'skipped', reason: 'no size reduction' };
     }
   } catch (error) {
     console.error(`❌ Failed to minify: ${inputPath}`);
     console.error(`   Error: ${error.message}`);
-    return { status: "failed", inputPath, error: error.message };
+    return { status: 'failed', inputPath, error: error.message };
   }
 }
 
@@ -128,7 +123,7 @@ async function minifyImage(inputPath) {
  */
 async function convertToWebP(inputPath) {
   const ext = path.extname(inputPath).toLowerCase();
-  const outputPath = inputPath.replace(/\.(png|jpg|jpeg)$/i, ".webp");
+  const outputPath = inputPath.replace(/\.(png|jpg|jpeg)$/i, '.webp');
 
   // Check if WebP already exists
   if (CONFIG.skipExisting) {
@@ -137,7 +132,7 @@ async function convertToWebP(inputPath) {
       if (CONFIG.verbose) {
         console.log(`⏭️  WebP exists: ${path.basename(outputPath)}`);
       }
-      return { status: "skipped", reason: "already exists" };
+      return { status: 'skipped', reason: 'already exists' };
     } catch {
       // File doesn't exist, continue
     }
@@ -158,29 +153,25 @@ async function convertToWebP(inputPath) {
 
     const outputStats = await fs.stat(outputPath);
     const outputSize = outputStats.size;
-    const savings = (((inputSize - outputSize) / inputSize) * 100).toFixed(1);
+    const savings = ((inputSize - outputSize) / inputSize * 100).toFixed(1);
 
     if (CONFIG.verbose) {
-      console.log(
-        `✅ WebP: ${path.basename(inputPath)} → ${path.basename(outputPath)}`,
-      );
-      console.log(
-        `   ${(inputSize / 1024).toFixed(2)}KB → ${(outputSize / 1024).toFixed(2)}KB (${savings}% smaller)`,
-      );
+      console.log(`✅ WebP: ${path.basename(inputPath)} → ${path.basename(outputPath)}`);
+      console.log(`   ${(inputSize / 1024).toFixed(2)}KB → ${(outputSize / 1024).toFixed(2)}KB (${savings}% smaller)`);
     }
 
     return {
-      status: "converted",
+      status: 'converted',
       inputPath,
       outputPath,
       inputSize,
       outputSize,
-      savings: parseFloat(savings),
+      savings: parseFloat(savings)
     };
   } catch (error) {
     console.error(`❌ Failed to convert: ${inputPath}`);
     console.error(`   Error: ${error.message}`);
-    return { status: "failed", inputPath, error: error.message };
+    return { status: 'failed', inputPath, error: error.message };
   }
 }
 
@@ -188,8 +179,8 @@ async function convertToWebP(inputPath) {
  * Main optimization pipeline
  */
 async function main() {
-  console.log("🚀 Starting Image Optimization Pipeline...\n");
-  console.log("📁 Scanning directories...");
+  console.log('🚀 Starting Image Optimization Pipeline...\n');
+  console.log('📁 Scanning directories...');
 
   // Gather all files
   const allFiles = [];
@@ -202,16 +193,16 @@ async function main() {
   console.log(`📸 Found ${allFiles.length} images to process\n`);
 
   if (allFiles.length === 0) {
-    console.log("⚠️  No images found. Check your paths.");
+    console.log('⚠️  No images found. Check your paths.');
     return;
   }
 
   // Step 1: Minify
   const minifyResults = [];
   if (CONFIG.minify.enabled) {
-    console.log("━".repeat(50));
-    console.log("STEP 1: Minifying images...");
-    console.log("━".repeat(50) + "\n");
+    console.log('━'.repeat(50));
+    console.log('STEP 1: Minifying images...');
+    console.log('━'.repeat(50) + '\n');
 
     for (const file of allFiles) {
       const result = await minifyImage(file);
@@ -222,9 +213,9 @@ async function main() {
   // Step 2: Convert to WebP
   const webpResults = [];
   if (CONFIG.webp.enabled) {
-    console.log("\n" + "━".repeat(50));
-    console.log("STEP 2: Converting to WebP...");
-    console.log("━".repeat(50) + "\n");
+    console.log('\n' + '━'.repeat(50));
+    console.log('STEP 2: Converting to WebP...');
+    console.log('━'.repeat(50) + '\n');
 
     for (const file of allFiles) {
       const result = await convertToWebP(file);
@@ -233,46 +224,35 @@ async function main() {
   }
 
   // Summary
-  console.log("\n" + "━".repeat(50));
-  console.log("📊 OPTIMIZATION SUMMARY");
-  console.log("━".repeat(50));
+  console.log('\n' + '━'.repeat(50));
+  console.log('📊 OPTIMIZATION SUMMARY');
+  console.log('━'.repeat(50));
 
   if (CONFIG.minify.enabled) {
-    const minified = minifyResults.filter((r) => r.status === "minified");
-    const minifySkipped = minifyResults.filter((r) => r.status === "skipped");
-    const minifyFailed = minifyResults.filter((r) => r.status === "failed");
+    const minified = minifyResults.filter(r => r.status === 'minified');
+    const minifySkipped = minifyResults.filter(r => r.status === 'skipped');
+    const minifyFailed = minifyResults.filter(r => r.status === 'failed');
 
-    console.log("\n🗜️  MINIFICATION:");
+    console.log('\n🗜️  MINIFICATION:');
     console.log(`   Optimized: ${minified.length}`);
     console.log(`   Skipped:   ${minifySkipped.length}`);
     console.log(`   Failed:    ${minifyFailed.length}`);
 
     if (minified.length > 0) {
-      const totalOriginal = minified.reduce(
-        (sum, r) => sum + r.originalSize,
-        0,
-      );
-      const totalMinified = minified.reduce(
-        (sum, r) => sum + r.minifiedSize,
-        0,
-      );
-      const totalSavings = (
-        ((totalOriginal - totalMinified) / totalOriginal) *
-        100
-      ).toFixed(1);
+      const totalOriginal = minified.reduce((sum, r) => sum + r.originalSize, 0);
+      const totalMinified = minified.reduce((sum, r) => sum + r.minifiedSize, 0);
+      const totalSavings = ((totalOriginal - totalMinified) / totalOriginal * 100).toFixed(1);
 
-      console.log(
-        `   Saved: ${((totalOriginal - totalMinified) / 1024 / 1024).toFixed(2)} MB (${totalSavings}%)`,
-      );
+      console.log(`   Saved: ${((totalOriginal - totalMinified) / 1024 / 1024).toFixed(2)} MB (${totalSavings}%)`);
     }
   }
 
   if (CONFIG.webp.enabled) {
-    const converted = webpResults.filter((r) => r.status === "converted");
-    const webpSkipped = webpResults.filter((r) => r.status === "skipped");
-    const webpFailed = webpResults.filter((r) => r.status === "failed");
+    const converted = webpResults.filter(r => r.status === 'converted');
+    const webpSkipped = webpResults.filter(r => r.status === 'skipped');
+    const webpFailed = webpResults.filter(r => r.status === 'failed');
 
-    console.log("\n📦 WEBP CONVERSION:");
+    console.log('\n📦 WEBP CONVERSION:');
     console.log(`   Converted: ${converted.length}`);
     console.log(`   Skipped:   ${webpSkipped.length}`);
     console.log(`   Failed:    ${webpFailed.length}`);
@@ -280,18 +260,13 @@ async function main() {
     if (converted.length > 0) {
       const totalInput = converted.reduce((sum, r) => sum + r.inputSize, 0);
       const totalOutput = converted.reduce((sum, r) => sum + r.outputSize, 0);
-      const totalSavings = (
-        ((totalInput - totalOutput) / totalInput) *
-        100
-      ).toFixed(1);
+      const totalSavings = ((totalInput - totalOutput) / totalInput * 100).toFixed(1);
 
-      console.log(
-        `   Saved: ${((totalInput - totalOutput) / 1024 / 1024).toFixed(2)} MB (${totalSavings}%)`,
-      );
+      console.log(`   Saved: ${((totalInput - totalOutput) / 1024 / 1024).toFixed(2)} MB (${totalSavings}%)`);
     }
   }
 
-  console.log("\n✨ Optimization complete!\n");
+  console.log('\n✨ Optimization complete!\n');
 }
 
 main().catch(console.error);

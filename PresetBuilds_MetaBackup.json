@@ -142,6 +142,42 @@
       "characterId": 110,
       "tags": ["표식", "스킬", "피렌", "코제트", "틸리아"],
       "buildHash": "v2d-%5DhYynB1Xe56%26%7BzMJ%5DbZi*f%7CDZ!cPkX%22uRu(YKw1zxZuJ%60C8FwDSU%3C%229tqK~%2F%3DdDUEo%7D%7B%3C%24d6)9f%3AwvO%2Bj!xm%22bMZZ%3A%5D0%3CgrR%25QlqF9%23%5Ds%3BE%26A%7CKDB)!WxWDw*M8EnSkI%3E(RW2yxB%5DWdB%60%2CzXgufR1acqJU%3Ad%7C%26Cu(Wcc%3A!%7BW%3C%60A"
+    },
+    {
+      "id": "preset-build",
+      "title": "(1/19) 피렌 - 1유파 빌드",
+      "description": "미스티가 잘키워진 경우엔 미스티 투자 그 외엔 코제트 잠재에 더 신경쓸 것, 배지에서는 속관/치확/스킬뎀/속성데미지를 + 고위험/스핀/섬광/추격 or 스킬 뎀증 같은걸 집어주면 됩니다. 자세한건 링크 참고",
+      "author": "피렌 1유파 빌드 갱신 + 레코드 배지 추가",
+      "authorLink": "https://arca.live/b/stellasora/159971822",
+      "element": "Dark",
+      "characterId": 110,
+      "tags": ["표식", "스킬", "피렌", "미스티", "코제트"],
+      "meta": true,
+      "buildHash": "v2d-%22hhxou_X~4A%22uNGP~c(F%24%26B*%26(!Xu%2F1303%2COcPdl7j%2C56%26rxq%26R0h%3D%2Cii%5EX%3F6)yKeq%3C%24U1Tkjl2t5cTl8jF%3Be%7D%2F72jf9e%3A0%3Dj19%5Ei%25ofa6kjMU~Toj2%3C5ZeGpB%3B%2CbXrG6iOg_i%40JkEv!D%24u%2BlBs2%3DWlN)He%5D%5BV%5BN%60%3FX%26%3FDsB3%22%7BefL%3D%3Du%3Alig%3APW(Y8jjYK~%3Eqp%5B%3A3dq3F"
+    },
+    {
+      "id": "preset-build",
+      "title": "(1/19) 피렌 - 1유파 빌드, 미스티 투자 좀 된 경우",
+      "description": "피렌 1유파 빌드의 틀이 어느 정도 잡힌 것 같고, 보통 차이가 생기면 미스티의 투자 정도로 보입니다. 참고를 위해 몇가지 빌드를 올렸습니다. 자세한건 링크 참고",
+      "author": "미스티 투자 좀 한 피렌덱 공략 (01/19 갱신)",
+      "authorLink": "https://arca.live/b/stellasora/159815791",
+      "element": "Dark",
+      "characterId": 110,
+      "tags": ["표식", "스킬", "피렌", "미스티", "코제트"],
+      "meta": true,
+      "buildHash": "v2d-5cjxoumBl)KSB%3E%5EM~cqaUXPxRVL%26JH%3DP%23HokSa%3BDeJ_1oO99hMLnEN%7B!DY9p5n_CW%7CPVTxUm8a1gG%5EpjK9PFe3h8I%23v%5EH%3B%7Cu%24r%40g%40%3AW%25%24STSA%25l%5Be_.FWVHpnDjtTDR7%25mv%3F_5%26SC5PV581B%5DLETlJhDZ*zqBzPDRQJ%7B()vq%2Cb6usPEuZDbXKaIQnO1%3C%7B%3Byr%3D(%23!%3E%3E%23%2C%7B.%5D)%2C*.C"
+    },
+    {
+      "id": "preset-build",
+      "title": "(1/21) 피렌 - 1유파 궁 하이브리드 빌드",
+      "description": "피렌 뱃지에 sp획득이 잘 챙겨져있다면 궁 하이브리드 빌드를 사용해볼만합니다. 미스티의 경우 틸리아 (공증잠재)/크루니스(공증,받피증잠재)로 대체가능. 자세한 사항은 링크 참고",
+      "author": "피렌 1유파+궁 빌드 배지추천",
+      "authorLink": "https://arca.live/b/stellasora/160144462",
+      "element": "Dark",
+      "characterId": 110,
+      "tags": ["궁", "스킬", "하이브리드", "피렌", "미스티", "코제트"],
+      "meta": true,
+      "buildHash": "v2d-%5Dhjxou6*0)Xbus%3Dg%23%5B%22W!e~qUqTO4U0MS%26ggNFKvom%26ti%2FwbRH%5DtBylX%23%24tBS%5B%23z%3Cbaq%2F%243U%22%3DlT%2B%25%3B!%7C%23gDQh%60D%3D6Re%602!90%7B%7CzcT%23kJSTVf..C%3A*qb%3FI%3Ex%26%22%7DE%3CCIh%5B%2F%40T%26WbX%7D0Nu%3FyXR%7Chv8Rw%24T(t%3CWlN6lT%24%25CX*RO%23D%2F_%3Eonu%5DFs%3C*4%3APqm%7B5kr%3AP7TyQ8Tvd%3DeVe9e%2FC"
     }
   ],
 
