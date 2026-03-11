@@ -847,7 +847,7 @@
   "UIText.Disc_StoryLimitTip.1": "미오픈",
   "UIText.Disc_SubSkill_ActiveConditions.1": "활성화 조건:",
   "UIText.Disc_SubSkill_ActiveLevel.1": "≥{num_0}개",
-  "UIText.Disc_SubSkill_Level.1": "{num_0}개",
+  "UIText.Disc_SubSkill_Level.1": "{num_0}레벨",
   "UIText.Disc_SubSkill_Tip.1": "별의 탑 진입 시 다음 소리를 획득",
   "UIText.Disc_SubSkill_Title.1": "협주 스킬",
   "UIText.Disc_SubSkill_TitleTip.1": "소리 수집으로 활성화 및 레벨업할 수 있습니다",
