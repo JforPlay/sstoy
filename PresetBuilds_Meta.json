@@ -4,7 +4,7 @@
   "metadata": {
     "lastUpdated": "2026-03-11",
     "bossRush": "뚜두뚜두 남작/심층의 주인 (~3/31)",
-    "jointDrill": "X",
+    "jointDrill": "셀시아ㆍ광기의 룩/셀시아ㆍ절망의 룩 (~3/17)",
     "totalBuilds": 0,
     "notes": "연합토벌 및 종언 컨텐츠 전용 빌드들 입니다."
   },
@@ -23,16 +23,27 @@
     },
     {
       "id": "preset-build",
-      "title": "(2/4) 땅 표식덱 빌드",
-      "description": "그레이 무지개 표식뎀 3개 띄우면 25만 이상도 충분히 가능, 자세한 스펙은 링크 참조",
+      "title": "(2/25) 나츠카 없는 레이스 파티",
+      "description": "나츠카 이후 유입된 이들을 위한 덱. 자세한건 링크 참조",
+      "author": "자 니들이 원하는 나츠카 없는 레이스 파티(다음 연토대비 도자기 추가)",
+      "authorLink": "https://arca.live/b/stellasora/163308046",
+      "element": "Wind",
+      "characterId": 143,
+      "tags": ["레이스", "틸리아", "안즈"],
+      "buildHash": "v3d-Qf68ouGBGBXb06.XYFIVP)700%3DH%3FKINgF9B)r6%26D94%7B%2BATLXCP5d%7Cb%3F50BmNByB%3E%2C%24dm*%3D~RC%2FH%3D%26c%3A%3F~r*%2FE4XVuj%2Bg%3ES3at%5Dws!NiQ%2F%3A56up4)%5EU%5E%3B%3A1Kox8%3DF%26Ll)1DOQnDRil7t%40%3AMv*xR%5D%23rnM*7GRaMQryJhkqc)%3E%23%7Bv%7Bnwajlmn)7XYW!1REHg%2BRc4(%7DB%234dVRpm%5EhOn%2BZ%7CD"
+    },
+    {
+      "id": "preset-build",
+      "title": "(3/11) 땅 표식덱 빌드",
+      "description": "가중처벌을 찍은 도자기보다 2만점 이상 올라감 재대로 택틱깍으면 23만이상 가능해보임",
       "author": "너희들이 알던 땅표식은 다시 깍아야 된다",
-      "authorLink": "https://arca.live/b/stellasora/161446683",
+      "authorLink": "https://arca.live/b/stellasora/164565395",
       "element": "Earth",
       "characterId": 159,
       "tags": ["표식", "나즈나", "새해 크루니스", "그레이"],
       "meta": true,
       "new" : true,
-      "buildHash": "v3d-hcmyouLC~4%40rB%3EU%40w%2BE.X%2FgGx%24XTq%3COX%22CM!sL%23%60DsE2v%60J%3Fu%25%7BREmk%3D(TZqw_%7B%3ES)Zu7%25%25%23MumljY.k%40Q2p*~7%60i%5B3.i3IVHo6wwO%2Cf%3E8%2F%23g%2FezMQwr%22.0QOh*%3A%242%3A%3AG%24EDEHF6AB"
+      "buildHash": "v3d-%22hjxoumB%5BA%7DU*%3B%22e6e2%3EU*6brLGw7HI%3C..u2_%3FV%25oB%7BhBg%3B%24%5DYF%7D%25RD%7CcH%7BrKPXQe%7D7b%249Q%5B0b(G%258B%3C)y4k5k(TB!%2B(Lm%5EKkMv%2FBpnHdOEe_4fb%7B%25%2Fblg6%26%3BbbS_vQM%7C_f5%3E%3F.*kxr%3CA!w%24VE%2FqI8T%3D%60M%3C*FlDR9"
     },
     {
       "id": "preset-build",
