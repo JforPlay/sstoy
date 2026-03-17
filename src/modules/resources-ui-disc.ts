@@ -48,18 +48,7 @@ export function renderDiscResourceGrid(): void{
   grid.innerHTML = '';
 
   let availableDiscs = Object.entries(resourcesState.discs)
-    .filter(([id, disc]) => {
-      if (!disc.Visible || !disc.Available) return false;
-
-      const discIPData = resourcesState.discIP[id];
-      const discNameKey = discIPData?.StoryName;
-      const discName = discNameKey
-        ? resourcesState.discIPNames[discNameKey] || discNameKey
-        : null;
-
-      // Name Required
-      return !!discName;
-    })
+    .filter(([, disc]) => disc.Visible && disc.Available)
     .sort((a, b) => parseInt(b[0]) - parseInt(a[0]));
 
   // Apply element filter
@@ -90,7 +79,9 @@ export function renderDiscResourceGrid(): void{
     const discNameKey = discIPData?.StoryName;
     const discName = discNameKey
       ? resourcesState.discIPNames[discNameKey] || discNameKey
-      : (window.i18n?.t('resources.discN') || '레코드 ${id}').replace('${id}', id.toString());
+      : null;
+
+    if (!discName) return;
 
     const elementInfo = resourcesState.gameEnums.elementType?.[disc.EET];
     const elementIcon = elementInfo?.icon || '';
