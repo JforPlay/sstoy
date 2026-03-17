@@ -174,21 +174,17 @@ async function loadDiscData(): Promise<void> {
         const discIPEntry = discDBState.discIPData[id];
         if (discIPEntry) {
           const storyName = discIPEntry.StoryName;
-          const localized = discDBState.discIPKRData[storyName];
-
-          if (localized && !localized.startsWith('레코드')) {
-            discDBState.discNames[id] = localized;
-          }
-        } 
+          discDBState.discNames[id] =
+            discDBState.discIPKRData[storyName] || storyName || window.i18n?.t('discdb.discNameDefault') || `Disc ${id}`;
+        } else {
+          discDBState.discNames[id] = window.i18n?.t('discdb.discNameDefault') || `Disc ${id}`;
+        }
       }
     });
 
     // Build allDiscs array
     discDBState.allDiscs = Object.entries(discDBState.discData)
-      .filter(([id, disc]) => {
-        if (!disc.Visible || !(disc as Record<string, unknown>).Available) return false;
-        return !!discDBState.discNames[id];
-      })
+      .filter(([, disc]) => disc.Visible && (disc as Record<string, unknown>).Available)
       .map(([id, disc]) => ({
         id,
         disc,
