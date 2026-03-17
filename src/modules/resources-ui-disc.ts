@@ -48,7 +48,18 @@ export function renderDiscResourceGrid(): void{
   grid.innerHTML = '';
 
   let availableDiscs = Object.entries(resourcesState.discs)
-    .filter(([, disc]) => disc.Visible && disc.Available)
+    .filter(([id, disc]) => {
+      if (!disc.Visible || !disc.Available) return false;
+
+      const discIPData = resourcesState.discIP[id];
+      const discNameKey = discIPData?.StoryName;
+      const discName = discNameKey
+        ? resourcesState.discIPNames[discNameKey] || discNameKey
+        : window.i18n?.t('resources.discN');
+
+      // Name Required
+      return !!discName;
+    })
     .sort((a, b) => parseInt(b[0]) - parseInt(a[0]));
 
   // Apply element filter
