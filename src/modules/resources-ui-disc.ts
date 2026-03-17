@@ -55,7 +55,7 @@ export function renderDiscResourceGrid(): void{
       const discNameKey = discIPData?.StoryName;
       const discName = discNameKey
         ? resourcesState.discIPNames[discNameKey] || discNameKey
-        : window.i18n?.t('resources.discN');
+        : null;
 
       // Name Required
       return !!discName;
