@@ -192,6 +192,24 @@ async function main() {
 
   console.log(`📸 Found ${allFiles.length} images to process\n`);
 
+  // const uniqueFiles = [...new Set(allFiles)];
+  // const targetFiles = [];
+
+  // for (const file of uniqueFiles) {
+  //   const outputPath = file.replace(/\.png$/i, '.webp');
+
+  //   try {
+  //     await fs.access(outputPath);
+  //     if (CONFIG.verbose) {
+  //       console.log(`⏭️  Skip (webp exists): ${path.basename(file)}`);
+  //     }
+  //   } catch {
+  //     targetFiles.push(file);
+  //   }
+  // }
+
+  // console.log(`📸 Found ${targetFiles.length} PNG images without WebP\n`);
+
   if (allFiles.length === 0) {
     console.log('⚠️  No images found. Check your paths.');
     return;
