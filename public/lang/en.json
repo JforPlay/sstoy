@@ -614,6 +614,10 @@
     "autoMode": "Auto Mode",
     "manualMode": "Manual Mode",
     "statsAggregation": "Stats Aggregation",
-    "buildBasedBadge": "Build-based"
+    "buildBasedBadge": "Build-based",
+    "toughnessBroken": "Toughness Broken",
+    "enemy": "Enemy",
+    "def": "DEF",
+    "res": "RES"
   }
 }

@@ -614,6 +614,10 @@
     "autoMode": "自動モード",
     "manualMode": "手動モード",
     "statsAggregation": "ステータス集計",
-    "buildBasedBadge": "ビルドベース"
+    "buildBasedBadge": "ビルドベース",
+    "toughnessBroken": "靭性破壊",
+    "enemy": "敵",
+    "def": "防御力",
+    "res": "耐性"
   }
 }

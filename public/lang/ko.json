@@ -614,6 +614,10 @@
     "autoMode": "자동 모드",
     "manualMode": "수동 모드",
     "statsAggregation": "스탯 집계",
-    "buildBasedBadge": "빌드 기반"
+    "buildBasedBadge": "빌드 기반",
+    "toughnessBroken": "강인도 파괴",
+    "enemy": "적",
+    "def": "방어력",
+    "res": "저항"
   }
 }

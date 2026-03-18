@@ -173,26 +173,31 @@ export function getStatDisplayName(attrKey: string): string {
   // Try to get enum ID for this attribute key
   const enumId = getEnumIdFromAttrKey(attrKey);
 
-  if (enumId !== null && GameData.gameEnums?.effectAttributeType) {
-    const enumEntry = GameData.gameEnums.effectAttributeType[enumId];
+  if (enumId !== null) {
+    // Primary: use per-language UIText (pattern: UIText.Enums_Effect_{id}.1)
+    const uiTextKey = `UIText.Enums_Effect_${enumId}.1`;
+    const uiTextName = GameData.uiText?.[uiTextKey];
+    if (uiTextName) return uiTextName;
 
-    if (enumEntry) {
-      // Return the localized name from GameEnums
-      // This automatically uses the correct language (KR/JP/EN/CN) based on loaded data
-      return enumEntry.name || enumEntry.key || attrKey;
-    }
+    // Fallback: use GameEnums (always Korean)
+    const enumEntry = GameData.gameEnums?.effectAttributeType?.[enumId];
+    if (enumEntry) return enumEntry.name || enumEntry.key || attrKey;
   }
 
   // Fallback: Try to find by matching key (case-insensitive)
   if (GameData.gameEnums?.effectAttributeType) {
     const enumEntries = Object.entries(GameData.gameEnums.effectAttributeType);
-    const matchingEntry = enumEntries.find(([id, entry]: [string, any]) =>
+    const matchingEntry = enumEntries.find(([, entry]: [string, any]) =>
       entry.key && entry.key.toLowerCase() === attrKey.toLowerCase()
     );
 
     if (matchingEntry) {
-      const [, entry] = matchingEntry as [string, any];
-      return entry.name || entry.key || attrKey;
+      const [matchedId, entry] = matchingEntry as [string, any];
+      // Try UIText first for this matched ID too
+      const uiKey = `UIText.Enums_Effect_${matchedId}.1`;
+      const uiName = GameData.uiText?.[uiKey];
+      if (uiName) return uiName;
+      return (entry as any).name || (entry as any).key || attrKey;
     }
   }
 

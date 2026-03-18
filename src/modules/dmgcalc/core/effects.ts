@@ -221,7 +221,6 @@ export interface ParsedBuff {
 export function parseBuffById(buffId: number | string): ParsedBuff | null {
   const buff = GameData.buffValue?.[buffId];
   if (!buff) {
-    console.warn(`[DmgCalc] Buff ${buffId} not found`);
     return null;
   }
 
@@ -254,7 +253,7 @@ export function parseBuffById(buffId: number | string): ParsedBuff | null {
 export function parseEffectById(effectId: number | string): ParsedEffect | null {
   const effect = GameData.effectValue?.[effectId];
   if (!effect) {
-    console.warn(`[DmgCalc] Effect ${effectId} not found`);
+    // Some effect IDs referenced by buffs don't exist in EffectValue data — this is expected
     return null;
   }
 
@@ -263,11 +262,28 @@ export function parseEffectById(effectId: number | string): ParsedEffect | null 
   const category = getEffectCategory(effectType);
 
   // Parse the value
+  // EffectTypeParam1 stores percentage stats as decimals (e.g. 0.25 = 25%)
+  // and flat stats (DEF, HP) as raw numbers.
+  // For percentage stats, the stat system uses per-10000 format, so we multiply by 10000.
+  // Flat stats (Def=2, Hp=3, ToughnessMax=42) are used as-is.
   let value = 0;
   if (effectData.EffectTypeParam1 !== undefined) {
-    value = typeof effectData.EffectTypeParam1 === 'string'
+    const rawValue = typeof effectData.EffectTypeParam1 === 'string'
       ? parseFloat(effectData.EffectTypeParam1)
       : effectData.EffectTypeParam1;
+
+    // Determine if stat uses bIntFloat (per-10000 format)
+    // ATK(1), DEF(2), HP(3) are non-bIntFloat (raw integers)
+    // All other stats (CritRate, FEE, SKILLDMG, etc.) are bIntFloat
+    const NON_INT_FLOAT_SUBTYPES = new Set([1, 2, 3, 9, 23, 24, 25, 26, 27, 28]); // ATK, DEF, HP, Penetrate, WEP-DEP
+    const firstSubtype = effectData.EffectTypeFirstSubtype || 0;
+    if (!NON_INT_FLOAT_SUBTYPES.has(firstSubtype)) {
+      // bIntFloat stat: decimal → per-10000 (0.015 → 150)
+      value = rawValue * 10000;
+    } else {
+      // Non-bIntFloat (ATK/DEF/HP): use raw value as-is
+      value = rawValue;
+    }
   }
 
   return {

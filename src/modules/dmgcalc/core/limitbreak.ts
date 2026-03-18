@@ -132,7 +132,7 @@ async function calculateLimitBreakDataPoint(
     // Calculate skill damage (no conversion needed)
     const skillResult = calculateSkillDamage(skillType);
 
-    const totalDamage = skillResult?.totalAverageDamage || 0;
+    const totalDamage = skillResult?.totalAvgDmg || 0;
 
     // Calculate contributions
     const statsContribution = calculateStatsContribution();
@@ -275,7 +275,7 @@ function calculateStatsContribution(): number {
   let baseAtk = atkStat.baseValue;
 
   atkStat.sources.forEach(source => {
-    if (!source.source.includes('버프') && !source.source.includes('Buff')) {
+    if (!source.name.includes('버프') && !source.name.includes('Buff')) {
       baseAtk += source.value;
     }
   });
@@ -294,7 +294,7 @@ function calculateBuffsContribution(): number {
   let buffAtk = 0;
 
   atkStat.sources.forEach(source => {
-    if (source.source.includes('버프') || source.source.includes('Buff')) {
+    if (source.name.includes('버프') || source.name.includes('Buff')) {
       buffAtk += source.value;
     }
   });

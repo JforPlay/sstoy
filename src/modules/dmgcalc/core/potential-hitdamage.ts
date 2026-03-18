@@ -98,9 +98,9 @@ export function parseHitDamageFromPotential(
     character: position,
     hitDamages,
     skillType: 'potential_damage',
-    damageType: firstHit.raw.DamageType || 0,
-    elementType: firstHit.raw.ElementType || 0,
-    sourceType: firstHit.raw.SourceType || 1
+    damageType: firstHit.damageType || 0,
+    elementType: firstHit.elementType || 0,
+    sourceType: firstHit.damageType || 1
   };
 }
 
@@ -151,34 +151,56 @@ function parseHitDamageParameter(
       break;
 
     default:
-      console.warn(`[DmgCalc] Unknown level type for HitDamage: ${levelType}`);
+      // Unknown level type — skip silently
   }
 
   // Look up the HitDamage in game data
   const hitDamageData = GameData.hitDamage?.[hitDamageId];
   if (!hitDamageData) {
-    console.warn(`[DmgCalc] HitDamage ${hitDamageId} not found`);
     return null;
   }
 
   const hdData = hitDamageData as any;
 
   // Extract damage values
-  const skillPercent = (hdData.SkillPercent || 0) / 100;
-  const skillAbs = hdData.SkillAbs || 0;
+  // For DamageNum entries, SkillPercentAmend is an array indexed by level
+  // For LevelUp/NoLevel entries, it may be scalar or single-element array
+  let rawPercent = 0;
+  if (levelType === 'DamageNum') {
+    const percentArr = hdData.SkillPercentAmend as number[] | undefined;
+    if (percentArr?.length) {
+      const index = Math.min(Math.max(0, level - 1), percentArr.length - 1);
+      rawPercent = percentArr[index] ?? 0;
+    }
+  } else if (Array.isArray(hdData.SkillPercentAmend)) {
+    rawPercent = hdData.SkillPercentAmend[0] ?? 0;
+  } else if (typeof hdData.SkillPercentAmend === 'number') {
+    rawPercent = hdData.SkillPercentAmend;
+  }
+
+  // Convert from raw per-10000 format to percentage (same as skills.ts)
+  const skillPercent = rawPercent / 10000;
+
+  let skillAbs = 0;
+  if (Array.isArray(hdData.SkillAbsAmend)) {
+    if (levelType === 'DamageNum') {
+      const index = Math.min(Math.max(0, level - 1), hdData.SkillAbsAmend.length - 1);
+      skillAbs = hdData.SkillAbsAmend[index] ?? 0;
+    } else {
+      skillAbs = hdData.SkillAbsAmend[0] ?? 0;
+    }
+  } else if (typeof hdData.SkillAbsAmend === 'number') {
+    skillAbs = hdData.SkillAbsAmend;
+  }
 
   return {
-    id: hitDamageId,
+    id: parseInt(hitDamageId, 10) || 0,
     displayName: hdData.HitdamageInfo || `Hit Damage ${hitDamageId}`,
     skillPercent,
     skillAbs,
-    sourceType: hdData.SourceType,
-    damageType: hdData.DamageType,
-    effectType: hdData.EffectType,
-    elementType: hdData.ElementType,
-    element: getElementName(hdData.ElementType),
-    hitType: getDamageTypeName(hdData.DamageType),
-    raw: hdData
+    damageType: hdData.DamageType ?? 1,
+    elementType: hdData.ElementType ?? 0,
+    energyCharge: hdData.EnergyCharge,
   };
 }
 

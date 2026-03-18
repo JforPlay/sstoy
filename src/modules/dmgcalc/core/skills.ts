@@ -1,108 +1,156 @@
 /**
- * Damage Calculator - Skill Parsing
- * Fetches and parses skill data including HitDamage, Buff, and Effect parameters
+ * Skill Parsing for Damage Calculator
+ *
+ * Fetches skill data from Character -> Skill -> HitDamage chain and returns
+ * structured SkillParameterData for the damage formula.
+ *
+ * Conversion note:
+ *   HitDamage.SkillPercentAmend stores values in per-10000 format.
+ *   e.g. 1720000 raw -> divide by 10000 -> 172.0 (percentage of ATK).
+ *   calc.ts then divides by 100 to get the actual multiplier (1.72).
  *
  * @module dmgcalc/core/skills
  */
 
-import { parseParamValue, parseDescriptionParams } from '@/modules/param-parser';
 import { GameData } from '@/shared/game-data';
-import type {
-  SkillParameterData,
-  HitDamageEntry,
-  BuffEntry,
-  EffectEntry,
-  ParamParserState
-} from '../types';
-import { DEFAULT_SKILL_PERCENT, EFFECT_TYPE_TO_STAT } from '../constants';
+import type { SkillParameterData, HitDamageEntry, SkillType } from '../types';
+
+// Skill type -> Character.json field mapping
+const SKILL_TYPE_TO_FIELD: Record<SkillType, string> = {
+  normalAtk: 'NormalAtkId',
+  skill: 'SkillId',
+  ultimate: 'UltimateId',
+};
 
 // =============================================================================
-// MAIN SKILL FETCHING
+// MAIN API
 // =============================================================================
 
 /**
- * Fetches character skill data and parses all parameters
- * @param skillType - 'normalAtk', 'skill', or 'ultimate'
- * @param character - Which character position (default: 'master')
- * @returns Parsed skill parameter data
+ * Get parsed skill data for a character's skill type at a given level.
+ *
+ * @param charId     - Character ID (from Character.json)
+ * @param skillType  - 'normalAtk' | 'skill' | 'ultimate'
+ * @param skillLevel - 1-based skill level (indexes SkillPercentAmend array)
+ * @returns Parsed skill data or null if not found
  */
-export function fetchSkillData(
-  skillType: 'normalAtk' | 'skill' | 'ultimate',
-  character: 'master' | 'assist1' | 'assist2' = 'master'
+export function getSkillData(
+  charId: number | string,
+  skillType: SkillType,
+  skillLevel: number,
+  limitBreak: number = 0
 ): SkillParameterData | null {
-  const charData = getCharacterData(character);
+  // 1. Resolve character -> skill ID
+  const charData = GameData.characters?.[charId];
   if (!charData) return null;
 
-  // Get skill ID based on type
-  let skillId: number | undefined;
-  if (skillType === 'normalAtk') {
-    skillId = charData.NormalAtkId;
-  } else if (skillType === 'skill') {
-    skillId = charData.SkillId;
-  } else if (skillType === 'ultimate') {
-    skillId = charData.UltimateId;
-  }
-
+  const field = SKILL_TYPE_TO_FIELD[skillType];
+  const skillId = (charData as any)[field] as number | undefined;
   if (!skillId) return null;
 
-  // Get skill data
-  const skillData = GameData.skills?.[skillId];
-  if (!skillData) return null;
+  // 2. Load skill entry
+  const skill = GameData.skills?.[skillId] as any;
+  if (!skill) return null;
 
-  // Get skill level from state
-  const skillLevel = window.state?.skillLevels?.[character]?.[skillId] || 1;
+  // 3. Resolve localized name (Skill.json uses "Title" not "Name")
+  const nameKey = skill.Title || skill.Name || `Skill.${skillId}.1`;
+  const skillName = GameData.skillsKR?.[nameKey] || `Skill ${skillId}`;
 
-  // Get skill name
-  const skillNameKey = (skillData as any).Name || `Skill.${skillId}.1`;
-  const skillName = GameData.skillsKR?.[skillNameKey] || `Skill ${skillId}`;
+  // 4. Resolve description (raw, with &Param& placeholders)
+  const descKey = skill.Desc || `Skill.${skillId}.2`;
+  const skillDesc = GameData.skillsKR?.[descKey] || '';
 
-  // Get skill description (raw with &Param1& placeholders)
-  const skillDescKey = (skillData as any).Desc || `Skill.${skillId}.2`;
-  const skillDescRaw = GameData.skillsKR?.[skillDescKey] || '';
+  // 5. Icon
+  const skillIcon = extractFilename(skill.Icon || '');
 
-  // Parse skill description to replace &Param1& with actual values
-  const skillParams: Record<string, string> = {};
-  const skillDataAny = skillData as any;
+  // 6. Determine max level from skill data (default 12)
+  const maxLevel = skill.MaxLevel || 12;
+
+  // 7. Parse Param1-Param10 for HitDamage, BuffValue, EffectValue references
+  const hitDamages: HitDamageEntry[] = [];
+  const buffParams: any[] = [];
+  const effectParams: any[] = [];
+
   for (let i = 1; i <= 10; i++) {
-    const paramKey = `Param${i}`;
-    if (skillDataAny[paramKey]) {
-      skillParams[paramKey] = skillDataAny[paramKey];
+    const paramValue = skill[`Param${i}`];
+    if (!paramValue || typeof paramValue !== 'string') continue;
+
+    const lower = paramValue.toLowerCase();
+
+    if (lower.startsWith('hitdamage,') || lower.startsWith('damage,')) {
+      const entry = parseHitDamageParam(paramValue, skillLevel, limitBreak);
+      if (entry) hitDamages.push(entry);
+    } else if (lower.startsWith('buffvalue,') || lower.startsWith('buff,')) {
+      buffParams.push({ raw: paramValue, index: i });
+    } else if (lower.startsWith('effectvalue,') || lower.startsWith('effect,')) {
+      effectParams.push({ raw: paramValue, index: i });
     }
   }
 
-  // Use parseDescriptionParams to replace parameters in description
-  const parserState = createParserState();
-  const skillDesc = parseDescriptionParams(
-    skillDescRaw,
-    skillParams,
-    skillLevel,
-    skillLevel,
-    parserState,
-    character
-  );
-
-  // Get skill icons
-  const skillIcon = extractFilename((skillData as any).Icon || '');
-  const skillIconBg = extractFilename((skillData as any).IconBg || '');
-
-  // Parse all parameters
-  const hitDamages = parseHitDamageParams(skillData, skillLevel, skillDescRaw);
-  const buffs = parseBuffParams(skillData, skillLevel, skillDescRaw);
-  const effects = parseEffectParams(skillData, skillLevel, skillDescRaw);
-  const otherParams = parseOtherParams(skillData, skillLevel, skillDescRaw);
-
   return {
-    skillId: String(skillId),
+    skillId,
     skillName,
-    skillDesc,
     skillIcon,
-    skillIconBg,
-    skillLevel,
+    skillDesc,
+    skillType: skillTypeToEnum(skillType),
+    maxLevel,
     hitDamages,
-    buffs,
-    effects,
-    otherParams
+    buffParams,
+    effectParams,
   };
+}
+
+/**
+ * Legacy compatibility wrapper used by calc.ts.
+ * Returns an extended object with `effects`, `skillLevel`, `skillIconBg`,
+ * `otherParams`, and `buffs` fields that calc.ts still references.
+ */
+export function fetchSkillData(
+  skillType: SkillType,
+  character: 'master' | 'assist1' | 'assist2' = 'master'
+): (SkillParameterData & { effects: any[]; skillLevel: number; skillIconBg: string; otherParams: any; buffs: any[] }) | null {
+  const charObj = window.state?.party?.[character];
+  if (!charObj || typeof charObj === 'string') return null;
+
+  const charId = charObj.id;
+  const charData = GameData.characters?.[charId];
+  if (!charData) return null;
+
+  const field = SKILL_TYPE_TO_FIELD[skillType];
+  const skillId = (charData as any)[field] as number | undefined;
+  if (!skillId) return null;
+
+  // Resolve current skill level from app state
+  const skillLevel = window.state?.skillLevels?.[character]?.[skillId] || 1;
+
+  const data = getSkillData(charId, skillType, skillLevel);
+  if (!data) return null;
+
+  // Extend with legacy fields that calc.ts uses
+  return {
+    ...data,
+    effects: data.effectParams,   // calc.ts accesses .effects
+    buffs: data.buffParams,       // calc.ts accesses .buffs
+    skillLevel,                   // calc.ts accesses .skillLevel
+    skillIconBg: '',              // calc.ts may reference .skillIconBg
+    otherParams: {},              // calc.ts may reference .otherParams
+  };
+}
+
+/**
+ * Aggregate slotDmg multiplier from effect parameters.
+ * Kept for backward compatibility with calc.ts.
+ */
+export function aggregateSlotDmgFromEffects(effects: any[]): number {
+  if (!effects || effects.length === 0) return 1;
+
+  let slotDmg = 1;
+  for (const effect of effects) {
+    if (effect?.value > 0) {
+      slotDmg *= 1 + effect.value / 10000;
+    }
+  }
+  return slotDmg;
 }
 
 // =============================================================================
@@ -110,375 +158,161 @@ export function fetchSkillData(
 // =============================================================================
 
 /**
- * Parses HitDamage parameters from skill data
- * HitDamage references are stored in Param1-Param10 fields
- * Format: "HitDamage,DamageNum,BaseId" or "HitDamage,LevelUp,BaseId"
+ * Parse a single HitDamage parameter string and return a HitDamageEntry.
+ *
+ * Parameter format: "HitDamage,{levelType},{baseId}"
+ * levelType is one of: DamageNum, LevelUp, NoLevel
+ *
+ * For DamageNum: baseId points directly to a HitDamage entry whose
+ *   SkillPercentAmend / SkillAbsAmend are arrays indexed by skill level.
+ *
+ * For LevelUp: actualId = baseId + (skillLevel * 10)
+ *
+ * For NoLevel: actualId = baseId
  */
-function parseHitDamageParams(
-  skillData: any,
-  skillLevel: number,
-  skillDesc: string
-): HitDamageEntry[] {
-  const hitDamages: HitDamageEntry[] = [];
+function parseHitDamageParam(paramStr: string, skillLevel: number, limitBreak: number): HitDamageEntry | null {
+  const parts = paramStr.split(',');
+  if (parts.length < 3) return null;
 
-  // Check Param1 through Param10 for HitDamage references
-  for (let i = 1; i <= 10; i++) {
-    const paramKey = `Param${i}`;
-    const paramValue = skillData[paramKey];
+  const levelType = parts[1]!;
+  const baseId = parts[2];
 
-    if (!paramValue || typeof paramValue !== 'string') continue;
+  if (!baseId) return null;
 
-    // Check if this param is a HitDamage reference
-    const lowerParam = paramValue.toLowerCase();
-    if (!lowerParam.startsWith('hitdamage,') && !lowerParam.startsWith('damage,')) continue;
-
-    try {
-      // Get the hit damage ID to access raw data first
-      const hitDamageId = calculateParamId(paramValue, skillLevel);
-
-      if (!hitDamageId || !GameData.hitDamage) continue;
-
-      const hitEntry = GameData.hitDamage[hitDamageId];
-
-      if (!hitEntry) continue;
-
-      const hitData = hitEntry as any;
-
-      // Use parseParamValue to get the formatted damage string
-      const parserState = createParserState();
-      const parsedValue = parseParamValue(
-        paramValue,
-        skillLevel,
-        skillLevel,
-        'master',
-        parserState
-      );
-
-      // Parse the formatted string (e.g., "10.2%" or "25.5% + 100")
-      let skillPercent = 0;
-      let skillAbs = 0;
-
-      if (parsedValue && parsedValue.value) {
-        const valueStr = String(parsedValue.value);
-        const parts = valueStr.split('+').map(p => p.trim());
-
-        // First part is usually the percentage
-        if (parts[0] && parts[0].includes('%')) {
-          skillPercent = parseFloat(parts[0].replace('%', ''));
-        }
-
-        // Second part (if exists) is the absolute value
-        if (parts[1]) {
-          skillAbs = parseFloat(parts[1]);
-        }
-      }
-
-      // Extract type information for damage calculation
-      const sourceType = hitData.SourceType; // 1=Character, 2=Summon, etc.
-      const damageType = hitData.DamageType; // 1=Normal, 2=Skill, 3=Ultimate
-      const effectType = hitData.EffectType;
-      const elementType = hitData.ElementType; // 1=Physical, 2=Fire, 3=Ice, etc.
-
-      // Simple display name: Hit 1, Hit 2, etc.
-      const displayName = `Hit ${hitDamages.length + 1}`;
-
-      hitDamages.push({
-        id: hitDamageId,
-        displayName,
-        skillPercent, // Already formatted as percentage
-        skillAbs,
-        sourceType,
-        damageType,
-        effectType,
-        elementType,
-        element: elementType ? String(elementType) : undefined,
-        hitType: damageType ? String(damageType) : undefined,
-        raw: hitEntry
-      });
-
-      console.log(
-        `[DmgCalc] Parsed HitDamage ${hitDamageId}: ${displayName}, ` +
-        `Param: "${paramValue}", ParsedValue: "${parsedValue.value}", ` +
-        `Level ${skillLevel}, SkillPercent: ${skillPercent}%, SkillAbs: ${skillAbs}, ` +
-        `SourceType: ${sourceType}, DamageType: ${damageType}, ElementType: ${elementType}`
-      );
-    } catch (error) {
-      console.warn(`[DmgCalc] Error parsing HitDamage param ${paramKey}: ${paramValue}`, error);
-    }
+  // For DamageNum, the baseId points directly to the HitDamage entry
+  // and SkillPercentAmend is an array indexed by skill level or LB level.
+  if (levelType === 'DamageNum') {
+    return parseDamageNumEntry(baseId, skillLevel, limitBreak);
   }
 
-  return hitDamages;
+  // For LevelUp / NoLevel, resolve the actual ID first
+  const actualId = resolveId(baseId, levelType, skillLevel);
+  return parseSingleHitDamage(actualId);
 }
 
-// =============================================================================
-// BUFF PARSING
-// =============================================================================
-
 /**
- * Parses Buff parameters from skill data
- * Buffs have duration which is important for DPS calculations
+ * Parse a DamageNum HitDamage entry.
+ * SkillPercentAmend and SkillAbsAmend are arrays; index by skill level.
  */
-function parseBuffParams(
-  skillData: any,
-  skillLevel: number,
-  skillDesc: string
-): BuffEntry[] {
-  const buffs: BuffEntry[] = [];
+function parseDamageNumEntry(baseId: string, skillLevel: number, limitBreak: number): HitDamageEntry | null {
+  const hdData = GameData.hitDamage?.[baseId] as any;
+  if (!hdData) return null;
 
-  // Check for Buff parameters in skill description
-  const buffParams = extractParamsFromDesc(skillDesc, 'buff');
-
-  buffParams.forEach((param, index) => {
-    try {
-      const buffData = parseParamValue(
-        param,
-        skillLevel,
-        skillLevel,
-        'master',
-        window.state as any
-      );
-
-      if (buffData && GameData.buffValue) {
-        const buffId = calculateParamId(param, skillLevel);
-        const buffEntry = GameData.buffValue[buffId];
-
-        if (buffEntry) {
-          const duration = (buffEntry as any).Duration || 0;
-          const stacks = (buffEntry as any).MaxStack;
-
-          buffs.push({
-            id: buffId,
-            displayName: `Buff ${index + 1}`,
-            duration: duration / 1000, // Convert to seconds
-            stacks: stacks || undefined,
-            values: buffEntry as any,
-            raw: buffEntry
-          });
-        }
-      }
-    } catch (error) {
-      console.warn(`[DmgCalc] Error parsing Buff param: ${param}`, error);
-    }
-  });
-
-  return buffs;
-}
-
-// =============================================================================
-// EFFECT PARSING
-// =============================================================================
-
-/**
- * Parses Effect parameters from skill data
- * Effects modify stats - EffectTypeFirstSubtype enum determines which stat
- */
-function parseEffectParams(
-  skillData: any,
-  skillLevel: number,
-  skillDesc: string
-): EffectEntry[] {
-  const effects: EffectEntry[] = [];
-
-  // Check for Effect parameters in skill description
-  const effectParams = extractParamsFromDesc(skillDesc, 'effect');
-
-  effectParams.forEach((param, index) => {
-    try {
-      const effectData = parseParamValue(
-        param,
-        skillLevel,
-        skillLevel,
-        'master',
-        window.state as any
-      );
-
-      if (effectData && GameData.effectValue) {
-        const effectId = calculateParamId(param, skillLevel);
-        const effectEntry = GameData.effectValue[effectId];
-
-        if (effectEntry) {
-          const effectType = (effectEntry as any).EffectTypeFirstSubtype;
-          const value = (effectEntry as any).Value || 0;
-
-          // Map effect type to target stat
-          const targetStat = mapEffectTypeToStat(effectType);
-
-          effects.push({
-            id: effectId,
-            displayName: `Effect ${index + 1}`,
-            effectType: effectType ? String(effectType) : 'unknown',
-            targetStat,
-            value,
-            raw: effectEntry
-          });
-        }
-      }
-    } catch (error) {
-      console.warn(`[DmgCalc] Error parsing Effect param: ${param}`, error);
-    }
-  });
-
-  return effects;
-}
-
-// =============================================================================
-// OTHER PARAMETERS
-// =============================================================================
-
-/**
- * Parses other parameters found in skill description
- */
-function parseOtherParams(
-  skillData: any,
-  skillLevel: number,
-  skillDesc: string
-): Record<string, any> {
-  const otherParams: Record<string, any> = {};
-
-  // Extract all &Param1& through &Param10& references
-  const paramMatches = skillDesc.matchAll(/&Param(\d+)&/g);
-
-  for (const match of paramMatches) {
-    const paramNum = parseInt(match[1] || '0');
-    if (paramNum >= 1 && paramNum <= 10) {
-      const paramKey = `Param${paramNum}`;
-      const paramValue = (skillData as any)[paramKey];
-
-      if (paramValue) {
-        try {
-          const parsedValue = parseParamValue(
-            paramValue,
-            skillLevel,
-            skillLevel,
-            'master',
-            window.state as any
-          );
-          otherParams[paramKey] = {
-            raw: paramValue,
-            parsed: parsedValue
-          };
-        } catch (error) {
-          console.warn(`[DmgCalc] Error parsing ${paramKey}:`, error);
-        }
-      }
-    }
+  // Determine array index based on levelTypeData (from game's QueryLevelInfo):
+  //   3 (SkillSlot): index by skill level (1-based → 0-based)
+  //   4 (BreakCount): index by limitBreak + 1 (game uses nAdvance + 1, 1-based)
+  //   Others: default to 0
+  let index: number;
+  const lType = hdData.levelTypeData;
+  if (lType === 4) {
+    // BreakCount: indexed by limit break level, 1-based in game → 0-based array
+    index = Math.max(0, limitBreak);
+  } else if (lType === 3) {
+    // SkillSlot: indexed by skill level, 1-based → 0-based
+    index = Math.max(0, skillLevel - 1);
+  } else {
+    index = 0;
   }
 
-  return otherParams;
+  const percentArr = hdData.SkillPercentAmend as number[] | undefined;
+  const absArr = hdData.SkillAbsAmend as number[] | undefined;
+
+  if (!percentArr?.length && !absArr?.length) return null;
+
+  // Clamp index
+  const maxIdx = Math.max(percentArr?.length ?? 0, absArr?.length ?? 0) - 1;
+  index = Math.min(index, maxIdx);
+
+  // SkillPercentAmend is in per-10000 format (1720000 = 172%).
+  // We divide by 10000 to get the percentage value (172.0).
+  const rawPercent = percentArr?.[index] ?? 0;
+  const skillPercent = rawPercent / 10000;
+
+  const skillAbs = absArr?.[index] ?? 0;
+
+  return {
+    id: parseInt(baseId, 10) || 0,
+    displayName: `Hit ${baseId}`,
+    skillPercent,
+    skillAbs,
+    damageType: hdData.DamageType ?? 1,
+    elementType: hdData.ElementType ?? 0,
+    energyCharge: hdData.EnergyCharge,
+  };
 }
 
-// =============================================================================
-// EFFECT AGGREGATION
-// =============================================================================
-
 /**
- * Aggregates slotDmg multiplier from Effect parameters
- * EffectTypeFirstSubtype determines what type of damage buff it is
+ * Parse a single (non-array) HitDamage entry (LevelUp / NoLevel).
+ * These entries have scalar SkillPercentAmend or a single-element array.
  */
-export function aggregateSlotDmgFromEffects(effects: EffectEntry[]): number {
-  let slotDmg = 1; // Base multiplier is 1 (100%)
+function parseSingleHitDamage(id: string): HitDamageEntry | null {
+  const hdData = GameData.hitDamage?.[id] as any;
+  if (!hdData) return null;
 
-  effects.forEach(effect => {
-    // Check if this effect is a damage increase buff
-    // For now, we'll assume effects with positive values are damage buffs
-    if (effect.value > 0) {
-      // Convert value to multiplier (assuming value is in percentage * 100)
-      // e.g., value 2000 = 20% = 0.20 multiplier
-      slotDmg *= (1 + effect.value / 10000);
-    }
-  });
+  // For LevelUp entries, the value may be a scalar or single-element array
+  let rawPercent = 0;
+  let rawAbs = 0;
 
-  return slotDmg;
-}
-
-// =============================================================================
-// HELPER FUNCTIONS
-// =============================================================================
-
-/**
- * Extracts parameter strings of a specific type from skill description
- */
-function extractParamsFromDesc(desc: string, type: string): string[] {
-  const params: string[] = [];
-  const regex = new RegExp(`${type},[^&]+`, 'gi');
-  const matches = desc.matchAll(regex);
-
-  for (const match of matches) {
-    params.push(match[0]);
+  if (Array.isArray(hdData.SkillPercentAmend)) {
+    rawPercent = hdData.SkillPercentAmend[0] ?? 0;
+  } else if (typeof hdData.SkillPercentAmend === 'number') {
+    rawPercent = hdData.SkillPercentAmend;
   }
 
-  return params;
+  if (Array.isArray(hdData.SkillAbsAmend)) {
+    rawAbs = hdData.SkillAbsAmend[0] ?? 0;
+  } else if (typeof hdData.SkillAbsAmend === 'number') {
+    rawAbs = hdData.SkillAbsAmend;
+  }
+
+  // Convert from per-10000 to percentage
+  const skillPercent = rawPercent / 10000;
+
+  return {
+    id: parseInt(id, 10) || 0,
+    displayName: `Hit ${id}`,
+    skillPercent,
+    skillAbs: rawAbs,
+    damageType: hdData.DamageType ?? 1,
+    elementType: hdData.ElementType ?? 0,
+    energyCharge: hdData.EnergyCharge,
+  };
 }
 
+// =============================================================================
+// HELPERS
+// =============================================================================
+
 /**
- * Calculates the actual ID for a parameter based on level
+ * Resolve a parameterized ID using level type.
  */
-function calculateParamId(paramString: string, level: number): string {
-  const parts = paramString.split(',');
-  if (parts.length < 3) return '';
-
-  const levelType = parts[1];
-  const baseId = parseInt(parts[2] || '0');
-
+function resolveId(baseIdStr: string, levelType: string, level: number): string {
   if (levelType === 'LevelUp') {
-    return String(baseId + (level * 10));
-  } else if (levelType === 'NoLevel') {
-    return String(baseId);
+    const baseId = parseInt(baseIdStr, 10);
+    if (!isNaN(baseId)) {
+      return String(baseId + level * 10);
+    }
   }
-
-  return String(baseId);
+  return baseIdStr;
 }
 
 /**
- * Maps EffectTypeFirstSubtype enum to stat key
- * TODO: Complete this mapping based on actual game data (Requirement #4)
+ * Map SkillType string to numeric enum used in SkillParameterData.
  */
-function mapEffectTypeToStat(effectType: number | undefined): string {
-  if (!effectType) return 'unknown';
-
-  return EFFECT_TYPE_TO_STAT[effectType] || 'unknown';
+function skillTypeToEnum(st: SkillType): number {
+  switch (st) {
+    case 'normalAtk': return 1;
+    case 'skill': return 2;
+    case 'ultimate': return 3;
+    default: return 0;
+  }
 }
 
 /**
- * Extracts filename from a file path
+ * Extract filename from a path string (last segment after /).
  */
 function extractFilename(path: string): string {
   if (!path) return '';
-  const parts = path.split('/');
-  return parts[parts.length - 1] || '';
-}
-
-/**
- * Get character data for a specific position
- */
-function getCharacterData(position: 'master' | 'assist1' | 'assist2'): any | null {
-  const character = window.state?.party?.[position];
-  if (!character || typeof character === 'string') return null;
-
-  const charData = GameData.characters?.[character.id];
-  return charData || null;
-}
-
-/**
- * Creates a ParamParserState structure from window.state for param parsing
- */
-function createParserState(): ParamParserState {
-  return {
-    effectValue: GameData.effectValue || {},
-    buffValue: GameData.buffValue || {},
-    shieldValue: GameData.shieldValue || {},
-    hitDamage: GameData.hitDamage || {},
-    onceAdditionalAttributeValue: GameData.onceAdditionalAttributeValue || {},
-    scriptParameterValue: GameData.scriptParameterValue || {},
-    skills: GameData.skills || {},
-    talents: GameData.talents || {},
-    potentials: GameData.potentials || {},
-    characters: GameData.characters || {},
-    discs: GameData.discs || {},
-    party: window.state?.party || { master: null, assist1: null, assist2: null },
-    selectedPotentials: window.state?.selectedPotentials || { master: [], assist1: [], assist2: [] },
-    potentialLevels: window.state?.potentialLevels || { master: {}, assist1: {}, assist2: {} },
-    skillLevels: window.state?.skillLevels || { master: {}, assist1: {}, assist2: {} },
-    characterLevelPhase: window.state?.characterLevelPhase || { master: 1, assist1: 1, assist2: 1 }
-  } as ParamParserState;
+  const segments = path.split('/');
+  return segments[segments.length - 1] || '';
 }
