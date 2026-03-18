@@ -6,7 +6,9 @@
  *   2. Talent bonuses (limit break unlocks)
  *   3. Potential stat bonuses
  *   4. Disc stats (main + sub)
- *   5. Active buff contributions
+ *   5. Note (소리) stats
+ *   6. Build rank ATK bonus (from StarTowerBuildRank.json)
+ *   7. Active buff contributions
  *
  * @module dmgcalc/core/stats
  */
@@ -59,12 +61,15 @@ export function aggregateAllStats(
   // 5. Note (소리) stats
   aggregateNoteStats(stats);
 
-  // 6. Calculate totals
+  // 6. Build rank ATK bonus
+  aggregateBuildRankStats(stats);
+
+  // 7. Calculate totals
   // NOTE: Active buffs are applied separately by applyBuffsToStats() in index.ts
   // after buff collection. Do NOT apply them here to avoid double-counting.
   calculateTotals(stats);
 
-  // 7. Apply manual stat overrides (replaces calculated totals)
+  // 8. Apply manual stat overrides (replaces calculated totals)
   applyStatOverrides(stats);
 
   return stats;
@@ -477,7 +482,53 @@ function aggregateNoteStats(stats: Map<string, AggregatedStat>): void {
 }
 
 // =============================================================================
-// 6. ACTIVE BUFFS
+// 6. BUILD RANK ATK BONUS
+// =============================================================================
+
+/**
+ * Add ATK bonus from build rank (Star Tower build level).
+ * Build level is determined by total score (potentials + discs),
+ * and each level grants a flat ATK bonus (Param1 in StarTowerBuildRank.json).
+ */
+function aggregateBuildRankStats(stats: Map<string, AggregatedStat>): void {
+  const rankData = GameData.starTowerBuildRank;
+  if (!rankData || Object.keys(rankData).length === 0) return;
+
+  // Calculate total score the same way app-summary does
+  let totalScore = 0;
+  const positions = ['master', 'assist1', 'assist2'] as const;
+  for (const pos of positions) {
+    if (window.calculateCharacterScore) {
+      totalScore += window.calculateCharacterScore(pos);
+    }
+  }
+  if (window.calculateDiscScore) {
+    totalScore += window.calculateDiscScore();
+  }
+
+  // Find highest rank where totalScore >= MinGrade
+  let bestLevel = 1;
+  let bestParam1 = 0;
+  for (const entry of Object.values(rankData)) {
+    const minGrade = (entry as any).MinGrade || 0;
+    const level = (entry as any).Level || 0;
+    if (totalScore >= minGrade && level > bestLevel) {
+      bestLevel = level;
+      bestParam1 = (entry as any).Param1 || 0;
+    }
+  }
+
+  if (bestParam1 > 0) {
+    addSource(stats, 'Atk', {
+      name: `Build Rank Lv.${bestLevel}`,
+      value: bestParam1,
+      active: true,
+    });
+  }
+}
+
+// =============================================================================
+// 7. ACTIVE BUFFS
 // =============================================================================
 
 function applyActiveBuffs(stats: Map<string, AggregatedStat>): void {
