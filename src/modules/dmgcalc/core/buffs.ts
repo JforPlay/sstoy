@@ -187,7 +187,7 @@ function collectTalentBuffs(charId: number, limitBreak: number): BuffSource[] {
           sourceCharId: charId,
           sourceCharName: charName,
           sourceType: 'talent',
-          sourceName: `LB${lbTier} 재능 - ${talentName}`,
+          sourceName: `LB${lbTier} ${window.i18n?.t('dmgcalc.talent') || '재능'} - ${talentName}`,
         });
         if (buffSource) buffs.push(buffSource);
       }
@@ -219,7 +219,9 @@ function collectSkillBuffs(
   // Get skill level from state (default 1)
   const skillLevel = resolveSkillLevel(skillId);
 
-  const typeLabel = sourceType === 'assist-skill' ? '지원스킬' : '궁극기';
+  const typeLabel = sourceType === 'assist-skill'
+    ? (window.i18n?.t('dmgcalc.assistSkill') || '지원스킬')
+    : (window.i18n?.t('dmgcalc.ultimate') || '궁극기');
 
   // First pass: collect Buff/BuffValue params and track their effect IDs
   const buffEffectIds = new Set<number>();
@@ -327,7 +329,7 @@ function collectPotentialBuffs(): BuffSource[] {
           sourceCharId: typeof sourceCharId === 'number' ? sourceCharId : parseInt(sourceCharId, 10),
           sourceCharName,
           sourceType: 'potential',
-          sourceName: `${sourceCharName} 잠재력 - ${potentialName}`,
+          sourceName: `${sourceCharName} ${window.i18n?.t('dmgcalc.potential') || '잠재력'} -${potentialName}`,
         });
         if (buffSource) {
           buffSource.level = level;
@@ -368,7 +370,7 @@ function collectPotentialStatDisplayEntries(): BuffSource[] {
         id: `${position}-pot-stat-${src.statKey}-${src.name}`,
         buffId: 0,
         name: src.name,
-        sourceName: `${sourceCharName} 잠재력 - ${src.name.replace(/^Potential:\s*/, '')}`,
+        sourceName: `${sourceCharName} ${window.i18n?.t('dmgcalc.potential') || '잠재력'} -${src.name.replace(/^Potential:\s*/, '')}`,
         description: '',
         statEffects: [{ key: src.statKey, value: src.value }],
         active: true,
@@ -453,7 +455,7 @@ function collectTalentBonusDisplayEntries(charId: number, limitBreak: number): B
         buffs.push({
           id: `lb-talent-${talentId}-p${i}-${effectId}`,
           buffId: effectId,
-          name: `LB${lbTier} - ${talentName}`,
+          name: `LB${lbTier} ${window.i18n?.t('dmgcalc.talent') || '재능'} - ${talentName}`,
           sourceName: `LB${lbTier} - ${statDisplayName}`,
           description: `${statDisplayName}: ${rawValue}`,
           statEffects: [{ key: statKey, value: rawValue, isFlat }],

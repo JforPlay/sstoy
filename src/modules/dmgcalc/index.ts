@@ -10,8 +10,9 @@
  * @module dmgcalc/index
  */
 
-import { loadFeatureData } from '@/shared/data-loader';
+import { loadFeatureData, loadLanguageData } from '@/shared/data-loader';
 import { GameData } from '@/shared/game-data';
+import { i18n } from '@/i18n';
 import { PHASE_TO_LEVEL, ELEMENT_TYPE_TO_STAT } from './constants';
 
 // Core
@@ -58,6 +59,11 @@ export async function render(): Promise<void> {
   // Load data once
   if (!dataLoaded) {
     await loadFeatureData('characterDB');
+    // Load UIText for stat name localization (if not already loaded)
+    if (!GameData.uiText || Object.keys(GameData.uiText).length === 0) {
+      const langInfo = i18n.getLanguageInfo();
+      await loadLanguageData(langInfo.gameLang, ['UIText.json']);
+    }
     dataLoaded = true;
   }
 

@@ -468,7 +468,7 @@ function aggregateNoteStats(stats: Map<string, AggregatedStat>): void {
       || `Note ${noteId}`;
 
     addSource(stats, statKey, {
-      name: `소리: ${noteName} Lv.${level}`,
+      name: `${window.i18n?.t('dmgcalc.noteSource') || '소리'}: ${noteName} Lv.${level}`,
       value,
       active: true,
       isPercentage,

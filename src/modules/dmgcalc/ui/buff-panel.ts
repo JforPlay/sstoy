@@ -14,6 +14,9 @@ import { getStatDisplayName } from '../core/enums';
 import { GameData } from '@/shared/game-data';
 import { getAttrKeyFromEnumId } from '../core/enums';
 
+/** i18n helper — falls back to provided default */
+const t = (key: string, fallback: string) => window.i18n?.t(`dmgcalc.${key}`) || fallback;
+
 // =============================================================================
 // MAIN EXPORT
 // =============================================================================
@@ -31,7 +34,7 @@ export function renderBuffPanel(state: DmgCalcState): string {
 
   return `
     <div class="dmgcalc-panel dmgcalc-buffs-panel">
-      <div class="dmgcalc-panel-title">BUFFS</div>
+      <div class="dmgcalc-panel-title">${t('buffs', 'BUFFS')}</div>
       <div class="buff-panel-grid">
         ${skillSection}
         ${potSection}
@@ -129,10 +132,10 @@ export function renderStatSummary(state: DmgCalcState): string {
       <details class="stat-summary-row${overriddenClass}">
         <summary>
           <span class="stat-summary-label">${s.label}</span>
-          <span class="stat-summary-calc" title="선택한 빌드 합산">${calcDisplay}</span>
+          <span class="stat-summary-calc" title="${t('calcTotal', '선택한 빌드 합산')}">${calcDisplay}</span>
           <span class="stat-summary-arrow">→</span>
-          <input type="text" class="stat-override-input" data-stat-key="${s.key}" data-is-flat="${s.isFlat}" value="${hasOverride ? overrideDisplay : ''}" placeholder="수동 입력" title="수동 입력 (Enter로 적용, 빈값으로 초기화)">
-          <span class="stat-summary-effective${hasOverride ? ' active' : ''}" title="적용값">${hasOverride ? `= ${overrideDisplay}` : ''}</span>
+          <input type="text" class="stat-override-input" data-stat-key="${s.key}" data-is-flat="${s.isFlat}" value="${hasOverride ? overrideDisplay : ''}" placeholder="${t('manualInput', '수동 입력')}" title="${t('manualInputHint', '수동 입력 (Enter로 적용, 빈값으로 초기화)')}">
+          <span class="stat-summary-effective${hasOverride ? ' active' : ''}" title="${t('appliedValue', '적용값')}">${hasOverride ? `= ${overrideDisplay}` : ''}</span>
         </summary>
         <div class="stat-src-breakdown">${breakdown}</div>
       </details>
@@ -141,7 +144,7 @@ export function renderStatSummary(state: DmgCalcState): string {
 
   return `
     <div class="dmgcalc-panel dmgcalc-stat-summary">
-      <div class="dmgcalc-panel-title">STAT SUMMARY</div>
+      <div class="dmgcalc-panel-title">${t('statSummary', 'STAT SUMMARY')}</div>
       ${rows}
     </div>
   `;
@@ -181,7 +184,7 @@ function renderSkillBuffArea(skillBuffs: BuffSource[], lbBonuses: BuffSource[]):
     lbSection = `
       <div class="buff-block">
         <div class="buff-block-header">
-          <span class="buff-block-title buff-lb-title">한계돌파 보너스</span>
+          <span class="buff-block-title buff-lb-title">${t('lbBonus', '한계돌파 보너스')}</span>
         </div>
         ${lbItems}
       </div>
@@ -214,7 +217,7 @@ function renderPotentialArea(potentialStats: BuffSource[]): string {
       if (potBuffs.length === 0) continue;
       const first = potBuffs[0]!;
       const level = first.level || 1;
-      const potName = (first.sourceName || first.name).replace(/^.*잠재력\s*-\s*/, '');
+      const potName = (first.sourceName || first.name).replace(/^.*-\s*/, '');
       const allEffects = potBuffs.flatMap(b => b.statEffects);
       const effectText = formatStatEffects(allEffects);
 
@@ -228,7 +231,7 @@ function renderPotentialArea(potentialStats: BuffSource[]): string {
     return `
       <div class="buff-block">
         <div class="buff-block-header">
-          <span class="buff-block-title">${group.charName} 잠재력</span>
+          <span class="buff-block-title">${group.charName} ${t('potential', '잠재력')}</span>
           <span class="buff-block-count">${group.buffs.length}</span>
         </div>
         ${items}
@@ -312,7 +315,7 @@ function renderNotesSection(state: DmgCalcState): string {
   return `
     <div class="buff-block buff-notes-block">
       <div class="buff-block-header">
-        <span class="buff-block-title notes-title">소리 (Notes)</span>
+        <span class="buff-block-title notes-title">${t('notes', '소리 (Notes)')}</span>
         <span class="buff-block-count">${noteIds.length}</span>
       </div>
       <div class="notes-grid">${items}</div>

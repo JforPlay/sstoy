@@ -279,7 +279,7 @@ function getPotentialName(potId: string, position: Position): string {
 
   // Include position in fallback name
   const positionLabel = position === 'master' ? '주력' : position === 'assist1' ? '지원1' : '지원2';
-  return `잠재력 ${potId} (${positionLabel})`;
+  return `${window.i18n?.t('dmgcalc.potential') || '잠재력'} ${potId} (${positionLabel})`;
 }
 
 /**

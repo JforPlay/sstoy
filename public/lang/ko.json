@@ -618,6 +618,19 @@
     "toughnessBroken": "강인도 파괴",
     "enemy": "적",
     "def": "방어력",
-    "res": "저항"
+    "res": "저항",
+    "buffs": "버프",
+    "statSummary": "스탯 합산",
+    "calcTotal": "선택한 빌드 합산",
+    "manualInput": "수동 입력",
+    "manualInputHint": "수동 입력 (Enter로 적용, 빈값으로 초기화)",
+    "appliedValue": "적용값",
+    "lbBonus": "한계돌파 보너스",
+    "notes": "소리 (Notes)",
+    "potential": "잠재력",
+    "assistSkill": "지원스킬",
+    "ultimate": "궁극기",
+    "talent": "재능",
+    "noteSource": "소리"
   }
 }

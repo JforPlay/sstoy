@@ -618,6 +618,19 @@
     "toughnessBroken": "靭性破壊",
     "enemy": "敵",
     "def": "防御力",
-    "res": "耐性"
+    "res": "耐性",
+    "buffs": "バフ",
+    "statSummary": "ステータス合計",
+    "calcTotal": "ビルド合計",
+    "manualInput": "手動入力",
+    "manualInputHint": "手動入力 (Enterで適用、空で初期化)",
+    "appliedValue": "適用値",
+    "lbBonus": "限界突破ボーナス",
+    "notes": "ノート",
+    "potential": "ポテンシャル",
+    "assistSkill": "支援スキル",
+    "ultimate": "必殺技",
+    "talent": "才能",
+    "noteSource": "ノート"
   }
 }
