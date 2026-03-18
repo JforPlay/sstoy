@@ -4,7 +4,7 @@
  */
 
 import type { SkillDamageResult, HitDamageCalculation, SkillType, DmgCalcState } from '../types';
-import { PHASE_TO_LEVEL, ELEMENT_TYPE_TO_STAT, ELEMENT_TYPE_TO_PEN, ELEMENT_TYPE_TO_IGNORE, DAMAGE_TYPE_TO_CRIT_STAT, DAMAGE_TYPE_TO_BONUS_STAT, SKILL_TYPE_TO_DAMAGE_TYPE } from '../constants';
+import { PHASE_TO_LEVEL, ELEMENT_TYPE_TO_STAT, ELEMENT_TYPE_TO_PEN, ELEMENT_TYPE_TO_IGNORE, ELEMENT_TYPE_TO_TAKEN, DAMAGE_TYPE_TO_CRIT_STAT, DAMAGE_TYPE_TO_BONUS_STAT, DAMAGE_TYPE_TO_TAKEN_STAT, SKILL_TYPE_TO_DAMAGE_TYPE } from '../constants';
 import { getState } from './state';
 import { getStat, getAllStats } from './stats';
 import { fetchSkillData, aggregateSlotDmgFromEffects } from './skills';
@@ -213,11 +213,20 @@ export function calculateSingleHitDamage(
   // Resilience break damage: 1.5x if toughness broken, 1.0x otherwise
   const resilienceBreakDmg = ((state.enemy as any).toughnessBroken === true || (state.enemy as any).toughness === 0) ? 1.5 : 1.0;
 
-  // Damage taken multipliers (not implemented yet, default to 1)
-  const slotDmgTaken = 1; // Specific damage taken increase (from RCDNORMALDMG, etc.)
-  const elementDmgTaken = 1; // Elemental damage taken increase
-  const generalDmgTaken = 1; // General damage taken increase
-  const dmgPlusTaken = 0; // Flat damage increase from taken
+  // Damage taken multipliers — "received damage increase" debuffs on enemy
+  // These come from party buffs like "받는 불 속성 피해 +60%"
+  const slotTakenKey = DAMAGE_TYPE_TO_TAKEN_STAT[damageType];
+  const slotTakenRaw = slotTakenKey ? (state.stats.get(slotTakenKey)?.total || 10000) : 10000;
+  const slotDmgTaken = slotTakenRaw / 10000; // per-10000: 10000 = 1.0x
+
+  const elemTakenKey = ELEMENT_TYPE_TO_TAKEN[hitElemType];
+  const elemTakenRaw = elemTakenKey ? (state.stats.get(elemTakenKey)?.total || 10000) : 10000;
+  const elementDmgTaken = elemTakenRaw / 10000; // per-10000: 10000 = 1.0x
+
+  const genTakenRaw = state.stats.get('GENDMGRCD')?.total || 10000;
+  const generalDmgTaken = genTakenRaw / 10000; // per-10000: 10000 = 1.0x
+
+  const dmgPlusTaken = 0; // DMGPLUSRCD — not commonly used
 
   const enemyMultiplier = erAmend * defAmend * slotDmgTaken * elementDmgTaken * generalDmgTaken * resilienceBreakDmg;
 
@@ -517,7 +526,16 @@ function calculateSingleHitDamageInternal(
   const intEffRes = (enemyRes * (1 - intIgn)) - intPen;
   const erAmend = calculateResistanceMultiplier(intEffRes);
   const resilienceBreakDmg = ((state.enemy as any).toughnessBroken === true || (state.enemy as any).toughness === 0) ? 1.5 : 1.0;
-  const enemyMultiplier = erAmend * defAmend * resilienceBreakDmg;
+
+  // Damage taken multipliers
+  const intDmgType = hit.damageType || 1;
+  const intSlotTakenKey = DAMAGE_TYPE_TO_TAKEN_STAT[intDmgType];
+  const intSlotTaken = intSlotTakenKey ? (state.stats.get(intSlotTakenKey)?.total || 10000) / 10000 : 1;
+  const intElemTakenKey = ELEMENT_TYPE_TO_TAKEN[intElemType];
+  const intElemTaken = intElemTakenKey ? (state.stats.get(intElemTakenKey)?.total || 10000) / 10000 : 1;
+  const intGenTaken = (state.stats.get('GENDMGRCD')?.total || 10000) / 10000;
+
+  const enemyMultiplier = erAmend * defAmend * intSlotTaken * intElemTaken * intGenTaken * resilienceBreakDmg;
 
   const baseDamage = amplifiedDamage * enemyMultiplier;
   const critDmg = critDamageValue * enemyMultiplier;

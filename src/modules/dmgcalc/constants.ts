@@ -22,6 +22,12 @@ export const STAT_CATEGORIES = {
     'NORMALCRITPOWER', 'SKILLCRITPOWER', 'ULTRACRITPOWER',
     'OTHERCRITPOWER', 'MARKCRITPOWER', 'SUMMONCRITPOWER', 'PROJECTILECRITPOWER'
   ],
+  receivedDmg: [
+    'RCDNORMALDMG', 'RCDSKILLDMG', 'RCDULTRADMG', 'RCDOTHERDMG',
+    'RCDMARKDMG', 'RCDSUMMONDMG', 'RCDPROJECTILEDMG',
+    'WEERCD', 'FEERCD', 'SEERCD', 'AEERCD', 'LEERCD', 'DEERCD',
+    'GENDMGRCD'
+  ],
   special: [
     'EnergyEfficiency', 'AbnormalMastery', 'Intensity',
     'GENDMG', 'DMGPLUS', 'FINALDMG', 'FINALDMGPLUS'
@@ -97,6 +103,11 @@ export const ELEMENT_TYPE_TO_STAT: Record<number, string> = {
   4: 'AEE',  // Lightning (번개)
   5: 'LEE',  // Wind (바람)
   6: 'DEE'   // Dark (어둠)
+};
+
+/** Maps element type to received element damage stat key */
+export const ELEMENT_TYPE_TO_TAKEN: Record<number, string> = {
+  1: 'WEERCD', 2: 'FEERCD', 3: 'SEERCD', 4: 'AEERCD', 5: 'LEERCD', 6: 'DEERCD'
 };
 
 /** Maps element type to penetration stat key */
