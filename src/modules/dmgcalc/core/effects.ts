@@ -272,16 +272,17 @@ export function parseEffectById(effectId: number | string): ParsedEffect | null 
       ? parseFloat(effectData.EffectTypeParam1)
       : effectData.EffectTypeParam1;
 
-    // Determine if stat uses bIntFloat (per-10000 format)
-    // ATK(1), DEF(2), HP(3) are non-bIntFloat (raw integers)
-    // All other stats (CritRate, FEE, SKILLDMG, etc.) are bIntFloat
-    const NON_INT_FLOAT_SUBTYPES = new Set([1, 2, 3, 9, 23, 24, 25, 26, 27, 28]); // ATK, DEF, HP, Penetrate, WEP-DEP
+    // Determine value conversion based on bIntFloat AND SecondSubtype
+    // ATK(1), DEF(2), HP(3), Penetrate(9), WEP-DEP(23-28) are non-bIntFloat
+    // But SecondSubtype=2 (PERCENTAGE) means even non-bIntFloat stats have decimal values
+    const NON_INT_FLOAT_SUBTYPES = new Set([1, 2, 3, 9, 23, 24, 25, 26, 27, 28]);
     const firstSubtype = effectData.EffectTypeFirstSubtype || 0;
-    if (!NON_INT_FLOAT_SUBTYPES.has(firstSubtype)) {
-      // bIntFloat stat: decimal → per-10000 (0.015 → 150)
+    const secondSubtype = effectData.EffectTypeSecondSubtype || 0;
+    if (!NON_INT_FLOAT_SUBTYPES.has(firstSubtype) || secondSubtype === 2) {
+      // bIntFloat stat OR percentage on flat stat: decimal → per-10000
       value = rawValue * 10000;
     } else {
-      // Non-bIntFloat (ATK/DEF/HP): use raw value as-is
+      // Non-bIntFloat with SecondSubtype=1 (flat): use raw value as-is
       value = rawValue;
     }
   }

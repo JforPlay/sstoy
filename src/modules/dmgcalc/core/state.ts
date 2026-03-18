@@ -95,8 +95,10 @@ export function setNoteLevel(noteId: string, level: number): void {
 }
 
 export function setPotentialLevel(potId: string, level: number): void {
-  // Max level from Potential.json, default to 20
+  // Max level = BASE_POTENTIAL_LEVEL(6) + potential.MaxLevel (matching app-char.ts logic)
   const potential = (window as any).GameData?.potentials?.[potId] as any;
-  const maxLevel = potential?.MaxLevel || 20;
+  const BASE_POTENTIAL_LEVEL = 6;
+  const maxLevelBonus = potential?.MaxLevel || 0;
+  const maxLevel = BASE_POTENTIAL_LEVEL + maxLevelBonus;
   state.potentialLevelOverrides[potId] = Math.max(1, Math.min(maxLevel, level));
 }

@@ -222,7 +222,11 @@ function renderPotentialArea(potentialStats: BuffSource[]): string {
       const effectText = formatStatEffects(allEffects);
 
       const stepper = potId > 0
-        ? `<span class="lvl-stepper"><button class="disc-ctrl-btn" data-action="pot-level-down" data-pot-id="${potId}" ${level <= 1 ? 'disabled' : ''}>-</button><span class="lvl-stepper-val">Lv.${level}</span><button class="disc-ctrl-btn" data-action="pot-level-up" data-pot-id="${potId}">+</button></span>`
+        ? (() => {
+            const pot = GameData.potentials?.[potId] as any;
+            const maxLv = 6 + (pot?.MaxLevel || 0);
+            return `<span class="lvl-stepper"><button class="disc-ctrl-btn" data-action="pot-level-down" data-pot-id="${potId}" ${level <= 1 ? 'disabled' : ''}>-</button><span class="lvl-stepper-val">Lv.${level}</span><button class="disc-ctrl-btn" data-action="pot-level-up" data-pot-id="${potId}" ${level >= maxLv ? 'disabled' : ''}>+</button></span>`;
+          })()
         : '';
 
       items += `<div class="buff-row"><span class="buff-row-name">${potName}</span>${stepper}<span class="buff-row-value">${effectText}</span></div>`;
