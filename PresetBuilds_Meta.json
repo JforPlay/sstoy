@@ -9,6 +9,32 @@
     "notes": "연합토벌 및 종언 컨텐츠 전용 빌드들 입니다."
   },
   "presets": [
+        {
+      "id": "preset-build",
+      "title": "(3/18) 치토세 + 토나 + 테레사",
+      "description": "치토세 잠재를 가장 후순위로 수집, 집중의 소리 돈 남으면 구매",
+      "author": "치토테 조합",
+      "authorLink": "https://arca.live/b/stellasora/165184691",
+      "element": "Water",
+      "characterId": 144,
+      "tags": ["토나", "치토세", "테레사"],
+      "new": true,
+      "meta": true,
+      "buildHash": "v3d-hchxnBnB%26t7pR%23%2F%3A34Jc3KgYxtuBclb%3FKk%40%2BWSB5~FJOPbm%7DKOc%25%23d36%3C)U%2BQ%2CN%3DM%5Dv5A%26G%2Cy%7DVPBr!_d%3F%23)Sv2)lC%60z%3CMzi%2BL9G365h7%7DFinxHJnkLz%2B%5BbFjGtV%3DX%2BB%22%241f%40zhT3Kqg_%24%3EnRM%7DgaY%2BCPM%60%223kJF"
+    },
+    {
+      "id": "preset-build",
+      "title": "(3/18) 요로즈 택배 딸배즈 빌드",
+      "description": "필수 잠재 약 70개. 자세한건 링크 참조",
+      "author": "잠재 최적화 딸배즈 빌드",
+      "authorLink": "https://arca.live/b/stellasora/163622506",
+      "element": "Water",
+      "characterId": 130,
+      "tags": ["토나", "테레사", "프리지아"],
+      "new": true,
+      "meta": true,
+      "buildHash": "v3d-YfhxoumBO5oj%7Bz%3EuwQ%23(Bavi!kEYM7m*ASGgI6NYaOeuDP5Hp5M)_K%40KYs%60mj.fmI%5BVsGp%24.%25wWHdOket9%3BXd8hTP%26H2nDc%5BPvB5%3B3%2BUxb%2456BiD%3FFcQue005l%3F2I%5E~V%2CER%25%7DN%2FKt4%7C3t%7C%3F*q%22k%22OB%22EKST6l%3CG%3F%5B%3AADY%2C5%2F%22z5%2FL%246xS%23%2CC"
+    },
     {
       "id": "preset-build",
       "title": "(2/28) 레이스 + 나츠카",
@@ -42,7 +68,6 @@
       "characterId": 159,
       "tags": ["표식", "나즈나", "새해 크루니스", "그레이"],
       "meta": true,
-      "new" : true,
       "buildHash": "v3d-%22hjxoumB%5BA%7DU*%3B%22e6e2%3EU*6brLGw7HI%3C..u2_%3FV%25oB%7BhBg%3B%24%5DYF%7D%25RD%7CcH%7BrKPXQe%7D7b%249Q%5B0b(G%258B%3C)y4k5k(TB!%2B(Lm%5EKkMv%2FBpnHdOEe_4fb%7B%25%2Fblg6%26%3BbbS_vQM%7C_f5%3E%3F.*kxr%3CA!w%24VE%2FqI8T%3D%60M%3C*FlDR9"
     },
     {
