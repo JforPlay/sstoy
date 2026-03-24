@@ -1406,7 +1406,9 @@ function renderDiscGrid(searchQuery = '', slotId: DiscSlotId): void {
     }
   });
 
-  let discsToDisplay = discsState.discSelector.allDiscsWithNames.map((item) => item.disc);
+  let discsToDisplay = discsState.discSelector.allDiscsWithNames
+    .map((item) => item.disc)
+    .filter((disc) => disc && discsState.discNames[disc.Id]);
 
   if (discsState.discSelector.selectedElement !== 'all') {
     discsToDisplay = discsToDisplay.filter(
