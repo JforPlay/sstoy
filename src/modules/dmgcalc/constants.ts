@@ -13,18 +13,23 @@
 export const STAT_CATEGORIES = {
   core: ['Atk', 'CritRate', 'CritPower'],
   offense: ['HitRate', 'StrikeRate', 'RuptureRate'],
-  elemental: ['WEE', 'FEE', 'SEE', 'AEE', 'LEE', 'DEE'], // Physical, Fire, Ice, Lightning, Wind, Dark
+  elemental: ['WEE', 'FEE', 'SEE', 'AEE', 'LEE', 'DEE'],
+  penetration: ['WEP', 'FEP', 'SEP', 'AEP', 'LEP', 'DEP'],
+  resistIgnore: ['WEI', 'FEI', 'SEI', 'AEI', 'LEI', 'DEI'],
   damage: [
-    // Skill-type damage bonuses
     'NORMALDMG', 'SKILLDMG', 'ULTRADMG', 'OTHERDMG',
     'MARKDMG', 'SUMMONDMG', 'PROJECTILEDMG',
-    // Skill-type crit power
     'NORMALCRITPOWER', 'SKILLCRITPOWER', 'ULTRACRITPOWER',
     'OTHERCRITPOWER', 'MARKCRITPOWER', 'SUMMONCRITPOWER', 'PROJECTILECRITPOWER'
   ],
+  receivedDmg: [
+    'RCDNORMALDMG', 'RCDSKILLDMG', 'RCDULTRADMG', 'RCDOTHERDMG',
+    'RCDMARKDMG', 'RCDSUMMONDMG', 'RCDPROJECTILEDMG',
+    'WEERCD', 'FEERCD', 'SEERCD', 'AEERCD', 'LEERCD', 'DEERCD',
+    'GENDMGRCD'
+  ],
   special: [
     'EnergyEfficiency', 'AbnormalMastery', 'Intensity',
-    // General damage modifiers (CRITICAL - from decompiled formula)
     'GENDMG', 'DMGPLUS', 'FINALDMG', 'FINALDMGPLUS'
   ]
 } as const;
@@ -98,6 +103,21 @@ export const ELEMENT_TYPE_TO_STAT: Record<number, string> = {
   4: 'AEE',  // Lightning (번개)
   5: 'LEE',  // Wind (바람)
   6: 'DEE'   // Dark (어둠)
+};
+
+/** Maps element type to received element damage stat key */
+export const ELEMENT_TYPE_TO_TAKEN: Record<number, string> = {
+  1: 'WEERCD', 2: 'FEERCD', 3: 'SEERCD', 4: 'AEERCD', 5: 'LEERCD', 6: 'DEERCD'
+};
+
+/** Maps element type to penetration stat key */
+export const ELEMENT_TYPE_TO_PEN: Record<number, string> = {
+  1: 'WEP', 2: 'FEP', 3: 'SEP', 4: 'AEP', 5: 'LEP', 6: 'DEP'
+};
+
+/** Maps element type to resistance ignore stat key */
+export const ELEMENT_TYPE_TO_IGNORE: Record<number, string> = {
+  1: 'WEI', 2: 'FEI', 3: 'SEI', 4: 'AEI', 5: 'LEI', 6: 'DEI'
 };
 
 /**

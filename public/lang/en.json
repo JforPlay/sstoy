@@ -614,6 +614,23 @@
     "autoMode": "Auto Mode",
     "manualMode": "Manual Mode",
     "statsAggregation": "Stats Aggregation",
-    "buildBasedBadge": "Build-based"
+    "buildBasedBadge": "Build-based",
+    "toughnessBroken": "Toughness Broken",
+    "enemy": "Enemy",
+    "def": "DEF",
+    "res": "RES",
+    "buffs": "Buffs",
+    "statSummary": "Stat Summary",
+    "calcTotal": "Build Total",
+    "manualInput": "Override",
+    "manualInputHint": "Manual override (Enter to apply, empty to reset)",
+    "appliedValue": "Applied",
+    "lbBonus": "Limit Break Bonus",
+    "notes": "Notes",
+    "potential": "Potential",
+    "assistSkill": "Assist Skill",
+    "ultimate": "Ultimate",
+    "talent": "Talent",
+    "noteSource": "Note"
   }
 }

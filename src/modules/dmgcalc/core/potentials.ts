@@ -1,466 +1,350 @@
 /**
- * Damage Calculator - Potential Effects Parser
- * Parses potential effects and extracts stat bonuses/buffs for all party members
+ * Potential Stat Bonuses for Damage Calculator
+ *
+ * Parses selected potentials and extracts stat bonuses.
+ * Handles two parameter formats:
+ *   - "EffectValue,{levelType},{id},EffectTypeParam1,HdPct"
+ *   - "OnceAdditionalAttributeValue,{levelType},{id},Value1,10KHdPct"
  *
  * @module dmgcalc/core/potentials
  */
 
 import { GameData } from '@/shared/game-data';
-import { parseParamValue } from '@/modules/param-parser';
 import { getAttrKeyFromEnumId } from './enums';
+import { getState } from './state';
 import type { Position } from '../types';
 
 // =============================================================================
 // TYPES
 // =============================================================================
 
-/**
- * Parsed potential effect
- */
-export interface PotentialEffect {
-  potentialId: number;
-  potentialName: string;
-  level: number;
-  maxLevel: number;
-  character: Position;
-  effects: ParsedEffect[];
-}
-
-/**
- * Individual parsed effect from a potential
- */
-export interface ParsedEffect {
-  /** Stat key (e.g., "Atk", "CritRate", "NORMALDMG") */
+export interface PotentialStatSource {
+  /** Stat key (e.g. "Atk", "CritRate", "NORMALDMG") */
   statKey: string;
-  /** Numeric value to add */
+  /** Display name for the source */
+  name: string;
+  /** Numeric value (per-10000 format for percentage stats, or flat for absolute) */
   value: number;
-  /** Source description (for UI display) */
-  source: string;
-  /** Effect type ID from EffectValue */
-  effectType: number;
-  /** Effect subtype (maps to stat) */
-  effectSubtype: number;
-  /** Whether this is a conditional effect */
-  isConditional: boolean;
-  /** Condition description (if conditional) */
-  condition?: string;
+  /** Whether this is a percentage bonus on a flat stat (ATK, DEF, HP) */
+  isPercentage: boolean;
+  /** Character ID the potential belongs to (for tracking) */
+  characterId?: number;
+  /** Potential ID (for level overrides) */
+  potentialId?: number;
+  /** Current resolved level of this potential */
+  level?: number;
 }
 
+// Re-export types used by stats.ts
+export type { PotentialStatSource as PotentialEffect };
+
 // =============================================================================
-// POTENTIAL EFFECT PARSING
+// MAIN API
 // =============================================================================
 
 /**
- * Parse all potential effects for a character at a specific position
+ * Get all stat bonuses from selected potentials for a position.
  *
- * @param position - Character position ('master', 'assist1', 'assist2')
- * @returns Array of potential effects with parsed stats
+ * @param position - 'master' | 'assist1' | 'assist2'
+ * @returns Array of stat sources to feed into aggregation
  */
-export function parsePotentialEffects(position: Position): PotentialEffect[] {
-  const effects: PotentialEffect[] = [];
+export function getPotentialStatBonuses(position: Position): PotentialStatSource[] {
+  const sources: PotentialStatSource[] = [];
 
-  // Get selected potentials for this position
-  const selectedPotentials = window.state?.selectedPotentials?.[position];
-  if (!selectedPotentials || selectedPotentials.length === 0) {
-    return effects;
-  }
+  const selected = window.state?.selectedPotentials?.[position] || [];
+  const levels = window.state?.potentialLevels?.[position] || {};
 
-  // Get potential levels
-  const potentialLevels = window.state?.potentialLevels?.[position] || {};
+  if (selected.length === 0) return sources;
 
-  // Process each selected potential
-  selectedPotentials.forEach(potId => {
-    if (!potId) return;
+  // Resolve character ID for source tracking
+  const charObj = window.state?.party?.[position];
+  const charId = charObj && typeof charObj !== 'string'
+    ? (typeof charObj.id === 'number' ? charObj.id : parseInt(charObj.id, 10))
+    : undefined;
 
-    const level = potentialLevels[potId] || 1;
+  for (const potId of selected) {
+    if (!potId) continue;
 
-    // Try both GameData.potentials and window.state.potentials
     const potential = GameData.potentials?.[potId] || window.state?.potentials?.[potId];
+    if (!potential) continue;
 
-    if (!potential) {
-      // Silently skip missing potentials (might be from newer game version)
-      return;
-    }
+    // Use local override if set, otherwise fall back to window.state level
+    const potentialLevelOverrides = getState().potentialLevelOverrides;
+    const level = potentialLevelOverrides[potId] !== undefined
+      ? potentialLevelOverrides[potId]
+      : (levels[potId] || 1);
+    const potName = resolvePotentialName(potId, position);
 
-    const potentialName = getPotentialName(String(potId), position);
-    const parsedEffects: ParsedEffect[] = [];
-
-    // Parse all parameter fields (Param1 through Param10)
+    // Parse Param1-Param10
     for (let i = 1; i <= 10; i++) {
-      const paramKey = `Param${i}` as keyof typeof potential;
-      const paramValue = potential[paramKey];
+      const param = (potential as any)[`Param${i}`];
+      if (!param || typeof param !== 'string') continue;
 
-      if (!paramValue || typeof paramValue !== 'string') continue;
-
-      // Parse the parameter string
-      try {
-        const effectData = parsePotentialParameter(
-          paramValue,
-          level,
-          position,
-          potential,
-          potentialName
-        );
-
-        if (effectData) {
-          parsedEffects.push(...effectData);
+      const parsed = parsePotentialParam(param, level, potName);
+      if (parsed) {
+        for (const src of parsed) {
+          sources.push({ ...src, characterId: charId, potentialId: potId, level });
         }
-      } catch (error) {
-        console.warn(`[DmgCalc] Failed to parse potential ${potId} param ${paramKey}:`, error);
       }
     }
-
-    if (parsedEffects.length > 0) {
-      effects.push({
-        potentialId: potId,
-        potentialName,
-        level,
-        maxLevel: (potential as any).MaxLevel || 1,
-        character: position,
-        effects: parsedEffects
-      });
-    }
-  });
-
-  return effects;
-}
-
-/**
- * Parse OnceAdditionalAttributeValue parameter
- *
- * Format: "OnceAdditionalAttributeValue,NoLevel,{id},Value1,10KHdPct"
- *
- * Structure:
- * - AttributeType1: Maps to GameEnums.effectAttributeType (e.g., 1=ATK, 57=SKILLDMG)
- * - ParameterType1: Type of parameter
- * - Value1: The actual value (in per-10000 format)
- *
- * @param paramStr - Parameter string
- * @param level - Potential level
- * @param potentialName - Display name
- * @returns Parsed effects
- */
-function parseOnceAdditionalAttributeValue(
-  paramStr: string,
-  level: number,
-  potentialName: string
-): ParsedEffect[] | null {
-  const effects: ParsedEffect[] = [];
-
-  // Split parameter string: "OnceAdditionalAttributeValue,NoLevel,{id},Value1,10KHdPct"
-  const parts = paramStr.split(',');
-  if (parts.length < 3) return null;
-
-  const fileType = parts[0];
-  const levelType = parts[1];
-  const baseIdStr = parts[2];
-
-  if (!fileType || !levelType || !baseIdStr) return null;
-
-  // Normalize file type
-  const normalizedFileType = fileType.toLowerCase().trim();
-  if (normalizedFileType !== 'onceadditionalattributevalue') {
-    return null;
   }
 
-  // Calculate actual ID based on level type
-  let onceAdditionalId = baseIdStr;
-  if (levelType === 'LevelUp') {
-    const baseId = parseInt(baseIdStr, 10);
-    if (!isNaN(baseId)) {
-      onceAdditionalId = String(baseId + (level * 10));
-    }
-  }
-
-  // Look up the OnceAdditionalAttributeValue in game data
-  const onceAdditional = GameData.onceAdditionalAttributeValue?.[onceAdditionalId];
-  if (!onceAdditional) {
-    console.warn(`[DmgCalc] OnceAdditionalAttributeValue ${onceAdditionalId} not found`);
-    return null;
-  }
-
-  const onceData = onceAdditional as any;
-
-  // Extract value
-  const rawValue = onceData.Value1 || 0;
-
-  // Apply format transformations based on format type (4th parameter)
-  const formatType = parts[4] || '';
-  let value = rawValue;
-
-  // Most OnceAdditional values are in per-10000 format (10KHdPct)
-  // They're already in the correct format, no conversion needed
-  if (!formatType.includes('10K') && formatType.includes('Pct')) {
-    // Per-100 format: multiply by 100
-    value = rawValue * 100;
-  }
-
-  // Get stat key from AttributeType1
-  const attributeType = onceData.AttributeType1;
-  if (attributeType === undefined) {
-    return null;
-  }
-
-  const statKey = getAttrKeyFromEnumId(attributeType);
-  if (!statKey) {
-    console.warn(`[DmgCalc] Unknown AttributeType1 ${attributeType} in OnceAdditionalAttributeValue ${onceAdditionalId}`);
-    return null;
-  }
-
-  effects.push({
-    statKey,
-    value,
-    source: `잠재력: ${potentialName}`,
-    effectType: 0, // Not from EffectValue
-    effectSubtype: attributeType,
-    isConditional: false
-  });
-
-  return effects.length > 0 ? effects : null;
-}
-
-/**
- * Parse a single potential parameter string
- *
- * @param paramStr - Parameter string (e.g., "EffectValue,NoLevel,10350111,EffectTypeParam1,HdPct")
- * @param level - Potential level
- * @param position - Character position
- * @param potential - Full potential data
- * @param potentialName - Display name for this potential
- * @returns Parsed effects, or null if parsing failed
- */
-function parsePotentialParameter(
-  paramStr: string,
-  level: number,
-  position: Position,
-  potential: any,
-  potentialName: string
-): ParsedEffect[] | null {
-  const effects: ParsedEffect[] = [];
-
-  // Check if this is OnceAdditionalAttributeValue parameter
-  if (paramStr.toLowerCase().includes('onceadditionalattributevalue')) {
-    const onceAdditionalEffects = parseOnceAdditionalAttributeValue(paramStr, level, potentialName);
-    if (onceAdditionalEffects) {
-      return onceAdditionalEffects;
-    }
-  }
-
-  // Parse the parameter value using param-parser
-  const state = window.state as any;
-  if (!state) return null;
-
-  // Call parseParamValue to get the parsed value
-  const parsedValue = parseParamValue(
-    paramStr,
-    level,
-    1, // skillLevel (not used for potentials)
-    position,
-    state,
-    false, // isSpecificPotential
-    window.state?.characterLevelPhase?.[position] || 0
-  );
-
-  if (!parsedValue || typeof parsedValue !== 'object') {
-    // Some parameters might just return a simple value
-    // Try to extract effect data differently
-    return parseEffectDirectly(paramStr, level, potentialName);
-  }
-
-  // If we got an object back, it might have effect data
-  // Extract stat information from the parsed result
-  const effectData = extractEffectFromParsed(parsedValue, potentialName);
-  if (effectData) {
-    effects.push(...effectData);
-  }
-
-  return effects.length > 0 ? effects : null;
-}
-
-/**
- * Extract effect data from a parsed parameter value
- */
-function extractEffectFromParsed(parsedValue: any, potentialName: string): ParsedEffect[] | null {
-  const effects: ParsedEffect[] = [];
-
-  // Check if this is an effect value with stat modifications
-  if (parsedValue.effectType !== undefined && parsedValue.effectSubtype !== undefined) {
-    const statKey = getAttrKeyFromEnumId(parsedValue.effectSubtype);
-
-    if (statKey) {
-      effects.push({
-        statKey,
-        value: parsedValue.value || 0,
-        source: `잠재력: ${potentialName}`,
-        effectType: parsedValue.effectType,
-        effectSubtype: parsedValue.effectSubtype,
-        isConditional: false
-      });
-    }
-  }
-
-  return effects.length > 0 ? effects : null;
-}
-
-/**
- * Parse effect data directly from parameter string
- * Fallback method when parseParamValue doesn't give us structured data
- */
-function parseEffectDirectly(
-  paramStr: string,
-  level: number,
-  potentialName: string
-): ParsedEffect[] | null {
-  const effects: ParsedEffect[] = [];
-
-  // Split parameter string: "fileType,levelType,baseId,fieldKey,formatType"
-  const parts = paramStr.split(',');
-  if (parts.length < 3) return null;
-
-  const fileType = parts[0];
-  const levelType = parts[1];
-  const baseIdStr = parts[2];
-  const fieldKey = parts[3] || 'EffectTypeParam1';
-
-  if (!fileType || !levelType || !baseIdStr) return null;
-
-  // Normalize file type
-  const normalizedFileType = fileType.toLowerCase().trim();
-
-  // Only process effect-related file types
-  if (normalizedFileType !== 'effectvalue' && normalizedFileType !== 'effect') {
-    return null;
-  }
-
-  // Calculate actual ID based on level type
-  let effectId = baseIdStr;
-  if (levelType === 'LevelUp') {
-    // For LevelUp: ID = baseId + (level * 10)
-    const baseId = parseInt(baseIdStr, 10);
-    if (!isNaN(baseId)) {
-      effectId = String(baseId + (level * 10));
-    }
-  }
-
-  // Look up the effect in EffectValue
-  const effectValue = GameData.effectValue?.[effectId];
-  if (!effectValue) {
-    console.warn(`[DmgCalc] EffectValue ${effectId} not found`);
-    return null;
-  }
-
-  // Extract the value from the specified field
-  const rawValue = (effectValue as any)[fieldKey];
-  if (rawValue === undefined) {
-    return null;
-  }
-
-  // Convert value based on format type
-  const formatType = parts[4] || '';
-  let value = typeof rawValue === 'string' ? parseFloat(rawValue) : rawValue;
-
-  if (isNaN(value)) {
-    return null;
-  }
-
-  // Apply format transformations
-  if (formatType.includes('Pct') || formatType.includes('pct')) {
-    // Already a percentage value, might need scaling
-    if (formatType.includes('10K')) {
-      // Per-10000 format: multiply by 100 to get per-10000 value
-      value = value * 10000;
-    } else if (formatType.includes('Hd') || formatType.includes('HD')) {
-      // Per-100 format: multiply by 100 to get per-100 value
-      value = value * 100;
-    }
-  }
-
-  // Get stat key from EffectTypeFirstSubtype
-  const effectSubtype = (effectValue as any).EffectTypeFirstSubtype;
-  if (effectSubtype === undefined) {
-    return null;
-  }
-
-  const statKey = getAttrKeyFromEnumId(effectSubtype);
-  if (!statKey) {
-    console.warn(`[DmgCalc] Unknown effect subtype ${effectSubtype} for potential ${potentialName}`);
-    return null;
-  }
-
-  effects.push({
-    statKey,
-    value,
-    source: `잠재력: ${potentialName}`,
-    effectType: (effectValue as any).EffectType || 0,
-    effectSubtype,
-    isConditional: false // TODO: Detect conditional effects
-  });
-
-  return effects.length > 0 ? effects : null;
+  return sources;
 }
 
 // =============================================================================
-// HELPER FUNCTIONS
+// LEGACY EXPORTS (for backward compatibility with stats.ts)
 // =============================================================================
 
 /**
- * Get potential display name
+ * Parse potential effects for all party positions.
+ * Returns an array that convertPotentialEffectsToStatSources can consume.
  */
-function getPotentialName(potId: string, position: Position): string {
-  // Try window.state.potentialNames first
-  if (window.state?.potentialNames?.[potId]) {
-    return window.state.potentialNames[potId];
-  }
-
-  // Try GameData
-  const potential = window.state?.potentials?.[potId as any];
-  if (potential) {
-    const nameKey = (potential as any).Name;
-    if (nameKey && GameData.potentialsKR) {
-      return GameData.potentialsKR[nameKey] || `Potential ${potId}`;
-    }
-  }
-
-  // Include position in fallback name
-  const positionLabel = position === 'master' ? '주력' : position === 'assist1' ? '지원1' : '지원2';
-  return `잠재력 ${potId} (${positionLabel})`;
-}
-
-/**
- * Get all potential effects for the entire party
- */
-export function parseAllPartyPotentialEffects(): PotentialEffect[] {
-  const allEffects: PotentialEffect[] = [];
-
-  // Parse potentials from all three character positions
+export function parseAllPartyPotentialEffects(): any[] {
+  const all: any[] = [];
   const positions: Position[] = ['master', 'assist1', 'assist2'];
 
-  positions.forEach(position => {
-    const effects = parsePotentialEffects(position);
-    allEffects.push(...effects);
-  });
+  for (const pos of positions) {
+    const sources = getPotentialStatBonuses(pos);
+    if (sources.length > 0) {
+      all.push({
+        character: pos,
+        effects: sources.map((s) => ({
+          statKey: s.statKey,
+          value: s.value,
+          source: s.name,
+        })),
+      });
+    }
+  }
 
-  return allEffects;
+  return all;
 }
 
 /**
- * Convert potential effects to stat sources for aggregation
+ * Convert potential effects array to stat sources for aggregation.
  */
 export function convertPotentialEffectsToStatSources(
-  potentialEffects: PotentialEffect[]
+  potentialEffects: any[]
 ): Array<{ statKey: string; source: string; value: number; character: Position }> {
-  const statSources: Array<{ statKey: string; source: string; value: number; character: Position }> = [];
+  const result: Array<{ statKey: string; source: string; value: number; character: Position }> = [];
 
-  potentialEffects.forEach(potential => {
-    potential.effects.forEach(effect => {
-      statSources.push({
+  for (const pot of potentialEffects) {
+    for (const effect of pot.effects) {
+      result.push({
         statKey: effect.statKey,
         source: effect.source,
         value: effect.value,
-        character: potential.character
+        character: pot.character,
       });
-    });
-  });
+    }
+  }
 
-  return statSources;
+  return result;
+}
+
+// =============================================================================
+// PARAM PARSING
+// =============================================================================
+
+/**
+ * Parse a single potential parameter string into stat sources.
+ */
+function parsePotentialParam(
+  paramStr: string,
+  level: number,
+  potName: string
+): PotentialStatSource[] | null {
+  const lower = paramStr.toLowerCase();
+
+  // Skip display-only params (AttributeType1,Enum,EAT describes the stat type, not a bonus)
+  if (lower.includes(',enum,') || lower.includes(',attributetype')) {
+    return null;
+  }
+
+  if (lower.startsWith('effectvalue,') || lower.startsWith('effect,')) {
+    return parseEffectValueParam(paramStr, level, potName);
+  }
+
+  if (lower.startsWith('onceadditionalattributevalue,')) {
+    return parseOnceAdditionalParam(paramStr, level, potName);
+  }
+
+  if (lower.startsWith('onceadditionalattribute,')) {
+    return parseOnceAdditionalParam(paramStr, level, potName);
+  }
+
+  return null;
+}
+
+/**
+ * Parse "EffectValue,{levelType},{baseId},EffectTypeParam1,HdPct"
+ *
+ * Looks up the EffectValue entry, reads EffectTypeFirstSubtype (stat ID)
+ * and EffectTypeParam1 (numeric value), and maps to a stat key.
+ */
+function parseEffectValueParam(
+  paramStr: string,
+  level: number,
+  potName: string
+): PotentialStatSource[] | null {
+  const parts = paramStr.split(',');
+  if (parts.length < 3) return null;
+
+  const levelType = parts[1]!;
+  const baseId = parseInt(parts[2]!, 10);
+  if (isNaN(baseId)) return null;
+
+  const actualId = resolveId(baseId, levelType, level);
+  const effectData = GameData.effectValue?.[actualId] as any;
+  if (!effectData) return null;
+
+  const subtype = effectData.EffectTypeFirstSubtype;
+  if (subtype === undefined) return null;
+
+  const statKey = getAttrKeyFromEnumId(subtype);
+  if (!statKey) return null;
+
+  // Extract value from EffectTypeParam1
+  let value = 0;
+  const raw = effectData.EffectTypeParam1;
+  if (raw !== undefined) {
+    value = typeof raw === 'string' ? parseFloat(raw) : raw;
+  }
+  if (isNaN(value) || value === 0) return null;
+
+  // Apply format conversion based on the format hint in the param string
+  const formatHint = parts[4] || '';
+  value = applyFormatConversion(value, formatHint);
+
+  // SecondSubtype=2 (PERCENTAGE) on non-bIntFloat stats = percentage multiplier
+  const secondSubtype = effectData.EffectTypeSecondSubtype || 0;
+  const FLAT_BASE_STATS = new Set(['Atk', 'Def', 'Hp']);
+  const isPercentage = secondSubtype === 2 && FLAT_BASE_STATS.has(statKey);
+
+  return [{
+    statKey,
+    name: `Potential: ${potName}`,
+    value,
+    isPercentage,
+  }];
+}
+
+/**
+ * Parse "OnceAdditionalAttributeValue,{levelType},{baseId},Value1,10KHdPct"
+ *
+ * Looks up OnceAdditionalAttributeValue entry, reads AttributeType1 (stat ID)
+ * and Value1 (numeric value).
+ */
+function parseOnceAdditionalParam(
+  paramStr: string,
+  level: number,
+  potName: string
+): PotentialStatSource[] | null {
+  const parts = paramStr.split(',');
+  if (parts.length < 3) return null;
+
+  const levelType = parts[1]!;
+  const baseId = parseInt(parts[2]!, 10);
+  if (isNaN(baseId)) return null;
+
+  const actualId = resolveId(baseId, levelType, level);
+  const data = GameData.onceAdditionalAttributeValue?.[actualId] as any;
+  if (!data) return null;
+
+  const attributeType = data.AttributeType1;
+  if (attributeType === undefined) return null;
+
+  const statKey = getAttrKeyFromEnumId(attributeType);
+  if (!statKey) return null;
+
+  let value = data.Value1 ?? 0;
+  if (typeof value === 'string') value = parseFloat(value);
+  if (isNaN(value) || value === 0) return null;
+
+  // OnceAdditionalAttributeValue values are always per-10000 percentages
+  // (Lua: ParseOnceDesc multiplies by IntFloatPrecision 0.0001)
+  // For per-10000 stats (SKILLDMG, GENDMG, etc.), this value adds directly
+  // For flat stats (ATK, DEF, HP), this is a percentage of the base stat
+  const FLAT_BASE_STATS = new Set(['Atk', 'Def', 'Hp']);
+  const isPercentage = FLAT_BASE_STATS.has(statKey);
+
+  // Value is already in per-10000 format — no conversion needed
+  return [{
+    statKey,
+    name: `Potential: ${potName}`,
+    value,
+    isPercentage,
+  }];
+}
+
+// =============================================================================
+// HELPERS
+// =============================================================================
+
+/**
+ * Resolve an ID based on level type.
+ */
+function resolveId(baseId: number, levelType: string, level: number): number {
+  if (levelType === 'LevelUp') {
+    return baseId + level * 10;
+  }
+  return baseId;
+}
+
+/**
+ * Apply format conversion to a raw value based on the format hint.
+ *
+ * Two different data sources with different value formats:
+ *
+ * 1. EffectValue.EffectTypeParam1: stored as decimals (0.25 = 25%)
+ *    → needs multiply by 10000 for per-10000 stat format
+ *
+ * 2. OnceAdditionalAttributeValue.Value1: stored as per-10000 integers (70 = 0.7%)
+ *    → already in per-10000 format, no conversion needed
+ *
+ * Format hints from param strings:
+ *   - "10KHdPct": already per-10000 (from OnceAdditionalAttributeValue) → no conversion
+ *   - "HdPct", "Pct", "Hd": decimal percentage (from EffectValue) → multiply by 10000
+ *   - "Fixed": flat value → no conversion
+ */
+function applyFormatConversion(value: number, formatHint: string): number {
+  const hint = formatHint.toLowerCase();
+
+  if (hint === 'fixed') {
+    // Flat value, no conversion
+    return value;
+  }
+
+  if (hint.includes('10k')) {
+    // Already in per-10000 format (OnceAdditionalAttributeValue.Value1)
+    return value;
+  }
+
+  if (hint.includes('hd') || hint.includes('pct')) {
+    // Decimal percentage from EffectValue → convert to per-10000
+    return value * 10000;
+  }
+
+  // Default: assume decimal percentage, convert to per-10000
+  return value * 10000;
+}
+
+/**
+ * Resolve the display name for a potential.
+ */
+function resolvePotentialName(potId: number, _position: Position): string {
+  // Primary: Get name from Item.json (same pattern as app-char.ts)
+  const itemKey = `Item.${potId}.1`;
+  if (GameData.itemsKR?.[itemKey]) {
+    return GameData.itemsKR[itemKey];
+  }
+
+  // Fallback: try potentialNames from state
+  const potIdStr = String(potId);
+  if (window.state?.potentialNames?.[potIdStr]) {
+    return window.state.potentialNames[potIdStr];
+  }
+
+  return `Potential ${potId}`;
 }

@@ -1,657 +1,615 @@
 /**
  * Stat Aggregation for Damage Calculator
- * Handles aggregation from characters, potentials, and discs
+ *
+ * Clean implementation that collects stats from all sources:
+ *   1. Base character attributes (from Attribute.json)
+ *   2. Talent bonuses (limit break unlocks)
+ *   3. Potential stat bonuses
+ *   4. Disc stats (main + sub)
+ *   5. Note (소리) stats
+ *   6. Build rank ATK bonus (from StarTowerBuildRank.json)
+ *   7. Active buff contributions
+ *
+ * @module dmgcalc/core/stats
  */
 
-import type { AggregatedStat, StatSource, StatCategory, Position } from '../types';
+import type { AggregatedStat, StatSource, Position } from '../types';
 import { STAT_CATEGORIES, PHASE_TO_LEVEL } from '../constants';
-import { getState, updateState } from './state';
+import { getState } from './state';
 import { GameData } from '../../../shared/game-data';
-import { formatStatValue as formatStatValueFromEnums } from './enums';
-import { parseAllPartyPotentialEffects, convertPotentialEffectsToStatSources } from './potentials';
-import { initializeBuffs, applyActiveBuffsToStats } from './buffs';
+import { getStatDisplayName, formatStatValue as formatStatValueFromEnums, getAttrKeyFromEnumId } from './enums';
+import { getPotentialStatBonuses } from './potentials';
+import { initializeBuffs } from './buffs';
 
 // Re-export formatStatValue for convenience
 export { formatStatValueFromEnums as formatStatValue };
 
+// Keys to skip when iterating attribute data entries
+const ATTR_META_KEYS = new Set(['Id', 'GroupId', 'Break', 'lvl']);
+
 // =============================================================================
-// MAIN AGGREGATION FUNCTION
+// MAIN AGGREGATION
 // =============================================================================
 
 /**
- * Aggregate all stats from build (character, potentials, discs)
+ * Aggregate all stats for a character build.
+ *
+ * @param charId       - Character ID (numeric, from Character.json)
+ * @param level        - Actual character level (1-90)
+ * @param limitBreak   - Limit break level (0-5, from dmgcalc stepper)
+ * @returns Map of stat key -> AggregatedStat
+ */
+export function aggregateAllStats(
+  charId: number,
+  level: number,
+  limitBreak: number
+): Map<string, AggregatedStat> {
+  const stats = initializeStats();
+
+  // 1. Base character stats from Attribute.json
+  aggregateBaseStats(stats, charId, level);
+
+  // 2. Talent bonuses unlocked by limit break
+  aggregateTalentBonuses(stats, charId, limitBreak);
+
+  // 3. Potential stats (all 3 positions)
+  aggregatePotentialStats(stats);
+
+  // 4. Disc stats
+  aggregateDiscStats(stats);
+
+  // 5. Note (소리) stats
+  aggregateNoteStats(stats);
+
+  // 6. Build rank ATK bonus
+  aggregateBuildRankStats(stats);
+
+  // 7. Calculate totals
+  // NOTE: Active buffs are applied separately by applyBuffsToStats() in index.ts
+  // after buff collection. Do NOT apply them here to avoid double-counting.
+  calculateTotals(stats);
+
+  // 8. Apply manual stat overrides (replaces calculated totals)
+  applyStatOverrides(stats);
+
+  return stats;
+}
+
+/**
+ * Legacy entry point - reads character info from window.state and delegates
+ * to aggregateAllStats. Updates dmgcalc state in place.
  */
 export function aggregateStatsFromBuild(): void {
-  console.log(`[DmgCalc] ========== Starting stat aggregation ==========`);
-
-  if (!window.state) {
-    console.error(`[DmgCalc] ❌ window.state is undefined!`);
-    return;
-  }
-
-  // Check if Attribute data is loaded
-  if (!GameData.attributes) {
-    console.error(`[DmgCalc] ❌ GameData.attributes is not loaded!`);
-    console.log(`[DmgCalc] Available GameData keys:`, Object.keys(GameData));
-  } else {
-    console.log(`[DmgCalc] ✅ GameData.attributes loaded, ${Object.keys(GameData.attributes).length} entries`);
-  }
-
-  initializeStats();
+  if (!window.state) return;
 
   const masterChar = window.state.party?.master;
-  if (!masterChar || typeof masterChar === 'string') {
-    console.error(`[DmgCalc] ❌ No master character selected`);
-    return;
-  }
-
-  console.log(`[DmgCalc] Master character:`, { id: masterChar.id, name: masterChar.name });
-
-  // 1. Base character stats
-  aggregateBaseStats(masterChar);
-
-  // 2. Stats from talent bonuses (limit break analysis)
-  aggregateTalentBonuses();
-
-  // 3. Stats from potentials
-  aggregatePotentialStats();
-
-  // 4. Stats from discs
-  aggregateDiscStats();
-
-  // 5. Initialize and apply buff system
-  initializeBuffs();
-  applyActiveBuffsToStats(getState().stats);
-
-  // 6. Calculate totals
-  calculateStatTotals();
-
-  console.log(`[DmgCalc] ========== Stat aggregation complete ==========`);
-}
-
-// =============================================================================
-// STAT INITIALIZATION
-// =============================================================================
-
-/**
- * Initialize stat map with all stat categories
- */
-function initializeStats(): void {
-  const state = getState();
-  state.stats.clear();
-
-  // Initialize all stat categories (including missing stats!)
-  Object.values(STAT_CATEGORIES).flat().forEach(statKey => {
-    state.stats.set(statKey, {
-      name: getStatDisplayName(statKey),
-      baseValue: 0,
-      sources: [],
-      manualAdjustment: 0,
-      total: 0
-    });
-  });
-
-  console.log(`[DmgCalc] Initialized ${state.stats.size} stat categories, including missing stats:`, {
-    hasGENDMG: state.stats.has('GENDMG'),
-    hasDMGPLUS: state.stats.has('DMGPLUS'),
-    hasFINALDMG: state.stats.has('FINALDMG'),
-    hasFINALDMGPLUS: state.stats.has('FINALDMGPLUS'),
-    hasNORMALCRITPOWER: state.stats.has('NORMALCRITPOWER'),
-    hasSKILLCRITPOWER: state.stats.has('SKILLCRITPOWER'),
-    hasULTRACRITPOWER: state.stats.has('ULTRACRITPOWER')
-  });
-}
-
-/**
- * Get localized display name for a stat
- */
-export function getStatDisplayName(statKey: string): string {
-  if (GameData.gameEnums?.effectAttributeType) {
-    const enumEntries = Object.entries(GameData.gameEnums.effectAttributeType);
-    const matchingEntry = enumEntries.find(([id, entry]: [string, any]) =>
-      entry.key && entry.key.toLowerCase() === statKey.toLowerCase()
-    );
-
-    if (matchingEntry) {
-      const [statId, entry] = matchingEntry as [string, any];
-      const uiTextKey = `UIText.Enums_Effect_${statId}.1`;
-      return GameData.uiText?.[uiTextKey] || entry.name || statKey;
-    }
-  }
-  return statKey;
-}
-
-// =============================================================================
-// CHARACTER BASE STATS
-// =============================================================================
-
-/**
- * Aggregate base stats from character
- */
-function aggregateBaseStats(character: any): void {
-  // Get character base stats from Attribute data
-  const charId = character.id;
-  const levelPhase = window.state?.characterLevelPhase?.master || 0;
-  const actualLevel = PHASE_TO_LEVEL[levelPhase] || 1;
-
-  // Find GroupId from attributes (same logic as characterdb.ts)
-  let groupId = null;
-  const attributes = GameData.attributes;
-
-  if (attributes) {
-    for (const attrId in attributes) {
-      const attr = attributes[attrId];
-      if (attr && attr.GroupId) {
-        if (attr.GroupId.toString().length >= 3) {
-          const charIdFromGroup = parseInt(attr.GroupId.toString().slice(-3));
-          const numCharId = typeof charId === 'string' ? parseInt(charId, 10) : charId;
-          if (charIdFromGroup === numCharId || attr.GroupId === numCharId) {
-            groupId = attr.GroupId;
-            break;
-          }
-        }
-      }
-    }
-  }
-
-  // If GroupId not found, try to use charId directly
-  if (!groupId) {
-    groupId = charId;
-  }
-
-  // Calculate limit break (0-8)
-  const limitBreak = levelPhase;
-
-  // Construct attribute ID with limit break and level padding
-  // Formula: {groupId}{(limitBreak * 1000 + level) padded to 5 digits}
-  let attrLevel = actualLevel;
-  // Special case: if levelPhase is 8, use level 90
-  if (levelPhase === 8) {
-    attrLevel = 90;
-  }
-
-  const combinedValue = (limitBreak * 1000) + attrLevel;
-  const combinedPadded = combinedValue.toString().padStart(5, '0');
-  const attrId = `${groupId}${combinedPadded}`;
-
-  const attrData = attributes?.[attrId];
-
-  console.log(`[DmgCalc] Looking for attribute ID: ${attrId}`, {
-    charId,
-    groupId,
-    levelPhase,
-    actualLevel: attrLevel,
-    limitBreak,
-    found: !!attrData,
-    attrData: attrData ? Object.keys(attrData) : 'NOT FOUND'
-  });
-
-  if (!attrData) {
-    console.error(`[DmgCalc] ❌ Attribute data not found for ID: ${attrId} (char: ${charId}, level: ${attrLevel}, LB: ${limitBreak})`);
-    console.log(`[DmgCalc] Available attribute IDs starting with ${groupId}:`,
-      Object.keys(attributes || {}).filter(id => id.startsWith(String(groupId))).slice(0, 10)
-    );
-    // Fallback to placeholder values
-    addStatSource('Atk', '캐릭터 기본', 500, true);
-    addStatSource('Hp', '캐릭터 기본', 5000, true);
-    addStatSource('Def', '캐릭터 기본', 200, true);
-    addStatSource('CritRate', '캐릭터 기본', 500, true); // 5% as 500 (per-10000)
-    addStatSource('CritPower', '캐릭터 기본', 15000, true); // 150% as 15000 (per-100)
-    return;
-  }
-
-  console.log(`[DmgCalc] ✅ Found character base stats:`, {
-    Atk: attrData.Atk,
-    Hp: attrData.Hp,
-    Def: attrData.Def,
-    CritRate: attrData.CritRate,
-    CritPower: attrData.CritPower
-  });
-
-  // Add all stats from attribute data (use keys as-is from data file)
-  for (const [key, value] of Object.entries(attrData)) {
-    if (['Id', 'GroupId', 'Break', 'lvl'].includes(key)) continue;
-    if (typeof value === 'number' && value !== 0) {
-      addStatSource(key, '캐릭터 기본', value, true);
-    }
-  }
-}
-
-// =============================================================================
-// TALENT BONUSES (LIMIT BREAK)
-// =============================================================================
-
-/**
- * Aggregate talent bonuses from character's current limit break level
- * This includes talents unlocked at each LB level (0-8)
- */
-function aggregateTalentBonuses(): void {
-  // First check if there are manual overrides from limitbreak analysis
-  const manualBonuses = (window as any).__talentBonuses;
-  if (manualBonuses && Object.keys(manualBonuses).length > 0) {
-    applyTalentBonusesFromMap(manualBonuses, '한계돌파 재능 (분석)');
-    return;
-  }
-
-  // Otherwise, calculate from current character's limit break level
-  const masterChar = window.state?.party?.master;
   if (!masterChar || typeof masterChar === 'string') return;
 
-  const charId = String(masterChar.id);
-  const limitBreak = window.state?.characterLevelPhase?.master || 0;
+  const charId = typeof masterChar.id === 'string' ? parseInt(masterChar.id, 10) : masterChar.id;
+  const levelPhase = window.state.characterLevelPhase?.master || 0;
+  const level = PHASE_TO_LEVEL[levelPhase] || 1;
 
-  // Get talent groups for this character
-  const talentGroups = GameData.talentGroups
-    ? Object.values(GameData.talentGroups)
-        .filter((group: any) => String(group.CharId) === charId)
-        .sort((a: any, b: any) => a.Background - b.Background)
-    : [];
+  const dmgState = getState();
+  const lb = dmgState.limitBreak;
 
-  if (talentGroups.length === 0) {
-    console.log(`[DmgCalc] No talent groups found for character ${charId}`);
-    return;
-  }
+  // Initialize buffs before aggregation so applyActiveBuffs can read them
+  initializeBuffs();
 
-  // Get talents unlocked up to current LB level (accumulative)
-  const unlockedGroups = talentGroups.filter((group: any) => group.Background <= limitBreak);
-  const unlockedTalents: any[] = [];
-
-  unlockedGroups.forEach((group: any) => {
-    const groupTalents = GameData.talents
-      ? Object.values(GameData.talents).filter((talent: any) => talent.GroupId === group.Id)
-      : [];
-    unlockedTalents.push(...groupTalents);
-  });
-
-  if (unlockedTalents.length === 0) {
-    console.log(`[DmgCalc] No talents unlocked at LB ${limitBreak}`);
-    return;
-  }
-
-  console.log(`[DmgCalc] Processing ${unlockedTalents.length} unlocked talents at LB ${limitBreak}`);
-
-  // Calculate bonuses from talents
-  const bonuses: Record<number, number> = {};
-
-  unlockedTalents.forEach((talent: any) => {
-    // Only process Type 2 talents (sub nodes that give stat bonuses)
-    if (talent.Type !== 2) return;
-    if (!talent.Param1) return;
-
-    // Parse the param to get the effect
-    const paramParts = talent.Param1.split(',');
-    if (paramParts.length < 3) return;
-
-    const effectId = parseInt(paramParts[2]);
-    const effectData = GameData.effectValue?.[effectId];
-
-    if (!effectData) return;
-
-    // Get the stat type ID from EffectTypeFirstSubtype
-    const statTypeId = effectData.EffectTypeFirstSubtype;
-    const rawValue = parseFloat(effectData.EffectTypeParam1 || '0');
-
-    if (statTypeId !== undefined && !isNaN(rawValue) && rawValue !== 0) {
-      bonuses[statTypeId] = (bonuses[statTypeId] || 0) + rawValue;
-    }
-  });
-
-  // Apply calculated bonuses
-  if (Object.keys(bonuses).length > 0) {
-    applyTalentBonusesFromMap(bonuses, '한계돌파 재능');
-  }
+  const stats = aggregateAllStats(charId, level, lb);
+  dmgState.stats = stats;
 }
 
-/**
- * Apply talent bonuses from a map to stats
- */
-function applyTalentBonusesFromMap(bonuses: Record<number, number>, sourceName: string): void {
-  console.log(`[DmgCalc] Applying talent bonuses from ${sourceName}:`, bonuses);
+// =============================================================================
+// INITIALIZATION
+// =============================================================================
 
-  Object.entries(bonuses).forEach(([statTypeIdStr, rawValue]) => {
-    const statTypeId = parseInt(statTypeIdStr);
-    if (isNaN(statTypeId) || typeof rawValue !== 'number') return;
+function initializeStats(): Map<string, AggregatedStat> {
+  const stats = new Map<string, AggregatedStat>();
 
-    // Find the stat key for this effect type ID
-    const statKey = getStatKeyFromEffectTypeId(statTypeId);
-    if (!statKey) {
-      console.warn(`[DmgCalc] Unknown stat type ID: ${statTypeId}`);
-      return;
-    }
+  // Pre-populate every known stat key so downstream code always finds them
+  const allKeys = Object.values(STAT_CATEGORIES).flat();
+  for (const key of allKeys) {
+    stats.set(key, createStat(key));
+  }
 
-    // Add the talent bonus as a stat source
-    addStatSource(statKey, sourceName, rawValue, true);
-    console.log(`[DmgCalc] Applied talent bonus: ${statKey} +${rawValue}`);
-  });
+  return stats;
 }
 
-/**
- * Convert EffectTypeFirstSubtype ID to stat key
- */
-function getStatKeyFromEffectTypeId(effectTypeId: number): string | null {
-  // This mapping matches EFFECT_TYPE_TO_STAT in constants.ts
-  const mapping: Record<number, string> = {
-    1: 'Atk',
-    2: 'Def',
-    3: 'Hp',
-    4: 'CritRate',
-    5: 'CritPower',
-    6: 'HitRate',
-    7: 'StrikeRate',
-    8: 'RuptureRate',
-    10: 'WEE',
-    11: 'FEE',
-    12: 'SEE',
-    13: 'AEE',
-    14: 'LEE',
-    15: 'DEE',
-    56: 'NORMALDMG',
-    57: 'SKILLDMG',
-    58: 'ULTRADMG',
-    59: 'OTHERDMG',
-    64: 'MARKDMG',
-    68: 'PROJECTILEDMG',
-    66: 'SUMMONDMG',
-    77: 'NORMALCRITPOWER',
-    78: 'SKILLCRITPOWER',
-    79: 'ULTRACRITPOWER',
-    83: 'OTHERCRITPOWER',
-    80: 'MARKCRITPOWER',
-    82: 'PROJECTILECRITPOWER',
-    81: 'SUMMONCRITPOWER',
-    100: 'EnergyEfficiency',
-    101: 'AbnormalMastery',
-    102: 'Intensity',
-    103: 'GENDMG',
-    104: 'DMGPLUS',
-    105: 'FINALDMG',
-    106: 'FINALDMGPLUS'
+function createStat(key: string): AggregatedStat {
+  return {
+    key,
+    displayName: getStatDisplayName(key),
+    baseValue: 0,
+    sources: [],
+    total: 0,
+    calculatedTotal: 0,
   };
-
-  return mapping[effectTypeId] || null;
 }
 
 // =============================================================================
-// POTENTIAL STATS
+// 1. BASE CHARACTER STATS
 // =============================================================================
 
-/**
- * Aggregate stats from potentials for all party members
- * Uses parsePotentialEffects() to extract and apply stat bonuses
- */
-function aggregatePotentialStats(): void {
-  // Parse potential effects from all party positions (master, assist1, assist2)
-  const allPotentialEffects = parseAllPartyPotentialEffects();
+function aggregateBaseStats(
+  stats: Map<string, AggregatedStat>,
+  charId: number,
+  level: number
+): void {
+  const attributes = GameData.attributes;
+  if (!attributes) return;
 
-  if (allPotentialEffects.length === 0) {
-    console.log('[DmgCalc] No potential effects found');
+  const groupId = findGroupId(charId, attributes);
+  if (groupId === null) return;
+
+  // Determine ascension phase from level
+  const phase = levelToPhase(level);
+
+  // Attribute key: {groupId}{(phase * 1000 + level) padded to 5 digits}
+  const combined = (phase * 1000) + level;
+  const attrId = `${groupId}${combined.toString().padStart(5, '0')}`;
+  const attrData = attributes[attrId];
+
+  if (!attrData) {
     return;
   }
 
-  console.log(`[DmgCalc] Found ${allPotentialEffects.length} potentials with effects`);
+  for (const [key, value] of Object.entries(attrData)) {
+    if (ATTR_META_KEYS.has(key)) continue;
+    if (typeof value !== 'number' || value === 0) continue;
 
-  // Convert to stat sources and add to aggregation
-  const statSources = convertPotentialEffectsToStatSources(allPotentialEffects);
-
-  statSources.forEach(({ statKey, source, value, character }) => {
-    // Skip if value is 0 or invalid
-    if (!value || value === 0) return;
-
-    // Add the stat source with character tracking
-    addStatSourceWithCharacter(statKey, source, value, true, character);
-  });
-
-  // Log summary of potential contributions
-  const potentialContributions = new Map<string, number>();
-  statSources.forEach(({ statKey, value }) => {
-    const current = potentialContributions.get(statKey) || 0;
-    potentialContributions.set(statKey, current + value);
-  });
-
-  if (potentialContributions.size > 0) {
-    console.log('[DmgCalc] Potential stat contributions:', Object.fromEntries(potentialContributions));
+    addSource(stats, key, { name: 'Base', value, active: true });
   }
 }
 
 /**
- * Add a stat source with character tracking
+ * Find the GroupId for a character by scanning attribute entries.
+ * GroupId is the prefix used in attribute ID construction.
  */
-function addStatSourceWithCharacter(
-  statKey: string,
-  source: string,
-  value: number,
-  active: boolean,
-  character?: Position
+function findGroupId(charId: number, attributes: Record<string, any>): number | null {
+  for (const attrId in attributes) {
+    const attr = attributes[attrId];
+    if (!attr?.GroupId) continue;
+    const gid = attr.GroupId;
+    const gidStr = gid.toString();
+    if (gidStr.length >= 3) {
+      const tail = parseInt(gidStr.slice(-3), 10);
+      if (tail === charId || gid === charId) {
+        return gid;
+      }
+    }
+  }
+  return charId; // fallback: use charId directly
+}
+
+/**
+ * Map a level to its ascension phase (Break value in Attribute.json).
+ * Break goes 0-8: Break 0 = lv1-9, Break 1 = lv10-19, ..., Break 8 = lv80-90+
+ * Level 90 still uses Break 8 (no Break 9 exists in the data).
+ */
+function levelToPhase(level: number): number {
+  if (level >= 80) return 8;
+  if (level >= 70) return 7;
+  if (level >= 60) return 6;
+  if (level >= 50) return 5;
+  if (level >= 40) return 4;
+  if (level >= 30) return 3;
+  if (level >= 20) return 2;
+  if (level >= 10) return 1;
+  return 0;
+}
+
+// =============================================================================
+// 2. TALENT BONUSES
+// =============================================================================
+
+function aggregateTalentBonuses(
+  stats: Map<string, AggregatedStat>,
+  charId: number,
+  limitBreak: number
 ): void {
-  const state = getState();
-  let stat = state.stats.get(statKey);
+  if (!GameData.talentGroups || !GameData.talents) return;
 
-  // If stat doesn't exist in initialized categories, create it dynamically
-  if (!stat) {
-    state.stats.set(statKey, {
-      name: getStatDisplayName(statKey),
-      baseValue: 0,
-      sources: [],
-      manualAdjustment: 0,
-      total: 0
-    });
-    stat = state.stats.get(statKey);
-  }
+  const charIdStr = String(charId);
 
-  if (stat) {
-    stat.sources.push({ source, value, active, character });
+  // Get talent groups for this character, sorted by Background (tier)
+  const groups = Object.values(GameData.talentGroups)
+    .filter((g: any) => String(g.CharId) === charIdStr && g.Background <= limitBreak)
+    .sort((a: any, b: any) => a.Background - b.Background);
+
+  if (groups.length === 0) return;
+
+  // Collect talents from all unlocked groups
+  for (const group of groups) {
+    const groupTalents = Object.values(GameData.talents)
+      .filter((t: any) => t.GroupId === (group as any).Id);
+
+    for (const talent of groupTalents) {
+      const t = talent as any;
+      if (t.Type !== 2) continue; // Only stat-bonus talents
+
+      // Process Param1-Param5 for EffectValue references
+      for (let i = 1; i <= 5; i++) {
+        const param = t[`Param${i}`];
+        if (!param || typeof param !== 'string') continue;
+
+        const lower = param.toLowerCase();
+        if (!lower.startsWith('effectvalue')) continue;
+
+        const parts = param.split(',');
+        if (parts.length < 3) continue;
+
+        const levelType = parts[1]!;
+        const baseId = parseInt(parts[2]!, 10);
+        if (isNaN(baseId)) continue;
+
+        // Resolve the actual effect ID
+        const effectId = levelType === 'LevelUp' ? baseId + (limitBreak * 10) : baseId;
+        const effectData = GameData.effectValue?.[effectId];
+        if (!effectData) continue;
+
+        const subtype = (effectData as any).EffectTypeFirstSubtype;
+        const secondSubtype = (effectData as any).EffectTypeSecondSubtype;
+        const rawParam = parseFloat((effectData as any).EffectTypeParam1 || '0');
+        if (subtype === undefined || isNaN(rawParam) || rawParam === 0) continue;
+
+        const statKey = getAttrKeyFromEnumId(subtype);
+        if (!statKey) continue;
+
+        // ATK/DEF/HP are non-bIntFloat (raw integers). All others are bIntFloat (per-10000).
+        // EffectTypeParam1 for bIntFloat stats is a decimal (0.015 = 150 in per-10000).
+        // SecondSubtype: 1=BASE_VALUE (add to stat), 2=PERCENTAGE (multiply base stat)
+        const NON_INT_FLOAT_STATS = new Set(['Atk', 'Def', 'Hp', 'WEP', 'FEP', 'SEP', 'AEP', 'LEP', 'DEP']);
+        const isBIntFloat = !NON_INT_FLOAT_STATS.has(statKey);
+
+        let rawValue: number;
+        if (isBIntFloat) {
+          // bIntFloat: convert decimal to per-10000 (0.015 → 150)
+          rawValue = rawParam * 10000;
+        } else {
+          // Non-bIntFloat (ATK/DEF/HP): flat value or percentage
+          rawValue = rawParam;
+        }
+
+        // SecondSubtype=2 (PERCENTAGE) on flat stats = percentage multiplier
+        const isPercentage = secondSubtype === 2 && !isBIntFloat;
+        addSource(stats, statKey, { name: 'Talent', value: rawValue, active: true, isPercentage });
+      }
+    }
   }
 }
 
 // =============================================================================
-// DISC STATS
+// 3. POTENTIAL STATS
 // =============================================================================
 
-/**
- * Aggregate stats from discs (main and sub)
- */
-function aggregateDiscStats(): void {
+function aggregatePotentialStats(stats: Map<string, AggregatedStat>): void {
+  const positions: Position[] = ['master', 'assist1', 'assist2'];
+
+  for (const position of positions) {
+    const sources = getPotentialStatBonuses(position);
+    for (const src of sources) {
+      if (src.isPercentage) {
+        // Percentage bonuses on flat stats — store with special name prefix
+        // These will be applied as multipliers during calculateTotals
+        addSource(stats, src.statKey, {
+          name: `${src.name} (%)`,
+          value: src.value,
+          active: true,
+          characterId: src.characterId,
+          isPercentage: true,
+        });
+      } else {
+        addSource(stats, src.statKey, {
+          name: src.name,
+          value: src.value,
+          active: true,
+          characterId: src.characterId,
+        });
+      }
+    }
+  }
+}
+
+// =============================================================================
+// 4. DISC STATS
+// =============================================================================
+
+function aggregateDiscStats(stats: Map<string, AggregatedStat>): void {
   if (!window.discsState?.selectedDiscs) return;
 
-  const mainDiscs = ['main1', 'main2', 'main3'] as const;
-  const subDiscs = ['sub1', 'sub2', 'sub3'] as const;
   const attributes = GameData.attributes;
   const discData = GameData.discs;
+  if (!attributes || !discData) return;
 
-  if (!attributes || !discData) {
-    console.warn('[DmgCalc] Missing disc or attribute data');
-    return;
+  // Disc attribute key format (from Lua GetDiscAttributeId):
+  // nGroupId * 1000 + nPhase * 100 + nLevel
+  // e.g., 21003 * 1000 + 8 * 100 + 80 = 21003880
+
+  const dmgState = getState();
+  const discLevel = dmgState.discLevel || 81;
+  const discPhase = levelToPhase(discLevel);
+
+  // Main discs
+  const mainSlots = ['main1', 'main2', 'main3'] as const;
+  for (const slotId of mainSlots) {
+    const selectedDisc = window.discsState.selectedDiscs?.[slotId];
+    if (!selectedDisc) continue;
+
+    const disc = discData[selectedDisc.Id];
+    if (!disc) continue;
+
+    const groupId = (disc as any).AttrBaseGroupId;
+    if (!groupId) continue;
+
+    const lb = dmgState.discLimitBreaks?.[slotId] ?? window.discsState.discLimitBreaks?.[slotId] ?? 1;
+    const level = discLevel;
+    const phase = discPhase;
+    // Key: groupId * 1000 + phase * 100 + level
+    const attrKey = String(groupId * 1000 + phase * 100 + level);
+    const attrData = attributes[attrKey];
+    if (!attrData) continue;
+
+    const discName = getDiscName(selectedDisc.Id);
+    const sourceName = `Main Disc: ${discName} (LB${lb})`;
+
+    for (const [key, value] of Object.entries(attrData)) {
+      if (ATTR_META_KEYS.has(key)) continue;
+      if (typeof value !== 'number' || value <= 0) continue;
+      addSource(stats, key, { name: sourceName, value, active: true });
+    }
   }
 
-  // Main disc stats (use limit break)
-  mainDiscs.forEach(slotId => {
-    const selectedDisc = window.discsState?.selectedDiscs?.[slotId];
-    if (!selectedDisc) return;
+  // Sub discs
+  const subSlots = ['sub1', 'sub2', 'sub3'] as const;
+  for (const slotId of subSlots) {
+    const selectedDisc = window.discsState.selectedDiscs?.[slotId];
+    if (!selectedDisc) continue;
 
-    // IMPORTANT: Default to 0 (no limit break) if not set
-    const limitBreak = window.discsState?.discLimitBreaks?.[slotId] || 0;
-    const discId = selectedDisc.Id;
-    const discName = getDiscName(discId);
-    const disc = discData[discId];
+    const disc = discData[selectedDisc.Id];
+    if (!disc) continue;
 
-    if (!disc) return;
+    const groupId = (disc as any).AttrBaseGroupId;
+    if (!groupId) continue;
 
-    const extDisc = disc as any;
-    const groupId = extDisc.AttrBaseGroupId;
-
-    if (!groupId) {
-      console.warn(`[DmgCalc] No AttrBaseGroupId for disc ${discId}`);
-      return;
-    }
-
-    // For main discs, max level is 70 (not 90 like characters)
-    // Attribute key format: {groupId}{limitBreak}{level padded to 2}
-    // All limit breaks use the same format (no special case for LB 0)
-    let attrKey: string;
-    const level = 70; // Main disc max level
-
-    attrKey = `${groupId}${limitBreak}${String(level).padStart(2, '0')}`;
-
+    const level = discLevel;
+    const phase = discPhase;
+    const attrKey = String(groupId * 1000 + phase * 100 + level);
     const attrData = attributes[attrKey];
+    if (!attrData) continue;
 
-    if (!attrData) {
-      console.warn(`[DmgCalc] ❌ Main disc attribute not found: ${attrKey} (disc: ${discId}, LB: ${limitBreak}, Level: ${level})`);
-      console.log(`[DmgCalc] Available keys for groupId ${groupId}:`,
-        Object.keys(attributes).filter(k => k.startsWith(String(groupId))).slice(0, 5)
-      );
-      return;
+    const discName = getDiscName(selectedDisc.Id);
+    const sourceName = `Sub Disc: ${discName}`;
+
+    for (const [key, value] of Object.entries(attrData)) {
+      if (ATTR_META_KEYS.has(key)) continue;
+      if (typeof value !== 'number' || value <= 0) continue;
+      addSource(stats, key, { name: sourceName, value, active: true });
     }
-
-    console.log(`[DmgCalc] ✅ Main disc ${slotId} stats:`, {
-      discName,
-      attrKey,
-      Atk: attrData.Atk,
-      stats: Object.keys(attrData).filter(k => !['Id', 'GroupId', 'Break', 'lvl'].includes(k))
-    });
-
-    // Add all stats from disc attributes
-    const excludeKeys = ['Id', 'GroupId', 'Break', 'lvl'];
-    const mainDiscTemplate = window.i18n?.t('dmgcalc.statSources.mainDisc') || 'Main Disc: {name}';
-    const mainDiscLabel = mainDiscTemplate.replace('{name}', discName);
-    for (const [statKey, value] of Object.entries(attrData)) {
-      if (excludeKeys.includes(statKey)) continue;
-      if (typeof value === 'number' && value > 0) {
-        addStatSource(statKey, mainDiscLabel, value, true);
-      }
-    }
-  });
-
-  // Sub disc stats (use phase level)
-  subDiscs.forEach(slotId => {
-    const selectedDisc = window.discsState?.selectedDiscs?.[slotId];
-    if (!selectedDisc) return;
-
-    const phase = window.discsState?.subDiscLevels?.[slotId] || 0;
-    const discId = selectedDisc.Id;
-    const discName = getDiscName(discId);
-    const disc = discData[discId];
-
-    if (!disc) return;
-
-    const extDisc = disc as any;
-    const groupId = extDisc.AttrBaseGroupId;
-
-    if (!groupId) {
-      console.warn(`[DmgCalc] No AttrBaseGroupId for sub disc ${discId}`);
-      return;
-    }
-
-    // Phase levels correspond to: 1, 10, 20, 30, 40, 50, 60, 70, 80, 90
-    const level = PHASE_TO_LEVEL[phase] || 1;
-
-    // Sub discs use limit break 0 (no limit break)
-    const attrKey = `${groupId}${String(level).padStart(3, '0')}`;
-
-    const attrData = attributes[attrKey];
-
-    if (!attrData) {
-      console.warn(`[DmgCalc] Attribute not found for sub disc ${discId}, key: ${attrKey}`);
-      return;
-    }
-
-    // Add all stats from sub disc attributes
-    const excludeKeys = ['Id', 'GroupId', 'Break', 'lvl'];
-    const subDiscTemplate = window.i18n?.t('dmgcalc.statSources.subDisc') || 'Sub Disc: {name}';
-    const subDiscLabel = subDiscTemplate.replace('{name}', discName);
-    for (const [statKey, value] of Object.entries(attrData)) {
-      if (excludeKeys.includes(statKey)) continue;
-      if (typeof value === 'number' && value > 0) {
-        addStatSource(statKey, subDiscLabel, value, true);
-      }
-    }
-  });
+  }
 }
 
 // =============================================================================
-// STAT SOURCE MANAGEMENT
+// 5. NOTE (소리) STATS
 // =============================================================================
 
 /**
- * Add a stat source to the aggregated stats
+ * Aggregate stat bonuses from notes (소리).
+ *
+ * Note levels come from two sources:
+ *   - Sub disc contributions (SubNoteSkillGroupId → SubNoteSkillPromote → SubNoteSkills JSON)
+ *   - Acquired notes (window.discsState.acquiredNotes)
+ *
+ * The user can override individual note levels via state.noteOverrides.
  */
-function addStatSource(statKey: string, source: string, value: number, active: boolean): void {
-  const state = getState();
-  let stat = state.stats.get(statKey);
+function aggregateNoteStats(stats: Map<string, AggregatedStat>): void {
+  const dmgState = getState();
+  const noteOverrides = dmgState.noteOverrides;
 
-  // If stat doesn't exist in initialized categories, create it dynamically
-  if (!stat) {
-    state.stats.set(statKey, {
-      name: getStatDisplayName(statKey),
-      baseValue: 0,
-      sources: [],
-      manualAdjustment: 0,
-      total: 0
+  // Collect all note IDs from overrides
+  const noteIds = Object.keys(noteOverrides);
+  if (noteIds.length === 0) return;
+
+  const subNoteSkills = GameData.subNoteSkills;
+  const effectValues = GameData.effectValue;
+  if (!subNoteSkills || !effectValues) return;
+
+  for (const noteId of noteIds) {
+    const level = noteOverrides[noteId];
+    if (!level || level <= 0) continue;
+
+    const noteData = subNoteSkills[noteId] as any;
+    if (!noteData || !noteData.Param2) continue;
+
+    // Parse Param2: "Effect,LevelUp,{baseId},EffectTypeParam1,HdPct"
+    const param2Parts = noteData.Param2.split(',').map((p: string) => p.trim());
+    if (param2Parts.length < 3) continue;
+
+    const [fileType, levelType, baseIdStr] = param2Parts;
+    if (fileType !== 'Effect' || levelType !== 'LevelUp') continue;
+
+    const baseId = parseInt(baseIdStr, 10);
+    if (isNaN(baseId)) continue;
+
+    const actualId = baseId + level * 10;
+    const effectData = effectValues[actualId] as any;
+    if (!effectData) continue;
+
+    const subtype = effectData.EffectTypeFirstSubtype;
+    if (subtype === undefined) continue;
+
+    const statKey = getAttrKeyFromEnumId(subtype);
+    if (!statKey) continue;
+
+    let rawParam = effectData.EffectTypeParam1;
+    if (rawParam === undefined) continue;
+    rawParam = typeof rawParam === 'string' ? parseFloat(rawParam) : rawParam;
+    if (isNaN(rawParam) || rawParam === 0) continue;
+
+    // Determine value type from bIntFloat flag AND SecondSubtype
+    const secondSubtype = effectData.EffectTypeSecondSubtype || 0;
+    const NON_INT_FLOAT_STATS = new Set(['Atk', 'Def', 'Hp', 'WEP', 'FEP', 'SEP', 'AEP', 'LEP', 'DEP']);
+    const isBIntFloat = !NON_INT_FLOAT_STATS.has(statKey);
+
+    let value: number;
+    let isPercentage = false;
+
+    if (isBIntFloat) {
+      // bIntFloat stats: decimal → per-10000 (e.g., 0.012 → 120)
+      value = rawParam * 10000;
+    } else if (secondSubtype === 2) {
+      // Non-bIntFloat (ATK/DEF/HP) with PERCENTAGE type: decimal → per-10000
+      // e.g., ATK note: 0.003 = 0.3% of base ATK → store as 30 per-10000
+      value = rawParam * 10000;
+      isPercentage = true;
+    } else {
+      // Flat value
+      value = rawParam;
+    }
+
+    // Get note name for source label
+    const noteKRKey = `SubNoteSkill.${noteId}.1`;
+    const noteName = GameData.subNoteSkillsKR?.[noteKRKey]
+      || window.discsState?.subNoteSkillKRData?.[noteKRKey]
+      || `Note ${noteId}`;
+
+    addSource(stats, statKey, {
+      name: `${window.i18n?.t('dmgcalc.noteSource') || '소리'}: ${noteName} Lv.${level}`,
+      value,
+      active: true,
+      isPercentage,
     });
-    stat = state.stats.get(statKey);
-  }
-
-  if (stat) {
-    stat.sources.push({ source, value, active });
   }
 }
 
+// =============================================================================
+// 6. BUILD RANK ATK BONUS
+// =============================================================================
+
 /**
- * Calculate total values for all stats
+ * Add ATK bonus from build rank (Star Tower build level).
+ * Build level is determined by total score (potentials + discs),
+ * and each level grants a flat ATK bonus (Param1 in StarTowerBuildRank.json).
  */
-function calculateStatTotals(): void {
-  const state = getState();
+function aggregateBuildRankStats(stats: Map<string, AggregatedStat>): void {
+  const rankData = GameData.starTowerBuildRank;
+  if (!rankData || Object.keys(rankData).length === 0) return;
 
-  state.stats.forEach((stat, key) => {
-    const activeSourcesTotal = stat.sources
-      .filter(s => s.active)
-      .reduce((sum, s) => sum + s.value, 0);
+  // Calculate total score the same way app-summary does
+  let totalScore = 0;
+  const positions = ['master', 'assist1', 'assist2'] as const;
+  for (const pos of positions) {
+    if (window.calculateCharacterScore) {
+      totalScore += window.calculateCharacterScore(pos);
+    }
+  }
+  if (window.calculateDiscScore) {
+    totalScore += window.calculateDiscScore();
+  }
 
-    stat.total = stat.baseValue + activeSourcesTotal + stat.manualAdjustment;
+  // Find highest rank where totalScore >= MinGrade
+  let bestLevel = 1;
+  let bestParam1 = 0;
+  for (const entry of Object.values(rankData)) {
+    const minGrade = (entry as any).MinGrade || 0;
+    const level = (entry as any).Level || 0;
+    if (totalScore >= minGrade && level > bestLevel) {
+      bestLevel = level;
+      bestParam1 = (entry as any).Param1 || 0;
+    }
+  }
 
-    // Debug log for ATK stat
-    if (key === 'Atk') {
-      console.log(`[DmgCalc] Final ATK calculation:`, {
-        baseValue: stat.baseValue,
-        sourcesCount: stat.sources.length,
-        activeSources: stat.sources.filter(s => s.active).map(s => ({ source: s.source, value: s.value })),
-        activeSourcesTotal,
-        manualAdjustment: stat.manualAdjustment,
-        total: stat.total
+  if (bestParam1 > 0) {
+    addSource(stats, 'Atk', {
+      name: `Build Rank Lv.${bestLevel}`,
+      value: bestParam1,
+      active: true,
+    });
+  }
+}
+
+// =============================================================================
+// 7. ACTIVE BUFFS
+// =============================================================================
+
+function applyActiveBuffs(stats: Map<string, AggregatedStat>): void {
+  const dmgState = getState();
+
+  for (const buff of dmgState.buffs) {
+    if (!buff.active) continue;
+
+    for (const effect of buff.statEffects) {
+      addSource(stats, effect.key, {
+        name: buff.name,
+        value: effect.value,
+        active: true,
       });
     }
+  }
+}
+
+// =============================================================================
+// TOTAL CALCULATION
+// =============================================================================
+
+function calculateTotals(stats: Map<string, AggregatedStat>): void {
+  stats.forEach((stat) => {
+    // Separate flat and percentage sources
+    const activeSources = stat.sources.filter((s) => s.active);
+    const flatTotal = activeSources
+      .filter((s) => !s.isPercentage)
+      .reduce((sum, s) => sum + s.value, 0);
+    const pctTotal = activeSources
+      .filter((s) => s.isPercentage)
+      .reduce((sum, s) => sum + s.value, 0);
+
+    // Base + flat additions, then apply percentage multiplier
+    const flatBase = stat.baseValue + flatTotal;
+    if (pctTotal !== 0) {
+      stat.total = Math.round(flatBase * (1 + pctTotal / 10000));
+    } else {
+      stat.total = flatBase;
+    }
+    // Preserve the calculated total before any manual override
+    stat.calculatedTotal = stat.total;
   });
-
-  // Update state with calculated stats
-  updateState({ stats: state.stats });
-}
-
-// =============================================================================
-// HELPER FUNCTIONS
-// =============================================================================
-
-/**
- * Get potential name from ID
- */
-function getPotentialName(potId: string): string {
-  const numId = parseInt(potId, 10);
-  if (isNaN(numId)) return potId;
-
-  const potential = window.state?.potentials?.[numId];
-  if (!potential) return potId;
-
-  // Get the name key from the potential's Name field
-  const nameKey = (potential as any).Name;
-  if (!nameKey || !window.state?.potentialNames) return potId;
-
-  return window.state.potentialNames[nameKey] || potId;
 }
 
 /**
- * Get disc name from ID
+ * Apply manual stat overrides from state.statOverrides.
+ * These replace the calculated total with a user-specified value.
  */
+function applyStatOverrides(stats: Map<string, AggregatedStat>): void {
+  const overrides = getState().statOverrides;
+  for (const [key, value] of Object.entries(overrides)) {
+    const stat = stats.get(key);
+    if (stat) {
+      stat.total = value;
+    }
+  }
+}
+
+// =============================================================================
+// HELPERS
+// =============================================================================
+
+/**
+ * Add a StatSource to an AggregatedStat entry, creating it if missing.
+ */
+function addSource(
+  stats: Map<string, AggregatedStat>,
+  key: string,
+  source: StatSource
+): void {
+  let stat = stats.get(key);
+  if (!stat) {
+    stat = createStat(key);
+    stats.set(key, stat);
+  }
+  stat.sources.push(source);
+}
+
 function getDiscName(discId: number): string {
-  if (!window.discsState?.discNames) return discId.toString();
-  return window.discsState.discNames[discId] || discId.toString();
+  return window.discsState?.discNames?.[discId]?.toString() || String(discId);
 }
 
 // =============================================================================
@@ -659,73 +617,49 @@ function getDiscName(discId: number): string {
 // =============================================================================
 
 /**
- * Get a specific stat value
+ * Get a single stat's total value from the dmgcalc state.
  */
 export function getStat(statKey: string): number {
-  const state = getState();
-  return state.stats.get(statKey)?.total || 0;
+  return getState().stats.get(statKey)?.total || 0;
 }
 
 /**
- * Get all stats
+ * Get the full stats map from the dmgcalc state.
  */
 export function getAllStats(): Map<string, AggregatedStat> {
-  const state = getState();
-  return state.stats;
+  return getState().stats;
 }
 
 /**
- * Toggle a stat source on/off
+ * Toggle an individual stat source on/off and recalculate totals.
  */
 export function toggleStatSource(statKey: string, sourceIndex: number): void {
-  const state = getState();
-  const stat = state.stats.get(statKey);
-
-  if (stat && stat.sources[sourceIndex]) {
+  const stat = getState().stats.get(statKey);
+  if (stat?.sources[sourceIndex]) {
     stat.sources[sourceIndex].active = !stat.sources[sourceIndex].active;
-    calculateStatTotals();
+    calculateTotals(getState().stats);
   }
 }
 
 /**
- * Set manual adjustment for a stat
+ * Get stats grouped by category for UI display.
  */
-export function setManualAdjustment(statKey: string, adjustment: number): void {
-  const state = getState();
-  const stat = state.stats.get(statKey);
+export function getStatsByCategory(): Map<string, Map<string, AggregatedStat>> {
+  const categorized = new Map<string, Map<string, AggregatedStat>>();
 
-  if (stat) {
-    stat.manualAdjustment = adjustment;
-    calculateStatTotals();
-  }
-}
-
-/**
- * Get stats grouped by category
- * Returns all stats organized by their category (core, offense, elemental, etc.)
- */
-export function getStatsByCategory(): Map<StatCategory, Map<string, AggregatedStat>> {
-  const state = getState();
-  const categorizedStats = new Map<StatCategory, Map<string, AggregatedStat>>();
-
-  // Initialize categories
-  const categories: StatCategory[] = ['core', 'offense', 'elemental', 'special'];
-  categories.forEach(cat => categorizedStats.set(cat, new Map()));
-
-  // Group stats by category
-  Object.entries(STAT_CATEGORIES).forEach(([categoryName, statKeys]) => {
-    const category = categoryName as StatCategory;
-    const categoryMap = categorizedStats.get(category);
-
-    if (categoryMap) {
-      statKeys.forEach(statKey => {
-        const stat = state.stats.get(statKey);
-        if (stat) {
-          categoryMap.set(statKey, stat);
-        }
-      });
+  for (const [categoryName, statKeys] of Object.entries(STAT_CATEGORIES)) {
+    const categoryMap = new Map<string, AggregatedStat>();
+    for (const key of statKeys) {
+      const stat = getState().stats.get(key);
+      if (stat) {
+        categoryMap.set(key, stat);
+      }
     }
-  });
+    categorized.set(categoryName, categoryMap);
+  }
 
-  return categorizedStats;
+  return categorized;
 }
+
+// Re-export getStatDisplayName so UI modules can import it from stats
+export { getStatDisplayName };

@@ -1,144 +1,104 @@
-/**
- * State Management for Damage Calculator
- * Handles initialization, getters, setters, and persistence
- */
+import type { DmgCalcState, EnemyConfig, BuffSource, AggregatedStat, SkillDamageResult, SkillType, DiscSlotId } from '../types';
 
-import type { DamageCalcState, EnemyConfig } from '../types';
-import { DEFAULT_ENEMY_CONFIG } from '../constants';
+const DEFAULT_ENEMY: EnemyConfig = {
+  level: 80,
+  def: 500,
+  res: 0,
+  toughnessBroken: false,
+};
 
-// =============================================================================
-// STATE INSTANCE
-// =============================================================================
+let state: DmgCalcState = createDefaultState();
 
-let state: DamageCalcState;
-
-// =============================================================================
-// INITIALIZATION
-// =============================================================================
-
-/**
- * Initialize damage calculator state
- */
-export function init(): void {
-  state = {
+function createDefaultState(): DmgCalcState {
+  return {
+    masterCharId: null,
+    masterLevel: 90,
+    limitBreak: 0,
+    skillLevels: { normalAtk: 8, skill: 8, ultimate: 8 },
+    discLevel: 81,
+    discLimitBreaks: { main1: 1, main2: 1, main3: 1, sub1: 1, sub2: 1, sub3: 1 },
+    noteOverrides: {},
+    potentialLevelOverrides: {},
+    statOverrides: {},
     stats: new Map(),
     buffs: [],
-    enemy: { ...DEFAULT_ENEMY_CONFIG },
-    results: {},
-    manualMode: false
+    enemy: { ...DEFAULT_ENEMY },
+    results: { normalAtk: null, skill: null, ultimate: null },
   };
-
-  // Try to load saved state from localStorage
-  loadStateFromStorage();
 }
 
-/**
- * Reset state to default values
- */
-export function resetState(): void {
-  init();
-}
-
-// =============================================================================
-// STATE ACCESSORS
-// =============================================================================
-
-/**
- * Ensure state is initialized and return it
- */
-function ensureState(): DamageCalcState {
-  if (!state) {
-    init();
-  }
+export function getState(): DmgCalcState {
   return state;
 }
 
-/**
- * Get current state (read-only reference)
- */
-export function getState(): DamageCalcState {
-  return ensureState();
+export function resetState(): void {
+  state = createDefaultState();
+}
+
+export function updateEnemy(partial: Partial<EnemyConfig>): void {
+  Object.assign(state.enemy, partial);
+}
+
+export function setLimitBreak(lb: number): void {
+  state.limitBreak = Math.max(0, Math.min(5, lb));
+}
+
+export function toggleBuff(buffId: string): void {
+  const buff = state.buffs.find(b => b.id === buffId);
+  if (buff) buff.active = !buff.active;
+}
+
+export function setStats(stats: Map<string, AggregatedStat>): void {
+  state.stats = stats;
+}
+
+export function setBuffs(buffs: BuffSource[]): void {
+  state.buffs = buffs;
+}
+
+export function setResult(skillType: SkillType, result: SkillDamageResult): void {
+  state.results[skillType] = result;
+}
+
+export function setBuildInfo(charId: number | null, level: number, skillLevels: Record<SkillType, number>): void {
+  state.masterCharId = charId;
+  state.masterLevel = level;
+  state.skillLevels = skillLevels;
 }
 
 /**
- * Update state with partial updates
+ * Set skill level for a specific skill type (local override).
+ * Clamps level to 1-13 range.
  */
-export function updateState(updates: Partial<DamageCalcState>): void {
-  Object.assign(ensureState(), updates);
-  saveStateToStorage();
+export function setSkillLevel(type: SkillType, level: number): void {
+  state.skillLevels[type] = Math.max(1, Math.min(13, level));
 }
 
-/**
- * Update enemy configuration
- */
-export function updateEnemyConfig(config: Partial<EnemyConfig>): void {
-  Object.assign(ensureState().enemy, config);
-  saveStateToStorage();
+export function setDiscLevel(level: number): void {
+  state.discLevel = Math.max(1, Math.min(90, level));
 }
 
-/**
- * Toggle manual mode
- */
-export function toggleManualMode(enabled: boolean): void {
-  ensureState().manualMode = enabled;
-  saveStateToStorage();
+export function setDiscLimitBreak(slotId: DiscSlotId, lb: number): void {
+  state.discLimitBreaks[slotId] = Math.max(0, Math.min(6, lb));
 }
 
-// =============================================================================
-// PERSISTENCE
-// =============================================================================
-
-/**
- * Save state to localStorage
- */
-function saveStateToStorage(): void {
-  if (!state) return;
-
-  try {
-    const serialized = JSON.stringify({
-      enemy: state.enemy,
-      manualMode: state.manualMode
-      // Note: Don't save stats or results - they're recalculated from build
-    });
-
-    localStorage.setItem('dmgcalc_state', serialized);
-  } catch (e) {
-    console.warn('[DmgCalc] Failed to save state to localStorage', e);
-  }
+export function setStatOverride(statKey: string, value: number): void {
+  state.statOverrides[statKey] = value;
 }
 
-/**
- * Load state from localStorage
- */
-function loadStateFromStorage(): void {
-  if (!state) return;
-
-  try {
-    const saved = localStorage.getItem('dmgcalc_state');
-    if (!saved) return;
-
-    const parsed = JSON.parse(saved);
-
-    // Merge saved state with default state
-    if (parsed.enemy) {
-      Object.assign(state.enemy, parsed.enemy);
-    }
-
-    if (typeof parsed.manualMode === 'boolean') {
-      state.manualMode = parsed.manualMode;
-    }
-  } catch (e) {
-    console.warn('[DmgCalc] Failed to load state from localStorage', e);
-  }
+export function clearStatOverride(statKey: string): void {
+  delete state.statOverrides[statKey];
 }
 
-/**
- * Clear saved state from localStorage
- */
-export function clearSavedState(): void {
-  try {
-    localStorage.removeItem('dmgcalc_state');
-  } catch (e) {
-    console.warn('[DmgCalc] Failed to clear saved state', e);
-  }
+export function setNoteLevel(noteId: string, level: number): void {
+  state.noteOverrides[noteId] = Math.max(0, Math.min(99, level));
+}
+
+export function setPotentialLevel(potId: string, level: number): void {
+  // Max level = BASE_POTENTIAL_LEVEL(6) + potential.MaxLevel (matching app-char.ts logic)
+  const potential = (window as any).GameData?.potentials?.[potId] as any;
+  const BASE_POTENTIAL_LEVEL = 6;
+  const maxLevelBonus = potential?.MaxLevel || 0;
+  const maxLevel = BASE_POTENTIAL_LEVEL + maxLevelBonus;
+  state.potentialLevelOverrides[potId] = Math.max(1, Math.min(maxLevel, level));
 }
