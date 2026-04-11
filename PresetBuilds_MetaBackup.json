@@ -110,6 +110,17 @@
     },
     {
       "id": "preset-build",
+      "title": "(3/5) 나즈나 프리지아 + 아야메/틸리아 빌드",
+      "description": "토벌용 고효율 쌀먹덱, 자세한건 링크 참조",
+      "author": "나즈나 프리지아 빌드 원본 + 틸리아",
+      "authorLink": "https://arca.live/b/stellasora/164003428",
+      "element": "Water",
+      "characterId": 111,
+      "tags": ["나즈나", "프리지아", "아야메", "틸리아"],
+      "buildHash": "v3d-Zct9oumBO5~%2BU24!U%5Er%7B)%5B%2B(%2Ctm%7BXOhw%3A1%26C!IB9ZH%26s%3F%2350%22J%26%26KWB%60*6KjX5w%5B%5ETEr%5EZ2%5EV%2C%2CwS7_8l5U8LP0e%3Ae.89JRF%5EN%2F!9k.iB)%7CtHC%2BD5DRHyGSjkjVV%7CKFkZe!%3A_oVV%3Ck%3E%5B8nJQnk%7C%2C%24Fn%3E%7Bt8N%2B%24%2B%2CZ2a%23rWA"
+    },
+    {
+      "id": "preset-build",
       "title": "(1/7) 클라루 후유카 종언/연합용 2유파 빌드",
       "description": "종언 877, 어웨이크너 27만 자세한 캐릭터, 레코드 스펙은 게시물 참조",
       "author": " 후유카 2유파 877.9",
