@@ -192,23 +192,23 @@ async function main() {
 
   console.log(`📸 Found ${allFiles.length} images to process\n`);
 
-  // const uniqueFiles = [...new Set(allFiles)];
-  // const targetFiles = [];
+  const uniqueFiles = [...new Set(allFiles)];
+  const targetFiles = [];
 
-  // for (const file of uniqueFiles) {
-  //   const outputPath = file.replace(/\.png$/i, '.webp');
+  for (const file of uniqueFiles) {
+    const outputPath = file.replace(/\.png$/i, '.webp');
 
-  //   try {
-  //     await fs.access(outputPath);
-  //     if (CONFIG.verbose) {
-  //       console.log(`⏭️  Skip (webp exists): ${path.basename(file)}`);
-  //     }
-  //   } catch {
-  //     targetFiles.push(file);
-  //   }
-  // }
+    try {
+      await fs.access(outputPath);
+      if (CONFIG.verbose) {
+        console.log(`⏭️  Skip (webp exists): ${path.basename(file)}`);
+      }
+    } catch {
+      targetFiles.push(file);
+    }
+  }
 
-  // console.log(`📸 Found ${targetFiles.length} PNG images without WebP\n`);
+  console.log(`📸 Found ${targetFiles.length} PNG images without WebP\n`);
 
   if (allFiles.length === 0) {
     console.log('⚠️  No images found. Check your paths.');
@@ -222,7 +222,7 @@ async function main() {
     console.log('STEP 1: Minifying images...');
     console.log('━'.repeat(50) + '\n');
 
-    for (const file of allFiles) {
+    for (const file of targetFiles) {
       const result = await minifyImage(file);
       minifyResults.push(result);
     }
@@ -235,7 +235,7 @@ async function main() {
     console.log('STEP 2: Converting to WebP...');
     console.log('━'.repeat(50) + '\n');
 
-    for (const file of allFiles) {
+    for (const file of targetFiles) {
       const result = await convertToWebP(file);
       webpResults.push(result);
     }
