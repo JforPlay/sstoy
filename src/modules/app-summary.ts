@@ -1049,6 +1049,10 @@ export async function renderSummary(): Promise<void> {
               <span class="btn-icon">🔗</span>
               <span class="btn-text">${window.i18n?.t('builder.urlShare') || 'URL Share'}</span>
             </button>
+            <button class="ingame-code-btn" data-action="saveload-ingame-code" id="ingame-code-btn">
+              <span class="btn-icon">📱</span>
+              <span class="btn-text">${window.i18n?.t('builder.ingameCode') || 'In-Game Preset'}</span>
+            </button>
           </div>
         </div>
       </div>

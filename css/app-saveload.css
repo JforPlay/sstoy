@@ -83,7 +83,8 @@
 
 .save-btn,
 .load-btn-main,
-.share-btn {
+.share-btn,
+.ingame-code-btn {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
     font-weight: 600;
@@ -110,9 +111,14 @@
     background: var(--secondary-color);
 }
 
+.ingame-code-btn {
+    background: var(--lavender);
+}
+
 .save-btn:hover:not(:disabled),
 .load-btn-main:hover:not(:disabled),
-.share-btn:hover:not(:disabled) {
+.share-btn:hover:not(:disabled),
+.ingame-code-btn:hover:not(:disabled) {
     transform: translateY(-2px);
     filter: brightness(1.1);
 }
@@ -129,8 +135,13 @@
     box-shadow: 0 4px 12px rgba(232, 138, 173, 0.4);
 }
 
+.ingame-code-btn:hover:not(:disabled) {
+    box-shadow: 0 4px 12px rgba(197, 184, 224, 0.4);
+}
+
 .save-btn:disabled,
-.share-btn:disabled {
+.share-btn:disabled,
+.ingame-code-btn:disabled {
     cursor: not-allowed;
     opacity: 0.5;
 }
@@ -343,7 +354,8 @@
     
     .save-btn,
     .load-btn-main,
-    .share-btn {
+    .share-btn,
+    .ingame-code-btn {
         width: 100%;
         justify-content: center;
     }
@@ -366,4 +378,36 @@
     .load-item-actions .delete-btn {
         flex: 1;
     }
+}
+
+/* In-game code modal */
+.ingame-code-modal .modal-body {
+  padding: 16px 24px 24px;
+}
+
+.ingame-code-modal .ingame-code-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.ingame-code-modal .ingame-code-divider {
+  margin: 16px 0;
+  border: 0;
+  border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+.ingame-code-modal .ingame-code-note {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #888);
+  margin: 0;
+}
+
+.ingame-code-modal .ingame-code-disabled-message {
+  padding: 10px;
+  background: var(--bg-secondary, rgba(255, 255, 255, 0.05));
+  border-radius: 4px;
+  color: var(--text-secondary, #888);
+  font-size: 0.9rem;
 }

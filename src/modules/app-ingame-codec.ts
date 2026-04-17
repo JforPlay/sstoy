@@ -1,0 +1,323 @@
+/**
+ * @module app-ingame-codec
+ * @description Pure codec for the game's Potential Preselection sharecode format.
+ *
+ * Wire format (verified against the game's Lua source):
+ * - Header (96 bits): three big-endian uint32 CharIds [master, assist1, assist2].
+ * - Per-slot body: MSB-first bitstream of specific (1 bit each), normal (3 bits each),
+ *   common (3 bits each), in the array order of CharPotential.json.
+ * - Trailing byte is zero-padded.
+ * - Base64: encoder emits standard alphabet + `=` padding. Decoder tolerates URL-safe
+ *   `-` / `_` variants and missing padding.
+ *
+ * No DOM access, no window.*, no GameData access. All data comes in as parameters.
+ */
+
+// =============================================================================
+// PUBLIC TYPES
+// =============================================================================
+
+export interface IngameCodePayload {
+  /** [master, assist1, assist2] — order fixed by the wire format */
+  slots: [SlotPayload, SlotPayload, SlotPayload];
+}
+
+export interface SlotPayload {
+  /** uint32 character ID */
+  charId: number;
+  /** length must equal schema.specificLen */
+  specificOn: boolean[];
+  /** length must equal schema.normalLen; values 0..maxLevel */
+  normalLevels: number[];
+  /** length must equal schema.commonLen; values 0..maxLevel */
+  commonLevels: number[];
+}
+
+export interface SlotSchema {
+  specificLen: number;
+  normalLen: number;
+  commonLen: number;
+}
+
+export interface CharSchemas {
+  master: SlotSchema;
+  assist: SlotSchema;
+}
+
+export type DecodeResult =
+  | { ok: true; payload: IngameCodePayload }
+  | { ok: false; reason: DecodeError; detail?: string };
+
+export type DecodeError =
+  | 'invalid_base64'
+  | 'too_short'
+  | 'wrong_payload_length'
+  | 'unknown_char'
+  | 'level_out_of_range';
+
+// =============================================================================
+// PUBLIC FUNCTIONS — implementations filled in by later tasks
+// =============================================================================
+
+export function encodeIngameCode(
+  payload: IngameCodePayload,
+  schemas: Map<number, CharSchemas>,
+  _maxLevel: number
+): string {
+  const positions: Array<'master' | 'assist'> = ['master', 'assist', 'assist'];
+  const writer = new BitWriter();
+
+  // Header: three big-endian uint32 CharIds.
+  for (const slot of payload.slots) {
+    writer.writeBits(slot.charId >>> 0, 32);
+  }
+
+  // Per-slot body.
+  for (let i = 0; i < 3; i++) {
+    const slot = payload.slots[i]!;
+    const charSchemas = schemas.get(slot.charId);
+    if (!charSchemas) {
+      throw new Error(`encodeIngameCode: no schema for CharId ${slot.charId}`);
+    }
+    const schema = charSchemas[positions[i]!];
+
+    if (slot.specificOn.length !== schema.specificLen) {
+      throw new Error(
+        `encodeIngameCode: specificOn length ${slot.specificOn.length} != expected ${schema.specificLen} for CharId ${slot.charId}`
+      );
+    }
+    if (slot.normalLevels.length !== schema.normalLen) {
+      throw new Error(
+        `encodeIngameCode: normalLevels length ${slot.normalLevels.length} != expected ${schema.normalLen} for CharId ${slot.charId}`
+      );
+    }
+    if (slot.commonLevels.length !== schema.commonLen) {
+      throw new Error(
+        `encodeIngameCode: commonLevels length ${slot.commonLevels.length} != expected ${schema.commonLen} for CharId ${slot.charId}`
+      );
+    }
+
+    for (const on of slot.specificOn) writer.writeBits(on ? 1 : 0, 1);
+    for (const lvl of slot.normalLevels) writer.writeBits(lvl & 7, 3);
+    for (const lvl of slot.commonLevels) writer.writeBits(lvl & 7, 3);
+  }
+
+  return base64Encode(writer.finish());
+}
+
+export function decodeIngameCode(
+  b64: string,
+  schemas: Map<number, CharSchemas>,
+  maxLevel: number
+): DecodeResult {
+  const bytes = base64Decode(b64);
+  if (!bytes) {
+    return { ok: false, reason: 'invalid_base64' };
+  }
+  if (bytes.length < 12) {
+    return { ok: false, reason: 'too_short' };
+  }
+
+  const reader = new BitReader(bytes);
+
+  // Header: three big-endian uint32 CharIds.
+  const charIds: [number, number, number] = [
+    reader.readBits(32) >>> 0,
+    reader.readBits(32) >>> 0,
+    reader.readBits(32) >>> 0,
+  ];
+
+  // Look up schemas.
+  const positions: Array<'master' | 'assist'> = ['master', 'assist', 'assist'];
+  const slotSchemas: SlotSchema[] = [];
+  for (let i = 0; i < 3; i++) {
+    const charSchemas = schemas.get(charIds[i]!);
+    if (!charSchemas) {
+      return {
+        ok: false,
+        reason: 'unknown_char',
+        detail: String(charIds[i]),
+      };
+    }
+    slotSchemas.push(charSchemas[positions[i]!]);
+  }
+
+  // Expected body bit count.
+  let expectedBits = 0;
+  for (const s of slotSchemas) {
+    expectedBits += s.specificLen * 1 + s.normalLen * 3 + s.commonLen * 3;
+  }
+  const remaining = reader.remainingBits();
+  if (remaining < expectedBits) {
+    return { ok: false, reason: 'wrong_payload_length' };
+  }
+  // Allow up to 7 trailing pad bits; anything >= 8 extra bits of slack is wrong.
+  if (remaining - expectedBits >= 8) {
+    return { ok: false, reason: 'wrong_payload_length' };
+  }
+
+  // Read per-slot body.
+  const slots: SlotPayload[] = [];
+  for (let i = 0; i < 3; i++) {
+    const schema = slotSchemas[i]!;
+    const specificOn: boolean[] = [];
+    for (let j = 0; j < schema.specificLen; j++) {
+      specificOn.push(reader.readBits(1) === 1);
+    }
+    const normalLevels: number[] = [];
+    for (let j = 0; j < schema.normalLen; j++) {
+      const lvl = reader.readBits(3);
+      if (lvl > maxLevel) {
+        return { ok: false, reason: 'level_out_of_range', detail: `slot ${i} normal[${j}]=${lvl}` };
+      }
+      normalLevels.push(lvl);
+    }
+    const commonLevels: number[] = [];
+    for (let j = 0; j < schema.commonLen; j++) {
+      const lvl = reader.readBits(3);
+      if (lvl > maxLevel) {
+        return { ok: false, reason: 'level_out_of_range', detail: `slot ${i} common[${j}]=${lvl}` };
+      }
+      commonLevels.push(lvl);
+    }
+    slots.push({ charId: charIds[i]!, specificOn, normalLevels, commonLevels });
+  }
+
+  // Verify trailing bits are all zero (defensive; game always zero-pads).
+  if (!reader.tailIsAllZero()) {
+    return { ok: false, reason: 'wrong_payload_length' };
+  }
+
+  return {
+    ok: true,
+    payload: { slots: slots as [SlotPayload, SlotPayload, SlotPayload] },
+  };
+}
+
+// =============================================================================
+// INTERNAL: BitWriter (MSB-first)
+// =============================================================================
+
+class BitWriter {
+  private bytes: number[] = [];
+  private currentByte = 0;
+  private bitsFilled = 0; // 0..7, how many bits of currentByte are written
+
+  writeBits(value: number, numBits: number): void {
+    if (numBits < 0 || numBits > 32) {
+      throw new Error(`writeBits: numBits out of range (${numBits})`);
+    }
+    // Feed in bits MSB-first.
+    for (let i = numBits - 1; i >= 0; i--) {
+      const bit = (value >>> i) & 1;
+      // Shift it into the current byte at position 7 - bitsFilled.
+      this.currentByte |= bit << (7 - this.bitsFilled);
+      this.bitsFilled++;
+      if (this.bitsFilled === 8) {
+        this.bytes.push(this.currentByte);
+        this.currentByte = 0;
+        this.bitsFilled = 0;
+      }
+    }
+  }
+
+  finish(): Uint8Array {
+    if (this.bitsFilled > 0) {
+      this.bytes.push(this.currentByte);
+      this.currentByte = 0;
+      this.bitsFilled = 0;
+    }
+    return new Uint8Array(this.bytes);
+  }
+}
+
+// =============================================================================
+// INTERNAL: BitReader (MSB-first)
+// =============================================================================
+
+class BitReader {
+  private bytes: Uint8Array;
+  private bitOffset = 0; // total bits consumed so far
+
+  constructor(bytes: Uint8Array) {
+    this.bytes = bytes;
+  }
+
+  /** Returns the next `numBits` as an unsigned integer (MSB-first). */
+  readBits(numBits: number): number {
+    if (numBits < 0 || numBits > 32) {
+      throw new Error(`readBits: numBits out of range (${numBits})`);
+    }
+    if (this.bitOffset + numBits > this.bytes.length * 8) {
+      throw new Error('readBits: read past end of buffer');
+    }
+    let value = 0;
+    for (let i = 0; i < numBits; i++) {
+      const byteIdx = (this.bitOffset + i) >>> 3;
+      const bitInByte = 7 - ((this.bitOffset + i) & 7);
+      const bit = (this.bytes[byteIdx]! >>> bitInByte) & 1;
+      value = (value << 1) | bit;
+    }
+    this.bitOffset += numBits;
+    // Use >>> 0 to coerce to unsigned 32-bit if caller wants that; normal numbers are fine too.
+    return value >>> 0;
+  }
+
+  remainingBits(): number {
+    return this.bytes.length * 8 - this.bitOffset;
+  }
+
+  /** True if every remaining bit is 0. Used to validate trailing zero-pad. */
+  tailIsAllZero(): boolean {
+    while (this.remainingBits() > 0) {
+      const n = Math.min(8, this.remainingBits());
+      if (this.readBits(n) !== 0) return false;
+    }
+    return true;
+  }
+}
+
+// =============================================================================
+// INTERNAL: base64 (standard encode, URL-safe-tolerant decode)
+// =============================================================================
+
+function base64Encode(bytes: Uint8Array): string {
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) {
+    bin += String.fromCharCode(bytes[i]!);
+  }
+  // URL-safe alphabet: game's text input silently strips `/` and `+` on paste,
+  // which corrupts the code. Emit `-`/`_` instead; the game's decoder normalizes
+  // them back (PlayerPotentialPreselectionData.lua:148-149).
+  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_');
+}
+
+function base64Decode(input: string): Uint8Array | null {
+  // Strip whitespace the user may have pasted.
+  let s = input.replace(/\s+/g, '');
+  // Normalize URL-safe alphabet.
+  s = s.replace(/-/g, '+').replace(/_/g, '/');
+  // Re-pad.
+  while (s.length % 4 !== 0) s += '=';
+  // Reject if any char is still outside the standard alphabet.
+  if (!/^[A-Za-z0-9+/]*={0,2}$/.test(s)) return null;
+  try {
+    const bin = atob(s);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return bytes;
+  } catch {
+    return null;
+  }
+}
+
+// =============================================================================
+// INTERNAL TESTING HOOK
+// =============================================================================
+
+export const __testing = {
+  BitWriter,
+  BitReader,
+  base64Encode,
+  base64Decode,
+};

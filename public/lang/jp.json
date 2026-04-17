@@ -413,7 +413,8 @@
       "recommended": "多ければ多いほど良い",
       "minimum": "１つは必須",
       "low": "後順位"
-    }
+    },
+    "ingameCode": "インゲームプリセット"
   },
   "disc": {
     "loadError": "ロスレコのデータのロードに失敗しました。",
@@ -632,5 +633,30 @@
     "ultimate": "必殺技",
     "talent": "才能",
     "noteSource": "ノート"
+  },
+  "ingameCode": {
+    "modalTitle": "インゲームプリセット",
+    "importLabel": "ゲーム内プリセット画面からコピーしたコードを貼り付けてください。",
+    "importButton": "読み込み",
+    "exportLabel": "現在のビルドをインゲームコードで共有します。",
+    "exportNote": "キャラクターと潜在のみ含まれます。ディスク、スキルレベル、優先度は含まれません。",
+    "copyButton": "コピー",
+    "masterRequired": "まずマスターキャラクターを選択してください。",
+    "defaultBuildName": "インゲームコードから読み込み",
+    "err": {
+      "empty": "インゲームコードを貼り付けてください。",
+      "invalidBase64": "コードの形式が正しくありません。",
+      "tooShort": "コードが短すぎます。",
+      "unknownChar": "不明なキャラクターID: {id}",
+      "wrongLength": "コード形式が一致しません。データバージョンを確認してください。",
+      "levelOutOfRange": "潜在レベルの値が正しくありません。",
+      "copyFailed": "クリップボードへのコピーに失敗しました。",
+      "encodeFailed": "コードの生成中にエラーが発生しました。",
+      "applyFailed": "ビルドの適用中にエラーが発生しました。"
+    },
+    "ok": {
+      "imported": "インゲームコードからビルドを読み込みました。",
+      "copied": "コードをコピーしました。"
+    }
   }
 }

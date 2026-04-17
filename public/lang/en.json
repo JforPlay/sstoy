@@ -413,7 +413,8 @@
       "recommended": "High Prio",
       "minimum": "Lv 1",
       "low": "Low Prio"
-    }
+    },
+    "ingameCode": "In-Game Preset"
   },
   "disc": {
     "loadError": "Failed to load disc data.",
@@ -632,5 +633,30 @@
     "ultimate": "Ultimate",
     "talent": "Talent",
     "noteSource": "Note"
+  },
+  "ingameCode": {
+    "modalTitle": "In-Game Preset",
+    "importLabel": "Paste a code from the in-game Potential Preset screen to load it as your build.",
+    "importButton": "Import",
+    "exportLabel": "Share your current build as an in-game code.",
+    "exportNote": "Only characters and potentials are included. Discs, skill levels, and priorities are not.",
+    "copyButton": "Copy",
+    "masterRequired": "Select a master character first.",
+    "defaultBuildName": "From in-game code",
+    "err": {
+      "empty": "Please paste an in-game code.",
+      "invalidBase64": "Invalid code format.",
+      "tooShort": "Code is too short.",
+      "unknownChar": "Unknown character ID: {id}",
+      "wrongLength": "Code format does not match. Check the data version.",
+      "levelOutOfRange": "Potential level value is invalid.",
+      "copyFailed": "Failed to copy to clipboard.",
+      "encodeFailed": "Failed to generate code.",
+      "applyFailed": "Failed to apply build."
+    },
+    "ok": {
+      "imported": "Build loaded from in-game code.",
+      "copied": "Code copied."
+    }
   }
 }

@@ -37,6 +37,8 @@
 
 import { fetchJSON, log, onLanguageChange, showToast } from '../shared';
 import { GameData } from '../shared/game-data';
+import { encodeIngameCode, decodeIngameCode } from './app-ingame-codec';
+import type { IngameCodePayload, SlotPayload, CharSchemas } from './app-ingame-codec';
 import type { Position, MainTab, PotentialMark, Disc } from '../types';
 import * as LZString from 'lz-string';
 import * as fflate from 'fflate';
@@ -677,7 +679,107 @@ function refreshAllDisplays(): void {
   }
 }
 
-async function restoreBuildData(data: BuildData | undefined): Promise<void> {
+/**
+ * Convert an IngameCodePayload into a synthetic BuildData for restoreBuildData.
+ *
+ * Per-slot potential IDs are reconstructed from GameData.charPotentials array order:
+ * specific IDs where specificOn[i] is true, then normal IDs where normalLevels[i] >= 1,
+ * then common IDs where commonLevels[i] >= 1. Master slot reads Master* arrays;
+ * assists read Assist* arrays. Common is shared.
+ *
+ * Discs, skill levels, marks, build memo: all cleared (wipe-and-replace semantics).
+ */
+function buildSyntheticBuildDataFromPayload(payload: IngameCodePayload): BuildData {
+  const positionKeys: Array<'m' | 'a1' | 'a2'> = ['m', 'a1', 'a2'];
+  const isMasterSlot = [true, false, false];
+
+  const c: NonNullable<BuildData['c']> = {};
+
+  for (let i = 0; i < 3; i++) {
+    const slot = payload.slots[i]!;
+    const key = positionKeys[i]!;
+    const isMaster = isMasterSlot[i]!;
+
+    const charPot = (GameData.charPotentials as Record<string, {
+      MasterSpecificPotentialIds?: number[];
+      MasterNormalPotentialIds?: number[];
+      AssistSpecificPotentialIds?: number[];
+      AssistNormalPotentialIds?: number[];
+      CommonPotentialIds?: number[];
+    }>)?.[slot.charId];
+
+    if (!charPot) {
+      // Caller should have verified this already; this is a defensive throw.
+      throw new Error(`Missing GameData.charPotentials for CharId ${slot.charId}`);
+    }
+
+    const specificIds = (isMaster
+      ? charPot.MasterSpecificPotentialIds
+      : charPot.AssistSpecificPotentialIds) || [];
+    const normalIds = (isMaster
+      ? charPot.MasterNormalPotentialIds
+      : charPot.AssistNormalPotentialIds) || [];
+    const commonIds = charPot.CommonPotentialIds || [];
+
+    const selectedPotentials: number[] = [];
+    const potentialLevels: Record<number, number> = {};
+
+    specificIds.forEach((id, idx) => {
+      if (slot.specificOn[idx]) {
+        selectedPotentials.push(id);
+        potentialLevels[id] = 1;
+      }
+    });
+    normalIds.forEach((id, idx) => {
+      const lvl = slot.normalLevels[idx] ?? 0;
+      if (lvl >= 1) {
+        selectedPotentials.push(id);
+        potentialLevels[id] = lvl;
+      }
+    });
+    commonIds.forEach((id, idx) => {
+      const lvl = slot.commonLevels[idx] ?? 0;
+      if (lvl >= 1) {
+        selectedPotentials.push(id);
+        potentialLevels[id] = lvl;
+      }
+    });
+
+    c[key] = {
+      i: String(slot.charId),
+      p: selectedPotentials,
+      pl: potentialLevels,
+      sl: {}, // skill levels wiped
+      pm: {}, // marks wiped
+    };
+  }
+
+  return {
+    v: '1.0',
+    n: window.i18n?.t('ingameCode.defaultBuildName') || 'From in-game code',
+    m: '', // memo wiped
+    c,
+    d: null, // discs wiped (restoreDiscsData rebuilds defaults)
+    nt: null, // notes wiped
+  };
+}
+
+/**
+ * Apply a decoded IngameCodePayload to window.state. Full wipe-and-replace.
+ * Shows the `ingameCode.ok.imported` toast on success.
+ */
+async function applyIngameCodePayload(payload: IngameCodePayload): Promise<void> {
+  const synthetic = buildSyntheticBuildDataFromPayload(payload);
+  await restoreBuildData(synthetic, {
+    toastKey: 'ingameCode.ok.imported',
+    toastFallback: 'Build loaded from in-game code.',
+  });
+}
+
+async function restoreBuildData(
+  data: BuildData | undefined,
+  options?: { toastKey?: string; toastFallback?: string }
+): Promise<void> {
   if (!data) {
     throw new Error('Invalid build data format');
   }
@@ -698,7 +800,9 @@ async function restoreBuildData(data: BuildData | undefined): Promise<void> {
     restoreNotesData(data.nt);
     refreshAllDisplays();
 
-    showToast(window.i18n?.t('saveload.buildLoaded') || 'Build loaded successfully!', 'success');
+    const toastKey = options?.toastKey ?? 'saveload.buildLoaded';
+    const toastFallback = options?.toastFallback ?? 'Build loaded successfully!';
+    showToast(window.i18n?.t(toastKey) || toastFallback, 'success');
   } catch (error) {
     console.error('Error restoring build data:', error);
     throw error;
@@ -1505,6 +1609,257 @@ function updateButtonCooldown(buttonId: string, cooldownEnd: number): void {
 }
 
 // =============================================================================
+// IN-GAME CODE MODAL
+// =============================================================================
+
+interface BuiltExportResult {
+  code: string | null; // null when master is empty
+  masterEmpty: boolean;
+}
+
+// =============================================================================
+// INGAME CODE HELPERS
+// =============================================================================
+
+type PeekResult =
+  | { ok: true; charIds: [number, number, number] }
+  | { ok: false; reason: 'invalid_base64' | 'too_short' };
+
+/**
+ * Read just the first 12 bytes of an in-game code (base64) to extract the
+ * three CharIds, without performing a full decode.  Used for the two-pass
+ * import flow: peek → build schemas → full decode.
+ */
+function peekIngameCodeHeader(b64: string): PeekResult {
+  // Mirror the codec's decode-side alphabet handling.
+  let s = b64.replace(/\s+/g, '').replace(/-/g, '+').replace(/_/g, '/');
+  while (s.length % 4 !== 0) s += '=';
+  if (!/^[A-Za-z0-9+/]*={0,2}$/.test(s)) return { ok: false, reason: 'invalid_base64' };
+  let bin: string;
+  try {
+    bin = atob(s);
+  } catch {
+    return { ok: false, reason: 'invalid_base64' };
+  }
+  if (bin.length < 12) return { ok: false, reason: 'too_short' };
+  const b = (i: number) => bin.charCodeAt(i) & 0xff;
+  const readU32 = (o: number) =>
+    (b(o) * 0x01000000 + (b(o + 1) << 16) + (b(o + 2) << 8) + b(o + 3)) >>> 0;
+  return {
+    ok: true,
+    charIds: [readU32(0), readU32(4), readU32(8)],
+  };
+}
+
+/**
+ * Build an IngameCodePayload from the current window.state and encode it.
+ * Returns { code: null, masterEmpty: true } when the master slot is empty.
+ */
+function buildExportCode(): BuiltExportResult {
+  const party = window.state?.party;
+  if (!party || !party['master']) {
+    return { code: null, masterEmpty: true };
+  }
+
+  const positions: Array<'master' | 'assist1' | 'assist2'> = ['master', 'assist1', 'assist2'];
+  const isMasterFlag = [true, false, false];
+  const usedCharIds = new Set<number>();
+  const slotsOut: SlotPayload[] = [];
+  const schemas = new Map<number, CharSchemas>();
+
+  // Default-fill preference lists (assist1 prefers 103, assist2 prefers 112).
+  const DEFAULT_FILL: Record<'master' | 'assist1' | 'assist2', number[]> = {
+    master: [],
+    assist1: [103, 112],
+    assist2: [112, 103],
+  };
+
+  // Pre-register filled slot IDs into usedCharIds so default-fill can skip them.
+  for (const pos of positions) {
+    const c = party[pos];
+    if (c) usedCharIds.add(Number(c.id));
+  }
+
+  type CharPotentialRecord = {
+    MasterSpecificPotentialIds?: number[];
+    MasterNormalPotentialIds?: number[];
+    AssistSpecificPotentialIds?: number[];
+    AssistNormalPotentialIds?: number[];
+    CommonPotentialIds?: number[];
+  };
+
+  function getCharPotential(charId: number): CharPotentialRecord | null {
+    const cp = (GameData.charPotentials as Record<string, CharPotentialRecord>)?.[charId];
+    return cp ?? null;
+  }
+
+  function schemaFor(charId: number): CharSchemas | null {
+    const cp = getCharPotential(charId);
+    if (!cp) return null;
+    return {
+      master: {
+        specificLen: (cp.MasterSpecificPotentialIds || []).length,
+        normalLen: (cp.MasterNormalPotentialIds || []).length,
+        commonLen: (cp.CommonPotentialIds || []).length,
+      },
+      assist: {
+        specificLen: (cp.AssistSpecificPotentialIds || []).length,
+        normalLen: (cp.AssistNormalPotentialIds || []).length,
+        commonLen: (cp.CommonPotentialIds || []).length,
+      },
+    };
+  }
+
+  function pickDefaultCharId(pos: 'assist1' | 'assist2'): number {
+    for (const pref of DEFAULT_FILL[pos]) {
+      if (!usedCharIds.has(pref) && schemaFor(pref)) return pref;
+    }
+    // Fallback: lowest CharId in GameData.characters not used, with a schema.
+    const all = Object.keys(GameData.characters || {})
+      .map((k) => Number(k))
+      .filter((n) => Number.isFinite(n))
+      .sort((a, b) => a - b);
+    for (const id of all) {
+      if (!usedCharIds.has(id) && schemaFor(id)) return id;
+    }
+    // Should never happen in a healthy dataset.
+    throw new Error('No available CharId for default-fill');
+  }
+
+  for (let i = 0; i < 3; i++) {
+    const pos = positions[i]!;
+    const isMaster = isMasterFlag[i]!;
+    const char = party[pos];
+
+    let charId: number;
+    let specificOn: boolean[];
+    let normalLevels: number[];
+    let commonLevels: number[];
+
+    if (char) {
+      charId = Number(char.id);
+      const sch = schemaFor(charId);
+      if (!sch) throw new Error(`No schema for CharId ${charId}`);
+      schemas.set(charId, sch);
+
+      const cp = getCharPotential(charId)!;
+      const specificIds = (isMaster ? cp.MasterSpecificPotentialIds : cp.AssistSpecificPotentialIds) || [];
+      const normalIds = (isMaster ? cp.MasterNormalPotentialIds : cp.AssistNormalPotentialIds) || [];
+      const commonIds = cp.CommonPotentialIds || [];
+
+      const selected = new Set(window.state?.selectedPotentials?.[pos] || []);
+      const levels = window.state?.potentialLevels?.[pos] || {};
+
+      specificOn = specificIds.map((id) => selected.has(id));
+      normalLevels = normalIds.map((id) =>
+        selected.has(id) ? Math.min(6, levels[id] ?? 1) : 0
+      );
+      commonLevels = commonIds.map((id) =>
+        selected.has(id) ? Math.min(6, levels[id] ?? 1) : 0
+      );
+    } else {
+      charId = pickDefaultCharId(pos as 'assist1' | 'assist2');
+      usedCharIds.add(charId);
+      const sch = schemaFor(charId)!;
+      schemas.set(charId, sch);
+      const body = isMaster ? sch.master : sch.assist;
+      specificOn = new Array(body.specificLen).fill(false);
+      normalLevels = new Array(body.normalLen).fill(0);
+      commonLevels = new Array(body.commonLen).fill(0);
+    }
+
+    slotsOut.push({ charId, specificOn, normalLevels, commonLevels });
+  }
+
+  const code = encodeIngameCode(
+    { slots: slotsOut as [SlotPayload, SlotPayload, SlotPayload] },
+    schemas,
+    6
+  );
+  return { code, masterEmpty: false };
+}
+
+function openIngameCodeModal(): void {
+  // Remove any existing instance first (idempotent).
+  document.getElementById('ingame-code-modal')?.remove();
+
+  const t = (key: string, fallback: string) => window.i18n?.t(key) || fallback;
+  const exportResult = (() => {
+    try {
+      return buildExportCode();
+    } catch (err) {
+      console.error('Failed to build export code:', err);
+      return { code: null, masterEmpty: false, error: true as const };
+    }
+  })();
+
+  const exportDisabled = exportResult.masterEmpty || 'error' in exportResult;
+  const exportMessage = exportResult.masterEmpty
+    ? t('ingameCode.masterRequired', 'Select a master character first.')
+    : 'error' in exportResult
+      ? t('ingameCode.err.encodeFailed', 'Failed to generate code.')
+      : null;
+
+  const html = `
+    <div class="modal ingame-code-modal active" id="ingame-code-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>${t('ingameCode.modalTitle', 'In-Game Preset')}</h2>
+          <button class="close-btn" data-action="saveload-close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+
+          <section class="ingame-code-section">
+            <p>${t('ingameCode.importLabel', 'Paste a code from the in-game Potential Preset screen to load it as your build.')}</p>
+            <textarea
+              id="ingame-code-import-input"
+              class="share-url-textarea"
+              rows="3"
+              placeholder=""
+            ></textarea>
+            <button class="copy-url-btn" data-action="saveload-ingame-import">
+              ${t('ingameCode.importButton', 'Import')}
+            </button>
+          </section>
+
+          <hr class="ingame-code-divider" />
+
+          <section class="ingame-code-section">
+            <p>${t('ingameCode.exportLabel', 'Share your current build as an in-game code.')}</p>
+            <p class="ingame-code-note">${t('ingameCode.exportNote', 'Only characters and potentials are included. Discs, skill levels, and priorities are not.')}</p>
+            ${
+              exportDisabled
+                ? `<p class="ingame-code-disabled-message">${exportMessage ?? ''}</p>`
+                : `
+                  <textarea
+                    id="ingame-code-export-output"
+                    class="share-url-textarea"
+                    rows="3"
+                    readonly
+                  >${exportResult.code ?? ''}</textarea>
+                  <button class="copy-url-btn" data-action="saveload-ingame-copy">
+                    ${t('ingameCode.copyButton', 'Copy')}
+                  </button>
+                `
+            }
+          </section>
+
+        </div>
+      </div>
+    </div>
+  `;
+
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = html;
+  const modal = wrapper.firstElementChild as HTMLElement;
+  document.body.appendChild(modal);
+
+  // Auto-select the export textarea for easy Ctrl+A copy.
+  const exportOutput = document.getElementById('ingame-code-export-output') as HTMLTextAreaElement | null;
+  exportOutput?.select();
+}
+
+// =============================================================================
 // PRESET BUILDS
 // =============================================================================
 
@@ -1674,6 +2029,121 @@ function handleSaveLoadAction(element: HTMLElement, action: string): void {
       break;
     }
 
+    case 'saveload-ingame-code': {
+      openIngameCodeModal();
+      break;
+    }
+
+    case 'saveload-ingame-import': {
+      const textarea = document.getElementById('ingame-code-import-input') as HTMLTextAreaElement | null;
+      const raw = (textarea?.value || '').trim();
+      if (!raw) {
+        showToast(
+          window.i18n?.t('ingameCode.err.empty') || 'Please paste an in-game code.',
+          'error'
+        );
+        break;
+      }
+
+      // Peek the header: base64-decode and pull 3 CharIds so we can collect schemas.
+      const peeked = peekIngameCodeHeader(raw);
+      if (!peeked.ok) {
+        const msgKey = peeked.reason === 'invalid_base64'
+          ? 'ingameCode.err.invalidBase64'
+          : 'ingameCode.err.tooShort';
+        const fallback = peeked.reason === 'invalid_base64'
+          ? 'Invalid code format.'
+          : 'Code is too short.';
+        showToast(window.i18n?.t(msgKey) || fallback, 'error');
+        break;
+      }
+
+      // Build schemas + verify GameData.characters exists for each CharId.
+      const schemas = new Map<number, CharSchemas>();
+      let unknownCharId: number | null = null;
+      for (const id of peeked.charIds) {
+        const cp = (GameData.charPotentials as Record<string, {
+          MasterSpecificPotentialIds?: number[];
+          MasterNormalPotentialIds?: number[];
+          AssistSpecificPotentialIds?: number[];
+          AssistNormalPotentialIds?: number[];
+          CommonPotentialIds?: number[];
+        }>)?.[id];
+        const cd = (GameData.characters as Record<string, unknown>)?.[id];
+        if (!cp || !cd) {
+          unknownCharId = id;
+          break;
+        }
+        schemas.set(id, {
+          master: {
+            specificLen: (cp.MasterSpecificPotentialIds || []).length,
+            normalLen: (cp.MasterNormalPotentialIds || []).length,
+            commonLen: (cp.CommonPotentialIds || []).length,
+          },
+          assist: {
+            specificLen: (cp.AssistSpecificPotentialIds || []).length,
+            normalLen: (cp.AssistNormalPotentialIds || []).length,
+            commonLen: (cp.CommonPotentialIds || []).length,
+          },
+        });
+      }
+      if (unknownCharId !== null) {
+        const template = window.i18n?.t('ingameCode.err.unknownChar') || 'Unknown character ID: {id}';
+        showToast(template.replace('{id}', String(unknownCharId)), 'error');
+        break;
+      }
+
+      // Full decode.
+      const result = decodeIngameCode(raw, schemas, 6);
+      if (!result.ok) {
+        const keyMap: Record<string, { key: string; fallback: string }> = {
+          invalid_base64: { key: 'ingameCode.err.invalidBase64', fallback: 'Invalid code format.' },
+          too_short: { key: 'ingameCode.err.tooShort', fallback: 'Code is too short.' },
+          wrong_payload_length: { key: 'ingameCode.err.wrongLength', fallback: 'Code format does not match. Check the data version.' },
+          unknown_char: { key: 'ingameCode.err.unknownChar', fallback: 'Unknown character ID: {id}' },
+          level_out_of_range: { key: 'ingameCode.err.levelOutOfRange', fallback: 'Potential level value is invalid.' },
+        };
+        const entry = keyMap[result.reason]!;
+        let msg = window.i18n?.t(entry.key) || entry.fallback;
+        if (result.reason === 'unknown_char' && result.detail) {
+          msg = msg.replace('{id}', result.detail);
+        }
+        showToast(msg, 'error');
+        break;
+      }
+
+      // Apply.
+      applyIngameCodePayload(result.payload).then(() => {
+        document.getElementById('ingame-code-modal')?.remove();
+      }).catch((err) => {
+        console.error('Ingame import apply error:', err);
+        showToast(
+          window.i18n?.t('ingameCode.err.applyFailed') || 'Failed to apply build.',
+          'error'
+        );
+      });
+      break;
+    }
+
+    case 'saveload-ingame-copy': {
+      const textarea = document.getElementById('ingame-code-export-output') as HTMLTextAreaElement | null;
+      const code = textarea?.value || '';
+      if (!code) break;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast(
+          window.i18n?.t('ingameCode.ok.copied') || 'Code copied.',
+          'success'
+        );
+      }).catch((err) => {
+        console.error('Clipboard copy failed:', err);
+        showToast(
+          window.i18n?.t('ingameCode.err.copyFailed') || 'Failed to copy to clipboard.',
+          'error'
+        );
+      });
+      break;
+    }
+
     default:
       break;
   }
@@ -1695,6 +2165,7 @@ if (typeof window !== 'undefined') {
   window.loadPresetBuilds = loadPresetBuilds;
   window.loadPresetBuild = loadPresetBuild;
   window.buildState = buildState;
+  window.openIngameCodeModal = openIngameCodeModal;
 }
 
 export default {
