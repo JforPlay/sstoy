@@ -16,7 +16,7 @@
 
 @media (max-width: 900px) {
   .disc-hero-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -74,6 +74,9 @@
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1.5rem var(--shadow);
   min-height: 32rem;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
   box-sizing: border-box;
 }
 
@@ -81,6 +84,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   margin-bottom: 0.75rem;
 }
 .bgm-label {
@@ -295,6 +300,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
 }
@@ -380,4 +386,47 @@
   border-radius: 50%;
   background: var(--primary-color);
   cursor: pointer;
+}
+
+/* Mobile: tighter spacing, stack header items, drop fixed min-height */
+@media (max-width: 600px) {
+  .bgm-panel {
+    padding: 0.75rem;
+    min-height: auto;
+    border-radius: 0.75rem;
+  }
+  .bgm-header {
+    margin-bottom: 0.5rem;
+  }
+  .bgm-label {
+    font-size: 0.72rem;
+  }
+  .bgm-mode-btn {
+    padding: 0.2rem 0.55rem;
+    font-size: 0.7rem;
+  }
+  .bgm-np-icon {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+  .bgm-np-track { font-size: 0.85rem; }
+  .bgm-np-sub   { font-size: 0.7rem; }
+  .bgm-volume {
+    max-width: none;
+    flex: 1 1 100%;
+    margin-left: 0;
+  }
+  .bgm-fav-list {
+    max-height: 10rem;
+  }
+  .bgm-fav-title { font-size: 0.75rem; }
+  .bgm-fav-id   { font-size: 0.65rem; }
+}
+
+/* Hero action buttons: keep inside padding on small screens */
+@media (max-width: 600px) {
+  .disc-hero-actions {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
 }

@@ -1076,7 +1076,7 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
     .disc-hero-section {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         min-height: auto;
     }
 
@@ -1090,10 +1090,12 @@
 
     .disc-info-hero {
         padding: 1.5rem;
+        min-width: 0;
     }
 
     .disc-name-hero {
         font-size: 1.75rem;
+        word-break: break-word;
     }
 
     .disc-selector-scroll {
@@ -1164,6 +1166,32 @@
 
     .disc-card-id {
         font-size: 0.65rem;
+    }
+
+    .disc-hero-section {
+        border-width: 2px;
+        border-radius: 1rem;
+    }
+
+    .disc-portrait-hero {
+        padding: 1rem;
+    }
+
+    .disc-image-wrapper {
+        height: 16rem;
+    }
+
+    .disc-info-hero {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .disc-name-hero {
+        font-size: 1.35rem;
+    }
+
+    .disc-details-card {
+        padding: 0.875rem;
     }
 }
 
