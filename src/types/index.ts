@@ -550,7 +550,8 @@ declare global {
     handleBuildTitleChange?: (event: Event) => void;
     handleBuildMemoChange?: (event: Event) => void;
     closeLoadModal?: () => void;
-    
+    openIngameCodeModal?: () => void;
+
     // Compression library
     fflate?: CompressionLib;
   }

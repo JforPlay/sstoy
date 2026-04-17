@@ -203,7 +203,30 @@
     "notePhase": "소리 단계",
     "noStory": "스토리 정보가 없습니다.",
     "loadingError": "레코드 데이터를 불러오는데 실패했습니다.",
-    "discNameDefault": "레코드 ${id}"
+    "discNameDefault": "레코드 ${id}",
+    "bgm": {
+      "panelTitle": "BGM 플레이어",
+      "modeLoop": "반복",
+      "modeQueue": "연속 재생",
+      "loopSuffix": "반복 중",
+      "playThisTooltip": "이 레코드의 BGM 재생",
+      "favoriteTooltip": "즐겨찾기에 추가",
+      "unfavoriteTooltip": "즐겨찾기에서 제거",
+      "favoritesHeader": "즐겨찾기",
+      "favoritesEmpty": "레코드의 BGM을 별표로 저장해보세요.",
+      "nowPlayingNone": "재생 중인 곡이 없습니다.",
+      "rowPlayTooltip": "재생",
+      "rowPauseTooltip": "일시정지",
+      "rowNavTooltip": "이 레코드로 이동",
+      "rowRemoveTooltip": "즐겨찾기에서 제거",
+      "noBgmAvailable": "이 레코드에는 BGM이 없습니다.",
+      "browserUnsupported": "이 브라우저는 BGM 오디오 형식을 재생할 수 없습니다. Chrome, Firefox 또는 Safari 17+ 를 사용해주세요.",
+      "favoritesCapReached": "즐겨찾기 목록이 가득 찼습니다 (최대 50개).",
+      "melodyMain": "메인",
+      "melodyVictory": "승리",
+      "volumeTooltip": "볼륨",
+      "muteTooltip": "음소거 전환"
+    }
   },
   "resources": {
     "title": "자원 도우미",

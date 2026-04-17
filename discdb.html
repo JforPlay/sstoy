@@ -57,6 +57,7 @@
     <link rel="stylesheet" href="css/utils.css">
     <link rel="stylesheet" href="css/components/ui-components.css">
     <link rel="stylesheet" href="css/discdb.css">
+    <link rel="stylesheet" href="css/bgm-player.css">
 
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
         data-cf-beacon='{"token": "2db4a0ab2bf144419ec4ed1c864c934d"}'></script>
@@ -146,7 +147,16 @@
 
         <!-- Disc Details Section -->
         <div id="disc-details" class="disc-details-container" style="display: none;">
+            <div class="disc-hero-row">
             <div class="disc-hero-section">
+                <div class="disc-hero-actions">
+                    <button type="button" class="disc-hero-action-btn" data-bgm-action="play-this" id="disc-hero-play-btn" hidden>
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                    <button type="button" class="disc-hero-action-btn" data-bgm-action="favorite" id="disc-hero-fav-btn" hidden>
+                        <i class="fa-solid fa-star"></i>
+                    </button>
+                </div>
                 <div class="disc-portrait-hero">
                     <div class="portrait-background"></div>
                     <div id="disc-image-container" class="disc-image-wrapper">
@@ -171,6 +181,8 @@
                         <div id="disc-description" class="disc-description"></div>
                     </div>
                 </div>
+            </div>
+            <div id="disc-bgm-panel"></div>
             </div>
 
             <div class="disc-attributes-section">

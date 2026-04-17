@@ -203,7 +203,30 @@
     "notePhase": "Note Phase",
     "noStory": "No story information available.",
     "loadingError": "Failed to load disc data.",
-    "discNameDefault": "Disc ${id}"
+    "discNameDefault": "Disc ${id}",
+    "bgm": {
+      "panelTitle": "BGM Player",
+      "modeLoop": "Loop",
+      "modeQueue": "Queue",
+      "loopSuffix": "looping",
+      "playThisTooltip": "Play this disc's BGM",
+      "favoriteTooltip": "Add to favorites",
+      "unfavoriteTooltip": "Remove from favorites",
+      "favoritesHeader": "Favorites",
+      "favoritesEmpty": "Star a disc's BGM to save it here.",
+      "nowPlayingNone": "Nothing playing — press play on a disc.",
+      "rowPlayTooltip": "Play",
+      "rowPauseTooltip": "Pause",
+      "rowNavTooltip": "Go to this disc",
+      "rowRemoveTooltip": "Remove from favorites",
+      "noBgmAvailable": "No BGM available for this disc.",
+      "browserUnsupported": "Your browser cannot play the BGM audio format. Try Chrome, Firefox, or Safari 17+.",
+      "favoritesCapReached": "Favorites list full (50 max).",
+      "melodyMain": "Main",
+      "melodyVictory": "Victory",
+      "volumeTooltip": "Volume",
+      "muteTooltip": "Mute / unmute"
+    }
   },
   "resources": {
     "title": "Resource Helper",

@@ -29,6 +29,7 @@ import { substituteSkillParams } from '../modules/param-parser';
 
 import { showError, parseElementTags } from '../shared';
 import Fuse from 'fuse.js';
+import { initBgmPlayer, type BgmPlayerHandle, type DiscBgmMap } from '../modules/bgm-player';
 import type { Disc, MainSkill, SecondarySkill, SubNoteSkill, SubNoteSkillPromoteGroup, GameEnums, Item } from '../types';
 
 // =============================================================================
@@ -64,6 +65,8 @@ interface DiscDBState {
     fuse: unknown;
     selectedElement: string;
   };
+  bgmMap: DiscBgmMap;
+  bgmPlayer: BgmPlayerHandle | null;
 }
 
 // =============================================================================
@@ -99,6 +102,8 @@ const discDBState: DiscDBState = {
     fuse: null,
     selectedElement: 'all',
   },
+  bgmMap: {},
+  bgmPlayer: null,
 };
 
 // =============================================================================
@@ -137,6 +142,20 @@ async function loadDiscData(): Promise<void> {
 
     await loadCoreData();
     await loadFeatureData('discSystem');
+
+    try {
+      const base = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '/');
+      const res = await fetch(`${base}data/disc_bgm_map.json`);
+      if (res.ok) {
+        discDBState.bgmMap = await res.json();
+      } else {
+        console.warn('[DiscDB] disc_bgm_map.json fetch returned', res.status);
+        discDBState.bgmMap = {};
+      }
+    } catch (err) {
+      console.warn('[DiscDB] Failed to load disc_bgm_map.json', err);
+      discDBState.bgmMap = {};
+    }
 
     const langFiles = [
       'DiscIP.json',
@@ -446,6 +465,17 @@ function renderDiscAttributes(discId: string, level: number, limitBreak: number)
 // =============================================================================
 
 /**
+ * Resolves the icon path for a disc id, reusing the same logic as renderDiscSelector.
+ * Returns null if no icon is available.
+ */
+function getDiscIconPath(discId: string): string | null {
+  const itemData = discDBState.itemData[discId];
+  if (!itemData || !itemData.Icon) return null;
+  const iconName = extractFilename(itemData.Icon as string);
+  return `assets/disc_icons/${iconName}.png`;
+}
+
+/**
  * Selects a disc and displays its detailed information
  *
  * Shows disc details container, updates all disc information sections
@@ -545,6 +575,28 @@ function selectDisc(discId: string): void {
   }
 
   renderDiscAttributes(discId, discDBState.discLevel, discDBState.discLimitBreak);
+
+  // Update BGM hero overlay buttons
+  const player = discDBState.bgmPlayer;
+  const playBtn = document.getElementById('disc-hero-play-btn') as HTMLButtonElement | null;
+  const favBtn = document.getElementById('disc-hero-fav-btn') as HTMLButtonElement | null;
+  const hasBgm = !!player && player.hasBgm(discId);
+  if (playBtn) {
+    playBtn.hidden = !hasBgm;
+    playBtn.title = window.i18n?.t('discdb.bgm.playThisTooltip') ?? '';
+    playBtn.onclick = hasBgm ? () => { void player!.playDisc(discId); } : null;
+  }
+  if (favBtn) {
+    favBtn.hidden = !hasBgm;
+    const isFav = !!player && player.isFavorite(discId);
+    favBtn.classList.toggle('active', isFav);
+    favBtn.title = window.i18n?.t(isFav ? 'discdb.bgm.unfavoriteTooltip' : 'discdb.bgm.favoriteTooltip') ?? '';
+    favBtn.onclick = hasBgm ? () => {
+      const nowFav = player!.toggleFavorite(discId);
+      favBtn.classList.toggle('active', nowFav);
+      favBtn.title = window.i18n?.t(nowFav ? 'discdb.bgm.unfavoriteTooltip' : 'discdb.bgm.favoriteTooltip') ?? '';
+    } : null;
+  }
 }
 
 function updateDiscDescription(discId: string, itemData: Item | undefined): void {
@@ -1041,6 +1093,24 @@ async function initPage(): Promise<void> {
   await loadDiscData();
   setupSearchHandler();
   setupEventDelegation();
+
+  // Initialize BGM player (safe if no-op — init returns null on unsupported browsers).
+  const panelEl = document.getElementById('disc-bgm-panel');
+  if (panelEl) {
+    discDBState.bgmPlayer = initBgmPlayer({
+      panelEl,
+      bgmMap: discDBState.bgmMap,
+      getDiscName: (id) => discDBState.discNames[id] || id,
+      getDiscIconPath,
+      t: (key) => window.i18n?.t(key) ?? key,
+    });
+  }
+
+  // Handle favorite-row nav events
+  document.addEventListener('bgm:navigate', (ev) => {
+    const detail = (ev as CustomEvent<{ discId: string }>).detail;
+    if (detail?.discId) selectDisc(detail.discId);
+  });
 }
 
 if (document.readyState === 'loading') {

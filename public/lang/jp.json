@@ -203,7 +203,30 @@
     "notePhase": "音符レベル",
     "noStory": "ストーリー情報がございません。",
     "loadingError": "ロスレコのデータの呼び込みに失敗しました。",
-    "discNameDefault": "ロスレコ ${id}"
+    "discNameDefault": "ロスレコ ${id}",
+    "bgm": {
+      "panelTitle": "BGMプレイヤー",
+      "modeLoop": "ループ",
+      "modeQueue": "連続再生",
+      "loopSuffix": "ループ中",
+      "playThisTooltip": "このレコードのBGMを再生",
+      "favoriteTooltip": "お気に入りに追加",
+      "unfavoriteTooltip": "お気に入りから削除",
+      "favoritesHeader": "お気に入り",
+      "favoritesEmpty": "レコードのBGMをスターで保存しましょう。",
+      "nowPlayingNone": "再生中の曲はありません。",
+      "rowPlayTooltip": "再生",
+      "rowPauseTooltip": "一時停止",
+      "rowNavTooltip": "このレコードへ",
+      "rowRemoveTooltip": "お気に入りから削除",
+      "noBgmAvailable": "このレコードにはBGMがありません。",
+      "browserUnsupported": "このブラウザはBGMの音声形式を再生できません。Chrome、Firefox、またはSafari 17以降を使用してください。",
+      "favoritesCapReached": "お気に入りリストがいっぱいです (最大50件)。",
+      "melodyMain": "メイン",
+      "melodyVictory": "勝利",
+      "volumeTooltip": "ボリューム",
+      "muteTooltip": "ミュート切替"
+    }
   },
   "resources": {
     "title": "素材ヘルパー",

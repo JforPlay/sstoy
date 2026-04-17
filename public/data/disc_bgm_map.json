@@ -1,0 +1,3083 @@
+{
+  "211001": {
+    "VoFile": "outfit_1001",
+    "StateId": 4269811653,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 604063670,
+          "start": 0.0,
+          "end": 6.8577
+        },
+        {
+          "wem": 150229201,
+          "start": 0.0,
+          "end": 13.7186
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.211001.1",
+    "VoName2": "DiscIP.211001.2",
+    "CharId": [
+      112
+    ]
+  },
+  "211002": {
+    "VoFile": "outfit_1002",
+    "StateId": 4269811654,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 742555548,
+          "start": 0.0,
+          "end": 61.464
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 273831112,
+          "start": 0.0,
+          "end": 7.6975
+        },
+        {
+          "wem": 496866816,
+          "start": 0.0,
+          "end": 13.4066
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.211002.1",
+    "VoName2": "DiscIP.211002.2",
+    "CharId": [
+      123
+    ]
+  },
+  "211003": {
+    "VoFile": "outfit_1003",
+    "StateId": 4269811655,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 397046620,
+          "start": 0.0,
+          "end": 5.8293
+        },
+        {
+          "wem": 590817301,
+          "start": 0.0,
+          "end": 11.6587
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.211003.1",
+    "VoName2": "DiscIP.211003.2",
+    "CharId": [
+      135
+    ]
+  },
+  "211004": {
+    "VoFile": "outfit_1004",
+    "StateId": 4269811648,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 693826303,
+          "start": 0.0,
+          "end": 6.0111
+        },
+        {
+          "wem": 711277871,
+          "start": 0.0,
+          "end": 12.0147
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.211004.1",
+    "VoName2": "DiscIP.211004.2",
+    "CharId": [
+      137
+    ]
+  },
+  "211005": {
+    "VoFile": "outfit_1005",
+    "StateId": 4269811649,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 181562500,
+          "start": 0.0,
+          "end": 5.9375
+        },
+        {
+          "wem": 543724378,
+          "start": 0.0,
+          "end": 10.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.211005.1",
+    "VoName2": "DiscIP.211005.2",
+    "CharId": [
+      103
+    ]
+  },
+  "211006": {
+    "VoFile": "outfit_1006",
+    "StateId": 4269811650,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 580218669,
+          "start": 0.0,
+          "end": 6.3227
+        },
+        {
+          "wem": 56216830,
+          "start": 0.0,
+          "end": 12.6316
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.211006.1",
+    "VoName2": "DiscIP.211006.2",
+    "CharId": [
+      133
+    ]
+  },
+  "211007": {
+    "VoFile": "outfit_1007",
+    "StateId": 4269811651,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 119255607,
+          "start": 0.0,
+          "end": 65.0847
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 1432320,
+          "start": 0.0,
+          "end": 6.3487
+        },
+        {
+          "wem": 279152674,
+          "start": 0.0,
+          "end": 10.17
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.211007.1",
+    "VoName2": "DiscIP.211007.2",
+    "CharId": [
+      111
+    ]
+  },
+  "211008": {
+    "VoFile": "outfit_1008",
+    "StateId": 4269811660,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 405846800,
+          "start": 0.0,
+          "end": 67.7647
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 1015539616,
+          "start": 0.0,
+          "end": 6.7059
+        },
+        {
+          "wem": 888499412,
+          "start": 0.0,
+          "end": 11.2941
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.211008.1",
+    "VoName2": "DiscIP.211008.2",
+    "CharId": [
+      130
+    ]
+  },
+  "212001": {
+    "VoFile": "outfit_2001",
+    "StateId": 998451716,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 565713450,
+          "start": 0.0,
+          "end": 62.8571
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 278928926,
+          "start": 0.0,
+          "end": 7.151
+        },
+        {
+          "wem": 518303623,
+          "start": 0.0,
+          "end": 11.4378
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.212001.1",
+    "VoName2": "DiscIP.212001.2",
+    "CharId": null
+  },
+  "212002": {
+    "VoFile": "outfit_2002",
+    "StateId": 998451719,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 982061245,
+          "start": 0.0,
+          "end": 59.6126
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 22999155,
+          "start": 0.0,
+          "end": 6.628
+        },
+        {
+          "wem": 646481860,
+          "start": 0.0,
+          "end": 13.2751
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.212002.1",
+    "VoName2": "DiscIP.212002.2",
+    "CharId": null
+  },
+  "212003": {
+    "VoFile": "outfit_2003",
+    "StateId": 998451718,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 310521111,
+          "start": 0.0,
+          "end": 56.0048
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 918283182,
+          "start": 0.0,
+          "end": 8.0023
+        },
+        {
+          "wem": 586499821,
+          "start": 0.0,
+          "end": 16.0092
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.212003.1",
+    "VoName2": "DiscIP.212003.2",
+    "CharId": null
+  },
+  "212005": {
+    "VoFile": "outfit_2005",
+    "StateId": 998451712,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 443152985,
+          "start": 0.0,
+          "end": 66.2069
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 705520520,
+          "start": 0.0,
+          "end": 6.6207
+        },
+        {
+          "wem": 413811426,
+          "start": 0.0,
+          "end": 9.931
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.212005.1",
+    "VoName2": "DiscIP.212005.2",
+    "CharId": [
+      123
+    ]
+  },
+  "212006": {
+    "VoFile": "outfit_2006",
+    "StateId": 998451715,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 1056081683,
+          "start": 0.0,
+          "end": 55.759
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 422057531,
+          "start": 0.0,
+          "end": 6.2849
+        },
+        {
+          "wem": 183837451,
+          "start": 0.0,
+          "end": 12.4783
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.212006.1",
+    "VoName2": "DiscIP.212006.2",
+    "CharId": [
+      117
+    ]
+  },
+  "212007": {
+    "VoFile": "outfit_2007",
+    "StateId": 998451714,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 641042713,
+          "start": 0.0,
+          "end": 57.608
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 21152159,
+          "start": 0.0,
+          "end": 6.4342
+        },
+        {
+          "wem": 224440177,
+          "start": 0.0,
+          "end": 12.8113
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.212007.1",
+    "VoName2": "DiscIP.212007.2",
+    "CharId": null
+  },
+  "212008": {
+    "VoFile": "outfit_2008",
+    "StateId": 998451725,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 96351698,
+          "start": 0.0,
+          "end": 66.1275
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 374454619,
+          "start": 0.0,
+          "end": 6.0062
+        },
+        {
+          "wem": 954537537,
+          "start": 0.0,
+          "end": 12.0169
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.212008.1",
+    "VoName2": "DiscIP.212008.2",
+    "CharId": null
+  },
+  "212009": {
+    "VoFile": "outfit_2009",
+    "StateId": 998451724,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 856817789,
+          "start": 0.0,
+          "end": 60.0
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 904892404,
+          "start": 0.0,
+          "end": 6.2069
+        },
+        {
+          "wem": 985232654,
+          "start": 0.0,
+          "end": 8.2759
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.212009.1",
+    "VoName2": "DiscIP.212009.2",
+    "CharId": null
+  },
+  "212010": {
+    "VoFile": "outfit_2010",
+    "StateId": 981674130,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 358880743,
+          "start": 0.0,
+          "end": 60.7595
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 667817391,
+          "start": 0.0,
+          "end": 6.6456
+        },
+        {
+          "wem": 589433795,
+          "start": 0.0,
+          "end": 12.1519
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.212010.1",
+    "VoName2": "DiscIP.212010.2",
+    "CharId": null
+  },
+  "213001": {
+    "VoFile": "outfit_3001",
+    "StateId": 3706451547,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": null,
+    "VoName1": "DiscIP.213001.1",
+    "VoName2": "DiscIP.213001.2",
+    "CharId": null
+  },
+  "213002": {
+    "VoFile": "outfit_3002",
+    "StateId": 3706451544,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": null,
+    "VoName1": "DiscIP.213002.1",
+    "VoName2": "DiscIP.213002.2",
+    "CharId": null
+  },
+  "213003": {
+    "VoFile": "outfit_3003",
+    "StateId": 3706451545,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 813195067,
+          "start": 0.0,
+          "end": 5.8215
+        },
+        {
+          "wem": 817687570,
+          "start": 0.0,
+          "end": 37.8182
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213003.1",
+    "VoName2": "DiscIP.213003.2",
+    "CharId": [
+      132
+    ]
+  },
+  "213004": {
+    "VoFile": "outfit_3004",
+    "StateId": 3706451550,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 686260481,
+          "start": 0.0,
+          "end": 70.073
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 691134233,
+          "start": 0.0,
+          "end": 7.0073
+        },
+        {
+          "wem": 303300877,
+          "start": 0.0,
+          "end": 10.511
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213004.1",
+    "VoName2": "DiscIP.213004.2",
+    "CharId": null
+  },
+  "213005": {
+    "VoFile": "outfit_3005",
+    "StateId": 3706451551,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 942628797,
+          "start": 0.0,
+          "end": 85.7164
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 253321806,
+          "start": 0.0,
+          "end": 5.7164
+        },
+        {
+          "wem": 538306965,
+          "start": 0.0,
+          "end": 11.4279
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213005.1",
+    "VoName2": "DiscIP.213005.2",
+    "CharId": [
+      135
+    ]
+  },
+  "213006": {
+    "VoFile": "outfit_3006",
+    "StateId": 3706451548,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 596557574,
+          "start": 0.0,
+          "end": 60.019
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 680419693,
+          "start": 0.0,
+          "end": 6.6922
+        },
+        {
+          "wem": 138435150,
+          "start": 0.0,
+          "end": 13.3485
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213006.1",
+    "VoName2": "DiscIP.213006.2",
+    "CharId": [
+      127
+    ]
+  },
+  "213007": {
+    "VoFile": "outfit_3007",
+    "StateId": 3706451549,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 515040114,
+          "start": 0.0,
+          "end": 73.6041
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 1020493335,
+          "start": 0.0,
+          "end": 6.4413
+        },
+        {
+          "wem": 240226717,
+          "start": 0.0,
+          "end": 9.6842
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213007.1",
+    "VoName2": "DiscIP.213007.2",
+    "CharId": null
+  },
+  "213008": {
+    "VoFile": "outfit_3008",
+    "StateId": 3706451538,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 92278043,
+          "start": 0.0,
+          "end": 60.3228
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 278661328,
+          "start": 0.0,
+          "end": 6.5897
+        },
+        {
+          "wem": 594011971,
+          "start": 0.0,
+          "end": 9.4478
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213008.1",
+    "VoName2": "DiscIP.213008.2",
+    "CharId": [
+      111
+    ]
+  },
+  "213009": {
+    "VoFile": "outfit_3009",
+    "StateId": 3706451539,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 660180463,
+          "start": 0.0,
+          "end": 60.4583
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 300821575,
+          "start": 0.0175,
+          "end": 6.5958
+        },
+        {
+          "wem": 1016810637,
+          "start": 0.0,
+          "end": 11.6332
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213009.1",
+    "VoName2": "DiscIP.213009.2",
+    "CharId": null
+  },
+  "213010": {
+    "VoFile": "outfit_3010",
+    "StateId": 3723229133,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 965928423,
+          "start": 0.0,
+          "end": 58.9145
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 234045920,
+          "start": 0.0,
+          "end": 6.567
+        },
+        {
+          "wem": 92488690,
+          "start": 0.0,
+          "end": 17.4757
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213010.1",
+    "VoName2": "DiscIP.213010.2",
+    "CharId": [
+      113
+    ]
+  },
+  "213011": {
+    "VoFile": "outfit_3011",
+    "StateId": 3723229132,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 466606099,
+          "start": 0.0,
+          "end": 62.9545
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 390350186,
+          "start": 0.0,
+          "end": 5.9135
+        },
+        {
+          "wem": 179796768,
+          "start": 0.0,
+          "end": 7.8516
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213011.1",
+    "VoName2": "DiscIP.213011.2",
+    "CharId": [
+      114
+    ]
+  },
+  "213012": {
+    "VoFile": "outfit_3012",
+    "StateId": 3723229135,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 863048743,
+          "start": 0.0,
+          "end": 60.7595
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 695828488,
+          "start": 0.0,
+          "end": 6.4557
+        },
+        {
+          "wem": 284774602,
+          "start": 0.0,
+          "end": 9.1139
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213012.1",
+    "VoName2": "DiscIP.213012.2",
+    "CharId": [
+      132
+    ]
+  },
+  "213013": {
+    "VoFile": "outfit_3013",
+    "StateId": 3723229134,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 456995951,
+          "start": 0.0,
+          "end": 59.5349
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 606356410,
+          "start": 0.0,
+          "end": 8.3721
+        },
+        {
+          "wem": 44975042,
+          "start": 0.0,
+          "end": 14.8837
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213013.1",
+    "VoName2": "DiscIP.213013.2",
+    "CharId": [
+      123
+    ]
+  },
+  "213014": {
+    "VoFile": "outfit_3014",
+    "StateId": 3723229129,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 804899945,
+          "start": 0.0,
+          "end": 58.1818
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 8459824,
+          "start": 0.0,
+          "end": 7.2727
+        },
+        {
+          "wem": 1059472479,
+          "start": 0.0,
+          "end": 14.5455
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213014.1",
+    "VoName2": "DiscIP.213014.2",
+    "CharId": [
+      107
+    ]
+  },
+  "213015": {
+    "VoFile": "outfit_3015",
+    "StateId": 3723229128,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 429406142,
+          "start": 0.0,
+          "end": 64.0
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 73253232,
+          "start": 0.0,
+          "end": 7.0
+        },
+        {
+          "wem": 526232159,
+          "start": 0.0,
+          "end": 10.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213015.1",
+    "VoName2": "DiscIP.213015.2",
+    "CharId": [
+      156
+    ]
+  },
+  "213016": {
+    "VoFile": "outfit_3016",
+    "StateId": 3723229131,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 916844502,
+          "start": 0.0,
+          "end": 4.8
+        },
+        {
+          "wem": 153769390,
+          "start": 0.0,
+          "end": 19.2
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213016.1",
+    "VoName2": "DiscIP.213016.2",
+    "CharId": [
+      126
+    ]
+  },
+  "213017": {
+    "VoFile": "outfit_3017",
+    "StateId": 3723229130,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 516528042,
+          "start": 0.0,
+          "end": 60.0001
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 264770508,
+          "start": 0.0,
+          "end": 6.0
+        },
+        {
+          "wem": 990887154,
+          "start": 0.0,
+          "end": 12.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213017.1",
+    "VoName2": "DiscIP.213017.2",
+    "CharId": null
+  },
+  "213018": {
+    "VoFile": "outfit_3018",
+    "StateId": 3723229125,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 136908951,
+          "start": 0.0,
+          "end": 64.0
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 551929063,
+          "start": 0.0,
+          "end": 8.0
+        },
+        {
+          "wem": 171647864,
+          "start": 0.0,
+          "end": 16.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213018.1",
+    "VoName2": "DiscIP.213018.2",
+    "CharId": [
+      142
+    ]
+  },
+  "213019": {
+    "VoFile": "outfit_3019",
+    "StateId": 3723229124,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 560294955,
+          "start": 0.0,
+          "end": 62.5
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 787946835,
+          "start": 0.0,
+          "end": 6.875
+        },
+        {
+          "wem": 91026293,
+          "start": 0.0,
+          "end": 10.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213019.1",
+    "VoName2": "DiscIP.213019.2",
+    "CharId": null
+  },
+  "213020": {
+    "VoFile": "outfit_3020",
+    "StateId": 3672896372,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 634647082,
+          "start": 0.0,
+          "end": 62.439
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 7774856,
+          "start": 0.0,
+          "end": 7.8049
+        },
+        {
+          "wem": 295502847,
+          "start": 0.0,
+          "end": 15.6098
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213020.1",
+    "VoName2": "DiscIP.213020.2",
+    "CharId": null
+  },
+  "213021": {
+    "VoFile": "outfit_3021",
+    "StateId": 3672896373,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 490554909,
+          "start": 0.0,
+          "end": 61.7143
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 736824381,
+          "start": 0.0,
+          "end": 9.4286
+        },
+        {
+          "wem": 510808183,
+          "start": 0.0,
+          "end": 13.7143
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213021.1",
+    "VoName2": "DiscIP.213021.2",
+    "CharId": null
+  },
+  "213022": {
+    "VoFile": "outfit_3022",
+    "StateId": 3672896374,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 1020829550,
+          "start": 0.0,
+          "end": 60.0115
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 698792119,
+          "start": 0.0,
+          "end": 5.72
+        },
+        {
+          "wem": 692996045,
+          "start": 0.0,
+          "end": 8.5789
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213022.1",
+    "VoName2": "DiscIP.213022.2",
+    "CharId": null
+  },
+  "213023": {
+    "VoFile": "outfit_3023",
+    "StateId": 3672896375,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 388595829,
+          "start": 0.0,
+          "end": 59.6078
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 578407308,
+          "start": 0.0,
+          "end": 7.8557
+        },
+        {
+          "wem": 706034727,
+          "start": 0.0,
+          "end": 12.549
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213023.1",
+    "VoName2": "DiscIP.213023.2",
+    "CharId": null
+  },
+  "213024": {
+    "VoFile": "outfit_3024",
+    "StateId": 3672896368,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 885553067,
+          "start": 0.0,
+          "end": 63.2967
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 583821176,
+          "start": 0.0,
+          "end": 6.5934
+        },
+        {
+          "wem": 399261172,
+          "start": 0.0,
+          "end": 10.5494
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213024.1",
+    "VoName2": "DiscIP.213024.2",
+    "CharId": null
+  },
+  "213025": {
+    "VoFile": "outfit_3025",
+    "StateId": 3672896369,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 510329512,
+          "start": 0.0,
+          "end": 7.2973
+        },
+        {
+          "wem": 510329512,
+          "start": 7.2973,
+          "end": 79.9073
+        }
+      ],
+      "loopFrom": 1
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 510329512,
+          "start": 0.0,
+          "end": 7.2973
+        },
+        {
+          "wem": 510329512,
+          "start": 7.2973,
+          "end": 27.5676
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213025.1",
+    "VoName2": "DiscIP.213025.2",
+    "CharId": null
+  },
+  "213026": {
+    "VoFile": "outfit_3026",
+    "StateId": 3672896370,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 992766590,
+          "start": 0.0,
+          "end": 61.5
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 442234563,
+          "start": 0.0,
+          "end": 8.8073
+        },
+        {
+          "wem": 1013066060,
+          "start": 0.0,
+          "end": 17.6147
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213026.1",
+    "VoName2": "DiscIP.213026.2",
+    "CharId": null
+  },
+  "213027": {
+    "VoFile": "outfit_3012",
+    "StateId": 3723229135,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 863048743,
+          "start": 0.0,
+          "end": 60.7595
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 695828488,
+          "start": 0.0,
+          "end": 6.4557
+        },
+        {
+          "wem": 284774602,
+          "start": 0.0,
+          "end": 9.1139
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213027.1",
+    "VoName2": "DiscIP.213027.2",
+    "CharId": [
+      138
+    ]
+  },
+  "213028": {
+    "VoFile": "outfit_3012",
+    "StateId": 3723229135,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 863048743,
+          "start": 0.0,
+          "end": 60.7595
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 695828488,
+          "start": 0.0,
+          "end": 6.4557
+        },
+        {
+          "wem": 284774602,
+          "start": 0.0,
+          "end": 9.1139
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213028.1",
+    "VoName2": "DiscIP.213028.2",
+    "CharId": [
+      103
+    ]
+  },
+  "213029": {
+    "VoFile": "outfit_3012",
+    "StateId": 3723229135,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 863048743,
+          "start": 0.0,
+          "end": 60.7595
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 695828488,
+          "start": 0.0,
+          "end": 6.4557
+        },
+        {
+          "wem": 284774602,
+          "start": 0.0,
+          "end": 9.1139
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213029.1",
+    "VoName2": "DiscIP.213029.2",
+    "CharId": [
+      107
+    ]
+  },
+  "213030": {
+    "VoFile": "outfit_3012",
+    "StateId": 3723229135,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 863048743,
+          "start": 0.0,
+          "end": 60.7595
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 695828488,
+          "start": 0.0,
+          "end": 6.4557
+        },
+        {
+          "wem": 284774602,
+          "start": 0.0,
+          "end": 9.1139
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213030.1",
+    "VoName2": "DiscIP.213030.2",
+    "CharId": null
+  },
+  "213031": {
+    "VoFile": "outfit_3012",
+    "StateId": 3723229135,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 863048743,
+          "start": 0.0,
+          "end": 60.7595
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 695828488,
+          "start": 0.0,
+          "end": 6.4557
+        },
+        {
+          "wem": 284774602,
+          "start": 0.0,
+          "end": 9.1139
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213031.1",
+    "VoName2": "DiscIP.213031.2",
+    "CharId": null
+  },
+  "213032": {
+    "VoFile": "outfit_3012",
+    "StateId": 3723229135,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 863048743,
+          "start": 0.0,
+          "end": 60.7595
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 695828488,
+          "start": 0.0,
+          "end": 6.4557
+        },
+        {
+          "wem": 284774602,
+          "start": 0.0,
+          "end": 9.1139
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.213032.1",
+    "VoName2": "DiscIP.213032.2",
+    "CharId": [
+      120
+    ]
+  },
+  "214001": {
+    "VoFile": "outfit_4001",
+    "StateId": 567008130,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 25454139,
+          "start": 0.0,
+          "end": 93.2436
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 501739531,
+          "start": 0.0,
+          "end": 6.0952
+        },
+        {
+          "wem": 753717279,
+          "start": 0.0,
+          "end": 10.8475
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214001.1",
+    "VoName2": "DiscIP.214001.2",
+    "CharId": [
+      114
+    ]
+  },
+  "214002": {
+    "VoFile": "outfit_4002",
+    "StateId": 567008129,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 648807531,
+          "start": 0.0,
+          "end": 6.5485
+        },
+        {
+          "wem": 1039586827,
+          "start": 0.0,
+          "end": 13.0862
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214002.1",
+    "VoName2": "DiscIP.214002.2",
+    "CharId": [
+      119
+    ]
+  },
+  "214003": {
+    "VoFile": "outfit_4003",
+    "StateId": 567008128,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": null,
+    "VoName1": "DiscIP.214003.1",
+    "VoName2": "DiscIP.214003.2",
+    "CharId": [
+      120
+    ]
+  },
+  "214004": {
+    "VoFile": "outfit_4004",
+    "StateId": 567008135,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 657976314,
+          "start": 0.0,
+          "end": 7.2973
+        },
+        {
+          "wem": 1027827243,
+          "start": 0.0,
+          "end": 12.973
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214004.1",
+    "VoName2": "DiscIP.214004.2",
+    "CharId": [
+      110
+    ]
+  },
+  "214005": {
+    "VoFile": "outfit_4005",
+    "StateId": 567008134,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 412512920,
+          "start": 0.0,
+          "end": 6.5455
+        },
+        {
+          "wem": 600600874,
+          "start": 0.0,
+          "end": 13.0909
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214005.1",
+    "VoName2": "DiscIP.214005.2",
+    "CharId": [
+      125
+    ]
+  },
+  "214006": {
+    "VoFile": "outfit_4006",
+    "StateId": 567008133,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 224880863,
+          "start": 0.0,
+          "end": 7.2885
+        },
+        {
+          "wem": 802851935,
+          "start": 0.0,
+          "end": 13.7405
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214006.1",
+    "VoName2": "DiscIP.214006.2",
+    "CharId": [
+      135
+    ]
+  },
+  "214007": {
+    "VoFile": "outfit_4007",
+    "StateId": 567008132,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 337002806,
+          "start": 0.0,
+          "end": 6.9474
+        },
+        {
+          "wem": 892430403,
+          "start": 0.0,
+          "end": 10.1053
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214007.1",
+    "VoName2": "DiscIP.214007.2",
+    "CharId": [
+      132
+    ]
+  },
+  "214008": {
+    "VoFile": "outfit_4008",
+    "StateId": 567008139,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 417265299,
+          "start": 0.0,
+          "end": 6.9107
+        },
+        {
+          "wem": 243426190,
+          "start": 0.0,
+          "end": 13.813
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214008.1",
+    "VoName2": "DiscIP.214008.2",
+    "CharId": [
+      130
+    ]
+  },
+  "214009": {
+    "VoFile": "outfit_4009",
+    "StateId": 567008138,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 116700513,
+          "start": 0.0,
+          "end": 41.9355
+        },
+        {
+          "wem": 340434629,
+          "start": 0.0,
+          "end": 67.0968
+        }
+      ],
+      "loopFrom": 1
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 883396317,
+          "start": 0.0,
+          "end": 5.8065
+        },
+        {
+          "wem": 349034363,
+          "start": 0.0,
+          "end": 20.6452
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214009.1",
+    "VoName2": "DiscIP.214009.2",
+    "CharId": [
+      112
+    ]
+  },
+  "214010": {
+    "VoFile": "outfit_4010",
+    "StateId": 550230544,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 120899713,
+          "start": 0.0,
+          "end": 18.0
+        },
+        {
+          "wem": 919404745,
+          "start": 0.0,
+          "end": 72.0
+        },
+        {
+          "wem": 888309805,
+          "start": 0.0,
+          "end": 48.0
+        }
+      ],
+      "loopFrom": 2
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 120899713,
+          "start": 3.4286,
+          "end": 21.4286
+        },
+        {
+          "wem": 1037722778,
+          "start": 0.0,
+          "end": 24.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214010.1",
+    "VoName2": "DiscIP.214010.2",
+    "CharId": null
+  },
+  "214011": {
+    "VoFile": "outfit_4011",
+    "StateId": 550230545,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 172857270,
+          "start": 0.0,
+          "end": 15.2308
+        },
+        {
+          "wem": 205489952,
+          "start": 0.0,
+          "end": 14.7692
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214011.1",
+    "VoName2": "DiscIP.214011.2",
+    "CharId": [
+      127
+    ]
+  },
+  "214012": {
+    "VoFile": "outfit_4012",
+    "StateId": 550230546,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 239838891,
+          "start": 0.0,
+          "end": 15.2381
+        },
+        {
+          "wem": 353780485,
+          "start": 0.0,
+          "end": 169.5238
+        }
+      ],
+      "loopFrom": 1
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 239838891,
+          "start": 0.0,
+          "end": 15.2381
+        },
+        {
+          "wem": 353780485,
+          "start": 47.619,
+          "end": 108.5714
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214012.1",
+    "VoName2": "DiscIP.214012.2",
+    "CharId": [
+      110
+    ]
+  },
+  "214013": {
+    "VoFile": "outfit_4013",
+    "StateId": 550230547,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 225938288,
+          "start": 1.1111,
+          "end": 166.6667
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 247298539,
+          "start": 0.0,
+          "end": 18.8889
+        },
+        {
+          "wem": 207589589,
+          "start": 0.0,
+          "end": 17.7778
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214013.1",
+    "VoName2": "DiscIP.214013.2",
+    "CharId": null
+  },
+  "214014": {
+    "VoFile": "outfit_4014",
+    "StateId": 550230548,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 557879933,
+          "start": 0.0,
+          "end": 98.0
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 556244158,
+          "start": 0.0,
+          "end": 6.0
+        },
+        {
+          "wem": 356359856,
+          "start": 0.0,
+          "end": 16.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214014.1",
+    "VoName2": "DiscIP.214014.2",
+    "CharId": null
+  },
+  "214015": {
+    "VoFile": "outfit_4015",
+    "StateId": 550230549,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 229122787,
+          "start": 0.0,
+          "end": 6.5455
+        },
+        {
+          "wem": 163355094,
+          "start": 0.0,
+          "end": 69.8182
+        },
+        {
+          "wem": 836929674,
+          "start": 0.0,
+          "end": 69.8182
+        }
+      ],
+      "loopFrom": 2
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 229122787,
+          "start": 0.0,
+          "end": 6.5455
+        },
+        {
+          "wem": 1022257081,
+          "start": 0.0,
+          "end": 17.4545
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214015.1",
+    "VoName2": "DiscIP.214015.2",
+    "CharId": [
+      133
+    ]
+  },
+  "214016": {
+    "VoFile": "outfit_4016",
+    "StateId": 550230550,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 377039009,
+          "start": 0.0,
+          "end": 7.3846
+        },
+        {
+          "wem": 133573685,
+          "start": 0.0,
+          "end": 73.8461
+        },
+        {
+          "wem": 600963182,
+          "start": 0.0,
+          "end": 73.8462
+        }
+      ],
+      "loopFrom": 2
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 377039009,
+          "start": 0.0,
+          "end": 7.3706
+        },
+        {
+          "wem": 649961534,
+          "start": 0.0,
+          "end": 16.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214016.1",
+    "VoName2": "DiscIP.214016.2",
+    "CharId": [
+      143
+    ]
+  },
+  "214017": {
+    "VoFile": "outfit_4017",
+    "StateId": 550230551,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 272760051,
+          "start": 0.0,
+          "end": 8.7273
+        },
+        {
+          "wem": 111743069,
+          "start": 0.0,
+          "end": 69.8182
+        },
+        {
+          "wem": 531785226,
+          "start": 0.0,
+          "end": 69.8182
+        }
+      ],
+      "loopFrom": 2
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 272760051,
+          "start": 0.0,
+          "end": 8.7273
+        },
+        {
+          "wem": 1012697061,
+          "start": 0.0,
+          "end": 15.2727
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214017.1",
+    "VoName2": "DiscIP.214017.2",
+    "CharId": [
+      134
+    ]
+  },
+  "214018": {
+    "VoFile": "outfit_4018",
+    "StateId": 550230552,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 496176761,
+          "start": 0.0,
+          "end": 51.0
+        },
+        {
+          "wem": 985940879,
+          "start": 0.0,
+          "end": 48.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 258714991,
+          "start": 0.0,
+          "end": 6.0
+        },
+        {
+          "wem": 62055700,
+          "start": 0.0,
+          "end": 12.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214018.1",
+    "VoName2": "DiscIP.214018.2",
+    "CharId": [
+      138
+    ]
+  },
+  "214019": {
+    "VoFile": "outfit_4019",
+    "StateId": 550230553,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 709115839,
+          "start": 0.0,
+          "end": 66.9767
+        },
+        {
+          "wem": 931296104,
+          "start": 0.0,
+          "end": 66.9767
+        }
+      ],
+      "loopFrom": 1
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 860239769,
+          "start": 2.093,
+          "end": 13.2558
+        },
+        {
+          "wem": 629423844,
+          "start": 0.0,
+          "end": 13.9535
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214019.1",
+    "VoName2": "DiscIP.214019.2",
+    "CharId": [
+      108
+    ]
+  },
+  "214020": {
+    "VoFile": "outfit_4020",
+    "StateId": 600563433,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 733616658,
+          "start": 0.0,
+          "end": 7.8261
+        },
+        {
+          "wem": 403622087,
+          "start": 0.0,
+          "end": 37.8261
+        },
+        {
+          "wem": 521309884,
+          "start": 0.0,
+          "end": 45.6522
+        }
+      ],
+      "loopFrom": 2
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 733616658,
+          "start": 0.0,
+          "end": 6.9565
+        },
+        {
+          "wem": 1023904863,
+          "start": 0.0,
+          "end": 10.4348
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214020.1",
+    "VoName2": "DiscIP.214020.2",
+    "CharId": [
+      125
+    ]
+  },
+  "214021": {
+    "VoFile": "outfit_4021",
+    "StateId": 600563432,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 325145161,
+          "start": 0.0,
+          "end": 57.6
+        },
+        {
+          "wem": 1343033,
+          "start": 0.0,
+          "end": 38.4
+        }
+      ],
+      "loopFrom": 1
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 658983406,
+          "start": 0.0,
+          "end": 9.6
+        },
+        {
+          "wem": 687643108,
+          "start": 0.0,
+          "end": 9.6
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214021.1",
+    "VoName2": "DiscIP.214021.2",
+    "CharId": [
+      134
+    ]
+  },
+  "214022": {
+    "VoFile": "outfit_4022",
+    "StateId": 600563435,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 600153208,
+          "start": 0.0,
+          "end": 56.4706
+        },
+        {
+          "wem": 885130821,
+          "start": 0.0,
+          "end": 62.1176
+        }
+      ],
+      "loopFrom": 1
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 360964564,
+          "start": 1.0588,
+          "end": 8.1176
+        },
+        {
+          "wem": 168005073,
+          "start": 0.0,
+          "end": 11.2941
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214022.1",
+    "VoName2": "DiscIP.214022.2",
+    "CharId": [
+      103
+    ]
+  },
+  "214023": {
+    "VoFile": "outfit_4023",
+    "StateId": 600563434,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 565544983,
+          "start": 0.0,
+          "end": 85.7143
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 263685703,
+          "start": 0.0,
+          "end": 8.5714
+        },
+        {
+          "wem": 937587768,
+          "start": 0.0,
+          "end": 17.1429
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214023.1",
+    "VoName2": "DiscIP.214023.2",
+    "CharId": null
+  },
+  "214024": {
+    "VoFile": "outfit_4024",
+    "StateId": 600563437,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 199673130,
+          "start": 0.0,
+          "end": 87.2727
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 206492334,
+          "start": 0.0,
+          "end": 6.7133
+        },
+        {
+          "wem": 351859256,
+          "start": 0.0,
+          "end": 13.4266
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214024.1",
+    "VoName2": "DiscIP.214024.2",
+    "CharId": [
+      112
+    ]
+  },
+  "214025": {
+    "VoFile": "outfit_4025",
+    "StateId": 600563436,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": null,
+    "VoName1": "DiscIP.214025.1",
+    "VoName2": "DiscIP.214025.2",
+    "CharId": [
+      107
+    ]
+  },
+  "214026": {
+    "VoFile": "outfit_4026",
+    "StateId": 600563439,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 435334533,
+          "start": 0.0,
+          "end": 18.0
+        },
+        {
+          "wem": 267528444,
+          "start": 18.0,
+          "end": 166.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 435334533,
+          "start": 0.0,
+          "end": 18.0
+        },
+        {
+          "wem": 1038285894,
+          "start": 98.0,
+          "end": 228.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214026.1",
+    "VoName2": "DiscIP.214026.2",
+    "CharId": [
+      155
+    ]
+  },
+  "214027": {
+    "VoFile": "outfit_4027",
+    "StateId": 600563438,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 202265627,
+          "start": 0.0,
+          "end": 8.7273
+        },
+        {
+          "wem": 711200908,
+          "start": 0.0,
+          "end": 17.4545
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214027.1",
+    "VoName2": "DiscIP.214027.2",
+    "CharId": [
+      141
+    ]
+  },
+  "214028": {
+    "VoFile": "outfit_4028",
+    "StateId": 600563425,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 551360608,
+          "start": 0.0,
+          "end": 20.5714
+        },
+        {
+          "wem": 737971187,
+          "start": 0.0,
+          "end": 41.1429
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214028.1",
+    "VoName2": "DiscIP.214028.2",
+    "CharId": [
+      119
+    ]
+  },
+  "214029": {
+    "VoFile": "outfit_4029",
+    "StateId": 600563424,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": null,
+    "VoName1": "DiscIP.214029.1",
+    "VoName2": "DiscIP.214029.2",
+    "CharId": [
+      114
+    ]
+  },
+  "214030": {
+    "VoFile": "outfit_4030",
+    "StateId": 583785846,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 144833533,
+          "start": 0.0,
+          "end": 96.0
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 407291234,
+          "start": 0.0,
+          "end": 17.4545
+        },
+        {
+          "wem": 141298976,
+          "start": 0.0,
+          "end": 17.4545
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214030.1",
+    "VoName2": "DiscIP.214030.2",
+    "CharId": null
+  },
+  "214031": {
+    "VoFile": "outfit_4031",
+    "StateId": 583785847,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 551504295,
+          "start": 0.0,
+          "end": 90.3529
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 171004945,
+          "start": 0.0,
+          "end": 5.6471
+        },
+        {
+          "wem": 700687981,
+          "start": 0.0,
+          "end": 11.2941
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214031.1",
+    "VoName2": "DiscIP.214031.2",
+    "CharId": [
+      144
+    ]
+  },
+  "214032": {
+    "VoFile": "outfit_4032",
+    "StateId": 583785844,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 282256792,
+          "start": 0.0,
+          "end": 89.1429
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 979712368,
+          "start": 0.0,
+          "end": 6.8571
+        },
+        {
+          "wem": 989063970,
+          "start": 0.0,
+          "end": 13.7143
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214032.1",
+    "VoName2": "DiscIP.214032.2",
+    "CharId": [
+      135
+    ]
+  },
+  "214033": {
+    "VoFile": "outfit_4033",
+    "StateId": 583785845,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 4210646,
+          "start": 0.0,
+          "end": 96.0
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 401790228,
+          "start": 0.0,
+          "end": 6.0
+        },
+        {
+          "wem": 646584493,
+          "start": 0.0,
+          "end": 24.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214033.1",
+    "VoName2": "DiscIP.214033.2",
+    "CharId": [
+      118
+    ]
+  },
+  "214034": {
+    "VoFile": "outfit_4034",
+    "StateId": 583785842,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": null,
+    "VoName1": "DiscIP.214034.1",
+    "VoName2": "DiscIP.214034.2",
+    "CharId": [
+      147
+    ]
+  },
+  "214035": {
+    "VoFile": "outfit_4035",
+    "StateId": 583785843,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": null,
+    "VoName1": "DiscIP.214035.1",
+    "VoName2": "DiscIP.214035.2",
+    "CharId": [
+      150
+    ]
+  },
+  "214036": {
+    "VoFile": "outfit_4036",
+    "StateId": 583785840,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 442319692,
+          "start": 0.6181,
+          "end": 5.6591
+        },
+        {
+          "wem": 433112678,
+          "start": 113.8144,
+          "end": 242.4742
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214036.1",
+    "VoName2": "DiscIP.214036.2",
+    "CharId": [
+      149
+    ]
+  },
+  "214037": {
+    "VoFile": "outfit_4037",
+    "StateId": 583785841,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 472410531,
+          "start": 0.0,
+          "end": 15.36
+        },
+        {
+          "wem": 247579688,
+          "start": 130.56,
+          "end": 268.8
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214037.1",
+    "VoName2": "DiscIP.214037.2",
+    "CharId": [
+      156
+    ]
+  },
+  "214038": {
+    "VoFile": "outfit_4038",
+    "StateId": 583785854,
+    "StateIdInHeader": true,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 557712330,
+          "start": 0.0,
+          "end": 15.0
+        },
+        {
+          "wem": 552671018,
+          "start": 0.0,
+          "end": 21.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214038.1",
+    "VoName2": "DiscIP.214038.2",
+    "CharId": [
+      155
+    ]
+  },
+  "214039": {
+    "VoFile": "outfit_4039",
+    "StateId": 583785855,
+    "StateIdInHeader": true,
+    "Main": {
+      "segments": [
+        {
+          "wem": 27636510,
+          "start": 2.4,
+          "end": 18.4
+        },
+        {
+          "wem": 27636510,
+          "start": 16.0,
+          "end": 96.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 1029424620,
+          "start": 1.6,
+          "end": 17.6
+        },
+        {
+          "wem": 812857626,
+          "start": 0.0,
+          "end": 12.8
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214039.1",
+    "VoName2": "DiscIP.214039.2",
+    "CharId": null
+  },
+  "214040": {
+    "VoFile": "outfit_4040",
+    "StateId": 634118607,
+    "StateIdInHeader": false,
+    "Main": {
+      "segments": [
+        {
+          "wem": 644243743,
+          "start": 0.0,
+          "end": 79.9869
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 337245837,
+          "start": 0.0,
+          "end": 16.0547
+        },
+        {
+          "wem": 1006870914,
+          "start": 0.0,
+          "end": 15.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214040.1",
+    "VoName2": "DiscIP.214040.2",
+    "CharId": null
+  },
+  "214041": {
+    "VoFile": "outfit_4041",
+    "StateId": 634118606,
+    "StateIdInHeader": false,
+    "Main": {
+      "segments": [
+        {
+          "wem": 1033477575,
+          "start": 0.0,
+          "end": 111.9101
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 1033477575,
+          "start": 0.0,
+          "end": 25.25
+        },
+        {
+          "wem": 1033477575,
+          "start": 25.2578,
+          "end": 75.0156
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214041.1",
+    "VoName2": "DiscIP.214041.2",
+    "CharId": null
+  },
+  "214043": {
+    "VoFile": "outfit_4043",
+    "StateId": 634118604,
+    "StateIdInHeader": false,
+    "Main": {
+      "segments": [
+        {
+          "wem": 571523810,
+          "start": 0.0,
+          "end": 24.0
+        },
+        {
+          "wem": 571523810,
+          "start": 24.0,
+          "end": 92.5714
+        }
+      ],
+      "loopFrom": 1
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 571523810,
+          "start": 0.0,
+          "end": 24.0
+        },
+        {
+          "wem": 571523810,
+          "start": 24.0,
+          "end": 75.4286
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214043.1",
+    "VoName2": "DiscIP.214043.2",
+    "CharId": [
+      110
+    ]
+  },
+  "214048": {
+    "VoFile": "outfit_4048",
+    "StateId": 634118599,
+    "StateIdInHeader": false,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 711406843,
+          "start": 0.0,
+          "end": 13.8947
+        },
+        {
+          "wem": 121379709,
+          "start": 0.0,
+          "end": 10.1053
+        }
+      ],
+      "loopFrom": 1
+    },
+    "VoName1": "DiscIP.214048.1",
+    "VoName2": "DiscIP.214048.2",
+    "CharId": null
+  },
+  "214042": {
+    "VoFile": "outfit_4042",
+    "StateId": 634118605,
+    "StateIdInHeader": false,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 429381028,
+          "start": 0.0,
+          "end": 15.0
+        }
+      ],
+      "loopFrom": 0
+    },
+    "VoName1": "DiscIP.214042.1",
+    "VoName2": "DiscIP.214042.2",
+    "CharId": null
+  },
+  "214044": {
+    "VoFile": "outfit_4044",
+    "StateId": 634118603,
+    "StateIdInHeader": false,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 145113165,
+          "start": 0.0,
+          "end": 15.4839
+        }
+      ],
+      "loopFrom": 0
+    },
+    "VoName1": "DiscIP.214044.1",
+    "VoName2": "DiscIP.214044.2",
+    "CharId": [
+      159
+    ]
+  },
+  "214046": {
+    "VoFile": "outfit_4046",
+    "StateId": 634118601,
+    "StateIdInHeader": false,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 98805947,
+          "start": 0.0,
+          "end": 21.3333
+        }
+      ],
+      "loopFrom": 0
+    },
+    "VoName1": "DiscIP.214046.1",
+    "VoName2": "DiscIP.214046.2",
+    "CharId": [
+      143
+    ]
+  },
+  "214047": {
+    "VoFile": "outfit_4047",
+    "StateId": 634118600,
+    "StateIdInHeader": false,
+    "Main": {
+      "segments": [
+        {
+          "wem": 698623818,
+          "start": 0.0,
+          "end": 25.5
+        },
+        {
+          "wem": 698623818,
+          "start": 25.5,
+          "end": 123.0
+        }
+      ],
+      "loopFrom": 1
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 146797500,
+          "start": 0.0,
+          "end": 12.0
+        }
+      ],
+      "loopFrom": 0
+    },
+    "VoName1": "DiscIP.214047.1",
+    "VoName2": "DiscIP.214047.2",
+    "CharId": [
+      130
+    ]
+  },
+  "214045": {
+    "VoFile": "outfit_4045",
+    "StateId": 634118602,
+    "StateIdInHeader": false,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 456501856,
+          "start": 0.0,
+          "end": 14.2222
+        }
+      ],
+      "loopFrom": 0
+    },
+    "VoName1": "DiscIP.214045.1",
+    "VoName2": "DiscIP.214045.2",
+    "CharId": [
+      145
+    ]
+  },
+  "214050": {
+    "VoFile": "outfit_4050",
+    "StateId": 617341020,
+    "StateIdInHeader": false,
+    "Main": null,
+    "Victory": {
+      "segments": [
+        {
+          "wem": 617902391,
+          "start": 0.0,
+          "end": 13.3333
+        }
+      ],
+      "loopFrom": 0
+    },
+    "VoName1": "DiscIP.214050.1",
+    "VoName2": "DiscIP.214050.2",
+    "CharId": [
+      145
+    ]
+  },
+  "214049": {
+    "VoFile": "outfit_4049",
+    "StateId": 634118598,
+    "StateIdInHeader": false,
+    "Main": {
+      "segments": [
+        {
+          "wem": 159122993,
+          "start": 0.0,
+          "end": 217.9189
+        }
+      ],
+      "loopFrom": 0
+    },
+    "Victory": {
+      "segments": [
+        {
+          "wem": 466116899,
+          "start": 0.0,
+          "end": 217.9189
+        }
+      ],
+      "loopFrom": 0
+    },
+    "VoName1": "DiscIP.214049.1",
+    "VoName2": "DiscIP.214049.2",
+    "CharId": null
+  }
+}
