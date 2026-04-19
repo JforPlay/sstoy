@@ -35,16 +35,6 @@
     },
     {
       "id": "preset-build",
-      "title": "(4/19) 레이스 2유파",
-      "description": "연합 토벌용 레이스 2유파 빌드입니다.",
-      "element": "Dark",
-      "characterId": 145,
-      "tags": ["오토하", "피렌", "코제트"],
-      "new": true,
-      "buildHash": "v3d-Hioypu1)0)lRQba%3E~lA%3DstYxJu%3EBbKfjj%7CvusEiw%2C(%2FT%3Bh%3AC%5B%23rKmGt%3A%7D%5Bzm*%5E%23%252oE%3BFy%7BRN!*dB%7BA%25y6k3r9%22eB!%22h%7B(EuoB~C*%2F8w%23)ZUF0%23*TTGl%7B6MhwqL%40lyYV%2C%60%7DYZ%5B!%2FfD%3Bqz*RjAd.8%7BO6cI8fb%7B%25%3FJ%60%7DIC_5%255%2FdSaH)f"
-    },
-    {
-      "id": "preset-build",
       "title": "(3/18) 치토세 + 토나 + 테레사",
       "description": "치토세 잠재를 가장 후순위로 수집, 집중의 소리 돈 남으면 구매",
       "author": "치토테 조합",
@@ -64,7 +54,6 @@
       "element": "Water",
       "characterId": 130,
       "tags": ["토나", "테레사", "프리지아"],
-      "meta": true,
       "buildHash": "v3d-YfhxoumBO5oj%7Bz%3EuwQ%23(Bavi!kEYM7m*ASGgI6NYaOeuDP5Hp5M)_K%40KYs%60mj.fmI%5BVsGp%24.%25wWHdOket9%3BXd8hTP%26H2nDc%5BPvB5%3B3%2BUxb%2456BiD%3FFcQue005l%3F2I%5E~V%2CER%25%7DN%2FKt4%7C3t%7C%3F*q%22k%22OB%22EKST6l%3CG%3F%5B%3AADY%2C5%2F%22z5%2FL%246xS%23%2CC"
     },
     {
@@ -99,7 +88,6 @@
       "element": "Earth",
       "characterId": 159,
       "tags": ["표식", "나즈나", "새해 크루니스", "그레이"],
-      "meta": true,
       "buildHash": "v3d-%22hjxoumB%5BA%7DU*%3B%22e6e2%3EU*6brLGw7HI%3C..u2_%3FV%25oB%7BhBg%3B%24%5DYF%7D%25RD%7CcH%7BrKPXQe%7D7b%249Q%5B0b(G%258B%3C)y4k5k(TB!%2B(Lm%5EKkMv%2FBpnHdOEe_4fb%7B%25%2Fblg6%26%3BbbS_vQM%7C_f5%3E%3F.*kxr%3CA!w%24VE%2FqI8T%3D%60M%3C*FlDR9"
     },
     {
