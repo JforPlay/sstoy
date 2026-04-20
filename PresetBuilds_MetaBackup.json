@@ -145,6 +145,17 @@
     },
     {
       "id": "preset-build",
+      "title": "(2/1) 클라루 후유카 2월 연합용 (요리사) 궁빌드",
+      "description": "플로라 - 과거의 잿더미 (저점보완 물나비), 미래희망의 불씨 (고점 불나비), 후유카의 후순위들은 필수 챙기고 난 이후 보이는거 집어주면 되고, 쾌속연타는 공속이 있기때문에 명함은 꼭 챙겨주세요. 자세한건 링크 영상 참고",
+      "author": "명함 후유카 60만 참고용 영상",
+      "authorLink": "https://arca.live/b/stellasora/161164444",
+      "element": "Fire",
+      "characterId": 158,
+      "tags": ["필살기", "클라루", "후유카", "플로라"],
+      "buildHash": "v2d-Hig_gu6Y*)U%3E8%60%40Kdg%7DSnju3%3Bzjeg%3D!eC!ls!nabwLRoo~%5Bywg%7C.RM_D%5Bz%2F.V%7BWSxR%2BN.B%60nYwE%7Bqfv%5D9%23%7D%3Cb%7D%7D%7CY%3E~ZZ%3Ahj3%25~%25qEV%7BRkA%25S%7D6cg%24fLGBr~5CZzQ6R%5DzwRIec_q1_%24!_fXboNqIIBI%22qPGOBVCjkuv%402fqqHg%5Ew%5DMV%60aC%3AyCrs%3DVK)u%5D%3FTq(%5EW%3E%5DkqPQIE%3BHX%3D4aA2%3D4%2BnHE2%407!jC66%40K~IC"
+    },
+    {
+      "id": "preset-build",
       "title": "(1/14) 피렌 - 1유파 빌드 참고용",
       "description": "아직까진 피렌 연구가 더 되어야할 것 같지만, 현재까지 나온 빌드 중 점수가 괜찮게 뽑히는거같은 1유파 빌드의 참고용입니다.",
       "author": "중국펌 피렌 1,2유파 빌드",
