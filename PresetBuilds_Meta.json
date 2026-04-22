@@ -35,84 +35,51 @@
     },
     {
       "id": "preset-build",
-      "title": "(3/18) 치토세 + 토나 + 테레사",
-      "description": "치토세 잠재를 가장 후순위로 수집, 집중의 소리 돈 남으면 구매",
-      "author": "치토테 조합",
-      "authorLink": "https://arca.live/b/stellasora/165184691",
+      "title": "(4/21) 치토세 + 토나 + 테레사",
+      "description": "치토세 1유파 메인, 토나 섭딜 빌드",
+      "author": "(04/21) 속성별 빌드/뱃지 옵션 가이드",
+      "authorLink": "https://arca.live/b/stellasora/168311530",
       "element": "Water",
       "characterId": 144,
       "tags": ["토나", "치토세", "테레사"],
       "meta": true,
-      "buildHash": "v3d-hchxnBnB%26t7pR%23%2F%3A34Jc3KgYxtuBclb%3FKk%40%2BWSB5~FJOPbm%7DKOc%25%23d36%3C)U%2BQ%2CN%3DM%5Dv5A%26G%2Cy%7DVPBr!_d%3F%23)Sv2)lC%60z%3CMzi%2BL9G365h7%7DFinxHJnkLz%2B%5BbFjGtV%3DX%2BB%22%241f%40zhT3Kqg_%24%3EnRM%7DgaY%2BCPM%60%223kJF"
+      "buildHash": "v3d-PihxnB%7B)N5ASox%3Ab%3Ds)wun%26twPGlJ!3UmV~XrL%5BDx85nEZ%2B!P!)v%3D~0K2h%3BTzh%3CKh%3B(.05%7B6yQ%7CqL%3E%25raOeE%25r%22hrw%3CH*zpS%5D%3A%5EC%2B%40nc9NKbce%3Dk%7C_2vIVsI%3EeXy%7DdS%5Es%2C%5EzUk%24%5Ej%3DWqrn%7C%3E%7DWx%22~8M2Lq%40k!Ws%3E4zQkjA"
     },
     {
       "id": "preset-build",
-      "title": "(3/18) 요로즈 택배 딸배즈 빌드",
-      "description": "필수 잠재 약 70개. 자세한건 링크 참조",
-      "author": "잠재 최적화 딸배즈 빌드",
-      "authorLink": "https://arca.live/b/stellasora/165167703",
+      "title": "(4/21) 토나 메인딜 딸배즈 빌드",
+      "description": "치토세가 없을 때 사용",
+      "author": "(04/21) 속성별 빌드/뱃지 옵션 가이드",
+      "authorLink": "https://arca.live/b/stellasora/168311530",
       "element": "Water",
       "characterId": 130,
       "tags": ["토나", "테레사", "프리지아"],
-      "buildHash": "v3d-YfhxoumBO5oj%7Bz%3EuwQ%23(Bavi!kEYM7m*ASGgI6NYaOeuDP5Hp5M)_K%40KYs%60mj.fmI%5BVsGp%24.%25wWHdOket9%3BXd8hTP%26H2nDc%5BPvB5%3B3%2BUxb%2456BiD%3FFcQue005l%3F2I%5E~V%2CER%25%7DN%2FKt4%7C3t%7C%3F*q%22k%22OB%22EKST6l%3CG%3F%5B%3AADY%2C5%2F%22z5%2FL%246xS%23%2CC"
+      "buildHash": "v3d-Yf99oumBV)J%236%2C6%60%5DFhVhY7D%40(iHR%24w28z_1oe%2B_%60%3E%7C)~(.t%40%7BA2v%60%5B%40B%2BZ%7Devb~%25%5D3)F%60l*1waH9OEet9Yg%5E6bFHaar%3D%23W!o*MvpRj%2B475%3B4_4v(U%5BZb3oY!%3CvPfcD1(i%22z5M%5BiLpve%3C.PJXeAmB%3Crn%60h%60Wst4tRoG%40CW*a5oe4m~A"
     },
     {
       "id": "preset-build",
-      "title": "(2/28) 레이스 + 나츠카",
-      "description": "레이스 메인의 바람덱입니다. 남은 메인 레코드는 패스/재앙으로. 집중소리는 할인 보이는대로 풀매수.. 자세한건 링크 참조",
-      "author": "바람덱 ㄹㅇ 찐최종본",
-      "authorLink": "https://arca.live/b/stellasora/163622506",
+      "title": "(4/21) 레이스 + 나츠카",
+      "description": "레이스 1유파, 나츠카 바람덱. 레이스는 잠재 대신 집중의 소리(일공피) 400원짜리 빼고 보이는 대로 집으면 됨. 자세한건 링크 참조",
+      "author": "(04/21) 속성별 빌드/뱃지 옵션 가이드",
+      "authorLink": "https://arca.live/b/stellasora/168311530",
       "element": "Wind",
       "characterId": 143,
       "tags": ["레이스", "나츠카", "안즈"],
       "meta": true,
-      "buildHash": "v3d-Hi%3BznB2)k)u%23%3F%3CJkeFl%5Bo%3FG%5BqUY!6Y_YS9jZsxYiR%7B5F%7DLLVj%5DA%3FM5bq3%7Cvr4%3C3%609Lchk%25%23%5BJ_%22%2C72%3Eq3h.%7DaD%40N%3ECkGtN%5EPTfk)%2C%2B%7DoNwtNT(%3Fi%24*ex9*Wx%3BIZ%3BY0CWrW%3BoIyZN%40%7Bp%3D%2B_B*TGO%7DGJ%25%5D%40O%3C%7Di%2FZ7pi~dWSDeL%3Bz4n5iI"
+      "buildHash": "v3d-Yfvnou_X~4)!4TYXjNB)v%5B4D%224v%3F3KzGGwIIS2r!%3BvscXe%2Cx%5EWfW%5BjA.m%3FH%7BF%2Ck.XpN%5Dhfn.%26%40zY8PB%25DfGDJe~%40R%60i*aP_%7BV*TgJygU%7B6%7CDFp%23yG%3AsiFAd*1Z!o8o4%3C%3C%23%3Abv%3DE%60%7DYLy5RI%3B95zWaloIJ%25h%60t%2C%5DPv%24%23%2CxT_V_IJ%2BjzyiN%60JCpRd%5BHA"
     },
     {
       "id": "preset-build",
-      "title": "(2/25) 나츠카 없는 레이스 파티",
-      "description": "나츠카 이후 유입된 이들을 위한 덱. 자세한건 링크 참조",
-      "author": "자 니들이 원하는 나츠카 없는 레이스 파티(다음 연토대비 도자기 추가)",
-      "authorLink": "https://arca.live/b/stellasora/163308046",
-      "element": "Wind",
-      "characterId": 143,
-      "tags": ["레이스", "틸리아", "안즈"],
-      "buildHash": "v3d-Qf68ouGBGBXb06.XYFIVP)700%3DH%3FKINgF9B)r6%26D94%7B%2BATLXCP5d%7Cb%3F50BmNByB%3E%2C%24dm*%3D~RC%2FH%3D%26c%3A%3F~r*%2FE4XVuj%2Bg%3ES3at%5Dws!NiQ%2F%3A56up4)%5EU%5E%3B%3A1Kox8%3DF%26Ll)1DOQnDRil7t%40%3AMv*xR%5D%23rnM*7GRaMQryJhkqc)%3E%23%7Bv%7Bnwajlmn)7XYW!1REHg%2BRc4(%7DB%234dVRpm%5EhOn%2BZ%7CD"
-    },
-    {
-      "id": "preset-build",
-      "title": "(3/11) 땅 표식덱 빌드",
-      "description": "가중처벌을 찍은 도자기보다 2만점 이상 올라감 재대로 택틱깍으면 23만이상 가능해보임",
-      "author": "너희들이 알던 땅표식은 다시 깍아야 된다",
-      "authorLink": "https://arca.live/b/stellasora/164565395",
+      "title": "(4/21) 땅 표식덱 빌드",
+      "description": "8탑 기준 땅 표식덱",
+      "author": "(04/21) 속성별 빌드/뱃지 옵션 가이드",
+      "authorLink": "https://arca.live/b/stellasora/168311530",
       "element": "Earth",
       "characterId": 159,
       "tags": ["표식", "나즈나", "새해 크루니스", "그레이"],
-      "buildHash": "v3d-%22hjxoumB%5BA%7DU*%3B%22e6e2%3EU*6brLGw7HI%3C..u2_%3FV%25oB%7BhBg%3B%24%5DYF%7D%25RD%7CcH%7BrKPXQe%7D7b%249Q%5B0b(G%258B%3C)y4k5k(TB!%2B(Lm%5EKkMv%2FBpnHdOEe_4fb%7B%25%2Fblg6%26%3BbbS_vQM%7C_f5%3E%3F.*kxr%3CA!w%24VE%2FqI8T%3D%60M%3C*FlDR9"
-    },
-    {
-      "id": "preset-build",
-      "title": "(2/4) 나즈나 + 새해 크루니스 표식덱",
-      "description": "나즈나를 메인으로 하는 새해 크루니스 표식덱입니다. 그레이의 뱃지에서 표식 데미지를 챙겨주는 것이 좋습니다. 자세한건 링크 참조",
-      "author": "갤펌) 크루니스 71만 표식덱",
-      "authorLink": "https://arca.live/b/stellasora/161390442",
-      "authors": [
-        {
-          "name": "올명함 표식덱 취황 35만5511점",
-          "link": "https://arca.live/b/stellasora/161433287"
-        },
-        {
-          "name": "1돌 전무X 30만점, 플레이 영상",
-          "link": "https://gall.dcinside.com/stellasora/194659"
-        }
-      ],
-      "element": "Earth",
-      "characterId": 159,
-      "tags": ["표식", "나즈나", "새해 크루니스", "그레이"],
-      "buildHash": "v3d-%22h48oumB~4O%5B%2ClM6%7Bg5%7C*DHB%5Dwdxc)B%3Cf%3E9%3B.%403F%60X%7Buh%22%2Bi9SON%2BPgkfFbxiV%5Bn)sM6j%60~%3C6hiPx2%40%3Fb%5BGyJ%3BAmon%3Aod%23B%5E*%243(_iybS*Xq8yH6B50%3AEk%25q%7Bq%7B%5DJ4RC%2Brmis4zGGPxlGrlGsJQg%23%5ETq%3A%3Eb%22yN(%2F%24bQj%5EzD%5E6%40WJ%22~a%2Cu%23BLCWC"
+      "buildHash": "v3d-%22ht9ou_X~4tzkb%22qfkDdbw!sne%5Dw%5Ev%25MdsBm%3BxW%5ESX%22CM!AvQT%3B%2F_p%7CQKSb%3FWKanC8v9K(%60%5Edn68hfO%24%3Frk%26O%60d%2Cx0x0mPodndA68I%7C2CGKa%7BJ(XE%22%2BkP%5E%5B.%5B32r%7D%5DR4VWLp%7BAIJCw8%7B)%40PjxC8Gvrx9L%26p_%23WjMilWICwhlOI%3CkAA"
     }
   ],
-
   "elements": {
     "Water": {
       "name": "물 속성",
