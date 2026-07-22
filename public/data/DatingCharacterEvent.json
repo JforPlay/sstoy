@@ -6,6 +6,7 @@
       103,
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -28,6 +29,7 @@
       103,
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -50,6 +52,7 @@
       107,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -72,6 +75,7 @@
       107,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -94,6 +98,7 @@
       108,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -116,6 +121,7 @@
       108,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -138,6 +144,7 @@
       111,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 3,
     "Affinity": 25,
     "Reward": [
@@ -160,6 +167,7 @@
       111,
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -182,6 +190,7 @@
       112,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -204,6 +213,7 @@
       112,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 3,
     "Affinity": 25,
     "Reward": [
@@ -226,6 +236,7 @@
       113,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -248,6 +259,7 @@
       113,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -270,6 +282,7 @@
       116,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -292,6 +305,7 @@
       116,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -314,6 +328,7 @@
       117,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -336,6 +351,7 @@
       117,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -358,6 +374,7 @@
       118,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -380,6 +397,7 @@
       118,
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -402,6 +420,7 @@
       119,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -424,6 +443,7 @@
       119,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -446,6 +466,7 @@
       120,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -468,6 +489,7 @@
       120,
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -490,6 +512,7 @@
       123,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -512,6 +535,7 @@
       123,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -534,6 +558,7 @@
       125,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -556,6 +581,7 @@
       125,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 3,
     "Affinity": 25,
     "Reward": [
@@ -578,6 +604,7 @@
       126,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -600,6 +627,7 @@
       126,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 3,
     "Affinity": 25,
     "Reward": [
@@ -622,6 +650,7 @@
       127,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -644,6 +673,7 @@
       127,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 4,
     "Affinity": 25,
     "Reward": [
@@ -666,6 +696,7 @@
       132,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -688,6 +719,7 @@
       132,
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -710,6 +742,7 @@
       135,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -732,6 +765,7 @@
       135,
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -754,6 +788,7 @@
       141,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -776,6 +811,7 @@
       141,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -798,6 +834,7 @@
       142,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -820,6 +857,7 @@
       142,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 4,
     "Affinity": 25,
     "Reward": [
@@ -842,6 +880,7 @@
       144,
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -864,6 +903,7 @@
       144,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -886,6 +926,7 @@
       147,
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -908,6 +949,7 @@
       147,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 4,
     "Affinity": 25,
     "Reward": [
@@ -930,6 +972,7 @@
       149,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -952,6 +995,7 @@
       149,
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -974,6 +1018,7 @@
       150,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -996,6 +1041,7 @@
       150,
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -1018,6 +1064,7 @@
       155,
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1040,6 +1087,7 @@
       155,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -1062,6 +1110,7 @@
       156,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1084,6 +1133,7 @@
       156,
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -1106,6 +1156,7 @@
       133,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -1128,6 +1179,7 @@
       133,
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1150,6 +1202,7 @@
       134,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1172,6 +1225,7 @@
       134,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1194,6 +1248,7 @@
       110,
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -1216,6 +1271,7 @@
       110,
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -1238,6 +1294,7 @@
       158,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 4,
     "Affinity": 25,
     "Reward": [
@@ -1260,6 +1317,7 @@
       158,
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -1282,6 +1340,7 @@
       159,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -1304,6 +1363,7 @@
       159,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 4,
     "Affinity": 25,
     "Reward": [
@@ -1326,6 +1386,7 @@
       143,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 4,
     "Affinity": 25,
     "Reward": [
@@ -1348,6 +1409,7 @@
       143,
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -1370,6 +1432,7 @@
       130,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1392,6 +1455,7 @@
       130,
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1414,6 +1478,7 @@
       145,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1436,6 +1501,7 @@
       145,
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1458,6 +1524,7 @@
       115,
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1480,6 +1547,7 @@
       115,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 3,
     "Affinity": 25,
     "Reward": [
@@ -1502,6 +1570,7 @@
       140,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1524,6 +1593,7 @@
       140,
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1546,6 +1616,7 @@
       114,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1568,6 +1639,7 @@
       114,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1583,6 +1655,52 @@
     "Clue": "DatingCharacterEvent.114302.6",
     "Memory": "DatingCharacterEvent.114302.7"
   },
+  "160301": {
+    "Id": 160301,
+    "DatingEventType": 5,
+    "DatingEventParams": [
+      160,
+      5
+    ],
+    "DatingEventExclude": [],
+    "BranchTag": 1,
+    "Affinity": 25,
+    "Reward": [
+      2,
+      10
+    ],
+    "Desc1": "DatingCharacterEvent.160301.1",
+    "Desc2": "DatingCharacterEvent.160301.2",
+    "Desc3": "DatingCharacterEvent.160301.3",
+    "Response": "happy",
+    "CG": "DatingSPCG_160301",
+    "Name": "DatingCharacterEvent.160301.5",
+    "Clue": "DatingCharacterEvent.160301.6",
+    "Memory": "DatingCharacterEvent.160301.7"
+  },
+  "160302": {
+    "Id": 160302,
+    "DatingEventType": 5,
+    "DatingEventParams": [
+      160,
+      17
+    ],
+    "DatingEventExclude": [],
+    "BranchTag": 3,
+    "Affinity": 25,
+    "Reward": [
+      2,
+      10
+    ],
+    "Desc1": "DatingCharacterEvent.160302.1",
+    "Desc2": "DatingCharacterEvent.160302.2",
+    "Desc3": "DatingCharacterEvent.160302.3",
+    "Response": "shy",
+    "CG": "DatingSPCG_160302",
+    "Name": "DatingCharacterEvent.160302.5",
+    "Clue": "DatingCharacterEvent.160302.6",
+    "Memory": "DatingCharacterEvent.160302.7"
+  },
   "125303": {
     "Id": 125303,
     "DatingEventType": 5,
@@ -1590,6 +1708,7 @@
       125,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 4,
     "Affinity": 25,
     "Reward": [
@@ -1612,6 +1731,7 @@
       132,
       17
     ],
+    "DatingEventExclude": [],
     "BranchTag": 3,
     "Affinity": 25,
     "Reward": [
@@ -1634,6 +1754,7 @@
       135,
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
     "Affinity": 25,
     "Reward": [
@@ -1656,6 +1777,7 @@
       141,
       17
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -1678,6 +1800,7 @@
       149,
       17
     ],
+    "DatingEventExclude": [],
     "BranchTag": 3,
     "Affinity": 25,
     "Reward": [
@@ -1700,6 +1823,7 @@
       156,
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -1722,6 +1846,7 @@
       119,
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
     "Affinity": 25,
     "Reward": [
@@ -1737,17 +1862,228 @@
     "Clue": "DatingCharacterEvent.119303.6",
     "Memory": "DatingCharacterEvent.119303.7"
   },
+  "108303": {
+    "Id": 108303,
+    "DatingEventType": 5,
+    "DatingEventParams": [
+      108,
+      17
+    ],
+    "DatingEventExclude": [],
+    "BranchTag": 1,
+    "Affinity": 25,
+    "Reward": [
+      2,
+      10
+    ],
+    "Desc1": "DatingCharacterEvent.108303.1",
+    "Desc2": "DatingCharacterEvent.108303.2",
+    "Desc3": "DatingCharacterEvent.108303.3",
+    "Response": "happy",
+    "CG": "DatingSPCG_108303",
+    "Name": "DatingCharacterEvent.108303.5",
+    "Clue": "DatingCharacterEvent.108303.6",
+    "Memory": "DatingCharacterEvent.108303.7"
+  },
+  "113303": {
+    "Id": 113303,
+    "DatingEventType": 5,
+    "DatingEventParams": [
+      113,
+      17
+    ],
+    "DatingEventExclude": [],
+    "BranchTag": 1,
+    "Affinity": 25,
+    "Reward": [
+      2,
+      10
+    ],
+    "Desc1": "DatingCharacterEvent.113303.1",
+    "Desc2": "DatingCharacterEvent.113303.2",
+    "Desc3": "DatingCharacterEvent.113303.3",
+    "Response": "shy",
+    "CG": "DatingSPCG_113303",
+    "Name": "DatingCharacterEvent.113303.5",
+    "Clue": "DatingCharacterEvent.113303.6",
+    "Memory": "DatingCharacterEvent.113303.7"
+  },
+  "117303": {
+    "Id": 117303,
+    "DatingEventType": 5,
+    "DatingEventParams": [
+      117,
+      17
+    ],
+    "DatingEventExclude": [],
+    "BranchTag": 1,
+    "Affinity": 25,
+    "Reward": [
+      2,
+      10
+    ],
+    "Desc1": "DatingCharacterEvent.117303.1",
+    "Desc2": "DatingCharacterEvent.117303.2",
+    "Desc3": "DatingCharacterEvent.117303.3",
+    "Response": "happy2",
+    "CG": "DatingSPCG_117303",
+    "Name": "DatingCharacterEvent.117303.5",
+    "Clue": "DatingCharacterEvent.117303.6",
+    "Memory": "DatingCharacterEvent.117303.7"
+  },
+  "120304": {
+    "Id": 120304,
+    "DatingEventType": 5,
+    "DatingEventParams": [
+      120,
+      7
+    ],
+    "DatingEventExclude": [],
+    "BranchTag": 4,
+    "Affinity": 25,
+    "Reward": [
+      2,
+      10
+    ],
+    "Desc1": "DatingCharacterEvent.120304.1",
+    "Desc2": "DatingCharacterEvent.120304.2",
+    "Desc3": "DatingCharacterEvent.120304.3",
+    "Response": "shy",
+    "CG": "DatingSPCG_120304",
+    "Name": "DatingCharacterEvent.120304.5",
+    "Clue": "DatingCharacterEvent.120304.6",
+    "Memory": "DatingCharacterEvent.120304.7"
+  },
+  "123303": {
+    "Id": 123303,
+    "DatingEventType": 5,
+    "DatingEventParams": [
+      123,
+      14
+    ],
+    "DatingEventExclude": [],
+    "BranchTag": 2,
+    "Affinity": 25,
+    "Reward": [
+      2,
+      10
+    ],
+    "Desc1": "DatingCharacterEvent.123303.1",
+    "Desc2": "DatingCharacterEvent.123303.2",
+    "Desc3": "DatingCharacterEvent.123303.3",
+    "Response": "happy",
+    "CG": "DatingSPCG_123303",
+    "Name": "DatingCharacterEvent.123303.5",
+    "Clue": "DatingCharacterEvent.123303.6",
+    "Memory": "DatingCharacterEvent.123303.7"
+  },
+  "126303": {
+    "Id": 126303,
+    "DatingEventType": 5,
+    "DatingEventParams": [
+      126,
+      14
+    ],
+    "DatingEventExclude": [],
+    "BranchTag": 2,
+    "Affinity": 25,
+    "Reward": [
+      2,
+      10
+    ],
+    "Desc1": "DatingCharacterEvent.126303.1",
+    "Desc2": "DatingCharacterEvent.126303.2",
+    "Desc3": "DatingCharacterEvent.126303.3",
+    "Response": "happy2",
+    "CG": "DatingSPCG_126303",
+    "Name": "DatingCharacterEvent.126303.5",
+    "Clue": "DatingCharacterEvent.126303.6",
+    "Memory": "DatingCharacterEvent.126303.7"
+  },
+  "127303": {
+    "Id": 127303,
+    "DatingEventType": 5,
+    "DatingEventParams": [
+      127,
+      14
+    ],
+    "DatingEventExclude": [],
+    "BranchTag": 1,
+    "Affinity": 25,
+    "Reward": [
+      2,
+      10
+    ],
+    "Desc1": "DatingCharacterEvent.127303.1",
+    "Desc2": "DatingCharacterEvent.127303.2",
+    "Desc3": "DatingCharacterEvent.127303.3",
+    "Response": "shy",
+    "CG": "DatingSPCG_127303",
+    "Name": "DatingCharacterEvent.127303.5",
+    "Clue": "DatingCharacterEvent.127303.6",
+    "Memory": "DatingCharacterEvent.127303.7"
+  },
+  "147303": {
+    "Id": 147303,
+    "DatingEventType": 5,
+    "DatingEventParams": [
+      147,
+      6
+    ],
+    "DatingEventExclude": [],
+    "BranchTag": 2,
+    "Affinity": 25,
+    "Reward": [
+      2,
+      10
+    ],
+    "Desc1": "DatingCharacterEvent.147303.1",
+    "Desc2": "DatingCharacterEvent.147303.2",
+    "Desc3": "DatingCharacterEvent.147303.3",
+    "Response": "shy",
+    "CG": "DatingSPCG_147303",
+    "Name": "DatingCharacterEvent.147303.5",
+    "Clue": "DatingCharacterEvent.147303.6",
+    "Memory": "DatingCharacterEvent.147303.7"
+  },
+  "116303": {
+    "Id": 116303,
+    "DatingEventType": 5,
+    "DatingEventParams": [
+      116,
+      17
+    ],
+    "DatingEventExclude": [],
+    "BranchTag": 3,
+    "Affinity": 25,
+    "Reward": [
+      2,
+      10
+    ],
+    "Desc1": "DatingCharacterEvent.116303.1",
+    "Desc2": "DatingCharacterEvent.116303.2",
+    "Desc3": "DatingCharacterEvent.116303.3",
+    "Response": "happy",
+    "CG": "DatingSPCG_116303",
+    "Name": "DatingCharacterEvent.116303.5",
+    "Clue": "DatingCharacterEvent.116303.6",
+    "Memory": "DatingCharacterEvent.116303.7"
+  },
   "515": {
     "Id": 515,
     "DatingEventType": 4,
     "DatingEventParams": [
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.515.1",
     "Desc2": "DatingCharacterEvent.515.2",
     "Desc3": "DatingCharacterEvent.515.3",
     "Response": "happy2",
+    "CG": "",
     "Name": "DatingCharacterEvent.515.5",
     "Clue": "DatingCharacterEvent.515.6",
     "Memory": "DatingCharacterEvent.515.7"
@@ -1758,11 +2094,15 @@
     "DatingEventParams": [
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.516.1",
     "Desc2": "DatingCharacterEvent.516.2",
     "Desc3": "DatingCharacterEvent.516.3",
     "Response": "think",
+    "CG": "",
     "Name": "DatingCharacterEvent.516.5",
     "Clue": "DatingCharacterEvent.516.6",
     "Memory": "DatingCharacterEvent.516.7"
@@ -1773,11 +2113,15 @@
     "DatingEventParams": [
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.517.1",
     "Desc2": "DatingCharacterEvent.517.2",
     "Desc3": "DatingCharacterEvent.517.3",
     "Response": "normal",
+    "CG": "",
     "Name": "DatingCharacterEvent.517.5",
     "Clue": "DatingCharacterEvent.517.6",
     "Memory": "DatingCharacterEvent.517.7"
@@ -1788,11 +2132,15 @@
     "DatingEventParams": [
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.518.1",
     "Desc2": "DatingCharacterEvent.518.2",
     "Desc3": "DatingCharacterEvent.518.3",
     "Response": "happy",
+    "CG": "",
     "Name": "DatingCharacterEvent.518.5",
     "Clue": "DatingCharacterEvent.518.6",
     "Memory": "DatingCharacterEvent.518.7"
@@ -1803,11 +2151,15 @@
     "DatingEventParams": [
       5
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.519.1",
     "Desc2": "DatingCharacterEvent.519.2",
     "Desc3": "DatingCharacterEvent.519.3",
     "Response": "think",
+    "CG": "",
     "Name": "DatingCharacterEvent.519.5",
     "Clue": "DatingCharacterEvent.519.6",
     "Memory": "DatingCharacterEvent.519.7"
@@ -1818,11 +2170,15 @@
     "DatingEventParams": [
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.615.1",
     "Desc2": "DatingCharacterEvent.615.2",
     "Desc3": "DatingCharacterEvent.615.3",
     "Response": "happy2",
+    "CG": "",
     "Name": "DatingCharacterEvent.615.5",
     "Clue": "DatingCharacterEvent.615.6",
     "Memory": "DatingCharacterEvent.615.7"
@@ -1833,11 +2189,15 @@
     "DatingEventParams": [
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.616.1",
     "Desc2": "DatingCharacterEvent.616.2",
     "Desc3": "DatingCharacterEvent.616.3",
     "Response": "normal",
+    "CG": "",
     "Name": "DatingCharacterEvent.616.5",
     "Clue": "DatingCharacterEvent.616.6",
     "Memory": "DatingCharacterEvent.616.7"
@@ -1848,11 +2208,15 @@
     "DatingEventParams": [
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.617.1",
     "Desc2": "DatingCharacterEvent.617.2",
     "Desc3": "DatingCharacterEvent.617.3",
     "Response": "happy",
+    "CG": "",
     "Name": "DatingCharacterEvent.617.5",
     "Clue": "DatingCharacterEvent.617.6",
     "Memory": "DatingCharacterEvent.617.7"
@@ -1863,11 +2227,15 @@
     "DatingEventParams": [
       6
     ],
+    "DatingEventExclude": [],
     "BranchTag": 3,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.618.1",
     "Desc2": "DatingCharacterEvent.618.2",
     "Desc3": "DatingCharacterEvent.618.3",
     "Response": "happy",
+    "CG": "",
     "Name": "DatingCharacterEvent.618.5",
     "Clue": "DatingCharacterEvent.618.6",
     "Memory": "DatingCharacterEvent.618.7"
@@ -1878,11 +2246,15 @@
     "DatingEventParams": [
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.714.1",
     "Desc2": "DatingCharacterEvent.714.2",
     "Desc3": "DatingCharacterEvent.714.3",
     "Response": "happy2",
+    "CG": "",
     "Name": "DatingCharacterEvent.714.5",
     "Clue": "DatingCharacterEvent.714.6",
     "Memory": "DatingCharacterEvent.714.7"
@@ -1893,11 +2265,15 @@
     "DatingEventParams": [
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.715.1",
     "Desc2": "DatingCharacterEvent.715.2",
     "Desc3": "DatingCharacterEvent.715.3",
     "Response": "think",
+    "CG": "",
     "Name": "DatingCharacterEvent.715.5",
     "Clue": "DatingCharacterEvent.715.6",
     "Memory": "DatingCharacterEvent.715.7"
@@ -1908,11 +2284,15 @@
     "DatingEventParams": [
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.716.1",
     "Desc2": "DatingCharacterEvent.716.2",
     "Desc3": "DatingCharacterEvent.716.3",
     "Response": "happy2",
+    "CG": "",
     "Name": "DatingCharacterEvent.716.5",
     "Clue": "DatingCharacterEvent.716.6",
     "Memory": "DatingCharacterEvent.716.7"
@@ -1923,11 +2303,15 @@
     "DatingEventParams": [
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.717.1",
     "Desc2": "DatingCharacterEvent.717.2",
     "Desc3": "DatingCharacterEvent.717.3",
     "Response": "happy",
+    "CG": "",
     "Name": "DatingCharacterEvent.717.5",
     "Clue": "DatingCharacterEvent.717.6",
     "Memory": "DatingCharacterEvent.717.7"
@@ -1938,11 +2322,15 @@
     "DatingEventParams": [
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.718.1",
     "Desc2": "DatingCharacterEvent.718.2",
     "Desc3": "DatingCharacterEvent.718.3",
     "Response": "happy",
+    "CG": "",
     "Name": "DatingCharacterEvent.718.5",
     "Clue": "DatingCharacterEvent.718.6",
     "Memory": "DatingCharacterEvent.718.7"
@@ -1953,11 +2341,15 @@
     "DatingEventParams": [
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 3,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.719.1",
     "Desc2": "DatingCharacterEvent.719.2",
     "Desc3": "DatingCharacterEvent.719.3",
     "Response": "normal",
+    "CG": "",
     "Name": "DatingCharacterEvent.719.5",
     "Clue": "DatingCharacterEvent.719.6",
     "Memory": "DatingCharacterEvent.719.7"
@@ -1968,11 +2360,15 @@
     "DatingEventParams": [
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 3,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.720.1",
     "Desc2": "DatingCharacterEvent.720.2",
     "Desc3": "DatingCharacterEvent.720.3",
     "Response": "normal",
+    "CG": "",
     "Name": "DatingCharacterEvent.720.5",
     "Clue": "DatingCharacterEvent.720.6",
     "Memory": "DatingCharacterEvent.720.7"
@@ -1983,11 +2379,15 @@
     "DatingEventParams": [
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 3,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.721.1",
     "Desc2": "DatingCharacterEvent.721.2",
     "Desc3": "DatingCharacterEvent.721.3",
     "Response": "shy",
+    "CG": "",
     "Name": "DatingCharacterEvent.721.5",
     "Clue": "DatingCharacterEvent.721.6",
     "Memory": "DatingCharacterEvent.721.7"
@@ -1998,11 +2398,15 @@
     "DatingEventParams": [
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 4,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.722.1",
     "Desc2": "DatingCharacterEvent.722.2",
     "Desc3": "DatingCharacterEvent.722.3",
     "Response": "happy",
+    "CG": "",
     "Name": "DatingCharacterEvent.722.5",
     "Clue": "DatingCharacterEvent.722.6",
     "Memory": "DatingCharacterEvent.722.7"
@@ -2013,11 +2417,15 @@
     "DatingEventParams": [
       7
     ],
+    "DatingEventExclude": [],
     "BranchTag": 4,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.723.1",
     "Desc2": "DatingCharacterEvent.723.2",
     "Desc3": "DatingCharacterEvent.723.3",
     "Response": "normal",
+    "CG": "",
     "Name": "DatingCharacterEvent.723.5",
     "Clue": "DatingCharacterEvent.723.6",
     "Memory": "DatingCharacterEvent.723.7"
@@ -2028,11 +2436,15 @@
     "DatingEventParams": [
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.814.1",
     "Desc2": "DatingCharacterEvent.814.2",
     "Desc3": "DatingCharacterEvent.814.3",
     "Response": "normal",
+    "CG": "",
     "Name": "DatingCharacterEvent.814.5",
     "Clue": "DatingCharacterEvent.814.6",
     "Memory": "DatingCharacterEvent.814.7"
@@ -2043,11 +2455,15 @@
     "DatingEventParams": [
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.815.1",
     "Desc2": "DatingCharacterEvent.815.2",
     "Desc3": "DatingCharacterEvent.815.3",
     "Response": "happy",
+    "CG": "",
     "Name": "DatingCharacterEvent.815.5",
     "Clue": "DatingCharacterEvent.815.6",
     "Memory": "DatingCharacterEvent.815.7"
@@ -2058,11 +2474,15 @@
     "DatingEventParams": [
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.816.1",
     "Desc2": "DatingCharacterEvent.816.2",
     "Desc3": "DatingCharacterEvent.816.3",
     "Response": "think",
+    "CG": "",
     "Name": "DatingCharacterEvent.816.5",
     "Clue": "DatingCharacterEvent.816.6",
     "Memory": "DatingCharacterEvent.816.7"
@@ -2073,11 +2493,15 @@
     "DatingEventParams": [
       8
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.817.1",
     "Desc2": "DatingCharacterEvent.817.2",
     "Desc3": "DatingCharacterEvent.817.3",
     "Response": "happy",
+    "CG": "",
     "Name": "DatingCharacterEvent.817.5",
     "Clue": "DatingCharacterEvent.817.6",
     "Memory": "DatingCharacterEvent.817.7"
@@ -2088,11 +2512,15 @@
     "DatingEventParams": [
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.1414.1",
     "Desc2": "DatingCharacterEvent.1414.2",
     "Desc3": "DatingCharacterEvent.1414.3",
     "Response": "normal",
+    "CG": "",
     "Name": "DatingCharacterEvent.1414.5",
     "Clue": "DatingCharacterEvent.1414.6",
     "Memory": "DatingCharacterEvent.1414.7"
@@ -2103,11 +2531,15 @@
     "DatingEventParams": [
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.1415.1",
     "Desc2": "DatingCharacterEvent.1415.2",
     "Desc3": "DatingCharacterEvent.1415.3",
     "Response": "shy",
+    "CG": "",
     "Name": "DatingCharacterEvent.1415.5",
     "Clue": "DatingCharacterEvent.1415.6",
     "Memory": "DatingCharacterEvent.1415.7"
@@ -2118,11 +2550,15 @@
     "DatingEventParams": [
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.1416.1",
     "Desc2": "DatingCharacterEvent.1416.2",
     "Desc3": "DatingCharacterEvent.1416.3",
     "Response": "happy2",
+    "CG": "",
     "Name": "DatingCharacterEvent.1416.5",
     "Clue": "DatingCharacterEvent.1416.6",
     "Memory": "DatingCharacterEvent.1416.7"
@@ -2133,11 +2569,15 @@
     "DatingEventParams": [
       14
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.1417.1",
     "Desc2": "DatingCharacterEvent.1417.2",
     "Desc3": "DatingCharacterEvent.1417.3",
     "Response": "normal",
+    "CG": "",
     "Name": "DatingCharacterEvent.1417.5",
     "Clue": "DatingCharacterEvent.1417.6",
     "Memory": "DatingCharacterEvent.1417.7"
@@ -2148,11 +2588,15 @@
     "DatingEventParams": [
       17
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.1714.1",
     "Desc2": "DatingCharacterEvent.1714.2",
     "Desc3": "DatingCharacterEvent.1714.3",
     "Response": "shy",
+    "CG": "",
     "Name": "DatingCharacterEvent.1714.5",
     "Clue": "DatingCharacterEvent.1714.6",
     "Memory": "DatingCharacterEvent.1714.7"
@@ -2163,11 +2607,15 @@
     "DatingEventParams": [
       17
     ],
+    "DatingEventExclude": [],
     "BranchTag": 1,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.1715.1",
     "Desc2": "DatingCharacterEvent.1715.2",
     "Desc3": "DatingCharacterEvent.1715.3",
     "Response": "happy2",
+    "CG": "",
     "Name": "DatingCharacterEvent.1715.5",
     "Clue": "DatingCharacterEvent.1715.6",
     "Memory": "DatingCharacterEvent.1715.7"
@@ -2178,11 +2626,15 @@
     "DatingEventParams": [
       17
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.1716.1",
     "Desc2": "DatingCharacterEvent.1716.2",
     "Desc3": "DatingCharacterEvent.1716.3",
     "Response": "happy",
+    "CG": "",
     "Name": "DatingCharacterEvent.1716.5",
     "Clue": "DatingCharacterEvent.1716.6",
     "Memory": "DatingCharacterEvent.1716.7"
@@ -2193,11 +2645,15 @@
     "DatingEventParams": [
       17
     ],
+    "DatingEventExclude": [],
     "BranchTag": 2,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.1717.1",
     "Desc2": "DatingCharacterEvent.1717.2",
     "Desc3": "DatingCharacterEvent.1717.3",
     "Response": "happy2",
+    "CG": "",
     "Name": "DatingCharacterEvent.1717.5",
     "Clue": "DatingCharacterEvent.1717.6",
     "Memory": "DatingCharacterEvent.1717.7"
@@ -2208,11 +2664,15 @@
     "DatingEventParams": [
       17
     ],
+    "DatingEventExclude": [],
     "BranchTag": 3,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.1718.1",
     "Desc2": "DatingCharacterEvent.1718.2",
     "Desc3": "DatingCharacterEvent.1718.3",
     "Response": "happy",
+    "CG": "",
     "Name": "DatingCharacterEvent.1718.5",
     "Clue": "DatingCharacterEvent.1718.6",
     "Memory": "DatingCharacterEvent.1718.7"
@@ -2223,11 +2683,15 @@
     "DatingEventParams": [
       17
     ],
+    "DatingEventExclude": [],
     "BranchTag": 3,
+    "Affinity": 0,
+    "Reward": [],
     "Desc1": "DatingCharacterEvent.1719.1",
     "Desc2": "DatingCharacterEvent.1719.2",
     "Desc3": "DatingCharacterEvent.1719.3",
     "Response": "think",
+    "CG": "",
     "Name": "DatingCharacterEvent.1719.5",
     "Clue": "DatingCharacterEvent.1719.6",
     "Memory": "DatingCharacterEvent.1719.7"

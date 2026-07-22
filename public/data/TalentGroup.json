@@ -2,6 +2,7 @@
   "10301": {
     "Id": 10301,
     "CharId": 103,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.10301.1"
@@ -41,6 +42,7 @@
   "10701": {
     "Id": 10701,
     "CharId": 107,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.10701.1"
@@ -80,6 +82,7 @@
   "10801": {
     "Id": 10801,
     "CharId": 108,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.10801.1"
@@ -119,6 +122,7 @@
   "11001": {
     "Id": 11001,
     "CharId": 110,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.11001.1"
@@ -158,6 +162,7 @@
   "11101": {
     "Id": 11101,
     "CharId": 111,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.11101.1"
@@ -197,6 +202,7 @@
   "11201": {
     "Id": 11201,
     "CharId": 112,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.11201.1"
@@ -236,6 +242,7 @@
   "11301": {
     "Id": 11301,
     "CharId": 113,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.11301.1"
@@ -275,6 +282,7 @@
   "11401": {
     "Id": 11401,
     "CharId": 114,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.11401.1"
@@ -314,6 +322,7 @@
   "11501": {
     "Id": 11501,
     "CharId": 115,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.11501.1"
@@ -353,6 +362,7 @@
   "11601": {
     "Id": 11601,
     "CharId": 116,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.11601.1"
@@ -392,6 +402,7 @@
   "11701": {
     "Id": 11701,
     "CharId": 117,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.11701.1"
@@ -431,6 +442,7 @@
   "11801": {
     "Id": 11801,
     "CharId": 118,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.11801.1"
@@ -470,6 +482,7 @@
   "11901": {
     "Id": 11901,
     "CharId": 119,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.11901.1"
@@ -509,6 +522,7 @@
   "12001": {
     "Id": 12001,
     "CharId": 120,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.12001.1"
@@ -548,6 +562,7 @@
   "12301": {
     "Id": 12301,
     "CharId": 123,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.12301.1"
@@ -587,6 +602,7 @@
   "12501": {
     "Id": 12501,
     "CharId": 125,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.12501.1"
@@ -626,6 +642,7 @@
   "12601": {
     "Id": 12601,
     "CharId": 126,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.12601.1"
@@ -665,6 +682,7 @@
   "12701": {
     "Id": 12701,
     "CharId": 127,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.12701.1"
@@ -704,6 +722,7 @@
   "13001": {
     "Id": 13001,
     "CharId": 130,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.13001.1"
@@ -743,6 +762,7 @@
   "13201": {
     "Id": 13201,
     "CharId": 132,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.13201.1"
@@ -782,6 +802,7 @@
   "13301": {
     "Id": 13301,
     "CharId": 133,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.13301.1"
@@ -821,6 +842,7 @@
   "13401": {
     "Id": 13401,
     "CharId": 134,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.13401.1"
@@ -860,6 +882,7 @@
   "13501": {
     "Id": 13501,
     "CharId": 135,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.13501.1"
@@ -899,6 +922,7 @@
   "14001": {
     "Id": 14001,
     "CharId": 140,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.14001.1"
@@ -938,6 +962,7 @@
   "14101": {
     "Id": 14101,
     "CharId": 141,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.14101.1"
@@ -977,6 +1002,7 @@
   "14201": {
     "Id": 14201,
     "CharId": 142,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.14201.1"
@@ -1016,6 +1042,7 @@
   "14301": {
     "Id": 14301,
     "CharId": 143,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.14301.1"
@@ -1055,6 +1082,7 @@
   "14401": {
     "Id": 14401,
     "CharId": 144,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.14401.1"
@@ -1094,6 +1122,7 @@
   "14501": {
     "Id": 14501,
     "CharId": 145,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.14501.1"
@@ -1133,6 +1162,7 @@
   "14701": {
     "Id": 14701,
     "CharId": 147,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.14701.1"
@@ -1172,6 +1202,7 @@
   "14901": {
     "Id": 14901,
     "CharId": 149,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.14901.1"
@@ -1211,6 +1242,7 @@
   "15001": {
     "Id": 15001,
     "CharId": 150,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.15001.1"
@@ -1250,6 +1282,7 @@
   "15501": {
     "Id": 15501,
     "CharId": 155,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.15501.1"
@@ -1289,6 +1322,7 @@
   "15601": {
     "Id": 15601,
     "CharId": 156,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.15601.1"
@@ -1328,6 +1362,7 @@
   "15801": {
     "Id": 15801,
     "CharId": 158,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.15801.1"
@@ -1367,6 +1402,7 @@
   "15901": {
     "Id": 15901,
     "CharId": 159,
+    "PreGroup": 0,
     "NodeLimit": 10,
     "Background": 1,
     "Title": "TalentGroup.15901.1"
@@ -1402,5 +1438,45 @@
     "NodeLimit": 10,
     "Background": 5,
     "Title": "TalentGroup.15905.1"
+  },
+  "16001": {
+    "Id": 16001,
+    "CharId": 160,
+    "PreGroup": 0,
+    "NodeLimit": 10,
+    "Background": 1,
+    "Title": "TalentGroup.16001.1"
+  },
+  "16002": {
+    "Id": 16002,
+    "CharId": 160,
+    "PreGroup": 16001,
+    "NodeLimit": 10,
+    "Background": 2,
+    "Title": "TalentGroup.16002.1"
+  },
+  "16003": {
+    "Id": 16003,
+    "CharId": 160,
+    "PreGroup": 16002,
+    "NodeLimit": 10,
+    "Background": 3,
+    "Title": "TalentGroup.16003.1"
+  },
+  "16004": {
+    "Id": 16004,
+    "CharId": 160,
+    "PreGroup": 16003,
+    "NodeLimit": 10,
+    "Background": 4,
+    "Title": "TalentGroup.16004.1"
+  },
+  "16005": {
+    "Id": 16005,
+    "CharId": 160,
+    "PreGroup": 16004,
+    "NodeLimit": 10,
+    "Background": 5,
+    "Title": "TalentGroup.16005.1"
   }
 }

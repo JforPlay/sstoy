@@ -21,8 +21,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 1001,
-    "SubNoteSkillGroupId": 1001
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 1001,
+    "SkillScript": ""
   },
   "211002": {
     "Id": 211002,
@@ -46,8 +50,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 1002,
-    "SubNoteSkillGroupId": 1002
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 1002,
+    "SkillScript": ""
   },
   "211003": {
     "Id": 211003,
@@ -71,8 +79,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 1003,
-    "SubNoteSkillGroupId": 1003
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 1003,
+    "SkillScript": ""
   },
   "211004": {
     "Id": 211004,
@@ -96,8 +108,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 1004,
-    "SubNoteSkillGroupId": 1004
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 1004,
+    "SkillScript": ""
   },
   "211005": {
     "Id": 211005,
@@ -121,8 +137,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 1005,
-    "SubNoteSkillGroupId": 1005
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 1005,
+    "SkillScript": ""
   },
   "211006": {
     "Id": 211006,
@@ -146,8 +166,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 1006,
-    "SubNoteSkillGroupId": 1006
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 1006,
+    "SkillScript": ""
   },
   "211007": {
     "Id": 211007,
@@ -171,8 +195,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 1007,
-    "SubNoteSkillGroupId": 1007
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 1007,
+    "SkillScript": ""
   },
   "211008": {
     "Id": 211008,
@@ -196,8 +224,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 1008,
-    "SubNoteSkillGroupId": 1008
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 1008,
+    "SkillScript": ""
   },
   "212001": {
     "Id": 212001,
@@ -221,8 +253,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 2001,
-    "SubNoteSkillGroupId": 2001
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 2001,
+    "SkillScript": ""
   },
   "212002": {
     "Id": 212002,
@@ -246,8 +282,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 2002,
-    "SubNoteSkillGroupId": 2002
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 2002,
+    "SkillScript": ""
   },
   "212003": {
     "Id": 212003,
@@ -271,8 +311,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 2003,
-    "SubNoteSkillGroupId": 2003
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 2003,
+    "SkillScript": ""
   },
   "212005": {
     "Id": 212005,
@@ -296,8 +340,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 2005,
-    "SubNoteSkillGroupId": 2005
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 2005,
+    "SkillScript": ""
   },
   "212006": {
     "Id": 212006,
@@ -321,8 +369,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 2006,
-    "SubNoteSkillGroupId": 2006
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 2006,
+    "SkillScript": ""
   },
   "212007": {
     "Id": 212007,
@@ -346,8 +398,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 2007,
-    "SubNoteSkillGroupId": 2007
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 2007,
+    "SkillScript": ""
   },
   "212008": {
     "Id": 212008,
@@ -371,8 +427,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 2008,
-    "SubNoteSkillGroupId": 2008
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 2008,
+    "SkillScript": ""
   },
   "212009": {
     "Id": 212009,
@@ -396,8 +456,12 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 2009,
-    "SubNoteSkillGroupId": 2009
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 2009,
+    "SkillScript": ""
   },
   "212010": {
     "Id": 212010,
@@ -421,8 +485,72 @@
       2,
       10
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 2010,
-    "SubNoteSkillGroupId": 2010
+    "SecondarySkillGroupId1": 0,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 2010,
+    "SkillScript": ""
+  },
+  "213001": {
+    "Id": 213001,
+    "EET": 7,
+    "Tags": [
+      817,
+      823
+    ],
+    "Visible": true,
+    "Available": true,
+    "DiscBg": "Disc/3001/3001",
+    "StrengthenGroupId": 31,
+    "AttrBaseGroupId": 21002,
+    "AttrExtraGroupId": 201,
+    "PromoteGroupId": 303,
+    "TransformItemId": 223001,
+    "MaxStarTransformItem": [
+      24,
+      40
+    ],
+    "ReadReward": [
+      2,
+      20
+    ],
+    "AVGReadReward": [],
+    "MainSkillGroupId": 3001,
+    "SecondarySkillGroupId1": 30011,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3001,
+    "SkillScript": ""
+  },
+  "213002": {
+    "Id": 213002,
+    "EET": 7,
+    "Tags": [
+      810,
+      802
+    ],
+    "Visible": true,
+    "Available": true,
+    "DiscBg": "Disc/3002/3002",
+    "StrengthenGroupId": 31,
+    "AttrBaseGroupId": 21002,
+    "AttrExtraGroupId": 201,
+    "PromoteGroupId": 301,
+    "TransformItemId": 223002,
+    "MaxStarTransformItem": [
+      24,
+      40
+    ],
+    "ReadReward": [
+      2,
+      20
+    ],
+    "AVGReadReward": [],
+    "MainSkillGroupId": 3002,
+    "SecondarySkillGroupId1": 30021,
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3002,
+    "SkillScript": ""
   },
   "213003": {
     "Id": 213003,
@@ -446,9 +574,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3003,
     "SecondarySkillGroupId1": 30031,
-    "SubNoteSkillGroupId": 3003
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3003,
+    "SkillScript": ""
   },
   "213004": {
     "Id": 213004,
@@ -472,9 +603,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3004,
     "SecondarySkillGroupId1": 30041,
-    "SubNoteSkillGroupId": 3004
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3004,
+    "SkillScript": ""
   },
   "213005": {
     "Id": 213005,
@@ -498,9 +632,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3005,
     "SecondarySkillGroupId1": 30051,
-    "SubNoteSkillGroupId": 3005
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3005,
+    "SkillScript": ""
   },
   "213006": {
     "Id": 213006,
@@ -524,9 +661,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3006,
     "SecondarySkillGroupId1": 30061,
-    "SubNoteSkillGroupId": 3006
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3006,
+    "SkillScript": ""
   },
   "213007": {
     "Id": 213007,
@@ -550,9 +690,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3007,
     "SecondarySkillGroupId1": 30071,
-    "SubNoteSkillGroupId": 3007
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3007,
+    "SkillScript": ""
   },
   "213008": {
     "Id": 213008,
@@ -576,9 +719,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3008,
     "SecondarySkillGroupId1": 30081,
-    "SubNoteSkillGroupId": 3008
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3008,
+    "SkillScript": ""
   },
   "213009": {
     "Id": 213009,
@@ -602,9 +748,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3009,
     "SecondarySkillGroupId1": 30091,
-    "SubNoteSkillGroupId": 3009
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3009,
+    "SkillScript": ""
   },
   "213010": {
     "Id": 213010,
@@ -628,9 +777,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3010,
     "SecondarySkillGroupId1": 30101,
-    "SubNoteSkillGroupId": 3010
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3010,
+    "SkillScript": ""
   },
   "213011": {
     "Id": 213011,
@@ -654,9 +806,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3011,
     "SecondarySkillGroupId1": 30111,
-    "SubNoteSkillGroupId": 3011
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3011,
+    "SkillScript": ""
   },
   "213012": {
     "Id": 213012,
@@ -680,9 +835,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3012,
     "SecondarySkillGroupId1": 30121,
-    "SubNoteSkillGroupId": 3012
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3012,
+    "SkillScript": ""
   },
   "213013": {
     "Id": 213013,
@@ -706,9 +864,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3013,
     "SecondarySkillGroupId1": 30131,
-    "SubNoteSkillGroupId": 3013
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3013,
+    "SkillScript": ""
   },
   "213014": {
     "Id": 213014,
@@ -732,9 +893,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3014,
     "SecondarySkillGroupId1": 30141,
-    "SubNoteSkillGroupId": 3014
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3014,
+    "SkillScript": ""
   },
   "213015": {
     "Id": 213015,
@@ -759,9 +923,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3015,
     "SecondarySkillGroupId1": 30151,
-    "SubNoteSkillGroupId": 3015
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3015,
+    "SkillScript": ""
   },
   "213016": {
     "Id": 213016,
@@ -786,9 +953,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3016,
     "SecondarySkillGroupId1": 30161,
-    "SubNoteSkillGroupId": 3016
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3016,
+    "SkillScript": ""
   },
   "213017": {
     "Id": 213017,
@@ -813,9 +983,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3017,
     "SecondarySkillGroupId1": 30171,
-    "SubNoteSkillGroupId": 3017
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3017,
+    "SkillScript": ""
   },
   "213018": {
     "Id": 213018,
@@ -840,9 +1013,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3018,
     "SecondarySkillGroupId1": 30181,
-    "SubNoteSkillGroupId": 3018
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3018,
+    "SkillScript": ""
   },
   "213019": {
     "Id": 213019,
@@ -867,9 +1043,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3019,
     "SecondarySkillGroupId1": 30191,
-    "SubNoteSkillGroupId": 3019
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3019,
+    "SkillScript": ""
   },
   "213020": {
     "Id": 213020,
@@ -894,9 +1073,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3020,
     "SecondarySkillGroupId1": 30201,
-    "SubNoteSkillGroupId": 3020
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3020,
+    "SkillScript": ""
   },
   "213021": {
     "Id": 213021,
@@ -920,9 +1102,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3021,
     "SecondarySkillGroupId1": 30211,
-    "SubNoteSkillGroupId": 3021
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3021,
+    "SkillScript": ""
   },
   "213022": {
     "Id": 213022,
@@ -946,9 +1131,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3022,
     "SecondarySkillGroupId1": 30221,
-    "SubNoteSkillGroupId": 3022
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3022,
+    "SkillScript": ""
   },
   "213023": {
     "Id": 213023,
@@ -972,9 +1160,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3023,
     "SecondarySkillGroupId1": 30231,
-    "SubNoteSkillGroupId": 3023
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3023,
+    "SkillScript": ""
   },
   "213024": {
     "Id": 213024,
@@ -998,9 +1189,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3024,
     "SecondarySkillGroupId1": 30241,
-    "SubNoteSkillGroupId": 3024
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3024,
+    "SkillScript": ""
   },
   "213025": {
     "Id": 213025,
@@ -1024,9 +1218,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3025,
     "SecondarySkillGroupId1": 30251,
-    "SubNoteSkillGroupId": 3025
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3025,
+    "SkillScript": ""
   },
   "213026": {
     "Id": 213026,
@@ -1050,9 +1247,12 @@
       2,
       20
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 3026,
     "SecondarySkillGroupId1": 30261,
-    "SubNoteSkillGroupId": 3026
+    "SecondarySkillGroupId2": 0,
+    "SubNoteSkillGroupId": 3026,
+    "SkillScript": ""
   },
   "214001": {
     "Id": 214001,
@@ -1078,10 +1278,12 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4001,
     "SecondarySkillGroupId1": 40011,
     "SecondarySkillGroupId2": 40012,
-    "SubNoteSkillGroupId": 4001
+    "SubNoteSkillGroupId": 4001,
+    "SkillScript": ""
   },
   "214002": {
     "Id": 214002,
@@ -1107,10 +1309,12 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4002,
     "SecondarySkillGroupId1": 40021,
     "SecondarySkillGroupId2": 40022,
-    "SubNoteSkillGroupId": 4002
+    "SubNoteSkillGroupId": 4002,
+    "SkillScript": ""
   },
   "214005": {
     "Id": 214005,
@@ -1143,7 +1347,8 @@
     "MainSkillGroupId": 4005,
     "SecondarySkillGroupId1": 40051,
     "SecondarySkillGroupId2": 40052,
-    "SubNoteSkillGroupId": 4005
+    "SubNoteSkillGroupId": 4005,
+    "SkillScript": ""
   },
   "214006": {
     "Id": 214006,
@@ -1176,7 +1381,8 @@
     "MainSkillGroupId": 4006,
     "SecondarySkillGroupId1": 40061,
     "SecondarySkillGroupId2": 40062,
-    "SubNoteSkillGroupId": 4006
+    "SubNoteSkillGroupId": 4006,
+    "SkillScript": ""
   },
   "214007": {
     "Id": 214007,
@@ -1209,7 +1415,8 @@
     "MainSkillGroupId": 4007,
     "SecondarySkillGroupId1": 40071,
     "SecondarySkillGroupId2": 40072,
-    "SubNoteSkillGroupId": 4007
+    "SubNoteSkillGroupId": 4007,
+    "SkillScript": ""
   },
   "214009": {
     "Id": 214009,
@@ -1235,10 +1442,12 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4009,
     "SecondarySkillGroupId1": 40091,
     "SecondarySkillGroupId2": 40092,
-    "SubNoteSkillGroupId": 4009
+    "SubNoteSkillGroupId": 4009,
+    "SkillScript": ""
   },
   "214010": {
     "Id": 214010,
@@ -1264,10 +1473,12 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4010,
     "SecondarySkillGroupId1": 40101,
     "SecondarySkillGroupId2": 40102,
-    "SubNoteSkillGroupId": 4010
+    "SubNoteSkillGroupId": 4010,
+    "SkillScript": ""
   },
   "214011": {
     "Id": 214011,
@@ -1293,10 +1504,12 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4011,
     "SecondarySkillGroupId1": 40111,
     "SecondarySkillGroupId2": 40112,
-    "SubNoteSkillGroupId": 4011
+    "SubNoteSkillGroupId": 4011,
+    "SkillScript": ""
   },
   "214012": {
     "Id": 214012,
@@ -1322,6 +1535,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4012,
     "SecondarySkillGroupId1": 40121,
     "SecondarySkillGroupId2": 40122,
@@ -1352,10 +1566,12 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4013,
     "SecondarySkillGroupId1": 40131,
     "SecondarySkillGroupId2": 40132,
-    "SubNoteSkillGroupId": 4013
+    "SubNoteSkillGroupId": 4013,
+    "SkillScript": ""
   },
   "214014": {
     "Id": 214014,
@@ -1381,10 +1597,12 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4014,
     "SecondarySkillGroupId1": 40141,
     "SecondarySkillGroupId2": 40142,
-    "SubNoteSkillGroupId": 4014
+    "SubNoteSkillGroupId": 4014,
+    "SkillScript": ""
   },
   "214018": {
     "Id": 214018,
@@ -1410,6 +1628,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4018,
     "SecondarySkillGroupId1": 40181,
     "SecondarySkillGroupId2": 40182,
@@ -1440,6 +1659,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4019,
     "SecondarySkillGroupId1": 40191,
     "SecondarySkillGroupId2": 40192,
@@ -1470,6 +1690,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4020,
     "SecondarySkillGroupId1": 40201,
     "SecondarySkillGroupId2": 40202,
@@ -1500,6 +1721,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4021,
     "SecondarySkillGroupId1": 40211,
     "SecondarySkillGroupId2": 40212,
@@ -1530,6 +1752,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4022,
     "SecondarySkillGroupId1": 40221,
     "SecondarySkillGroupId2": 40222,
@@ -1560,6 +1783,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4023,
     "SecondarySkillGroupId1": 40231,
     "SecondarySkillGroupId2": 40232,
@@ -1631,7 +1855,8 @@
     "MainSkillGroupId": 4027,
     "SecondarySkillGroupId1": 40271,
     "SecondarySkillGroupId2": 40272,
-    "SubNoteSkillGroupId": 4027
+    "SubNoteSkillGroupId": 4027,
+    "SkillScript": ""
   },
   "214028": {
     "Id": 214028,
@@ -1691,10 +1916,12 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4030,
     "SecondarySkillGroupId1": 40301,
     "SecondarySkillGroupId2": 40302,
-    "SubNoteSkillGroupId": 4030
+    "SubNoteSkillGroupId": 4030,
+    "SkillScript": ""
   },
   "214031": {
     "Id": 214031,
@@ -1720,10 +1947,12 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4031,
     "SecondarySkillGroupId1": 40311,
     "SecondarySkillGroupId2": 40312,
-    "SubNoteSkillGroupId": 4031
+    "SubNoteSkillGroupId": 4031,
+    "SkillScript": ""
   },
   "214032": {
     "Id": 214032,
@@ -1749,6 +1978,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4032,
     "SecondarySkillGroupId1": 40321,
     "SecondarySkillGroupId2": 40322,
@@ -1779,6 +2009,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4033,
     "SecondarySkillGroupId1": 40331,
     "SecondarySkillGroupId2": 40332,
@@ -1816,7 +2047,8 @@
     "MainSkillGroupId": 4036,
     "SecondarySkillGroupId1": 40361,
     "SecondarySkillGroupId2": 40362,
-    "SubNoteSkillGroupId": 4036
+    "SubNoteSkillGroupId": 4036,
+    "SkillScript": ""
   },
   "214037": {
     "Id": 214037,
@@ -1910,6 +2142,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4039,
     "SecondarySkillGroupId1": 40391,
     "SecondarySkillGroupId2": 40392,
@@ -1974,6 +2207,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4040,
     "SecondarySkillGroupId1": 40401,
     "SecondarySkillGroupId2": 40402,
@@ -2038,6 +2272,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4024,
     "SecondarySkillGroupId1": 40241,
     "SecondarySkillGroupId2": 40242,
@@ -2102,6 +2337,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4041,
     "SecondarySkillGroupId1": 40411,
     "SecondarySkillGroupId2": 40412,
@@ -2166,6 +2402,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4043,
     "SecondarySkillGroupId1": 40431,
     "SecondarySkillGroupId2": 40432,
@@ -2230,6 +2467,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4042,
     "SecondarySkillGroupId1": 40421,
     "SecondarySkillGroupId2": 40422,
@@ -2294,6 +2532,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4046,
     "SecondarySkillGroupId1": 40461,
     "SecondarySkillGroupId2": 40462,
@@ -2358,6 +2597,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4047,
     "SecondarySkillGroupId1": 40471,
     "SecondarySkillGroupId2": 40472,
@@ -2422,6 +2662,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4050,
     "SecondarySkillGroupId1": 40501,
     "SecondarySkillGroupId2": 40502,
@@ -2452,6 +2693,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4049,
     "SecondarySkillGroupId1": 40491,
     "SecondarySkillGroupId2": 40492,
@@ -2516,6 +2758,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4003,
     "SecondarySkillGroupId1": 40031,
     "SecondarySkillGroupId2": 40032,
@@ -2580,6 +2823,7 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4052,
     "SecondarySkillGroupId1": 40521,
     "SecondarySkillGroupId2": 40522,
@@ -2644,10 +2888,76 @@
       2,
       30
     ],
+    "AVGReadReward": [],
     "MainSkillGroupId": 4053,
     "SecondarySkillGroupId1": 40531,
     "SecondarySkillGroupId2": 40532,
     "SubNoteSkillGroupId": 4053,
     "SkillScript": "AIScript.Disc.Disc_214053"
+  },
+  "214055": {
+    "Id": 214055,
+    "EET": 1,
+    "Tags": [
+      807,
+      823,
+      805
+    ],
+    "Visible": true,
+    "Available": true,
+    "DiscBg": "Disc/4055/4055",
+    "StrengthenGroupId": 41,
+    "AttrBaseGroupId": 21105,
+    "AttrExtraGroupId": 301,
+    "PromoteGroupId": 401,
+    "TransformItemId": 224055,
+    "MaxStarTransformItem": [
+      24,
+      200
+    ],
+    "ReadReward": [
+      2,
+      30
+    ],
+    "AVGReadReward": [
+      2,
+      30
+    ],
+    "MainSkillGroupId": 4055,
+    "SecondarySkillGroupId1": 40551,
+    "SecondarySkillGroupId2": 40552,
+    "SubNoteSkillGroupId": 4055,
+    "SkillScript": "AIScript.Disc.Disc_214055"
+  },
+  "214056": {
+    "Id": 214056,
+    "EET": 1,
+    "Tags": [
+      801,
+      810,
+      804
+    ],
+    "Visible": true,
+    "Available": true,
+    "DiscBg": "Disc/4056/4056",
+    "StrengthenGroupId": 41,
+    "AttrBaseGroupId": 21102,
+    "AttrExtraGroupId": 301,
+    "PromoteGroupId": 402,
+    "TransformItemId": 224056,
+    "MaxStarTransformItem": [
+      24,
+      200
+    ],
+    "ReadReward": [
+      2,
+      30
+    ],
+    "AVGReadReward": [],
+    "MainSkillGroupId": 4056,
+    "SecondarySkillGroupId1": 40561,
+    "SecondarySkillGroupId2": 40562,
+    "SubNoteSkillGroupId": 4056,
+    "SkillScript": "AIScript.Disc.Disc_214056"
   }
 }

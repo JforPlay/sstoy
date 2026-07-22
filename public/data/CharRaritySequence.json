@@ -2,6 +2,7 @@
   "1": {
     "Id": 1,
     "Grade": 1,
+    "AdvanceLvl": 0,
     "LvLimit": 10,
     "WorldClassLimit": 1
   },
@@ -64,6 +65,7 @@
   "10": {
     "Id": 10,
     "Grade": 2,
+    "AdvanceLvl": 0,
     "LvLimit": 10,
     "WorldClassLimit": 1
   },
@@ -126,6 +128,7 @@
   "19": {
     "Id": 19,
     "Grade": 3,
+    "AdvanceLvl": 0,
     "LvLimit": 10,
     "WorldClassLimit": 1
   },

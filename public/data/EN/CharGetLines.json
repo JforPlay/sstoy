@@ -23,6 +23,7 @@
   "CharGetLines.11103.1": "My bag is heavier than most would assume—that's because you should never underestimate the weight of knowledge!",
   "CharGetLines.11104.1": "Hey, you can't just give me cookies this amazing and then not give me some more, okay? You better promise!",
   "CharGetLines.11105.1": "In the pale winter sunlight, you hold a warm drink as your breath creates a white mist. You, who see yourself as just ordinary, are the one who makes this day special.",
+  "CharGetLines.11106.1": "Uh... I'll do my best to keep this inflatable steady, but please be careful getting on board.\u000b—A-And of course, if you fall into the water, I'll definitely pull you back up!",
   "CharGetLines.11201.1": "Let's aim for a Monolith we've never seen before! Come on, Boss, time to move out!",
   "CharGetLines.11202.1": "The first meeting is chance, the second is destiny...or something like that. Huh? That doesn't sound like me?",
   "CharGetLines.11203.1": "Let's keep traveling together forever!",
@@ -48,7 +49,7 @@
   "CharGetLines.11605.1": "The best moment I can think of is having a nap in the cozy warmth of the afternoon. When you wake up, the sunlight dances along the windowsill, and the flowers welcome your awakening.",
   "CharGetLines.11701.1": "Welcome! I'm Jinglin, the manager of Jing's Bistro! If you're ever hungry, drop on by!",
   "CharGetLines.11702.1": "I've decided—I'll make a special dish just for you! ...No, it's cool. After all, you're one of our regulars!",
-  "CharGetLines.11703.1": "Jinglin, making a cool debut! Did you get the shot? Ugh, my legs are quivering.",
+  "CharGetLines.11703.1": "Jinglin, making a cool debut!\u000bDid you get the shot? Ugh, my legs are quivering.",
   "CharGetLines.11704.1": "Scientific Mahjong is the path to victory! You agree, right? Hehe, I knew you were my mahjong buddy!",
   "CharGetLines.11801.1": "Are you the rumored Boss? Then I should conduct a full-body examination.",
   "CharGetLines.11802.1": "There seems to be some fated connection between us, so I'd love for you to stop by next time you're in the area.",
@@ -163,5 +164,9 @@
   "CharGetLines.15901.1": "What an interesting coincidence to run into you while traveling. By the way... what do you think about this Loong-style outfit?",
   "CharGetLines.15902.1": "We meet again. You just can't get my special injections out of your mind, can you?",
   "CharGetLines.15903.1": "Hehe... I'll make your feelings soar even higher.",
-  "CharGetLines.15904.1": "Now it's your turn to heal me... Heh, don't stop your hands."
+  "CharGetLines.15904.1": "Now it's your turn to heal me... Heh, don't stop your hands.",
+  "CharGetLines.16001.1": "I don't get to come to the beach with everyone much, so I hope we can make the most of it. Ah, but just so you know... If you do anything risky, you're getting a \"gentle warning\" from me!",
+  "CharGetLines.16002.1": "Looks like this beach still needs me around a little longer. Well then, I'll happily keep you all company!",
+  "CharGetLines.16003.1": "Alright, I'm done talking. Don't blame me when things get a little rough!",
+  "CharGetLines.16004.1": "It's about time we headed back... But...\nThe sunset is so beautiful. Let's stay a little longer."
 }

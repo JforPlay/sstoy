@@ -1,6 +1,7 @@
 {
   "1": {
     "Id": 1,
+    "MinGrade": 0,
     "Rarity": 5,
     "AttrBaseGroupId": 900,
     "Level": 1,

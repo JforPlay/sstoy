@@ -2,11 +2,13 @@
   "211001": {
     "Id": 211001,
     "VoFile": "outfit_1001",
+    "VoBegin1": 0.0,
     "VoLoop1": 61.714,
     "VoName1": "DiscIP.211001.1",
     "VoBegin2": 6.857,
     "VoLoop2": 13.714,
     "VoName2": "DiscIP.211001.2",
+    "AvgId": "",
     "StoryName": "DiscIP.211001.3",
     "StoryDesc": "DiscIP.211001.4",
     "CharId": [
@@ -16,11 +18,13 @@
   "211002": {
     "Id": 211002,
     "VoFile": "outfit_1002",
+    "VoBegin1": 0.0,
     "VoLoop1": 61.44,
     "VoName1": "DiscIP.211002.1",
     "VoBegin2": 7.68,
     "VoLoop2": 15.36,
     "VoName2": "DiscIP.211002.2",
+    "AvgId": "",
     "StoryName": "DiscIP.211002.3",
     "StoryDesc": "DiscIP.211002.4",
     "CharId": [
@@ -30,11 +34,13 @@
   "211003": {
     "Id": 211003,
     "VoFile": "outfit_1003",
+    "VoBegin1": 0.0,
     "VoLoop1": 58.181,
     "VoName1": "DiscIP.211003.1",
     "VoBegin2": 6.545,
     "VoLoop2": 11.636,
     "VoName2": "DiscIP.211003.2",
+    "AvgId": "",
     "StoryName": "DiscIP.211003.3",
     "StoryDesc": "DiscIP.211003.4",
     "CharId": [
@@ -44,11 +50,13 @@
   "211004": {
     "Id": 211004,
     "VoFile": "outfit_1004",
+    "VoBegin1": 0.0,
     "VoLoop1": 66.0,
     "VoName1": "DiscIP.211004.1",
     "VoBegin2": 6.0,
     "VoLoop2": 12.0,
     "VoName2": "DiscIP.211004.2",
+    "AvgId": "",
     "StoryName": "DiscIP.211004.3",
     "StoryDesc": "DiscIP.211004.4",
     "CharId": [
@@ -58,11 +66,13 @@
   "211005": {
     "Id": 211005,
     "VoFile": "outfit_1005",
+    "VoBegin1": 0.0,
     "VoLoop1": 55.0,
     "VoName1": "DiscIP.211005.1",
     "VoBegin2": 5.937,
     "VoLoop2": 10.0,
     "VoName2": "DiscIP.211005.2",
+    "AvgId": "",
     "StoryName": "DiscIP.211005.3",
     "StoryDesc": "DiscIP.211005.4",
     "CharId": [
@@ -78,6 +88,7 @@
     "VoBegin2": 6.316,
     "VoLoop2": 12.632,
     "VoName2": "DiscIP.211006.2",
+    "AvgId": "",
     "StoryName": "DiscIP.211006.3",
     "StoryDesc": "DiscIP.211006.4",
     "CharId": [
@@ -87,11 +98,13 @@
   "211007": {
     "Id": 211007,
     "VoFile": "outfit_1007",
+    "VoBegin1": 0.0,
     "VoLoop1": 65.085,
     "VoName1": "DiscIP.211007.1",
     "VoBegin2": 6.356,
     "VoLoop2": 10.169,
     "VoName2": "DiscIP.211007.2",
+    "AvgId": "",
     "StoryName": "DiscIP.211007.3",
     "StoryDesc": "DiscIP.211007.4",
     "CharId": [
@@ -101,11 +114,13 @@
   "211008": {
     "Id": 211008,
     "VoFile": "outfit_1008",
+    "VoBegin1": 0.0,
     "VoLoop1": 67.765,
     "VoName1": "DiscIP.211008.1",
     "VoBegin2": 6.706,
     "VoLoop2": 11.296,
     "VoName2": "DiscIP.211008.2",
+    "AvgId": "",
     "StoryName": "DiscIP.211008.3",
     "StoryDesc": "DiscIP.211008.4",
     "CharId": [
@@ -115,44 +130,55 @@
   "212001": {
     "Id": 212001,
     "VoFile": "outfit_2001",
+    "VoBegin1": 0.0,
     "VoLoop1": 62.859,
     "VoName1": "DiscIP.212001.1",
     "VoBegin2": 7.143,
     "VoLoop2": 11.429,
     "VoName2": "DiscIP.212001.2",
+    "AvgId": "",
     "StoryName": "DiscIP.212001.3",
-    "StoryDesc": "DiscIP.212001.4"
+    "StoryDesc": "DiscIP.212001.4",
+    "CharId": []
   },
   "212002": {
     "Id": 212002,
     "VoFile": "outfit_2002",
+    "VoBegin1": 0.0,
     "VoLoop1": 59.586,
     "VoName1": "DiscIP.212002.1",
     "VoBegin2": 6.621,
     "VoLoop2": 13.241,
     "VoName2": "DiscIP.212002.2",
+    "AvgId": "",
     "StoryName": "DiscIP.212002.3",
-    "StoryDesc": "DiscIP.212002.4"
+    "StoryDesc": "DiscIP.212002.4",
+    "CharId": []
   },
   "212003": {
     "Id": 212003,
     "VoFile": "outfit_2003",
+    "VoBegin1": 0.0,
     "VoLoop1": 56.0,
     "VoName1": "DiscIP.212003.1",
     "VoBegin2": 8.0,
     "VoLoop2": 16.0,
     "VoName2": "DiscIP.212003.2",
+    "AvgId": "",
     "StoryName": "DiscIP.212003.3",
-    "StoryDesc": "DiscIP.212003.4"
+    "StoryDesc": "DiscIP.212003.4",
+    "CharId": []
   },
   "212005": {
     "Id": 212005,
     "VoFile": "outfit_2005",
+    "VoBegin1": 0.0,
     "VoLoop1": 66.205,
     "VoName1": "DiscIP.212005.1",
     "VoBegin2": 6.621,
     "VoLoop2": 9.931,
     "VoName2": "DiscIP.212005.2",
+    "AvgId": "",
     "StoryName": "DiscIP.212005.3",
     "StoryDesc": "DiscIP.212005.4",
     "CharId": [
@@ -162,11 +188,13 @@
   "212006": {
     "Id": 212006,
     "VoFile": "outfit_2006",
+    "VoBegin1": 0.0,
     "VoLoop1": 56.348,
     "VoName1": "DiscIP.212006.1",
     "VoBegin2": 6.261,
     "VoLoop2": 12.522,
     "VoName2": "DiscIP.212006.2",
+    "AvgId": "",
     "StoryName": "DiscIP.212006.3",
     "StoryDesc": "DiscIP.212006.4",
     "CharId": [
@@ -176,55 +204,101 @@
   "212007": {
     "Id": 212007,
     "VoFile": "outfit_2007",
+    "VoBegin1": 0.0,
     "VoLoop1": 57.6,
     "VoName1": "DiscIP.212007.1",
     "VoBegin2": 6.4,
     "VoLoop2": 12.8,
     "VoName2": "DiscIP.212007.2",
+    "AvgId": "",
     "StoryName": "DiscIP.212007.3",
-    "StoryDesc": "DiscIP.212007.4"
+    "StoryDesc": "DiscIP.212007.4",
+    "CharId": []
   },
   "212008": {
     "Id": 212008,
     "VoFile": "outfit_2008",
+    "VoBegin1": 0.0,
     "VoLoop1": 66.375,
     "VoName1": "DiscIP.212008.1",
     "VoBegin2": 6.375,
     "VoLoop2": 12.0,
     "VoName2": "DiscIP.212008.2",
+    "AvgId": "",
     "StoryName": "DiscIP.212008.3",
-    "StoryDesc": "DiscIP.212008.4"
+    "StoryDesc": "DiscIP.212008.4",
+    "CharId": []
   },
   "212009": {
     "Id": 212009,
     "VoFile": "outfit_2009",
+    "VoBegin1": 0.0,
     "VoLoop1": 60.034,
     "VoName1": "DiscIP.212009.1",
     "VoBegin2": 6.207,
     "VoLoop2": 10.345,
     "VoName2": "DiscIP.212009.2",
+    "AvgId": "",
     "StoryName": "DiscIP.212009.3",
-    "StoryDesc": "DiscIP.212009.4"
+    "StoryDesc": "DiscIP.212009.4",
+    "CharId": []
   },
   "212010": {
     "Id": 212010,
     "VoFile": "outfit_2010",
+    "VoBegin1": 0.0,
     "VoLoop1": 60.759,
     "VoName1": "DiscIP.212010.1",
     "VoBegin2": 6.646,
     "VoLoop2": 12.152,
     "VoName2": "DiscIP.212010.2",
+    "AvgId": "",
     "StoryName": "DiscIP.212010.3",
-    "StoryDesc": "DiscIP.212010.4"
+    "StoryDesc": "DiscIP.212010.4",
+    "CharId": []
+  },
+  "213001": {
+    "Id": 213001,
+    "VoFile": "outfit_3001",
+    "VoBegin1": 0.0,
+    "VoLoop1": 62.439,
+    "VoName1": "DiscIP.213001.1",
+    "VoBegin2": 7.805,
+    "VoLoop2": 15.61,
+    "VoName2": "DiscIP.213001.2",
+    "AvgId": "",
+    "StoryName": "DiscIP.213001.3",
+    "StoryDesc": "DiscIP.213001.4",
+    "CharId": []
+  },
+  "213002": {
+    "Id": 213002,
+    "VoFile": "outfit_3002",
+    "VoBegin1": 0.0,
+    "VoLoop1": 60.0,
+    "VoName1": "DiscIP.213002.1",
+    "VoBegin2": 6.667,
+    "VoLoop2": 13.333,
+    "VoName2": "DiscIP.213002.2",
+    "AvgId": "",
+    "StoryName": "DiscIP.213002.3",
+    "StoryDesc": "DiscIP.213002.4",
+    "CharId": [
+      133,
+      134,
+      156
+    ]
   },
   "213003": {
     "Id": 213003,
     "VoFile": "outfit_3003",
+    "VoBegin1": 0.0,
     "VoLoop1": 61.091,
     "VoName1": "DiscIP.213003.1",
     "VoBegin2": 5.818,
     "VoLoop2": 11.636,
     "VoName2": "DiscIP.213003.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213003.3",
     "StoryDesc": "DiscIP.213003.4",
     "CharId": [
@@ -235,22 +309,27 @@
   "213004": {
     "Id": 213004,
     "VoFile": "outfit_3004",
+    "VoBegin1": 0.0,
     "VoLoop1": 70.073,
     "VoName1": "DiscIP.213004.1",
     "VoBegin2": 7.007,
     "VoLoop2": 10.511,
     "VoName2": "DiscIP.213004.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213004.3",
-    "StoryDesc": "DiscIP.213004.4"
+    "StoryDesc": "DiscIP.213004.4",
+    "CharId": []
   },
   "213005": {
     "Id": 213005,
     "VoFile": "outfit_3005",
+    "VoBegin1": 0.0,
     "VoLoop1": 85.716,
     "VoName1": "DiscIP.213005.1",
     "VoBegin2": 5.716,
     "VoLoop2": 11.428,
     "VoName2": "DiscIP.213005.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213005.3",
     "StoryDesc": "DiscIP.213005.4",
     "CharId": [
@@ -260,11 +339,13 @@
   "213006": {
     "Id": 213006,
     "VoFile": "outfit_3006",
+    "VoBegin1": 0.0,
     "VoLoop1": 60.0,
     "VoName1": "DiscIP.213006.1",
     "VoBegin2": 6.667,
     "VoLoop2": 13.333,
     "VoName2": "DiscIP.213006.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213006.3",
     "StoryDesc": "DiscIP.213006.4",
     "CharId": [
@@ -276,13 +357,16 @@
   "213007": {
     "Id": 213007,
     "VoFile": "outfit_3007",
+    "VoBegin1": 0.0,
     "VoLoop1": 63.661,
     "VoName1": "DiscIP.213007.1",
     "VoBegin2": 6.249,
     "VoLoop2": 9.643,
     "VoName2": "DiscIP.213007.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213007.3",
-    "StoryDesc": "DiscIP.213007.4"
+    "StoryDesc": "DiscIP.213007.4",
+    "CharId": []
   },
   "213008": {
     "Id": 213008,
@@ -293,6 +377,7 @@
     "VoBegin2": 6.597,
     "VoLoop2": 9.424,
     "VoName2": "DiscIP.213008.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213008.3",
     "StoryDesc": "DiscIP.213008.4",
     "CharId": [
@@ -310,17 +395,21 @@
     "VoBegin2": 5.913,
     "VoLoop2": 11.636,
     "VoName2": "DiscIP.213009.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213009.3",
-    "StoryDesc": "DiscIP.213009.4"
+    "StoryDesc": "DiscIP.213009.4",
+    "CharId": []
   },
   "213010": {
     "Id": 213010,
     "VoFile": "outfit_3010",
+    "VoBegin1": 0.0,
     "VoLoop1": 58.909,
     "VoName1": "DiscIP.213010.1",
     "VoBegin2": 6.545,
     "VoLoop2": 8.727,
     "VoName2": "DiscIP.213010.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213010.3",
     "StoryDesc": "DiscIP.213010.4",
     "CharId": [
@@ -331,11 +420,13 @@
   "213011": {
     "Id": 213011,
     "VoFile": "outfit_3011",
+    "VoBegin1": 0.0,
     "VoLoop1": 62.951,
     "VoName1": "DiscIP.213011.1",
     "VoBegin2": 7.869,
     "VoLoop2": 7.869,
     "VoName2": "DiscIP.213011.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213011.3",
     "StoryDesc": "DiscIP.213011.4",
     "CharId": [
@@ -346,11 +437,13 @@
   "213012": {
     "Id": 213012,
     "VoFile": "outfit_3012",
+    "VoBegin1": 0.0,
     "VoLoop1": 60.759,
     "VoName1": "DiscIP.213012.1",
     "VoBegin2": 6.456,
     "VoLoop2": 9.114,
     "VoName2": "DiscIP.213012.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213012.3",
     "StoryDesc": "DiscIP.213012.4",
     "CharId": [
@@ -360,11 +453,13 @@
   "213013": {
     "Id": 213013,
     "VoFile": "outfit_3013",
+    "VoBegin1": 0.0,
     "VoLoop1": 59.526,
     "VoName1": "DiscIP.213013.1",
     "VoBegin2": 8.372,
     "VoLoop2": 14.884,
     "VoName2": "DiscIP.213013.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213013.3",
     "StoryDesc": "DiscIP.213013.4",
     "CharId": [
@@ -374,11 +469,13 @@
   "213014": {
     "Id": 213014,
     "VoFile": "outfit_3014",
+    "VoBegin1": 0.0,
     "VoLoop1": 58.182,
     "VoName1": "DiscIP.213014.1",
     "VoBegin2": 7.273,
     "VoLoop2": 14.545,
     "VoName2": "DiscIP.213014.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213014.3",
     "StoryDesc": "DiscIP.213014.4",
     "CharId": [
@@ -388,11 +485,13 @@
   "213015": {
     "Id": 213015,
     "VoFile": "outfit_3015",
+    "VoBegin1": 0.0,
     "VoLoop1": 64.0,
     "VoName1": "DiscIP.213015.1",
     "VoBegin2": 7.0,
     "VoLoop2": 10.0,
     "VoName2": "DiscIP.213015.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213015.3",
     "StoryDesc": "DiscIP.213015.4",
     "CharId": [
@@ -403,11 +502,13 @@
   "213016": {
     "Id": 213016,
     "VoFile": "outfit_3016",
+    "VoBegin1": 0.0,
     "VoLoop1": 55.199,
     "VoName1": "DiscIP.213016.1",
     "VoBegin2": 4.615,
     "VoLoop2": 19.199,
     "VoName2": "DiscIP.213016.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213016.3",
     "StoryDesc": "DiscIP.213016.4",
     "CharId": [
@@ -417,22 +518,27 @@
   "213017": {
     "Id": 213017,
     "VoFile": "outfit_3017",
+    "VoBegin1": 0.0,
     "VoLoop1": 60.0,
     "VoName1": "DiscIP.213017.1",
     "VoBegin2": 6.0,
     "VoLoop2": 12.0,
     "VoName2": "DiscIP.213017.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213017.3",
-    "StoryDesc": "DiscIP.213017.4"
+    "StoryDesc": "DiscIP.213017.4",
+    "CharId": []
   },
   "213018": {
     "Id": 213018,
     "VoFile": "outfit_3018",
+    "VoBegin1": 0.0,
     "VoLoop1": 64.0,
     "VoName1": "DiscIP.213018.1",
     "VoBegin2": 8.0,
     "VoLoop2": 18.0,
     "VoName2": "DiscIP.213018.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213018.3",
     "StoryDesc": "DiscIP.213018.4",
     "CharId": [
@@ -442,11 +548,13 @@
   "213019": {
     "Id": 213019,
     "VoFile": "outfit_3019",
+    "VoBegin1": 0.0,
     "VoLoop1": 62.5,
     "VoName1": "DiscIP.213019.1",
     "VoBegin2": 6.875,
     "VoLoop2": 10.0,
     "VoName2": "DiscIP.213019.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213019.3",
     "StoryDesc": "DiscIP.213019.4",
     "CharId": [
@@ -456,11 +564,13 @@
   "213020": {
     "Id": 213020,
     "VoFile": "outfit_3020",
+    "VoBegin1": 0.0,
     "VoLoop1": 62.439,
     "VoName1": "DiscIP.213020.1",
     "VoBegin2": 7.805,
     "VoLoop2": 15.61,
     "VoName2": "DiscIP.213020.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213020.3",
     "StoryDesc": "DiscIP.213020.4",
     "CharId": [
@@ -470,46 +580,58 @@
   "213021": {
     "Id": 213021,
     "VoFile": "outfit_3021",
+    "VoBegin1": 0.0,
     "VoLoop1": 60.643,
     "VoName1": "DiscIP.213021.1",
     "VoBegin2": 9.214,
     "VoLoop2": 13.714,
     "VoName2": "DiscIP.213021.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213021.3",
-    "StoryDesc": "DiscIP.213021.4"
+    "StoryDesc": "DiscIP.213021.4",
+    "CharId": []
   },
   "213022": {
     "Id": 213022,
     "VoFile": "outfit_3022",
+    "VoBegin1": 0.0,
     "VoLoop1": 60.0,
     "VoName1": "DiscIP.213022.1",
     "VoBegin2": 5.714,
     "VoLoop2": 8.574,
     "VoName2": "DiscIP.213022.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213022.3",
-    "StoryDesc": "DiscIP.213022.4"
+    "StoryDesc": "DiscIP.213022.4",
+    "CharId": []
   },
   "213023": {
     "Id": 213023,
     "VoFile": "outfit_3023",
+    "VoBegin1": 0.0,
     "VoLoop1": 59.608,
     "VoName1": "DiscIP.213023.1",
     "VoBegin2": 9.412,
     "VoLoop2": 12.549,
     "VoName2": "DiscIP.213023.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213023.3",
-    "StoryDesc": "DiscIP.213023.4"
+    "StoryDesc": "DiscIP.213023.4",
+    "CharId": []
   },
   "213024": {
     "Id": 213024,
     "VoFile": "outfit_3024",
+    "VoBegin1": 0.0,
     "VoLoop1": 63.297,
     "VoName1": "DiscIP.213024.1",
     "VoBegin2": 6.593,
     "VoLoop2": 10.549,
     "VoName2": "DiscIP.213024.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213024.3",
-    "StoryDesc": "DiscIP.213024.4"
+    "StoryDesc": "DiscIP.213024.4",
+    "CharId": []
   },
   "213025": {
     "Id": 213025,
@@ -520,28 +642,35 @@
     "VoBegin2": 7.295,
     "VoLoop2": 12.953,
     "VoName2": "DiscIP.213025.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213025.3",
-    "StoryDesc": "DiscIP.213025.4"
+    "StoryDesc": "DiscIP.213025.4",
+    "CharId": []
   },
   "213026": {
     "Id": 213026,
     "VoFile": "outfit_3026",
+    "VoBegin1": 0.0,
     "VoLoop1": 61.651,
     "VoName1": "DiscIP.213026.1",
     "VoBegin2": 8.807,
     "VoLoop2": 17.615,
     "VoName2": "DiscIP.213026.2",
+    "AvgId": "",
     "StoryName": "DiscIP.213026.3",
-    "StoryDesc": "DiscIP.213026.4"
+    "StoryDesc": "DiscIP.213026.4",
+    "CharId": []
   },
   "214001": {
     "Id": 214001,
     "VoFile": "outfit_4001",
+    "VoBegin1": 0.0,
     "VoLoop1": 93.221,
     "VoName1": "DiscIP.214001.1",
     "VoBegin2": 6.441,
     "VoLoop2": 10.847,
     "VoName2": "DiscIP.214001.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214001.3",
     "StoryDesc": "DiscIP.214001.4",
     "CharId": [
@@ -552,11 +681,13 @@
   "214002": {
     "Id": 214002,
     "VoFile": "outfit_4002",
+    "VoBegin1": 0.0,
     "VoLoop1": 91.428,
     "VoName1": "DiscIP.214002.1",
     "VoBegin2": 6.531,
     "VoLoop2": 13.061,
     "VoName2": "DiscIP.214002.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214002.3",
     "StoryDesc": "DiscIP.214002.4",
     "CharId": [
@@ -567,11 +698,13 @@
   "214003": {
     "Id": 214003,
     "VoFile": "outfit_4003",
+    "VoBegin1": 0.0,
     "VoLoop1": 91.764,
     "VoName1": "DiscIP.214003.1",
     "VoBegin2": 7.059,
     "VoLoop2": 10.588,
     "VoName2": "DiscIP.214003.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214003.3",
     "StoryDesc": "DiscIP.214003.4",
     "CharId": [
@@ -582,6 +715,7 @@
   "214004": {
     "Id": 214004,
     "VoFile": "outfit_4004",
+    "VoBegin1": 0.0,
     "VoLoop1": 90.81,
     "VoName1": "DiscIP.214004.1",
     "VoBegin2": 7.297,
@@ -597,6 +731,7 @@
   "214005": {
     "Id": 214005,
     "VoFile": "outfit_4005",
+    "VoBegin1": 0.0,
     "VoLoop1": 98.171,
     "VoName1": "DiscIP.214005.1",
     "VoBegin2": 6.545,
@@ -612,6 +747,7 @@
   "214006": {
     "Id": 214006,
     "VoFile": "outfit_4006",
+    "VoBegin1": 0.0,
     "VoLoop1": 96.0,
     "VoName1": "DiscIP.214006.1",
     "VoBegin2": 7.286,
@@ -627,6 +763,7 @@
   "214007": {
     "Id": 214007,
     "VoFile": "outfit_4007",
+    "VoBegin1": 0.0,
     "VoLoop1": 98.526,
     "VoName1": "DiscIP.214007.1",
     "VoBegin2": 6.947,
@@ -642,6 +779,7 @@
   "214008": {
     "Id": 214008,
     "VoFile": "outfit_4008",
+    "VoBegin1": 0.0,
     "VoLoop1": 82.877,
     "VoName1": "DiscIP.214008.1",
     "VoBegin2": 6.906,
@@ -663,6 +801,7 @@
     "VoBegin2": 5.806,
     "VoLoop2": 20.646,
     "VoName2": "DiscIP.214009.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214009.3",
     "StoryDesc": "DiscIP.214009.4",
     "CharId": [
@@ -680,8 +819,10 @@
     "VoBegin2": 18.0,
     "VoLoop2": 24.0,
     "VoName2": "DiscIP.214010.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214010.3",
-    "StoryDesc": "DiscIP.214010.4"
+    "StoryDesc": "DiscIP.214010.4",
+    "CharId": []
   },
   "214011": {
     "Id": 214011,
@@ -692,6 +833,7 @@
     "VoBegin2": 14.769,
     "VoLoop2": 16.615,
     "VoName2": "DiscIP.214011.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214011.3",
     "StoryDesc": "DiscIP.214011.4",
     "CharId": [
@@ -709,6 +851,7 @@
     "VoBegin2": 15.238,
     "VoLoop2": 7.619,
     "VoName2": "DiscIP.214012.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214012.3",
     "StoryDesc": "DiscIP.214012.4",
     "CharId": [
@@ -718,22 +861,27 @@
   "214013": {
     "Id": 214013,
     "VoFile": "outfit_4013",
+    "VoBegin1": 0.0,
     "VoLoop1": 164.444,
     "VoName1": "DiscIP.214013.1",
     "VoBegin2": 18.888,
     "VoLoop2": 17.777,
     "VoName2": "DiscIP.214013.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214013.3",
-    "StoryDesc": "DiscIP.214013.4"
+    "StoryDesc": "DiscIP.214013.4",
+    "CharId": []
   },
   "214014": {
     "Id": 214014,
     "VoFile": "outfit_4014",
+    "VoBegin1": 0.0,
     "VoLoop1": 98.0,
     "VoName1": "DiscIP.214014.1",
     "VoBegin2": 6.0,
     "VoLoop2": 16.0,
     "VoName2": "DiscIP.214014.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214014.3",
     "StoryDesc": "DiscIP.214014.4",
     "CharId": [
@@ -793,11 +941,13 @@
   "214018": {
     "Id": 214018,
     "VoFile": "outfit_4018",
+    "VoBegin1": 0.0,
     "VoLoop1": 99.0,
     "VoName1": "DiscIP.214018.1",
     "VoBegin2": 5.625,
     "VoLoop2": 12.0,
     "VoName2": "DiscIP.214018.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214018.3",
     "StoryDesc": "DiscIP.214018.4",
     "CharId": [
@@ -807,11 +957,13 @@
   "214019": {
     "Id": 214019,
     "VoFile": "outfit_4019",
+    "VoBegin1": 0.0,
     "VoLoop1": 133.954,
     "VoName1": "DiscIP.214019.1",
     "VoBegin2": 8.372,
     "VoLoop2": 13.953,
     "VoName2": "DiscIP.214019.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214019.3",
     "StoryDesc": "DiscIP.214019.4",
     "CharId": [
@@ -827,6 +979,7 @@
     "VoBegin2": 6.957,
     "VoLoop2": 10.435,
     "VoName2": "DiscIP.214020.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214020.3",
     "StoryDesc": "DiscIP.214020.4",
     "CharId": [
@@ -842,6 +995,7 @@
     "VoBegin2": 9.6,
     "VoLoop2": 9.6,
     "VoName2": "DiscIP.214021.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214021.3",
     "StoryDesc": "DiscIP.214021.4",
     "CharId": [
@@ -851,11 +1005,13 @@
   "214022": {
     "Id": 214022,
     "VoFile": "outfit_4022",
+    "VoBegin1": 0.0,
     "VoLoop1": 118.589,
     "VoName1": "DiscIP.214022.1",
     "VoBegin2": 5.647,
     "VoLoop2": 11.294,
     "VoName2": "DiscIP.214022.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214022.3",
     "StoryDesc": "DiscIP.214022.4",
     "CharId": [
@@ -865,22 +1021,27 @@
   "214023": {
     "Id": 214023,
     "VoFile": "outfit_4023",
+    "VoBegin1": 0.0,
     "VoLoop1": 85.714,
     "VoName1": "DiscIP.214023.1",
     "VoBegin2": 8.571,
     "VoLoop2": 17.143,
     "VoName2": "DiscIP.214023.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214023.3",
-    "StoryDesc": "DiscIP.214023.4"
+    "StoryDesc": "DiscIP.214023.4",
+    "CharId": []
   },
   "214024": {
     "Id": 214024,
     "VoFile": "outfit_4024",
+    "VoBegin1": 0.0,
     "VoLoop1": 87.0,
     "VoName1": "DiscIP.214024.1",
     "VoBegin2": 6.713,
     "VoLoop2": 13.427,
     "VoName2": "DiscIP.214024.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214024.3",
     "StoryDesc": "DiscIP.214024.4",
     "CharId": [
@@ -954,11 +1115,13 @@
   "214030": {
     "Id": 214030,
     "VoFile": "outfit_4030",
+    "VoBegin1": 0.0,
     "VoLoop1": 96.0,
     "VoName1": "DiscIP.214030.1",
     "VoBegin2": 17.455,
     "VoLoop2": 17.455,
     "VoName2": "DiscIP.214030.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214030.3",
     "StoryDesc": "DiscIP.214030.4",
     "CharId": [
@@ -968,11 +1131,13 @@
   "214031": {
     "Id": 214031,
     "VoFile": "outfit_4031",
+    "VoBegin1": 0.0,
     "VoLoop1": 90.348,
     "VoName1": "DiscIP.214031.1",
     "VoBegin2": 5.647,
     "VoLoop2": 11.294,
     "VoName2": "DiscIP.214031.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214031.3",
     "StoryDesc": "DiscIP.214031.4",
     "CharId": [
@@ -983,11 +1148,13 @@
   "214032": {
     "Id": 214032,
     "VoFile": "outfit_4032",
+    "VoBegin1": 0.0,
     "VoLoop1": 89.134,
     "VoName1": "DiscIP.214032.1",
     "VoBegin2": 6.857,
     "VoLoop2": 13.714,
     "VoName2": "DiscIP.214032.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214032.3",
     "StoryDesc": "DiscIP.214032.4",
     "CharId": [
@@ -997,11 +1164,13 @@
   "214033": {
     "Id": 214033,
     "VoFile": "outfit_4033",
+    "VoBegin1": 0.0,
     "VoLoop1": 96.0,
     "VoName1": "DiscIP.214033.1",
     "VoBegin2": 6.0,
     "VoLoop2": 24.0,
     "VoName2": "DiscIP.214033.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214033.3",
     "StoryDesc": "DiscIP.214033.4",
     "CharId": [
@@ -1066,17 +1235,21 @@
     "VoBegin2": 15.0,
     "VoLoop2": 21.0,
     "VoName2": "DiscIP.214039.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214039.3",
-    "StoryDesc": "DiscIP.214039.4"
+    "StoryDesc": "DiscIP.214039.4",
+    "CharId": []
   },
   "214040": {
     "Id": 214040,
     "VoFile": "outfit_4040",
+    "VoBegin1": 0.0,
     "VoLoop1": 80.0,
     "VoName1": "DiscIP.214040.1",
     "VoBegin2": 16.0,
     "VoLoop2": 15.0,
     "VoName2": "DiscIP.214040.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214040.3",
     "StoryDesc": "DiscIP.214040.4",
     "CharId": [
@@ -1092,6 +1265,7 @@
     "VoBegin2": 15.0,
     "VoLoop2": 21.0,
     "VoName2": "DiscIP.214041.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214041.3",
     "StoryDesc": "DiscIP.214041.4",
     "CharId": [
@@ -1107,6 +1281,7 @@
     "VoBegin2": 15.0,
     "VoLoop2": 21.0,
     "VoName2": "DiscIP.214043.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214043.3",
     "StoryDesc": "DiscIP.214043.4",
     "CharId": [
@@ -1116,6 +1291,7 @@
   "214048": {
     "Id": 214048,
     "VoFile": "outfit_4048",
+    "VoBegin1": 0.0,
     "VoLoop1": 151.158,
     "VoName1": "DiscIP.214048.1",
     "VoBegin2": 13.0,
@@ -1131,10 +1307,13 @@
   "214042": {
     "Id": 214042,
     "VoFile": "outfit_4042",
+    "VoBegin1": 0.0,
     "VoLoop1": 120.0,
     "VoName1": "DiscIP.214042.1",
+    "VoBegin2": 0.0,
     "VoLoop2": 15.199,
     "VoName2": "DiscIP.214042.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214042.3",
     "StoryDesc": "DiscIP.214042.4",
     "CharId": [
@@ -1144,8 +1323,10 @@
   "214044": {
     "Id": 214044,
     "VoFile": "outfit_4044",
+    "VoBegin1": 0.0,
     "VoLoop1": 115.161,
     "VoName1": "DiscIP.214044.1",
+    "VoBegin2": 0.0,
     "VoLoop2": 15.341,
     "VoName2": "DiscIP.214044.2",
     "AvgId": "CG_disc4044",
@@ -1161,8 +1342,10 @@
     "VoBegin1": 21.333,
     "VoLoop1": 92.0,
     "VoName1": "DiscIP.214046.1",
+    "VoBegin2": 0.0,
     "VoLoop2": 21.333,
     "VoName2": "DiscIP.214046.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214046.3",
     "StoryDesc": "DiscIP.214046.4",
     "CharId": [
@@ -1175,8 +1358,10 @@
     "VoBegin1": 25.2,
     "VoLoop1": 72.0,
     "VoName1": "DiscIP.214047.1",
+    "VoBegin2": 0.0,
     "VoLoop2": 12.0,
     "VoName2": "DiscIP.214047.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214047.3",
     "StoryDesc": "DiscIP.214047.4",
     "CharId": [
@@ -1186,8 +1371,10 @@
   "214045": {
     "Id": 214045,
     "VoFile": "outfit_4045",
+    "VoBegin1": 0.0,
     "VoLoop1": 103.58,
     "VoName1": "DiscIP.214045.1",
+    "VoBegin2": 0.0,
     "VoLoop2": 14.22,
     "VoName2": "DiscIP.214045.2",
     "AvgId": "CG_disc4045",
@@ -1200,10 +1387,13 @@
   "214050": {
     "Id": 214050,
     "VoFile": "outfit_4050",
+    "VoBegin1": 0.0,
     "VoLoop1": 150.0,
     "VoName1": "DiscIP.214050.1",
+    "VoBegin2": 0.0,
     "VoLoop2": 16.0,
     "VoName2": "DiscIP.214050.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214050.3",
     "StoryDesc": "DiscIP.214050.4",
     "CharId": [
@@ -1213,18 +1403,24 @@
   "214049": {
     "Id": 214049,
     "VoFile": "outfit_4049",
+    "VoBegin1": 0.0,
     "VoLoop1": 218.0,
     "VoName1": "DiscIP.214049.1",
+    "VoBegin2": 0.0,
     "VoLoop2": 218.0,
     "VoName2": "DiscIP.214049.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214049.3",
-    "StoryDesc": "DiscIP.214049.4"
+    "StoryDesc": "DiscIP.214049.4",
+    "CharId": []
   },
   "214051": {
     "Id": 214051,
     "VoFile": "outfit_4051",
+    "VoBegin1": 0.0,
     "VoLoop1": 131.53,
     "VoName1": "DiscIP.214051.1",
+    "VoBegin2": 0.0,
     "VoLoop2": 12.307,
     "VoName2": "DiscIP.214051.2",
     "AvgId": "CG_disc4051",
@@ -1237,10 +1433,13 @@
   "214052": {
     "Id": 214052,
     "VoFile": "outfit_4052",
+    "VoBegin1": 0.0,
     "VoLoop1": 97.5,
     "VoName1": "DiscIP.214052.1",
+    "VoBegin2": 0.0,
     "VoLoop2": 10.808,
     "VoName2": "DiscIP.214052.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214052.3",
     "StoryDesc": "DiscIP.214052.4",
     "CharId": [
@@ -1250,8 +1449,10 @@
   "214054": {
     "Id": 214054,
     "VoFile": "outfit_4054",
+    "VoBegin1": 0.0,
     "VoLoop1": 105.0,
     "VoName1": "DiscIP.214054.1",
+    "VoBegin2": 0.0,
     "VoLoop2": 12.51,
     "VoName2": "DiscIP.214054.2",
     "AvgId": "CG_disc4054",
@@ -1264,14 +1465,49 @@
   "214053": {
     "Id": 214053,
     "VoFile": "outfit_4053",
+    "VoBegin1": 0.0,
     "VoLoop1": 96.5,
     "VoName1": "DiscIP.214053.1",
+    "VoBegin2": 0.0,
     "VoLoop2": 15.02,
     "VoName2": "DiscIP.214053.2",
+    "AvgId": "",
     "StoryName": "DiscIP.214053.3",
     "StoryDesc": "DiscIP.214053.4",
     "CharId": [
       114
+    ]
+  },
+  "214055": {
+    "Id": 214055,
+    "VoFile": "outfit_4055",
+    "VoBegin1": 0.0,
+    "VoLoop1": 122.333,
+    "VoName1": "DiscIP.214055.1",
+    "VoBegin2": 0.0,
+    "VoLoop2": 16.2,
+    "VoName2": "DiscIP.214055.2",
+    "AvgId": "CG_disc4055",
+    "StoryName": "DiscIP.214055.3",
+    "StoryDesc": "DiscIP.214055.4",
+    "CharId": [
+      160
+    ]
+  },
+  "214056": {
+    "Id": 214056,
+    "VoFile": "outfit_4056",
+    "VoBegin1": 0.0,
+    "VoLoop1": 152.0,
+    "VoName1": "DiscIP.214056.1",
+    "VoBegin2": 0.0,
+    "VoLoop2": 15.0,
+    "VoName2": "DiscIP.214056.2",
+    "AvgId": "",
+    "StoryName": "DiscIP.214056.3",
+    "StoryDesc": "DiscIP.214056.4",
+    "CharId": [
+      160
     ]
   }
 }

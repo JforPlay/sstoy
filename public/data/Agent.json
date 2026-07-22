@@ -10,6 +10,7 @@
     "Quality": 1,
     "MemberType": 1,
     "Level": 1,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102
@@ -43,6 +44,7 @@
     "Quality": 2,
     "MemberType": 1,
     "Level": 40,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101,
@@ -78,6 +80,7 @@
     "Quality": 3,
     "MemberType": 1,
     "Level": 70,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101,
@@ -114,6 +117,7 @@
     "Quality": 1,
     "MemberType": 1,
     "Level": 1,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101
@@ -147,6 +151,7 @@
     "Quality": 2,
     "MemberType": 1,
     "Level": 40,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101,
@@ -182,6 +187,7 @@
     "Quality": 3,
     "MemberType": 1,
     "Level": 70,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101,
@@ -218,6 +224,7 @@
     "Quality": 1,
     "MemberType": 1,
     "Level": 1,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101
@@ -251,6 +258,7 @@
     "Quality": 2,
     "MemberType": 1,
     "Level": 40,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102,
@@ -286,6 +294,7 @@
     "Quality": 3,
     "MemberType": 1,
     "Level": 70,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102,
@@ -322,6 +331,7 @@
     "Quality": 1,
     "MemberType": 1,
     "Level": 1,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       103
@@ -355,6 +365,7 @@
     "Quality": 2,
     "MemberType": 1,
     "Level": 40,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101,
@@ -390,6 +401,7 @@
     "Quality": 3,
     "MemberType": 1,
     "Level": 70,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101,
@@ -426,6 +438,7 @@
     "Quality": 1,
     "MemberType": 1,
     "Level": 1,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101
@@ -459,6 +472,7 @@
     "Quality": 2,
     "MemberType": 1,
     "Level": 40,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101,
@@ -494,6 +508,7 @@
     "Quality": 3,
     "MemberType": 1,
     "Level": 70,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101,
@@ -530,6 +545,7 @@
     "Quality": 1,
     "MemberType": 1,
     "Level": 1,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102
@@ -563,6 +579,7 @@
     "Quality": 2,
     "MemberType": 1,
     "Level": 40,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102,
@@ -598,6 +615,7 @@
     "Quality": 3,
     "MemberType": 1,
     "Level": 70,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102,
@@ -634,6 +652,7 @@
     "Quality": 1,
     "MemberType": 1,
     "Level": 1,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101
@@ -648,7 +667,13 @@
     "BonusPreview1": "[[32001,2,3]]",
     "Time2": 1200,
     "RewardPreview2": "[[32001,18,18],[32000,10,11],[33001,2,4]]",
-    "BonusPreview2": "[[32001,4,5]]"
+    "BonusPreview2": "[[32001,4,5]]",
+    "Time3": 0,
+    "RewardPreview3": "",
+    "BonusPreview3": "",
+    "Time4": 0,
+    "RewardPreview4": "",
+    "BonusPreview4": ""
   },
   "300102": {
     "Id": 300102,
@@ -661,6 +686,7 @@
     "Quality": 2,
     "MemberType": 1,
     "Level": 40,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101,
@@ -677,7 +703,13 @@
     "BonusPreview1": "[[32001,4,5]]",
     "Time2": 1200,
     "RewardPreview2": "[[32001,28,29],[32000,16,17],[33001,2,6]]",
-    "BonusPreview2": "[[32001,7,8]]"
+    "BonusPreview2": "[[32001,7,8]]",
+    "Time3": 0,
+    "RewardPreview3": "",
+    "BonusPreview3": "",
+    "Time4": 0,
+    "RewardPreview4": "",
+    "BonusPreview4": ""
   },
   "300103": {
     "Id": 300103,
@@ -690,6 +722,7 @@
     "Quality": 3,
     "MemberType": 1,
     "Level": 70,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101,
@@ -707,7 +740,13 @@
     "BonusPreview1": "[[32001,7,8]]",
     "Time2": 1200,
     "RewardPreview2": "[[32001,49,50],[32000,27,27],[33001,4,8]]",
-    "BonusPreview2": "[[32001,12,12]]"
+    "BonusPreview2": "[[32001,12,12]]",
+    "Time3": 0,
+    "RewardPreview3": "",
+    "BonusPreview3": "",
+    "Time4": 0,
+    "RewardPreview4": "",
+    "BonusPreview4": ""
   },
   "300201": {
     "Id": 300201,
@@ -720,6 +759,7 @@
     "Quality": 1,
     "MemberType": 1,
     "Level": 1,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102
@@ -734,7 +774,13 @@
     "BonusPreview1": "[[32011,2,3]]",
     "Time2": 1200,
     "RewardPreview2": "[[32011,18,18],[32000,10,11],[33001,2,4]]",
-    "BonusPreview2": "[[32011,4,5]]"
+    "BonusPreview2": "[[32011,4,5]]",
+    "Time3": 0,
+    "RewardPreview3": "",
+    "BonusPreview3": "",
+    "Time4": 0,
+    "RewardPreview4": "",
+    "BonusPreview4": ""
   },
   "300202": {
     "Id": 300202,
@@ -747,6 +793,7 @@
     "Quality": 2,
     "MemberType": 1,
     "Level": 40,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102,
@@ -763,7 +810,13 @@
     "BonusPreview1": "[[32011,4,5]]",
     "Time2": 1200,
     "RewardPreview2": "[[32011,28,29],[32000,16,17],[33001,2,6]]",
-    "BonusPreview2": "[[32011,7,8]]"
+    "BonusPreview2": "[[32011,7,8]]",
+    "Time3": 0,
+    "RewardPreview3": "",
+    "BonusPreview3": "",
+    "Time4": 0,
+    "RewardPreview4": "",
+    "BonusPreview4": ""
   },
   "300203": {
     "Id": 300203,
@@ -776,6 +829,7 @@
     "Quality": 3,
     "MemberType": 1,
     "Level": 70,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102,
@@ -793,7 +847,13 @@
     "BonusPreview1": "[[32011,7,8]]",
     "Time2": 1200,
     "RewardPreview2": "[[32011,49,50],[32000,27,27],[33001,4,8]]",
-    "BonusPreview2": "[[32011,12,12]]"
+    "BonusPreview2": "[[32011,12,12]]",
+    "Time3": 0,
+    "RewardPreview3": "",
+    "BonusPreview3": "",
+    "Time4": 0,
+    "RewardPreview4": "",
+    "BonusPreview4": ""
   },
   "300301": {
     "Id": 300301,
@@ -806,6 +866,7 @@
     "Quality": 1,
     "MemberType": 1,
     "Level": 1,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102
@@ -820,7 +881,13 @@
     "BonusPreview1": "[[32021,2,3]]",
     "Time2": 1200,
     "RewardPreview2": "[[32021,18,18],[32000,10,11],[33001,2,4]]",
-    "BonusPreview2": "[[32021,4,5]]"
+    "BonusPreview2": "[[32021,4,5]]",
+    "Time3": 0,
+    "RewardPreview3": "",
+    "BonusPreview3": "",
+    "Time4": 0,
+    "RewardPreview4": "",
+    "BonusPreview4": ""
   },
   "300302": {
     "Id": 300302,
@@ -833,6 +900,7 @@
     "Quality": 2,
     "MemberType": 1,
     "Level": 40,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102,
@@ -849,7 +917,13 @@
     "BonusPreview1": "[[32021,4,5]]",
     "Time2": 1200,
     "RewardPreview2": "[[32021,28,29],[32000,16,17],[33001,2,6]]",
-    "BonusPreview2": "[[32021,7,8]]"
+    "BonusPreview2": "[[32021,7,8]]",
+    "Time3": 0,
+    "RewardPreview3": "",
+    "BonusPreview3": "",
+    "Time4": 0,
+    "RewardPreview4": "",
+    "BonusPreview4": ""
   },
   "300303": {
     "Id": 300303,
@@ -862,6 +936,7 @@
     "Quality": 3,
     "MemberType": 1,
     "Level": 70,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102,
@@ -879,7 +954,13 @@
     "BonusPreview1": "[[32021,7,8]]",
     "Time2": 1200,
     "RewardPreview2": "[[32021,49,50],[32000,27,27],[33001,4,8]]",
-    "BonusPreview2": "[[32021,12,12]]"
+    "BonusPreview2": "[[32021,12,12]]",
+    "Time3": 0,
+    "RewardPreview3": "",
+    "BonusPreview3": "",
+    "Time4": 0,
+    "RewardPreview4": "",
+    "BonusPreview4": ""
   },
   "400101": {
     "Id": 400101,
@@ -892,6 +973,7 @@
     "Quality": 1,
     "MemberType": 1,
     "Level": 1,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102
@@ -925,6 +1007,7 @@
     "Quality": 2,
     "MemberType": 1,
     "Level": 40,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102,
@@ -960,6 +1043,7 @@
     "Quality": 3,
     "MemberType": 1,
     "Level": 70,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       102,
@@ -996,6 +1080,7 @@
     "Quality": 1,
     "MemberType": 1,
     "Level": 1,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       103
@@ -1029,6 +1114,7 @@
     "Quality": 2,
     "MemberType": 1,
     "Level": 40,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101,
@@ -1064,6 +1150,7 @@
     "Quality": 3,
     "MemberType": 1,
     "Level": 70,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101,
@@ -1100,6 +1187,7 @@
     "Quality": 1,
     "MemberType": 1,
     "Level": 1,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101
@@ -1133,6 +1221,7 @@
     "Quality": 2,
     "MemberType": 1,
     "Level": 40,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101,
@@ -1168,6 +1257,7 @@
     "Quality": 3,
     "MemberType": 1,
     "Level": 70,
+    "BuildScore": 0,
     "MemberLimit": 3,
     "Tags": [
       101,

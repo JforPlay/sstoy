@@ -17,6 +17,7 @@
       2,
       5
     ],
+    "HateTags": [],
     "Birthday": "8.8",
     "PotentialMain1": "CharacterDes.103.4",
     "PotentialMain2": "CharacterDes.103.5",
@@ -45,6 +46,7 @@
       4,
       5
     ],
+    "HateTags": [],
     "Birthday": "11.18",
     "PotentialMain1": "CharacterDes.107.4",
     "PotentialMain2": "CharacterDes.107.5",
@@ -73,6 +75,7 @@
       1,
       8
     ],
+    "HateTags": [],
     "Birthday": "10.8",
     "PotentialMain1": "CharacterDes.108.4",
     "PotentialMain2": "CharacterDes.108.5",
@@ -133,6 +136,7 @@
       6,
       7
     ],
+    "HateTags": [],
     "Birthday": "5.1",
     "PotentialMain1": "CharacterDes.111.4",
     "PotentialMain2": "CharacterDes.111.5",
@@ -161,6 +165,7 @@
       1,
       4
     ],
+    "HateTags": [],
     "Birthday": "6.21",
     "PotentialMain1": "CharacterDes.112.4",
     "PotentialMain2": "CharacterDes.112.5",
@@ -189,6 +194,7 @@
       6,
       8
     ],
+    "HateTags": [],
     "Birthday": "7.6",
     "PotentialMain1": "CharacterDes.113.4",
     "PotentialMain2": "CharacterDes.113.5",
@@ -281,6 +287,7 @@
       3,
       7
     ],
+    "HateTags": [],
     "Birthday": "9.22",
     "PotentialMain1": "CharacterDes.116.4",
     "PotentialMain2": "CharacterDes.116.5",
@@ -309,6 +316,7 @@
       7,
       8
     ],
+    "HateTags": [],
     "Birthday": "5.10",
     "PotentialMain1": "CharacterDes.117.4",
     "PotentialMain2": "CharacterDes.117.5",
@@ -337,6 +345,7 @@
       2,
       4
     ],
+    "HateTags": [],
     "Birthday": "10.15",
     "PotentialMain1": "CharacterDes.118.4",
     "PotentialMain2": "CharacterDes.118.5",
@@ -397,6 +406,7 @@
       1,
       3
     ],
+    "HateTags": [],
     "Birthday": "1.22",
     "PotentialMain1": "CharacterDes.120.4",
     "PotentialMain2": "CharacterDes.120.5",
@@ -425,6 +435,7 @@
       6,
       7
     ],
+    "HateTags": [],
     "Birthday": "6.1",
     "PotentialMain1": "CharacterDes.123.4",
     "PotentialMain2": "CharacterDes.123.5",
@@ -485,6 +496,7 @@
       1,
       6
     ],
+    "HateTags": [],
     "Birthday": "9.5",
     "PotentialMain1": "CharacterDes.126.4",
     "PotentialMain2": "CharacterDes.126.5",
@@ -513,6 +525,7 @@
       1,
       4
     ],
+    "HateTags": [],
     "Birthday": "2.21",
     "PotentialMain1": "CharacterDes.127.4",
     "PotentialMain2": "CharacterDes.127.5",
@@ -577,6 +590,7 @@
     "HateTags": [
       3
     ],
+    "Birthday": "",
     "PotentialMain1": "CharacterDes.132.4",
     "PotentialMain2": "CharacterDes.132.5",
     "PotentialAssistant1": "CharacterDes.132.6",
@@ -892,6 +906,7 @@
       5,
       7
     ],
+    "HateTags": [],
     "Birthday": "11.11",
     "PotentialMain1": "CharacterDes.147.4",
     "PotentialMain2": "CharacterDes.147.5",
@@ -952,6 +967,7 @@
       4,
       8
     ],
+    "HateTags": [],
     "Birthday": "8.20",
     "PotentialMain1": "CharacterDes.150.4",
     "PotentialMain2": "CharacterDes.150.5",
@@ -1089,5 +1105,35 @@
     "PotentialMainContent2": "CharacterDes.159.10",
     "PotentialAssistantContent1": "CharacterDes.159.11",
     "PotentialAssistantContent2": "CharacterDes.159.12"
+  },
+  "160": {
+    "Id": 160,
+    "Alias": "CharacterDes.160.2",
+    "CnCv": "CharacterDes.160.1",
+    "JpCv": "CharacterDes.160.8",
+    "CharColor": "#b0e0f6",
+    "CharSkillColor": "#b0e0f6",
+    "CharDes": "CharacterDes.160.3",
+    "Tag": [
+      103,
+      202,
+      306
+    ],
+    "Force": 13,
+    "PreferTags": [
+      4,
+      8,
+      3
+    ],
+    "HateTags": [],
+    "Birthday": "12.14",
+    "PotentialMain1": "CharacterDes.160.4",
+    "PotentialMain2": "CharacterDes.160.5",
+    "PotentialAssistant1": "CharacterDes.160.6",
+    "PotentialAssistant2": "CharacterDes.160.7",
+    "PotentialMainContent1": "CharacterDes.160.9",
+    "PotentialMainContent2": "CharacterDes.160.10",
+    "PotentialAssistantContent1": "CharacterDes.160.11",
+    "PotentialAssistantContent2": "CharacterDes.160.12"
   }
 }

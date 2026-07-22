@@ -110,7 +110,12 @@
     "BriefDesc": "SubNoteSkill.90011.2",
     "Desc": "SubNoteSkill.90011.3",
     "Param1": "0.3%",
-    "Param2": "Effect,LevelUp,90011001,EffectTypeParam1,HdPct"
+    "Param2": "Effect,LevelUp,90011001,EffectTypeParam1,HdPct",
+    "Param3": "",
+    "Param4": "",
+    "Param5": "",
+    "Param6": "",
+    "Param7": ""
   },
   "90012": {
     "Id": 90012,
@@ -223,7 +228,12 @@
     "BriefDesc": "SubNoteSkill.90012.2",
     "Desc": "SubNoteSkill.90012.3",
     "Param1": "0.1%",
-    "Param2": "Effect,LevelUp,90012001,EffectTypeParam1,HdPct"
+    "Param2": "Effect,LevelUp,90012001,EffectTypeParam1,HdPct",
+    "Param3": "",
+    "Param4": "",
+    "Param5": "",
+    "Param6": "",
+    "Param7": ""
   },
   "90013": {
     "Id": 90013,
@@ -336,7 +346,12 @@
     "BriefDesc": "SubNoteSkill.90013.2",
     "Desc": "SubNoteSkill.90013.3",
     "Param1": "0.46%",
-    "Param2": "Effect,LevelUp,90013001,EffectTypeParam1,HdPct"
+    "Param2": "Effect,LevelUp,90013001,EffectTypeParam1,HdPct",
+    "Param3": "",
+    "Param4": "",
+    "Param5": "",
+    "Param6": "",
+    "Param7": ""
   },
   "90014": {
     "Id": 90014,
@@ -449,7 +464,12 @@
     "BriefDesc": "SubNoteSkill.90014.2",
     "Desc": "SubNoteSkill.90014.3",
     "Param1": "0.3%",
-    "Param2": "Effect,LevelUp,90014001,EffectTypeParam1,HdPct"
+    "Param2": "Effect,LevelUp,90014001,EffectTypeParam1,HdPct",
+    "Param3": "",
+    "Param4": "",
+    "Param5": "",
+    "Param6": "",
+    "Param7": ""
   },
   "90015": {
     "Id": 90015,
@@ -562,7 +582,12 @@
     "BriefDesc": "SubNoteSkill.90015.2",
     "Desc": "SubNoteSkill.90015.3",
     "Param1": "1.2%",
-    "Param2": "Effect,LevelUp,90015001,EffectTypeParam1,HdPct"
+    "Param2": "Effect,LevelUp,90015001,EffectTypeParam1,HdPct",
+    "Param3": "",
+    "Param4": "",
+    "Param5": "",
+    "Param6": "",
+    "Param7": ""
   },
   "90016": {
     "Id": 90016,
@@ -675,7 +700,12 @@
     "BriefDesc": "SubNoteSkill.90016.2",
     "Desc": "SubNoteSkill.90016.3",
     "Param1": "0.46%",
-    "Param2": "Effect,LevelUp,90016001,EffectTypeParam1,HdPct"
+    "Param2": "Effect,LevelUp,90016001,EffectTypeParam1,HdPct",
+    "Param3": "",
+    "Param4": "",
+    "Param5": "",
+    "Param6": "",
+    "Param7": ""
   },
   "90017": {
     "Id": 90017,
@@ -788,7 +818,12 @@
     "BriefDesc": "SubNoteSkill.90017.2",
     "Desc": "SubNoteSkill.90017.3",
     "Param1": "1%",
-    "Param2": "Effect,LevelUp,90017001,EffectTypeParam1,HdPct"
+    "Param2": "Effect,LevelUp,90017001,EffectTypeParam1,HdPct",
+    "Param3": "",
+    "Param4": "",
+    "Param5": "",
+    "Param6": "",
+    "Param7": ""
   },
   "90018": {
     "Id": 90018,
@@ -901,7 +936,12 @@
     "BriefDesc": "SubNoteSkill.90018.2",
     "Desc": "SubNoteSkill.90018.3",
     "Param1": "0.3%",
-    "Param2": "Effect,LevelUp,90018001,EffectTypeParam1,HdPct"
+    "Param2": "Effect,LevelUp,90018001,EffectTypeParam1,HdPct",
+    "Param3": "",
+    "Param4": "",
+    "Param5": "",
+    "Param6": "",
+    "Param7": ""
   },
   "90019": {
     "Id": 90019,
@@ -1014,7 +1054,12 @@
     "BriefDesc": "SubNoteSkill.90019.2",
     "Desc": "SubNoteSkill.90019.3",
     "Param1": "0.3%",
-    "Param2": "Effect,LevelUp,90019001,EffectTypeParam1,HdPct"
+    "Param2": "Effect,LevelUp,90019001,EffectTypeParam1,HdPct",
+    "Param3": "",
+    "Param4": "",
+    "Param5": "",
+    "Param6": "",
+    "Param7": ""
   },
   "90020": {
     "Id": 90020,
@@ -1127,7 +1172,12 @@
     "BriefDesc": "SubNoteSkill.90020.2",
     "Desc": "SubNoteSkill.90020.3",
     "Param1": "0.3%",
-    "Param2": "Effect,LevelUp,90020001,EffectTypeParam1,HdPct"
+    "Param2": "Effect,LevelUp,90020001,EffectTypeParam1,HdPct",
+    "Param3": "",
+    "Param4": "",
+    "Param5": "",
+    "Param6": "",
+    "Param7": ""
   },
   "90021": {
     "Id": 90021,
@@ -1240,7 +1290,12 @@
     "BriefDesc": "SubNoteSkill.90021.2",
     "Desc": "SubNoteSkill.90021.3",
     "Param1": "0.3%",
-    "Param2": "Effect,LevelUp,90021001,EffectTypeParam1,HdPct"
+    "Param2": "Effect,LevelUp,90021001,EffectTypeParam1,HdPct",
+    "Param3": "",
+    "Param4": "",
+    "Param5": "",
+    "Param6": "",
+    "Param7": ""
   },
   "90022": {
     "Id": 90022,
@@ -1353,7 +1408,12 @@
     "BriefDesc": "SubNoteSkill.90022.2",
     "Desc": "SubNoteSkill.90022.3",
     "Param1": "0.3%",
-    "Param2": "Effect,LevelUp,90022001,EffectTypeParam1,HdPct"
+    "Param2": "Effect,LevelUp,90022001,EffectTypeParam1,HdPct",
+    "Param3": "",
+    "Param4": "",
+    "Param5": "",
+    "Param6": "",
+    "Param7": ""
   },
   "90023": {
     "Id": 90023,
@@ -1466,6 +1526,11 @@
     "BriefDesc": "SubNoteSkill.90023.2",
     "Desc": "SubNoteSkill.90023.3",
     "Param1": "0.3%",
-    "Param2": "Effect,LevelUp,90023001,EffectTypeParam1,HdPct"
+    "Param2": "Effect,LevelUp,90023001,EffectTypeParam1,HdPct",
+    "Param3": "",
+    "Param4": "",
+    "Param5": "",
+    "Param6": "",
+    "Param7": ""
   }
 }
