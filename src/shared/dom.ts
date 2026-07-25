@@ -279,7 +279,7 @@ export function enableLazyLoadingInContainer(container: HTMLElement): void {
  * const parsed = parseElementTags(raw);
  * // <span class="element-tag" style="color: #FFD700; font-weight: 600;">
  * //   빛 속성 표식
- * //   <img src="assets/Icon_ElementTagTrigger_Light.png" alt="Light" class="element-tag-icon">
+ * //   <img src="assets/common/Icon_ElementTagTrigger_Light.png" alt="Light" class="element-tag-icon">
  * // </span>
  * ```
  */
@@ -311,7 +311,7 @@ export function parseElementTags(description: string): string {
     const elementInfo = iconIdToElement[iconId];
 
     if (elementInfo) {
-      const iconPath = `assets/${elementInfo.icon}.png`;
+      const iconPath = `assets/common/${elementInfo.icon}.png`;
       return `<span class="element-tag" style="color: ${elementInfo.color}; font-weight: 600;">${textContent}<img src="${iconPath}" alt="${elementInfo.name}" class="element-tag-icon" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 4px;" onerror="this.style.display='none'"></span>`;
     } else {
       return `<span class="element-tag">${textContent}</span>`;

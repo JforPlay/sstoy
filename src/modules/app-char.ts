@@ -251,7 +251,7 @@ function renderCharacterGrid(): void {
 
       // Get element icon using EET (Element Enum Type)
       const elementId = char.EET;
-      const elementIconPath = elementId ? `assets/icon_common_property_${elementId}.png` : '';
+      const elementIconPath = elementId ? `assets/common/icon_common_property_${elementId}.png` : '';
 
       card.innerHTML = `
         <div class="character-selector-img-wrapper">
@@ -501,7 +501,7 @@ function updatePartyBarSlot(position: Position, character: PartyMember | null): 
       const elementId = character.data.EET;
       const elementInfo = (GameData.gameEnums.elementType as Record<number, any>)?.[elementId] as { name?: string } | undefined;
       const elementName = elementInfo?.name ?? '';
-      const elementIconPath = `assets/icon_common_property_${elementId}.png`;
+      const elementIconPath = `assets/common/icon_common_property_${elementId}.png`;
       elementIconContainer.innerHTML = `<img src="${elementIconPath}" alt="${elementName}" class="party-element-img" title="${elementName}" onerror="this.style.display='none'">`;
       elementIconContainer.style.display = 'flex';
     } else {
@@ -574,7 +574,7 @@ function renderFilledCharacterCard(
 
   // Build element icon path
   const elementId = character.data.EET;
-  const elementIconPath = elementId ? `assets/icon_common_property_${elementId}.png` : '';
+  const elementIconPath = elementId ? `assets/common/icon_common_property_${elementId}.png` : '';
 
   card.innerHTML = `
     <div class="character-card-header">

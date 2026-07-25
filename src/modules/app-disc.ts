@@ -563,7 +563,7 @@ function getNoteIconPath(noteData: SubNoteSkill | undefined): string {
 
   const parts = noteData.Icon.split('/');
   const iconName = parts[parts.length - 1];
-  return `assets/${iconName}_S.png`;
+  return `assets/common/${iconName}_S.png`;
 }
 
 // =============================================================================
@@ -1256,25 +1256,25 @@ export function renderDiscs(preserveFocusId: string | null = null): void {
               <i class="fa-solid fa-border-all"></i> ${window.i18n?.t('disc.allElements') || 'All'}
             </button>
             <button class="element-filter-btn" data-element="1" data-action="disc-filter-element">
-              ${createResponsiveImage('assets/icon_common_property_1.png', window.i18n?.t('disc.waterElement') || 'Water', 'element-icon')} ${window.i18n?.t('disc.waterElement') || 'Water'}
+              ${createResponsiveImage('assets/common/icon_common_property_1.png', window.i18n?.t('disc.waterElement') || 'Water', 'element-icon')} ${window.i18n?.t('disc.waterElement') || 'Water'}
             </button>
             <button class="element-filter-btn" data-element="2" data-action="disc-filter-element">
-              ${createResponsiveImage('assets/icon_common_property_2.png', window.i18n?.t('disc.fireElement') || 'Fire', 'element-icon')} ${window.i18n?.t('disc.fireElement') || 'Fire'}
+              ${createResponsiveImage('assets/common/icon_common_property_2.png', window.i18n?.t('disc.fireElement') || 'Fire', 'element-icon')} ${window.i18n?.t('disc.fireElement') || 'Fire'}
             </button>
             <button class="element-filter-btn" data-element="3" data-action="disc-filter-element">
-              ${createResponsiveImage('assets/icon_common_property_3.png', window.i18n?.t('disc.earthElement') || 'Earth', 'element-icon')} ${window.i18n?.t('disc.earthElement') || 'Earth'}
+              ${createResponsiveImage('assets/common/icon_common_property_3.png', window.i18n?.t('disc.earthElement') || 'Earth', 'element-icon')} ${window.i18n?.t('disc.earthElement') || 'Earth'}
             </button>
             <button class="element-filter-btn" data-element="4" data-action="disc-filter-element">
-              ${createResponsiveImage('assets/icon_common_property_4.png', window.i18n?.t('disc.windElement') || 'Wind', 'element-icon')} ${window.i18n?.t('disc.windElement') || 'Wind'}
+              ${createResponsiveImage('assets/common/icon_common_property_4.png', window.i18n?.t('disc.windElement') || 'Wind', 'element-icon')} ${window.i18n?.t('disc.windElement') || 'Wind'}
             </button>
             <button class="element-filter-btn" data-element="5" data-action="disc-filter-element">
-              ${createResponsiveImage('assets/icon_common_property_5.png', window.i18n?.t('disc.lightElement') || 'Light', 'element-icon')} ${window.i18n?.t('disc.lightElement') || 'Light'}
+              ${createResponsiveImage('assets/common/icon_common_property_5.png', window.i18n?.t('disc.lightElement') || 'Light', 'element-icon')} ${window.i18n?.t('disc.lightElement') || 'Light'}
             </button>
             <button class="element-filter-btn" data-element="6" data-action="disc-filter-element">
-              ${createResponsiveImage('assets/icon_common_property_6.png', window.i18n?.t('disc.darkElement') || 'Dark', 'element-icon')} ${window.i18n?.t('disc.darkElement') || 'Dark'}
+              ${createResponsiveImage('assets/common/icon_common_property_6.png', window.i18n?.t('disc.darkElement') || 'Dark', 'element-icon')} ${window.i18n?.t('disc.darkElement') || 'Dark'}
             </button>
             <button class="element-filter-btn" data-element="7" data-action="disc-filter-element">
-              ${createResponsiveImage('assets/icon_common_property_7.png', window.i18n?.t('disc.noElementFilter') || 'No Element', 'element-icon')} ${window.i18n?.t('disc.noElementFilter') || 'No Element'}
+              ${createResponsiveImage('assets/common/icon_common_property_7.png', window.i18n?.t('disc.noElementFilter') || 'No Element', 'element-icon')} ${window.i18n?.t('disc.noElementFilter') || 'No Element'}
             </button>
           </div>
         </div>

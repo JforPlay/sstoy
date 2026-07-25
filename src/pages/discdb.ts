@@ -773,7 +773,7 @@ function getSecondarySkillNoteRequirements(disc: Disc): string[] {
 function getNoteIconPath(noteData: SubNoteSkill): string {
   if (!noteData || !noteData.Icon) return '';
   const filename = extractFilename(noteData.Icon);
-  return `assets/${filename}_S.png`;
+  return `assets/common/${filename}_S.png`;
 }
 
 /**

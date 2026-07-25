@@ -507,7 +507,7 @@ function generateNotesSummary(): string {
     if (noteData.Icon) {
       const parts = noteData.Icon.split('/');
       const iconName = parts[parts.length - 1];
-      iconPath = `assets/${iconName}_S.png`;
+      iconPath = `assets/common/${iconName}_S.png`;
     }
 
     const noteInfo: NoteInfo = {

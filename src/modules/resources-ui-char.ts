@@ -94,7 +94,7 @@ export function renderCharacterResourceGrid(): void {
 
     // Get element icon using EET (Element Enum Type)
     const elementId = char.EET;
-    const elementIconPath = elementId ? `assets/icon_common_property_${elementId}.png` : '';
+    const elementIconPath = elementId ? `assets/common/icon_common_property_${elementId}.png` : '';
 
     charItem.innerHTML = `
       <div class="character-selector-img-wrapper">

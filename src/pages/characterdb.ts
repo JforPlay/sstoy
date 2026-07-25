@@ -754,7 +754,7 @@ function renderCharacterSelector() {
 
         // Get element icon using EET (Element Enum Type)
         const elementId = char.EET;
-        const elementIconPath = elementId ? `assets/icon_common_property_${elementId}.png` : '';
+        const elementIconPath = elementId ? `assets/common/icon_common_property_${elementId}.png` : '';
 
         // Image wrapper with circle background
         const imgWrapper = document.createElement('div');

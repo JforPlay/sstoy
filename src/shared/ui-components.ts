@@ -87,7 +87,7 @@ export function renderCharacterGridItem(charId: string, selected = false): strin
 
   // Get element icon using EET (Element Enum Type)
   const elementId = char.EET;
-  const elementIconPath = elementId ? `assets/icon_common_property_${elementId}.png` : '';
+  const elementIconPath = elementId ? `assets/common/icon_common_property_${elementId}.png` : '';
 
   // We can use dataset attributes for event delegation instead of inline onclick
   return `

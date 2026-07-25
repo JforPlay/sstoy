@@ -21,7 +21,7 @@ import fs from 'fs/promises';
 // Configuration
 const CONFIG = {
   inputDirs: [
-    'public/assets/*.{png,jpg,jpeg}', // Root assets folder (notes, element icons, etc.)
+    'public/assets/common/**/*.{png,jpg,jpeg}', // Shared notes, element, and system icons
     'public/assets/char/**/*.{png,jpg,jpeg}',
     'public/assets/disc_icons/**/*.{png,jpg,jpeg}',
     'public/assets/skill_icons/**/*.{png,jpg,jpeg}',
