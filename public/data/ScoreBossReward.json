@@ -1,0 +1,58 @@
+{
+  "1": {
+    "Id": 1,
+    "StarNeed": 2,
+    "RewardItemId1": 2,
+    "RewardNum1": 100,
+    "RewardItemId2": 0,
+    "RewardNum2": 0
+  },
+  "2": {
+    "Id": 2,
+    "StarNeed": 4,
+    "RewardItemId1": 2,
+    "RewardNum1": 100,
+    "RewardItemId2": 0,
+    "RewardNum2": 0
+  },
+  "3": {
+    "Id": 3,
+    "StarNeed": 6,
+    "RewardItemId1": 2,
+    "RewardNum1": 100,
+    "RewardItemId2": 0,
+    "RewardNum2": 0
+  },
+  "4": {
+    "Id": 4,
+    "StarNeed": 8,
+    "RewardItemId1": 2,
+    "RewardNum1": 100,
+    "RewardItemId2": 0,
+    "RewardNum2": 0
+  },
+  "5": {
+    "Id": 5,
+    "StarNeed": 10,
+    "RewardItemId1": 2,
+    "RewardNum1": 100,
+    "RewardItemId2": 0,
+    "RewardNum2": 0
+  },
+  "6": {
+    "Id": 6,
+    "StarNeed": 12,
+    "RewardItemId1": 2,
+    "RewardNum1": 100,
+    "RewardItemId2": 0,
+    "RewardNum2": 0
+  },
+  "7": {
+    "Id": 7,
+    "StarNeed": 14,
+    "RewardItemId1": 2,
+    "RewardNum1": 100,
+    "RewardItemId2": 0,
+    "RewardNum2": 0
+  }
+}

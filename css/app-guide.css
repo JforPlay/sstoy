@@ -1,0 +1,328 @@
+/* ============================================================================
+   GUIDE DATABASE - Boss details and concise recommendation cards
+   ============================================================================ */
+
+.guide-layout {
+  padding: .75rem 0 2rem;
+}
+
+.guide-page .page-title-icon {
+  display: inline-grid;
+  place-items: center;
+  margin-bottom: 0;
+  font-size: 2.25rem;
+  line-height: 1;
+}
+
+.guide-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  padding: .75rem;
+  margin-bottom: 1.25rem;
+  background: var(--bg-card);
+  border-radius: 14px;
+}
+
+.guide-tab {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: .55rem;
+  row-gap: .15rem;
+  min-height: 62px;
+  padding: .7rem 1rem;
+  border: 2px solid transparent;
+  border-radius: 9px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  white-space: normal;
+  cursor: pointer;
+}
+
+.guide-tab:not(:has(> span:not(.guide-tab-title))) {
+  grid-template-rows: 1fr;
+}
+
+.guide-tab:not(:has(> span:not(.guide-tab-title))) i {
+  grid-row: auto;
+}
+
+.guide-tab i {
+  grid-row: span 2;
+}
+
+.guide-tab-title {
+  color: inherit;
+}
+
+.guide-tab > span:not(.guide-tab-title) {
+  grid-column: 2;
+  margin-top: .15rem;
+  color: inherit;
+  font-size: .78rem;
+  font-weight: 500;
+  opacity: .78;
+}
+
+.guide-boss-selector {
+  display: flex;
+  gap: .65rem;
+  margin-bottom: 1rem;
+}
+
+.guide-boss-selector-button {
+  flex: 1;
+  padding: .75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.guide-boss-selector-button.active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, var(--bg-secondary));
+  color: var(--accent);
+}
+
+.guide-boss-overview {
+  display: grid;
+  grid-template-columns: minmax(260px, .85fr) minmax(0, 1.15fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.guide-boss-image,
+.guide-boss-info,
+.guide-build-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-card);
+}
+
+.guide-boss-image {
+  display: grid;
+  place-items: center;
+  min-height: 440px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #273442, #17212c);
+}
+
+[data-theme="light"] .guide-boss-image {
+  background: linear-gradient(135deg, #e4f0f7, #d3e3ee);
+}
+
+.guide-boss-image img {
+  display: block;
+  width: 100%;
+  height: 440px;
+  object-fit: contain;
+}
+
+.guide-boss-image span {
+  display: none;
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.guide-boss-image.missing span,
+.guide-boss-image:not(:has(img)) span {
+  display: block;
+}
+
+.guide-boss-image.missing img {
+  display: none;
+}
+
+.guide-boss-info {
+  padding: 1.15rem;
+}
+
+.guide-boss-info h3,
+.guide-recommendations > h3 {
+  margin: 0 0 .9rem;
+  color: var(--accent);
+  font-size: 1.35rem;
+}
+
+.guide-boss-summary,
+.guide-boss-data-row p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.guide-info-row {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: .8rem;
+}
+
+.guide-element-summary {
+  display: grid;
+  gap: .55rem;
+  padding-bottom: .9rem;
+  margin-bottom: .9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.guide-element-summary .guide-info-row {
+  margin: 0;
+}
+
+.guide-element-icons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem;
+}
+
+.guide-element-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.guide-boss-data-list {
+  display: grid;
+  gap: .75rem;
+}
+
+.guide-boss-data-row {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: .75rem;
+  align-items: start;
+  padding-top: .85rem;
+  border-top: 1px solid var(--border);
+}
+
+.guide-boss-data-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 64px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.guide-boss-data-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.guide-boss-data-label {
+  color: var(--text-secondary);
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+.guide-boss-data-row h4 {
+  margin: .1rem 0 .35rem;
+  font-size: 1rem;
+}
+
+.guide-recommendations {
+  margin-top: 1.5rem;
+}
+
+.guide-build-list {
+  display: grid;
+  gap: .7rem;
+}
+
+.guide-build-card {
+  padding: 1rem;
+}
+
+.guide-build-card h4 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.guide-build-description {
+  margin: .55rem 0;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.guide-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+}
+
+.guide-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: .26rem .55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  font-size: .8rem;
+}
+
+.guide-tag.element {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.guide-tag.weakness {
+  border-color: #f4b942;
+  color: #f4b942;
+}
+
+.guide-build-details {
+  margin-top: .8rem;
+  padding-top: .65rem;
+  border-top: 1px solid var(--border);
+}
+
+.guide-build-details summary {
+  color: var(--accent);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.guide-build-detail-body {
+  padding-top: .7rem;
+}
+
+.guide-build-detail-body p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.guide-empty,
+.guide-loading {
+  padding: 2.5rem 1rem;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .guide-tabs {
+    grid-template-columns: 1fr;
+    gap: .45rem;
+  }
+
+  .guide-boss-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-boss-image {
+    min-height: 0;
+  }
+}

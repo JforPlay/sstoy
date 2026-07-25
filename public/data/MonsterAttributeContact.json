@@ -1,0 +1,146 @@
+{
+  "6310010": {
+    "Id": 6310010,
+    "GroupId": 1001,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310011": {
+    "Id": 6310011,
+    "GroupId": 1001,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310012": {
+    "Id": 6310012,
+    "GroupId": 1001,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310020": {
+    "Id": 6310020,
+    "GroupId": 1003,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310030": {
+    "Id": 6310030,
+    "GroupId": 1002,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310040": {
+    "Id": 6310040,
+    "GroupId": 1004,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310050": {
+    "Id": 6310050,
+    "GroupId": 1005,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310060": {
+    "Id": 6310060,
+    "GroupId": 1007,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310110": {
+    "Id": 6310110,
+    "GroupId": 1006,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310070": {
+    "Id": 6310070,
+    "GroupId": 1007,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310080": {
+    "Id": 6310080,
+    "GroupId": 1007,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310090": {
+    "Id": 6310090,
+    "GroupId": 1009,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310100": {
+    "Id": 6310100,
+    "GroupId": 1009,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310130": {
+    "Id": 6310130,
+    "GroupId": 1011,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310120": {
+    "Id": 6310120,
+    "GroupId": 1010,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310150": {
+    "Id": 6310150,
+    "GroupId": 1012,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310140": {
+    "Id": 6310140,
+    "GroupId": 1012,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310170": {
+    "Id": 6310170,
+    "GroupId": 1013,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310160": {
+    "Id": 6310160,
+    "GroupId": 1013,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310180": {
+    "Id": 6310180,
+    "GroupId": 1014,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310190": {
+    "Id": 6310190,
+    "GroupId": 1015,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6400110": {
+    "Id": 6400110,
+    "GroupId": 3001,
+    "MaxLevel": 100,
+    "AtkTemplateId": 3001
+  },
+  "6400120": {
+    "Id": 6400120,
+    "GroupId": 3001,
+    "MaxLevel": 100,
+    "AtkTemplateId": 3001
+  },
+  "6400130": {
+    "Id": 6400130,
+    "GroupId": 3001,
+    "MaxLevel": 100,
+    "AtkTemplateId": 3001
+  }
+}

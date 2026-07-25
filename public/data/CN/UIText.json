@@ -900,7 +900,7 @@
   "UIText.Double_Drops_Quest_Title.1": "奖励任务",
   "UIText.Double_Drops_Triple_Count_1.1": "今日三倍奖励次数：{0}/{1}",
   "UIText.Double_Drops_Triple_Count_2.1": "今日三倍奖励次数",
-  "UIText.Double_Drops_WorldClass_Lock.1": "权限等级<color=#08d3d4><space=11>{0}<space=11></color>解锁",
+  "UIText.Double_Drops_WorldClass_Lock.1": "权限等级<color=#e8737b><space=11>{0}<space=11></color>解锁",
   "UIText.DropRate_0.1": "掉落",
   "UIText.DropRate_1.1": "罕见掉落",
   "UIText.DropRate_2.1": "小概率掉落",

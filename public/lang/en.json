@@ -5,11 +5,16 @@
     "app": "Party Builder",
     "characterdb": "Trekker DB",
     "discdb": "Disc DB",
+    "guide": "Guide DB Beta",
     "resources": "Resource Calculator",
     "tasks": "Task Helper",
     "theme": "Toggle Theme",
     "themeLight": "Light",
     "themeDark": "Dark"
+  },
+  "guide": {
+    "title": "Guide DB Beta",
+    "subtitle": "Guide information for current content"
   },
   "common": {
     "level": "Level",

@@ -5,11 +5,16 @@
     "app": "도자기 공방",
     "characterdb": "여행가 DB",
     "discdb": "레코드 DB",
+    "guide": "공략 DB Beta",
     "resources": "자원 도우미",
     "tasks": "의뢰 도우미",
     "theme": "테마 전환",
     "themeLight": "라이트",
     "themeDark": "다크"
+  },
+  "guide": {
+    "title": "공략 DB Beta",
+    "subtitle": "현재 콘텐츠에 맞는 공략을 확인하세요"
   },
   "common": {
     "level": "레벨",

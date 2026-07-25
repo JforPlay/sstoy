@@ -507,6 +507,8 @@ declare global {
 
     // Preset module functions
     renderPresets?: () => void;
+    renderGuide?: () => void;
+    restoreGuideHeader?: () => void;
     loadPresetBuilds?: (filePath?: string) => Promise<unknown>;
     loadPresetBuild?: (hash: string, title: string) => void;
     

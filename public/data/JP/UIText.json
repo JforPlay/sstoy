@@ -3037,7 +3037,7 @@
   "UIText.Soldier_FinishTitle.1": "撤退",
   "UIText.Soldier_Go.1": "挑戦",
   "UIText.Soldier_GoldTips_BasicReward.1": "基本報酬",
-  "UIText.Soldier_GoldTips_Desc.1": "賢者のコインはユニットの購入、チームレベルのアップグレード、ショップ更新に使用する通貨です。\nノードごとのコイン収入＝<color=#f98037>基礎コインド</color>＋<color=#f98037>連勝/連敗ゴールド</color>＋<color=#f98037>利息</color>\nラウンド開始時に<color=#f98037>{0}</color>コインを所持するごとに、<color=#f98037>{1}</color>コインの利息を獲得できる（上限{2}コイン）。",
+  "UIText.Soldier_GoldTips_Desc.1": "賢者のコインはユニットの購入、チームレベルのアップグレード、ショップ更新に使用する通貨です。\nノードごとのコイン収入＝<color=#f98037>基礎コイン</color>＋<color=#f98037>連勝/連敗コイン</color>＋<color=#f98037>利息</color>\nラウンド開始時に<color=#f98037>{0}</color>コインを所持するごとに、<color=#f98037>{1}</color>コインの利息を獲得できる（上限{2}コイン）。",
   "UIText.Soldier_GoldTips_Income.1": "獲得予想",
   "UIText.Soldier_GoldTips_Interest.1": "利息",
   "UIText.Soldier_GoldTips_Losingingstreak.1": "連敗",

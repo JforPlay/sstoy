@@ -78,15 +78,11 @@ const ELEMENT_ORDER = ['Water', 'Fire', 'Earth', 'Wind', 'Light', 'Dark', 'Norma
 const CATEGORY_FILES = {
   meta: 'PresetBuilds_Meta.json',
   arena: 'PresetBuilds_Arena.json',
-  general: 'PresetBuilds_General.json',
-  meta_backup: 'PresetBuilds_MetaBackup.json',
 } as const;
 
 const CATEGORY_LABELS = {
   meta: '연합/종언/정상결전용',
   arena: '아레나/전선용',
-  general: '범용/대체용',
-  meta_backup: '오래된 메타덱들 백업용',
 } as const;
 
 type PresetCategory = keyof typeof CATEGORY_FILES;
@@ -344,7 +340,7 @@ function getFilteredTags(): string[] {
  * Preload counts for all categories (lightweight - only fetches preset count)
  */
 async function preloadCategoryCounts(): Promise<void> {
-  const categories: PresetCategory[] = ['meta', 'arena', 'general', 'meta_backup'];
+  const categories: PresetCategory[] = ['meta', 'arena'];
 
   // Load counts in parallel
   await Promise.all(
@@ -378,7 +374,7 @@ function getCategoryCount(category: PresetCategory): number {
  * Render category tabs
  */
 function renderCategoryTabs(): string {
-  const categories: PresetCategory[] = ['meta', 'arena', 'general', 'meta_backup'];
+  const categories: PresetCategory[] = ['meta', 'arena'];
 
   let html = '<div class="preset-category-tabs">';
 

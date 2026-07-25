@@ -52,8 +52,7 @@ export default defineConfig(({ command, mode }) => ({
           'PresetBuilds.json',
           'PresetBuilds_Meta.json',
           'PresetBuilds_Arena.json',
-          'PresetBuilds_General.json',
-          'PresetBuilds_MetaBackup.json',
+          'GuideContent.json',
           'patchnotes.json'
         ];
         filesToCopy.forEach((file) => {
@@ -82,6 +81,7 @@ export default defineConfig(({ command, mode }) => ({
       input: {
         main: resolve(__dirname, 'index.html'),
         app: resolve(__dirname, 'app.html'),
+        guide: resolve(__dirname, 'guide.html'),
         characterdb: resolve(__dirname, 'characterdb.html'),
         discdb: resolve(__dirname, 'discdb.html'),
         resources: resolve(__dirname, 'resources.html'),

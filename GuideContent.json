@@ -1,0 +1,18 @@
+{
+  "scoreBoss": {
+    "bosses": [
+      {
+        "weakElements": ["Light", "Fire"],
+        "strongElements": ["Wind"]
+      },
+      {
+        "weakElements": ["Water", "Earth"],
+        "strongElements": ["Dark"]
+      }
+    ]
+  },
+  "jointDrill": {
+    "builds": {}
+  },
+  "attributeBuilds": []
+}

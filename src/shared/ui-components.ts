@@ -484,6 +484,7 @@ export function renderGlobalHeader(activePage: string): string {
   const navItems = [
     { id: 'characterdb', href: 'characterdb.html', icon: 'characterDB' },
     { id: 'discdb', href: 'discdb.html', icon: 'disc' },
+    { id: 'guide', href: 'guide.html', icon: 'tasks' },
     { id: 'app', href: 'app.html', icon: 'pottery' },
     { id: 'tasks', href: 'tasks.html', icon: 'tasks' },
     { id: 'resources', href: 'resources.html', icon: 'resources' },
