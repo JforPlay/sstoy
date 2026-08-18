@@ -125,6 +125,18 @@
     "MaxLevel": 100,
     "AtkTemplateId": 0
   },
+  "6310200": {
+    "Id": 6310200,
+    "GroupId": 1016,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
+  "6310210": {
+    "Id": 6310210,
+    "GroupId": 1016,
+    "MaxLevel": 100,
+    "AtkTemplateId": 0
+  },
   "6400110": {
     "Id": 6400110,
     "GroupId": 3001,
@@ -139,6 +151,18 @@
   },
   "6400130": {
     "Id": 6400130,
+    "GroupId": 3001,
+    "MaxLevel": 100,
+    "AtkTemplateId": 3001
+  },
+  "6500210": {
+    "Id": 6500210,
+    "GroupId": 3001,
+    "MaxLevel": 100,
+    "AtkTemplateId": 3001
+  },
+  "6500220": {
+    "Id": 6500220,
     "GroupId": 3001,
     "MaxLevel": 100,
     "AtkTemplateId": 3001

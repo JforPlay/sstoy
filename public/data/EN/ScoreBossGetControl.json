@@ -44,5 +44,7 @@
   "ScoreBossGetControl.1022.1": "Bounty - Spotless",
   "ScoreBossGetControl.1022.2": "Avoiding the boss's shooting skills grants <color=#ec6d21>&Param1&</color> Technique Score, up to <color=#ec6d21>&Param2&</color> times, totaling <color=#ec6d21>&Param3&</color> points.",
   "ScoreBossGetControl.1023.1": "Bounty: Sealing Tower of Sand",
-  "ScoreBossGetControl.1023.2": "Each time a Quicksand Pillar on the field is put to sleep, grants <color=#ec6d21>&Param1&</color> Technique Score, up to <color=#ec6d21>&Param2&</color> times, for a total of <color=#ec6d21>&Param3&</color> points."
+  "ScoreBossGetControl.1023.2": "Each time a Quicksand Pillar on the field is put to sleep, grants <color=#ec6d21>&Param1&</color> Technique Score, up to <color=#ec6d21>&Param2&</color> times, for a total of <color=#ec6d21>&Param3&</color> points.",
+  "ScoreBossGetControl.1024.1": "Bounty: Hardworking Gardener",
+  "ScoreBossGetControl.1024.2": "Each time a flower at the edge of the field is destroyed, gain <color=#ec6d21>&Param1&</color> Technique Score. This can trigger up to <color=#ec6d21>&Param2&</color> times, for a total of <color=#ec6d21>&Param3&</color> points."
 }

@@ -1509,5 +1509,37 @@
     "CharId": [
       160
     ]
+  },
+  "214057": {
+    "Id": 214057,
+    "VoFile": "outfit_4057",
+    "VoBegin1": 0.0,
+    "VoLoop1": 103.4,
+    "VoName1": "DiscIP.214057.1",
+    "VoBegin2": 0.0,
+    "VoLoop2": 14.9,
+    "VoName2": "DiscIP.214057.2",
+    "AvgId": "CG_disc4057",
+    "StoryName": "DiscIP.214057.3",
+    "StoryDesc": "DiscIP.214057.4",
+    "CharId": [
+      157
+    ]
+  },
+  "214058": {
+    "Id": 214058,
+    "VoFile": "outfit_4058",
+    "VoBegin1": 0.0,
+    "VoLoop1": 137.0,
+    "VoName1": "DiscIP.214058.1",
+    "VoBegin2": 0.0,
+    "VoLoop2": 10.666,
+    "VoName2": "DiscIP.214058.2",
+    "AvgId": "",
+    "StoryName": "DiscIP.214058.3",
+    "StoryDesc": "DiscIP.214058.4",
+    "CharId": [
+      157
+    ]
   }
 }

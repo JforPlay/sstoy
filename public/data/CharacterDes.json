@@ -1042,6 +1042,38 @@
     "PotentialAssistantContent1": "CharacterDes.156.11",
     "PotentialAssistantContent2": "CharacterDes.156.12"
   },
+  "157": {
+    "Id": 157,
+    "Alias": "CharacterDes.157.2",
+    "CnCv": "CharacterDes.157.1",
+    "JpCv": "CharacterDes.157.8",
+    "CharColor": "#bb788e",
+    "CharSkillColor": "#bb788e",
+    "CharDes": "CharacterDes.157.3",
+    "Tag": [
+      101,
+      204,
+      310
+    ],
+    "Force": 2,
+    "PreferTags": [
+      2,
+      3,
+      4
+    ],
+    "HateTags": [
+      1
+    ],
+    "Birthday": "9.1",
+    "PotentialMain1": "CharacterDes.157.4",
+    "PotentialMain2": "CharacterDes.157.5",
+    "PotentialAssistant1": "CharacterDes.157.6",
+    "PotentialAssistant2": "CharacterDes.157.7",
+    "PotentialMainContent1": "CharacterDes.157.9",
+    "PotentialMainContent2": "CharacterDes.157.10",
+    "PotentialAssistantContent1": "CharacterDes.157.11",
+    "PotentialAssistantContent2": "CharacterDes.157.12"
+  },
   "158": {
     "Id": 158,
     "Alias": "CharacterDes.158.2",

@@ -238,5 +238,25 @@
     "LeaveTriggerEvent": "amb_city_all_stop",
     "IntroCutscene": "",
     "LevelScript": ""
+  },
+  "1001026": {
+    "Id": 1001026,
+    "SceneName": "Levels/Main/Company/Company_Main_6_2",
+    "ConfigPrefabName": "RegionBoss_FengCao_BossRush_10",
+    "Theme": 14,
+    "BGM": "fengCao_combatBoss_setState",
+    "LeaveTriggerEvent": "amb_city_all_stop",
+    "IntroCutscene": "",
+    "LevelScript": ""
+  },
+  "1001027": {
+    "Id": 1001027,
+    "SceneName": "Levels/Main/Company/Company_Main_5_2",
+    "ConfigPrefabName": "ScoreBoss_FengNiao_2",
+    "Theme": 12,
+    "BGM": "fengNiao_realChallenge_setState",
+    "LeaveTriggerEvent": "amb_company_all_stop",
+    "IntroCutscene": "",
+    "LevelScript": ""
   }
 }

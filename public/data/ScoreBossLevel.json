@@ -293,6 +293,34 @@
     "ExtraImage": "Icon/MapChallenge/boss_Tachie_14",
     "ExtraImageAni": "ScoreBossSelect_Info_in_Hasana"
   },
+  "22": {
+    "Id": 22,
+    "FloorId": 1001026,
+    "MonsterId": 6310200,
+    "NonDamageScoreGet": 1011,
+    "ScoreBossAbility": 100019,
+    "ScoreGetSwitchGroup": 1013,
+    "Episode": "Icon/MapChallenge/cover_Bossrush_fengcao",
+    "Image": "Icon/MapChallenge/boss_Tachie_05",
+    "BG": "Image/UIBG/uniseed_basement",
+    "SummonLevelUp": true,
+    "ExtraImage": "",
+    "ExtraImageAni": ""
+  },
+  "23": {
+    "Id": 23,
+    "FloorId": 1001027,
+    "MonsterId": 6310210,
+    "NonDamageScoreGet": 1024,
+    "ScoreBossAbility": 100020,
+    "ScoreGetSwitchGroup": 1013,
+    "Episode": "Icon/MapChallenge/cover_Bossrush_fengniao",
+    "Image": "Icon/MapChallenge/boss_Tachie_04",
+    "BG": "ImageAvg/AvgBg/tower_wind_light",
+    "SummonLevelUp": true,
+    "ExtraImage": "",
+    "ExtraImageAni": ""
+  },
   "998": {
     "Id": 998,
     "FloorId": 1001020,
