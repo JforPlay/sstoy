@@ -40,5 +40,9 @@
   "ScoreBossAbility.100019.1": "破风之楔",
   "ScoreBossAbility.100019.2": "主控角色对首领造成普攻伤害后，首领受到的绝招伤害强度提高<color=#ec6d21>&Param1&</color>，持续<color=#ec6d21>&Param2&</color>秒，最多叠加<color=#ec6d21>&Param3&</color>层，每0.5秒最多触发一次。\n全队的防御穿透属性提高<color=#ec6d21>&Param4&</color>点，援护角色在场期间，全队的防御穿透属性提高<color=#ec6d21>&Param5&</color>",
   "ScoreBossAbility.100020.1": "私人订制",
-  "ScoreBossAbility.100020.2": "援护角色每驻场<color=#ec6d21>&Param1&</color>秒，为自己与主控角色叠加1层【蓄势】。\n每层【蓄势】提供<color=#ec6d21>&Param2&</color>技能伤害强度与<color=#ec6d21>&Param5&</color>普攻伤害强度，最多叠加<color=#ec6d21>&Param3&</color>层，每次叠加时重置持续时间，持续<color=#ec6d21>&Param4&</color>秒。\n两名援护角色可分别为主控角色叠加【蓄势】，层数上限与效果分别计算，可同时存在。"
+  "ScoreBossAbility.100020.2": "援护角色每驻场<color=#ec6d21>&Param1&</color>秒，为自己与主控角色叠加1层【蓄势】。\n每层【蓄势】提供<color=#ec6d21>&Param2&</color>技能伤害强度与<color=#ec6d21>&Param5&</color>普攻伤害强度，最多叠加<color=#ec6d21>&Param3&</color>层，每次叠加时重置持续时间，持续<color=#ec6d21>&Param4&</color>秒。\n两名援护角色可分别为主控角色叠加【蓄势】，层数上限与效果分别计算，可同时存在。",
+  "ScoreBossAbility.100021.1": "层层打薄",
+  "ScoreBossAbility.100021.2": "任意角色每触发<color=#ec6d21>&Param3&</color>次印记，对首领目标附加「破甲」，每层「破甲」使其受到普攻伤害强度提升<color=#ec6d21>&Param4&</color>，受到技能伤害强度提升<color=#ec6d21>&Param5&</color>，可叠加<color=#ec6d21>&Param6&</color>层。",
+  "ScoreBossAbility.100022.1": "碎壳追击",
+  "ScoreBossAbility.100022.2": "援护角色对首领目标造成绝招伤害时，首领目标受到的绝招伤害强度提升<color=#ec6d21>&Param1&</color>，持续<color=#ec6d21>&Param3&</color>秒，可叠加<color=#ec6d21>&Param4&</color>层。\n援护角色对首领目标造成普攻伤害时，首领目标受到的技能伤害强度提升<color=#ec6d21>&Param2&</color>，持续<color=#ec6d21>&Param5&</color>秒，可叠加<color=#ec6d21>&Param6&</color>层。"
 }

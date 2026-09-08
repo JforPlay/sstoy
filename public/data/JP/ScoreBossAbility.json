@@ -40,5 +40,9 @@
   "ScoreBossAbility.100019.1": "風のくさび",
   "ScoreBossAbility.100019.2": "主力巡遊者が首領に通常攻撃ダメージを与えた時、<color=#ec6d21>&Param2&</color>秒間、首領の必殺技被ダメージ強度が<color=#ec6d21>&Param1&</color>増加する。この効果は<color=#ec6d21>&Param3&</color>回まで重複でき、0.5秒ごとに1回のみ発動する。\nチーム全体は防御貫通を<color=#ec6d21>&Param4&</color>獲得する。支援巡遊者がフィールドにいる間、追加でチーム全体は現在の防御貫通の<color=#ec6d21>&Param5&</color>を獲得する。",
   "ScoreBossAbility.100020.1": "オーダーメイド",
-  "ScoreBossAbility.100020.2": "支援巡遊者が出場して<color=#ec6d21>&Param1&</color>秒経過するごとに、自身と主力巡遊者に「モメンタム」を1付与する。\n「モメンタム」1につきスキルダメージ強度が<color=#ec6d21>&Param2&</color>、通常攻撃ダメージ強度が<color=#ec6d21>&Param5&</color>増加する。この効果は<color=#ec6d21>&Param3&</color>回まで重複できる。「モメンタム」は<color=#ec6d21>&Param4&</color>秒間持続し、獲得するたびに持続時間がリセットされる。\n2体の支援巡遊者は、それぞれ独立して主力巡遊者に「モメンタム」を付与できる。重複上限および効果は個別に計算され、同時に存在できる。"
+  "ScoreBossAbility.100020.2": "支援巡遊者が出場して<color=#ec6d21>&Param1&</color>秒経過するごとに、自身と主力巡遊者に「モメンタム」を1付与する。\n「モメンタム」1につきスキルダメージ強度が<color=#ec6d21>&Param2&</color>、通常攻撃ダメージ強度が<color=#ec6d21>&Param5&</color>増加する。この効果は<color=#ec6d21>&Param3&</color>回まで重複できる。「モメンタム」は<color=#ec6d21>&Param4&</color>秒間持続し、獲得するたびに持続時間がリセットされる。\n2体の支援巡遊者は、それぞれ独立して主力巡遊者に「モメンタム」を付与できる。重複上限および効果は個別に計算され、同時に存在できる。",
+  "ScoreBossAbility.100021.1": "アーマーブレイク",
+  "ScoreBossAbility.100021.2": "チーム内の巡遊者が印を<color=#ec6d21>&Param3&</color>回発動させるごとに、首領に「アーマーブレイク」を1付与する。「アーマーブレイク」1ごとに、首領の通常攻撃被ダメージ強度が<color=#ec6d21>&Param4&</color>増加し、スキル被ダメージ強度が<color=#ec6d21>&Param5&</color>増加する。この効果は<color=#ec6d21>&Param6&</color>回まで重複できる。",
+  "ScoreBossAbility.100022.1": "狙い澄ます",
+  "ScoreBossAbility.100022.2": "支援巡遊者が首領に必殺技ダメージを与えた時、<color=#ec6d21>&Param3&</color>秒間、首領の必殺技被ダメージ強度が<color=#ec6d21>&Param1&</color>増加する。この効果は<color=#ec6d21>&Param4&</color>回まで重複できる。\n支援巡遊者が首領に通常攻撃ダメージを与えた時、<color=#ec6d21>&Param5&</color>秒間、首領のスキル被ダメージ強度が<color=#ec6d21>&Param2&</color>増加する。この効果は<color=#ec6d21>&Param6&</color>回まで重複できる。"
 }

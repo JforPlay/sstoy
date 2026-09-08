@@ -46,5 +46,9 @@
   "ScoreBossGetControl.1023.1": "Bounty: Sealing Tower of Sand",
   "ScoreBossGetControl.1023.2": "Each time a Quicksand Pillar on the field is put to sleep, grants <color=#ec6d21>&Param1&</color> Technique Score, up to <color=#ec6d21>&Param2&</color> times, for a total of <color=#ec6d21>&Param3&</color> points.",
   "ScoreBossGetControl.1024.1": "Bounty: Hardworking Gardener",
-  "ScoreBossGetControl.1024.2": "Each time a flower at the edge of the field is destroyed, gain <color=#ec6d21>&Param1&</color> Technique Score. This can trigger up to <color=#ec6d21>&Param2&</color> times, for a total of <color=#ec6d21>&Param3&</color> points."
+  "ScoreBossGetControl.1024.2": "Each time a flower at the edge of the field is destroyed, gain <color=#ec6d21>&Param1&</color> Technique Score. This can trigger up to <color=#ec6d21>&Param2&</color> times, for a total of <color=#ec6d21>&Param3&</color> points.",
+  "ScoreBossGetControl.1025.1": "Bounty: Nimble Dodge",
+  "ScoreBossGetControl.1025.2": "During each round of bullet volleys or coordinated water sprays from the Fresh-Keeper Octopus, successfully dodging grants <color=#ec6d21>&Param1&</color> Technique Score, up to <color=#ec6d21>&Param2&</color> times, totaling <color=#ec6d21>&Param3&</color> points.",
+  "ScoreBossGetControl.1026.1": "Bounty: Freezer Nap",
+  "ScoreBossGetControl.1026.2": "Each time the Fresh-Keeper Octopus is successfully forced into early dormancy, grants <color=#ec6d21>&Param1&</color> Technique Score, up to <color=#ec6d21>&Param2&</color> times, totaling <color=#ec6d21>&Param3&</color> points."
 }

@@ -52933,6 +52933,2735 @@
             ]
         }
     },
+    "vo_137_combat_battleClear_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "So this is the daily life of a Trekker... I'll keep that in mind!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.975,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_battleClear_002": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "A feeling you can only experience on an adventure... It's such a thrill!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.156,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.53,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_battleClear_003": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "Thank you very much for helping me train!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.17,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_chatLvUp_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "If I pray to the God of Grace before a fight, good things will happen!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.859,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.12,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_chatNext_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "We arrived! The mysterious Monolith! It's the start of a new adventure!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.135,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.4,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_chat_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "To be a Trekker, there're a lot of things I need to learn!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.941,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.96,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_chat_002": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "That light over there... Is that a Wishing Box?!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.154,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.04,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_chat_003": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "You could frame any view inside the Monolith, and it'd look like a work of art♪",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.051,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.02,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_chat_004": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "Does there happen to be a store that sells souvenirs close by?",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.163,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.97,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_chat_005": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "Reading about it and seeing it for yourself are completely different things.",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.4,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.5,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_dead_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "It can't ... end here...",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.433,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.66,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_dead_002": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "I ... don't want to lose...",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.62,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_eventRoom_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "Excuse me. Do you have a minute?",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.472,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.64,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_perk_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "Is this the legendary \"Trekker's Secret Manual\"?",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.51,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_perk_002": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "This ... is my power...!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.674,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.67,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_perk_003": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "I can't wait to get to the next adventure!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.2,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_restRoom_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "Since it's a ways away, let's rest a bit around here.",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_shopRoom_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "I'll be paying, so please feel free to choose anything you need.",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.145,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.16,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_subPerk_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "O Almighty God of Grace, bless me with your power!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.948,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.77,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_subPerk_002": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "I'm going to help everyone I can with what I've got.",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.26,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_ultskill_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "Whew... Time to show you what I'm really made of!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.8,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.8,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_combat_ultskill_002": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "My dreams... I'll make them a reality myself!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.267,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.48,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_affchat1_001": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "shy_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Um... Mentor. Is it okay if I draw your portrait? O-Of course, it's just for practice...!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6.8,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.15,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_affchat2_001": {
+        "anim": {
+            "female_cn": [
+                "shy_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "shy_a",
+                "",
+                "presents_a",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Um... Mentor? Next week is the auction, so... To make sure I don't do anything reckless... Could you come with me? Ah, but... If there's something you want... I'll win it at all costs!",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Um... Mentor? Next week is the auction, so...",
+                "To make sure I don't do anything reckless... Could you come with me?",
+                "Ah, but... If there's something you want... I'll win it at all costs!",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                9.9,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.09,
+                11.58,
+                18.23,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_affchat3_001": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "chat_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Mentor, did you know? Clouds float in the sky freely, and no two clouds are the same.",
+                "That must be nice... I wish I could be like them... Free to choose my own destiny.",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                12,
+                16.933,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.94,
+                15.78,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_affchat4_001": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "shy_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "shy_a",
+                "",
+                "chat_b",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Whoa, whoa, whoa!! I-I wasn't staring at you, Mentor...! It was this little bird, you see! I was just looking at the little bird making a nest above your head...",
+                "Ah...! By the way, it has already flown off into the distance!",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Whoa, whoa, whoa!! I-I wasn't staring at you, Mentor...!",
+                "It was this little bird, you see! I was just looking at the little bird making a nest above your head...",
+                "Ah...! By the way, it has already flown off into the distance!",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                8.6,
+                10.833,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.03,
+                15.57,
+                19.57,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_affchat5_001": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "presents_b",
+                "shy_a",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "presents_b",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "I used to think that seeing scenery that I've never seen before with my own eyes was enough for me.",
+                "But now, well... I want to see it not by myself, but with you, Mentor...",
+                "Because in that way, any sight we see will become a memory that I never forget for the rest of my life!",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.4,
+                11.4,
+                22.062,
+                0
+            ],
+            "female_jp": [
+                8.31,
+                18.23,
+                24.6,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_afflv1_001": {
+        "anim": {},
+        "text": {
+            "female_cn": [
+                "The life of a Trekker is a lot harder than I imagined. But... As long as I have you by my side, Mentor, I can keep going on, no matter what challenges might stand in the way.",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "The life of a Trekker is a lot harder than I imagined. But...",
+                "As long as I have you by my side, Mentor, I can keep going on, no matter what challenges might stand in the way.",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                8.367,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.63,
+                13.43,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_afflv2_001": {
+        "anim": {},
+        "text": {
+            "female_cn": [
+                "I'm so glad that I met you, Mentor. You not only teach me the necessary knowledge to be a Trekker, but you are always there to support me and encourage me... Hehe... I don't even know how to thank you♪",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I'm so glad that I met you, Mentor. You not only teach me the necessary knowledge to be a Trekker...",
+                "... But you are always there to support me and encourage me...",
+                "Hehe... I don't even know how to thank you♪",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                11.176,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                9.23,
+                13.89,
+                19.93,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_afflv3_001": {
+        "anim": {},
+        "text": {
+            "female_cn": [
+                "I'll follow your footsteps and surpass you... And one day, I'll become a great Trekker, who can protect all of you!",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I'll follow your footsteps and surpass you...",
+                "And one day, I'll become a great Trekker, who can protect all of you!",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6.133,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.06,
+                9.3,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_afflv4_001": {
+        "anim": {},
+        "text": {
+            "female_cn": [
+                "The path I walked beside you, Mentor, and the memories of our adventures... They're what shaped who I am today! Let's keep exploring this wonderful world together for many years to come!",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "The path I walked beside you, Mentor, and the memories of our adventures... They're what shaped who I am today!",
+                "Let's keep exploring this wonderful world together for many years to come!",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                9.663,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.72,
+                14.11,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_birth_001": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "presents_a",
+                "presents_b",
+                ""
+            ],
+            "female_jp": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Mentor, today is my birthday.",
+                "Whenever my birthday comes around, I always catch myself wondering...",
+                "Will I have enough experience next year to become more of a Trekker than I am now?",
+                ""
+            ],
+            "female_jp": [
+                "Whenever my birthday comes around, I always catch myself wondering...",
+                "Will I have enough experience next year to become more of a Trekker than I am now?",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.2,
+                10.8,
+                16.767,
+                0
+            ],
+            "female_jp": [
+                6.38,
+                13.68,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_charup_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "I must say I've learned a lot as a Trekker! I'll make sure to keep reviewing so I don't forget.",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.167,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.45,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_discuss_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Um... Mentor. I happened to notice something... The best Trekkers are the ones that say the least, just like Amber.",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Um... Mentor. I happened to notice something...",
+                "The best Trekkers are the ones that say the least, just like Amber.",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.7,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.9,
+                10.7,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_discuss_002": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "The Ashwind Clan is so friendly, kind, and skilled. I was able to learn so much just by talking with them.",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "The Ashwind Clan is so friendly, kind, and skilled.",
+                "I was able to learn so much just by talking with them.",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7.233,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.57,
+                12.24,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_discuss_003": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "presents_b",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "When I first started as a Trekker, Willow was such a big help for me. She reminds me of a high-class character straight out of a novel...! Isn't that crazy? She is so awesome!",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "When I first started as a Trekker, Willow was such a big help for me.",
+                "She reminds me of a high-class character straight out of a novel...!",
+                "Isn't that crazy?==RT==She is so awesome!",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6.523,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.77,
+                12.72,
+                16.7,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_discuss_004": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "presents_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "chat_a",
+                "presents_a"
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "When Wraith said, \"The lady who keeps buying whatever weapons catch her eye\"... Was she talking about me?",
+                "I like to think I was swindled in place of other customers, so in a way, I think I was a lot of help to other people!",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "When Wraith said, \"The lady who keeps buying whatever weapons catch her eye\"...",
+                "Was she talking about me? You could say I was easily swindled many times but...",
+                "I like to think I was swindled in place of other customers...",
+                "So in a way, I think I was a lot of help to other people!"
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7.6,
+                14.167,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.36,
+                15.16,
+                19.68,
+                23.42
+            ]
+        }
+    },
+    "vo_137_ui_discuss_005": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "chat_b",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Iris suggested I should keep a ledger book but... How does she manage to keep track of all those numbers in her head to begin with...?",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Iris suggested I should keep a ledger book but...",
+                "How does she manage to keep track of all those numbers in her head to begin with...?",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7.6,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.68,
+                13.13,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_excharup_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "If one day I can be someone's mentor, too... Hehe♪",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.433,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.5,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_exhang_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Almost there! I'm almost done drawing! Please keep that pose just a little more!",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Almost there! I'm almost done drawing!",
+                "Please keep that pose just a little more!",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.733,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.2,
+                6.69,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_fullscreen_001": {
+        "anim": {
+            "female_cn": [
+                "special_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "special_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Mentor, if it's all right with you, would you dance with me for one song?",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.633,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.33,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_fullscreen_002": {
+        "anim": {
+            "female_cn": [
+                "special_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "special_b",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "It's okay to make mistakes. Don't be embarrassed... Look into my eyes and trust me to guide you. Now, take the first step...",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "It's okay to make mistakes. Don't be embarrassed...",
+                "Look into my eyes and trust me to guide you. Now, take the first step...",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6.633,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.77,
+                13.6,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_gachaNew_001": {
+        "anim": {},
+        "text": {
+            "female_cn": [
+                "I can't wait to go on an adventure with you, Mentor! That's right! If you don't mind, could you tell me some stories about the Monolith?",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I can't wait to go on an adventure with you, Mentor!",
+                "That's right! If you don't mind, could you tell me some stories about the Monolith?",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.3,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.22,
+                9.51,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_gacha_001": {
+        "anim": {},
+        "text": {
+            "female_cn": [
+                "The thing written in \"Trekker's Lucky Planner\" is true...! If you keep thinking about the person you want to meet again, that wish will surely come true... You and I make the best team after all, Mentor!",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "The thing written in \"Trekker's Lucky Planner\" is true...!",
+                "If you keep thinking about the person you want to meet again, that wish will surely come true...",
+                "You and I make the best team after all, Mentor!",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                8.631,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.51,
+                11.59,
+                15.9,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_greet_001": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Look there! That cloud... Hehe. It looks like a Shrubshrew♪",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.848,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.49,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_greet_002": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "chat_b",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "chat_b",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Mentor, have you seen my limited edition Sherlock charm? I treated myself to it so I treasure it dearly...",
+                "Eh? It's a fake!? But it's \"Monolith Premium\"... Doesn't that mean it was made in the Monolith...!?",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Mentor, have you seen my limited edition Sherlock charm?",
+                "I treated myself to it so I treasure it dearly... Eh? It's a fake!?",
+                "But it's \"Monolith Premium\"... Doesn't that mean it was made in the Monolith...!?",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6.2,
+                12.767,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.12,
+                13.9,
+                18.63,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_greetmorn_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "chat_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_a",
+                "",
+                "chat_b",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Mentor, would you like to try my healthy breakfast that I came up with?",
+                "To go with the Ignis Fruit juice, add glazed mushroom skewers... Ah, wait. Mentor!? Why are you running away...!?",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Mentor, would you like to try my healthy breakfast that I came up with?",
+                "To go with the Ignis Fruit juice, add glazed mushroom skewers...",
+                "Ah, wait. Mentor!? Why are you running away...!?",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.2,
+                7.685,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.71,
+                10.5,
+                14.71,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_greetnight_001": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Hehe... I'm so worn out today... But I guess this is what it means to be fulfilled as a Trekker♪",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Hehe... I'm so worn out today...",
+                "But I guess this is what it means to be fulfilled as a Trekker♪",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.833,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.09,
+                10.86,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_greetnoon_001": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "presents_b",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Taking naps is such a waste of time! There's still plenty of places that I want to explore, you know!?",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Taking naps is such a waste of time!",
+                "There's still plenty of places that I want to explore, you know!?",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.3,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.75,
+                7.6,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_hang_001": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "chat_a",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "I see, Mentor. Is this to train me to have better patience as a Trekker? If that's the case, I accept your challenge!",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I see, Mentor. Is this to train me to have better patience as a Trekker?",
+                "If that's the case, I accept your challenge!",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6.687,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.8,
+                13.5,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_hang_002": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Hmm... Mentor? If you keep ignoring me like this... I'll have to come over there myself, okay?",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Hmm... Mentor? If you keep ignoring me like this...",
+                "I'll have to come over there myself, okay?",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.6,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                6.5,
+                9.73,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_hfc_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "chat_a",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Huh? Is that the latest way to greet among Trekkers? If so, I'd better learn it and use it too...!",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Huh? Is that the latest way to greet among Trekkers?",
+                "If so, I'd better learn it and use it too...!",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.802,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.63,
+                11.36,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_hfc_002": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Are you asking for a high-five? Then... here's to an amazing day! High-five!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.637,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.2,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_logo_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "Yostar",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_lose_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "My training wasn't enough...",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.062,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1.7,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_lose_002": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "I need to try harder...",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.033,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1.75,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_music_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "That's a splendid tune... Which piece is that from?",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.3,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.18,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_newyear_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Happy New Year, Mentor! As we embrace the New Year, why don't we start planning this year's adventure itinerary right now?",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Happy New Year, Mentor!",
+                "As we embrace the New Year, why don't we start planning this year's adventure itinerary right now?",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6.884,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.17,
+                10.26,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_posterchat_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "presents_a",
+                "presents_b",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Of course I've planned our adventures! In 3 years, we'll make our guild famous, and we'll conquer the Monolith by year 5... Then after 10 years or so, the adventures of \"Eleanor the Trekker\" will have spread across the continent!",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Of course I've planned our adventures!",
+                "In 3 years, we'll make our guild famous, and we'll conquer the Monolith by year 5...",
+                "Then after 10 years or so, the adventures of \"Eleanor the Trekker\" will have spread across the continent!",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                11.367,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.74,
+                8.66,
+                15,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_posterchat_002": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "I wonder ... what kind of place is the highest floor of a Monolith? I'd really like to see it with my own eyes one day.",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I wonder ... what kind of place is the highest floor of a Monolith?",
+                "I'd really like to see it with my own eyes one day.",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.1,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.04,
+                7.12,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_posterchat_003": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "shy_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "I haven't told anyone this but, I'm actually turning our adventures into a manga. Hehehe♪ It will definitely be a big hit someday.",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "I haven't told anyone this but, I'm actually turning our adventures into a manga.",
+                "Hehehe♪ It will definitely be a big hit someday.",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                5.8,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.01,
+                11.84,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_posterchat_004": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Mentor, let's get out of here. The person staring at us is probably a bodyguard that my parents arranged.",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6.333,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.06,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_posterchat_005": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Mentor, is your company having financial difficulties? It'll be fine. I'll invest in you, Mentor!",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Mentor, is your company having financial difficulties?",
+                "It'll be fine. I'll invest in you, Mentor!",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                6.067,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.51,
+                9.26,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_posterchat_006": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "presents_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_a",
+                "",
+                "",
+                "presents_b"
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Mentor! Hear this out! I've learned some techniques for surviving in the Wilds!",
+                "When accidentally falling into a pit, try scaring the Puffloon fish! That makes it gulp air... And if you grab onto them, you can get back out. There are some really strange creatures out there in the Wilds, don't you think?",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Mentor! Hear this out! I've learned some techniques for surviving in the Wilds!",
+                "When accidentally falling into a pit, try scaring the Puffloon fish!",
+                "That makes it gulp air... And if you grab onto them, you can get back out.",
+                "There are some really strange creatures out there in the Wilds, don't you think?"
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4,
+                15.767,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.93,
+                11.4,
+                18.23,
+                21.87
+            ]
+        }
+    },
+    "vo_137_ui_standee_001": {
+        "anim": {
+            "female_cn": [
+                "special_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "special_a",
+                "presents_b",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "The Trekker lifestyle isn't entirely what I had in mind... But I really enjoy the many different surprises that happen every day!",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "The Trekker lifestyle isn't entirely what I had in mind...",
+                "But I really enjoy the many different surprises that happen every day!",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.9,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.66,
+                11.32,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_standee_002": {
+        "anim": {
+            "female_cn": [
+                "special_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "special_b",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "I can now lift this trunk easily! Because I've been training so hard all this time!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.1,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.3,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_swap_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "It's an honor to be on the team. I look forward to working with you!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.9,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.76,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_swap_002": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "I won't use being a rookie as an excuse. I'll give it my all!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.8,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.85,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_swap_003": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "This case has all sorts of things in it!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.1,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_swap_004": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "O God of Grace... Please let this go well!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.567,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.45,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_thankEx_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "chat_a",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "This gift... Mentor... You must have chosen it carefully just for me, right...? I'll order a special shelf for this from a craftsman and place it in a good spot.",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "This gift... Mentor... You must have chosen it carefully just for me, right...?",
+                "I'll order a special shelf for this from a craftsman and place it in a good spot.",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                8.9,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.05,
+                12.65,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_thankSmall_001": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Whoa...! So Trekkers exchange gifts like this?",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.1,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.6,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_thank_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "How did you know this was the thing I was searching for!? Thank you so much!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.7,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                5.3,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_uniMusic_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "Come to think of it, I think I saved some money for the journey... Where did I put it?",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                7.123,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                7.4,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_unlockCG_001": {
+        "anim": {},
+        "text": {
+            "female_cn": [
+                "Mentor, hold my hand tightly, please. That's it, just like this... Hehe. Your hand is so warm♪",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Mentor, hold my hand tightly, please.",
+                "That's it, just like this... Hehe. Your hand is so warm♪",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                10.033,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.85,
+                12.07,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_unlockLook_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "Mentor, are you proud of me?",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.367,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.73,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_valentine_001": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "presents_b",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "shy_a",
+                "",
+                "presents_a",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Here you go, Mentor! Well... I thought homemade chocolate would really convey my feelings better...",
+                "B-But if the taste doesn't suit you, don't hesitate to let me know! If so, I can hire a professional pastry chef to make something to your liking!",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Here you go, Mentor! Well... I thought homemade chocolate would really convey my feelings better...",
+                "B-But if the taste doesn't suit you, don't hesitate to let me know!",
+                "If so, I can hire a professional pastry chef to make something to your liking!",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                10,
+                18.4,
+                0,
+                0
+            ],
+            "female_jp": [
+                8.98,
+                15.01,
+                21.48,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_win_001": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "This was a great victory that will forever be etched into the history of Trekkers!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2.72,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.94,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_win_002": {
+        "anim": {},
+        "text": {
+            "female_jp": [
+                "Shall we have a victory celebration? Leave the catering to me.",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.233,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.23,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_xmas_001": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "chat_a",
+                "presents_b",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "presents_a",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Happy Snowish Festival, Mentor! A wonderful day like this should be spent with everyone!==RT==",
+                "I've already reserved the venue for the festival and prepared some delicious desserts, hot drinks…",
+                "... and decorations that match the festive atmosphere. Oh, and I've arranged a shuttle to pick everyone up. It'll be here any minute now~",
+                ""
+            ],
+            "female_jp": [
+                "Happy Snowish Festival, Mentor! A wonderful day like this should be spent with everyone!",
+                "With that said, I have prepared the event space and meals already, so when you're ready, let's head out together!",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                9.1,
+                14,
+                20.267,
+                0
+            ],
+            "female_jp": [
+                7.87,
+                14.41,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_137_ui_yourbirth_001": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "chat_a",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "",
+                "chat_a",
+                ""
+            ]
+        },
+        "text": {
+            "female_cn": [
+                "Happy birthday, Mentor! I've been working hard to prepare for today. Whether it's the gift, the cake, or the plans for later, I want to make sure everything is as perfect as possible...",
+                "After all, it's your birthday, Mentor, so we have to celebrate it in style!",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "Happy Birthday!",
+                "I'm going to make sure that today is the best day ever for you.",
+                "So Mentor, please enjoy today as much as you want!",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                10.3,
+                13.267,
+                0,
+                0
+            ],
+            "female_jp": [
+                2.78,
+                9.8,
+                13.29,
+                0
+            ]
+        }
+    },
     "vo_140_combat_battleClear_001": {
         "anim": {},
         "text": {
@@ -114371,6 +117100,526 @@
             ],
             "female_jp": [
                 4,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_137_001_confirm": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Yes!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_137_002_deny": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "You're mistaken.",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_137_003_question": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Yes?",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_137_004_confuse": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "think_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Huh?",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_137_005_sad": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Why...",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1.12,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_137_006_excit": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Wah...!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1.46,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_137_007_angry": {
+        "anim": {
+            "female_cn": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "No!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_137_008_happy": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "I'm glad.",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1.56,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_137_009_sigh": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_b",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Hahh...",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_137_010_catchphrase": {
+        "anim": {
+            "female_cn": [
+                "think_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "What's wrong?",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                1.06,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_137_011_catchphrase": {
+        "anim": {
+            "female_cn": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "presents_b",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Someday, I'll definitely become the number one Trekker!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.7,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_137_012_catchphrase": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "I'm paying for this, so please have fun and don't mind the money.",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                3.167,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.46,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_137_013_catchphrase": {
+        "anim": {
+            "female_cn": [
+                "presents_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "Could I have all the merchandise from here to there, please?",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.9,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                3.22,
+                0,
+                0,
+                0
+            ]
+        }
+    },
+    "vo_story_137_014_catchphrase": {
+        "anim": {
+            "female_cn": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ],
+            "female_jp": [
+                "chat_a",
+                "",
+                "",
+                ""
+            ]
+        },
+        "text": {
+            "female_jp": [
+                "If you want to get a good look at the world, a trusty telescope is what you need!",
+                "",
+                "",
+                ""
+            ]
+        },
+        "time": {
+            "female_cn": [
+                4.728,
+                0,
+                0,
+                0
+            ],
+            "female_jp": [
+                4.24,
                 0,
                 0,
                 0

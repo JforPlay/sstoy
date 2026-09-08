@@ -258,5 +258,25 @@
     "LeaveTriggerEvent": "amb_company_all_stop",
     "IntroCutscene": "",
     "LevelScript": ""
+  },
+  "1001028": {
+    "Id": 1001028,
+    "SceneName": "Levels/StoryActivity/StoryActivity_13/StoryActivity_13_Boss_A_01",
+    "ConfigPrefabName": "StoryActivity_13_Boss_BossRush",
+    "Theme": 461,
+    "BGM": "amb_900001_combatBoss_setState",
+    "LeaveTriggerEvent": "amb_900001_all_stop",
+    "IntroCutscene": "",
+    "LevelScript": "AIScript.LevelAndGroupController.Level.JiJuXieLevelController_Lv2"
+  },
+  "1001029": {
+    "Id": 1001029,
+    "SceneName": "Levels/Roguelike/Roguelike_4/Roguelike_4_Boss_003",
+    "ConfigPrefabName": "Roguelike_4_Boss_JinDuanLiRong_BossRush_3",
+    "Theme": 111,
+    "BGM": "roguelike_combatLiRong_setState",
+    "LeaveTriggerEvent": "amb_roguelike_all_stop",
+    "IntroCutscene": "",
+    "LevelScript": ""
   }
 }

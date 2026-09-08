@@ -46,5 +46,9 @@
   "ScoreBossGetControl.1023.1": "현상 수배·모래의 탑",
   "ScoreBossGetControl.1023.2": "필드에 있는 「모래 기둥」을 수면시킬 때마다 기술 점수 <color=#ec6d21>&Param1&</color>포인트를 획득한다. 최대 <color=#ec6d21>&Param2&</color>회 발동할 수 있어 총 <color=#ec6d21>&Param3&</color>포인트를 획득할 수 있다.",
   "ScoreBossGetControl.1024.1": "현상 수배·성실한 가드너",
-  "ScoreBossGetControl.1024.2": "필드 끝에 있는 꽃을 격파할 때마다 기술 점수 <color=#ec6d21>&Param1&</color>포인트를 획득한다. 최대 <color=#ec6d21>&Param2&</color>회 발동할 수 있어 총 <color=#ec6d21>&Param3&</color>포인트를 획득할 수 있다."
+  "ScoreBossGetControl.1024.2": "필드 끝에 있는 꽃을 격파할 때마다 기술 점수 <color=#ec6d21>&Param1&</color>포인트를 획득한다. 최대 <color=#ec6d21>&Param2&</color>회 발동할 수 있어 총 <color=#ec6d21>&Param3&</color>포인트를 획득할 수 있다.",
+  "ScoreBossGetControl.1025.1": "현상 수배·현란한 스텝",
+  "ScoreBossGetControl.1025.2": "「냉장 문어」가 일제 사격 또는 협동 물 뿜기를 진행할 때 회피에 성공하면 기술 점수 <color=#ec6d21>&Param1&</color>포인트를 획득한다. 최대 <color=#ec6d21>&Param2&</color>회 발동할 수 있어 총 <color=#ec6d21>&Param3&</color>포인트를 획득할 수 있다.",
+  "ScoreBossGetControl.1026.1": "현상 수배·휴식 타임",
+  "ScoreBossGetControl.1026.2": "「냉장 문어」를 미리 휴면 상태에 빠뜨리면 기술 점수 <color=#ec6d21>&Param1&</color>포인트를 획득한다. 최대 <color=#ec6d21>&Param2&</color>회 발동할 수 있어 총 <color=#ec6d21>&Param3&</color>포인트를 획득할 수 있다."
 }

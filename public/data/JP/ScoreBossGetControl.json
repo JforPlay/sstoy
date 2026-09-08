@@ -46,5 +46,9 @@
   "ScoreBossGetControl.1023.1": "懸賞：流砂の柱",
   "ScoreBossGetControl.1023.2": "フィールド上の「流砂の柱」を休眠状態にすることに成功するたび、スコアを<color=#ec6d21>&Param1&</color>ポイント獲得できる。（最大<color=#ec6d21>&Param2&</color>回、合計<color=#ec6d21>&Param3&</color>ポイントまで）",
   "ScoreBossGetControl.1024.1": "懸賞・勤労な庭師",
-  "ScoreBossGetControl.1024.2": "フィールド上の花を1体撃破するごとに、テクニックスコアを<color=#ec6d21>&Param1&</color>獲得する。（最大<color=#ec6d21>&Param2&</color>回まで発動、合計<color=#ec6d21>&Param3&</color>ポイントまで。）"
+  "ScoreBossGetControl.1024.2": "フィールド上の花を1体撃破するごとに、テクニックスコアを<color=#ec6d21>&Param1&</color>獲得する。（最大<color=#ec6d21>&Param2&</color>回まで発動、合計<color=#ec6d21>&Param3&</color>ポイントまで。）",
+  "ScoreBossGetControl.1025.1": "懸賞･間隙をぬって",
+  "ScoreBossGetControl.1025.2": "「レーゾータコカイナ」が弾丸の一斉射撃または連携放水を行うたびに、それを回避するとテクニックスコアを<color=#ec6d21>&Param1&</color>ポイント獲得できる。（最大<color=#ec6d21>&Param2&</color>回、合計<color=#ec6d21>&Param3&</color>ポイントまで）",
+  "ScoreBossGetControl.1026.1": "懸賞･冷蔵休憩",
+  "ScoreBossGetControl.1026.2": "「レーゾータコカイナ」を早めに休眠状態にすることに成功するたび、テクニックスコアを<color=#ec6d21>&Param1&</color>ポイント獲得できる。（最大<color=#ec6d21>&Param2&</color>回、合計<color=#ec6d21>&Param3&</color>ポイントまで）"
 }

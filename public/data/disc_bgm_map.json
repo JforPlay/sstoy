@@ -1993,5 +1993,43 @@
     "CharId": [
       157
     ]
+  },
+  "214059": {
+    "VoFile": "outfit_4059",
+    "StateId": 617341013,
+    "StateIdInHeader": false,
+    "Wems": [
+      330709447
+    ],
+    "WemsExist": [
+      330709447
+    ],
+    "VoLoop1": 105.4,
+    "VoBegin2": 0.0,
+    "VoLoop2": 16.7,
+    "VoName1": "DiscIP.214059.1",
+    "VoName2": "DiscIP.214059.2",
+    "CharId": [
+      137
+    ]
+  },
+  "214060": {
+    "VoFile": "outfit_4060",
+    "StateId": 667673877,
+    "StateIdInHeader": false,
+    "Wems": [
+      258224048
+    ],
+    "WemsExist": [
+      258224048
+    ],
+    "VoLoop1": 107.1,
+    "VoBegin2": 0.0,
+    "VoLoop2": 14.769,
+    "VoName1": "DiscIP.214060.1",
+    "VoName2": "DiscIP.214060.2",
+    "CharId": [
+      137
+    ]
   }
 }

@@ -438,5 +438,49 @@
     "AwardItemNum2": 0,
     "AwardItemTid3": 0,
     "AwardItemNum3": 0
+  },
+  "41": {
+    "Id": 41,
+    "SeasonId": 11,
+    "RankLower": 1000,
+    "AwardItemTid1": 2,
+    "AwardItemNum1": 600,
+    "AwardItemTid2": 118101,
+    "AwardItemNum2": 1,
+    "AwardItemTid3": 0,
+    "AwardItemNum3": 0
+  },
+  "42": {
+    "Id": 42,
+    "SeasonId": 11,
+    "RankLower": 2000,
+    "AwardItemTid1": 2,
+    "AwardItemNum1": 500,
+    "AwardItemTid2": 118102,
+    "AwardItemNum2": 1,
+    "AwardItemTid3": 0,
+    "AwardItemNum3": 0
+  },
+  "43": {
+    "Id": 43,
+    "SeasonId": 11,
+    "RankLower": 5000,
+    "AwardItemTid1": 2,
+    "AwardItemNum1": 400,
+    "AwardItemTid2": 118103,
+    "AwardItemNum2": 1,
+    "AwardItemTid3": 0,
+    "AwardItemNum3": 0
+  },
+  "44": {
+    "Id": 44,
+    "SeasonId": 11,
+    "RankLower": 10000,
+    "AwardItemTid1": 2,
+    "AwardItemNum1": 300,
+    "AwardItemTid2": 0,
+    "AwardItemNum2": 0,
+    "AwardItemTid3": 0,
+    "AwardItemNum3": 0
   }
 }
