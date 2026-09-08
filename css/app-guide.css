@@ -303,6 +303,94 @@
   color: var(--text-secondary);
 }
 
+.guide-attribute-layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.guide-attribute-sidebar,
+.guide-attribute-content {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-card);
+}
+
+.guide-attribute-sidebar {
+  align-self: start;
+  overflow: hidden;
+}
+
+.guide-attribute-sidebar-header {
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.guide-attribute-sidebar-header h3,
+.guide-attribute-content > h3 {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.05rem;
+}
+
+.guide-attribute-sidebar-header i {
+  color: var(--accent);
+}
+
+.guide-attribute-list {
+  display: grid;
+  gap: .45rem;
+  padding: .7rem;
+}
+
+.guide-attribute-button {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  width: 100%;
+  padding: .7rem .75rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.guide-attribute-button:hover {
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+.guide-attribute-button.active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, var(--bg-secondary));
+  color: var(--accent);
+}
+
+.guide-attribute-button img,
+.guide-attribute-content > h3 img {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+
+.guide-attribute-content {
+  min-height: 300px;
+  padding: 1.15rem;
+}
+
+.guide-attribute-content > h3 {
+  padding-bottom: .9rem;
+  margin-bottom: .9rem;
+  border-bottom: 1px solid var(--border);
+}
+
 .guide-empty,
 .guide-loading {
   padding: 2.5rem 1rem;
@@ -324,5 +412,13 @@
 
   .guide-boss-image {
     min-height: 0;
+  }
+
+  .guide-attribute-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-attribute-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

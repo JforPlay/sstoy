@@ -573,6 +573,21 @@
   font-size: 1.5rem;
 }
 
+.compact-tab-notice {
+  padding: 0.16rem 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.compact-main-tab.active .compact-tab-notice {
+  border-color: color-mix(in srgb, var(--text-primary) 55%, transparent);
+  color: var(--text-primary);
+}
+
 .compact-tab-label {
   font-size: 1rem;
   letter-spacing: 0.3px;

@@ -37,6 +37,18 @@ interface ScoreBossGetControl {
   [key: `Param${number}`]: string | undefined;
 }
 
+interface Monster {
+  FAId: number;
+}
+
+interface MonsterSkin {
+  MonsterManual: number;
+}
+
+interface MonsterManual {
+  Name: string;
+}
+
 interface GuideBuild {
   title: string;
   description?: string;
@@ -68,16 +80,13 @@ interface ActiveScoreBossData {
   abilityText: Record<string, string>;
   scoreGetControls: Record<string, ScoreBossGetControl>;
   scoreGetText: Record<string, string>;
+  bossNames: Record<number, string>;
 }
 
 type ElementKey = 'Water' | 'Fire' | 'Earth' | 'Wind' | 'Light' | 'Dark' | 'Normal';
 
 const DATA_ROOT = 'data';
 const GUIDE_CONTENT_FILE = 'GuideContent.json';
-const BOSS_NAMES: Record<number, string> = {
-  6310180: '광기의 요리사',
-  6310190: '하자나',
-};
 const ELEMENT_ICON_IDS: Record<ElementKey, number> = {
   Water: 1,
   Fire: 2,
@@ -87,8 +96,10 @@ const ELEMENT_ICON_IDS: Record<ElementKey, number> = {
   Dark: 6,
   Normal: 7,
 };
+const ATTRIBUTE_ELEMENTS: ElementKey[] = ['Water', 'Fire', 'Earth', 'Wind', 'Light', 'Dark', 'Normal'];
 let activeTab: GuideTab = 'scoreboss';
 let selectedScoreBossId: number | null = null;
+let selectedAttributeElement: ElementKey = 'Water';
 let initialized = false;
 
 // =============================================================================
@@ -132,13 +143,17 @@ function getActiveControl(data: Record<string, ScoreBossControl>): ScoreBossCont
 
 async function loadActiveScoreBoss(): Promise<ActiveScoreBossData | null> {
   const language = window.i18n?.currentLang || 'KR';
-  const [controls, levelData, abilities, abilityText, scoreGetControls, scoreGetText] = await Promise.all([
+  const [controls, levelData, abilities, abilityText, scoreGetControls, scoreGetText, monsters, monsterSkins, monsterManuals, monsterManualText] = await Promise.all([
     loadJson<Record<string, ScoreBossControl>>('ScoreBossControl.json'),
     loadJson<Record<string, ScoreBossLevel>>('ScoreBossLevel.json'),
     loadJson<Record<string, ScoreBossAbility>>('ScoreBossAbility.json'),
     loadJson<Record<string, string>>(`${language}/ScoreBossAbility.json`),
     loadJson<Record<string, ScoreBossGetControl>>('ScoreBossGetControl.json'),
     loadJson<Record<string, string>>(`${language}/ScoreBossGetControl.json`),
+    loadJson<Record<string, Monster>>('Monster.json'),
+    loadJson<Record<string, MonsterSkin>>('MonsterSkin.json'),
+    loadJson<Record<string, MonsterManual>>('MonsterManual.json'),
+    loadJson<Record<string, string>>(`${language}/MonsterManual.json`),
   ]);
 
   const control = getActiveControl(controls);
@@ -148,7 +163,14 @@ async function loadActiveScoreBoss(): Promise<ActiveScoreBossData | null> {
     .map((levelId) => levelData[String(levelId)])
     .filter((level): level is ScoreBossLevel => Boolean(level));
 
-  return { control, levels, abilities, abilityText, scoreGetControls, scoreGetText };
+  const bossNames = Object.fromEntries(levels.map((level) => {
+    const monster = monsters[String(level.MonsterId)];
+    const skin = monster ? monsterSkins[String(monster.FAId)] : undefined;
+    const manual = skin ? monsterManuals[String(skin.MonsterManual)] : undefined;
+    return [level.MonsterId, manual ? (monsterManualText[manual.Name] || manual.Name) : `Boss ${level.MonsterId}`];
+  }));
+
+  return { control, levels, abilities, abilityText, scoreGetControls, scoreGetText, bossNames };
 }
 
 function formatDate(value: string): string {
@@ -217,20 +239,52 @@ function renderElementIcons(elements: ElementKey[]): string {
   return icons || '<span class="guide-muted">정보 없음</span>';
 }
 
+function getElementLabel(element: ElementKey): string {
+  const labelKey = element === 'Normal' ? 'none' : element.toLowerCase();
+  return window.i18n?.t(`discdb.${labelKey}`) || element;
+}
+
+function renderAttributeBuilds(builds: GuideBuild[]): string {
+  const elementBuilds = builds.filter((build) => build.elements?.includes(selectedAttributeElement));
+  const elementLabel = getElementLabel(selectedAttributeElement);
+
+  return `<section class="guide-attribute-layout">
+    <aside class="guide-attribute-sidebar">
+      <div class="guide-attribute-sidebar-header">
+        <h3><i class="fa-solid fa-list"></i> 속성 목록</h3>
+      </div>
+      <div class="guide-attribute-list" role="tablist" aria-label="속성별 빌드 선택">
+        ${ATTRIBUTE_ELEMENTS.map((element) => {
+          const iconId = ELEMENT_ICON_IDS[element];
+          const isSelected = element === selectedAttributeElement;
+          return `<button class="guide-attribute-button ${isSelected ? 'active' : ''}" data-guide-attribute="${element}" role="tab" aria-selected="${isSelected}">
+            <img src="assets/common/icon_common_property_${iconId}.png" alt="" aria-hidden="true">
+            <span>${escapeHtml(getElementLabel(element))}</span>
+          </button>`;
+        }).join('')}
+      </div>
+    </aside>
+    <div class="guide-attribute-content">
+      <h3><img src="assets/common/icon_common_property_${ELEMENT_ICON_IDS[selectedAttributeElement]}.png" alt=""> ${escapeHtml(elementLabel)} 빌드</h3>
+      ${renderBuildList(elementBuilds, `등록된 ${elementLabel} 빌드가 없습니다.`)}
+    </div>
+  </section>`;
+}
+
 // =============================================================================
 // SCORE BOSS
 // =============================================================================
 
-function getBossName(monsterId: number): string {
-  return BOSS_NAMES[monsterId] || `Boss ${monsterId}`;
+function getBossName(monsterId: number, bossNames: Record<number, string>): string {
+  return bossNames[monsterId] || `Boss ${monsterId}`;
 }
 
-function renderBossSelector(levels: ScoreBossLevel[]): string {
+function renderBossSelector(activeData: ActiveScoreBossData): string {
   return `<div class="guide-boss-selector" role="tablist" aria-label="연합 토벌 보스 선택">
-    ${levels.map((level) => {
+    ${activeData.levels.map((level) => {
       const isSelected = selectedScoreBossId === level.MonsterId;
       return `<button class="guide-boss-selector-button ${isSelected ? 'active' : ''}" data-score-boss-id="${level.MonsterId}" role="tab" aria-selected="${isSelected}">
-        ${escapeHtml(getBossName(level.MonsterId))}
+        ${escapeHtml(getBossName(level.MonsterId, activeData.bossNames))}
       </button>`;
     }).join('')}
   </div>`;
@@ -288,12 +342,12 @@ function renderScoreBoss(activeData: ActiveScoreBossData, content: GuideContent)
   if (!level) return '<div class="guide-empty">진행 중인 연합 토벌 정보를 찾지 못했습니다.</div>';
 
   const bossIndex = activeData.levels.findIndex((item) => item.Id === level.Id);
-  const bossName = getBossName(level.MonsterId);
+  const bossName = getBossName(level.MonsterId, activeData.bossNames);
   const imagePath = `assets/monster/scoreboss_${level.MonsterId}.png`;
   const override = content.scoreBoss?.bosses?.[bossIndex] || {};
   const builds = override.builds || [];
 
-  return `${renderBossSelector(activeData.levels)}
+  return `${renderBossSelector(activeData)}
     <section class="guide-boss-detail">
       <div class="guide-boss-overview">
         <div class="guide-boss-image">
@@ -357,7 +411,7 @@ export async function renderGuide(): Promise<void> {
     } else if (activeTab === 'jointdrill') {
       body = renderBuildList(content.jointDrill?.builds?.current || [], '진행 중인 종언의 노래 공략이 없습니다.');
     } else {
-      body = renderBuildList(content.attributeBuilds || [], '등록된 속성별 빌드가 없습니다.');
+      body = renderAttributeBuilds(content.attributeBuilds || []);
     }
 
     container.innerHTML = `<div class="guide-layout">
@@ -382,6 +436,7 @@ export function init(): void {
     const target = event.target as HTMLElement;
     const tab = target.closest<HTMLButtonElement>('[data-guide-tab]');
     const bossButton = target.closest<HTMLButtonElement>('[data-score-boss-id]');
+    const attributeButton = target.closest<HTMLButtonElement>('[data-guide-attribute]');
 
     if (tab) {
       activeTab = tab.dataset.guideTab as GuideTab;
@@ -391,6 +446,12 @@ export function init(): void {
 
     if (bossButton) {
       selectedScoreBossId = Number(bossButton.dataset.scoreBossId);
+      void renderGuide();
+      return;
+    }
+
+    if (attributeButton) {
+      selectedAttributeElement = attributeButton.dataset.guideAttribute as ElementKey;
       void renderGuide();
     }
   });

@@ -13,5 +13,5 @@ import * as appGuide from '../modules/app-guide';
   initGlobalHeader('guide');
   appGuide.init();
   await appGuide.renderGuide();
-  document.addEventListener('languageChanged', () => void appGuide.renderGuide());
+  window.addEventListener('languageChanged', () => void appGuide.renderGuide());
 })().catch((error) => console.error('[GuideMain] Failed to initialize:', error));

@@ -2,12 +2,22 @@
   "scoreBoss": {
     "bosses": [
       {
-        "weakElements": ["Light", "Fire"],
-        "strongElements": ["Wind"]
+        "weakElements": [
+          "Wind",
+          "Dark"
+        ],
+        "strongElements": [
+          "Fire"
+        ]
       },
       {
-        "weakElements": ["Water", "Earth"],
-        "strongElements": ["Dark"]
+        "weakElements": [
+          "Earth",
+          "Wind"
+        ],
+        "strongElements": [
+          "Light"
+        ]
       }
     ]
   },
