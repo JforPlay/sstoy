@@ -1,0 +1,47 @@
+{
+  "100001": {
+    "Id": 100001,
+    "MateId1": 7010101,
+    "MateId2": 7010107,
+    "MateId3": 0,
+    "MateId4": 7010113,
+    "MateId5": 7010114,
+    "MateId6": 0,
+    "MateId7": 7010113,
+    "MateId8": 7010114,
+    "MateId9": 0,
+    "MateId10": 0,
+    "MateId11": 0,
+    "MateId12": 0
+  },
+  "100002": {
+    "Id": 100002,
+    "MateId1": 7010115,
+    "MateId2": 7010121,
+    "MateId3": 0,
+    "MateId4": 7010127,
+    "MateId5": 7010128,
+    "MateId6": 0,
+    "MateId7": 7010127,
+    "MateId8": 7010128,
+    "MateId9": 0,
+    "MateId10": 0,
+    "MateId11": 0,
+    "MateId12": 0
+  },
+  "100003": {
+    "Id": 100003,
+    "MateId1": 7010129,
+    "MateId2": 7010135,
+    "MateId3": 0,
+    "MateId4": 7010141,
+    "MateId5": 7010142,
+    "MateId6": 0,
+    "MateId7": 7010141,
+    "MateId8": 7010142,
+    "MateId9": 0,
+    "MateId10": 0,
+    "MateId11": 0,
+    "MateId12": 0
+  }
+}

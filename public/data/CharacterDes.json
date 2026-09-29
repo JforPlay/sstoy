@@ -728,6 +728,38 @@
     "PotentialAssistantContent1": "CharacterDes.137.11",
     "PotentialAssistantContent2": "CharacterDes.137.12"
   },
+  "139": {
+    "Id": 139,
+    "Alias": "CharacterDes.139.2",
+    "CnCv": "CharacterDes.139.1",
+    "JpCv": "CharacterDes.139.8",
+    "CharColor": "#555559",
+    "CharSkillColor": "#555559",
+    "CharDes": "CharacterDes.139.3",
+    "Tag": [
+      101,
+      202,
+      310
+    ],
+    "Force": 2,
+    "PreferTags": [
+      8,
+      7,
+      3
+    ],
+    "HateTags": [
+      5
+    ],
+    "Birthday": "3.21",
+    "PotentialMain1": "CharacterDes.139.4",
+    "PotentialMain2": "CharacterDes.139.5",
+    "PotentialAssistant1": "CharacterDes.139.6",
+    "PotentialAssistant2": "CharacterDes.139.7",
+    "PotentialMainContent1": "CharacterDes.139.9",
+    "PotentialMainContent2": "CharacterDes.139.10",
+    "PotentialAssistantContent1": "CharacterDes.139.11",
+    "PotentialAssistantContent2": "CharacterDes.139.12"
+  },
   "140": {
     "Id": 140,
     "Alias": "CharacterDes.140.2",
@@ -1199,5 +1231,92 @@
     "PotentialMainContent2": "CharacterDes.160.10",
     "PotentialAssistantContent1": "CharacterDes.160.11",
     "PotentialAssistantContent2": "CharacterDes.160.12"
+  },
+  "997": {
+    "Id": 997,
+    "Alias": "CharacterDes.997.2",
+    "CnCv": "CharacterDes.997.1",
+    "JpCv": "CharacterDes.997.8",
+    "CharColor": "#6eb29b",
+    "CharSkillColor": "#6eb29b",
+    "CharDes": "CharacterDes.997.3",
+    "Tag": [
+      102,
+      201,
+      301
+    ],
+    "Force": 2,
+    "PreferTags": [
+      2,
+      5
+    ],
+    "HateTags": [],
+    "Birthday": "",
+    "PotentialMain1": "CharacterDes.997.4",
+    "PotentialMain2": "CharacterDes.997.5",
+    "PotentialAssistant1": "CharacterDes.997.6",
+    "PotentialAssistant2": "CharacterDes.997.7",
+    "PotentialMainContent1": "CharacterDes.997.9",
+    "PotentialMainContent2": "CharacterDes.997.10",
+    "PotentialAssistantContent1": "CharacterDes.997.11",
+    "PotentialAssistantContent2": "CharacterDes.997.12"
+  },
+  "998": {
+    "Id": 998,
+    "Alias": "CharacterDes.998.2",
+    "CnCv": "CharacterDes.998.1",
+    "JpCv": "CharacterDes.998.8",
+    "CharColor": "#6eb29b",
+    "CharSkillColor": "#6eb29b",
+    "CharDes": "CharacterDes.998.3",
+    "Tag": [
+      102,
+      201,
+      301
+    ],
+    "Force": 2,
+    "PreferTags": [
+      2,
+      5
+    ],
+    "HateTags": [],
+    "Birthday": "",
+    "PotentialMain1": "CharacterDes.998.4",
+    "PotentialMain2": "CharacterDes.998.5",
+    "PotentialAssistant1": "CharacterDes.998.6",
+    "PotentialAssistant2": "CharacterDes.998.7",
+    "PotentialMainContent1": "CharacterDes.998.9",
+    "PotentialMainContent2": "CharacterDes.998.10",
+    "PotentialAssistantContent1": "CharacterDes.998.11",
+    "PotentialAssistantContent2": "CharacterDes.998.12"
+  },
+  "999": {
+    "Id": 999,
+    "Alias": "CharacterDes.999.2",
+    "CnCv": "CharacterDes.999.1",
+    "JpCv": "CharacterDes.999.8",
+    "CharColor": "#6eb29b",
+    "CharSkillColor": "#6eb29b",
+    "CharDes": "CharacterDes.999.3",
+    "Tag": [
+      102,
+      201,
+      301
+    ],
+    "Force": 2,
+    "PreferTags": [
+      2,
+      5
+    ],
+    "HateTags": [],
+    "Birthday": "",
+    "PotentialMain1": "CharacterDes.999.4",
+    "PotentialMain2": "CharacterDes.999.5",
+    "PotentialAssistant1": "CharacterDes.999.6",
+    "PotentialAssistant2": "CharacterDes.999.7",
+    "PotentialMainContent1": "CharacterDes.999.9",
+    "PotentialMainContent2": "CharacterDes.999.10",
+    "PotentialAssistantContent1": "CharacterDes.999.11",
+    "PotentialAssistantContent2": "CharacterDes.999.12"
   }
 }

@@ -44,5 +44,9 @@
   "ScoreBossAbility.100021.1": "层层打薄",
   "ScoreBossAbility.100021.2": "任意角色每触发<color=#ec6d21>&Param3&</color>次印记，对首领目标附加「破甲」，每层「破甲」使其受到普攻伤害强度提升<color=#ec6d21>&Param4&</color>，受到技能伤害强度提升<color=#ec6d21>&Param5&</color>，可叠加<color=#ec6d21>&Param6&</color>层。",
   "ScoreBossAbility.100022.1": "碎壳追击",
-  "ScoreBossAbility.100022.2": "援护角色对首领目标造成绝招伤害时，首领目标受到的绝招伤害强度提升<color=#ec6d21>&Param1&</color>，持续<color=#ec6d21>&Param3&</color>秒，可叠加<color=#ec6d21>&Param4&</color>层。\n援护角色对首领目标造成普攻伤害时，首领目标受到的技能伤害强度提升<color=#ec6d21>&Param2&</color>，持续<color=#ec6d21>&Param5&</color>秒，可叠加<color=#ec6d21>&Param6&</color>层。"
+  "ScoreBossAbility.100022.2": "援护角色对首领目标造成绝招伤害时，首领目标受到的绝招伤害强度提升<color=#ec6d21>&Param1&</color>，持续<color=#ec6d21>&Param3&</color>秒，可叠加<color=#ec6d21>&Param4&</color>层。\n援护角色对首领目标造成普攻伤害时，首领目标受到的技能伤害强度提升<color=#ec6d21>&Param2&</color>，持续<color=#ec6d21>&Param5&</color>秒，可叠加<color=#ec6d21>&Param6&</color>层。",
+  "ScoreBossAbility.100023.1": "裂壳余威",
+  "ScoreBossAbility.100023.2": "主控角色施放绝招时，首领目标受到的技能伤害强度提升<color=#ec6d21>&Param1&</color>，持续<color=#ec6d21>&Param3&</color>秒。\n主控角色施放绝招时，首领目标受到的印记伤害强度提升<color=#ec6d21>&Param2&</color>，持续<color=#ec6d21>&Param4&</color>秒。",
+  "ScoreBossAbility.100024.1": "追猎血契",
+  "ScoreBossAbility.100024.2": "主控角色最大生命提升<color=#ec6d21>&Param1&</color>，受到伤害提升<color=#ec6d21>&Param2&</color>。\n己方<color=#ec6d21>&Param3&</color>秒内对首领目标累计造成<color=#ec6d21>&Param4&</color>次印记伤害时，首领目标受到的技能伤害强度提升<color=#ec6d21>&Param5&</color>，受到的普攻伤害强度提升<color=#ec6d21>&Param6&</color>，持续<color=#ec6d21>&Param7&</color>秒。"
 }

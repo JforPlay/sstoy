@@ -44,5 +44,9 @@
   "ScoreBossAbility.100021.1": "アーマーブレイク",
   "ScoreBossAbility.100021.2": "チーム内の巡遊者が印を<color=#ec6d21>&Param3&</color>回発動させるごとに、首領に「アーマーブレイク」を1付与する。「アーマーブレイク」1ごとに、首領の通常攻撃被ダメージ強度が<color=#ec6d21>&Param4&</color>増加し、スキル被ダメージ強度が<color=#ec6d21>&Param5&</color>増加する。この効果は<color=#ec6d21>&Param6&</color>回まで重複できる。",
   "ScoreBossAbility.100022.1": "狙い澄ます",
-  "ScoreBossAbility.100022.2": "支援巡遊者が首領に必殺技ダメージを与えた時、<color=#ec6d21>&Param3&</color>秒間、首領の必殺技被ダメージ強度が<color=#ec6d21>&Param1&</color>増加する。この効果は<color=#ec6d21>&Param4&</color>回まで重複できる。\n支援巡遊者が首領に通常攻撃ダメージを与えた時、<color=#ec6d21>&Param5&</color>秒間、首領のスキル被ダメージ強度が<color=#ec6d21>&Param2&</color>増加する。この効果は<color=#ec6d21>&Param6&</color>回まで重複できる。"
+  "ScoreBossAbility.100022.2": "支援巡遊者が首領に必殺技ダメージを与えた時、<color=#ec6d21>&Param3&</color>秒間、首領の必殺技被ダメージ強度が<color=#ec6d21>&Param1&</color>増加する。この効果は<color=#ec6d21>&Param4&</color>回まで重複できる。\n支援巡遊者が首領に通常攻撃ダメージを与えた時、<color=#ec6d21>&Param5&</color>秒間、首領のスキル被ダメージ強度が<color=#ec6d21>&Param2&</color>増加する。この効果は<color=#ec6d21>&Param6&</color>回まで重複できる。",
+  "ScoreBossAbility.100023.1": "ひび割れた好機",
+  "ScoreBossAbility.100023.2": "主力巡遊者が必殺技を発動した時、&Param3&秒間、首領のスキル被ダメージ強度が<color=#ec6d21>&Param1&</color>増加する。\n主力巡遊者が必殺技を発動した時、&Param4&秒間、首領の印被ダメージ強度が<color=#ec6d21>&Param2&</color>増加する。",
+  "ScoreBossAbility.100024.1": "命がけの追撃",
+  "ScoreBossAbility.100024.2": "主力巡遊者の最大HPが<color=#ec6d21>&Param1&</color>上昇し、被ダメージが<color=#ec6d21>&Param2&</color>増加する。\n味方が&Param3&秒以内に首領へ累計<color=#ec6d21>&Param4&</color>回の印ダメージを与えた時、&Param7&秒間、首領のスキル被ダメージ強度が<color=#ec6d21>&Param5&</color>増加し、通常攻撃被ダメージ強度が<color=#ec6d21>&Param6&</color>増加する。"
 }

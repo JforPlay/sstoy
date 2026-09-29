@@ -294,6 +294,188 @@
   cursor: pointer;
 }
 
+.guide-jointdrill {
+  display: grid;
+  gap: 1rem;
+}
+
+.guide-jointdrill-header,
+.guide-jointdrill-system {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-card);
+}
+
+.guide-jointdrill-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem;
+}
+
+.guide-jointdrill-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.guide-jointdrill-header h3 {
+  margin: .35rem 0;
+  font-size: 1.35rem;
+}
+
+.guide-jointdrill-header p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.guide-jointdrill-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: .45rem;
+}
+
+.guide-jointdrill-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .45rem .6rem;
+  border-radius: 7px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+.guide-jointdrill-difficulties {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: .6rem;
+}
+
+.guide-jointdrill-difficulty {
+  display: grid;
+  gap: .2rem;
+  padding: .75rem;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.guide-jointdrill-difficulty:hover {
+  color: var(--text-primary);
+}
+
+.guide-jointdrill-difficulty.active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, var(--bg-secondary));
+  color: var(--accent);
+}
+
+.guide-jointdrill-difficulty small {
+  color: inherit;
+  font-size: .75rem;
+  font-weight: 500;
+  opacity: .8;
+}
+
+.guide-jointdrill-system {
+  padding: 1.15rem;
+}
+
+.guide-jointdrill-system > h3 {
+  margin: 0 0 .9rem;
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.guide-jointdrill-system > h3 span {
+  margin-left: .25rem;
+  color: var(--text-secondary);
+  font-size: .8rem;
+}
+
+.guide-jointdrill-affix-selector {
+  display: flex;
+  gap: .55rem;
+  overflow-x: auto;
+  padding-bottom: .2rem;
+}
+
+.guide-jointdrill-affix-button {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  align-items: center;
+  gap: .5rem;
+  min-width: 152px;
+  padding: .55rem .65rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: .82rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.guide-jointdrill-affix-button:hover {
+  color: var(--text-primary);
+}
+
+.guide-jointdrill-affix-button.active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, var(--bg-secondary));
+  color: var(--accent);
+}
+
+.guide-jointdrill-affix-button img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.guide-jointdrill-affix-detail {
+  display: none;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: .85rem;
+  margin-top: .8rem;
+  padding: .9rem;
+  border-top: 1px solid var(--border);
+}
+
+.guide-jointdrill-affix-detail.active {
+  display: grid;
+}
+
+.guide-jointdrill-affix-detail img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.guide-jointdrill-affix-detail h4 {
+  margin: 0 0 .35rem;
+  font-size: 1rem;
+}
+
+.guide-jointdrill-affix-detail p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
 .guide-build-detail-body {
   padding-top: .7rem;
 }
@@ -421,4 +603,13 @@
   .guide-attribute-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .guide-jointdrill-header {
+    display: grid;
+  }
+
+  .guide-jointdrill-meta {
+    justify-content: flex-start;
+  }
+
 }

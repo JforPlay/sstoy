@@ -12,6 +12,14 @@ interface ScoreBossControl {
   LevelGroup: number[];
 }
 
+interface Activity {
+  Id: number;
+  ActivityType: number;
+  TabBgRes: string;
+  StartTime: string;
+  EndTime: string;
+}
+
 interface ScoreBossLevel {
   Id: number;
   MonsterId: number;
@@ -49,12 +57,37 @@ interface MonsterManual {
   Name: string;
 }
 
+interface JointDrillControl {
+  Id: number;
+  DrillLevelGroupId: number;
+}
+
+interface JointDrillLevel {
+  Id: number;
+  Difficulty: number;
+  DrillLevelGroupId: number;
+  BattleTime: number;
+  BossId: number;
+  BossAffix: number[];
+  RecommendLv: number;
+  SubName: string;
+}
+
+interface JointDrillAffix {
+  Id: number;
+  Name: string;
+  Desc: string;
+  Icon: string;
+}
+
 interface GuideBuild {
   title: string;
   description?: string;
   characters?: string[];
   elements?: string[];
   buildNote?: string;
+  startDate?: string;
+  endDate?: string;
 }
 
 interface BossOverride {
@@ -83,6 +116,17 @@ interface ActiveScoreBossData {
   bossNames: Record<number, string>;
 }
 
+interface ActiveJointDrillData {
+  activity: Activity;
+  control: JointDrillControl;
+  levels: JointDrillLevel[];
+  affixes: Record<string, JointDrillAffix>;
+  affixText: Record<string, string>;
+  levelText: Record<string, string>;
+  uiText: Record<string, string>;
+  bossNames: Record<number, string>;
+}
+
 type ElementKey = 'Water' | 'Fire' | 'Earth' | 'Wind' | 'Light' | 'Dark' | 'Normal';
 
 const DATA_ROOT = 'data';
@@ -99,6 +143,8 @@ const ELEMENT_ICON_IDS: Record<ElementKey, number> = {
 const ATTRIBUTE_ELEMENTS: ElementKey[] = ['Water', 'Fire', 'Earth', 'Wind', 'Light', 'Dark', 'Normal'];
 let activeTab: GuideTab = 'scoreboss';
 let selectedScoreBossId: number | null = null;
+let selectedJointDrillLevelId: number | null = null;
+let selectedJointDrillAffixId: number | null = null;
 let selectedAttributeElement: ElementKey = 'Water';
 let initialized = false;
 
@@ -130,15 +176,19 @@ async function loadGuideContent(): Promise<GuideContent> {
 
 function getActiveControl(data: Record<string, ScoreBossControl>): ScoreBossControl | undefined {
   const controls = Object.values(data);
-  const now = Date.now();
-  const activeControl = controls.find((control) => {
-    const startTime = Date.parse(control.StartTime);
-    const endTime = Date.parse(control.EndTime);
-    return startTime <= now && now < endTime;
-  });
+  return controls.find((control) => isWithinEventPeriod(control.StartTime, control.EndTime));
+}
 
-  return activeControl
-    || controls.sort((a, b) => Date.parse(b.EndTime) - Date.parse(a.EndTime))[0];
+function isWithinEventPeriod(startDate?: string, endDate?: string): boolean {
+  const now = Date.now();
+  const startTime = startDate ? Date.parse(startDate) : Number.NEGATIVE_INFINITY;
+  if (Number.isNaN(startTime) || now < startTime) return false;
+  if (!endDate) return true;
+
+  const end = new Date(endDate);
+  if (Number.isNaN(end.getTime())) return false;
+  end.setHours(24, 0, 0, 0);
+  return now < end.getTime();
 }
 
 async function loadActiveScoreBoss(): Promise<ActiveScoreBossData | null> {
@@ -173,6 +223,44 @@ async function loadActiveScoreBoss(): Promise<ActiveScoreBossData | null> {
   return { control, levels, abilities, abilityText, scoreGetControls, scoreGetText, bossNames };
 }
 
+async function loadActiveJointDrill(): Promise<ActiveJointDrillData | null> {
+  const language = window.i18n?.currentLang || 'KR';
+  const [activities, controls, levelData, affixes, affixText, levelText, uiText, monsters, monsterSkins, monsterManuals, monsterManualText] = await Promise.all([
+    loadJson<Record<string, Activity>>('Activity.json'),
+    loadJson<Record<string, JointDrillControl>>('JointDrillControl.json'),
+    loadJson<Record<string, JointDrillLevel>>('JointDrillLevel.json'),
+    loadJson<Record<string, JointDrillAffix>>('JointDrillAffix.json'),
+    loadJson<Record<string, string>>(`${language}/JointDrillAffix.json`),
+    loadJson<Record<string, string>>(`${language}/JointDrillLevel.json`),
+    loadJson<Record<string, string>>(`${language}/UIText.json`),
+    loadJson<Record<string, Monster>>('Monster.json'),
+    loadJson<Record<string, MonsterSkin>>('MonsterSkin.json'),
+    loadJson<Record<string, MonsterManual>>('MonsterManual.json'),
+    loadJson<Record<string, string>>(`${language}/MonsterManual.json`),
+  ]);
+  const activity = Object.values(activities).find((item) => (
+    item.ActivityType === 7
+    && item.TabBgRes.includes('jointdrill')
+    && isWithinEventPeriod(item.StartTime, item.EndTime)
+  ));
+
+  if (!activity) return null;
+  const control = controls[String(activity.Id)];
+  if (!control) return null;
+
+  const levels = Object.values(levelData)
+    .filter((level) => level.DrillLevelGroupId === control.DrillLevelGroupId)
+    .sort((a, b) => a.Difficulty - b.Difficulty);
+  const bossNames = Object.fromEntries(levels.map((level) => {
+    const monster = monsters[String(level.BossId)];
+    const skin = monster ? monsterSkins[String(monster.FAId)] : undefined;
+    const manual = skin ? monsterManuals[String(skin.MonsterManual)] : undefined;
+    return [level.BossId, manual ? (monsterManualText[manual.Name] || manual.Name) : `Boss ${level.BossId}`];
+  }));
+
+  return { activity, control, levels, affixes, affixText, levelText, uiText, bossNames };
+}
+
 function formatDate(value: string): string {
   return new Intl.DateTimeFormat('ko-KR', {
     month: 'long',
@@ -182,8 +270,8 @@ function formatDate(value: string): string {
   }).format(new Date(value));
 }
 
-function formatPeriod(control: ScoreBossControl): string {
-  return `${formatDate(control.StartTime)} ~ ${formatDate(control.EndTime)}`;
+function formatPeriod(period: Pick<ScoreBossControl, 'StartTime' | 'EndTime'>): string {
+  return `${formatDate(period.StartTime)} ~ ${formatDate(period.EndTime)}`;
 }
 
 function formatAbilityText(template: string, ability: ScoreBossAbility): string {
@@ -223,8 +311,9 @@ function renderBuildCard(build: GuideBuild): string {
 }
 
 function renderBuildList(builds: GuideBuild[], emptyText: string): string {
-  if (builds.length === 0) return `<div class="guide-empty">${emptyText}</div>`;
-  return `<div class="guide-build-list">${builds.map(renderBuildCard).join('')}</div>`;
+  const visibleBuilds = builds.filter((build) => isWithinEventPeriod(build.startDate, build.endDate));
+  if (visibleBuilds.length === 0) return `<div class="guide-empty">${emptyText}</div>`;
+  return `<div class="guide-build-list">${visibleBuilds.map(renderBuildCard).join('')}</div>`;
 }
 
 function renderElementIcons(elements: ElementKey[]): string {
@@ -363,6 +452,81 @@ function renderScoreBoss(activeData: ActiveScoreBossData, content: GuideContent)
     </section>`;
 }
 
+function getJointDrillDifficultyName(level: JointDrillLevel, uiText: Record<string, string>): string {
+  return uiText[`UIText.JointDrill_Difficulty_Name_${level.Difficulty}.1`] || `난이도 ${level.Difficulty}`;
+}
+
+function renderJointDrill(activeData: ActiveJointDrillData, content: GuideContent): string {
+  if (!activeData.levels.some((level) => level.Id === selectedJointDrillLevelId)) {
+    selectedJointDrillLevelId = activeData.levels[0]?.Id || null;
+  }
+
+  const level = activeData.levels.find((item) => item.Id === selectedJointDrillLevelId);
+  if (!level) return '<div class="guide-empty">종언 난이도 정보를 찾지 못했습니다.</div>';
+
+  const bossName = activeData.bossNames[level.BossId] || `Boss ${level.BossId}`;
+  const affixes = level.BossAffix
+    .map((affixId) => activeData.affixes[String(affixId)])
+    .filter((affix): affix is JointDrillAffix => Boolean(affix));
+  if (!affixes.some((affix) => affix.Id === selectedJointDrillAffixId)) {
+    selectedJointDrillAffixId = affixes[0]?.Id || null;
+  }
+  const levelName = activeData.levelText[level.SubName] || level.SubName;
+  const builds = content.jointDrill?.builds?.[String(level.Difficulty)] || content.jointDrill?.builds?.current || [];
+
+  return `<section class="guide-jointdrill">
+    <section class="guide-jointdrill-header">
+      <div>
+        <span class="guide-jointdrill-eyebrow"><i class="fa-solid fa-list-check"></i> 종언의 노래</span>
+        <h3>${escapeHtml(bossName)}</h3>
+        <p>${escapeHtml(levelName)}</p>
+      </div>
+      <div class="guide-jointdrill-meta">
+        <span><i class="fa-regular fa-calendar"></i> ${escapeHtml(formatPeriod(activeData.activity))}</span>
+        <span><i class="fa-solid fa-user-group"></i> 권장 레벨 ${escapeHtml(level.RecommendLv)}</span>
+        <span><i class="fa-regular fa-clock"></i> ${escapeHtml(level.BattleTime)}초</span>
+      </div>
+    </section>
+    <div class="guide-jointdrill-difficulties" role="tablist" aria-label="종언 난이도 선택">
+      ${activeData.levels.map((item) => {
+        const selected = item.Id === selectedJointDrillLevelId;
+        return `<button class="guide-jointdrill-difficulty ${selected ? 'active' : ''}" data-joint-drill-level-id="${item.Id}" role="tab" aria-selected="${selected}">
+          <span>${escapeHtml(getJointDrillDifficultyName(item, activeData.uiText))}</span>
+          <small>권장 ${escapeHtml(item.RecommendLv)}</small>
+        </button>`;
+      }).join('')}
+    </div>
+    <section class="guide-jointdrill-system">
+      <h3>보스 시스템 <span>${affixes.length}개</span></h3>
+      <div class="guide-jointdrill-affix-selector" role="tablist" aria-label="보스 시스템 선택">
+        ${affixes.map((affix) => {
+          const iconName = affix.Icon.split('/').pop() || affix.Icon;
+          const name = activeData.affixText[affix.Name] || affix.Name;
+          const selected = affix.Id === selectedJointDrillAffixId;
+          return `<button class="guide-jointdrill-affix-button ${selected ? 'active' : ''}" data-joint-drill-affix-id="${affix.Id}" role="tab" aria-selected="${selected}">
+            <img src="assets/jointdrill/${escapeHtml(iconName)}.png" alt="" loading="lazy">
+            <span>${escapeHtml(name)}</span>
+          </button>`;
+        }).join('')}
+      </div>
+      ${affixes.map((affix) => {
+        const iconName = affix.Icon.split('/').pop() || affix.Icon;
+        const name = activeData.affixText[affix.Name] || affix.Name;
+        const description = activeData.affixText[affix.Desc] || affix.Desc;
+        const selected = affix.Id === selectedJointDrillAffixId;
+        return `<article class="guide-jointdrill-affix-detail ${selected ? 'active' : ''}" data-joint-drill-affix-detail-id="${affix.Id}">
+          <img src="assets/jointdrill/${escapeHtml(iconName)}.png" alt="" loading="lazy">
+          <div><h4>${escapeHtml(name)}</h4><p>${escapeHtml(description)}</p></div>
+        </article>`;
+      }).join('')}
+    </section>
+    <section class="guide-recommendations">
+      <h3>추천 빌드</h3>
+      ${renderBuildList(builds, '등록된 추천 빌드가 없습니다.')}
+    </section>
+  </section>`;
+}
+
 // =============================================================================
 // PAGE RENDERING
 // =============================================================================
@@ -393,6 +557,7 @@ export async function renderGuide(): Promise<void> {
   const container = document.getElementById('guide-container');
   if (!container) return;
 
+  const scrollY = window.scrollY;
   container.innerHTML = '<div class="guide-loading">공략 정보를 불러오는 중...</div>';
 
   try {
@@ -409,7 +574,10 @@ export async function renderGuide(): Promise<void> {
         body = '<div class="guide-empty">진행 중인 연합 토벌 정보를 찾지 못했습니다.</div>';
       }
     } else if (activeTab === 'jointdrill') {
-      body = renderBuildList(content.jointDrill?.builds?.current || [], '진행 중인 종언의 노래 공략이 없습니다.');
+      const activeJointDrill = await loadActiveJointDrill();
+      body = activeJointDrill
+        ? renderJointDrill(activeJointDrill, content)
+        : '<div class="guide-empty">진행 중인 종언의 노래가 없습니다.</div>';
     } else {
       body = renderAttributeBuilds(content.attributeBuilds || []);
     }
@@ -418,6 +586,7 @@ export async function renderGuide(): Promise<void> {
       ${renderGuideTabs(scoreBossPeriod)}
       <div class="guide-content">${body}</div>
     </div>`;
+    requestAnimationFrame(() => window.scrollTo({ top: scrollY }));
   } catch (error) {
     console.error('[Guide] Failed to render guide database:', error);
     container.innerHTML = '<div class="guide-empty">공략 정보를 불러오지 못했습니다.</div>';
@@ -436,6 +605,8 @@ export function init(): void {
     const target = event.target as HTMLElement;
     const tab = target.closest<HTMLButtonElement>('[data-guide-tab]');
     const bossButton = target.closest<HTMLButtonElement>('[data-score-boss-id]');
+    const jointDrillButton = target.closest<HTMLButtonElement>('[data-joint-drill-level-id]');
+    const jointDrillAffixButton = target.closest<HTMLButtonElement>('[data-joint-drill-affix-id]');
     const attributeButton = target.closest<HTMLButtonElement>('[data-guide-attribute]');
 
     if (tab) {
@@ -447,6 +618,27 @@ export function init(): void {
     if (bossButton) {
       selectedScoreBossId = Number(bossButton.dataset.scoreBossId);
       void renderGuide();
+      return;
+    }
+
+    if (jointDrillButton) {
+      selectedJointDrillLevelId = Number(jointDrillButton.dataset.jointDrillLevelId);
+      void renderGuide();
+      return;
+    }
+
+    if (jointDrillAffixButton) {
+      event.preventDefault();
+      selectedJointDrillAffixId = Number(jointDrillAffixButton.dataset.jointDrillAffixId);
+      const system = jointDrillAffixButton.closest<HTMLElement>('.guide-jointdrill-system');
+      system?.querySelectorAll<HTMLButtonElement>('[data-joint-drill-affix-id]').forEach((button) => {
+        const selected = button === jointDrillAffixButton;
+        button.classList.toggle('active', selected);
+        button.setAttribute('aria-selected', String(selected));
+      });
+      system?.querySelectorAll<HTMLElement>('[data-joint-drill-affix-detail-id]').forEach((detail) => {
+        detail.classList.toggle('active', Number(detail.dataset.jointDrillAffixDetailId) === selectedJointDrillAffixId);
+      });
       return;
     }
 
