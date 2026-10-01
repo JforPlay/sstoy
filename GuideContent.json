@@ -1,32 +1,28 @@
-﻿{
-    "scoreBoss":  {
-                      "bosses":  [
-                                     {
-                                         "weakElements":  [
-                                                              "Wind",
-                                                              "Dark"
-                                                          ],
-                                         "strongElements":  [
-                                                                "Fire"
-                                                            ]
-                                     },
-                                     {
-                                         "weakElements":  [
-                                                              "Earth",
-                                                              "Wind"
-                                                          ],
-                                         "strongElements":  [
-                                                                "Light"
-                                                            ]
-                                     }
-                                 ]
-                  },
-    "jointDrill":  {
-                       "builds":  {
-
-                                  }
-                   },
-    "attributeBuilds":  [
-
-                        ]
+{
+  "scoreBoss": {
+    "bosses": [
+      {
+        "weakElements": [
+          "Water",
+          "Fire"
+        ],
+        "strongElements": [
+          "Earth"
+        ]
+      },
+      {
+        "weakElements": [
+          "Wind",
+          "Light"
+        ],
+        "strongElements": [
+          "Dark"
+        ]
+      }
+    ]
+  },
+  "jointDrill": {
+    "builds": {}
+  },
+  "attributeBuilds": []
 }
