@@ -175,8 +175,9 @@ async function loadGuideContent(): Promise<GuideContent> {
 }
 
 function getActiveControl(data: Record<string, ScoreBossControl>): ScoreBossControl | undefined {
-  const controls = Object.values(data);
-  return controls.find((control) => isWithinEventPeriod(control.StartTime, control.EndTime));
+  return Object.values(data)
+    .filter((control) => isWithinEventPeriod(control.StartTime, control.EndTime))
+    .sort((a, b) => Date.parse(b.StartTime) - Date.parse(a.StartTime))[0];
 }
 
 function isWithinEventPeriod(startDate?: string, endDate?: string): boolean {
@@ -238,11 +239,13 @@ async function loadActiveJointDrill(): Promise<ActiveJointDrillData | null> {
     loadJson<Record<string, MonsterManual>>('MonsterManual.json'),
     loadJson<Record<string, string>>(`${language}/MonsterManual.json`),
   ]);
-  const activity = Object.values(activities).find((item) => (
-    item.ActivityType === 7
-    && item.TabBgRes.includes('jointdrill')
-    && isWithinEventPeriod(item.StartTime, item.EndTime)
-  ));
+  const activity = Object.values(activities)
+    .filter((item) => (
+      item.ActivityType === 7
+      && item.TabBgRes.includes('jointdrill')
+      && isWithinEventPeriod(item.StartTime, item.EndTime)
+    ))
+    .sort((a, b) => Date.parse(b.StartTime) - Date.parse(a.StartTime))[0];
 
   if (!activity) return null;
   const control = controls[String(activity.Id)];
