@@ -162,8 +162,8 @@ function escapeHtml(value: string | number | undefined): string {
   }[char] || char));
 }
 
-async function loadJson<T>(file: string): Promise<T> {
-  const response = await fetch(`${DATA_ROOT}/${file}`);
+async function loadJson<T>(file: string, fresh = false): Promise<T> {
+  const response = await fetch(`${DATA_ROOT}/${file}`, fresh ? { cache: 'no-store' } : undefined);
   if (!response.ok) throw new Error(`Failed to load ${file}`);
   return response.json() as Promise<T>;
 }
@@ -194,12 +194,12 @@ function isWithinEventPeriod(startDate?: string, endDate?: string): boolean {
 async function loadActiveScoreBoss(): Promise<ActiveScoreBossData | null> {
   const language = window.i18n?.currentLang || 'KR';
   const [controls, levelData, abilities, abilityText, scoreGetControls, scoreGetText, monsters, monsterSkins, monsterManuals, monsterManualText] = await Promise.all([
-    loadJson<Record<string, ScoreBossControl>>('ScoreBossControl.json'),
-    loadJson<Record<string, ScoreBossLevel>>('ScoreBossLevel.json'),
-    loadJson<Record<string, ScoreBossAbility>>('ScoreBossAbility.json'),
-    loadJson<Record<string, string>>(`${language}/ScoreBossAbility.json`),
-    loadJson<Record<string, ScoreBossGetControl>>('ScoreBossGetControl.json'),
-    loadJson<Record<string, string>>(`${language}/ScoreBossGetControl.json`),
+    loadJson<Record<string, ScoreBossControl>>('ScoreBossControl.json', true),
+    loadJson<Record<string, ScoreBossLevel>>('ScoreBossLevel.json', true),
+    loadJson<Record<string, ScoreBossAbility>>('ScoreBossAbility.json', true),
+    loadJson<Record<string, string>>(`${language}/ScoreBossAbility.json`, true),
+    loadJson<Record<string, ScoreBossGetControl>>('ScoreBossGetControl.json', true),
+    loadJson<Record<string, string>>(`${language}/ScoreBossGetControl.json`, true),
     loadJson<Record<string, Monster>>('Monster.json'),
     loadJson<Record<string, MonsterSkin>>('MonsterSkin.json'),
     loadJson<Record<string, MonsterManual>>('MonsterManual.json'),
@@ -226,13 +226,13 @@ async function loadActiveScoreBoss(): Promise<ActiveScoreBossData | null> {
 async function loadActiveJointDrill(): Promise<ActiveJointDrillData | null> {
   const language = window.i18n?.currentLang || 'KR';
   const [activities, controls, levelData, affixes, affixText, levelText, uiText, monsters, monsterSkins, monsterManuals, monsterManualText] = await Promise.all([
-    loadJson<Record<string, Activity>>('Activity.json'),
-    loadJson<Record<string, JointDrillControl>>('JointDrillControl.json'),
-    loadJson<Record<string, JointDrillLevel>>('JointDrillLevel.json'),
-    loadJson<Record<string, JointDrillAffix>>('JointDrillAffix.json'),
-    loadJson<Record<string, string>>(`${language}/JointDrillAffix.json`),
-    loadJson<Record<string, string>>(`${language}/JointDrillLevel.json`),
-    loadJson<Record<string, string>>(`${language}/UIText.json`),
+    loadJson<Record<string, Activity>>('Activity.json', true),
+    loadJson<Record<string, JointDrillControl>>('JointDrillControl.json', true),
+    loadJson<Record<string, JointDrillLevel>>('JointDrillLevel.json', true),
+    loadJson<Record<string, JointDrillAffix>>('JointDrillAffix.json', true),
+    loadJson<Record<string, string>>(`${language}/JointDrillAffix.json`, true),
+    loadJson<Record<string, string>>(`${language}/JointDrillLevel.json`, true),
+    loadJson<Record<string, string>>(`${language}/UIText.json`, true),
     loadJson<Record<string, Monster>>('Monster.json'),
     loadJson<Record<string, MonsterSkin>>('MonsterSkin.json'),
     loadJson<Record<string, MonsterManual>>('MonsterManual.json'),
