@@ -1,6 +1,6 @@
 import { fetchJSON } from '../shared/network';
 import { i18n } from '../i18n';
-import LZString from 'lz-string';
+import { encodeHousingShare, decodeHousingShare } from './housing-share';
 import { canPlace, canUseFurniture, furnitureKind, fixturePlacement, supportsPlacement, validateLayout } from './housing-layout';
 import { HousingScene } from './housing-scene';
 import type { Furniture, Layout, Placement, Room, RoomSize, DefaultFurniture } from './housing-layout';
@@ -81,15 +81,13 @@ export async function initHousing(): Promise<void> {
   } catch { invalidSavedData = true; }
   let imported = false;
   let invalidSharedData = false;
-  if (location.hash.startsWith('#layout=')) {
+  if (location.hash.startsWith('#layout=') || location.hash.startsWith('#h=')) {
     try {
-      if (location.hash.length > 40000) throw new Error('Oversized layout');
-      const json = LZString.decompressFromEncodedURIComponent(location.hash.slice(8));
-      if (!json || json.length > 100000) throw new Error('Invalid shared data');
-      const shared = validateLayout(JSON.parse(json), furniture, rooms, sizes);
+      const decoded = decodeHousingShare(location.hash);
+      const shared = validateLayout(decoded.layout, furniture, rooms, sizes);
       // A shared plan is a preview until explicitly saved, preserving the user's local plan.
       layout = shared;
-      roomId = Object.keys(shared.rooms)[0] || roomId;
+      roomId = decoded.roomId || Object.keys(shared.rooms)[0] || roomId;
       imported = true;
     } catch { invalidSharedData = true; }
   }
@@ -206,8 +204,9 @@ function renderBoard(): void {
       });
     } catch (error) { console.error('[Housing 3D]', error); status(t('webglError')); return; }
   }
+  const floor = finishId('floor');
   sceneView.update({ indoor: !!currentRoom().RoomType, size: size(), placements: scenePlacements(),
-    furniture, selected, floor: finishId('floor'), wall: finishId('wall'), grid: showGrid });
+    furniture, selected, floor: floor && furniture[floor]?.NotShow ? undefined : floor, wall: finishId('wall'), grid: showGrid });
   board.ondragover = event => { event.preventDefault(); if (event.dataTransfer) event.dataTransfer.dropEffect = 'copy'; };
   board.ondrop = event => {
     event.preventDefault();
@@ -399,7 +398,7 @@ function handleKeyboard(event: KeyboardEvent): void {
 }
 
 async function share(): Promise<void> {
-  const url = `${location.origin}${location.pathname}#layout=${LZString.compressToEncodedURIComponent(JSON.stringify(layout))}`;
+  const url = `${location.origin}${location.pathname}${encodeHousingShare(layout, roomId)}`;
   const box = document.getElementById('housing-share')!;
   box.hidden = false;
   const input = document.getElementById('housing-share-url') as HTMLInputElement;

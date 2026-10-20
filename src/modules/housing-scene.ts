@@ -1,22 +1,11 @@
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { loadHousingModel as loadModel } from './housing-models';
 import { footprint, furnitureKind } from './housing-layout';
 import type { Furniture, Placement, RoomSize } from './housing-layout';
 
 type SceneState = { indoor: boolean; size: RoomSize; placements: Placement[]; furniture: Record<string, Furniture>; selected: string; floor?: number; wall?: number; grid: boolean };
 type Callbacks = { select: (uid: string) => void; move: (placement: Placement) => void; error: (id: string) => void };
-const loader = new GLTFLoader();
-const models = new Map<string, Promise<THREE.Group>>();
-function loadModel(id: string): Promise<THREE.Group> {
-  let pending = models.get(id);
-  if (!pending) {
-    pending = loader.loadAsync(`assets/housing/models/${id}.glb`).then(gltf => gltf.scene);
-    models.set(id, pending);
-    void pending.catch(() => models.delete(id));
-  }
-  return pending;
-}
 
 /** Original Unity meshes, rendered in real 3D. Layout coordinates remain unchanged. */
 export class HousingScene {
@@ -47,7 +36,7 @@ export class HousingScene {
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.NoToneMapping;
     this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    this.renderer.shadowMap.type = THREE.PCFShadowMap;
     this.scene.background = new THREE.Color('#c7d9b0');
     this.scene.add(new THREE.HemisphereLight(0xffffff, 0x9aab80, 2.2));
     const sun = new THREE.DirectionalLight(0xfff5dc, 2.2);
@@ -120,7 +109,12 @@ export class HousingScene {
           if (node instanceof THREE.Mesh && node.name.includes('DianTi01')) node.userData.backdropCenter = new THREE.Box3().setFromObject(node).getCenter(new THREE.Vector3());
         });
         this.draw();
-      }).catch(() => this.callbacks.error(sceneId));
+      }).catch(error => {
+        if (this.disposed || this.environmentId !== sceneId) return;
+        console.error('[Housing] Environment load failed:', error);
+        this.environmentId = '';
+        this.callbacks.error(sceneId);
+      });
     }
     if (this.grid) { this.scene.remove(this.grid); this.grid.geometry.dispose(); (this.grid.material as THREE.Material).dispose(); }
     this.grid = new THREE.GridHelper(state.size.L, state.size.L, 0xfff8dd, 0xfff8dd);
@@ -158,7 +152,7 @@ export class HousingScene {
           wrapper.userData.placement = p.uid;
         }
         return wrapper;
-      } catch { if (revision === this.revision) this.callbacks.error(String(entry.id)); return undefined; }
+      } catch { if (!this.disposed && revision === this.revision) this.callbacks.error(String(entry.id)); return undefined; }
     })).then(objects => {
       if (revision !== this.revision || this.disposed) return;
       this.objects.clear();
