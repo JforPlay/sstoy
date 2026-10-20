@@ -85,6 +85,7 @@ export default defineConfig(({ command, mode }) => ({
         characterdb: resolve(__dirname, 'characterdb.html'),
         discdb: resolve(__dirname, 'discdb.html'),
         resources: resolve(__dirname, 'resources.html'),
+        housing: resolve(__dirname, 'housing.html'),
         tasks: resolve(__dirname, 'tasks.html')
       },
       output: {
@@ -92,6 +93,7 @@ export default defineConfig(({ command, mode }) => ({
         manualChunks: (id) => {
           // Vendor libraries
           if (id.includes('node_modules')) {
+            if (id.includes('/three/')) return 'vendor-three';
             if (id.includes('fuse.js')) return 'vendor-fuse';
             if (id.includes('lz-string')) return 'vendor-lz';
             if (id.includes('chart.js')) return 'vendor-charts';

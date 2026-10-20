@@ -1,0 +1,28 @@
+{
+  "705001": {
+    "Id": 705001,
+    "Desc": "DormRoomScene.705001.2",
+    "IconRes": "Icon/Room/DormRoom_001_Out_01",
+    "ListIconRes": "Icon/Room/DormRoom_001_Out_01",
+    "SceneRes": "DormLevel/001/DormLevel_001_Out_01"
+  },
+  "705002": {
+    "Id": 705002,
+    "Desc": "DormRoomScene.705002.2",
+    "IconRes": "Icon/Room/DormRoom_001_In_01",
+    "ListIconRes": "Icon/Room/DormRoom_001_In_01",
+    "SceneRes": "DormLevel/001/DormLevel_001_In_01"
+  },
+  "705003": {
+    "Id": 705003,
+    "Desc": "DormRoomScene.705003.2",
+    "SceneRes": "DormLevel/Apartment/Room_2"
+  },
+  "709001": {
+    "Id": 709001,
+    "Desc": "DormRoomScene.709001.2",
+    "IconRes": "Icon/Room/DormRoom_001_Out_01_big",
+    "ListIconRes": "Icon/Room/DormRoom_001_Out_01_big",
+    "SceneRes": "DormLevel/001/DormLevel_001_Born.unity"
+  }
+}

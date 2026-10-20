@@ -4,14 +4,22 @@ import { initGlobalHeader } from '../shared/ui-components';
 import { initLanguageChangeListener } from '../shared/events';
 import * as appGuide from '../modules/app-guide';
 
+function updatePageTitle(): void {
+  document.title = `${i18n.t('guide.title')} | ${i18n.t('nav.title')}`;
+}
+
 (async () => {
   if (document.readyState === 'loading') {
     await new Promise<void>((resolve) => document.addEventListener('DOMContentLoaded', () => resolve()));
   }
   await i18n.init();
+  updatePageTitle();
   initLanguageChangeListener();
   initGlobalHeader('guide');
   appGuide.init();
   await appGuide.renderGuide();
-  window.addEventListener('languageChanged', () => void appGuide.renderGuide());
+  window.addEventListener('languageChanged', () => {
+    updatePageTitle();
+    void appGuide.renderGuide();
+  });
 })().catch((error) => console.error('[GuideMain] Failed to initialize:', error));

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>(function(){const theme=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',theme);})();</script>
+  <title>하우징 Beta | 스소 도우미</title>
+  <link rel="icon" type="image/png" href="assets/others/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="css/utils.css">
+  <link rel="stylesheet" href="css/components/ui-components.css">
+  <link rel="stylesheet" href="css/housing.css">
+</head>
+<body>
+  <div id="global-navigation"></div>
+  <main class="container housing-page">
+    <header>
+      <div class="header-title-row"><h1><i class="fa-solid fa-couch page-title-icon"></i> <span data-i18n="housing.title">하우징 Beta</span></h1></div>
+      <p class="subtitle" data-i18n="housing.subtitle">가구를 골라 나만의 공간을 미리 꾸며보세요.</p>
+    </header>
+    <div id="housing-app" aria-busy="true"><p data-i18n="common.loading">로딩 중...</p></div>
+    <p id="housing-status" role="status" aria-live="polite"></p>
+  </main>
+  <script type="module" src="src/app/housing-main.ts"></script>
+</body>
+</html>

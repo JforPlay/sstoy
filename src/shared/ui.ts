@@ -44,6 +44,7 @@ export const ICONS: Record<string, string> = {
   pottery: 'fa-solid fa-medal',
   tasks: 'fa-solid fa-clipboard-list',
   resources: 'fa-solid fa-box',
+  housing: 'fa-solid fa-couch',
   guide: 'fa-solid fa-book-open',
   // Positions & Characters
   people: 'fa-solid fa-users',

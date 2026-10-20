@@ -1,0 +1,55 @@
+{
+  "730001": {
+    "Id": 730001,
+    "FurnitureCount": 2,
+    "noShow": true,
+    "RoomLayoutName": "DormLayoutReward.730001.1",
+    "RoomLayoutDesc": "DormLayoutReward.730001.2",
+    "RoomLayoutTag": "DormLayoutReward.730001.3",
+    "GetWay": "DormLayoutReward.730001.4"
+  },
+  "730002": {
+    "Id": 730002,
+    "RoomType": 1,
+    "FurnitureCount": 3,
+    "noShow": true,
+    "RoomLayoutName": "DormLayoutReward.730002.1",
+    "RoomLayoutDesc": "DormLayoutReward.730002.2",
+    "RoomLayoutTag": "DormLayoutReward.730002.3",
+    "GetWay": "DormLayoutReward.730002.4"
+  },
+  "731001": {
+    "Id": 731001,
+    "RoomType": 1,
+    "FurnitureCount": 46,
+    "RoomLayoutName": "DormLayoutReward.731001.1",
+    "RoomLayoutDesc": "DormLayoutReward.731001.2",
+    "RoomLayoutTag": "DormLayoutReward.731001.3",
+    "RoomLayoutListIcon": "Icon/DormRoomLayout/DormRoomLayout_1001",
+    "RewardId1": 2,
+    "Qty1": 50,
+    "GetWay": "DormLayoutReward.731001.4"
+  },
+  "731002": {
+    "Id": 731002,
+    "FurnitureCount": 63,
+    "RoomLayoutName": "DormLayoutReward.731002.1",
+    "RoomLayoutDesc": "DormLayoutReward.731002.2",
+    "RoomLayoutTag": "DormLayoutReward.731002.3",
+    "RoomLayoutListIcon": "Icon/DormRoomLayout/DormRoomLayout_1002",
+    "RewardId1": 2,
+    "Qty1": 50,
+    "GetWay": "DormLayoutReward.731002.4"
+  },
+  "731003": {
+    "Id": 731003,
+    "FurnitureCount": 53,
+    "RoomLayoutName": "DormLayoutReward.731003.1",
+    "RoomLayoutDesc": "DormLayoutReward.731003.2",
+    "RoomLayoutTag": "DormLayoutReward.731003.3",
+    "RoomLayoutListIcon": "Icon/DormRoomLayout/DormRoomLayout_1003",
+    "RewardId1": 2,
+    "Qty1": 50,
+    "GetWay": "DormLayoutReward.731003.4"
+  }
+}

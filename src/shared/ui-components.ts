@@ -488,6 +488,7 @@ export function renderGlobalHeader(activePage: string): string {
     { id: 'app', href: 'app.html', icon: 'pottery' },
     { id: 'tasks', href: 'tasks.html', icon: 'tasks' },
     { id: 'resources', href: 'resources.html', icon: 'resources' },
+    { id: 'housing', href: 'housing.html', icon: 'housing' },
   ];
 
   const navLinks = navItems.map(item => {
