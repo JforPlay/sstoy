@@ -1,29 +1,29 @@
 {
-  "1": {
+  "0": {
     "Star": 1,
     "ScoreNeed": 2000
   },
-  "2": {
+  "1": {
     "Star": 2,
     "ScoreNeed": 3500
   },
-  "3": {
+  "2": {
     "Star": 3,
     "ScoreNeed": 6000
   },
-  "4": {
+  "3": {
     "Star": 4,
     "ScoreNeed": 10000
   },
-  "5": {
+  "4": {
     "Star": 5,
     "ScoreNeed": 15000
   },
-  "6": {
+  "5": {
     "Star": 6,
     "ScoreNeed": 20000
   },
-  "7": {
+  "6": {
     "Star": 7,
     "ScoreNeed": 25000
   }

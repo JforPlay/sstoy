@@ -3,61 +3,26 @@
     "Id": 100,
     "Icon": "Icon/Monster/monsterhead_00001Clipboard_Com_L",
     "Name": "MonsterManual.100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.100.2",
-    "SkillDesc": "MonsterManual.100.3",
-    "EpicLv": 0,
-    "HP": 0,
-    "ATK": 0,
-    "DEF": 0,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "SkillDesc": "MonsterManual.100.3"
   },
   "101": {
     "Id": 101,
     "Icon": "Icon/Monster/monsterhead_00000Unknown_Com_L",
     "Name": "MonsterManual.101.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.101.2",
-    "SkillDesc": "MonsterManual.101.3",
-    "EpicLv": 0,
-    "HP": 0,
-    "ATK": 0,
-    "DEF": 0,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "SkillDesc": "MonsterManual.101.3"
   },
   "1000100": {
     "Id": 1000100,
     "Icon": "Icon/Monster/monsterhead_00000Unknown_Com_L",
     "Name": "MonsterManual.1000100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1000100.2",
     "SkillDesc": "MonsterManual.1000100.3",
     "EpicLv": 5,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000111": {
     "Id": 1000111,
@@ -74,14 +39,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000121": {
     "Id": 1000121,
@@ -98,14 +56,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000131": {
     "Id": 1000131,
@@ -122,14 +73,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000141": {
     "Id": 1000141,
@@ -146,14 +90,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000151": {
     "Id": 1000151,
@@ -170,14 +107,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000161": {
     "Id": 1000161,
@@ -194,34 +124,18 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000200": {
     "Id": 1000200,
     "Icon": "Icon/Monster/monsterhead_10002TuBoShuSheShou_Dark_L",
     "Name": "MonsterManual.1000200.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1000200.2",
     "SkillDesc": "MonsterManual.1000200.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000211": {
     "Id": 1000211,
@@ -238,14 +152,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000221": {
     "Id": 1000221,
@@ -262,14 +169,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000231": {
     "Id": 1000231,
@@ -286,14 +186,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000241": {
     "Id": 1000241,
@@ -310,14 +203,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000251": {
     "Id": 1000251,
@@ -334,14 +220,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000261": {
     "Id": 1000261,
@@ -358,34 +237,18 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000300": {
     "Id": 1000300,
     "Icon": "Icon/Monster/monsterhead_00000Unknown_Com_L",
     "Name": "MonsterManual.1000300.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1000300.2",
     "SkillDesc": "MonsterManual.1000300.3",
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1000311": {
     "Id": 1000311,
@@ -402,14 +265,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1000321": {
     "Id": 1000321,
@@ -426,14 +282,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1000331": {
     "Id": 1000331,
@@ -450,14 +299,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1000341": {
     "Id": 1000341,
@@ -474,14 +316,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1000351": {
     "Id": 1000351,
@@ -498,14 +333,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1000361": {
     "Id": 1000361,
@@ -522,34 +350,18 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1000400": {
     "Id": 1000400,
     "Icon": "Icon/Monster/monsterhead_00000Unknown_Com_L",
     "Name": "MonsterManual.1000400.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1000400.2",
     "SkillDesc": "MonsterManual.1000400.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000411": {
     "Id": 1000411,
@@ -566,14 +378,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000421": {
     "Id": 1000421,
@@ -590,14 +395,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000431": {
     "Id": 1000431,
@@ -614,14 +412,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000441": {
     "Id": 1000441,
@@ -638,14 +429,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000451": {
     "Id": 1000451,
@@ -662,14 +446,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000461": {
     "Id": 1000461,
@@ -686,14 +463,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000516": {
     "Id": 1000516,
@@ -710,34 +480,18 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1000600": {
     "Id": 1000600,
     "Icon": "Icon/Monster/monsterhead_00000Unknown_Com_L",
     "Name": "MonsterManual.1000600.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1000600.2",
     "SkillDesc": "MonsterManual.1000600.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000611": {
     "Id": 1000611,
@@ -754,14 +508,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000621": {
     "Id": 1000621,
@@ -778,14 +525,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000631": {
     "Id": 1000631,
@@ -802,14 +542,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000641": {
     "Id": 1000641,
@@ -826,14 +559,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000651": {
     "Id": 1000651,
@@ -850,14 +576,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000661": {
     "Id": 1000661,
@@ -874,14 +593,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000741": {
     "Id": 1000741,
@@ -895,57 +607,29 @@
     ],
     "Desc": "MonsterManual.1000741.2",
     "SkillDesc": "MonsterManual.1000741.3",
-    "EpicLv": 3,
-    "HP": 0,
-    "ATK": 0,
-    "DEF": 0,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "EpicLv": 3
   },
   "1000705": {
     "Id": 1000705,
     "Icon": "Icon/Monster/monsterhead_10007KuangFengQingXiao_Wind_L",
     "Name": "MonsterManual.1000705.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1000705.2",
     "SkillDesc": "MonsterManual.1000705.3",
     "EpicLv": 3,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1000800": {
     "Id": 1000800,
     "Icon": "Icon/Monster/monsterhead_10008BuCaoXie_Com_L",
     "Name": "MonsterManual.1000800.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1000800.2",
     "SkillDesc": "MonsterManual.1000800.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000861": {
     "Id": 1000861,
@@ -962,14 +646,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1000841": {
     "Id": 1000841,
@@ -986,14 +663,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1001066": {
     "Id": 1001066,
@@ -1010,34 +680,18 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1001205": {
     "Id": 1001205,
     "Icon": "Icon/Monster/monsterhead_10012FanRongZhiShiTi_Com_L",
     "Name": "MonsterManual.1001205.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1001205.2",
     "SkillDesc": "MonsterManual.1001205.3",
     "EpicLv": 3,
     "HP": 2,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1001236": {
     "Id": 1001236,
@@ -1054,14 +708,7 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1001266": {
     "Id": 1001266,
@@ -1078,14 +725,7 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1001256": {
     "Id": 1001256,
@@ -1102,14 +742,7 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1001226": {
     "Id": 1001226,
@@ -1126,14 +759,7 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1001246": {
     "Id": 1001246,
@@ -1150,14 +776,7 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1001216": {
     "Id": 1001216,
@@ -1174,34 +793,18 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1001500": {
     "Id": 1001500,
     "Icon": "Icon/Monster/monsterhead_10015FengYu_Com_L",
     "Name": "MonsterManual.1001500.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1001500.2",
     "SkillDesc": "MonsterManual.1001500.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1001511": {
     "Id": 1001511,
@@ -1218,14 +821,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1001521": {
     "Id": 1001521,
@@ -1242,14 +838,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1001531": {
     "Id": 1001531,
@@ -1266,14 +855,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1001541": {
     "Id": 1001541,
@@ -1290,14 +872,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1001551": {
     "Id": 1001551,
@@ -1314,14 +889,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1001561": {
     "Id": 1001561,
@@ -1338,54 +906,29 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1100700": {
     "Id": 1100700,
     "Icon": "Icon/Monster/monsterhead_11007ZhongYeYuanGong_Com_L",
     "Name": "MonsterManual.1100700.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1100700.2",
     "SkillDesc": "MonsterManual.1100700.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1001800": {
     "Id": 1001800,
     "Icon": "Icon/Monster/monsterhead_10018GaoYaGuo_Com_L",
     "Name": "MonsterManual.1001800.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1001800.2",
     "SkillDesc": "MonsterManual.1001800.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1001811": {
     "Id": 1001811,
@@ -1402,14 +945,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1001821": {
     "Id": 1001821,
@@ -1426,14 +962,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1001831": {
     "Id": 1001831,
@@ -1450,14 +979,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1001841": {
     "Id": 1001841,
@@ -1474,14 +996,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1001851": {
     "Id": 1001851,
@@ -1498,14 +1013,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1001861": {
     "Id": 1001861,
@@ -1522,94 +1030,51 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1100300": {
     "Id": 1100300,
     "Icon": "Icon/Monster/monsterhead_11003JinZhanNongJi_Com_L",
     "Name": "MonsterManual.1100300.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1100300.2",
     "SkillDesc": "MonsterManual.1100300.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1100400": {
     "Id": 1100400,
     "Icon": "Icon/Monster/monsterhead_11004YuanChengNongJi_Com_L",
     "Name": "MonsterManual.1100400.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1100400.2",
     "SkillDesc": "MonsterManual.1100400.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1102100": {
     "Id": 1102100,
     "Icon": "Icon/Monster/monsterhead_11021XunHuiQuan_Com_L",
     "Name": "MonsterManual.1102100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1102100.2",
     "SkillDesc": "MonsterManual.1102100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1103105": {
     "Id": 1103105,
     "Icon": "Icon/Monster/monsterhead_11031FaMuXie_Com_L",
     "Name": "MonsterManual.1103105.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1103105.2",
     "SkillDesc": "MonsterManual.1103105.3",
     "EpicLv": 3,
     "HP": 2,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1104166": {
     "Id": 1104166,
@@ -1626,94 +1091,51 @@
     "EpicLv": 2,
     "HP": 2,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1300100": {
     "Id": 1300100,
     "Icon": "Icon/Monster/monsterhead_13001JinZhanHuiFeng_Com_L",
     "Name": "MonsterManual.1300100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1300100.2",
     "SkillDesc": "MonsterManual.1300100.3",
     "EpicLv": 5,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1301100": {
     "Id": 1301100,
     "Icon": "Icon/Monster/monsterhead_13011YuanChengHuiFeng_Com_L",
     "Name": "MonsterManual.1301100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1301100.2",
     "SkillDesc": "MonsterManual.1301100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1302100": {
     "Id": 1302100,
     "Icon": "Icon/Monster/monsterhead_13021XiaoMan_Com_L",
     "Name": "MonsterManual.1302100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1302100.2",
     "SkillDesc": "MonsterManual.1302100.3",
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1303100": {
     "Id": 1303100,
     "Icon": "Icon/Monster/monsterhead_13031XinYue_Com_L",
     "Name": "MonsterManual.1303100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1303100.2",
     "SkillDesc": "MonsterManual.1303100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1304151": {
     "Id": 1304151,
@@ -1730,14 +1152,7 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1305136": {
     "Id": 1305136,
@@ -1754,54 +1169,29 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1306100": {
     "Id": 1306100,
     "Icon": "Icon/Monster/monsterhead_13061XiaoGaoDa_Com_L",
     "Name": "MonsterManual.1306100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1306100.2",
     "SkillDesc": "MonsterManual.1306100.3",
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1306105": {
     "Id": 1306105,
     "Icon": "Icon/Monster/monsterhead_13061XiaoGaoDa_Com_L",
     "Name": "MonsterManual.1306105.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1306105.2",
     "SkillDesc": "MonsterManual.1306105.3",
     "EpicLv": 3,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1306111": {
     "Id": 1306111,
@@ -1818,14 +1208,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1306116": {
     "Id": 1306116,
@@ -1842,14 +1225,7 @@
     "EpicLv": 3,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1306121": {
     "Id": 1306121,
@@ -1866,14 +1242,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1306126": {
     "Id": 1306126,
@@ -1890,14 +1259,7 @@
     "EpicLv": 3,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1306131": {
     "Id": 1306131,
@@ -1914,14 +1276,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1306136": {
     "Id": 1306136,
@@ -1938,14 +1293,7 @@
     "EpicLv": 3,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1306141": {
     "Id": 1306141,
@@ -1962,14 +1310,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1306146": {
     "Id": 1306146,
@@ -1986,14 +1327,7 @@
     "EpicLv": 3,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1306151": {
     "Id": 1306151,
@@ -2010,14 +1344,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1306156": {
     "Id": 1306156,
@@ -2034,14 +1361,7 @@
     "EpicLv": 3,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1306161": {
     "Id": 1306161,
@@ -2058,14 +1378,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1306166": {
     "Id": 1306166,
@@ -2082,114 +1395,62 @@
     "EpicLv": 3,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1400100": {
     "Id": 1400100,
     "Icon": "Icon/Monster/monsterhead_14001JinZhanLvRen_Com_L",
     "Name": "MonsterManual.1400100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1400100.2",
     "SkillDesc": "MonsterManual.1400100.3",
     "EpicLv": 5,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1401100": {
     "Id": 1401100,
     "Icon": "Icon/Monster/monsterhead_14011YuanChengLvRen_Com_L",
     "Name": "MonsterManual.1401100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1401100.2",
     "SkillDesc": "MonsterManual.1401100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1402100": {
     "Id": 1402100,
     "Icon": "Icon/Monster/monsterhead_14021ZhongZhuangLvRen_Com_L",
     "Name": "MonsterManual.1402100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1402100.2",
     "SkillDesc": "MonsterManual.1402100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1500100": {
     "Id": 1500100,
     "Icon": "Icon/Monster/monsterhead_15001ZhongYeZaBing_Com_L",
     "Name": "MonsterManual.1500100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1500100.2",
     "SkillDesc": "MonsterManual.1500100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1501100": {
     "Id": 1501100,
     "Icon": "Icon/Monster/monsterhead_15011ZhongZhuangZhongYe_Com_L",
     "Name": "MonsterManual.1501100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1501100.2",
     "SkillDesc": "MonsterManual.1501100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1551056": {
     "Id": 1551056,
@@ -2206,14 +1467,7 @@
     "EpicLv": 2,
     "HP": 2,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "1552041": {
     "Id": 1552041,
@@ -2230,14 +1484,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1552051": {
     "Id": 1552051,
@@ -2254,14 +1501,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1600141": {
     "Id": 1600141,
@@ -2278,14 +1518,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1601141": {
     "Id": 1601141,
@@ -2302,14 +1535,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1651046": {
     "Id": 1651046,
@@ -2326,14 +1552,7 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1751026": {
     "Id": 1751026,
@@ -2350,334 +1569,183 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "3000100": {
     "Id": 3000100,
     "Icon": "Icon/Monster/monsterhead_30001YongJinHuiFeng_Com_L",
     "Name": "MonsterManual.3000100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3000100.2",
     "SkillDesc": "MonsterManual.3000100.3",
     "EpicLv": 5,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3001100": {
     "Id": 3001100,
     "Icon": "Icon/Monster/monsterhead_30011YongJinLvRen_Com_L",
     "Name": "MonsterManual.3001100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3001100.2",
     "SkillDesc": "MonsterManual.3001100.3",
     "EpicLv": 5,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3002100": {
     "Id": 3002100,
     "Icon": "Icon/Monster/monsterhead_30021YongJinJingYing_Com_L",
     "Name": "MonsterManual.3002100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3002100.2",
     "SkillDesc": "MonsterManual.3002100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 3,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "3010100": {
     "Id": 3010100,
     "Icon": "Icon/Monster/monsterhead_30101YongYuanHuiFeng_Com_L",
     "Name": "MonsterManual.3010100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3010100.2",
     "SkillDesc": "MonsterManual.3010100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3011100": {
     "Id": 3011100,
     "Icon": "Icon/Monster/monsterhead_30111YongYuanLvRen_Com_L",
     "Name": "MonsterManual.3011100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3011100.2",
     "SkillDesc": "MonsterManual.3011100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3012100": {
     "Id": 3012100,
     "Icon": "Icon/Monster/monsterhead_30121YongYuanJingYing_Com_L",
     "Name": "MonsterManual.3012100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3012100.2",
     "SkillDesc": "MonsterManual.3012100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3020100": {
     "Id": 3020100,
     "Icon": "Icon/Monster/monsterhead_30201ShengDanJianDun_Com_L",
     "Name": "MonsterManual.3020100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3020100.2",
     "SkillDesc": "MonsterManual.3020100.3",
     "EpicLv": 5,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3021100": {
     "Id": 3021100,
     "Icon": "Icon/Monster/monsterhead_30211ShengDanXiaoFa_Com_L",
     "Name": "MonsterManual.3021100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3021100.2",
     "SkillDesc": "MonsterManual.3021100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3022100": {
     "Id": 3022100,
     "Icon": "Icon/Monster/monsterhead_30221ShengDanTouShou_Com_L",
     "Name": "MonsterManual.3022100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3022100.2",
     "SkillDesc": "MonsterManual.3022100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3023100": {
     "Id": 3023100,
     "Icon": "Icon/Monster/monsterhead_30231ShengDanXiaoGuanzi_Com_L",
     "Name": "MonsterManual.3023100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3023100.2",
     "SkillDesc": "MonsterManual.3023100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3024100": {
     "Id": 3024100,
     "Icon": "Icon/Monster/monsterhead_30241ShengDanPangPang_Com_L",
     "Name": "MonsterManual.3024100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3024100.2",
     "SkillDesc": "MonsterManual.3024100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3025100": {
     "Id": 3025100,
     "Icon": "Icon/Monster/monsterhead_30251ShengDanZhongGuanZi_Com_L",
     "Name": "MonsterManual.3025100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3025100.2",
     "SkillDesc": "MonsterManual.3025100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 3,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "3026100": {
     "Id": 3026100,
     "Icon": "Icon/Monster/monsterhead_30261ShengDanFengLing_Com_L",
     "Name": "MonsterManual.3026100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3026100.2",
     "SkillDesc": "MonsterManual.3026100.3",
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "3027100": {
     "Id": 3027100,
     "Icon": "Icon/Monster/monsterhead_30271ShengDanQieChe_Com_L",
     "Name": "MonsterManual.3027100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3027100.2",
     "SkillDesc": "MonsterManual.3027100.3",
     "EpicLv": 3,
     "HP": 1,
     "ATK": 3,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "3028105": {
     "Id": 3028105,
     "Icon": "Icon/Monster/monsterhead_30281ShengDanTaLou_Com_L",
     "Name": "MonsterManual.3028105.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3028105.2",
     "SkillDesc": "MonsterManual.3028105.3",
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5000100": {
     "Id": 5000100,
     "Icon": "Icon/Monster/monsterhead_50001DaShou_Com_L",
     "Name": "MonsterManual.5000100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5000100.2",
     "SkillDesc": "MonsterManual.5000100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5000111": {
     "Id": 5000111,
@@ -2694,14 +1762,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5000121": {
     "Id": 5000121,
@@ -2718,14 +1779,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5000131": {
     "Id": 5000131,
@@ -2742,14 +1796,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5000141": {
     "Id": 5000141,
@@ -2766,14 +1813,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5000151": {
     "Id": 5000151,
@@ -2790,14 +1830,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5000161": {
     "Id": 5000161,
@@ -2814,34 +1847,18 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5001105": {
     "Id": 5001105,
     "Icon": "Icon/Monster/monsterhead_50011XingXing_Com_L",
     "Name": "MonsterManual.5001105.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5001105.2",
     "SkillDesc": "MonsterManual.5001105.3",
     "EpicLv": 3,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5001126": {
     "Id": 5001126,
@@ -2858,14 +1875,7 @@
     "EpicLv": 3,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5001136": {
     "Id": 5001136,
@@ -2882,14 +1892,7 @@
     "EpicLv": 3,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5001166": {
     "Id": 5001166,
@@ -2906,14 +1909,7 @@
     "EpicLv": 3,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5001116": {
     "Id": 5001116,
@@ -2930,14 +1926,7 @@
     "EpicLv": 3,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5001146": {
     "Id": 5001146,
@@ -2954,14 +1943,7 @@
     "EpicLv": 3,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5001156": {
     "Id": 5001156,
@@ -2978,34 +1960,18 @@
     "EpicLv": 3,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5002000": {
     "Id": 5002000,
     "Icon": "Icon/Monster/monsterhead_50020ShaYuFaShi_Com_L",
     "Name": "MonsterManual.5002000.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5002000.2",
     "SkillDesc": "MonsterManual.5002000.3",
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5002011": {
     "Id": 5002011,
@@ -3022,14 +1988,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5002021": {
     "Id": 5002021,
@@ -3046,14 +2005,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5002031": {
     "Id": 5002031,
@@ -3070,14 +2022,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5002041": {
     "Id": 5002041,
@@ -3094,14 +2039,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5002051": {
     "Id": 5002051,
@@ -3118,14 +2056,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5002061": {
     "Id": 5002061,
@@ -3142,34 +2073,18 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5002100": {
     "Id": 5002100,
     "Icon": "Icon/Monster/monsterhead_50021JianDun_Com_L",
     "Name": "MonsterManual.5002100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5002100.2",
     "SkillDesc": "MonsterManual.5002100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5002111": {
     "Id": 5002111,
@@ -3186,14 +2101,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5002121": {
     "Id": 5002121,
@@ -3210,14 +2118,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5002131": {
     "Id": 5002131,
@@ -3234,14 +2135,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5002141": {
     "Id": 5002141,
@@ -3258,14 +2152,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5002151": {
     "Id": 5002151,
@@ -3282,14 +2169,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5002161": {
     "Id": 5002161,
@@ -3306,34 +2186,18 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5003100": {
     "Id": 5003100,
     "Icon": "Icon/Monster/monsterhead_50031ShuangJian_Com_L",
     "Name": "MonsterManual.5003100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5003100.2",
     "SkillDesc": "MonsterManual.5003100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5003111": {
     "Id": 5003111,
@@ -3350,14 +2214,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5003121": {
     "Id": 5003121,
@@ -3374,14 +2231,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5003131": {
     "Id": 5003131,
@@ -3398,14 +2248,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5003141": {
     "Id": 5003141,
@@ -3422,14 +2265,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5003151": {
     "Id": 5003151,
@@ -3446,14 +2282,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5003161": {
     "Id": 5003161,
@@ -3470,34 +2299,18 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5004100": {
     "Id": 5004100,
     "Icon": "Icon/Monster/monsterhead_50041XiaoFa_Com_L",
     "Name": "MonsterManual.5004100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5004100.2",
     "SkillDesc": "MonsterManual.5004100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5004111": {
     "Id": 5004111,
@@ -3514,14 +2327,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5004121": {
     "Id": 5004121,
@@ -3538,14 +2344,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5004131": {
     "Id": 5004131,
@@ -3562,14 +2361,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5004141": {
     "Id": 5004141,
@@ -3586,14 +2378,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5004151": {
     "Id": 5004151,
@@ -3610,14 +2395,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5004161": {
     "Id": 5004161,
@@ -3634,34 +2412,18 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5005100": {
     "Id": 5005100,
     "Icon": "Icon/Monster/monsterhead_50051DanZhuTouShou_Com_L",
     "Name": "MonsterManual.5005100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5005100.2",
     "SkillDesc": "MonsterManual.5005100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5005111": {
     "Id": 5005111,
@@ -3678,14 +2440,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5005121": {
     "Id": 5005121,
@@ -3702,14 +2457,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5005131": {
     "Id": 5005131,
@@ -3726,14 +2474,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5005141": {
     "Id": 5005141,
@@ -3750,14 +2491,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5005151": {
     "Id": 5005151,
@@ -3774,14 +2508,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5005161": {
     "Id": 5005161,
@@ -3798,34 +2525,18 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5006100": {
     "Id": 5006100,
     "Icon": "Icon/Monster/monsterhead_50061XiaoShiLaiMu_Com_L",
     "Name": "MonsterManual.5006100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5006100.2",
     "SkillDesc": "MonsterManual.5006100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5006111": {
     "Id": 5006111,
@@ -3842,14 +2553,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5006121": {
     "Id": 5006121,
@@ -3866,14 +2570,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5006131": {
     "Id": 5006131,
@@ -3890,14 +2587,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5006141": {
     "Id": 5006141,
@@ -3914,14 +2604,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5006151": {
     "Id": 5006151,
@@ -3938,14 +2621,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5006161": {
     "Id": 5006161,
@@ -3962,34 +2638,18 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5007100": {
     "Id": 5007100,
     "Icon": "Icon/Monster/monsterhead_50071ZhongShiLaiMu_Com_L",
     "Name": "MonsterManual.5007100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5007100.2",
     "SkillDesc": "MonsterManual.5007100.3",
     "EpicLv": 5,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5007111": {
     "Id": 5007111,
@@ -4006,14 +2666,7 @@
     "EpicLv": 5,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5007121": {
     "Id": 5007121,
@@ -4030,14 +2683,7 @@
     "EpicLv": 5,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5007131": {
     "Id": 5007131,
@@ -4054,14 +2700,7 @@
     "EpicLv": 5,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5007141": {
     "Id": 5007141,
@@ -4078,14 +2717,7 @@
     "EpicLv": 5,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5007151": {
     "Id": 5007151,
@@ -4102,14 +2734,7 @@
     "EpicLv": 5,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5007161": {
     "Id": 5007161,
@@ -4126,14 +2751,7 @@
     "EpicLv": 5,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5008126": {
     "Id": 5008126,
@@ -4150,34 +2768,18 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5009100": {
     "Id": 5009100,
     "Icon": "Icon/Monster/monsterhead_50091GuanZi_Com_L",
     "Name": "MonsterManual.5009100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5009100.2",
     "SkillDesc": "MonsterManual.5009100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5009111": {
     "Id": 5009111,
@@ -4194,14 +2796,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5009121": {
     "Id": 5009121,
@@ -4218,14 +2813,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5009131": {
     "Id": 5009131,
@@ -4242,14 +2830,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5009141": {
     "Id": 5009141,
@@ -4266,14 +2847,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5009151": {
     "Id": 5009151,
@@ -4290,14 +2864,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5009161": {
     "Id": 5009161,
@@ -4314,34 +2881,18 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5010100": {
     "Id": 5010100,
     "Icon": "Icon/Monster/monsterhead_50101YinYing_Com_L",
     "Name": "MonsterManual.5010100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5010100.2",
     "SkillDesc": "MonsterManual.5010100.3",
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5010111": {
     "Id": 5010111,
@@ -4358,14 +2909,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5010121": {
     "Id": 5010121,
@@ -4382,14 +2926,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5010131": {
     "Id": 5010131,
@@ -4406,14 +2943,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5010141": {
     "Id": 5010141,
@@ -4430,14 +2960,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5010151": {
     "Id": 5010151,
@@ -4454,14 +2977,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5010161": {
     "Id": 5010161,
@@ -4478,34 +2994,18 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5011100": {
     "Id": 5011100,
     "Icon": "Icon/Monster/monsterhead_50111BuffJingLing_Com_L",
     "Name": "MonsterManual.5011100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5011100.2",
     "SkillDesc": "MonsterManual.5011100.3",
     "EpicLv": 4,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5011111": {
     "Id": 5011111,
@@ -4522,14 +3022,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5011121": {
     "Id": 5011121,
@@ -4546,14 +3039,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5011131": {
     "Id": 5011131,
@@ -4570,14 +3056,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5011141": {
     "Id": 5011141,
@@ -4594,14 +3073,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5011151": {
     "Id": 5011151,
@@ -4618,14 +3090,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5011161": {
     "Id": 5011161,
@@ -4642,34 +3107,18 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5012100": {
     "Id": 5012100,
     "Icon": "Icon/Monster/monsterhead_50121DunWei_Com_L",
     "Name": "MonsterManual.5012100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5012100.2",
     "SkillDesc": "MonsterManual.5012100.3",
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5012111": {
     "Id": 5012111,
@@ -4686,14 +3135,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5012121": {
     "Id": 5012121,
@@ -4710,14 +3152,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5012131": {
     "Id": 5012131,
@@ -4734,14 +3169,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5012141": {
     "Id": 5012141,
@@ -4758,14 +3186,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5012151": {
     "Id": 5012151,
@@ -4782,14 +3203,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5012161": {
     "Id": 5012161,
@@ -4806,34 +3220,18 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5013100": {
     "Id": 5013100,
     "Icon": "Icon/Monster/monsterhead_50131ShiLaiMuDui_Com_L",
     "Name": "MonsterManual.5013100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5013100.2",
     "SkillDesc": "MonsterManual.5013100.3",
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5013111": {
     "Id": 5013111,
@@ -4850,14 +3248,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5013121": {
     "Id": 5013121,
@@ -4874,14 +3265,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5013131": {
     "Id": 5013131,
@@ -4898,14 +3282,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5013141": {
     "Id": 5013141,
@@ -4922,14 +3299,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5013151": {
     "Id": 5013151,
@@ -4946,14 +3316,7 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5013161": {
     "Id": 5013161,
@@ -4970,34 +3333,18 @@
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5014100": {
     "Id": 5014100,
     "Icon": "Icon/Monster/monsterhead_50141TaLu_Com_L",
     "Name": "MonsterManual.5014100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5014100.2",
     "SkillDesc": "MonsterManual.5014100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5014111": {
     "Id": 5014111,
@@ -5014,14 +3361,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5014121": {
     "Id": 5014121,
@@ -5038,14 +3378,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5014131": {
     "Id": 5014131,
@@ -5062,14 +3395,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5014141": {
     "Id": 5014141,
@@ -5086,14 +3412,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5014151": {
     "Id": 5014151,
@@ -5110,14 +3429,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5014161": {
     "Id": 5014161,
@@ -5134,34 +3446,18 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5015100": {
     "Id": 5015100,
     "Icon": "Icon/Monster/monsterhead_50151PoShuiGuai_Com_L",
     "Name": "MonsterManual.5015100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5015100.2",
     "SkillDesc": "MonsterManual.5015100.3",
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5015111": {
     "Id": 5015111,
@@ -5178,14 +3474,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5015121": {
     "Id": 5015121,
@@ -5202,14 +3491,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5015131": {
     "Id": 5015131,
@@ -5226,14 +3508,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5015141": {
     "Id": 5015141,
@@ -5250,14 +3525,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5015151": {
     "Id": 5015151,
@@ -5274,14 +3542,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5015161": {
     "Id": 5015161,
@@ -5298,34 +3559,18 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5016100": {
     "Id": 5016100,
     "Icon": "Icon/Monster/monsterhead_50161BianSuCiKe_Com_L",
     "Name": "MonsterManual.5016100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5016100.2",
     "SkillDesc": "MonsterManual.5016100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5016111": {
     "Id": 5016111,
@@ -5342,14 +3587,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5016121": {
     "Id": 5016121,
@@ -5366,14 +3604,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5016131": {
     "Id": 5016131,
@@ -5390,14 +3621,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5016141": {
     "Id": 5016141,
@@ -5414,14 +3638,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5016151": {
     "Id": 5016151,
@@ -5438,14 +3655,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5016161": {
     "Id": 5016161,
@@ -5462,14 +3672,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5016166": {
     "Id": 5016166,
@@ -5486,14 +3689,7 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5017126": {
     "Id": 5017126,
@@ -5510,34 +3706,18 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5018105": {
     "Id": 5018105,
     "Icon": "Icon/Monster/monsterhead_50181ShunYiGuai_Com_L",
     "Name": "MonsterManual.5018105.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5018105.2",
     "SkillDesc": "MonsterManual.5018105.3",
     "EpicLv": 3,
     "HP": 2,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5018116": {
     "Id": 5018116,
@@ -5554,14 +3734,7 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5018136": {
     "Id": 5018136,
@@ -5578,14 +3751,7 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5018126": {
     "Id": 5018126,
@@ -5602,14 +3768,7 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5018146": {
     "Id": 5018146,
@@ -5626,14 +3785,7 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5018156": {
     "Id": 5018156,
@@ -5650,14 +3802,7 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5018166": {
     "Id": 5018166,
@@ -5674,34 +3819,18 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5019100": {
     "Id": 5019100,
     "Icon": "Icon/Monster/monsterhead_50191ZhongGuanZi_Com_L",
     "Name": "MonsterManual.5019100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5019100.2",
     "SkillDesc": "MonsterManual.5019100.3",
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5019111": {
     "Id": 5019111,
@@ -5718,14 +3847,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5019121": {
     "Id": 5019121,
@@ -5742,14 +3864,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5019131": {
     "Id": 5019131,
@@ -5766,14 +3881,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5019141": {
     "Id": 5019141,
@@ -5790,14 +3898,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5019151": {
     "Id": 5019151,
@@ -5814,14 +3915,7 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5019161": {
     "Id": 5019161,
@@ -5838,34 +3932,18 @@
     "EpicLv": 5,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5020100": {
     "Id": 5020100,
     "Icon": "Icon/Monster/monsterhead_50201WeiBing_Com_L",
     "Name": "MonsterManual.5020100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5020100.2",
     "SkillDesc": "MonsterManual.5020100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5020111": {
     "Id": 5020111,
@@ -5882,14 +3960,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5020121": {
     "Id": 5020121,
@@ -5906,14 +3977,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5020131": {
     "Id": 5020131,
@@ -5930,14 +3994,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5020141": {
     "Id": 5020141,
@@ -5954,14 +4011,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5020151": {
     "Id": 5020151,
@@ -5978,14 +4028,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5020161": {
     "Id": 5020161,
@@ -6002,34 +4045,18 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5021100": {
     "Id": 5021100,
     "Icon": "Icon/Monster/monsterhead_50211TanZhaoDeng_Com_L",
     "Name": "MonsterManual.5021100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5021100.2",
     "SkillDesc": "MonsterManual.5021100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5021111": {
     "Id": 5021111,
@@ -6046,14 +4073,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5021131": {
     "Id": 5021131,
@@ -6070,14 +4090,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5021121": {
     "Id": 5021121,
@@ -6094,14 +4107,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5021141": {
     "Id": 5021141,
@@ -6118,14 +4124,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5021151": {
     "Id": 5021151,
@@ -6142,14 +4141,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5021161": {
     "Id": 5021161,
@@ -6166,34 +4158,18 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5022100": {
     "Id": 5022100,
     "Icon": "Icon/Monster/monsterhead_50221DengPao_Com_L",
     "Name": "MonsterManual.5022100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5022100.2",
     "SkillDesc": "MonsterManual.5022100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5022111": {
     "Id": 5022111,
@@ -6210,14 +4186,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5022131": {
     "Id": 5022131,
@@ -6234,14 +4203,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5022121": {
     "Id": 5022121,
@@ -6258,14 +4220,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5022141": {
     "Id": 5022141,
@@ -6282,14 +4237,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5022151": {
     "Id": 5022151,
@@ -6306,14 +4254,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5022161": {
     "Id": 5022161,
@@ -6330,34 +4271,18 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5023100": {
     "Id": 5023100,
     "Icon": "Icon/Monster/monsterhead_50231JiXieBi_Com_L",
     "Name": "MonsterManual.5023100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5023100.2",
     "SkillDesc": "MonsterManual.5023100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5023111": {
     "Id": 5023111,
@@ -6374,14 +4299,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5023131": {
     "Id": 5023131,
@@ -6398,14 +4316,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5023121": {
     "Id": 5023121,
@@ -6422,14 +4333,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5023141": {
     "Id": 5023141,
@@ -6446,14 +4350,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5023151": {
     "Id": 5023151,
@@ -6470,14 +4367,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5023161": {
     "Id": 5023161,
@@ -6494,34 +4384,18 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5024100": {
     "Id": 5024100,
     "Icon": "Icon/Monster/monsterhead_50241ShiZiDao_Com_L",
     "Name": "MonsterManual.5024100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5024100.2",
     "SkillDesc": "MonsterManual.5024100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5024111": {
     "Id": 5024111,
@@ -6538,14 +4412,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5024131": {
     "Id": 5024131,
@@ -6562,14 +4429,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5024121": {
     "Id": 5024121,
@@ -6586,14 +4446,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5024141": {
     "Id": 5024141,
@@ -6610,14 +4463,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5024151": {
     "Id": 5024151,
@@ -6634,14 +4480,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5024161": {
     "Id": 5024161,
@@ -6658,34 +4497,18 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5025100": {
     "Id": 5025100,
     "Icon": "Icon/Monster/monsterhead_50251ShanDianLieQuan_Com_L",
     "Name": "MonsterManual.5025100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5025100.2",
     "SkillDesc": "MonsterManual.5025100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5025111": {
     "Id": 5025111,
@@ -6702,14 +4525,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5025131": {
     "Id": 5025131,
@@ -6726,14 +4542,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5025121": {
     "Id": 5025121,
@@ -6750,14 +4559,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5025141": {
     "Id": 5025141,
@@ -6774,14 +4576,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5025151": {
     "Id": 5025151,
@@ -6798,14 +4593,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5025156": {
     "Id": 5025156,
@@ -6822,14 +4610,7 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5025161": {
     "Id": 5025161,
@@ -6846,34 +4627,18 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5026100": {
     "Id": 5026100,
     "Icon": "Icon/Monster/monsterhead_50261FengLing_Com_L",
     "Name": "MonsterManual.5026100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5026100.2",
     "SkillDesc": "MonsterManual.5026100.3",
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5026111": {
     "Id": 5026111,
@@ -6890,14 +4655,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5026131": {
     "Id": 5026131,
@@ -6914,14 +4672,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5026121": {
     "Id": 5026121,
@@ -6938,14 +4689,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5026141": {
     "Id": 5026141,
@@ -6962,14 +4706,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5026151": {
     "Id": 5026151,
@@ -6986,14 +4723,7 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5026161": {
     "Id": 5026161,
@@ -7010,34 +4740,18 @@
     "EpicLv": 4,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5027100": {
     "Id": 5027100,
     "Icon": "Icon/Monster/monsterhead_50271FengMeiGuai_Com_L",
     "Name": "MonsterManual.5027100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5027100.2",
     "SkillDesc": "MonsterManual.5027100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5027111": {
     "Id": 5027111,
@@ -7054,14 +4768,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5027131": {
     "Id": 5027131,
@@ -7078,14 +4785,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5027121": {
     "Id": 5027121,
@@ -7102,14 +4802,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5027141": {
     "Id": 5027141,
@@ -7126,14 +4819,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5027146": {
     "Id": 5027146,
@@ -7150,14 +4836,7 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5027151": {
     "Id": 5027151,
@@ -7174,14 +4853,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5027161": {
     "Id": 5027161,
@@ -7198,34 +4870,18 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5028100": {
     "Id": 5028100,
     "Icon": "Icon/Monster/monsterhead_50281LeiSheZhu_Com_L",
     "Name": "MonsterManual.5028100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5028100.2",
     "SkillDesc": "MonsterManual.5028100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5028111": {
     "Id": 5028111,
@@ -7242,14 +4898,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5028131": {
     "Id": 5028131,
@@ -7266,14 +4915,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5028121": {
     "Id": 5028121,
@@ -7290,14 +4932,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5028141": {
     "Id": 5028141,
@@ -7314,14 +4949,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5028151": {
     "Id": 5028151,
@@ -7338,14 +4966,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5028156": {
     "Id": 5028156,
@@ -7362,14 +4983,7 @@
     "EpicLv": 3,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5028161": {
     "Id": 5028161,
@@ -7386,14 +5000,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5030146": {
     "Id": 5030146,
@@ -7410,14 +5017,7 @@
     "EpicLv": 3,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5030166": {
     "Id": 5030166,
@@ -7434,14 +5034,7 @@
     "EpicLv": 3,
     "HP": 3,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5031116": {
     "Id": 5031116,
@@ -7458,14 +5051,7 @@
     "EpicLv": 3,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5050166": {
     "Id": 5050166,
@@ -7482,14 +5068,7 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5051126": {
     "Id": 5051126,
@@ -7506,14 +5085,7 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5051136": {
     "Id": 5051136,
@@ -7530,14 +5102,7 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5052166": {
     "Id": 5052166,
@@ -7554,14 +5119,7 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 2,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5053116": {
     "Id": 5053116,
@@ -7578,14 +5136,7 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5054136": {
     "Id": 5054136,
@@ -7602,34 +5153,18 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5055100": {
     "Id": 5055100,
     "Icon": "Icon/Monster/monsterhead_50551CanCha_Com_L",
     "Name": "MonsterManual.5055100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5055100.2",
     "SkillDesc": "MonsterManual.5055100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5055111": {
     "Id": 5055111,
@@ -7646,14 +5181,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5055121": {
     "Id": 5055121,
@@ -7670,14 +5198,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5055131": {
     "Id": 5055131,
@@ -7694,14 +5215,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5055136": {
     "Id": 5055136,
@@ -7718,14 +5232,7 @@
     "EpicLv": 2,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5055141": {
     "Id": 5055141,
@@ -7742,14 +5249,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5055151": {
     "Id": 5055151,
@@ -7766,14 +5266,7 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5055161": {
     "Id": 5055161,
@@ -7790,34 +5283,18 @@
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5056100": {
     "Id": 5056100,
     "Icon": "Icon/Monster/monsterhead_50561CanDao_Com_L",
     "Name": "MonsterManual.5056100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5056100.2",
     "SkillDesc": "MonsterManual.5056100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5056111": {
     "Id": 5056111,
@@ -7834,14 +5311,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5056121": {
     "Id": 5056121,
@@ -7858,14 +5328,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5056131": {
     "Id": 5056131,
@@ -7882,14 +5345,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5056141": {
     "Id": 5056141,
@@ -7906,14 +5362,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5056151": {
     "Id": 5056151,
@@ -7930,14 +5379,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5056161": {
     "Id": 5056161,
@@ -7954,14 +5396,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5057146": {
     "Id": 5057146,
@@ -7978,14 +5413,7 @@
     "EpicLv": 2,
     "HP": 2,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5057241": {
     "Id": 5057241,
@@ -8002,14 +5430,7 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5058156": {
     "Id": 5058156,
@@ -8026,14 +5447,7 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "5060146": {
     "Id": 5060146,
@@ -8050,54 +5464,29 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "5080100": {
     "Id": 5080100,
     "Icon": "Icon/Monster/monsterhead_50801QiEBaoXiang_Com_L",
     "Name": "MonsterManual.5080100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5080100.2",
     "SkillDesc": "MonsterManual.5080100.3",
     "EpicLv": 4,
     "HP": 1,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "7000105": {
     "Id": 7000105,
     "Icon": "Icon/Monster/monsterhead_70001JuYuanMeiYing_Dark_L",
     "Name": "MonsterManual.7000105.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.7000105.2",
     "SkillDesc": "MonsterManual.7000105.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "7002246": {
     "Id": 7002246,
@@ -8114,20 +5503,12 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "9912101": {
     "Id": 9912101,
     "Icon": "Icon/Monster/monsterhead_00000Unknown_Com_L",
     "Name": "MonsterManual.9912101.1",
-    "EET": [],
     "WeakEET": [
       3,
       1,
@@ -8141,154 +5522,84 @@
     "EpicLv": 5,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5022170": {
     "Id": 5022170,
     "Icon": "Icon/Monster/monsterhead_30631DengLong_Com_L",
     "Name": "MonsterManual.5022170.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5022170.2",
     "SkillDesc": "MonsterManual.5022170.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1400170": {
     "Id": 1400170,
     "Icon": "Icon/Monster/monsterhead_30611JinLvRen_Com_L",
     "Name": "MonsterManual.1400170.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1400170.2",
     "SkillDesc": "MonsterManual.1400170.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1401170": {
     "Id": 1401170,
     "Icon": "Icon/Monster/monsterhead_30621YuanLvRen_Com_L",
     "Name": "MonsterManual.1401170.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1401170.2",
     "SkillDesc": "MonsterManual.1401170.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5025170": {
     "Id": 5025170,
     "Icon": "Icon/Monster/monsterhead_30641NianShou_Com_L",
     "Name": "MonsterManual.5025170.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5025170.2",
     "SkillDesc": "MonsterManual.5025170.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "5025175": {
     "Id": 5025175,
     "Icon": "Icon/Monster/monsterhead_30641NianShou_Com_L",
     "Name": "MonsterManual.5025175.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.5025175.2",
     "SkillDesc": "MonsterManual.5025175.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "7200105": {
     "Id": 7200105,
     "Icon": "Icon/Monster/monsterhead_72001ShuangZiQiHong_Com_L",
     "Name": "MonsterManual.7200105.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.7200105.2",
     "SkillDesc": "MonsterManual.7200105.3",
     "EpicLv": 2,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "7200205": {
     "Id": 7200205,
     "Icon": "Icon/Monster/monsterhead_72002ShuangZiQiLan_Com_L",
     "Name": "MonsterManual.7200205.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.7200205.2",
     "SkillDesc": "MonsterManual.7200205.3",
     "EpicLv": 2,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "7003156": {
     "Id": 7003156,
@@ -8305,14 +5616,7 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "7002136": {
     "Id": 7002136,
@@ -8329,333 +5633,362 @@
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "3093105": {
     "Id": 3093105,
     "Icon": "Icon/Monster/monsterhead_30931HaSaNa_Earth_L",
     "Name": "MonsterManual.3093105.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3093105.2",
     "SkillDesc": "MonsterManual.3093105.3",
     "EpicLv": 2,
     "HP": 1,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1700100": {
     "Id": 1700100,
     "Icon": "Icon/Monster/monsterhead_17001ChangFuWeiBing_Com_L",
     "Name": "MonsterManual.1700100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1700100.2",
     "SkillDesc": "MonsterManual.1700100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1701100": {
     "Id": 1701100,
     "Icon": "Icon/Monster/monsterhead_17011QingNuWeiBing_Com_L",
     "Name": "MonsterManual.1701100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1701100.2",
     "SkillDesc": "MonsterManual.1701100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1702100": {
     "Id": 1702100,
     "Icon": "Icon/Monster/monsterhead_17021ChangQiangQishi_Com_L",
     "Name": "MonsterManual.1702100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1702100.2",
     "SkillDesc": "MonsterManual.1702100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 3,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "1703100": {
     "Id": 1703100,
     "Icon": "Icon/Monster/monsterhead_17031ZhongNuWeiBing_Com_L",
     "Name": "MonsterManual.1703100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1703100.2",
     "SkillDesc": "MonsterManual.1703100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3090100": {
     "Id": 3090100,
     "Icon": "Icon/Monster/monsterhead_30901ChiHou_Com_L",
     "Name": "MonsterManual.3090100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3090100.2",
     "SkillDesc": "MonsterManual.3090100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3091100": {
     "Id": 3091100,
     "Icon": "Icon/Monster/monsterhead_30911NuShou_Com_L",
     "Name": "MonsterManual.3091100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3091100.2",
     "SkillDesc": "MonsterManual.3091100.3",
     "EpicLv": 5,
     "HP": 3,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3092100": {
     "Id": 3092100,
     "Icon": "Icon/Monster/monsterhead_30921JuJiShou_Com_L",
     "Name": "MonsterManual.3092100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3092100.2",
     "SkillDesc": "MonsterManual.3092100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3110100": {
     "Id": 3110100,
     "Icon": "Icon/Monster/monsterhead_31101GeLeiHuoEn_Com_L",
     "Name": "MonsterManual.3110100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3110100.2",
     "SkillDesc": "MonsterManual.3110100.3",
     "EpicLv": 3,
     "HP": 3,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "3130105": {
     "Id": 3130105,
     "Icon": "Icon/Monster/monsterhead_31301JiJuXie_Com_L",
     "Name": "MonsterManual.3130105.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3130105.2",
     "SkillDesc": "MonsterManual.3130105.3",
     "EpicLv": 2,
     "HP": 2,
     "ATK": 2,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "3130200": {
     "Id": 3130200,
     "Icon": "Icon/Monster/monsterhead_31302ZhangYuPaoTai_Com_L",
     "Name": "MonsterManual.3130200.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3130200.2",
-    "SkillDesc": "MonsterManual.3130200.3",
-    "EpicLv": 0,
-    "HP": 0,
-    "ATK": 0,
-    "DEF": 0,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "SkillDesc": "MonsterManual.3130200.3"
   },
   "1800100": {
     "Id": 1800100,
     "Icon": "Icon/Monster/monsterhead_18001LiMingShuangDao_Com_L",
     "Name": "MonsterManual.1800100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1800100.2",
     "SkillDesc": "MonsterManual.1800100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 2,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "1801100": {
     "Id": 1801100,
     "Icon": "Icon/Monster/monsterhead_18011LiMingFaShi_Com_L",
     "Name": "MonsterManual.1801100.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.1801100.2",
     "SkillDesc": "MonsterManual.1801100.3",
     "EpicLv": 4,
     "HP": 2,
     "ATK": 3,
-    "DEF": 2,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 2
   },
   "3141105": {
     "Id": 3141105,
     "Icon": "Icon/Monster/monsterhead_31411DaShilaimu_Chuan_Com_L",
     "Name": "MonsterManual.3141105.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.3141105.2",
     "SkillDesc": "MonsterManual.3141105.3",
     "EpicLv": 2,
     "HP": 2,
     "ATK": 3,
-    "DEF": 3,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 3
   },
   "7201105": {
     "Id": 7201105,
     "Icon": "Icon/Monster/monsterhead_72011MoShuShi_Nan_Com_L",
     "Name": "MonsterManual.7201105.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.7201105.2",
     "SkillDesc": "MonsterManual.7201105.3",
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
   },
   "7201205": {
     "Id": 7201205,
     "Icon": "Icon/Monster/monsterhead_72012MoShuShi_Nv_Com_L",
     "Name": "MonsterManual.7201205.1",
-    "EET": [],
-    "WeakEET": [],
     "Desc": "MonsterManual.7201205.2",
     "SkillDesc": "MonsterManual.7201205.3",
     "EpicLv": 2,
     "HP": 1,
     "ATK": 1,
-    "DEF": 1,
-    "TOUGHNESS": 0,
-    "AbilityTitle1": "",
-    "AbilityDesc1": "",
-    "AbilityTitle2": "",
-    "AbilityDesc2": "",
-    "AbilityTitle3": "",
-    "AbilityDesc3": ""
+    "DEF": 1
+  },
+  "7201300": {
+    "Id": 7201300,
+    "Icon": "Icon/Monster/monsterhead_72013RenOu_Xuhuan_Com_L",
+    "Name": "MonsterManual.7201300.1",
+    "Desc": "MonsterManual.7201300.2",
+    "SkillDesc": "MonsterManual.7201300.3",
+    "EpicLv": 4,
+    "HP": 2,
+    "ATK": 1,
+    "DEF": 2
+  },
+  "7201400": {
+    "Id": 7201400,
+    "Icon": "Icon/Monster/monsterhead_72014RenOu_Shiti_Com_L",
+    "Name": "MonsterManual.7201400.1",
+    "Desc": "MonsterManual.7201400.2",
+    "SkillDesc": "MonsterManual.7201400.3",
+    "EpicLv": 4,
+    "HP": 1,
+    "ATK": 3,
+    "DEF": 1
+  },
+  "7201500": {
+    "Id": 7201500,
+    "Icon": "Icon/Monster/monsterhead_72015RenOu_BiaoQaing_Com_L",
+    "Name": "MonsterManual.7201500.1",
+    "Desc": "MonsterManual.7201500.2",
+    "SkillDesc": "MonsterManual.7201500.3",
+    "EpicLv": 4,
+    "HP": 2,
+    "ATK": 1,
+    "DEF": 2
+  },
+  "7201505": {
+    "Id": 7201505,
+    "Icon": "Icon/Monster/monsterhead_72015RenOu_BiaoQaing_Com_L",
+    "Name": "MonsterManual.7201505.1",
+    "Desc": "MonsterManual.7201505.2",
+    "SkillDesc": "MonsterManual.7201505.3",
+    "EpicLv": 3,
+    "HP": 2,
+    "ATK": 1,
+    "DEF": 2
+  },
+  "7201600": {
+    "Id": 7201600,
+    "Icon": "Icon/Monster/monsterhead_72015RenOu_JuNu_Com_L",
+    "Name": "MonsterManual.7201600.1",
+    "Desc": "MonsterManual.7201600.2",
+    "SkillDesc": "MonsterManual.7201600.3",
+    "EpicLv": 4,
+    "HP": 2,
+    "ATK": 1,
+    "DEF": 2
+  },
+  "7201605": {
+    "Id": 7201605,
+    "Icon": "Icon/Monster/monsterhead_72015RenOu_JuNu_Com_L",
+    "Name": "MonsterManual.7201605.1",
+    "Desc": "MonsterManual.7201605.2",
+    "SkillDesc": "MonsterManual.7201605.3",
+    "EpicLv": 3,
+    "HP": 2,
+    "ATK": 1,
+    "DEF": 2
+  },
+  "7006166": {
+    "Id": 7006166,
+    "Icon": "Icon/Monster/monsterhead_70061WuYu_Dark_L",
+    "Name": "MonsterManual.7006166.1",
+    "EET": [
+      6
+    ],
+    "WeakEET": [
+      5
+    ],
+    "Desc": "MonsterManual.7006166.2",
+    "SkillDesc": "MonsterManual.7006166.3",
+    "EpicLv": 2,
+    "HP": 1,
+    "ATK": 1,
+    "DEF": 1
+  },
+  "7006261": {
+    "Id": 7006261,
+    "Icon": "Icon/Monster/monsterhead_70062BoomGhost_Dark_L",
+    "Name": "MonsterManual.7006261.1",
+    "EET": [
+      6
+    ],
+    "WeakEET": [
+      5
+    ],
+    "Desc": "MonsterManual.7006261.2",
+    "SkillDesc": "MonsterManual.7006261.3",
+    "EpicLv": 5,
+    "HP": 3,
+    "ATK": 3,
+    "DEF": 3
+  },
+  "7006361": {
+    "Id": 7006361,
+    "Icon": "Icon/Monster/monsterhead_70063BigHeadGhost_Dark_L",
+    "Name": "MonsterManual.7006361.1",
+    "EET": [
+      6
+    ],
+    "WeakEET": [
+      5
+    ],
+    "Desc": "MonsterManual.7006361.2",
+    "SkillDesc": "MonsterManual.7006361.3",
+    "EpicLv": 4,
+    "HP": 2,
+    "ATK": 2,
+    "DEF": 2
+  },
+  "7006461": {
+    "Id": 7006461,
+    "Icon": "Icon/Monster/monsterhead_70064MageGhost_Dark_L",
+    "Name": "MonsterManual.7006461.1",
+    "EET": [
+      6
+    ],
+    "WeakEET": [
+      5
+    ],
+    "Desc": "MonsterManual.7006461.2",
+    "SkillDesc": "MonsterManual.7006461.3",
+    "EpicLv": 4,
+    "HP": 3,
+    "ATK": 2,
+    "DEF": 3
+  },
+  "7006561": {
+    "Id": 7006561,
+    "Icon": "Icon/Monster/monsterhead_70065HorrorGhost_Dark_L",
+    "Name": "MonsterManual.7006561.1",
+    "EET": [
+      6
+    ],
+    "WeakEET": [
+      5
+    ],
+    "Desc": "MonsterManual.7006561.2",
+    "SkillDesc": "MonsterManual.7006561.3",
+    "EpicLv": 4,
+    "HP": 2,
+    "ATK": 1,
+    "DEF": 1
+  },
+  "9000100": {
+    "Id": 9000100,
+    "Icon": "Icon/Monster/monsterhead_90001SaoDiJiQiRen_Earth_L",
+    "Name": "MonsterManual.9000100.1",
+    "Desc": "MonsterManual.9000100.2",
+    "SkillDesc": "MonsterManual.9000100.3",
+    "EpicLv": 5,
+    "HP": 2,
+    "ATK": 3,
+    "DEF": 3
+  },
+  "9000200": {
+    "Id": 9000200,
+    "Icon": "Icon/Monster/monsterhead_90002WuRenJi_Wind_L",
+    "Name": "MonsterManual.9000200.1",
+    "Desc": "MonsterManual.9000200.2",
+    "SkillDesc": "MonsterManual.9000200.3",
+    "EpicLv": 5,
+    "HP": 3,
+    "ATK": 2,
+    "DEF": 3
+  },
+  "9001300": {
+    "Id": 9001300,
+    "Icon": "Icon/Monster/monsterhead_90013WuRenJi_Wind_L",
+    "Name": "MonsterManual.9001300.1",
+    "Desc": "MonsterManual.9001300.2",
+    "SkillDesc": "MonsterManual.9001300.3",
+    "EpicLv": 5,
+    "HP": 3,
+    "ATK": 2,
+    "DEF": 3
   }
 }

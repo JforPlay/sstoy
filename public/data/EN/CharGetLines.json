@@ -19,6 +19,7 @@
   "CharGetLines.11002.1": "We know each other well enough. No need for formalities.\nTell me why you want me, and maybe I'll go along.",
   "CharGetLines.11003.1": "Perhaps it's time to renegotiate our contract. Our partnership would benefit from it.",
   "CharGetLines.11004.1": "Now that you've chosen to stay by my side, there's no escaping me.",
+  "CharGetLines.11005.1": "Borrowed power demands a price.\nWhy are you so nervous? I'm no demon.",
   "CharGetLines.11101.1": "Nice to meet you, I'm Iris. Uh... If there's anything I can improve on, please don't hesitate to tell me.",
   "CharGetLines.11102.1": "I'm back. Here, take this. Please treat my part-time earnings as the guild's emergency fund.",
   "CharGetLines.11103.1": "My bag is heavier than most would assume—that's because you should never underestimate the weight of knowledge!",
@@ -30,6 +31,7 @@
   "CharGetLines.11203.1": "Let's keep traveling together forever!",
   "CharGetLines.11204.1": "Once Loxy's fixed, let's go see a Monolith... just the two of us.",
   "CharGetLines.11205.1": "Sun, sand, and sea—time to slip into your swimsuit!\u000bFeel the warm sun on your skin and the gentle kiss of the waves. Summer's calling, just don't forget your sunscreen!",
+  "CharGetLines.11207.1": "Your mission today is to slack off with me!\nGo put your pajamas on. I saved the spot right next to me just for you!",
   "CharGetLines.11301.1": "Nice to meet you. I'm Shimiao from the Baize Bureau. From now on, I'll handle all all communications regarding our cooperation with your guild. I look forward to working with you.",
   "CharGetLines.11302.1": "Boss! Been a bit, huh? I've got an urgent task for you—I'll fill you in on the way.",
   "CharGetLines.11303.1": "Water can take any shape it wants. Which means its potential is limitless!",
@@ -166,6 +168,7 @@
   "CharGetLines.15502.1": "Ah, hello again! The bond between us must be stronger than a ship's mooring rope! ♪",
   "CharGetLines.15503.1": "I'll show you the joy of surfing!",
   "CharGetLines.15504.1": "Ah, the night air, the moonlight sparkling on the waves... We'll never forget this moment, will we?",
+  "CharGetLines.15505.1": "The sea breeze smells of coral, and of you. When I close my eyes, I feel like I'm wrapped in a gentle embrace.",
   "CharGetLines.15601.1": "Yaawn... I'm Nazuna with Petal Bloom. I'm not great at working hard, but… I guess I can try a little as long as I'm with you, Boss.",
   "CharGetLines.15602.1": "Hello again, Boss.\nOh, no, no. Please don't worry about me.\nLet's both just take it easy.",
   "CharGetLines.15603.1": "Swish, swish, swish! Hoo, I feel a little stronger here.",
@@ -186,5 +189,9 @@
   "CharGetLines.16001.1": "I don't get to come to the beach with everyone much, so I hope we can make the most of it. Ah, but just so you know... If you do anything risky, you're getting a \"gentle warning\" from me!",
   "CharGetLines.16002.1": "Looks like this beach still needs me around a little longer. Well then, I'll happily keep you all company!",
   "CharGetLines.16003.1": "Alright, I'm done talking. Don't blame me when things get a little rough!",
-  "CharGetLines.16004.1": "It's about time we headed back... But...\nThe sunset is so beautiful. Let's stay a little longer."
+  "CharGetLines.16004.1": "It's about time we headed back... But...\nThe sunset is so beautiful. Let's stay a little longer.",
+  "CharGetLines.16201.1": "I am Alina, captain of the Night Watch. I have answered your call. I swear here and now that I will fight by your side to the very end and protect all that you hold dear.",
+  "CharGetLines.16202.1": "They say the first meeting is chance, and the second is destiny...If that's true, then perhaps this reunion was meant to be.",
+  "CharGetLines.16203.1": "No matter where fate may lead you, if anything stands in your way, I will become your sword and cut it down.",
+  "CharGetLines.16204.1": "What's wrong? Hurry and wash up, or you'll get cold."
 }

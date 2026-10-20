@@ -184,7 +184,7 @@
     "VoLoop2": 11.429,
     "VoName1": "DiscIP.212001.1",
     "VoName2": "DiscIP.212001.2",
-    "CharId": []
+    "CharId": null
   },
   "212002": {
     "VoFile": "outfit_2002",
@@ -203,7 +203,7 @@
     "VoLoop2": 13.241,
     "VoName1": "DiscIP.212002.1",
     "VoName2": "DiscIP.212002.2",
-    "CharId": []
+    "CharId": null
   },
   "212003": {
     "VoFile": "outfit_2003",
@@ -222,7 +222,7 @@
     "VoLoop2": 16.0,
     "VoName1": "DiscIP.212003.1",
     "VoName2": "DiscIP.212003.2",
-    "CharId": []
+    "CharId": null
   },
   "212005": {
     "VoFile": "outfit_2005",
@@ -283,7 +283,7 @@
     "VoLoop2": 12.8,
     "VoName1": "DiscIP.212007.1",
     "VoName2": "DiscIP.212007.2",
-    "CharId": []
+    "CharId": null
   },
   "212008": {
     "VoFile": "outfit_2008",
@@ -302,7 +302,7 @@
     "VoLoop2": 12.0,
     "VoName1": "DiscIP.212008.1",
     "VoName2": "DiscIP.212008.2",
-    "CharId": []
+    "CharId": null
   },
   "212009": {
     "VoFile": "outfit_2009",
@@ -321,7 +321,7 @@
     "VoLoop2": 10.345,
     "VoName1": "DiscIP.212009.1",
     "VoName2": "DiscIP.212009.2",
-    "CharId": []
+    "CharId": null
   },
   "212010": {
     "VoFile": "outfit_2010",
@@ -340,7 +340,7 @@
     "VoLoop2": 12.152,
     "VoName1": "DiscIP.212010.1",
     "VoName2": "DiscIP.212010.2",
-    "CharId": []
+    "CharId": null
   },
   "213001": {
     "VoFile": "outfit_3001",
@@ -359,7 +359,7 @@
     "VoLoop2": 15.61,
     "VoName1": "DiscIP.213001.1",
     "VoName2": "DiscIP.213001.2",
-    "CharId": []
+    "CharId": null
   },
   "213002": {
     "VoFile": "outfit_3002",
@@ -423,7 +423,7 @@
     "VoLoop2": 10.511,
     "VoName1": "DiscIP.213004.1",
     "VoName2": "DiscIP.213004.2",
-    "CharId": []
+    "CharId": null
   },
   "213005": {
     "VoFile": "outfit_3005",
@@ -486,7 +486,7 @@
     "VoLoop2": 9.643,
     "VoName1": "DiscIP.213007.1",
     "VoName2": "DiscIP.213007.2",
-    "CharId": []
+    "CharId": null
   },
   "213008": {
     "VoFile": "outfit_3008",
@@ -528,7 +528,7 @@
     "VoLoop2": 11.636,
     "VoName1": "DiscIP.213009.1",
     "VoName2": "DiscIP.213009.2",
-    "CharId": []
+    "CharId": null
   },
   "213010": {
     "VoFile": "outfit_3010",
@@ -697,7 +697,7 @@
     "VoLoop2": 12.0,
     "VoName1": "DiscIP.213017.1",
     "VoName2": "DiscIP.213017.2",
-    "CharId": []
+    "CharId": null
   },
   "213018": {
     "VoFile": "outfit_3018",
@@ -779,7 +779,7 @@
     "VoLoop2": 13.714,
     "VoName1": "DiscIP.213021.1",
     "VoName2": "DiscIP.213021.2",
-    "CharId": []
+    "CharId": null
   },
   "213022": {
     "VoFile": "outfit_3022",
@@ -798,7 +798,7 @@
     "VoLoop2": 8.574,
     "VoName1": "DiscIP.213022.1",
     "VoName2": "DiscIP.213022.2",
-    "CharId": []
+    "CharId": null
   },
   "213023": {
     "VoFile": "outfit_3023",
@@ -817,7 +817,7 @@
     "VoLoop2": 12.549,
     "VoName1": "DiscIP.213023.1",
     "VoName2": "DiscIP.213023.2",
-    "CharId": []
+    "CharId": null
   },
   "213024": {
     "VoFile": "outfit_3024",
@@ -836,7 +836,7 @@
     "VoLoop2": 10.549,
     "VoName1": "DiscIP.213024.1",
     "VoName2": "DiscIP.213024.2",
-    "CharId": []
+    "CharId": null
   },
   "213025": {
     "VoFile": "outfit_3025",
@@ -855,7 +855,7 @@
     "VoLoop2": 12.953,
     "VoName1": "DiscIP.213025.1",
     "VoName2": "DiscIP.213025.2",
-    "CharId": []
+    "CharId": null
   },
   "213026": {
     "VoFile": "outfit_3026",
@@ -874,7 +874,7 @@
     "VoLoop2": 17.615,
     "VoName1": "DiscIP.213026.1",
     "VoName2": "DiscIP.213026.2",
-    "CharId": []
+    "CharId": null
   },
   "214001": {
     "VoFile": "outfit_4001",
@@ -1087,7 +1087,7 @@
     "VoLoop2": 24.0,
     "VoName1": "DiscIP.214010.1",
     "VoName2": "DiscIP.214010.2",
-    "CharId": []
+    "CharId": null
   },
   "214011": {
     "VoFile": "outfit_4011",
@@ -1150,7 +1150,7 @@
     "VoLoop2": 17.777,
     "VoName1": "DiscIP.214013.1",
     "VoName2": "DiscIP.214013.2",
-    "CharId": []
+    "CharId": null
   },
   "214014": {
     "VoFile": "outfit_4014",
@@ -1360,7 +1360,7 @@
     "VoLoop2": 17.143,
     "VoName1": "DiscIP.214023.1",
     "VoName2": "DiscIP.214023.2",
-    "CharId": []
+    "CharId": null
   },
   "214024": {
     "VoFile": "outfit_4024",
@@ -1633,7 +1633,7 @@
     "VoLoop2": 21.0,
     "VoName1": "DiscIP.214039.1",
     "VoName2": "DiscIP.214039.2",
-    "CharId": []
+    "CharId": null
   },
   "214040": {
     "VoFile": "outfit_4040",
@@ -1730,7 +1730,7 @@
       429381028
     ],
     "VoLoop1": 120.0,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 15.199,
     "VoName1": "DiscIP.214042.1",
     "VoName2": "DiscIP.214042.2",
@@ -1749,7 +1749,7 @@
       145113165
     ],
     "VoLoop1": 115.161,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 15.341,
     "VoName1": "DiscIP.214044.1",
     "VoName2": "DiscIP.214044.2",
@@ -1768,7 +1768,7 @@
       98805947
     ],
     "VoLoop1": 92.0,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 21.333,
     "VoName1": "DiscIP.214046.1",
     "VoName2": "DiscIP.214046.2",
@@ -1787,7 +1787,7 @@
       146797500
     ],
     "VoLoop1": 72.0,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 12.0,
     "VoName1": "DiscIP.214047.1",
     "VoName2": "DiscIP.214047.2",
@@ -1806,7 +1806,7 @@
       456501856
     ],
     "VoLoop1": 103.58,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 14.22,
     "VoName1": "DiscIP.214045.1",
     "VoName2": "DiscIP.214045.2",
@@ -1825,7 +1825,7 @@
       617902391
     ],
     "VoLoop1": 150.0,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 16.0,
     "VoName1": "DiscIP.214050.1",
     "VoName2": "DiscIP.214050.2",
@@ -1844,11 +1844,11 @@
       466116899
     ],
     "VoLoop1": 218.0,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 218.0,
     "VoName1": "DiscIP.214049.1",
     "VoName2": "DiscIP.214049.2",
-    "CharId": []
+    "CharId": null
   },
   "214051": {
     "VoFile": "outfit_4051",
@@ -1861,7 +1861,7 @@
       351756400
     ],
     "VoLoop1": 131.53,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 12.307,
     "VoName1": "DiscIP.214051.1",
     "VoName2": "DiscIP.214051.2",
@@ -1880,7 +1880,7 @@
       369905954
     ],
     "VoLoop1": 97.5,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 10.808,
     "VoName1": "DiscIP.214052.1",
     "VoName2": "DiscIP.214052.2",
@@ -1899,7 +1899,7 @@
       203260693
     ],
     "VoLoop1": 105.0,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 12.51,
     "VoName1": "DiscIP.214054.1",
     "VoName2": "DiscIP.214054.2",
@@ -1918,7 +1918,7 @@
       950016106
     ],
     "VoLoop1": 96.5,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 15.02,
     "VoName1": "DiscIP.214053.1",
     "VoName2": "DiscIP.214053.2",
@@ -1933,7 +1933,7 @@
     "Wems": [],
     "WemsExist": [],
     "VoLoop1": 122.333,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 16.2,
     "VoName1": "DiscIP.214055.1",
     "VoName2": "DiscIP.214055.2",
@@ -1948,7 +1948,7 @@
     "Wems": [],
     "WemsExist": [],
     "VoLoop1": 152.0,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 15.0,
     "VoName1": "DiscIP.214056.1",
     "VoName2": "DiscIP.214056.2",
@@ -1967,7 +1967,7 @@
       958842044
     ],
     "VoLoop1": 103.4,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 14.9,
     "VoName1": "DiscIP.214057.1",
     "VoName2": "DiscIP.214057.2",
@@ -1986,7 +1986,7 @@
       507640646
     ],
     "VoLoop1": 137.0,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 10.666,
     "VoName1": "DiscIP.214058.1",
     "VoName2": "DiscIP.214058.2",
@@ -2005,7 +2005,7 @@
       330709447
     ],
     "VoLoop1": 105.4,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 16.7,
     "VoName1": "DiscIP.214059.1",
     "VoName2": "DiscIP.214059.2",
@@ -2024,7 +2024,7 @@
       258224048
     ],
     "VoLoop1": 107.1,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 14.769,
     "VoName1": "DiscIP.214060.1",
     "VoName2": "DiscIP.214060.2",
@@ -2043,7 +2043,7 @@
       360975576
     ],
     "VoLoop1": 88.9,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 25.2,
     "VoName1": "DiscIP.214061.1",
     "VoName2": "DiscIP.214061.2",
@@ -2062,12 +2062,50 @@
       100529979
     ],
     "VoLoop1": 103.2,
-    "VoBegin2": 0.0,
+    "VoBegin2": null,
     "VoLoop2": 9.6,
     "VoName1": "DiscIP.214062.1",
     "VoName2": "DiscIP.214062.2",
     "CharId": [
       112
+    ]
+  },
+  "214066": {
+    "VoFile": "outfit_4066",
+    "StateId": 667673875,
+    "StateIdInHeader": false,
+    "Wems": [
+      670838710
+    ],
+    "WemsExist": [
+      670838710
+    ],
+    "VoLoop1": 236.364,
+    "VoBegin2": null,
+    "VoLoop2": 236.364,
+    "VoName1": "DiscIP.214066.1",
+    "VoName2": "DiscIP.214066.2",
+    "CharId": [
+      162
+    ]
+  },
+  "214067": {
+    "VoFile": "outfit_4067",
+    "StateId": 667673874,
+    "StateIdInHeader": false,
+    "Wems": [
+      653772463
+    ],
+    "WemsExist": [
+      653772463
+    ],
+    "VoLoop1": 197.5,
+    "VoBegin2": null,
+    "VoLoop2": 14.333,
+    "VoName1": "DiscIP.214067.1",
+    "VoName2": "DiscIP.214067.2",
+    "CharId": [
+      162
     ]
   }
 }

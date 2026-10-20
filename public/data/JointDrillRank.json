@@ -35,9 +35,7 @@
     "AwardItemTid1": 2,
     "AwardItemNum1": 1800,
     "AwardItemTid2": 34,
-    "AwardItemNum2": 1800,
-    "AwardItemTid3": 0,
-    "AwardItemNum3": 0
+    "AwardItemNum2": 1800
   },
   "5": {
     "Id": 5,
@@ -45,9 +43,7 @@
     "AwardItemTid1": 2,
     "AwardItemNum1": 1500,
     "AwardItemTid2": 34,
-    "AwardItemNum2": 1600,
-    "AwardItemTid3": 0,
-    "AwardItemNum3": 0
+    "AwardItemNum2": 1600
   },
   "6": {
     "Id": 6,
@@ -55,8 +51,6 @@
     "AwardItemTid1": 2,
     "AwardItemNum1": 1200,
     "AwardItemTid2": 34,
-    "AwardItemNum2": 1400,
-    "AwardItemTid3": 0,
-    "AwardItemNum3": 0
+    "AwardItemNum2": 1400
   }
 }

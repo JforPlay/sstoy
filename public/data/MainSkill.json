@@ -3,52 +3,28 @@
     "Id": 900101,
     "GroupId": 9001,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.900101.1",
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
-    "Desc": "MainSkill.900101.2",
-    "Param1": "",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Desc": "MainSkill.900101.2"
   },
   "900102": {
     "Id": 900102,
     "GroupId": 9001,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.900102.1",
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
-    "Desc": "MainSkill.900102.2",
-    "Param1": "",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Desc": "MainSkill.900102.2"
   },
   "900103": {
     "Id": 900103,
     "GroupId": 9001,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.900103.1",
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
-    "Desc": "MainSkill.900103.2",
-    "Param1": "",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Desc": "MainSkill.900103.2"
   },
   "100101": {
     "Id": 100101,
@@ -61,13 +37,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.100101.2",
-    "Param1": "7%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "7%"
   },
   "100102": {
     "Id": 100102,
@@ -80,13 +50,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.100102.2",
-    "Param1": "8.4%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "8.4%"
   },
   "100103": {
     "Id": 100103,
@@ -99,13 +63,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.100103.2",
-    "Param1": "9.8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "9.8%"
   },
   "100104": {
     "Id": 100104,
@@ -118,13 +76,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.100104.2",
-    "Param1": "11.2%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "11.2%"
   },
   "100105": {
     "Id": 100105,
@@ -137,13 +89,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.100105.2",
-    "Param1": "12.6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12.6%"
   },
   "100106": {
     "Id": 100106,
@@ -156,13 +102,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.100106.2",
-    "Param1": "14%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "14%"
   },
   "100201": {
     "Id": 100201,
@@ -175,13 +115,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.100201.2",
-    "Param1": "7%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "7%"
   },
   "100202": {
     "Id": 100202,
@@ -194,13 +128,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.100202.2",
-    "Param1": "8.4%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "8.4%"
   },
   "100203": {
     "Id": 100203,
@@ -213,13 +141,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.100203.2",
-    "Param1": "9.8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "9.8%"
   },
   "100204": {
     "Id": 100204,
@@ -232,13 +154,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.100204.2",
-    "Param1": "11.2%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "11.2%"
   },
   "100205": {
     "Id": 100205,
@@ -251,13 +167,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.100205.2",
-    "Param1": "12.6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12.6%"
   },
   "100206": {
     "Id": 100206,
@@ -270,13 +180,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.100206.2",
-    "Param1": "14%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "14%"
   },
   "100301": {
     "Id": 100301,
@@ -289,13 +193,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.100301.2",
-    "Param1": "10%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "10%"
   },
   "100302": {
     "Id": 100302,
@@ -308,13 +206,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.100302.2",
-    "Param1": "12%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12%"
   },
   "100303": {
     "Id": 100303,
@@ -327,13 +219,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.100303.2",
-    "Param1": "14%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "14%"
   },
   "100304": {
     "Id": 100304,
@@ -346,13 +232,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.100304.2",
-    "Param1": "16%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "16%"
   },
   "100305": {
     "Id": 100305,
@@ -365,13 +245,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.100305.2",
-    "Param1": "18%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "18%"
   },
   "100306": {
     "Id": 100306,
@@ -384,13 +258,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.100306.2",
-    "Param1": "20%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "20%"
   },
   "100401": {
     "Id": 100401,
@@ -403,13 +271,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.100401.2",
-    "Param1": "10%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "10%"
   },
   "100402": {
     "Id": 100402,
@@ -422,13 +284,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.100402.2",
-    "Param1": "12%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12%"
   },
   "100403": {
     "Id": 100403,
@@ -441,13 +297,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.100403.2",
-    "Param1": "14%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "14%"
   },
   "100404": {
     "Id": 100404,
@@ -460,13 +310,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.100404.2",
-    "Param1": "16%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "16%"
   },
   "100405": {
     "Id": 100405,
@@ -479,13 +323,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.100405.2",
-    "Param1": "18%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "18%"
   },
   "100406": {
     "Id": 100406,
@@ -498,13 +336,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.100406.2",
-    "Param1": "20%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "20%"
   },
   "100501": {
     "Id": 100501,
@@ -517,13 +349,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.100501.2",
-    "Param1": "22.5%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "22.5%"
   },
   "100502": {
     "Id": 100502,
@@ -536,13 +362,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.100502.2",
-    "Param1": "27%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "27%"
   },
   "100503": {
     "Id": 100503,
@@ -555,13 +375,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.100503.2",
-    "Param1": "31.5%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "31.5%"
   },
   "100504": {
     "Id": 100504,
@@ -574,13 +388,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.100504.2",
-    "Param1": "36%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "36%"
   },
   "100505": {
     "Id": 100505,
@@ -593,13 +401,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.100505.2",
-    "Param1": "40.5%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "40.5%"
   },
   "100506": {
     "Id": 100506,
@@ -612,13 +414,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.100506.2",
-    "Param1": "45%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "45%"
   },
   "100601": {
     "Id": 100601,
@@ -631,13 +427,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.100601.2",
-    "Param1": "22.5%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "22.5%"
   },
   "100602": {
     "Id": 100602,
@@ -650,13 +440,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.100602.2",
-    "Param1": "27%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "27%"
   },
   "100603": {
     "Id": 100603,
@@ -669,13 +453,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.100603.2",
-    "Param1": "31.5%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "31.5%"
   },
   "100604": {
     "Id": 100604,
@@ -688,13 +466,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.100604.2",
-    "Param1": "36%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "36%"
   },
   "100605": {
     "Id": 100605,
@@ -707,13 +479,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.100605.2",
-    "Param1": "40.5%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "40.5%"
   },
   "100606": {
     "Id": 100606,
@@ -726,13 +492,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.100606.2",
-    "Param1": "45%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "45%"
   },
   "100701": {
     "Id": 100701,
@@ -746,13 +506,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.100701.2",
-    "Param1": "8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "8%"
   },
   "100702": {
     "Id": 100702,
@@ -766,13 +520,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.100702.2",
-    "Param1": "9.6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "9.6%"
   },
   "100703": {
     "Id": 100703,
@@ -786,13 +534,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.100703.2",
-    "Param1": "11.2%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "11.2%"
   },
   "100704": {
     "Id": 100704,
@@ -806,13 +548,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.100704.2",
-    "Param1": "12.8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12.8%"
   },
   "100705": {
     "Id": 100705,
@@ -826,13 +562,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.100705.2",
-    "Param1": "14.4%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "14.4%"
   },
   "100706": {
     "Id": 100706,
@@ -846,13 +576,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.100706.2",
-    "Param1": "16%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "16%"
   },
   "100801": {
     "Id": 100801,
@@ -866,13 +590,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.100801.2",
-    "Param1": "8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "8%"
   },
   "100802": {
     "Id": 100802,
@@ -886,13 +604,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.100802.2",
-    "Param1": "9.6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "9.6%"
   },
   "100803": {
     "Id": 100803,
@@ -906,13 +618,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.100803.2",
-    "Param1": "11.2%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "11.2%"
   },
   "100804": {
     "Id": 100804,
@@ -926,13 +632,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.100804.2",
-    "Param1": "12.8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12.8%"
   },
   "100805": {
     "Id": 100805,
@@ -946,13 +646,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.100805.2",
-    "Param1": "14.4%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "14.4%"
   },
   "100806": {
     "Id": 100806,
@@ -966,13 +660,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.100806.2",
-    "Param1": "16%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "16%"
   },
   "200101": {
     "Id": 200101,
@@ -986,13 +674,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.200101.2",
-    "Param1": "8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "8%"
   },
   "200102": {
     "Id": 200102,
@@ -1006,13 +688,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.200102.2",
-    "Param1": "9.6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "9.6%"
   },
   "200103": {
     "Id": 200103,
@@ -1026,13 +702,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.200103.2",
-    "Param1": "11.2%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "11.2%"
   },
   "200104": {
     "Id": 200104,
@@ -1046,13 +716,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.200104.2",
-    "Param1": "12.8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12.8%"
   },
   "200105": {
     "Id": 200105,
@@ -1066,13 +730,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.200105.2",
-    "Param1": "14.4%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "14.4%"
   },
   "200106": {
     "Id": 200106,
@@ -1086,13 +744,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.200106.2",
-    "Param1": "16%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "16%"
   },
   "200201": {
     "Id": 200201,
@@ -1105,13 +757,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.200201.2",
-    "Param1": "7%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "7%"
   },
   "200202": {
     "Id": 200202,
@@ -1124,13 +770,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.200202.2",
-    "Param1": "8.4%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "8.4%"
   },
   "200203": {
     "Id": 200203,
@@ -1143,13 +783,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.200203.2",
-    "Param1": "9.8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "9.8%"
   },
   "200204": {
     "Id": 200204,
@@ -1162,13 +796,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.200204.2",
-    "Param1": "11.2%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "11.2%"
   },
   "200205": {
     "Id": 200205,
@@ -1181,13 +809,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.200205.2",
-    "Param1": "12.6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12.6%"
   },
   "200206": {
     "Id": 200206,
@@ -1200,13 +822,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_1",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.200206.2",
-    "Param1": "14%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "14%"
   },
   "200301": {
     "Id": 200301,
@@ -1220,13 +836,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.200301.2",
-    "Param1": "8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "8%"
   },
   "200302": {
     "Id": 200302,
@@ -1240,13 +850,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.200302.2",
-    "Param1": "9.6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "9.6%"
   },
   "200303": {
     "Id": 200303,
@@ -1260,13 +864,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.200303.2",
-    "Param1": "11.2%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "11.2%"
   },
   "200304": {
     "Id": 200304,
@@ -1280,13 +878,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.200304.2",
-    "Param1": "12.8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12.8%"
   },
   "200305": {
     "Id": 200305,
@@ -1300,13 +892,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.200305.2",
-    "Param1": "14.4%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "14.4%"
   },
   "200306": {
     "Id": 200306,
@@ -1320,13 +906,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_4",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.200306.2",
-    "Param1": "16%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "16%"
   },
   "200501": {
     "Id": 200501,
@@ -1339,13 +919,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_13",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.200501.2",
-    "Param1": "6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "6%"
   },
   "200502": {
     "Id": 200502,
@@ -1358,13 +932,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_13",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.200502.2",
-    "Param1": "7.2%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "7.2%"
   },
   "200503": {
     "Id": 200503,
@@ -1377,13 +945,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_13",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.200503.2",
-    "Param1": "8.4%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "8.4%"
   },
   "200504": {
     "Id": 200504,
@@ -1396,13 +958,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_13",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.200504.2",
-    "Param1": "9.6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "9.6%"
   },
   "200505": {
     "Id": 200505,
@@ -1415,13 +971,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_13",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.200505.2",
-    "Param1": "10.8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "10.8%"
   },
   "200506": {
     "Id": 200506,
@@ -1434,13 +984,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_13",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.200506.2",
-    "Param1": "12%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12%"
   },
   "200601": {
     "Id": 200601,
@@ -1453,13 +997,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_14",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.200601.2",
-    "Param1": "6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "6%"
   },
   "200602": {
     "Id": 200602,
@@ -1472,13 +1010,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_14",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.200602.2",
-    "Param1": "7.2%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "7.2%"
   },
   "200603": {
     "Id": 200603,
@@ -1491,13 +1023,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_14",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.200603.2",
-    "Param1": "8.4%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "8.4%"
   },
   "200604": {
     "Id": 200604,
@@ -1510,13 +1036,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_14",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.200604.2",
-    "Param1": "9.6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "9.6%"
   },
   "200605": {
     "Id": 200605,
@@ -1529,13 +1049,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_14",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.200605.2",
-    "Param1": "10.8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "10.8%"
   },
   "200606": {
     "Id": 200606,
@@ -1548,13 +1062,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_14",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.200606.2",
-    "Param1": "12%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12%"
   },
   "200701": {
     "Id": 200701,
@@ -1567,13 +1075,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_9",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.200701.2",
-    "Param1": "6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "6%"
   },
   "200702": {
     "Id": 200702,
@@ -1586,13 +1088,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_9",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.200702.2",
-    "Param1": "7.2%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "7.2%"
   },
   "200703": {
     "Id": 200703,
@@ -1605,13 +1101,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_9",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.200703.2",
-    "Param1": "8.4%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "8.4%"
   },
   "200704": {
     "Id": 200704,
@@ -1624,13 +1114,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_9",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.200704.2",
-    "Param1": "9.6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "9.6%"
   },
   "200705": {
     "Id": 200705,
@@ -1643,13 +1127,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_9",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.200705.2",
-    "Param1": "10.8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "10.8%"
   },
   "200706": {
     "Id": 200706,
@@ -1662,13 +1140,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_9",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.200706.2",
-    "Param1": "12%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12%"
   },
   "200801": {
     "Id": 200801,
@@ -1681,13 +1153,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_12",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.200801.2",
-    "Param1": "6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "6%"
   },
   "200802": {
     "Id": 200802,
@@ -1700,13 +1166,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_12",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.200802.2",
-    "Param1": "7.2%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "7.2%"
   },
   "200803": {
     "Id": 200803,
@@ -1719,13 +1179,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_12",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.200803.2",
-    "Param1": "8.4%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "8.4%"
   },
   "200804": {
     "Id": 200804,
@@ -1738,13 +1192,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_12",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.200804.2",
-    "Param1": "9.6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "9.6%"
   },
   "200805": {
     "Id": 200805,
@@ -1757,13 +1205,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_12",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.200805.2",
-    "Param1": "10.8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "10.8%"
   },
   "200806": {
     "Id": 200806,
@@ -1776,13 +1218,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_12",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.200806.2",
-    "Param1": "12%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12%"
   },
   "200901": {
     "Id": 200901,
@@ -1795,13 +1231,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_10",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.200901.2",
-    "Param1": "6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "6%"
   },
   "200902": {
     "Id": 200902,
@@ -1814,13 +1244,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_10",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.200902.2",
-    "Param1": "7.2%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "7.2%"
   },
   "200903": {
     "Id": 200903,
@@ -1833,13 +1257,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_10",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.200903.2",
-    "Param1": "8.4%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "8.4%"
   },
   "200904": {
     "Id": 200904,
@@ -1852,13 +1270,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_10",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.200904.2",
-    "Param1": "9.6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "9.6%"
   },
   "200905": {
     "Id": 200905,
@@ -1871,13 +1283,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_10",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.200905.2",
-    "Param1": "10.8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "10.8%"
   },
   "200906": {
     "Id": 200906,
@@ -1890,13 +1296,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_10",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.200906.2",
-    "Param1": "12%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12%"
   },
   "201001": {
     "Id": 201001,
@@ -1909,13 +1309,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_11",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.201001.2",
-    "Param1": "6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "6%"
   },
   "201002": {
     "Id": 201002,
@@ -1928,13 +1322,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_11",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.201002.2",
-    "Param1": "7.2%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "7.2%"
   },
   "201003": {
     "Id": 201003,
@@ -1947,13 +1335,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_11",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.201003.2",
-    "Param1": "8.4%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "8.4%"
   },
   "201004": {
     "Id": 201004,
@@ -1966,13 +1348,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_11",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.201004.2",
-    "Param1": "9.6%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "9.6%"
   },
   "201005": {
     "Id": 201005,
@@ -1985,13 +1361,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_11",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.201005.2",
-    "Param1": "10.8%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "10.8%"
   },
   "201006": {
     "Id": 201006,
@@ -2004,13 +1374,7 @@
     "Icon": "Icon/DiscSkill/DiscSkill_11",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.201006.2",
-    "Param1": "12%",
-    "Param2": "",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param1": "12%"
   },
   "300301": {
     "Id": 300301,
@@ -2026,11 +1390,7 @@
     "Desc": "MainSkill.300301.2",
     "Param1": "5%",
     "Param2": "25%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300302": {
     "Id": 300302,
@@ -2046,11 +1406,7 @@
     "Desc": "MainSkill.300302.2",
     "Param1": "6%",
     "Param2": "30%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300303": {
     "Id": 300303,
@@ -2066,11 +1422,7 @@
     "Desc": "MainSkill.300303.2",
     "Param1": "7%",
     "Param2": "35%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300304": {
     "Id": 300304,
@@ -2086,11 +1438,7 @@
     "Desc": "MainSkill.300304.2",
     "Param1": "8%",
     "Param2": "40%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300305": {
     "Id": 300305,
@@ -2106,11 +1454,7 @@
     "Desc": "MainSkill.300305.2",
     "Param1": "9%",
     "Param2": "45%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300306": {
     "Id": 300306,
@@ -2126,11 +1470,7 @@
     "Desc": "MainSkill.300306.2",
     "Param1": "10%",
     "Param2": "50%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300401": {
     "Id": 300401,
@@ -2146,11 +1486,7 @@
     "Desc": "MainSkill.300401.2",
     "Param1": "7.5%",
     "Param2": "80%",
-    "Param3": "8%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8%"
   },
   "300402": {
     "Id": 300402,
@@ -2166,11 +1502,7 @@
     "Desc": "MainSkill.300402.2",
     "Param1": "9%",
     "Param2": "80%",
-    "Param3": "9.6%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "9.6%"
   },
   "300403": {
     "Id": 300403,
@@ -2186,11 +1518,7 @@
     "Desc": "MainSkill.300403.2",
     "Param1": "10.5%",
     "Param2": "80%",
-    "Param3": "11.2%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "11.2%"
   },
   "300404": {
     "Id": 300404,
@@ -2206,11 +1534,7 @@
     "Desc": "MainSkill.300404.2",
     "Param1": "12%",
     "Param2": "80%",
-    "Param3": "12.8%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "12.8%"
   },
   "300405": {
     "Id": 300405,
@@ -2226,11 +1550,7 @@
     "Desc": "MainSkill.300405.2",
     "Param1": "13.5%",
     "Param2": "80%",
-    "Param3": "14.4%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "14.4%"
   },
   "300406": {
     "Id": 300406,
@@ -2246,11 +1566,7 @@
     "Desc": "MainSkill.300406.2",
     "Param1": "15%",
     "Param2": "80%",
-    "Param3": "16%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16%"
   },
   "300501": {
     "Id": 300501,
@@ -2266,11 +1582,7 @@
     "Desc": "MainSkill.300501.2",
     "Param1": "5%",
     "Param2": "25%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300502": {
     "Id": 300502,
@@ -2286,11 +1598,7 @@
     "Desc": "MainSkill.300502.2",
     "Param1": "6%",
     "Param2": "30%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300503": {
     "Id": 300503,
@@ -2306,11 +1614,7 @@
     "Desc": "MainSkill.300503.2",
     "Param1": "7%",
     "Param2": "35%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300504": {
     "Id": 300504,
@@ -2326,11 +1630,7 @@
     "Desc": "MainSkill.300504.2",
     "Param1": "8%",
     "Param2": "40%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300505": {
     "Id": 300505,
@@ -2346,11 +1646,7 @@
     "Desc": "MainSkill.300505.2",
     "Param1": "9%",
     "Param2": "45%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300506": {
     "Id": 300506,
@@ -2366,11 +1662,7 @@
     "Desc": "MainSkill.300506.2",
     "Param1": "10%",
     "Param2": "50%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300601": {
     "Id": 300601,
@@ -2386,11 +1678,7 @@
     "Desc": "MainSkill.300601.2",
     "Param1": "7.5%",
     "Param2": "80%",
-    "Param3": "8%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8%"
   },
   "300602": {
     "Id": 300602,
@@ -2406,11 +1694,7 @@
     "Desc": "MainSkill.300602.2",
     "Param1": "9%",
     "Param2": "80%",
-    "Param3": "9.6%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "9.6%"
   },
   "300603": {
     "Id": 300603,
@@ -2426,11 +1710,7 @@
     "Desc": "MainSkill.300603.2",
     "Param1": "10.5%",
     "Param2": "80%",
-    "Param3": "11.2%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "11.2%"
   },
   "300604": {
     "Id": 300604,
@@ -2446,11 +1726,7 @@
     "Desc": "MainSkill.300604.2",
     "Param1": "12%",
     "Param2": "80%",
-    "Param3": "12.8%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "12.8%"
   },
   "300605": {
     "Id": 300605,
@@ -2466,11 +1742,7 @@
     "Desc": "MainSkill.300605.2",
     "Param1": "13.5%",
     "Param2": "80%",
-    "Param3": "14.4%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "14.4%"
   },
   "300606": {
     "Id": 300606,
@@ -2486,11 +1758,7 @@
     "Desc": "MainSkill.300606.2",
     "Param1": "15%",
     "Param2": "80%",
-    "Param3": "16%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16%"
   },
   "300701": {
     "Id": 300701,
@@ -2506,11 +1774,7 @@
     "Desc": "MainSkill.300701.2",
     "Param1": "5%",
     "Param2": "25%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300702": {
     "Id": 300702,
@@ -2526,11 +1790,7 @@
     "Desc": "MainSkill.300702.2",
     "Param1": "6%",
     "Param2": "30%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300703": {
     "Id": 300703,
@@ -2546,11 +1806,7 @@
     "Desc": "MainSkill.300703.2",
     "Param1": "7%",
     "Param2": "35%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300704": {
     "Id": 300704,
@@ -2566,11 +1822,7 @@
     "Desc": "MainSkill.300704.2",
     "Param1": "8%",
     "Param2": "40%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300705": {
     "Id": 300705,
@@ -2586,11 +1838,7 @@
     "Desc": "MainSkill.300705.2",
     "Param1": "9%",
     "Param2": "45%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300706": {
     "Id": 300706,
@@ -2606,11 +1854,7 @@
     "Desc": "MainSkill.300706.2",
     "Param1": "10%",
     "Param2": "50%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300801": {
     "Id": 300801,
@@ -2626,11 +1870,7 @@
     "Desc": "MainSkill.300801.2",
     "Param1": "7.5%",
     "Param2": "80%",
-    "Param3": "8%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8%"
   },
   "300802": {
     "Id": 300802,
@@ -2646,11 +1886,7 @@
     "Desc": "MainSkill.300802.2",
     "Param1": "9%",
     "Param2": "80%",
-    "Param3": "9.6%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "9.6%"
   },
   "300803": {
     "Id": 300803,
@@ -2666,11 +1902,7 @@
     "Desc": "MainSkill.300803.2",
     "Param1": "10.5%",
     "Param2": "80%",
-    "Param3": "11.2%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "11.2%"
   },
   "300804": {
     "Id": 300804,
@@ -2686,11 +1918,7 @@
     "Desc": "MainSkill.300804.2",
     "Param1": "12%",
     "Param2": "80%",
-    "Param3": "12.8%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "12.8%"
   },
   "300805": {
     "Id": 300805,
@@ -2706,11 +1934,7 @@
     "Desc": "MainSkill.300805.2",
     "Param1": "13.5%",
     "Param2": "80%",
-    "Param3": "14.4%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "14.4%"
   },
   "300806": {
     "Id": 300806,
@@ -2726,11 +1950,7 @@
     "Desc": "MainSkill.300806.2",
     "Param1": "15%",
     "Param2": "80%",
-    "Param3": "16%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16%"
   },
   "300901": {
     "Id": 300901,
@@ -2746,11 +1966,7 @@
     "Desc": "MainSkill.300901.2",
     "Param1": "5%",
     "Param2": "25%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300902": {
     "Id": 300902,
@@ -2766,11 +1982,7 @@
     "Desc": "MainSkill.300902.2",
     "Param1": "6%",
     "Param2": "30%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300903": {
     "Id": 300903,
@@ -2786,11 +1998,7 @@
     "Desc": "MainSkill.300903.2",
     "Param1": "7%",
     "Param2": "35%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300904": {
     "Id": 300904,
@@ -2806,11 +2014,7 @@
     "Desc": "MainSkill.300904.2",
     "Param1": "8%",
     "Param2": "40%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300905": {
     "Id": 300905,
@@ -2826,11 +2030,7 @@
     "Desc": "MainSkill.300905.2",
     "Param1": "9%",
     "Param2": "45%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "300906": {
     "Id": 300906,
@@ -2846,11 +2046,7 @@
     "Desc": "MainSkill.300906.2",
     "Param1": "10%",
     "Param2": "50%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "301001": {
     "Id": 301001,
@@ -2866,11 +2062,7 @@
     "Desc": "MainSkill.301001.2",
     "Param1": "7.5%",
     "Param2": "80%",
-    "Param3": "8%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8%"
   },
   "301002": {
     "Id": 301002,
@@ -2886,11 +2078,7 @@
     "Desc": "MainSkill.301002.2",
     "Param1": "9%",
     "Param2": "80%",
-    "Param3": "9.6%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "9.6%"
   },
   "301003": {
     "Id": 301003,
@@ -2906,11 +2094,7 @@
     "Desc": "MainSkill.301003.2",
     "Param1": "10.5%",
     "Param2": "80%",
-    "Param3": "11.2%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "11.2%"
   },
   "301004": {
     "Id": 301004,
@@ -2926,11 +2110,7 @@
     "Desc": "MainSkill.301004.2",
     "Param1": "12%",
     "Param2": "80%",
-    "Param3": "12.8%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "12.8%"
   },
   "301005": {
     "Id": 301005,
@@ -2946,11 +2126,7 @@
     "Desc": "MainSkill.301005.2",
     "Param1": "13.5%",
     "Param2": "80%",
-    "Param3": "14.4%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "14.4%"
   },
   "301006": {
     "Id": 301006,
@@ -2966,11 +2142,7 @@
     "Desc": "MainSkill.301006.2",
     "Param1": "15%",
     "Param2": "80%",
-    "Param3": "16%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16%"
   },
   "301101": {
     "Id": 301101,
@@ -2986,11 +2158,7 @@
     "Desc": "MainSkill.301101.2",
     "Param1": "5%",
     "Param2": "25%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "301102": {
     "Id": 301102,
@@ -3006,11 +2174,7 @@
     "Desc": "MainSkill.301102.2",
     "Param1": "6%",
     "Param2": "30%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "301103": {
     "Id": 301103,
@@ -3026,11 +2190,7 @@
     "Desc": "MainSkill.301103.2",
     "Param1": "7%",
     "Param2": "35%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "301104": {
     "Id": 301104,
@@ -3046,11 +2206,7 @@
     "Desc": "MainSkill.301104.2",
     "Param1": "8%",
     "Param2": "40%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "301105": {
     "Id": 301105,
@@ -3066,11 +2222,7 @@
     "Desc": "MainSkill.301105.2",
     "Param1": "9%",
     "Param2": "45%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "301106": {
     "Id": 301106,
@@ -3086,11 +2238,7 @@
     "Desc": "MainSkill.301106.2",
     "Param1": "10%",
     "Param2": "50%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "301201": {
     "Id": 301201,
@@ -3106,11 +2254,7 @@
     "Desc": "MainSkill.301201.2",
     "Param1": "7.5%",
     "Param2": "80%",
-    "Param3": "8%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8%"
   },
   "301202": {
     "Id": 301202,
@@ -3126,11 +2270,7 @@
     "Desc": "MainSkill.301202.2",
     "Param1": "9%",
     "Param2": "80%",
-    "Param3": "9.6%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "9.6%"
   },
   "301203": {
     "Id": 301203,
@@ -3146,11 +2286,7 @@
     "Desc": "MainSkill.301203.2",
     "Param1": "10.5%",
     "Param2": "80%",
-    "Param3": "11.2%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "11.2%"
   },
   "301204": {
     "Id": 301204,
@@ -3166,11 +2302,7 @@
     "Desc": "MainSkill.301204.2",
     "Param1": "12%",
     "Param2": "80%",
-    "Param3": "12.8%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "12.8%"
   },
   "301205": {
     "Id": 301205,
@@ -3186,11 +2318,7 @@
     "Desc": "MainSkill.301205.2",
     "Param1": "13.5%",
     "Param2": "80%",
-    "Param3": "14.4%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "14.4%"
   },
   "301206": {
     "Id": 301206,
@@ -3206,11 +2334,7 @@
     "Desc": "MainSkill.301206.2",
     "Param1": "15%",
     "Param2": "80%",
-    "Param3": "16%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16%"
   },
   "301301": {
     "Id": 301301,
@@ -3226,11 +2350,7 @@
     "Desc": "MainSkill.301301.2",
     "Param1": "5%",
     "Param2": "25%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "301302": {
     "Id": 301302,
@@ -3246,11 +2366,7 @@
     "Desc": "MainSkill.301302.2",
     "Param1": "6%",
     "Param2": "30%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "301303": {
     "Id": 301303,
@@ -3266,11 +2382,7 @@
     "Desc": "MainSkill.301303.2",
     "Param1": "7%",
     "Param2": "35%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "301304": {
     "Id": 301304,
@@ -3286,11 +2398,7 @@
     "Desc": "MainSkill.301304.2",
     "Param1": "8%",
     "Param2": "40%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "301305": {
     "Id": 301305,
@@ -3306,11 +2414,7 @@
     "Desc": "MainSkill.301305.2",
     "Param1": "9%",
     "Param2": "45%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "301306": {
     "Id": 301306,
@@ -3326,11 +2430,7 @@
     "Desc": "MainSkill.301306.2",
     "Param1": "10%",
     "Param2": "50%",
-    "Param3": "5",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5"
   },
   "301401": {
     "Id": 301401,
@@ -3346,11 +2446,7 @@
     "Desc": "MainSkill.301401.2",
     "Param1": "7.5%",
     "Param2": "80%",
-    "Param3": "8%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8%"
   },
   "301402": {
     "Id": 301402,
@@ -3366,11 +2462,7 @@
     "Desc": "MainSkill.301402.2",
     "Param1": "9%",
     "Param2": "80%",
-    "Param3": "9.6%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "9.6%"
   },
   "301403": {
     "Id": 301403,
@@ -3386,11 +2478,7 @@
     "Desc": "MainSkill.301403.2",
     "Param1": "10.5%",
     "Param2": "80%",
-    "Param3": "11.2%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "11.2%"
   },
   "301404": {
     "Id": 301404,
@@ -3406,11 +2494,7 @@
     "Desc": "MainSkill.301404.2",
     "Param1": "12%",
     "Param2": "80%",
-    "Param3": "12.8%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "12.8%"
   },
   "301405": {
     "Id": 301405,
@@ -3426,11 +2510,7 @@
     "Desc": "MainSkill.301405.2",
     "Param1": "13.5%",
     "Param2": "80%",
-    "Param3": "14.4%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "14.4%"
   },
   "301406": {
     "Id": 301406,
@@ -3446,11 +2526,7 @@
     "Desc": "MainSkill.301406.2",
     "Param1": "15%",
     "Param2": "80%",
-    "Param3": "16%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16%"
   },
   "301501": {
     "Id": 301501,
@@ -3466,11 +2542,7 @@
     "Desc": "MainSkill.301501.2",
     "Param1": "7.5%",
     "Param2": "12.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301502": {
     "Id": 301502,
@@ -3486,11 +2558,7 @@
     "Desc": "MainSkill.301502.2",
     "Param1": "9%",
     "Param2": "15%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301503": {
     "Id": 301503,
@@ -3506,11 +2574,7 @@
     "Desc": "MainSkill.301503.2",
     "Param1": "10.5%",
     "Param2": "17.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301504": {
     "Id": 301504,
@@ -3526,11 +2590,7 @@
     "Desc": "MainSkill.301504.2",
     "Param1": "12%",
     "Param2": "20%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301505": {
     "Id": 301505,
@@ -3546,11 +2606,7 @@
     "Desc": "MainSkill.301505.2",
     "Param1": "13.5%",
     "Param2": "22.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301506": {
     "Id": 301506,
@@ -3566,11 +2622,7 @@
     "Desc": "MainSkill.301506.2",
     "Param1": "15%",
     "Param2": "25%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301601": {
     "Id": 301601,
@@ -3586,11 +2638,7 @@
     "Desc": "MainSkill.301601.2",
     "Param1": "7.5%",
     "Param2": "12.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301602": {
     "Id": 301602,
@@ -3606,11 +2654,7 @@
     "Desc": "MainSkill.301602.2",
     "Param1": "9%",
     "Param2": "15%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301603": {
     "Id": 301603,
@@ -3626,11 +2670,7 @@
     "Desc": "MainSkill.301603.2",
     "Param1": "10.5%",
     "Param2": "17.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301604": {
     "Id": 301604,
@@ -3646,11 +2686,7 @@
     "Desc": "MainSkill.301604.2",
     "Param1": "12%",
     "Param2": "20%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301605": {
     "Id": 301605,
@@ -3666,11 +2702,7 @@
     "Desc": "MainSkill.301605.2",
     "Param1": "13.5%",
     "Param2": "22.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301606": {
     "Id": 301606,
@@ -3686,11 +2718,7 @@
     "Desc": "MainSkill.301606.2",
     "Param1": "15%",
     "Param2": "25%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301701": {
     "Id": 301701,
@@ -3706,11 +2734,7 @@
     "Desc": "MainSkill.301701.2",
     "Param1": "7.5%",
     "Param2": "12.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301702": {
     "Id": 301702,
@@ -3726,11 +2750,7 @@
     "Desc": "MainSkill.301702.2",
     "Param1": "9%",
     "Param2": "15%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301703": {
     "Id": 301703,
@@ -3746,11 +2766,7 @@
     "Desc": "MainSkill.301703.2",
     "Param1": "10.5%",
     "Param2": "17.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301704": {
     "Id": 301704,
@@ -3766,11 +2782,7 @@
     "Desc": "MainSkill.301704.2",
     "Param1": "12%",
     "Param2": "20%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301705": {
     "Id": 301705,
@@ -3786,11 +2798,7 @@
     "Desc": "MainSkill.301705.2",
     "Param1": "13.5%",
     "Param2": "22.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301706": {
     "Id": 301706,
@@ -3806,11 +2814,7 @@
     "Desc": "MainSkill.301706.2",
     "Param1": "15%",
     "Param2": "25%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301801": {
     "Id": 301801,
@@ -3826,11 +2830,7 @@
     "Desc": "MainSkill.301801.2",
     "Param1": "7.5%",
     "Param2": "12.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301802": {
     "Id": 301802,
@@ -3846,11 +2846,7 @@
     "Desc": "MainSkill.301802.2",
     "Param1": "9%",
     "Param2": "15%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301803": {
     "Id": 301803,
@@ -3866,11 +2862,7 @@
     "Desc": "MainSkill.301803.2",
     "Param1": "10.5%",
     "Param2": "17.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301804": {
     "Id": 301804,
@@ -3886,11 +2878,7 @@
     "Desc": "MainSkill.301804.2",
     "Param1": "12%",
     "Param2": "20%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301805": {
     "Id": 301805,
@@ -3906,11 +2894,7 @@
     "Desc": "MainSkill.301805.2",
     "Param1": "13.5%",
     "Param2": "22.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301806": {
     "Id": 301806,
@@ -3926,11 +2910,7 @@
     "Desc": "MainSkill.301806.2",
     "Param1": "15%",
     "Param2": "25%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301901": {
     "Id": 301901,
@@ -3946,11 +2926,7 @@
     "Desc": "MainSkill.301901.2",
     "Param1": "7.5%",
     "Param2": "12.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301902": {
     "Id": 301902,
@@ -3966,11 +2942,7 @@
     "Desc": "MainSkill.301902.2",
     "Param1": "9%",
     "Param2": "15%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301903": {
     "Id": 301903,
@@ -3986,11 +2958,7 @@
     "Desc": "MainSkill.301903.2",
     "Param1": "10.5%",
     "Param2": "17.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301904": {
     "Id": 301904,
@@ -4006,11 +2974,7 @@
     "Desc": "MainSkill.301904.2",
     "Param1": "12%",
     "Param2": "20%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301905": {
     "Id": 301905,
@@ -4026,11 +2990,7 @@
     "Desc": "MainSkill.301905.2",
     "Param1": "13.5%",
     "Param2": "22.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "301906": {
     "Id": 301906,
@@ -4046,11 +3006,7 @@
     "Desc": "MainSkill.301906.2",
     "Param1": "15%",
     "Param2": "25%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "302001": {
     "Id": 302001,
@@ -4066,11 +3022,7 @@
     "Desc": "MainSkill.302001.2",
     "Param1": "7.5%",
     "Param2": "12.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "302002": {
     "Id": 302002,
@@ -4086,11 +3038,7 @@
     "Desc": "MainSkill.302002.2",
     "Param1": "9%",
     "Param2": "15%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "302003": {
     "Id": 302003,
@@ -4106,11 +3054,7 @@
     "Desc": "MainSkill.302003.2",
     "Param1": "10.5%",
     "Param2": "17.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "302004": {
     "Id": 302004,
@@ -4126,11 +3070,7 @@
     "Desc": "MainSkill.302004.2",
     "Param1": "12%",
     "Param2": "20%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "302005": {
     "Id": 302005,
@@ -4146,11 +3086,7 @@
     "Desc": "MainSkill.302005.2",
     "Param1": "13.5%",
     "Param2": "22.5%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "302006": {
     "Id": 302006,
@@ -4166,11 +3102,7 @@
     "Desc": "MainSkill.302006.2",
     "Param1": "15%",
     "Param2": "25%",
-    "Param3": "16",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "16"
   },
   "302101": {
     "Id": 302101,
@@ -4185,12 +3117,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.302101.2",
     "Param1": "16%",
-    "Param2": "15",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "15"
   },
   "302102": {
     "Id": 302102,
@@ -4205,12 +3132,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.302102.2",
     "Param1": "19.2%",
-    "Param2": "18",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "18"
   },
   "302103": {
     "Id": 302103,
@@ -4225,12 +3147,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.302103.2",
     "Param1": "22.4%",
-    "Param2": "21",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "21"
   },
   "302104": {
     "Id": 302104,
@@ -4245,12 +3162,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.302104.2",
     "Param1": "25.6%",
-    "Param2": "24",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "24"
   },
   "302105": {
     "Id": 302105,
@@ -4265,12 +3177,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.302105.2",
     "Param1": "28.8%",
-    "Param2": "27",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "27"
   },
   "302106": {
     "Id": 302106,
@@ -4285,12 +3192,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.302106.2",
     "Param1": "32%",
-    "Param2": "30",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "30"
   },
   "302201": {
     "Id": 302201,
@@ -4305,12 +3207,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.302201.2",
     "Param1": "16%",
-    "Param2": "15",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "15"
   },
   "302202": {
     "Id": 302202,
@@ -4325,12 +3222,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.302202.2",
     "Param1": "19.2%",
-    "Param2": "18",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "18"
   },
   "302203": {
     "Id": 302203,
@@ -4345,12 +3237,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.302203.2",
     "Param1": "22.4%",
-    "Param2": "21",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "21"
   },
   "302204": {
     "Id": 302204,
@@ -4365,12 +3252,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.302204.2",
     "Param1": "25.6%",
-    "Param2": "24",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "24"
   },
   "302205": {
     "Id": 302205,
@@ -4385,12 +3267,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.302205.2",
     "Param1": "28.8%",
-    "Param2": "27",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "27"
   },
   "302206": {
     "Id": 302206,
@@ -4405,12 +3282,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.302206.2",
     "Param1": "32%",
-    "Param2": "30",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "30"
   },
   "302301": {
     "Id": 302301,
@@ -4425,12 +3297,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.302301.2",
     "Param1": "16%",
-    "Param2": "15",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "15"
   },
   "302302": {
     "Id": 302302,
@@ -4445,12 +3312,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.302302.2",
     "Param1": "19.2%",
-    "Param2": "18",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "18"
   },
   "302303": {
     "Id": 302303,
@@ -4465,12 +3327,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.302303.2",
     "Param1": "22.4%",
-    "Param2": "21",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "21"
   },
   "302304": {
     "Id": 302304,
@@ -4485,12 +3342,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.302304.2",
     "Param1": "25.6%",
-    "Param2": "24",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "24"
   },
   "302305": {
     "Id": 302305,
@@ -4505,12 +3357,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.302305.2",
     "Param1": "28.8%",
-    "Param2": "27",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "27"
   },
   "302306": {
     "Id": 302306,
@@ -4525,12 +3372,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.302306.2",
     "Param1": "32%",
-    "Param2": "30",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "30"
   },
   "302401": {
     "Id": 302401,
@@ -4545,12 +3387,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.302401.2",
     "Param1": "16%",
-    "Param2": "15",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "15"
   },
   "302402": {
     "Id": 302402,
@@ -4565,12 +3402,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.302402.2",
     "Param1": "19.2%",
-    "Param2": "18",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "18"
   },
   "302403": {
     "Id": 302403,
@@ -4585,12 +3417,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.302403.2",
     "Param1": "22.4%",
-    "Param2": "21",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "21"
   },
   "302404": {
     "Id": 302404,
@@ -4605,12 +3432,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.302404.2",
     "Param1": "25.6%",
-    "Param2": "24",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "24"
   },
   "302405": {
     "Id": 302405,
@@ -4625,12 +3447,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.302405.2",
     "Param1": "28.8%",
-    "Param2": "27",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "27"
   },
   "302406": {
     "Id": 302406,
@@ -4645,12 +3462,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.302406.2",
     "Param1": "32%",
-    "Param2": "30",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "30"
   },
   "302501": {
     "Id": 302501,
@@ -4665,12 +3477,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.302501.2",
     "Param1": "16%",
-    "Param2": "15",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "15"
   },
   "302502": {
     "Id": 302502,
@@ -4685,12 +3492,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.302502.2",
     "Param1": "19.2%",
-    "Param2": "18",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "18"
   },
   "302503": {
     "Id": 302503,
@@ -4705,12 +3507,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.302503.2",
     "Param1": "22.4%",
-    "Param2": "21",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "21"
   },
   "302504": {
     "Id": 302504,
@@ -4725,12 +3522,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.302504.2",
     "Param1": "25.6%",
-    "Param2": "24",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "24"
   },
   "302505": {
     "Id": 302505,
@@ -4745,12 +3537,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.302505.2",
     "Param1": "28.8%",
-    "Param2": "27",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "27"
   },
   "302506": {
     "Id": 302506,
@@ -4765,12 +3552,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.302506.2",
     "Param1": "32%",
-    "Param2": "30",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "30"
   },
   "302601": {
     "Id": 302601,
@@ -4785,12 +3567,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.302601.2",
     "Param1": "16%",
-    "Param2": "15",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "15"
   },
   "302602": {
     "Id": 302602,
@@ -4805,12 +3582,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.302602.2",
     "Param1": "19.2%",
-    "Param2": "18",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "18"
   },
   "302603": {
     "Id": 302603,
@@ -4825,12 +3597,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.302603.2",
     "Param1": "22.4%",
-    "Param2": "21",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "21"
   },
   "302604": {
     "Id": 302604,
@@ -4845,12 +3612,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.302604.2",
     "Param1": "25.6%",
-    "Param2": "24",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "24"
   },
   "302605": {
     "Id": 302605,
@@ -4865,12 +3627,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.302605.2",
     "Param1": "28.8%",
-    "Param2": "27",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "27"
   },
   "302606": {
     "Id": 302606,
@@ -4885,12 +3642,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.302606.2",
     "Param1": "32%",
-    "Param2": "30",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "30"
   },
   "400101": {
     "Id": 400101,
@@ -4909,9 +3661,7 @@
     "Param2": "5%",
     "Param3": "8",
     "Param4": "10%",
-    "Param5": "8",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "8"
   },
   "400102": {
     "Id": 400102,
@@ -4930,9 +3680,7 @@
     "Param2": "5%",
     "Param3": "8",
     "Param4": "10%",
-    "Param5": "8",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "8"
   },
   "400103": {
     "Id": 400103,
@@ -4951,9 +3699,7 @@
     "Param2": "5%",
     "Param3": "8",
     "Param4": "10%",
-    "Param5": "8",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "8"
   },
   "400104": {
     "Id": 400104,
@@ -4972,9 +3718,7 @@
     "Param2": "5%",
     "Param3": "8",
     "Param4": "10%",
-    "Param5": "8",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "8"
   },
   "400105": {
     "Id": 400105,
@@ -4993,9 +3737,7 @@
     "Param2": "5%",
     "Param3": "8",
     "Param4": "10%",
-    "Param5": "8",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "8"
   },
   "400106": {
     "Id": 400106,
@@ -5014,9 +3756,7 @@
     "Param2": "5%",
     "Param3": "8",
     "Param4": "10%",
-    "Param5": "8",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "8"
   },
   "400201": {
     "Id": 400201,
@@ -5035,9 +3775,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "400202": {
     "Id": 400202,
@@ -5056,9 +3794,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "400203": {
     "Id": 400203,
@@ -5077,9 +3813,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "400204": {
     "Id": 400204,
@@ -5098,9 +3832,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "400205": {
     "Id": 400205,
@@ -5119,9 +3851,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "400206": {
     "Id": 400206,
@@ -5140,9 +3870,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "400501": {
     "Id": 400501,
@@ -5157,12 +3885,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.400501.2",
     "Param1": "10%",
-    "Param2": "10%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "10%"
   },
   "400502": {
     "Id": 400502,
@@ -5177,12 +3900,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.400502.2",
     "Param1": "12%",
-    "Param2": "12%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "12%"
   },
   "400503": {
     "Id": 400503,
@@ -5197,12 +3915,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.400503.2",
     "Param1": "14%",
-    "Param2": "14%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "14%"
   },
   "400504": {
     "Id": 400504,
@@ -5217,12 +3930,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.400504.2",
     "Param1": "16%",
-    "Param2": "16%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "16%"
   },
   "400505": {
     "Id": 400505,
@@ -5237,12 +3945,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.400505.2",
     "Param1": "18%",
-    "Param2": "18%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "18%"
   },
   "400506": {
     "Id": 400506,
@@ -5257,12 +3960,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.400506.2",
     "Param1": "20%",
-    "Param2": "20%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "20%"
   },
   "400601": {
     "Id": 400601,
@@ -5278,11 +3976,7 @@
     "Desc": "MainSkill.400601.2",
     "Param1": "10%",
     "Param2": "15%",
-    "Param3": "8",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8"
   },
   "400602": {
     "Id": 400602,
@@ -5298,11 +3992,7 @@
     "Desc": "MainSkill.400602.2",
     "Param1": "12%",
     "Param2": "18%",
-    "Param3": "8",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8"
   },
   "400603": {
     "Id": 400603,
@@ -5318,11 +4008,7 @@
     "Desc": "MainSkill.400603.2",
     "Param1": "14%",
     "Param2": "21%",
-    "Param3": "8",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8"
   },
   "400604": {
     "Id": 400604,
@@ -5338,11 +4024,7 @@
     "Desc": "MainSkill.400604.2",
     "Param1": "16%",
     "Param2": "24%",
-    "Param3": "8",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8"
   },
   "400605": {
     "Id": 400605,
@@ -5358,11 +4040,7 @@
     "Desc": "MainSkill.400605.2",
     "Param1": "18%",
     "Param2": "27%",
-    "Param3": "8",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8"
   },
   "400606": {
     "Id": 400606,
@@ -5378,11 +4056,7 @@
     "Desc": "MainSkill.400606.2",
     "Param1": "20%",
     "Param2": "30%",
-    "Param3": "8",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8"
   },
   "400701": {
     "Id": 400701,
@@ -5400,11 +4074,7 @@
     "Desc": "MainSkill.400701.2",
     "Param1": "12%",
     "Param2": "13.8%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "400702": {
     "Id": 400702,
@@ -5422,11 +4092,7 @@
     "Desc": "MainSkill.400702.2",
     "Param1": "14.4%",
     "Param2": "16.5%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "400703": {
     "Id": 400703,
@@ -5444,11 +4110,7 @@
     "Desc": "MainSkill.400703.2",
     "Param1": "16.8%",
     "Param2": "19.3%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "400704": {
     "Id": 400704,
@@ -5466,11 +4128,7 @@
     "Desc": "MainSkill.400704.2",
     "Param1": "19.2%",
     "Param2": "22%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "400705": {
     "Id": 400705,
@@ -5488,11 +4146,7 @@
     "Desc": "MainSkill.400705.2",
     "Param1": "21.6%",
     "Param2": "24.8%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "400706": {
     "Id": 400706,
@@ -5510,11 +4164,7 @@
     "Desc": "MainSkill.400706.2",
     "Param1": "24%",
     "Param2": "27.5%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "400901": {
     "Id": 400901,
@@ -5531,10 +4181,7 @@
     "Param1": "10%",
     "Param2": "20%",
     "Param3": "15",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "400902": {
     "Id": 400902,
@@ -5551,10 +4198,7 @@
     "Param1": "12%",
     "Param2": "20%",
     "Param3": "15",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "400903": {
     "Id": 400903,
@@ -5571,10 +4215,7 @@
     "Param1": "14%",
     "Param2": "20%",
     "Param3": "15",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "400904": {
     "Id": 400904,
@@ -5591,10 +4232,7 @@
     "Param1": "16%",
     "Param2": "20%",
     "Param3": "15",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "400905": {
     "Id": 400905,
@@ -5611,10 +4249,7 @@
     "Param1": "18%",
     "Param2": "20%",
     "Param3": "15",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "400906": {
     "Id": 400906,
@@ -5631,10 +4266,7 @@
     "Param1": "20%",
     "Param2": "20%",
     "Param3": "15",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401001": {
     "Id": 401001,
@@ -5651,10 +4283,7 @@
     "Param1": "10%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401002": {
     "Id": 401002,
@@ -5671,10 +4300,7 @@
     "Param1": "12%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401003": {
     "Id": 401003,
@@ -5691,10 +4317,7 @@
     "Param1": "14%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401004": {
     "Id": 401004,
@@ -5711,10 +4334,7 @@
     "Param1": "16%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401005": {
     "Id": 401005,
@@ -5731,10 +4351,7 @@
     "Param1": "18%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401006": {
     "Id": 401006,
@@ -5751,10 +4368,7 @@
     "Param1": "20%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401101": {
     "Id": 401101,
@@ -5770,11 +4384,7 @@
     "Desc": "MainSkill.401101.2",
     "Param1": "10%",
     "Param2": "15%",
-    "Param3": "20",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "20"
   },
   "401102": {
     "Id": 401102,
@@ -5790,11 +4400,7 @@
     "Desc": "MainSkill.401102.2",
     "Param1": "12%",
     "Param2": "15%",
-    "Param3": "20",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "20"
   },
   "401103": {
     "Id": 401103,
@@ -5810,11 +4416,7 @@
     "Desc": "MainSkill.401103.2",
     "Param1": "14%",
     "Param2": "15%",
-    "Param3": "20",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "20"
   },
   "401104": {
     "Id": 401104,
@@ -5830,11 +4432,7 @@
     "Desc": "MainSkill.401104.2",
     "Param1": "16%",
     "Param2": "15%",
-    "Param3": "20",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "20"
   },
   "401105": {
     "Id": 401105,
@@ -5850,11 +4448,7 @@
     "Desc": "MainSkill.401105.2",
     "Param1": "18%",
     "Param2": "15%",
-    "Param3": "20",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "20"
   },
   "401106": {
     "Id": 401106,
@@ -5870,11 +4464,7 @@
     "Desc": "MainSkill.401106.2",
     "Param1": "20%",
     "Param2": "15%",
-    "Param3": "20",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "20"
   },
   "401201": {
     "Id": 401201,
@@ -5890,10 +4480,7 @@
     "Param1": "10%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401202": {
     "Id": 401202,
@@ -5909,10 +4496,7 @@
     "Param1": "12%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401203": {
     "Id": 401203,
@@ -5928,10 +4512,7 @@
     "Param1": "14%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401204": {
     "Id": 401204,
@@ -5947,10 +4528,7 @@
     "Param1": "16%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401205": {
     "Id": 401205,
@@ -5966,10 +4544,7 @@
     "Param1": "18%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401206": {
     "Id": 401206,
@@ -5985,10 +4560,7 @@
     "Param1": "20%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401301": {
     "Id": 401301,
@@ -6005,10 +4577,7 @@
     "Param1": "10%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401302": {
     "Id": 401302,
@@ -6025,10 +4594,7 @@
     "Param1": "12%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401303": {
     "Id": 401303,
@@ -6045,10 +4611,7 @@
     "Param1": "14%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401304": {
     "Id": 401304,
@@ -6065,10 +4628,7 @@
     "Param1": "16%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401305": {
     "Id": 401305,
@@ -6085,10 +4645,7 @@
     "Param1": "18%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401306": {
     "Id": 401306,
@@ -6105,10 +4662,7 @@
     "Param1": "20%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401401": {
     "Id": 401401,
@@ -6125,10 +4679,7 @@
     "Param1": "10%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401402": {
     "Id": 401402,
@@ -6145,10 +4696,7 @@
     "Param1": "12%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401403": {
     "Id": 401403,
@@ -6165,10 +4713,7 @@
     "Param1": "14%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401404": {
     "Id": 401404,
@@ -6185,10 +4730,7 @@
     "Param1": "16%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401405": {
     "Id": 401405,
@@ -6205,10 +4747,7 @@
     "Param1": "18%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401406": {
     "Id": 401406,
@@ -6225,622 +4764,439 @@
     "Param1": "20%",
     "Param2": "15%",
     "Param3": "20",
-    "Param4": "20",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "20"
   },
   "401801": {
     "Id": 401801,
     "GroupId": 4018,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.401801.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214018",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.401801.2",
     "Param1": "5%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "401802": {
     "Id": 401802,
     "GroupId": 4018,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.401802.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214018",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.401802.2",
     "Param1": "8%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "401803": {
     "Id": 401803,
     "GroupId": 4018,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.401803.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214018",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.401803.2",
     "Param1": "11%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "401804": {
     "Id": 401804,
     "GroupId": 4018,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.401804.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214018",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.401804.2",
     "Param1": "14%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "401805": {
     "Id": 401805,
     "GroupId": 4018,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.401805.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214018",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.401805.2",
     "Param1": "17%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "401806": {
     "Id": 401806,
     "GroupId": 4018,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.401806.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214018",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.401806.2",
     "Param1": "20%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "401901": {
     "Id": 401901,
     "GroupId": 4019,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.401901.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214019",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.401901.2",
     "Param1": "5%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "401902": {
     "Id": 401902,
     "GroupId": 4019,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.401902.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214019",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.401902.2",
     "Param1": "8%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "401903": {
     "Id": 401903,
     "GroupId": 4019,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.401903.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214019",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.401903.2",
     "Param1": "11%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "401904": {
     "Id": 401904,
     "GroupId": 4019,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.401904.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214019",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.401904.2",
     "Param1": "14%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "401905": {
     "Id": 401905,
     "GroupId": 4019,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.401905.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214019",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.401905.2",
     "Param1": "17%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "401906": {
     "Id": 401906,
     "GroupId": 4019,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.401906.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214019",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.401906.2",
     "Param1": "20%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402001": {
     "Id": 402001,
     "GroupId": 4020,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.402001.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214020",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.402001.2",
     "Param1": "5%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402002": {
     "Id": 402002,
     "GroupId": 4020,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.402002.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214020",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.402002.2",
     "Param1": "8%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402003": {
     "Id": 402003,
     "GroupId": 4020,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.402003.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214020",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.402003.2",
     "Param1": "11%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402004": {
     "Id": 402004,
     "GroupId": 4020,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.402004.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214020",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.402004.2",
     "Param1": "14%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402005": {
     "Id": 402005,
     "GroupId": 4020,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.402005.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214020",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.402005.2",
     "Param1": "17%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402006": {
     "Id": 402006,
     "GroupId": 4020,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.402006.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214020",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
     "Desc": "MainSkill.402006.2",
     "Param1": "20%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402101": {
     "Id": 402101,
     "GroupId": 4021,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.402101.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214021",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.402101.2",
     "Param1": "5%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402102": {
     "Id": 402102,
     "GroupId": 4021,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.402102.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214021",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.402102.2",
     "Param1": "8%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402103": {
     "Id": 402103,
     "GroupId": 4021,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.402103.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214021",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.402103.2",
     "Param1": "11%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402104": {
     "Id": 402104,
     "GroupId": 4021,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.402104.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214021",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.402104.2",
     "Param1": "14%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402105": {
     "Id": 402105,
     "GroupId": 4021,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.402105.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214021",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.402105.2",
     "Param1": "17%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402106": {
     "Id": 402106,
     "GroupId": 4021,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.402106.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214021",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.402106.2",
     "Param1": "20%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402201": {
     "Id": 402201,
     "GroupId": 4022,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.402201.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214022",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.402201.2",
     "Param1": "5%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402202": {
     "Id": 402202,
     "GroupId": 4022,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.402202.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214022",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.402202.2",
     "Param1": "8%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402203": {
     "Id": 402203,
     "GroupId": 4022,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.402203.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214022",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.402203.2",
     "Param1": "11%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402204": {
     "Id": 402204,
     "GroupId": 4022,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.402204.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214022",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.402204.2",
     "Param1": "14%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402205": {
     "Id": 402205,
     "GroupId": 4022,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.402205.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214022",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.402205.2",
     "Param1": "17%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402206": {
     "Id": 402206,
     "GroupId": 4022,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.402206.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214022",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.402206.2",
     "Param1": "20%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402301": {
     "Id": 402301,
     "GroupId": 4023,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.402301.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214023",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.402301.2",
     "Param1": "5%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402302": {
     "Id": 402302,
     "GroupId": 4023,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.402302.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214023",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.402302.2",
     "Param1": "8%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402303": {
     "Id": 402303,
     "GroupId": 4023,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.402303.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214023",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.402303.2",
     "Param1": "11%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402304": {
     "Id": 402304,
     "GroupId": 4023,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.402304.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214023",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.402304.2",
     "Param1": "14%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402305": {
     "Id": 402305,
     "GroupId": 4023,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.402305.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214023",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.402305.2",
     "Param1": "17%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402306": {
     "Id": 402306,
     "GroupId": 4023,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.402306.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214023",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.402306.2",
     "Param1": "20%",
     "Param2": "2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "402601": {
     "Id": 402601,
@@ -6856,11 +5212,7 @@
     "Desc": "MainSkill.402601.2",
     "Param1": "15%",
     "Param2": "15%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402602": {
     "Id": 402602,
@@ -6876,11 +5228,7 @@
     "Desc": "MainSkill.402602.2",
     "Param1": "18%",
     "Param2": "18%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402603": {
     "Id": 402603,
@@ -6896,11 +5244,7 @@
     "Desc": "MainSkill.402603.2",
     "Param1": "21%",
     "Param2": "21%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402604": {
     "Id": 402604,
@@ -6916,11 +5260,7 @@
     "Desc": "MainSkill.402604.2",
     "Param1": "24%",
     "Param2": "24%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402605": {
     "Id": 402605,
@@ -6936,11 +5276,7 @@
     "Desc": "MainSkill.402605.2",
     "Param1": "27%",
     "Param2": "27%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402606": {
     "Id": 402606,
@@ -6956,11 +5292,7 @@
     "Desc": "MainSkill.402606.2",
     "Param1": "30%",
     "Param2": "30%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402701": {
     "Id": 402701,
@@ -6976,11 +5308,7 @@
     "Desc": "MainSkill.402701.2",
     "Param1": "10%",
     "Param2": "15%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402702": {
     "Id": 402702,
@@ -6996,11 +5324,7 @@
     "Desc": "MainSkill.402702.2",
     "Param1": "12%",
     "Param2": "18%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402703": {
     "Id": 402703,
@@ -7016,11 +5340,7 @@
     "Desc": "MainSkill.402703.2",
     "Param1": "14%",
     "Param2": "21%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402704": {
     "Id": 402704,
@@ -7036,11 +5356,7 @@
     "Desc": "MainSkill.402704.2",
     "Param1": "16%",
     "Param2": "24%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402705": {
     "Id": 402705,
@@ -7056,11 +5372,7 @@
     "Desc": "MainSkill.402705.2",
     "Param1": "18%",
     "Param2": "27%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402706": {
     "Id": 402706,
@@ -7076,11 +5388,7 @@
     "Desc": "MainSkill.402706.2",
     "Param1": "20%",
     "Param2": "30%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402801": {
     "Id": 402801,
@@ -7097,11 +5405,7 @@
     "Desc": "MainSkill.402801.2",
     "Param1": "14%",
     "Param2": "12%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402802": {
     "Id": 402802,
@@ -7118,11 +5422,7 @@
     "Desc": "MainSkill.402802.2",
     "Param1": "16.8%",
     "Param2": "14.4%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402803": {
     "Id": 402803,
@@ -7139,11 +5439,7 @@
     "Desc": "MainSkill.402803.2",
     "Param1": "19.6%",
     "Param2": "16.8%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402804": {
     "Id": 402804,
@@ -7160,11 +5456,7 @@
     "Desc": "MainSkill.402804.2",
     "Param1": "22.4%",
     "Param2": "19.2%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402805": {
     "Id": 402805,
@@ -7181,11 +5473,7 @@
     "Desc": "MainSkill.402805.2",
     "Param1": "25.2%",
     "Param2": "21.6%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "402806": {
     "Id": 402806,
@@ -7202,11 +5490,7 @@
     "Desc": "MainSkill.402806.2",
     "Param1": "28%",
     "Param2": "24%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "403001": {
     "Id": 403001,
@@ -7225,9 +5509,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "403002": {
     "Id": 403002,
@@ -7246,9 +5528,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "403003": {
     "Id": 403003,
@@ -7267,9 +5547,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "403004": {
     "Id": 403004,
@@ -7288,9 +5566,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "403005": {
     "Id": 403005,
@@ -7309,9 +5585,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "403006": {
     "Id": 403006,
@@ -7330,9 +5604,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "403101": {
     "Id": 403101,
@@ -7351,9 +5623,7 @@
     "Param2": "8%",
     "Param3": "8",
     "Param4": "10%",
-    "Param5": "8",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "8"
   },
   "403102": {
     "Id": 403102,
@@ -7372,9 +5642,7 @@
     "Param2": "8%",
     "Param3": "8",
     "Param4": "10%",
-    "Param5": "8",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "8"
   },
   "403103": {
     "Id": 403103,
@@ -7393,9 +5661,7 @@
     "Param2": "8%",
     "Param3": "8",
     "Param4": "10%",
-    "Param5": "8",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "8"
   },
   "403104": {
     "Id": 403104,
@@ -7414,9 +5680,7 @@
     "Param2": "8%",
     "Param3": "8",
     "Param4": "10%",
-    "Param5": "8",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "8"
   },
   "403105": {
     "Id": 403105,
@@ -7435,9 +5699,7 @@
     "Param2": "8%",
     "Param3": "8",
     "Param4": "10%",
-    "Param5": "8",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "8"
   },
   "403106": {
     "Id": 403106,
@@ -7456,9 +5718,7 @@
     "Param2": "8%",
     "Param3": "8",
     "Param4": "10%",
-    "Param5": "8",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "8"
   },
   "403201": {
     "Id": 403201,
@@ -7476,9 +5736,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "403202": {
     "Id": 403202,
@@ -7496,9 +5754,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "403203": {
     "Id": 403203,
@@ -7516,9 +5772,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "403204": {
     "Id": 403204,
@@ -7536,9 +5790,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "403205": {
     "Id": 403205,
@@ -7556,9 +5808,7 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "403206": {
     "Id": 403206,
@@ -7576,15 +5826,12 @@
     "Param2": "35%",
     "Param3": "10%",
     "Param4": "8",
-    "Param5": "10%",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10%"
   },
   "403301": {
     "Id": 403301,
     "GroupId": 4033,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.403301.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214033",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
@@ -7592,16 +5839,12 @@
     "Param1": "10%",
     "Param2": "50%",
     "Param3": "8.5%",
-    "Param4": "10%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "10%"
   },
   "403302": {
     "Id": 403302,
     "GroupId": 4033,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.403302.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214033",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
@@ -7609,16 +5852,12 @@
     "Param1": "12%",
     "Param2": "50%",
     "Param3": "8.5%",
-    "Param4": "10%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "10%"
   },
   "403303": {
     "Id": 403303,
     "GroupId": 4033,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.403303.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214033",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
@@ -7626,16 +5865,12 @@
     "Param1": "14%",
     "Param2": "50%",
     "Param3": "8.5%",
-    "Param4": "10%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "10%"
   },
   "403304": {
     "Id": 403304,
     "GroupId": 4033,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.403304.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214033",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
@@ -7643,16 +5878,12 @@
     "Param1": "16%",
     "Param2": "50%",
     "Param3": "8.5%",
-    "Param4": "10%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "10%"
   },
   "403305": {
     "Id": 403305,
     "GroupId": 4033,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.403305.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214033",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
@@ -7660,16 +5891,12 @@
     "Param1": "18%",
     "Param2": "50%",
     "Param3": "8.5%",
-    "Param4": "10%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "10%"
   },
   "403306": {
     "Id": 403306,
     "GroupId": 4033,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.403306.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214033",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
@@ -7677,10 +5904,7 @@
     "Param1": "20%",
     "Param2": "50%",
     "Param3": "8.5%",
-    "Param4": "10%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "10%"
   },
   "403601": {
     "Id": 403601,
@@ -7697,11 +5921,7 @@
     "Desc": "MainSkill.403601.2",
     "Param1": "10%",
     "Param2": "14%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "403602": {
     "Id": 403602,
@@ -7718,11 +5938,7 @@
     "Desc": "MainSkill.403602.2",
     "Param1": "12%",
     "Param2": "16.8%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "403603": {
     "Id": 403603,
@@ -7739,11 +5955,7 @@
     "Desc": "MainSkill.403603.2",
     "Param1": "14%",
     "Param2": "19.6%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "403604": {
     "Id": 403604,
@@ -7760,11 +5972,7 @@
     "Desc": "MainSkill.403604.2",
     "Param1": "16%",
     "Param2": "22.4%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "403605": {
     "Id": 403605,
@@ -7781,11 +5989,7 @@
     "Desc": "MainSkill.403605.2",
     "Param1": "18%",
     "Param2": "25.2%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "403606": {
     "Id": 403606,
@@ -7802,11 +6006,7 @@
     "Desc": "MainSkill.403606.2",
     "Param1": "20%",
     "Param2": "28%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "403701": {
     "Id": 403701,
@@ -7821,11 +6021,7 @@
     "Desc": "MainSkill.403701.2",
     "Param1": "10%",
     "Param2": "7.5%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "403702": {
     "Id": 403702,
@@ -7840,11 +6036,7 @@
     "Desc": "MainSkill.403702.2",
     "Param1": "12%",
     "Param2": "9%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "403703": {
     "Id": 403703,
@@ -7859,11 +6051,7 @@
     "Desc": "MainSkill.403703.2",
     "Param1": "14%",
     "Param2": "10.5%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "403704": {
     "Id": 403704,
@@ -7878,11 +6066,7 @@
     "Desc": "MainSkill.403704.2",
     "Param1": "16%",
     "Param2": "12%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "403705": {
     "Id": 403705,
@@ -7897,11 +6081,7 @@
     "Desc": "MainSkill.403705.2",
     "Param1": "18%",
     "Param2": "13.5%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "403706": {
     "Id": 403706,
@@ -7916,11 +6096,7 @@
     "Desc": "MainSkill.403706.2",
     "Param1": "20%",
     "Param2": "15%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "403801": {
     "Id": 403801,
@@ -7937,10 +6113,7 @@
     "Param1": "15%",
     "Param2": "2.5%",
     "Param3": "15",
-    "Param4": "9",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "9"
   },
   "403802": {
     "Id": 403802,
@@ -7957,10 +6130,7 @@
     "Param1": "18%",
     "Param2": "3%",
     "Param3": "15",
-    "Param4": "9",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "9"
   },
   "403803": {
     "Id": 403803,
@@ -7977,10 +6147,7 @@
     "Param1": "21%",
     "Param2": "3.5%",
     "Param3": "15",
-    "Param4": "9",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "9"
   },
   "403804": {
     "Id": 403804,
@@ -7997,10 +6164,7 @@
     "Param1": "24%",
     "Param2": "4%",
     "Param3": "15",
-    "Param4": "9",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "9"
   },
   "403805": {
     "Id": 403805,
@@ -8017,10 +6181,7 @@
     "Param1": "27%",
     "Param2": "4.5%",
     "Param3": "15",
-    "Param4": "9",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "9"
   },
   "403806": {
     "Id": 403806,
@@ -8037,10 +6198,7 @@
     "Param1": "30%",
     "Param2": "5%",
     "Param3": "15",
-    "Param4": "9",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "9"
   },
   "403901": {
     "Id": 403901,
@@ -8057,10 +6215,7 @@
     "Param1": "6%",
     "Param2": "3%",
     "Param3": "10",
-    "Param4": "5",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "5"
   },
   "403902": {
     "Id": 403902,
@@ -8077,10 +6232,7 @@
     "Param1": "7.2%",
     "Param2": "3.6%",
     "Param3": "10",
-    "Param4": "5",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "5"
   },
   "403903": {
     "Id": 403903,
@@ -8097,10 +6249,7 @@
     "Param1": "8.4%",
     "Param2": "4.2%",
     "Param3": "10",
-    "Param4": "5",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "5"
   },
   "403904": {
     "Id": 403904,
@@ -8117,10 +6266,7 @@
     "Param1": "9.6%",
     "Param2": "4.8%",
     "Param3": "10",
-    "Param4": "5",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "5"
   },
   "403905": {
     "Id": 403905,
@@ -8137,10 +6283,7 @@
     "Param1": "10.8%",
     "Param2": "5.4%",
     "Param3": "10",
-    "Param4": "5",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "5"
   },
   "403906": {
     "Id": 403906,
@@ -8157,16 +6300,12 @@
     "Param1": "12%",
     "Param2": "6%",
     "Param3": "10",
-    "Param4": "5",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "5"
   },
   "401701": {
     "Id": 401701,
     "GroupId": 4017,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.401701.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214017",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -8176,14 +6315,12 @@
     "Param3": "10",
     "Param4": "10%",
     "Param5": "12",
-    "Param6": "3",
-    "Param7": ""
+    "Param6": "3"
   },
   "401702": {
     "Id": 401702,
     "GroupId": 4017,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.401702.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214017",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -8193,14 +6330,12 @@
     "Param3": "10",
     "Param4": "12%",
     "Param5": "12",
-    "Param6": "3",
-    "Param7": ""
+    "Param6": "3"
   },
   "401703": {
     "Id": 401703,
     "GroupId": 4017,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.401703.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214017",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -8210,14 +6345,12 @@
     "Param3": "10",
     "Param4": "14%",
     "Param5": "12",
-    "Param6": "3",
-    "Param7": ""
+    "Param6": "3"
   },
   "401704": {
     "Id": 401704,
     "GroupId": 4017,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.401704.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214017",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -8227,14 +6360,12 @@
     "Param3": "10",
     "Param4": "16%",
     "Param5": "12",
-    "Param6": "3",
-    "Param7": ""
+    "Param6": "3"
   },
   "401705": {
     "Id": 401705,
     "GroupId": 4017,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.401705.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214017",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -8244,14 +6375,12 @@
     "Param3": "10",
     "Param4": "18%",
     "Param5": "12",
-    "Param6": "3",
-    "Param7": ""
+    "Param6": "3"
   },
   "401706": {
     "Id": 401706,
     "GroupId": 4017,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.401706.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214017",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -8261,110 +6390,79 @@
     "Param3": "10",
     "Param4": "20%",
     "Param5": "12",
-    "Param6": "3",
-    "Param7": ""
+    "Param6": "3"
   },
   "404001": {
     "Id": 404001,
     "GroupId": 4040,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.404001.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214040",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.404001.2",
     "Param1": "4%",
     "Param2": "10",
-    "Param3": "8",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8"
   },
   "404002": {
     "Id": 404002,
     "GroupId": 4040,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.404002.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214040",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.404002.2",
     "Param1": "4.8%",
     "Param2": "10",
-    "Param3": "8",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8"
   },
   "404003": {
     "Id": 404003,
     "GroupId": 4040,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.404003.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214040",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.404003.2",
     "Param1": "5.6%",
     "Param2": "10",
-    "Param3": "8",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8"
   },
   "404004": {
     "Id": 404004,
     "GroupId": 4040,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.404004.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214040",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.404004.2",
     "Param1": "6.4%",
     "Param2": "10",
-    "Param3": "8",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8"
   },
   "404005": {
     "Id": 404005,
     "GroupId": 4040,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.404005.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214040",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.404005.2",
     "Param1": "7.2%",
     "Param2": "10",
-    "Param3": "8",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8"
   },
   "404006": {
     "Id": 404006,
     "GroupId": 4040,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.404006.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214040",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.404006.2",
     "Param1": "8%",
     "Param2": "10",
-    "Param3": "8",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8"
   },
   "401501": {
     "Id": 401501,
@@ -8381,9 +6479,7 @@
     "Param2": "5",
     "Param3": "1.5%",
     "Param4": "6",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "401502": {
     "Id": 401502,
@@ -8400,9 +6496,7 @@
     "Param2": "5",
     "Param3": "1.8%",
     "Param4": "6",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "401503": {
     "Id": 401503,
@@ -8419,9 +6513,7 @@
     "Param2": "5",
     "Param3": "2.1%",
     "Param4": "6",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "401504": {
     "Id": 401504,
@@ -8438,9 +6530,7 @@
     "Param2": "5",
     "Param3": "2.4%",
     "Param4": "6",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "401505": {
     "Id": 401505,
@@ -8457,9 +6547,7 @@
     "Param2": "5",
     "Param3": "2.7%",
     "Param4": "6",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "401506": {
     "Id": 401506,
@@ -8476,9 +6564,7 @@
     "Param2": "5",
     "Param3": "3%",
     "Param4": "6",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "402401": {
     "Id": 402401,
@@ -8492,12 +6578,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.402401.2",
     "Param1": "25%",
-    "Param2": "3",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "3"
   },
   "402402": {
     "Id": 402402,
@@ -8511,12 +6592,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.402402.2",
     "Param1": "30%",
-    "Param2": "3",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "3"
   },
   "402403": {
     "Id": 402403,
@@ -8530,12 +6606,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.402403.2",
     "Param1": "35%",
-    "Param2": "3",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "3"
   },
   "402404": {
     "Id": 402404,
@@ -8549,12 +6620,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.402404.2",
     "Param1": "40%",
-    "Param2": "3",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "3"
   },
   "402405": {
     "Id": 402405,
@@ -8568,12 +6634,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.402405.2",
     "Param1": "45%",
-    "Param2": "3",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "3"
   },
   "402406": {
     "Id": 402406,
@@ -8587,12 +6648,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.402406.2",
     "Param1": "50%",
-    "Param2": "3",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "3"
   },
   "400401": {
     "Id": 400401,
@@ -8721,11 +6777,7 @@
     "Desc": "MainSkill.404301.2",
     "Param1": "5%",
     "Param2": "12%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "404302": {
     "Id": 404302,
@@ -8740,11 +6792,7 @@
     "Desc": "MainSkill.404302.2",
     "Param1": "6%",
     "Param2": "14.4%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "404303": {
     "Id": 404303,
@@ -8759,11 +6807,7 @@
     "Desc": "MainSkill.404303.2",
     "Param1": "7%",
     "Param2": "16.8%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "404304": {
     "Id": 404304,
@@ -8778,11 +6822,7 @@
     "Desc": "MainSkill.404304.2",
     "Param1": "8%",
     "Param2": "19.2%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "404305": {
     "Id": 404305,
@@ -8797,11 +6837,7 @@
     "Desc": "MainSkill.404305.2",
     "Param1": "9%",
     "Param2": "21.6%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "404306": {
     "Id": 404306,
@@ -8816,11 +6852,7 @@
     "Desc": "MainSkill.404306.2",
     "Param1": "10%",
     "Param2": "24%",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "404801": {
     "Id": 404801,
@@ -8837,9 +6869,7 @@
     "Param2": "12.25",
     "Param3": "1%",
     "Param4": "18",
-    "Param5": "15",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "15"
   },
   "404802": {
     "Id": 404802,
@@ -8856,9 +6886,7 @@
     "Param2": "12.25",
     "Param3": "1.2%",
     "Param4": "18",
-    "Param5": "15",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "15"
   },
   "404803": {
     "Id": 404803,
@@ -8875,9 +6903,7 @@
     "Param2": "12.25",
     "Param3": "1.4%",
     "Param4": "18",
-    "Param5": "15",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "15"
   },
   "404804": {
     "Id": 404804,
@@ -8894,9 +6920,7 @@
     "Param2": "12.25",
     "Param3": "1.6%",
     "Param4": "18",
-    "Param5": "15",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "15"
   },
   "404805": {
     "Id": 404805,
@@ -8913,9 +6937,7 @@
     "Param2": "12.25",
     "Param3": "1.8%",
     "Param4": "18",
-    "Param5": "15",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "15"
   },
   "404806": {
     "Id": 404806,
@@ -8932,9 +6954,7 @@
     "Param2": "12.25",
     "Param3": "2%",
     "Param4": "18",
-    "Param5": "15",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "15"
   },
   "404101": {
     "Id": 404101,
@@ -8948,12 +6968,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.404101.2",
     "Param1": "5%",
-    "Param2": "8%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "8%"
   },
   "404102": {
     "Id": 404102,
@@ -8967,12 +6982,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.404102.2",
     "Param1": "6%",
-    "Param2": "9.6%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "9.6%"
   },
   "404103": {
     "Id": 404103,
@@ -8986,12 +6996,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.404103.2",
     "Param1": "7%",
-    "Param2": "11.2%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "11.2%"
   },
   "404104": {
     "Id": 404104,
@@ -9005,12 +7010,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.404104.2",
     "Param1": "8%",
-    "Param2": "12.8%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "12.8%"
   },
   "404105": {
     "Id": 404105,
@@ -9024,12 +7024,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.404105.2",
     "Param1": "9%",
-    "Param2": "14.4%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "14.4%"
   },
   "404106": {
     "Id": 404106,
@@ -9043,12 +7038,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.404106.2",
     "Param1": "10%",
-    "Param2": "16%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "16%"
   },
   "404401": {
     "Id": 404401,
@@ -9063,11 +7053,7 @@
     "Desc": "MainSkill.404401.2",
     "Param1": "20%",
     "Param2": "15%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "404402": {
     "Id": 404402,
@@ -9082,11 +7068,7 @@
     "Desc": "MainSkill.404402.2",
     "Param1": "24%",
     "Param2": "18%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "404403": {
     "Id": 404403,
@@ -9101,11 +7083,7 @@
     "Desc": "MainSkill.404403.2",
     "Param1": "28%",
     "Param2": "21%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "404404": {
     "Id": 404404,
@@ -9120,11 +7098,7 @@
     "Desc": "MainSkill.404404.2",
     "Param1": "32%",
     "Param2": "24%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "404405": {
     "Id": 404405,
@@ -9139,11 +7113,7 @@
     "Desc": "MainSkill.404405.2",
     "Param1": "36%",
     "Param2": "27%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "404406": {
     "Id": 404406,
@@ -9158,11 +7128,7 @@
     "Desc": "MainSkill.404406.2",
     "Param1": "40%",
     "Param2": "30%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "404201": {
     "Id": 404201,
@@ -9177,11 +7143,7 @@
     "Desc": "MainSkill.404201.2",
     "Param1": "10%",
     "Param2": "20%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "404202": {
     "Id": 404202,
@@ -9196,11 +7158,7 @@
     "Desc": "MainSkill.404202.2",
     "Param1": "12%",
     "Param2": "24%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "404203": {
     "Id": 404203,
@@ -9215,11 +7173,7 @@
     "Desc": "MainSkill.404203.2",
     "Param1": "14%",
     "Param2": "28%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "404204": {
     "Id": 404204,
@@ -9234,11 +7188,7 @@
     "Desc": "MainSkill.404204.2",
     "Param1": "16%",
     "Param2": "32%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "404205": {
     "Id": 404205,
@@ -9253,11 +7203,7 @@
     "Desc": "MainSkill.404205.2",
     "Param1": "18%",
     "Param2": "36%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "404206": {
     "Id": 404206,
@@ -9272,17 +7218,12 @@
     "Desc": "MainSkill.404206.2",
     "Param1": "20%",
     "Param2": "40%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "401601": {
     "Id": 401601,
     "GroupId": 4016,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.401601.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214016",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -9292,14 +7233,12 @@
     "Param3": "18%",
     "Param4": "2.5%",
     "Param5": "5%",
-    "Param6": "7.5%",
-    "Param7": ""
+    "Param6": "7.5%"
   },
   "401602": {
     "Id": 401602,
     "GroupId": 4016,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.401602.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214016",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -9309,14 +7248,12 @@
     "Param3": "21.6%",
     "Param4": "3%",
     "Param5": "6%",
-    "Param6": "9%",
-    "Param7": ""
+    "Param6": "9%"
   },
   "401603": {
     "Id": 401603,
     "GroupId": 4016,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.401603.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214016",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -9326,14 +7263,12 @@
     "Param3": "25.2%",
     "Param4": "3.5%",
     "Param5": "7%",
-    "Param6": "10.5%",
-    "Param7": ""
+    "Param6": "10.5%"
   },
   "401604": {
     "Id": 401604,
     "GroupId": 4016,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.401604.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214016",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -9343,14 +7278,12 @@
     "Param3": "28.8%",
     "Param4": "4%",
     "Param5": "8%",
-    "Param6": "12%",
-    "Param7": ""
+    "Param6": "12%"
   },
   "401605": {
     "Id": 401605,
     "GroupId": 4016,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.401605.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214016",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -9360,14 +7293,12 @@
     "Param3": "32.4%",
     "Param4": "4.5%",
     "Param5": "9%",
-    "Param6": "13.5%",
-    "Param7": ""
+    "Param6": "13.5%"
   },
   "401606": {
     "Id": 401606,
     "GroupId": 4016,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.401606.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214016",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -9377,116 +7308,84 @@
     "Param3": "36%",
     "Param4": "5%",
     "Param5": "10%",
-    "Param6": "15%",
-    "Param7": ""
+    "Param6": "15%"
   },
   "404601": {
     "Id": 404601,
     "GroupId": 4046,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.404601.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214046",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.404601.2",
     "Param1": "3%",
     "Param2": "25",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "404602": {
     "Id": 404602,
     "GroupId": 4046,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.404602.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214046",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.404602.2",
     "Param1": "3.6%",
     "Param2": "25",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "404603": {
     "Id": 404603,
     "GroupId": 4046,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.404603.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214046",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.404603.2",
     "Param1": "4.2%",
     "Param2": "25",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "404604": {
     "Id": 404604,
     "GroupId": 4046,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.404604.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214046",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.404604.2",
     "Param1": "4.8%",
     "Param2": "25",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "404605": {
     "Id": 404605,
     "GroupId": 4046,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.404605.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214046",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.404605.2",
     "Param1": "5.4%",
     "Param2": "25",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "404606": {
     "Id": 404606,
     "GroupId": 4046,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.404606.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214046",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
     "Desc": "MainSkill.404606.2",
     "Param1": "6%",
     "Param2": "25",
-    "Param3": "10",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10"
   },
   "400801": {
     "Id": 400801,
     "GroupId": 4008,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.400801.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214008",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -9496,14 +7395,12 @@
     "Param3": "10",
     "Param4": "10%",
     "Param5": "20",
-    "Param6": "12%",
-    "Param7": ""
+    "Param6": "12%"
   },
   "400802": {
     "Id": 400802,
     "GroupId": 4008,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.400802.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214008",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -9513,14 +7410,12 @@
     "Param3": "10",
     "Param4": "12%",
     "Param5": "20",
-    "Param6": "14.4%",
-    "Param7": ""
+    "Param6": "14.4%"
   },
   "400803": {
     "Id": 400803,
     "GroupId": 4008,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.400803.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214008",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -9530,14 +7425,12 @@
     "Param3": "10",
     "Param4": "14%",
     "Param5": "20",
-    "Param6": "16.8%",
-    "Param7": ""
+    "Param6": "16.8%"
   },
   "400804": {
     "Id": 400804,
     "GroupId": 4008,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.400804.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214008",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -9547,14 +7440,12 @@
     "Param3": "10",
     "Param4": "16%",
     "Param5": "20",
-    "Param6": "19.2%",
-    "Param7": ""
+    "Param6": "19.2%"
   },
   "400805": {
     "Id": 400805,
     "GroupId": 4008,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.400805.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214008",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -9564,14 +7455,12 @@
     "Param3": "10",
     "Param4": "18%",
     "Param5": "20",
-    "Param6": "21.6%",
-    "Param7": ""
+    "Param6": "21.6%"
   },
   "400806": {
     "Id": 400806,
     "GroupId": 4008,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.400806.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214008",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -9581,14 +7470,12 @@
     "Param3": "10",
     "Param4": "20%",
     "Param5": "20",
-    "Param6": "24%",
-    "Param7": ""
+    "Param6": "24%"
   },
   "404701": {
     "Id": 404701,
     "GroupId": 4047,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.404701.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214047",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -9598,14 +7485,12 @@
     "Param3": "10",
     "Param4": "5%",
     "Param5": "20",
-    "Param6": "6%",
-    "Param7": ""
+    "Param6": "6%"
   },
   "404702": {
     "Id": 404702,
     "GroupId": 4047,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.404702.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214047",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -9615,14 +7500,12 @@
     "Param3": "10",
     "Param4": "6%",
     "Param5": "20",
-    "Param6": "7.2%",
-    "Param7": ""
+    "Param6": "7.2%"
   },
   "404703": {
     "Id": 404703,
     "GroupId": 4047,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.404703.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214047",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -9632,14 +7515,12 @@
     "Param3": "10",
     "Param4": "7%",
     "Param5": "20",
-    "Param6": "8.4%",
-    "Param7": ""
+    "Param6": "8.4%"
   },
   "404704": {
     "Id": 404704,
     "GroupId": 4047,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.404704.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214047",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -9649,14 +7530,12 @@
     "Param3": "10",
     "Param4": "8%",
     "Param5": "20",
-    "Param6": "9.6%",
-    "Param7": ""
+    "Param6": "9.6%"
   },
   "404705": {
     "Id": 404705,
     "GroupId": 4047,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.404705.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214047",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -9666,14 +7545,12 @@
     "Param3": "10",
     "Param4": "9%",
     "Param5": "20",
-    "Param6": "10.8%",
-    "Param7": ""
+    "Param6": "10.8%"
   },
   "404706": {
     "Id": 404706,
     "GroupId": 4047,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.404706.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214047",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -9683,8 +7560,7 @@
     "Param3": "10",
     "Param4": "10%",
     "Param5": "20",
-    "Param6": "12%",
-    "Param7": ""
+    "Param6": "12%"
   },
   "404501": {
     "Id": 404501,
@@ -9700,10 +7576,7 @@
     "Param1": "20%",
     "Param2": "5",
     "Param3": "20",
-    "Param4": "15%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "15%"
   },
   "404502": {
     "Id": 404502,
@@ -9719,10 +7592,7 @@
     "Param1": "24%",
     "Param2": "5",
     "Param3": "20",
-    "Param4": "18%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "18%"
   },
   "404503": {
     "Id": 404503,
@@ -9738,10 +7608,7 @@
     "Param1": "28%",
     "Param2": "5",
     "Param3": "20",
-    "Param4": "21%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "21%"
   },
   "404504": {
     "Id": 404504,
@@ -9757,10 +7624,7 @@
     "Param1": "32%",
     "Param2": "5",
     "Param3": "20",
-    "Param4": "24%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "24%"
   },
   "404505": {
     "Id": 404505,
@@ -9776,10 +7640,7 @@
     "Param1": "36%",
     "Param2": "5",
     "Param3": "20",
-    "Param4": "27%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "27%"
   },
   "404506": {
     "Id": 404506,
@@ -9795,10 +7656,7 @@
     "Param1": "40%",
     "Param2": "5",
     "Param3": "20",
-    "Param4": "30%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "30%"
   },
   "405001": {
     "Id": 405001,
@@ -9814,10 +7672,7 @@
     "Param1": "5%",
     "Param2": "5",
     "Param3": "20",
-    "Param4": "6%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "6%"
   },
   "405002": {
     "Id": 405002,
@@ -9833,10 +7688,7 @@
     "Param1": "6%",
     "Param2": "5",
     "Param3": "20",
-    "Param4": "7.2%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "7.2%"
   },
   "405003": {
     "Id": 405003,
@@ -9852,10 +7704,7 @@
     "Param1": "7%",
     "Param2": "5",
     "Param3": "20",
-    "Param4": "8.4%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "8.4%"
   },
   "405004": {
     "Id": 405004,
@@ -9871,10 +7720,7 @@
     "Param1": "8%",
     "Param2": "5",
     "Param3": "20",
-    "Param4": "9.6%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "9.6%"
   },
   "405005": {
     "Id": 405005,
@@ -9890,10 +7736,7 @@
     "Param1": "9%",
     "Param2": "5",
     "Param3": "20",
-    "Param4": "10.8%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "10.8%"
   },
   "405006": {
     "Id": 405006,
@@ -9909,118 +7752,84 @@
     "Param1": "10%",
     "Param2": "5",
     "Param3": "20",
-    "Param4": "12%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "12%"
   },
   "404901": {
     "Id": 404901,
     "GroupId": 4049,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.404901.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214049",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.404901.2",
     "Param1": "20%",
     "Param2": "20",
-    "Param3": "30",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "30"
   },
   "404902": {
     "Id": 404902,
     "GroupId": 4049,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.404902.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214049",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.404902.2",
     "Param1": "24%",
     "Param2": "20",
-    "Param3": "30",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "30"
   },
   "404903": {
     "Id": 404903,
     "GroupId": 4049,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.404903.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214049",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.404903.2",
     "Param1": "28%",
     "Param2": "20",
-    "Param3": "30",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "30"
   },
   "404904": {
     "Id": 404904,
     "GroupId": 4049,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.404904.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214049",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.404904.2",
     "Param1": "32%",
     "Param2": "20",
-    "Param3": "30",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "30"
   },
   "404905": {
     "Id": 404905,
     "GroupId": 4049,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.404905.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214049",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.404905.2",
     "Param1": "36%",
     "Param2": "20",
-    "Param3": "30",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "30"
   },
   "404906": {
     "Id": 404906,
     "GroupId": 4049,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.404906.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214049",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
     "Desc": "MainSkill.404906.2",
     "Param1": "40%",
     "Param2": "20",
-    "Param3": "30",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "30"
   },
   "405101": {
     "Id": 405101,
     "GroupId": 4051,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.405101.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214051",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
@@ -10029,15 +7838,12 @@
     "Param2": "8",
     "Param3": "10",
     "Param4": "10%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "405102": {
     "Id": 405102,
     "GroupId": 4051,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.405102.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214051",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
@@ -10046,15 +7852,12 @@
     "Param2": "8",
     "Param3": "10",
     "Param4": "12%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "405103": {
     "Id": 405103,
     "GroupId": 4051,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.405103.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214051",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
@@ -10063,15 +7866,12 @@
     "Param2": "8",
     "Param3": "10",
     "Param4": "14%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "405104": {
     "Id": 405104,
     "GroupId": 4051,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.405104.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214051",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
@@ -10080,15 +7880,12 @@
     "Param2": "8",
     "Param3": "10",
     "Param4": "16%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "405105": {
     "Id": 405105,
     "GroupId": 4051,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.405105.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214051",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
@@ -10097,15 +7894,12 @@
     "Param2": "8",
     "Param3": "10",
     "Param4": "18%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "405106": {
     "Id": 405106,
     "GroupId": 4051,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.405106.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214051",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
@@ -10114,15 +7908,12 @@
     "Param2": "8",
     "Param3": "10",
     "Param4": "20%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "400301": {
     "Id": 400301,
     "GroupId": 4003,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.400301.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214003",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
@@ -10131,15 +7922,12 @@
     "Param2": "20",
     "Param3": "10",
     "Param4": "6%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "400302": {
     "Id": 400302,
     "GroupId": 4003,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.400302.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214003",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
@@ -10148,15 +7936,12 @@
     "Param2": "20",
     "Param3": "10",
     "Param4": "7.2%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "400303": {
     "Id": 400303,
     "GroupId": 4003,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.400303.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214003",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
@@ -10165,15 +7950,12 @@
     "Param2": "20",
     "Param3": "10",
     "Param4": "8.4%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "400304": {
     "Id": 400304,
     "GroupId": 4003,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.400304.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214003",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
@@ -10182,15 +7964,12 @@
     "Param2": "20",
     "Param3": "10",
     "Param4": "9.6%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "400305": {
     "Id": 400305,
     "GroupId": 4003,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.400305.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214003",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
@@ -10199,15 +7978,12 @@
     "Param2": "20",
     "Param3": "10",
     "Param4": "10.8%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "400306": {
     "Id": 400306,
     "GroupId": 4003,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.400306.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214003",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
@@ -10216,15 +7992,12 @@
     "Param2": "20",
     "Param3": "10",
     "Param4": "12%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "405401": {
     "Id": 405401,
     "GroupId": 4054,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.405401.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214054",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
@@ -10232,16 +8005,12 @@
     "Param1": "15",
     "Param2": "15%",
     "Param3": "10",
-    "Param4": "25%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "25%"
   },
   "405402": {
     "Id": 405402,
     "GroupId": 4054,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.405402.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214054",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
@@ -10249,16 +8018,12 @@
     "Param1": "15",
     "Param2": "18%",
     "Param3": "10",
-    "Param4": "30%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "30%"
   },
   "405403": {
     "Id": 405403,
     "GroupId": 4054,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.405403.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214054",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
@@ -10266,16 +8031,12 @@
     "Param1": "15",
     "Param2": "21%",
     "Param3": "10",
-    "Param4": "35%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "35%"
   },
   "405404": {
     "Id": 405404,
     "GroupId": 4054,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.405404.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214054",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
@@ -10283,16 +8044,12 @@
     "Param1": "15",
     "Param2": "24%",
     "Param3": "10",
-    "Param4": "40%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "40%"
   },
   "405405": {
     "Id": 405405,
     "GroupId": 4054,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.405405.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214054",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
@@ -10300,16 +8057,12 @@
     "Param1": "15",
     "Param2": "27%",
     "Param3": "10",
-    "Param4": "45%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "45%"
   },
   "405406": {
     "Id": 405406,
     "GroupId": 4054,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.405406.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214054",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
@@ -10317,118 +8070,84 @@
     "Param1": "15",
     "Param2": "30%",
     "Param3": "10",
-    "Param4": "50%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "50%"
   },
   "405201": {
     "Id": 405201,
     "GroupId": 4052,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.405201.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214052",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.405201.2",
     "Param1": "15",
     "Param2": "7%",
-    "Param3": "5%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "5%"
   },
   "405202": {
     "Id": 405202,
     "GroupId": 4052,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.405202.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214052",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.405202.2",
     "Param1": "15",
     "Param2": "8.4%",
-    "Param3": "6%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "6%"
   },
   "405203": {
     "Id": 405203,
     "GroupId": 4052,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.405203.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214052",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.405203.2",
     "Param1": "15",
     "Param2": "9.8%",
-    "Param3": "7%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "7%"
   },
   "405204": {
     "Id": 405204,
     "GroupId": 4052,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.405204.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214052",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.405204.2",
     "Param1": "15",
     "Param2": "11.2%",
-    "Param3": "8%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "8%"
   },
   "405205": {
     "Id": 405205,
     "GroupId": 4052,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.405205.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214052",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.405205.2",
     "Param1": "15",
     "Param2": "12.6%",
-    "Param3": "9%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "9%"
   },
   "405206": {
     "Id": 405206,
     "GroupId": 4052,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.405206.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214052",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_2",
     "Desc": "MainSkill.405206.2",
     "Param1": "15",
     "Param2": "14%",
-    "Param3": "10%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "10%"
   },
   "402901": {
     "Id": 402901,
     "GroupId": 4029,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.402901.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214029",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -10436,16 +8155,12 @@
     "Param1": "25%",
     "Param2": "5%",
     "Param3": "10%",
-    "Param4": "15%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "15%"
   },
   "402902": {
     "Id": 402902,
     "GroupId": 4029,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.402902.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214029",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -10453,16 +8168,12 @@
     "Param1": "30%",
     "Param2": "6%",
     "Param3": "12%",
-    "Param4": "18%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "18%"
   },
   "402903": {
     "Id": 402903,
     "GroupId": 4029,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.402903.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214029",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -10470,16 +8181,12 @@
     "Param1": "35%",
     "Param2": "7%",
     "Param3": "14%",
-    "Param4": "21%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "21%"
   },
   "402904": {
     "Id": 402904,
     "GroupId": 4029,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.402904.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214029",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -10487,16 +8194,12 @@
     "Param1": "40%",
     "Param2": "8%",
     "Param3": "16%",
-    "Param4": "24%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "24%"
   },
   "402905": {
     "Id": 402905,
     "GroupId": 4029,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.402905.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214029",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -10504,16 +8207,12 @@
     "Param1": "45%",
     "Param2": "9%",
     "Param3": "18%",
-    "Param4": "27%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "27%"
   },
   "402906": {
     "Id": 402906,
     "GroupId": 4029,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.402906.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214029",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -10521,16 +8220,12 @@
     "Param1": "50%",
     "Param2": "10%",
     "Param3": "20%",
-    "Param4": "30%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "30%"
   },
   "405301": {
     "Id": 405301,
     "GroupId": 4053,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.405301.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214053",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -10538,16 +8233,12 @@
     "Param1": "10%",
     "Param2": "2%",
     "Param3": "4%",
-    "Param4": "6%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "6%"
   },
   "405302": {
     "Id": 405302,
     "GroupId": 4053,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.405302.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214053",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -10555,16 +8246,12 @@
     "Param1": "12%",
     "Param2": "2.4%",
     "Param3": "4.8%",
-    "Param4": "7.2%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "7.2%"
   },
   "405303": {
     "Id": 405303,
     "GroupId": 4053,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.405303.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214053",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -10572,16 +8259,12 @@
     "Param1": "14%",
     "Param2": "2.8%",
     "Param3": "5.6%",
-    "Param4": "8.4%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "8.4%"
   },
   "405304": {
     "Id": 405304,
     "GroupId": 4053,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.405304.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214053",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -10589,16 +8272,12 @@
     "Param1": "16%",
     "Param2": "3.2%",
     "Param3": "6.4%",
-    "Param4": "9.6%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "9.6%"
   },
   "405305": {
     "Id": 405305,
     "GroupId": 4053,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.405305.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214053",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -10606,16 +8285,12 @@
     "Param1": "18%",
     "Param2": "3.6%",
     "Param3": "7.2%",
-    "Param4": "10.8%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "10.8%"
   },
   "405306": {
     "Id": 405306,
     "GroupId": 4053,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.405306.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214053",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
@@ -10623,10 +8298,7 @@
     "Param1": "20%",
     "Param2": "4%",
     "Param3": "8%",
-    "Param4": "12%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "12%"
   },
   "300101": {
     "Id": 300101,
@@ -10642,11 +8314,7 @@
     "Desc": "MainSkill.300101.2",
     "Param1": "5%",
     "Param2": "6%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "300102": {
     "Id": 300102,
@@ -10662,11 +8330,7 @@
     "Desc": "MainSkill.300102.2",
     "Param1": "6%",
     "Param2": "7.2%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "300103": {
     "Id": 300103,
@@ -10682,11 +8346,7 @@
     "Desc": "MainSkill.300103.2",
     "Param1": "7%",
     "Param2": "8.4%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "300104": {
     "Id": 300104,
@@ -10702,11 +8362,7 @@
     "Desc": "MainSkill.300104.2",
     "Param1": "8%",
     "Param2": "9.6%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "300105": {
     "Id": 300105,
@@ -10722,11 +8378,7 @@
     "Desc": "MainSkill.300105.2",
     "Param1": "9%",
     "Param2": "10.8%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "300106": {
     "Id": 300106,
@@ -10742,11 +8394,7 @@
     "Desc": "MainSkill.300106.2",
     "Param1": "10%",
     "Param2": "12%",
-    "Param3": "4",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "4"
   },
   "300201": {
     "Id": 300201,
@@ -10761,12 +8409,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.300201.2",
     "Param1": "5%",
-    "Param2": "8%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "8%"
   },
   "300202": {
     "Id": 300202,
@@ -10781,12 +8424,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.300202.2",
     "Param1": "6%",
-    "Param2": "9.6%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "9.6%"
   },
   "300203": {
     "Id": 300203,
@@ -10801,12 +8439,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.300203.2",
     "Param1": "7%",
-    "Param2": "11.2%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "11.2%"
   },
   "300204": {
     "Id": 300204,
@@ -10821,12 +8454,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.300204.2",
     "Param1": "8%",
-    "Param2": "12.8%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "12.8%"
   },
   "300205": {
     "Id": 300205,
@@ -10841,12 +8469,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.300205.2",
     "Param1": "9%",
-    "Param2": "14.4%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "14.4%"
   },
   "300206": {
     "Id": 300206,
@@ -10861,12 +8484,7 @@
     "IconBg": "Icon/DiscSkill/db_DiscSkill_1",
     "Desc": "MainSkill.300206.2",
     "Param1": "10%",
-    "Param2": "16%",
-    "Param3": "",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param2": "16%"
   },
   "405501": {
     "Id": 405501,
@@ -10883,9 +8501,7 @@
     "Param2": "6",
     "Param3": "4",
     "Param4": "15%",
-    "Param5": "4",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "4"
   },
   "405502": {
     "Id": 405502,
@@ -10902,9 +8518,7 @@
     "Param2": "6",
     "Param3": "4",
     "Param4": "18%",
-    "Param5": "4",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "4"
   },
   "405503": {
     "Id": 405503,
@@ -10921,9 +8535,7 @@
     "Param2": "6",
     "Param3": "4",
     "Param4": "21%",
-    "Param5": "4",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "4"
   },
   "405504": {
     "Id": 405504,
@@ -10940,9 +8552,7 @@
     "Param2": "6",
     "Param3": "4",
     "Param4": "24%",
-    "Param5": "4",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "4"
   },
   "405505": {
     "Id": 405505,
@@ -10959,9 +8569,7 @@
     "Param2": "6",
     "Param3": "4",
     "Param4": "27%",
-    "Param5": "4",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "4"
   },
   "405506": {
     "Id": 405506,
@@ -10978,15 +8586,12 @@
     "Param2": "6",
     "Param3": "4",
     "Param4": "30%",
-    "Param5": "4",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "4"
   },
   "405601": {
     "Id": 405601,
     "GroupId": 4056,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.405601.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214056",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -10995,15 +8600,12 @@
     "Param2": "6",
     "Param3": "2",
     "Param4": "5%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "405602": {
     "Id": 405602,
     "GroupId": 4056,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.405602.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214056",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -11012,15 +8614,12 @@
     "Param2": "6",
     "Param3": "2",
     "Param4": "6%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "405603": {
     "Id": 405603,
     "GroupId": 4056,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.405603.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214056",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -11029,15 +8628,12 @@
     "Param2": "6",
     "Param3": "2",
     "Param4": "7%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "405604": {
     "Id": 405604,
     "GroupId": 4056,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.405604.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214056",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -11046,15 +8642,12 @@
     "Param2": "6",
     "Param3": "2",
     "Param4": "8%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "405605": {
     "Id": 405605,
     "GroupId": 4056,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.405605.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214056",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -11063,15 +8656,12 @@
     "Param2": "6",
     "Param3": "2",
     "Param4": "9%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "405606": {
     "Id": 405606,
     "GroupId": 4056,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.405606.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214056",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -11080,15 +8670,12 @@
     "Param2": "6",
     "Param3": "2",
     "Param4": "10%",
-    "Param5": "10",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "10"
   },
   "405701": {
     "Id": 405701,
     "GroupId": 4057,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.405701.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214057",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
@@ -11098,14 +8685,12 @@
     "Param3": "15%",
     "Param4": "3%",
     "Param5": "6%",
-    "Param6": "9%",
-    "Param7": ""
+    "Param6": "9%"
   },
   "405702": {
     "Id": 405702,
     "GroupId": 4057,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.405702.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214057",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
@@ -11115,14 +8700,12 @@
     "Param3": "18%",
     "Param4": "3.6%",
     "Param5": "7.2%",
-    "Param6": "10.8%",
-    "Param7": ""
+    "Param6": "10.8%"
   },
   "405703": {
     "Id": 405703,
     "GroupId": 4057,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.405703.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214057",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
@@ -11132,14 +8715,12 @@
     "Param3": "21%",
     "Param4": "4.2%",
     "Param5": "8.4%",
-    "Param6": "12.6%",
-    "Param7": ""
+    "Param6": "12.6%"
   },
   "405704": {
     "Id": 405704,
     "GroupId": 4057,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.405704.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214057",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
@@ -11149,14 +8730,12 @@
     "Param3": "24%",
     "Param4": "4.8%",
     "Param5": "9.6%",
-    "Param6": "14.4%",
-    "Param7": ""
+    "Param6": "14.4%"
   },
   "405705": {
     "Id": 405705,
     "GroupId": 4057,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.405705.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214057",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
@@ -11166,14 +8745,12 @@
     "Param3": "27%",
     "Param4": "5.4%",
     "Param5": "10.8%",
-    "Param6": "16.2%",
-    "Param7": ""
+    "Param6": "16.2%"
   },
   "405706": {
     "Id": 405706,
     "GroupId": 4057,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.405706.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214057",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_6",
@@ -11183,8 +8760,7 @@
     "Param3": "30%",
     "Param4": "6%",
     "Param5": "12%",
-    "Param6": "18%",
-    "Param7": ""
+    "Param6": "18%"
   },
   "405801": {
     "Id": 405801,
@@ -11202,9 +8778,7 @@
     "Param2": "15",
     "Param3": "2",
     "Param4": "5%",
-    "Param5": "30",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "30"
   },
   "405802": {
     "Id": 405802,
@@ -11222,9 +8796,7 @@
     "Param2": "15",
     "Param3": "2",
     "Param4": "6%",
-    "Param5": "30",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "30"
   },
   "405803": {
     "Id": 405803,
@@ -11242,9 +8814,7 @@
     "Param2": "15",
     "Param3": "2",
     "Param4": "7%",
-    "Param5": "30",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "30"
   },
   "405804": {
     "Id": 405804,
@@ -11262,9 +8832,7 @@
     "Param2": "15",
     "Param3": "2",
     "Param4": "8%",
-    "Param5": "30",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "30"
   },
   "405805": {
     "Id": 405805,
@@ -11282,9 +8850,7 @@
     "Param2": "15",
     "Param3": "2",
     "Param4": "9%",
-    "Param5": "30",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "30"
   },
   "405806": {
     "Id": 405806,
@@ -11302,15 +8868,12 @@
     "Param2": "15",
     "Param3": "2",
     "Param4": "10%",
-    "Param5": "30",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "30"
   },
   "405901": {
     "Id": 405901,
     "GroupId": 4059,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.405901.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214059",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -11319,15 +8882,12 @@
     "Param2": "10%",
     "Param3": "5",
     "Param4": "15%",
-    "Param5": "5",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "5"
   },
   "405902": {
     "Id": 405902,
     "GroupId": 4059,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.405902.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214059",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -11336,15 +8896,12 @@
     "Param2": "12%",
     "Param3": "5",
     "Param4": "18%",
-    "Param5": "5",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "5"
   },
   "405903": {
     "Id": 405903,
     "GroupId": 4059,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.405903.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214059",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -11353,15 +8910,12 @@
     "Param2": "14%",
     "Param3": "5",
     "Param4": "21%",
-    "Param5": "5",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "5"
   },
   "405904": {
     "Id": 405904,
     "GroupId": 4059,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.405904.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214059",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -11370,15 +8924,12 @@
     "Param2": "16%",
     "Param3": "5",
     "Param4": "24%",
-    "Param5": "5",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "5"
   },
   "405905": {
     "Id": 405905,
     "GroupId": 4059,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.405905.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214059",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -11387,15 +8938,12 @@
     "Param2": "18%",
     "Param3": "5",
     "Param4": "27%",
-    "Param5": "5",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "5"
   },
   "405906": {
     "Id": 405906,
     "GroupId": 4059,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.405906.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214059",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -11404,15 +8952,12 @@
     "Param2": "20%",
     "Param3": "5",
     "Param4": "30%",
-    "Param5": "5",
-    "Param6": "",
-    "Param7": ""
+    "Param5": "5"
   },
   "406001": {
     "Id": 406001,
     "GroupId": 4060,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.406001.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214060",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -11420,16 +8965,12 @@
     "Param1": "15",
     "Param2": "20",
     "Param3": "5%",
-    "Param4": "5%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "5%"
   },
   "406002": {
     "Id": 406002,
     "GroupId": 4060,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.406002.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214060",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -11437,16 +8978,12 @@
     "Param1": "15",
     "Param2": "20",
     "Param3": "6%",
-    "Param4": "6%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "6%"
   },
   "406003": {
     "Id": 406003,
     "GroupId": 4060,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.406003.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214060",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -11454,16 +8991,12 @@
     "Param1": "15",
     "Param2": "20",
     "Param3": "7%",
-    "Param4": "7%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "7%"
   },
   "406004": {
     "Id": 406004,
     "GroupId": 4060,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.406004.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214060",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -11471,16 +9004,12 @@
     "Param1": "15",
     "Param2": "20",
     "Param3": "8%",
-    "Param4": "8%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "8%"
   },
   "406005": {
     "Id": 406005,
     "GroupId": 4060,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.406005.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214060",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -11488,16 +9017,12 @@
     "Param1": "15",
     "Param2": "20",
     "Param3": "9%",
-    "Param4": "9%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "9%"
   },
   "406006": {
     "Id": 406006,
     "GroupId": 4060,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.406006.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214060",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_4",
@@ -11505,16 +9030,12 @@
     "Param1": "15",
     "Param2": "20",
     "Param3": "10%",
-    "Param4": "10%",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "10%"
   },
   "406101": {
     "Id": 406101,
     "GroupId": 4061,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.406101.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214061",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -11522,16 +9043,12 @@
     "Param1": "7.5%",
     "Param2": "20",
     "Param3": "12%",
-    "Param4": "4",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "4"
   },
   "406102": {
     "Id": 406102,
     "GroupId": 4061,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.406102.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214061",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -11539,16 +9056,12 @@
     "Param1": "9%",
     "Param2": "20",
     "Param3": "14.4%",
-    "Param4": "4",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "4"
   },
   "406103": {
     "Id": 406103,
     "GroupId": 4061,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.406103.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214061",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -11556,16 +9069,12 @@
     "Param1": "10.5%",
     "Param2": "20",
     "Param3": "16.8%",
-    "Param4": "4",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "4"
   },
   "406104": {
     "Id": 406104,
     "GroupId": 4061,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.406104.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214061",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -11573,16 +9082,12 @@
     "Param1": "12%",
     "Param2": "20",
     "Param3": "19.2%",
-    "Param4": "4",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "4"
   },
   "406105": {
     "Id": 406105,
     "GroupId": 4061,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.406105.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214061",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -11590,16 +9095,12 @@
     "Param1": "13.5%",
     "Param2": "20",
     "Param3": "21.6%",
-    "Param4": "4",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "4"
   },
   "406106": {
     "Id": 406106,
     "GroupId": 4061,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.406106.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214061",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
@@ -11607,111 +9108,240 @@
     "Param1": "15%",
     "Param2": "20",
     "Param3": "24%",
-    "Param4": "4",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param4": "4"
   },
   "406201": {
     "Id": 406201,
     "GroupId": 4062,
     "Level": 1,
-    "EffectId": [],
     "Name": "MainSkill.406201.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214062",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.406201.2",
     "Param1": "8",
     "Param2": "6%",
-    "Param3": "15%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "15%"
   },
   "406202": {
     "Id": 406202,
     "GroupId": 4062,
     "Level": 2,
-    "EffectId": [],
     "Name": "MainSkill.406202.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214062",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.406202.2",
     "Param1": "8",
     "Param2": "7.2%",
-    "Param3": "18%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "18%"
   },
   "406203": {
     "Id": 406203,
     "GroupId": 4062,
     "Level": 3,
-    "EffectId": [],
     "Name": "MainSkill.406203.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214062",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.406203.2",
     "Param1": "8",
     "Param2": "8.4%",
-    "Param3": "21%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "21%"
   },
   "406204": {
     "Id": 406204,
     "GroupId": 4062,
     "Level": 4,
-    "EffectId": [],
     "Name": "MainSkill.406204.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214062",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.406204.2",
     "Param1": "8",
     "Param2": "9.6%",
-    "Param3": "24%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "24%"
   },
   "406205": {
     "Id": 406205,
     "GroupId": 4062,
     "Level": 5,
-    "EffectId": [],
     "Name": "MainSkill.406205.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214062",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.406205.2",
     "Param1": "8",
     "Param2": "10.8%",
-    "Param3": "27%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "27%"
   },
   "406206": {
     "Id": 406206,
     "GroupId": 4062,
     "Level": 6,
-    "EffectId": [],
     "Name": "MainSkill.406206.1",
     "Icon": "Icon/DiscSkill/DiscSkill_214062",
     "IconBg": "Icon/DiscSkill/db_DiscSkill_5",
     "Desc": "MainSkill.406206.2",
     "Param1": "8",
     "Param2": "12%",
-    "Param3": "30%",
-    "Param4": "",
-    "Param5": "",
-    "Param6": "",
-    "Param7": ""
+    "Param3": "30%"
+  },
+  "406601": {
+    "Id": 406601,
+    "GroupId": 4066,
+    "Level": 1,
+    "Name": "MainSkill.406601.1",
+    "Icon": "Icon/DiscSkill/DiscSkill_214066",
+    "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+    "Desc": "MainSkill.406601.2",
+    "Param1": "15%",
+    "Param2": "15%",
+    "Param3": "5",
+    "Param4": "15%",
+    "Param5": "8"
+  },
+  "406602": {
+    "Id": 406602,
+    "GroupId": 4066,
+    "Level": 2,
+    "Name": "MainSkill.406602.1",
+    "Icon": "Icon/DiscSkill/DiscSkill_214066",
+    "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+    "Desc": "MainSkill.406602.2",
+    "Param1": "18%",
+    "Param2": "18%",
+    "Param3": "5",
+    "Param4": "18%",
+    "Param5": "8"
+  },
+  "406603": {
+    "Id": 406603,
+    "GroupId": 4066,
+    "Level": 3,
+    "Name": "MainSkill.406603.1",
+    "Icon": "Icon/DiscSkill/DiscSkill_214066",
+    "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+    "Desc": "MainSkill.406603.2",
+    "Param1": "21%",
+    "Param2": "21%",
+    "Param3": "5",
+    "Param4": "21%",
+    "Param5": "8"
+  },
+  "406604": {
+    "Id": 406604,
+    "GroupId": 4066,
+    "Level": 4,
+    "Name": "MainSkill.406604.1",
+    "Icon": "Icon/DiscSkill/DiscSkill_214066",
+    "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+    "Desc": "MainSkill.406604.2",
+    "Param1": "24%",
+    "Param2": "24%",
+    "Param3": "5",
+    "Param4": "24%",
+    "Param5": "8"
+  },
+  "406605": {
+    "Id": 406605,
+    "GroupId": 4066,
+    "Level": 5,
+    "Name": "MainSkill.406605.1",
+    "Icon": "Icon/DiscSkill/DiscSkill_214066",
+    "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+    "Desc": "MainSkill.406605.2",
+    "Param1": "27%",
+    "Param2": "27%",
+    "Param3": "5",
+    "Param4": "27%",
+    "Param5": "8"
+  },
+  "406606": {
+    "Id": 406606,
+    "GroupId": 4066,
+    "Level": 6,
+    "Name": "MainSkill.406606.1",
+    "Icon": "Icon/DiscSkill/DiscSkill_214066",
+    "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+    "Desc": "MainSkill.406606.2",
+    "Param1": "30%",
+    "Param2": "30%",
+    "Param3": "5",
+    "Param4": "30%",
+    "Param5": "8"
+  },
+  "406701": {
+    "Id": 406701,
+    "GroupId": 4067,
+    "Level": 1,
+    "Name": "MainSkill.406701.1",
+    "Icon": "Icon/DiscSkill/DiscSkill_214067",
+    "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+    "Desc": "MainSkill.406701.2",
+    "Param1": "5",
+    "Param2": "0.5%",
+    "Param3": "15",
+    "Param4": "5%"
+  },
+  "406702": {
+    "Id": 406702,
+    "GroupId": 4067,
+    "Level": 2,
+    "Name": "MainSkill.406702.1",
+    "Icon": "Icon/DiscSkill/DiscSkill_214067",
+    "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+    "Desc": "MainSkill.406702.2",
+    "Param1": "5",
+    "Param2": "0.6%",
+    "Param3": "15",
+    "Param4": "6%"
+  },
+  "406703": {
+    "Id": 406703,
+    "GroupId": 4067,
+    "Level": 3,
+    "Name": "MainSkill.406703.1",
+    "Icon": "Icon/DiscSkill/DiscSkill_214067",
+    "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+    "Desc": "MainSkill.406703.2",
+    "Param1": "5",
+    "Param2": "0.7%",
+    "Param3": "15",
+    "Param4": "7%"
+  },
+  "406704": {
+    "Id": 406704,
+    "GroupId": 4067,
+    "Level": 4,
+    "Name": "MainSkill.406704.1",
+    "Icon": "Icon/DiscSkill/DiscSkill_214067",
+    "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+    "Desc": "MainSkill.406704.2",
+    "Param1": "5",
+    "Param2": "0.8%",
+    "Param3": "15",
+    "Param4": "8%"
+  },
+  "406705": {
+    "Id": 406705,
+    "GroupId": 4067,
+    "Level": 5,
+    "Name": "MainSkill.406705.1",
+    "Icon": "Icon/DiscSkill/DiscSkill_214067",
+    "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+    "Desc": "MainSkill.406705.2",
+    "Param1": "5",
+    "Param2": "0.9%",
+    "Param3": "15",
+    "Param4": "9%"
+  },
+  "406706": {
+    "Id": 406706,
+    "GroupId": 4067,
+    "Level": 6,
+    "Name": "MainSkill.406706.1",
+    "Icon": "Icon/DiscSkill/DiscSkill_214067",
+    "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+    "Desc": "MainSkill.406706.2",
+    "Param1": "5",
+    "Param2": "1%",
+    "Param3": "15",
+    "Param4": "10%"
   }
 }

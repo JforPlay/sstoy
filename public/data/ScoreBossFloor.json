@@ -5,9 +5,7 @@
     "ConfigPrefabName": "Roguelike_MiniBoss_DaWuGui_Test",
     "Theme": 114,
     "BGM": "city_combatBoss_setState",
-    "LeaveTriggerEvent": "amb_city_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_city_all_stop"
   },
   "1001002": {
     "Id": 1001002,
@@ -15,9 +13,7 @@
     "ConfigPrefabName": "RegionBoss_FengCao_BossRush",
     "Theme": 14,
     "BGM": "fengCao_combatBoss_setState",
-    "LeaveTriggerEvent": "amb_city_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_city_all_stop"
   },
   "1001003": {
     "Id": 1001003,
@@ -25,9 +21,7 @@
     "ConfigPrefabName": "Roguelike_3_Boss_ChuShi_BossRush",
     "Theme": 107,
     "BGM": "roguelike_combatChuZi_setState",
-    "LeaveTriggerEvent": "amb_city_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_city_all_stop"
   },
   "1001004": {
     "Id": 1001004,
@@ -35,9 +29,7 @@
     "ConfigPrefabName": "Roguelike_4_Boss_JinDuanLiRong_BossRush",
     "Theme": 111,
     "BGM": "roguelike_combatLiRong_setState",
-    "LeaveTriggerEvent": "amb_roguelike_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_roguelike_all_stop"
   },
   "1001005": {
     "Id": 1001005,
@@ -45,9 +37,7 @@
     "ConfigPrefabName": "Roguelike_Boss_ShaSha_BossRush",
     "Theme": 105,
     "BGM": "roguelike_combatShasha_setState",
-    "LeaveTriggerEvent": "amb_roguelike_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_roguelike_all_stop"
   },
   "1001006": {
     "Id": 1001006,
@@ -55,9 +45,7 @@
     "ConfigPrefabName": "Bossrush_FengShanJi",
     "Theme": 109,
     "BGM": "roguelike_combatFan_setState",
-    "LeaveTriggerEvent": "amb_roguelike_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_roguelike_all_stop"
   },
   "1001007": {
     "Id": 1001007,
@@ -65,9 +53,7 @@
     "ConfigPrefabName": "Roguelike_3_Boss_ChuShi_BossRush_2",
     "Theme": 107,
     "BGM": "roguelike_combatChuZi_setState",
-    "LeaveTriggerEvent": "amb_city_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_city_all_stop"
   },
   "1001008": {
     "Id": 1001008,
@@ -75,9 +61,7 @@
     "ConfigPrefabName": "ScoreBoss_FengNiao",
     "Theme": 12,
     "BGM": "fengNiao_realChallenge_setState",
-    "LeaveTriggerEvent": "amb_company_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_company_all_stop"
   },
   "1001009": {
     "Id": 1001009,
@@ -85,9 +69,7 @@
     "ConfigPrefabName": "RegionBoss_DaGuanZi_BossRush",
     "Theme": 106,
     "BGM": "roguelike_combatGuanzi_setState",
-    "LeaveTriggerEvent": "amb_roguelike_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_roguelike_all_stop"
   },
   "1001010": {
     "Id": 1001010,
@@ -95,9 +77,7 @@
     "ConfigPrefabName": "Roguelike_4_Boss_TaiDeng_BossRush",
     "Theme": 110,
     "BGM": "roguelike_combatLamp_setState",
-    "LeaveTriggerEvent": "amb_roguelike_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_roguelike_all_stop"
   },
   "1001011": {
     "Id": 1001011,
@@ -105,9 +85,7 @@
     "ConfigPrefabName": "Roguelike_Boss_ShaSha_BossRush_2",
     "Theme": 105,
     "BGM": "roguelike_combatShasha_setState",
-    "LeaveTriggerEvent": "amb_roguelike_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_roguelike_all_stop"
   },
   "1001012": {
     "Id": 1001012,
@@ -115,9 +93,7 @@
     "ConfigPrefabName": "MiniBoss_BingXiangGuai_Test_Lv1",
     "Theme": 114,
     "BGM": "city_combatBoss_setState",
-    "LeaveTriggerEvent": "amb_city_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_city_all_stop"
   },
   "1001013": {
     "Id": 1001013,
@@ -125,9 +101,7 @@
     "ConfigPrefabName": "MiniBoss_BingXiangGuai_Test_Lv2",
     "Theme": 114,
     "BGM": "city_combatBoss_setState",
-    "LeaveTriggerEvent": "amb_city_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_city_all_stop"
   },
   "1001014": {
     "Id": 1001014,
@@ -135,9 +109,7 @@
     "ConfigPrefabName": "RegionBoss_FengCao_BossRush_6",
     "Theme": 14,
     "BGM": "fengCao_combatBoss_setState",
-    "LeaveTriggerEvent": "amb_city_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_city_all_stop"
   },
   "1001015": {
     "Id": 1001015,
@@ -145,9 +117,7 @@
     "ConfigPrefabName": "Bossrush_HaSaNa",
     "Theme": 118,
     "BGM": "hasaNa_combatBoss_setState",
-    "LeaveTriggerEvent": "amb_coast_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_coast_all_stop"
   },
   "1001016": {
     "Id": 1001016,
@@ -155,9 +125,7 @@
     "ConfigPrefabName": "Roguelike_4_Boss_TaiDeng_BossRush_2",
     "Theme": 110,
     "BGM": "roguelike_combatLamp_setState",
-    "LeaveTriggerEvent": "amb_roguelike_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_roguelike_all_stop"
   },
   "1001017": {
     "Id": 1001017,
@@ -165,9 +133,7 @@
     "ConfigPrefabName": "Roguelike_4_Boss_JinDuanLiRong_BossRush_2",
     "Theme": 111,
     "BGM": "roguelike_combatLiRong_setState",
-    "LeaveTriggerEvent": "amb_roguelike_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_roguelike_all_stop"
   },
   "1001019": {
     "Id": 1001019,
@@ -175,9 +141,7 @@
     "ConfigPrefabName": "Bossrush_FengShanJi_2",
     "Theme": 109,
     "BGM": "roguelike_combatFan_setState",
-    "LeaveTriggerEvent": "amb_roguelike_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_roguelike_all_stop"
   },
   "1001020": {
     "Id": 1001020,
@@ -185,9 +149,7 @@
     "ConfigPrefabName": "Roguelike_3_Boss_ChuShi_BossRush_3",
     "Theme": 107,
     "BGM": "roguelike_combatChuZi_setState",
-    "LeaveTriggerEvent": "amb_city_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_city_all_stop"
   },
   "1001021": {
     "Id": 1001021,
@@ -195,9 +157,7 @@
     "ConfigPrefabName": "Bossrush_HaSaNa_2",
     "Theme": 118,
     "BGM": "hasaNa_combatBoss_setState",
-    "LeaveTriggerEvent": "amb_coast_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_coast_all_stop"
   },
   "1001022": {
     "Id": 1001022,
@@ -205,9 +165,7 @@
     "ConfigPrefabName": "BattleTest_QunGuai_2",
     "Theme": 114,
     "BGM": "city_combatBoss_setState",
-    "LeaveTriggerEvent": "amb_city_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_city_all_stop"
   },
   "1001023": {
     "Id": 1001023,
@@ -215,9 +173,7 @@
     "ConfigPrefabName": "BattleTest_QunGuai_3",
     "Theme": 114,
     "BGM": "city_combatBoss_setState",
-    "LeaveTriggerEvent": "amb_city_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_city_all_stop"
   },
   "1001024": {
     "Id": 1001024,
@@ -225,9 +181,7 @@
     "ConfigPrefabName": "BattleTest_QunGuai_4",
     "Theme": 114,
     "BGM": "city_combatBoss_setState",
-    "LeaveTriggerEvent": "amb_city_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_city_all_stop"
   },
   "1001025": {
     "Id": 1001025,
@@ -235,9 +189,7 @@
     "ConfigPrefabName": "BattleTest_QunGuai_9",
     "Theme": 114,
     "BGM": "city_combatBoss_setState",
-    "LeaveTriggerEvent": "amb_city_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_city_all_stop"
   },
   "1001026": {
     "Id": 1001026,
@@ -245,9 +197,7 @@
     "ConfigPrefabName": "RegionBoss_FengCao_BossRush_10",
     "Theme": 14,
     "BGM": "fengCao_combatBoss_setState",
-    "LeaveTriggerEvent": "amb_city_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_city_all_stop"
   },
   "1001027": {
     "Id": 1001027,
@@ -255,9 +205,7 @@
     "ConfigPrefabName": "ScoreBoss_FengNiao_2",
     "Theme": 12,
     "BGM": "fengNiao_realChallenge_setState",
-    "LeaveTriggerEvent": "amb_company_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_company_all_stop"
   },
   "1001028": {
     "Id": 1001028,
@@ -266,7 +214,6 @@
     "Theme": 461,
     "BGM": "amb_900001_combatBoss_setState",
     "LeaveTriggerEvent": "amb_900001_all_stop",
-    "IntroCutscene": "",
     "LevelScript": "AIScript.LevelAndGroupController.Level.JiJuXieLevelController_Lv2"
   },
   "1001029": {
@@ -275,9 +222,7 @@
     "ConfigPrefabName": "Roguelike_4_Boss_JinDuanLiRong_BossRush_3",
     "Theme": 111,
     "BGM": "roguelike_combatLiRong_setState",
-    "LeaveTriggerEvent": "amb_roguelike_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_roguelike_all_stop"
   },
   "1001030": {
     "Id": 1001030,
@@ -286,7 +231,6 @@
     "Theme": 461,
     "BGM": "amb_900001_combatBoss_setState",
     "LeaveTriggerEvent": "amb_900001_all_stop",
-    "IntroCutscene": "",
     "LevelScript": "AIScript.LevelAndGroupController.Level.JiJuXieLevelController_Lv3"
   },
   "1001031": {
@@ -295,8 +239,6 @@
     "ConfigPrefabName": "Roguelike_Boss_ShaSha_BossRush_3",
     "Theme": 105,
     "BGM": "roguelike_combatShasha_setState",
-    "LeaveTriggerEvent": "amb_roguelike_all_stop",
-    "IntroCutscene": "",
-    "LevelScript": ""
+    "LeaveTriggerEvent": "amb_roguelike_all_stop"
   }
 }
