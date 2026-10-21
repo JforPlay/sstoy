@@ -238,6 +238,15 @@ class Converter:
         self.materials[k] = mat
         return mat
 
+    def mesh_positions(self, handler, mesh, renderer, transform):
+        return np.array(handler.m_Vertices, dtype=np.float32)[:, :3]
+
+    def prepare_renderer(self, renderer):
+        return renderer
+
+    def renderer_allowed(self, renderer, go):
+        return renderer.m_Enabled and go
+
     def convert(self):
         duplicate = set()
         nodes = 0
@@ -245,9 +254,9 @@ class Converter:
             for obj in assets.objects.values():
                 if obj.type.name not in ('MeshRenderer', 'SkinnedMeshRenderer'):
                     continue
-                renderer = obj.read()
+                renderer = self.prepare_renderer(obj.read())
                 go = read(renderer.m_GameObject)
-                if not renderer.m_Enabled or not go:
+                if not go or not self.renderer_allowed(renderer, go):
                     continue
                 if not self.prefab and go.m_Name in ('Sphere', 'Cylinder', 'Cylinder (2)'):
                     continue
@@ -270,7 +279,7 @@ class Converter:
                 handler.process()
                 if not handler.m_Vertices:
                     continue
-                positions = np.array(handler.m_Vertices, dtype=np.float32)[:, :3]
+                positions = self.mesh_positions(handler, mesh, renderer, transform)
                 positions[:, 0] *= -1
                 uv = np.array(handler.m_UV0, dtype=np.float32)[:, :2] if handler.m_UV0 else None
                 normals = np.array(handler.m_Normals, dtype=np.float32)[:, :3] if handler.m_Normals else None

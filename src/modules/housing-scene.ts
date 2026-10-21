@@ -2,9 +2,10 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { loadHousingModel as loadModel } from './housing-models';
 import { footprint, furnitureKind } from './housing-layout';
+import { setCharacterExpression } from './housing-expression';
 import type { Furniture, Placement, RoomSize } from './housing-layout';
 
-type SceneState = { indoor: boolean; size: RoomSize; placements: Placement[]; furniture: Record<string, Furniture>; selected: string; floor?: number; wall?: number; grid: boolean };
+type SceneState = { indoor: boolean; size: RoomSize; placements: Placement[]; furniture: Record<string, Furniture>; selected: string; floor?: number; wall?: number; grid: boolean; character?: string; expression?: number };
 type Callbacks = { select: (uid: string) => void; move: (placement: Placement) => void; error: (id: string) => void };
 
 /** Original Unity meshes, rendered in real 3D. Layout coordinates remain unchanged. */
@@ -15,6 +16,7 @@ export class HousingScene {
   private readonly controls: OrbitControls;
   private readonly objects = new THREE.Group();
   private readonly environment = new THREE.Group();
+  private readonly character = new THREE.Group();
   private readonly raycaster = new THREE.Raycaster();
   private readonly pointer = new THREE.Vector2();
   private readonly observer: ResizeObserver;
@@ -45,7 +47,7 @@ export class HousingScene {
     sun.shadow.mapSize.set(2048, 2048);
     Object.assign(sun.shadow.camera, { left: -35, right: 35, top: 35, bottom: -35, far: 100 });
     sun.shadow.bias = -.0005;
-    this.scene.add(sun, sun.target, this.environment, this.objects);
+    this.scene.add(sun, sun.target, this.environment, this.objects, this.character);
     this.controls = new OrbitControls(this.camera, canvas);
     this.controls.enableDamping = false;
     this.controls.minZoom = .45;
@@ -61,10 +63,20 @@ export class HousingScene {
     canvas.addEventListener('pointermove', this.onMove);
     canvas.addEventListener('pointerup', this.onUp);
     canvas.addEventListener('pointercancel', this.onUp);
+    canvas.addEventListener('mousedown', this.preventPagePan);
+    canvas.addEventListener('wheel', this.preventPageScroll, { passive: false });
     this.observer = new ResizeObserver(this.resize);
     this.observer.observe(host);
     this.resize();
   }
+
+  // Keep browser autoscroll and wheel scrolling outside the scene controls.
+  private readonly preventPagePan = (event: MouseEvent): void => {
+    if (event.button === 1) event.preventDefault();
+  };
+  private readonly preventPageScroll = (event: WheelEvent): void => {
+    event.preventDefault();
+  };
 
   private readonly draw = (): void => {
     if (this.disposed) return;
@@ -92,6 +104,25 @@ export class HousingScene {
   update(state: SceneState): void {
     this.state = state;
     const revision = ++this.revision;
+    this.character.clear();
+    if (state.character) {
+      void loadModel(state.character).then(source => {
+        if (this.disposed || revision !== this.revision) return;
+        const model = source.clone(true);
+        setCharacterExpression(model, this.state?.expression || 1);
+        this.prepare(model);
+        const bounds = new THREE.Box3().setFromObject(model);
+        const center = bounds.getCenter(new THREE.Vector3());
+        // Keep the original SD proportions and place the soles on the room floor.
+        model.position.set(-state.size.L / 2 - center.x, -bounds.min.y + .02, state.size.W / 2 - center.z);
+        this.character.add(model);
+        this.draw();
+      }).catch(error => {
+        if (this.disposed || revision !== this.revision) return;
+        console.error('[Housing] Character load failed:', error);
+        this.callbacks.error(state.character!);
+      });
+    }
     const sceneId = state.indoor ? 'indoor' : 'outdoor';
     if (this.environmentId !== sceneId) {
       this.environmentId = sceneId;
@@ -164,6 +195,12 @@ export class HousingScene {
       this.highlight(state.selected);
       this.draw();
     });
+    this.draw();
+  }
+
+  setExpression(expression: number): void {
+    if (this.state) this.state.expression = expression;
+    setCharacterExpression(this.character, expression);
     this.draw();
   }
 
@@ -245,6 +282,8 @@ export class HousingScene {
     canvas.removeEventListener('pointermove', this.onMove);
     canvas.removeEventListener('pointerup', this.onUp);
     canvas.removeEventListener('pointercancel', this.onUp);
+    canvas.removeEventListener('mousedown', this.preventPagePan);
+    canvas.removeEventListener('wheel', this.preventPageScroll);
     this.grid?.geometry.dispose();
     if (this.grid) (this.grid.material as THREE.Material).dispose();
     this.selection?.geometry.dispose(); this.selection?.material.dispose();

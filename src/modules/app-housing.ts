@@ -4,9 +4,11 @@ import { i18n } from '../i18n';
 import { encodeHousingShare, decodeHousingShare } from './housing-share';
 import { canPlace, canUseFurniture, furnitureKind, fixturePlacement, supportsPlacement, validateLayout } from './housing-layout';
 import { HousingScene } from './housing-scene';
+import { HousingPreview } from './housing-preview';
 import type { Furniture, Layout, Placement, Room, RoomSize, DefaultFurniture } from './housing-layout';
 
 type Item = { Title: string; Desc?: string; Icon?: string };
+type HousingCharacter = { characterId: number; model: string; expressions?: number[] };
 const storageKey = 'housingLayoutV1';
 let furniture: Record<string, Furniture> = {};
 let rooms: Record<string, Room> = {};
@@ -23,6 +25,14 @@ let category = 0;
 let query = '';
 let allowOverlap = false;
 let showGrid = true;
+let characterModel = '';
+let characters: Record<string, HousingCharacter> = {};
+let characterNames: Record<string, string> = {};
+let catalogMode: 'furniture' | 'characters' = 'furniture';
+let catalogCharacter = '';
+let previewMode: '2d' | '3d' = '3d';
+let inspectorPreview: HousingPreview | undefined;
+const characterExpressions: Record<string, number> = {};
 let wallSide: 'left' | 'right' = 'right';
 let wallElevation = 1;
 let languageRevision = 0;
@@ -63,13 +73,15 @@ function undo(): void {
 async function loadNames(): Promise<void> {
   const revision = ++languageRevision;
   const lang = i18n.currentLang || 'KR';
-  const [newNames, newRoomNames] = await Promise.all([
+  const [newNames, newRoomNames, newCharacterNames] = await Promise.all([
     fetchJSON<Record<string, string>>(`data/${lang}/Item.json`),
     fetchJSON<Record<string, string>>(`data/${lang}/DormRoom.json`),
+    fetchJSON<Record<string, string>>(`data/${lang}/Character.json`),
   ]);
   if (revision !== languageRevision) return;
   names = newNames;
   roomNames = newRoomNames;
+  characterNames = newCharacterNames;
   render();
 }
 
@@ -81,6 +93,7 @@ export async function initHousing(): Promise<void> {
     fetchJSON<Record<string, Item>>('data/Item.json'),
   ]);
   defaults = Object.values(await fetchJSON<Record<string, DefaultFurniture>>('data/DormRoomLayout.json'));
+  characters = await fetchJSON<Record<string, HousingCharacter>>('assets/housing/models/characters.json');
   roomId = Object.keys(rooms)[0]!;
   let invalidSavedData = false;
   try {
@@ -111,6 +124,7 @@ export async function initHousing(): Promise<void> {
 }
 
 function render(): void {
+  inspectorPreview?.dispose(); inspectorPreview = undefined;
   sceneView?.dispose(); sceneView = undefined;
   root().setAttribute('aria-busy', 'false');
   root().innerHTML = `
@@ -128,7 +142,11 @@ function render(): void {
     </div>
     <div class="housing-layout">
       <aside class="housing-panel">
-        <h2>${t('catalog')} <small>(${Object.values(furniture).filter(f => !f.NotShow).length})</small></h2>
+        <div class="housing-catalog-tabs" role="group" aria-label="${t('catalogType')}">
+          <button class="btn btn-secondary ${catalogMode === 'furniture' ? 'active' : ''}" data-catalog="furniture" aria-pressed="${catalogMode === 'furniture'}">${t('catalog')}</button>
+          <button class="btn btn-secondary ${catalogMode === 'characters' ? 'active' : ''}" data-catalog="characters" aria-pressed="${catalogMode === 'characters'}">${t('characterCatalog')}</button>
+        </div>
+        <h2 id="housing-catalog-heading"></h2>
         <input class="housing-input" id="housing-search" type="search" value="${esc(query)}" placeholder="${esc(t('search'))}" aria-label="${esc(t('search'))}">
         <div class="housing-filters" role="group" aria-label="${esc(t('category'))}">
           ${[0, 1, 2, 3, 4, 5, 6, 7, 8].map(tab => `<button class="btn btn-secondary ${category === tab ? 'active' : ''}" data-category="${tab}" aria-pressed="${category === tab}">${t(`category${tab}`)}</button>`).join('')}
@@ -136,6 +154,7 @@ function render(): void {
         <label class="housing-help"><input id="housing-compatible" type="checkbox"> ${t('compatibleOnly')}</label>
         <div id="housing-catalog" class="housing-catalog"></div>
       </aside>
+      <aside class="housing-panel housing-inspector"><h2 id="housing-inspector-heading">${t('details')}</h2><div id="housing-details" class="housing-details"></div><div id="housing-summary" class="housing-summary"></div></aside>
       <section class="housing-panel">
         <div class="housing-board-heading"><h2>${t('floorPlan')}</h2><span>${size().L} × ${size().W}</span></div>
         <div class="housing-board-actions">
@@ -154,7 +173,6 @@ function render(): void {
         <p class="housing-help">${t('backgroundNote')}</p>
         <div id="housing-share" class="housing-share" hidden><label for="housing-share-url">${t('share')}</label><input id="housing-share-url" class="housing-input" readonly></div>
       </section>
-      <aside class="housing-panel housing-inspector"><h2>${t('details')}</h2><div id="housing-details" class="housing-details"></div><div id="housing-summary" class="housing-summary"></div></aside>
     </div>
     <p class="housing-note">${t('limitation')}</p>`;
   root().onclick = handleClick;
@@ -176,6 +194,27 @@ function render(): void {
 
 function renderCatalog(): void {
   const container = document.getElementById('housing-catalog')!;
+  const characterMode = catalogMode === 'characters';
+  document.getElementById('housing-catalog-heading')!.textContent = `${t(characterMode ? 'characterCatalog' : 'catalog')} (${characterMode ? Object.keys(characters).length : Object.values(furniture).filter(f => !f.NotShow).length})`;
+  root().querySelector<HTMLElement>('.housing-filters')!.hidden = characterMode;
+  root().querySelector<HTMLInputElement>('#housing-compatible')!.closest('label')!.hidden = characterMode;
+  const search = root().querySelector<HTMLInputElement>('#housing-search')!;
+  search.placeholder = t(characterMode ? 'characterSearch' : 'search');
+  search.setAttribute('aria-label', search.placeholder);
+  root().querySelectorAll<HTMLElement>('[data-catalog]').forEach(button => {
+    const active = button.dataset.catalog === catalogMode;
+    button.classList.toggle('active', active); button.setAttribute('aria-pressed', String(active));
+  });
+  if (characterMode) {
+    container.innerHTML = Object.entries(characters).filter(([, c]) => `${characterNames[`Character.${c.characterId}.1`]} ${c.characterId}`.toLowerCase().includes(query.toLowerCase())).map(([skin, c]) =>
+      `<button class="housing-furniture ${catalogCharacter === skin ? 'selected' : ''}" data-character="${skin}" aria-label="${esc(characterNames[`Character.${c.characterId}.1`] || c.characterId)}"><img src="assets/char/head_${skin}_S.png" alt="" loading="lazy" draggable="false"><strong>${esc(characterNames[`Character.${c.characterId}.1`] || c.characterId)}</strong><small>3D</small></button>`).join('') || `<p class="housing-help">${t('noResults')}</p>`;
+    container.ondragstart = null;
+    container.ondblclick = event => {
+      const skin = (event.target as HTMLElement).closest<HTMLElement>('[data-character]')?.dataset.character;
+      if (skin && characters[skin]) { characterModel = characters[skin]!.model; renderBoard(); renderInspector(); }
+    };
+    return;
+  }
   const compatibleOnly = document.querySelector<HTMLInputElement>('#housing-compatible')?.checked;
   const list = Object.values(furniture).filter(f => !f.NotShow && (!category || f.Tab === category) &&
     (!compatibleOnly || canUseFurniture(f, currentRoom())) && `${name(f.Id)} ${f.Id}`.toLowerCase().includes(query.toLowerCase()));
@@ -205,6 +244,7 @@ function renderBoard(): void {
     try {
       sceneView = new HousingScene(board, {
         select: uid => {
+          catalogMode = 'furniture'; catalogCharacter = ''; renderCatalog();
           selected = uid;
           catalogId = selectedPlacement()?.furnitureId || catalogId;
           renderInspector();
@@ -216,7 +256,7 @@ function renderBoard(): void {
   }
   const floor = finishId('floor');
   sceneView.update({ indoor: !!currentRoom().RoomType, size: size(), placements: scenePlacements(),
-    furniture, selected, floor: floor && furniture[floor]?.NotShow ? undefined : floor, wall: finishId('wall'), grid: showGrid });
+    furniture, selected, floor: floor && furniture[floor]?.NotShow ? undefined : floor, wall: finishId('wall'), grid: showGrid, character: characterModel, expression: characterExpressions[characterModel] || 1 });
   board.ondragover = event => { event.preventDefault(); if (event.dataTransfer) event.dataTransfer.dropEffect = 'copy'; };
   board.ondrop = event => {
     event.preventDefault();
@@ -236,16 +276,43 @@ function renderBoard(): void {
 }
 
 function renderInspector(): void {
-  const f = selectedFurniture();
-  const p = selectedPlacement();
+  inspectorPreview?.dispose(); inspectorPreview = undefined;
+  const character = catalogMode === 'characters' ? characters[catalogCharacter] : undefined;
+  const f = catalogMode === 'furniture' ? selectedFurniture() : undefined;
+  const p = catalogMode === 'furniture' ? selectedPlacement() : undefined;
   const detail = document.getElementById('housing-details')!;
   const compatible = f && canUseFurniture(f, currentRoom());
   const kind = f ? furnitureKind(f) : 'floor';
   const finish = kind === 'floorFinish' || kind === 'wallFinish' || kind === 'fixture';
-  detail.innerHTML = f ? `<img src="${image(f.Id)}" alt=""><h3>${esc(name(f.Id))}</h3>
+  document.getElementById('housing-inspector-heading')!.textContent = t(catalogMode === 'characters' ? 'characterDetails' : 'details');
+  const modelId = character?.model || (f && !f.NotShow ? String(f.Id) : '');
+  const imageUrl = character ? `assets/char/head_${catalogCharacter}_L.png` : f ? image(f.Id) : '';
+  const title = character ? characterNames[`Character.${character.characterId}.1`] || String(character.characterId) : f ? name(f.Id) : '';
+  const preview = modelId ? `<div class="housing-preview-tabs" role="group" aria-label="${t('previewType')}">
+    <button class="btn btn-secondary ${previewMode === '3d' ? 'active' : ''}" data-preview="3d" aria-pressed="${previewMode === '3d'}">3D</button>
+    <button class="btn btn-secondary ${previewMode === '2d' ? 'active' : ''}" data-preview="2d" aria-pressed="${previewMode === '2d'}">2D</button></div>
+    ${previewMode === '3d' ? `<div id="housing-model-preview" class="housing-model-preview" role="group" aria-label="${esc(title)} 3D"></div><p class="housing-help">${t('previewHelp')}</p>` : `<img class="housing-preview-image" src="${esc(imageUrl)}" alt="${esc(title)}">`}` : '';
+  const expressionSelect = character?.expressions?.length ? `<label class="housing-help">${t('expression')}<select class="housing-input" id="housing-expression">${character.expressions.map(id => `<option value="${id}" ${(characterExpressions[character.model] || 1) === id ? 'selected' : ''}>${id === 1 ? t('expressionDefault') : `${t('expression')} ${id}`}</option>`).join('')}</select></label>` : '';
+  detail.innerHTML = character ? `${preview}<h3>${esc(title)}</h3>${expressionSelect}<p>${t('characterPreview')}</p><button class="btn btn-primary" data-action="show-character">${t('showCharacter')}</button><button class="btn btn-secondary" data-action="hide-character" ${characterModel ? '' : 'disabled'}>${t('hideCharacter')}</button>` : f ? `${preview}<h3>${esc(name(f.Id))}</h3>
     <p>${f.L} × ${f.W} × ${f.H}<br>${t('collection')}: ${f.CollectionValue || 0}<br>${t('category')}: ${t(`category${f.Tab}`)}${p ? `<br>X ${p.x} · Y ${p.y} · ${p.rotation}°` : ''}</p>
     <p>${esc(names[items[f.Id]?.Desc || ''] || '')}</p>
-    <p>${esc(availability(f))}${kind === 'fixture' ? `<br>${t('fixedHint')}` : ''}${kind === 'wall' ? `<br>${t('wallHint')}` : ''}</p>` : `<p class="housing-help">${t('selectFurniture')}</p>`;
+    <p>${esc(availability(f))}${kind === 'fixture' ? `<br>${t('fixedHint')}` : ''}${kind === 'wall' ? `<br>${t('wallHint')}` : ''}</p>` : `<p class="housing-help">${t(catalogMode === 'characters' ? 'selectCharacter' : 'selectFurniture')}</p>`;
+  const previewHost = document.getElementById('housing-model-preview');
+  if (previewHost && modelId) {
+    try {
+      inspectorPreview = new HousingPreview(previewHost, modelId, () => { previewHost.textContent = t('modelError'); });
+      if (character) inspectorPreview.setExpression(characterExpressions[character.model] || 1);
+    }
+    catch (error) { console.error('[Housing preview]', error); previewHost.textContent = t('webglError'); }
+  }
+  const expressionInput = document.getElementById('housing-expression') as HTMLSelectElement | null;
+  if (expressionInput && character) expressionInput.onchange = () => {
+    const value = Number(expressionInput.value);
+    if (!character.expressions?.includes(value)) return;
+    characterExpressions[character.model] = value;
+    inspectorPreview?.setExpression(value);
+    if (characterModel === character.model) sceneView?.setExpression(value);
+  };
   const add = root().querySelector<HTMLButtonElement>('[data-action="add"]')!;
   add.disabled = !compatible || (!finish && placements().length >= 200);
   add.textContent = finish ? t(kind === 'fixture' ? 'replaceFixture' : 'applyFinish') : p ? t('duplicate') : t('add');
@@ -342,6 +409,20 @@ function moveSelected(x: number, y: number, rotation?: number, elevation?: numbe
 function handleClick(event: MouseEvent): void {
   const target = (event.target as HTMLElement).closest<HTMLButtonElement>('button');
   if (!target || target.disabled) return;
+  if (target.dataset.catalog) {
+    catalogMode = target.dataset.catalog as typeof catalogMode;
+    query = ''; root().querySelector<HTMLInputElement>('#housing-search')!.value = '';
+    renderCatalog(); renderInspector(); return;
+  }
+  if (target.dataset.preview) {
+    previewMode = target.dataset.preview as typeof previewMode;
+    renderInspector(); return;
+  }
+  if (target.dataset.character) {
+    catalogCharacter = target.dataset.character; selected = '';
+    root().querySelectorAll<HTMLElement>('[data-character]').forEach(card => card.classList.toggle('selected', card.dataset.character === catalogCharacter));
+    renderInspector(); return;
+  }
   if (target.dataset.room) {
     roomId = target.dataset.room; selected = ''; render(); return;
   }
@@ -361,6 +442,10 @@ function handleClick(event: MouseEvent): void {
   }
   const p = selectedPlacement();
   switch (target.dataset.action) {
+    case 'show-character':
+      characterModel = characters[catalogCharacter]?.model || ''; renderBoard(); renderInspector(); break;
+    case 'hide-character':
+      characterModel = ''; renderBoard(); renderInspector(); break;
     case 'add': addFurniture(selectedFurniture()?.Id || 0); break;
     case 'rotate':
       if (p?.wall) changeWallMount(p.wall === 'left' ? 'right' : 'left', p.elevation ?? 1);

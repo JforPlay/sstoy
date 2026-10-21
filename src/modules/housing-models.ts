@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import type { GLTF } from 'three/addons/loaders/GLTFLoader.js';
+import { setCharacterExpression } from './housing-expression';
 
 const models = new Map<string, Promise<THREE.Group>>();
 
@@ -48,6 +49,7 @@ async function readModel(id: string): Promise<THREE.Group> {
       }
       const gltf = await loader.parseAsync(bytes, new URL('.', url).href);
       await checkTextures(gltf, id);
+      setCharacterExpression(gltf.scene);
       return gltf.scene;
     } catch (error) {
       if (attempt) throw error;
