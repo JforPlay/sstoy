@@ -14,6 +14,7 @@
     "themeDark": "다크"
   },
   "housing": {
+    "furnitureCopied": "가구를 복사했습니다. Ctrl+V로 빈자리에 붙여넣을 수 있습니다.",
     "finishAction": "더블클릭하거나 배치 화면에 끌어놓아 적용",
     "webglError": "이 브라우저에서 3D 화면을 시작하지 못했습니다.",
     "modelError": "3D 모델을 불러오지 못했습니다",
@@ -62,7 +63,7 @@
     "category8": "특수 가구",
     "compatibleOnly": "현재 공간에 배치 가능한 가구만",
     "floorPlan": "배치 미리보기",
-    "instructions": "가구 드래그: 이동 · 빈 공간 드래그: 시점 회전 · 우클릭 드래그: 화면 이동 · 휠: 확대·축소 · R: 회전 · Delete: 삭제",
+    "instructions": "가구 드래그: 이동 · 빈 공간 드래그: 시점 회전 · 휠 클릭/우클릭 드래그: 화면 이동(범위 제한) · 휠: 확대·축소 · R: 회전 · Delete: 삭제 · Ctrl+Z: 되돌리기 · Ctrl+C/V: 가구 복사·붙여넣기",
     "overlap": "겹침 허용",
     "details": "가구 정보",
     "collection": "수집 점수 참고치",

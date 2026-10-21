@@ -14,6 +14,7 @@
     "themeDark": "ダーク"
   },
   "housing": {
+    "furnitureCopied": "家具をコピーしました。Ctrl+Vで空いている場所に貼り付けます。",
     "finishAction": "ダブルクリック、またはプレビューにドラッグして適用",
     "webglError": "このブラウザーでは3D画面を開始できませんでした。",
     "modelError": "3Dモデルを読み込めませんでした",
@@ -62,7 +63,7 @@
     "category8": "特殊家具",
     "compatibleOnly": "この空間に配置できる家具のみ",
     "floorPlan": "配置プレビュー",
-    "instructions": "家具をドラッグ：移動 · 空白をドラッグ：視点回転 · 右ドラッグ：画面移動 · ホイール：拡大・縮小 · R：回転 · Delete：削除",
+    "instructions": "家具をドラッグ：移動 · 空白をドラッグ：視点回転 · 中／右ドラッグ：画面移動（範囲制限） · ホイール：拡大・縮小 · R：回転 · Delete：削除 · Ctrl+Z：元に戻す · Ctrl+C/V：家具をコピー・貼り付け",
     "overlap": "重なりを許可",
     "details": "家具情報",
     "collection": "収集ポイント参考値",

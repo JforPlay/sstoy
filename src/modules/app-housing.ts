@@ -1,4 +1,5 @@
 import { fetchJSON } from '../shared/network';
+import { showToast } from '../shared/ui';
 import { i18n } from '../i18n';
 import { encodeHousingShare, decodeHousingShare } from './housing-share';
 import { canPlace, canUseFurniture, furnitureKind, fixturePlacement, supportsPlacement, validateLayout } from './housing-layout';
@@ -26,6 +27,7 @@ let wallSide: 'left' | 'right' = 'right';
 let wallElevation = 1;
 let languageRevision = 0;
 let sceneView: HousingScene | undefined;
+const furnitureClipboardPrefix = 'sstoy-housing-furniture:';
 const history: string[] = [];
 const t = (key: string): string => i18n.t(`housing.${key}`);
 const esc = (value: string | number): string => String(value).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]!));
@@ -51,6 +53,12 @@ function persist(): boolean {
 }
 function commit(): boolean { const saved = persist(); renderBoard(); renderInspector(); return saved; }
 function notifyInvalid(): void { status(t('invalidPosition')); }
+function undo(): void {
+  if (!history.length) return;
+  layout = JSON.parse(history.pop()!) as Layout;
+  selected = '';
+  if (commit()) status(t('updated'));
+}
 
 async function loadNames(): Promise<void> {
   const revision = ++languageRevision;
@@ -98,6 +106,8 @@ export async function initHousing(): Promise<void> {
     void loadNames().catch(error => { console.error('[Housing]', error); status(t('loadError')); });
   });
   document.addEventListener('keydown', handleKeyboard);
+  document.addEventListener('copy', copyFurniture);
+  document.addEventListener('paste', pasteFurniture);
 }
 
 function render(): void {
@@ -288,23 +298,24 @@ function changeWallMount(side: 'left' | 'right', elevation: number): void {
 }
 
 
-function addFurniture(id: number, point?: { x: number; y: number }): void {
+function addFurniture(id: number, point?: { x: number; y: number }, template?: Placement): void {
   const f = furniture[id];
   if (!f || !canUseFurniture(f, currentRoom())) { status(f ? availability(f) : t('unsupported')); return; }
   const kind = furnitureKind(f);
   if (kind === 'floorFinish' || kind === 'wallFinish' || kind === 'fixture') { applyDecoration(f); return; }
   if (placements().length >= 200) { status(t('limit')); return; }
-  const candidate: Placement = { uid: crypto.randomUUID(), furnitureId: id, x: point ? Math.floor(point.x) : 0, y: point ? Math.floor(point.y) : 0, rotation: 0 };
+  const candidate: Placement = { uid: crypto.randomUUID(), furnitureId: id, x: point ? Math.floor(point.x) : 0, y: point ? Math.floor(point.y) : 0, rotation: template?.rotation ?? 0 };
   if (kind === 'wall') {
-    candidate.wall = wallSide; candidate.elevation = Math.min(wallElevation, Math.max(0, (size().H || 5) - f.H));
-    candidate.rotation = wallSide === 'left' ? 90 : 0;
-    candidate.x = wallSide === 'left' ? 0 : Math.max(0, candidate.x);
-    candidate.y = wallSide === 'right' ? 0 : Math.max(0, candidate.y);
+    candidate.wall = template?.wall || wallSide;
+    candidate.elevation = Math.min(template?.elevation ?? wallElevation, Math.max(0, (size().H || 5) - f.H));
+    candidate.rotation = candidate.wall === 'left' ? 90 : 0;
+    candidate.x = candidate.wall === 'left' ? 0 : Math.max(0, candidate.x);
+    candidate.y = candidate.wall === 'right' ? 0 : Math.max(0, candidate.y);
   }
   if (!point) {
     let found = false;
-    const maxX = kind === 'wall' && wallSide === 'left' ? 1 : size().L;
-    const maxY = kind === 'wall' && wallSide === 'right' ? 1 : size().W;
+    const maxX = candidate.wall === 'left' ? 1 : size().L;
+    const maxY = candidate.wall === 'right' ? 1 : size().W;
     for (let y = 0; y < maxY && !found; y++) for (let x = 0; x < maxX && !found; x++) {
       candidate.x = x; candidate.y = y;
       found = canPlace(candidate, scenePlacements(), furniture, size(), allowOverlap);
@@ -362,9 +373,12 @@ function handleClick(event: MouseEvent): void {
       if (layout.decorations?.[roomId]) { remember(); delete layout.decorations[roomId]; selected = ''; if (commit()) status(t('applied')); }
       break;
     case 'undo':
-      if (history.length) { layout = JSON.parse(history.pop()!) as Layout; selected = ''; if (commit()) status(t('updated')); }
+      undo();
       break;
-    case 'save': if (persist()) status(t('saved')); break;
+    case 'save':
+      if (persist()) { status(t('saved')); showToast(t('saved'), 'success'); }
+      else showToast(t('saveError'), 'error');
+      break;
     case 'clear':
       if ((placements().length || layout.decorations?.[roomId]) && confirm(t('confirmClear'))) { remember(); layout.rooms[roomId] = []; if (layout.decorations) delete layout.decorations[roomId]; selected = ''; commit(); }
       break;
@@ -378,9 +392,42 @@ function handleClick(event: MouseEvent): void {
   }
 }
 
+function copyFurniture(event: ClipboardEvent): void {
+  const target = event.target as HTMLElement;
+  if (target.closest('input,select,textarea,[contenteditable="true"]') || window.getSelection()?.toString()) return;
+  const p = selectedPlacement();
+  if (!p || isFixed(p) || !event.clipboardData) return;
+  event.clipboardData.setData('text/plain', furnitureClipboardPrefix + JSON.stringify({ furnitureId: p.furnitureId, rotation: p.rotation, wall: p.wall, elevation: p.elevation }));
+  event.preventDefault();
+  status(t('furnitureCopied')); showToast(t('furnitureCopied'), 'success');
+}
+
+function pasteFurniture(event: ClipboardEvent): void {
+  const target = event.target as HTMLElement;
+  if (target.closest('input,select,textarea,[contenteditable="true"]')) return;
+  const text = event.clipboardData?.getData('text/plain') || '';
+  if (!text.startsWith(furnitureClipboardPrefix)) return;
+  event.preventDefault();
+  try {
+    if (text.length > 1000) throw new Error('Oversized furniture clipboard');
+    const data = JSON.parse(text.slice(furnitureClipboardPrefix.length)) as Partial<Placement>;
+    if (!data || !Number.isInteger(data.furnitureId) || ![0, 90, 180, 270].includes(data.rotation!) ||
+      (data.wall !== undefined && !['left', 'right'].includes(data.wall)) ||
+      (data.elevation !== undefined && (!Number.isInteger(data.elevation) || data.elevation < 0))) throw new Error('Invalid furniture clipboard');
+    addFurniture(data.furnitureId!, undefined, { uid: 'clipboard', furnitureId: data.furnitureId!, x: 0, y: 0, rotation: data.rotation!, wall: data.wall, elevation: data.elevation });
+  } catch { status(t('importError')); }
+}
+
 function handleKeyboard(event: KeyboardEvent): void {
   const target = event.target as HTMLElement;
-  if (!selected || target.closest('input,select,textarea') || !target.closest('.housing-board')) return;
+  if (target.closest('input,select,textarea,[contenteditable="true"]')) return;
+  if (event.ctrlKey || event.metaKey) {
+    if (event.altKey || event.shiftKey || event.repeat) return;
+    const key = event.key.toLowerCase();
+    if (key === 'z' && history.length) { event.preventDefault(); undo(); }
+    return;
+  }
+  if (event.altKey || !selected || !target.closest('.housing-board')) return;
   const p = selectedPlacement();
   if (!p || isFixed(p)) return;
   const delta: Record<string, [number, number]> = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };

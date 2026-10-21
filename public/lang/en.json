@@ -14,6 +14,7 @@
     "themeDark": "Dark"
   },
   "housing": {
+    "furnitureCopied": "Furniture copied. Press Ctrl+V to paste into a free space.",
     "finishAction": "Double-click or drag onto the preview to apply",
     "webglError": "Could not start the 3D view in this browser.",
     "modelError": "Could not load the 3D model",
@@ -62,7 +63,7 @@
     "category8": "Special",
     "compatibleOnly": "Placeable in this space only",
     "floorPlan": "Layout preview",
-    "instructions": "Drag furniture: move · Drag empty space: orbit · Right drag: pan · Wheel: zoom · R: rotate · Delete: remove",
+    "instructions": "Drag furniture: move · Drag empty space: orbit · Middle/right drag: pan (bounded) · Wheel: zoom · R: rotate · Delete: remove · Ctrl+Z: undo · Ctrl+C/V: copy/paste furniture",
     "overlap": "Allow overlap",
     "details": "Furniture details",
     "collection": "Collection score estimate",

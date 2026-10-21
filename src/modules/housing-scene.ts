@@ -53,7 +53,9 @@ export class HousingScene {
     this.controls.maxPolarAngle = Math.PI * .48;
     this.controls.minPolarAngle = .15;
     this.controls.mouseButtons.LEFT = THREE.MOUSE.ROTATE;
+    this.controls.mouseButtons.MIDDLE = THREE.MOUSE.PAN;
     this.controls.mouseButtons.RIGHT = THREE.MOUSE.PAN;
+    this.controls.screenSpacePanning = false;
     this.controls.addEventListener('change', this.draw);
     canvas.addEventListener('pointerdown', this.onDown, true);
     canvas.addEventListener('pointermove', this.onMove);
@@ -96,6 +98,8 @@ export class HousingScene {
       this.environment.clear();
       this.camera.position.set(-35, 30, 40);
       this.controls.target.set(-state.size.L / 2, 0, state.size.W / 2);
+      this.controls.cursor.copy(this.controls.target);
+      this.controls.maxTargetRadius = Math.min(state.size.L, state.size.W) / 2;
       this.camera.zoom = 1.3;
       this.controls.update();
       this.scene.background = new THREE.Color(state.indoor ? '#b7b5bd' : '#c7d9b0');
