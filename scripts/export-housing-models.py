@@ -247,6 +247,9 @@ class Converter:
     def renderer_allowed(self, renderer, go):
         return renderer.m_Enabled and go
 
+    def node_created(self, name, renderer, transform, handler):
+        pass
+
     def convert(self):
         duplicate = set()
         nodes = 0
@@ -301,7 +304,9 @@ class Converter:
                         visual = trimesh.visual.TextureVisuals(uv=uv, material=self.material(material_pointer))
                         geometry = trimesh.Trimesh(vertices=positions, faces=faces, vertex_normals=normals, visual=visual, process=False)
                         self.scene.geometry[geometry_key] = geometry
-                    self.scene.graph.update(frame_to=f'{go.m_Name}_{nodes}', matrix=matrix, geometry=geometry_key)
+                    node_name = f'{go.m_Name}_{nodes}'
+                    self.scene.graph.update(frame_to=node_name, matrix=matrix, geometry=geometry_key)
+                    self.node_created(node_name, renderer, transform, handler)
                     nodes += 1
         if not nodes:
             raise ValueError('No renderable geometry')

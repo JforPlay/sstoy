@@ -243,16 +243,6 @@
         </div>
     </div>
 
-    <!-- Service Worker -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                const swUrl = new URL('sw.js', window.location.href).pathname;
-                navigator.serviceWorker.register(swUrl)
-                    .catch(err => console.warn('[SW] Registration failed:', err));
-            });
-        }
-    </script>
 
     <script type="module" src="src/pages/mainpage.ts"></script>
 </body>

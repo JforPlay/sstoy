@@ -18,6 +18,12 @@
       13,
       14
     ],
+    "animation": {
+      "name": "SDact_16201_Idle_01",
+      "duration": 1.8666667938232422,
+      "channels": 498,
+      "unusedPaths": []
+    },
     "nodes": 67,
     "geometry": 67,
     "materials": 6,
@@ -54,6 +60,22 @@
       13,
       14
     ],
+    "animation": {
+      "name": "SDact_10301_Idle_01",
+      "duration": 1.8666667938232422,
+      "channels": 327,
+      "unusedPaths": [
+        101038124,
+        561479908,
+        1442298468,
+        1887249874,
+        1921352364,
+        2290794447,
+        2952300295,
+        3682123143,
+        4228547919
+      ]
+    },
     "nodes": 69,
     "geometry": 69,
     "materials": 7,
@@ -91,6 +113,12 @@
       14,
       81
     ],
+    "animation": {
+      "name": "SDact_11001_Idle_01",
+      "duration": 1.8666667938232422,
+      "channels": 396,
+      "unusedPaths": []
+    },
     "nodes": 72,
     "geometry": 72,
     "materials": 7,
@@ -127,6 +155,22 @@
       13,
       14
     ],
+    "animation": {
+      "name": "SDact_11101_Idle_01",
+      "duration": 1.8666667938232422,
+      "channels": 378,
+      "unusedPaths": [
+        101038124,
+        561479908,
+        1442298468,
+        1887249874,
+        1921352364,
+        2290794447,
+        2952300295,
+        3682123143,
+        4228547919
+      ]
+    },
     "nodes": 71,
     "geometry": 71,
     "materials": 8,
@@ -163,6 +207,22 @@
       13,
       14
     ],
+    "animation": {
+      "name": "SDact_11201_Idle_01",
+      "duration": 1.8666667938232422,
+      "channels": 459,
+      "unusedPaths": [
+        101038124,
+        561479908,
+        1442298468,
+        1887249874,
+        1921352364,
+        2290794447,
+        2952300295,
+        3682123143,
+        4228547919
+      ]
+    },
     "nodes": 68,
     "geometry": 68,
     "materials": 6,
@@ -199,6 +259,12 @@
       13,
       14
     ],
+    "animation": {
+      "name": "SDact_13301_Idle_01",
+      "duration": 1.8666667938232422,
+      "channels": 492,
+      "unusedPaths": []
+    },
     "nodes": 69,
     "geometry": 69,
     "materials": 8,
@@ -235,6 +301,12 @@
       13,
       14
     ],
+    "animation": {
+      "name": "SDact_13401_Idle_01",
+      "duration": 1.8666667938232422,
+      "channels": 405,
+      "unusedPaths": []
+    },
     "nodes": 73,
     "geometry": 73,
     "materials": 7,
@@ -271,6 +343,12 @@
       13,
       14
     ],
+    "animation": {
+      "name": "SDact_13501_Idle_01",
+      "duration": 1.8666667938232422,
+      "channels": 516,
+      "unusedPaths": []
+    },
     "nodes": 70,
     "geometry": 70,
     "materials": 7,
@@ -307,6 +385,12 @@
       13,
       14
     ],
+    "animation": {
+      "name": "SDact_14401_Idle_01",
+      "duration": 1.8666667938232422,
+      "channels": 471,
+      "unusedPaths": []
+    },
     "nodes": 65,
     "geometry": 65,
     "materials": 6,
@@ -343,6 +427,12 @@
       13,
       14
     ],
+    "animation": {
+      "name": "SDact_15601_Idle_01",
+      "duration": 1.8666667938232422,
+      "channels": 486,
+      "unusedPaths": []
+    },
     "nodes": 70,
     "geometry": 70,
     "materials": 8,

@@ -3,6 +3,8 @@
  * Exposes shared utilities to the global window object for backward compatibility
  */
 
+import './service-worker';
+
 import {
   fetchJSON,
   clearJSONCache

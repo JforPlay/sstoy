@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { loadHousingModel } from './housing-models';
+import { loadHousingModel, cloneHousingModel } from './housing-models';
 import { setCharacterExpression } from './housing-expression';
+import { HousingMotion } from './housing-motion';
 
 /** Independent inspector camera; never changes the room camera or saved layout. */
 export class HousingPreview {
@@ -12,6 +13,8 @@ export class HousingPreview {
   private readonly observer: ResizeObserver;
   private disposed = false;
   private expression = 1;
+  private motion?: HousingMotion;
+  private motionEnabled = true;
 
   constructor(private readonly host: HTMLElement, id: string, onError: () => void) {
     const canvas = this.renderer.domElement;
@@ -36,13 +39,14 @@ export class HousingPreview {
     this.resize();
     void loadHousingModel(id).then(source => {
       if (this.disposed) return;
-      const model = source.clone(true);
+      const model = cloneHousingModel(source);
       setCharacterExpression(model, this.expression);
       const bounds = new THREE.Box3().setFromObject(model);
       const center = bounds.getCenter(new THREE.Vector3());
       const radius = Math.max(bounds.getSize(new THREE.Vector3()).length() / 2, .1);
       model.position.sub(center);
       this.scene.add(model);
+      this.motion = new HousingMotion(model, this.draw, this.motionEnabled);
       const distance = radius / Math.sin(THREE.MathUtils.degToRad(20));
       this.camera.position.copy(new THREE.Vector3(-1, .7, 1.4).normalize().multiplyScalar(distance));
       this.camera.near = radius / 100;
@@ -65,6 +69,11 @@ export class HousingPreview {
     this.draw();
   }
 
+  setMotion(enabled: boolean): void {
+    this.motionEnabled = enabled;
+    this.motion?.setEnabled(enabled);
+  }
+
   private readonly onWheel = (event: WheelEvent): void => { event.preventDefault(); };
   private readonly onMouseDown = (event: MouseEvent): void => { if (event.button === 1) event.preventDefault(); };
   private readonly draw = (): void => { if (!this.disposed) this.renderer.render(this.scene, this.camera); };
@@ -79,6 +88,7 @@ export class HousingPreview {
 
   dispose(): void {
     this.disposed = true;
+    this.motion?.dispose();
     this.observer.disconnect();
     this.controls.dispose();
     const canvas = this.renderer.domElement;

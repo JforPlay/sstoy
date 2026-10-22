@@ -1,11 +1,12 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { loadHousingModel as loadModel } from './housing-models';
+import { loadHousingModel as loadModel, cloneHousingModel } from './housing-models';
+import { HousingMotion } from './housing-motion';
 import { footprint, furnitureKind } from './housing-layout';
 import { setCharacterExpression } from './housing-expression';
 import type { Furniture, Placement, RoomSize } from './housing-layout';
 
-type SceneState = { indoor: boolean; size: RoomSize; placements: Placement[]; furniture: Record<string, Furniture>; selected: string; floor?: number; wall?: number; grid: boolean; character?: string; expression?: number };
+type SceneState = { indoor: boolean; size: RoomSize; placements: Placement[]; furniture: Record<string, Furniture>; selected: string; floor?: number; wall?: number; grid: boolean; character?: string; expression?: number; motion?: boolean };
 type Callbacks = { select: (uid: string) => void; move: (placement: Placement) => void; error: (id: string) => void };
 
 /** Original Unity meshes, rendered in real 3D. Layout coordinates remain unchanged. */
@@ -17,6 +18,7 @@ export class HousingScene {
   private readonly objects = new THREE.Group();
   private readonly environment = new THREE.Group();
   private readonly character = new THREE.Group();
+  private motion?: HousingMotion;
   private readonly raycaster = new THREE.Raycaster();
   private readonly pointer = new THREE.Vector2();
   private readonly observer: ResizeObserver;
@@ -104,11 +106,12 @@ export class HousingScene {
   update(state: SceneState): void {
     this.state = state;
     const revision = ++this.revision;
+    this.motion?.dispose(); this.motion = undefined;
     this.character.clear();
     if (state.character) {
       void loadModel(state.character).then(source => {
         if (this.disposed || revision !== this.revision) return;
-        const model = source.clone(true);
+        const model = cloneHousingModel(source);
         setCharacterExpression(model, this.state?.expression || 1);
         this.prepare(model);
         const bounds = new THREE.Box3().setFromObject(model);
@@ -116,6 +119,7 @@ export class HousingScene {
         // Keep the original SD proportions and place the soles on the room floor.
         model.position.set(-state.size.L / 2 - center.x, -bounds.min.y + .02, state.size.W / 2 - center.z);
         this.character.add(model);
+        this.motion = new HousingMotion(model, this.draw, this.state?.motion !== false);
         this.draw();
       }).catch(error => {
         if (this.disposed || revision !== this.revision) return;
@@ -204,6 +208,11 @@ export class HousingScene {
     this.draw();
   }
 
+  setMotion(enabled: boolean): void {
+    if (this.state) this.state.motion = enabled;
+    this.motion?.setEnabled(enabled);
+  }
+
   private prepare(object: THREE.Object3D): void {
     object.traverse(node => {
       if (node instanceof THREE.Mesh) { node.castShadow = true; node.receiveShadow = true; }
@@ -276,6 +285,7 @@ export class HousingScene {
 
   dispose(): void {
     this.disposed = true; ++this.revision;
+    this.motion?.dispose();
     this.observer.disconnect(); this.controls.dispose();
     const canvas = this.renderer.domElement;
     canvas.removeEventListener('pointerdown', this.onDown, true);

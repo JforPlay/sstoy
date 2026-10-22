@@ -45,6 +45,7 @@
     "characterDetails": "캐릭터 정보",
     "expression": "감정·표정",
     "expressionDefault": "기본",
+    "idleMotion": "대기 동작 재생",
     "selectCharacter": "목록에서 캐릭터를 선택하세요.",
     "showCharacter": "공간에 표시",
     "hideCharacter": "공간에서 숨기기",

@@ -8,13 +8,24 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 
 // __dirname replacement for ESM
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const assetVersion = process.env.GITHUB_SHA || Date.now().toString(36);
 
 export default defineConfig(({ command, mode }) => ({
+  define: {
+    'import.meta.env.VITE_ASSET_VERSION': JSON.stringify(command === 'build' ? assetVersion : 'dev'),
+  },
   // Use '/sstoy/' for GitHub Pages, '/' for Cloudflare Pages or dev
   // Set CF_PAGES=1 environment variable for Cloudflare deployment
   base: command === 'build' && !process.env.CF_PAGES ? '/sstoy/' : '/',
 
   plugins: [
+    {
+      name: 'version-service-worker',
+      writeBundle() {
+        const source = fs.readFileSync(resolve(__dirname, 'public/sw.js'), 'utf8');
+        fs.writeFileSync(resolve(__dirname, 'dist/sw.js'), source.replace("'sstoy-network-first-v3'", JSON.stringify(`sstoy-network-first-v3-${assetVersion}`)));
+      }
+    },
     // HTML processing plugin for better template support
     createHtmlPlugin({
       minify: true,

@@ -8,7 +8,7 @@ import { HousingPreview } from './housing-preview';
 import type { Furniture, Layout, Placement, Room, RoomSize, DefaultFurniture } from './housing-layout';
 
 type Item = { Title: string; Desc?: string; Icon?: string };
-type HousingCharacter = { characterId: number; model: string; expressions?: number[] };
+type HousingCharacter = { characterId: number; model: string; expressions?: number[]; animation?: { name: string } | null };
 const storageKey = 'housingLayoutV1';
 let furniture: Record<string, Furniture> = {};
 let rooms: Record<string, Room> = {};
@@ -33,6 +33,7 @@ let catalogCharacter = '';
 let previewMode: '2d' | '3d' = '3d';
 let inspectorPreview: HousingPreview | undefined;
 const characterExpressions: Record<string, number> = {};
+let motionEnabled = true;
 let wallSide: 'left' | 'right' = 'right';
 let wallElevation = 1;
 let languageRevision = 0;
@@ -256,7 +257,7 @@ function renderBoard(): void {
   }
   const floor = finishId('floor');
   sceneView.update({ indoor: !!currentRoom().RoomType, size: size(), placements: scenePlacements(),
-    furniture, selected, floor: floor && furniture[floor]?.NotShow ? undefined : floor, wall: finishId('wall'), grid: showGrid, character: characterModel, expression: characterExpressions[characterModel] || 1 });
+    furniture, selected, floor: floor && furniture[floor]?.NotShow ? undefined : floor, wall: finishId('wall'), grid: showGrid, character: characterModel, expression: characterExpressions[characterModel] || 1, motion: motionEnabled });
   board.ondragover = event => { event.preventDefault(); if (event.dataTransfer) event.dataTransfer.dropEffect = 'copy'; };
   board.ondrop = event => {
     event.preventDefault();
@@ -292,7 +293,8 @@ function renderInspector(): void {
     <button class="btn btn-secondary ${previewMode === '3d' ? 'active' : ''}" data-preview="3d" aria-pressed="${previewMode === '3d'}">3D</button>
     <button class="btn btn-secondary ${previewMode === '2d' ? 'active' : ''}" data-preview="2d" aria-pressed="${previewMode === '2d'}">2D</button></div>
     ${previewMode === '3d' ? `<div id="housing-model-preview" class="housing-model-preview" role="group" aria-label="${esc(title)} 3D"></div><p class="housing-help">${t('previewHelp')}</p>` : `<img class="housing-preview-image" src="${esc(imageUrl)}" alt="${esc(title)}">`}` : '';
-  const expressionSelect = character?.expressions?.length ? `<label class="housing-help">${t('expression')}<select class="housing-input" id="housing-expression">${character.expressions.map(id => `<option value="${id}" ${(characterExpressions[character.model] || 1) === id ? 'selected' : ''}>${id === 1 ? t('expressionDefault') : `${t('expression')} ${id}`}</option>`).join('')}</select></label>` : '';
+  const motionToggle = character?.animation ? `<label class="housing-help"><input type="checkbox" id="housing-motion" ${motionEnabled ? 'checked' : ''}> ${t('idleMotion')}</label>` : '';
+  const expressionSelect = (character?.expressions?.length ? `<label class="housing-help">${t('expression')}<select class="housing-input" id="housing-expression">${character.expressions.map(id => `<option value="${id}" ${(characterExpressions[character.model] || 1) === id ? 'selected' : ''}>${id === 1 ? t('expressionDefault') : `${t('expression')} ${id}`}</option>`).join('')}</select></label>` : '') + motionToggle;
   detail.innerHTML = character ? `${preview}<h3>${esc(title)}</h3>${expressionSelect}<p>${t('characterPreview')}</p><button class="btn btn-primary" data-action="show-character">${t('showCharacter')}</button><button class="btn btn-secondary" data-action="hide-character" ${characterModel ? '' : 'disabled'}>${t('hideCharacter')}</button>` : f ? `${preview}<h3>${esc(name(f.Id))}</h3>
     <p>${f.L} × ${f.W} × ${f.H}<br>${t('collection')}: ${f.CollectionValue || 0}<br>${t('category')}: ${t(`category${f.Tab}`)}${p ? `<br>X ${p.x} · Y ${p.y} · ${p.rotation}°` : ''}</p>
     <p>${esc(names[items[f.Id]?.Desc || ''] || '')}</p>
@@ -302,10 +304,17 @@ function renderInspector(): void {
     try {
       inspectorPreview = new HousingPreview(previewHost, modelId, () => { previewHost.textContent = t('modelError'); });
       if (character) inspectorPreview.setExpression(characterExpressions[character.model] || 1);
+      inspectorPreview.setMotion(motionEnabled);
     }
     catch (error) { console.error('[Housing preview]', error); previewHost.textContent = t('webglError'); }
   }
   const expressionInput = document.getElementById('housing-expression') as HTMLSelectElement | null;
+  const motionInput = document.getElementById('housing-motion') as HTMLInputElement | null;
+  if (motionInput) motionInput.onchange = () => {
+    motionEnabled = motionInput.checked;
+    inspectorPreview?.setMotion(motionEnabled);
+    sceneView?.setMotion(motionEnabled);
+  };
   if (expressionInput && character) expressionInput.onchange = () => {
     const value = Number(expressionInput.value);
     if (!character.expressions?.includes(value)) return;

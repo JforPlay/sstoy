@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import type { GLTF } from 'three/addons/loaders/GLTFLoader.js';
 import { setCharacterExpression } from './housing-expression';
+import { clone as cloneSkeleton } from 'three/addons/utils/SkeletonUtils.js';
+import { assetURL } from '../shared/asset-url';
 
 const models = new Map<string, Promise<THREE.Group>>();
 
@@ -27,7 +29,7 @@ async function checkTextures(gltf: GLTF, id: string): Promise<void> {
 }
 
 async function readModel(id: string): Promise<THREE.Group> {
-  const url = new URL(`assets/housing/models/${id}.glb`, document.baseURI);
+  const url = new URL(assetURL(`assets/housing/models/${id}.glb`), document.baseURI);
   let bytes: ArrayBuffer | undefined;
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
@@ -50,6 +52,7 @@ async function readModel(id: string): Promise<THREE.Group> {
       const gltf = await loader.parseAsync(bytes, new URL('.', url).href);
       await checkTextures(gltf, id);
       setCharacterExpression(gltf.scene);
+      gltf.scene.animations = gltf.animations;
       return gltf.scene;
     } catch (error) {
       if (attempt) throw error;
@@ -67,4 +70,8 @@ export function loadHousingModel(id: string): Promise<THREE.Group> {
     void pending.catch(() => { if (models.get(id) === pending) models.delete(id); });
   }
   return pending;
+}
+
+export function cloneHousingModel(source: THREE.Group): THREE.Group {
+  return source.animations.length ? cloneSkeleton(source) as THREE.Group : source.clone(true);
 }

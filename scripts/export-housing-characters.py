@@ -1,4 +1,4 @@
-"""Bake the original SD character prefab's standing pose to a static housing GLB."""
+"""Export SD characters with selectable facial sets, original skinning and idle clips."""
 import argparse
 import importlib.util
 import json
@@ -8,6 +8,7 @@ from pathlib import Path
 import numpy as np
 
 sys.dont_write_bytecode = True
+from housing_animation_export import add_idle_animation
 spec = importlib.util.spec_from_file_location('housing_export', Path(__file__).with_name('export-housing-models.py'))
 base = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(base)
@@ -25,6 +26,7 @@ class CharacterConverter(base.Converter):
         self.morphs = {}
         self.overrides = {}
         self.allowed = set()
+        self.skin_nodes = {}
         if expression is not None:
             def ptr(field):
                 return base.PPtr(**facial[field], assetsfile=self.facial_file)
@@ -114,6 +116,14 @@ class CharacterConverter(base.Converter):
             result += np.einsum('nij,nj->ni', np.asarray(matrices)[indices[:, slot]], points4) * weights[:, slot, None]
         return result[:, :3].astype(np.float32)
 
+    def node_created(self, name, renderer, transform, handler):
+        if getattr(renderer, 'm_Bones', None) and handler.m_BoneWeights:
+            bones = [base.read(b) for b in renderer.m_Bones]
+            world = self.mirror @ self.world(transform) @ self.mirror
+            inverses = [np.linalg.inv(self.mirror @ self.world(b) @ self.mirror) @ world for b in bones]
+            self.skin_nodes[name] = dict(indices=handler.m_BoneIndices, weights=handler.m_BoneWeights,
+                                         bones=[base.key(b) for b in bones], inverses=inverses)
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -147,6 +157,7 @@ def main():
         facial_tree = facial.read_typetree()
         config = base.read(base.PPtr(**facial_tree['configData'], assetsfile=facial.assets_file)).object_reader.read_typetree()
         expressions = []
+        skin_nodes = dict(converter.skin_nodes)
         for expression in config['entries']:
             face_converter = CharacterConverter(env, files, skin, facial, expression)
             face_scene, face_stats = face_converter.convert()
@@ -154,13 +165,17 @@ def main():
                 transform, geometry = face_scene.graph[node]
                 scene.add_geometry(face_scene.geometry[geometry], node_name=f"expression_{expression['id']}_{node}",
                                    geom_name=f"expression_{expression['id']}_{geometry}", transform=transform)
+                if node in face_converter.skin_nodes:
+                    skin_nodes[f"expression_{expression['id']}_{node}"] = face_converter.skin_nodes[node]
             expressions.append(expression['id'])
         stats.update(nodes=len(scene.graph.nodes_geometry), geometry=len(scene.geometry), bounds=scene.bounds.tolist())
         if missing or converter.unresolved:
             raise ValueError(f'Incomplete character {skin} dependencies: {missing}, {stats}')
         filename = f'character-{skin}.glb'
-        (target / filename).write_bytes(scene.export(file_type='glb'))
-        manifest[skin] = dict(characterId=int(skin[:-2]) if args.all else args.character, model=f'character-{skin}', expressions=expressions, **stats)
+        animation_path = next((root / f'char_sd_{skin}_animations.unity3d' for root in roots if (root / f'char_sd_{skin}_animations.unity3d').exists()), None)
+        blob, animation = add_idle_animation(scene.export(file_type='glb'), converter, skin_nodes, animation_path, skin)
+        (target / filename).write_bytes(blob)
+        manifest[skin] = dict(characterId=int(skin[:-2]) if args.all else args.character, model=f'character-{skin}', expressions=expressions, animation=animation, **stats)
         print(filename, json.dumps(stats), flush=True)
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), 'utf-8')
 

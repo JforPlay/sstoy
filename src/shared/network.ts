@@ -19,6 +19,8 @@
 // =============================================================================
 
 /** Cache storage for parsed JSON data */
+import { assetURL } from './asset-url';
+
 const jsonCache = new Map<string, unknown>();
 
 /** Tracking map for in-flight requests to prevent duplicates */
@@ -116,7 +118,7 @@ export async function fetchJSON<T = unknown>(path: string): Promise<T> {
     return inFlight.get(path) as Promise<T>;
   }
 
-  const promise = fetch(path)
+  const promise = fetch(assetURL(path), { cache: 'no-cache' })
     .then(async (res) => {
       if (!res.ok) {
         throw new Error(`[Network] Failed to fetch ${path}: ${res.status} ${res.statusText}`);

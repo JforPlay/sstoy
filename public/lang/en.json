@@ -45,6 +45,7 @@
     "characterDetails": "Character details",
     "expression": "Expression",
     "expressionDefault": "Default",
+    "idleMotion": "Play idle animation",
     "selectCharacter": "Select a character from the list.",
     "showCharacter": "Show in room",
     "hideCharacter": "Hide from room",

@@ -45,6 +45,7 @@
     "characterDetails": "キャラクター情報",
     "expression": "感情・表情",
     "expressionDefault": "通常",
+    "idleMotion": "待機モーションを再生",
     "selectCharacter": "一覧からキャラクターを選択してください。",
     "showCharacter": "部屋に表示",
     "hideCharacter": "部屋から隠す",
