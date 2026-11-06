@@ -3,20 +3,20 @@
     "bosses": [
       {
         "weakElements": [
-          "Water",
-          "Fire"
+          "Light",
+          "Water"
         ],
         "strongElements": [
-          "Earth"
+          "Wind"
         ]
       },
       {
         "weakElements": [
-          "Wind",
-          "Light"
+          "Light",
+          "Earth"
         ],
         "strongElements": [
-          "Dark"
+          "Fire"
         ]
       }
     ]

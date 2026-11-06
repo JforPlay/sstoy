@@ -3,6 +3,9 @@
  * @description Standalone guide database for Score Boss, Joint Drill, and attribute builds.
  */
 
+import { formatGuideAbilityText } from './guide-params';
+import type { ParamParserState } from '../types';
+
 type GuideTab = 'scoreboss' | 'jointdrill' | 'attribute';
 
 interface ScoreBossControl {
@@ -114,6 +117,7 @@ interface ActiveScoreBossData {
   scoreGetControls: Record<string, ScoreBossGetControl>;
   scoreGetText: Record<string, string>;
   bossNames: Record<number, string>;
+  parameters: ParamParserState;
 }
 
 interface ActiveJointDrillData {
@@ -194,7 +198,7 @@ function isWithinEventPeriod(startDate?: string, endDate?: string): boolean {
 
 async function loadActiveScoreBoss(): Promise<ActiveScoreBossData | null> {
   const language = window.i18n?.currentLang || 'KR';
-  const [controls, levelData, abilities, abilityText, scoreGetControls, scoreGetText, monsters, monsterSkins, monsterManuals, monsterManualText] = await Promise.all([
+  const [controls, levelData, abilities, abilityText, scoreGetControls, scoreGetText, monsters, monsterSkins, monsterManuals, monsterManualText, buffValue, effectValue] = await Promise.all([
     loadJson<Record<string, ScoreBossControl>>('ScoreBossControl.json', true),
     loadJson<Record<string, ScoreBossLevel>>('ScoreBossLevel.json', true),
     loadJson<Record<string, ScoreBossAbility>>('ScoreBossAbility.json', true),
@@ -205,6 +209,8 @@ async function loadActiveScoreBoss(): Promise<ActiveScoreBossData | null> {
     loadJson<Record<string, MonsterSkin>>('MonsterSkin.json'),
     loadJson<Record<string, MonsterManual>>('MonsterManual.json'),
     loadJson<Record<string, string>>(`${language}/MonsterManual.json`),
+    loadJson<Record<string, unknown>>('BuffValue.json', true),
+    loadJson<Record<string, unknown>>('EffectValue.json', true),
   ]);
 
   const control = getActiveControl(controls);
@@ -221,7 +227,8 @@ async function loadActiveScoreBoss(): Promise<ActiveScoreBossData | null> {
     return [level.MonsterId, manual ? (monsterManualText[manual.Name] || manual.Name) : `Boss ${level.MonsterId}`];
   }));
 
-  return { control, levels, abilities, abilityText, scoreGetControls, scoreGetText, bossNames };
+  const parameters: ParamParserState = { buffValue, effectValue, shieldValue: {}, hitDamage: {}, onceAdditionalAttributeValue: {}, scriptParameterValue: {} };
+  return { control, levels, abilities, abilityText, scoreGetControls, scoreGetText, bossNames, parameters };
 }
 
 async function loadActiveJointDrill(): Promise<ActiveJointDrillData | null> {
@@ -275,16 +282,6 @@ function formatDate(value: string): string {
 
 function formatPeriod(period: Pick<ScoreBossControl, 'StartTime' | 'EndTime'>): string {
   return `${formatDate(period.StartTime)} ~ ${formatDate(period.EndTime)}`;
-}
-
-function formatAbilityText(template: string, ability: ScoreBossAbility): string {
-  return template
-    .replace(/&Param(\d+)&/g, (_, index: string) => {
-      const paramIndex = Number(index);
-      const value = String(ability[`Value${paramIndex}`] ?? '');
-      return ability[`Param${paramIndex}`]?.includes(',Pct') ? `${value}%` : value;
-    })
-    .replace(/<[^>]+>/g, '');
 }
 
 // =============================================================================
@@ -406,7 +403,7 @@ function renderBossInfo(level: ScoreBossLevel, activeData: ActiveScoreBossData, 
       <div>
         <span class="guide-boss-data-label">${title}</span>
         <h4>${escapeHtml(name)}</h4>
-        <p>${escapeHtml(formatAbilityText(description, data))}</p>
+        <p>${escapeHtml(formatGuideAbilityText(description, data, activeData.parameters))}</p>
       </div>
     </article>`;
   };
