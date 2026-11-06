@@ -63,6 +63,8 @@ export interface GameDataStore {
   charGetLines: Record<string, any>;
   charGetLinesKR: Record<string, any>;
   charGem: Record<string, any>;
+  charGemAttrValue: Record<string, any>;
+  charGemSlotControl: Record<string, any>;
   characterArchive: Record<string, any>;
   characterArchiveContent: Record<string, any>;
   characterArchiveContentKR: Record<string, any>;
@@ -153,6 +155,8 @@ export const GameData: GameDataStore = {
   charGetLines: {},
   charGetLinesKR: {},
   charGem: {},
+  charGemAttrValue: {},
+  charGemSlotControl: {},
   characterArchive: {},
   characterArchiveContent: {},
   characterArchiveContentKR: {},

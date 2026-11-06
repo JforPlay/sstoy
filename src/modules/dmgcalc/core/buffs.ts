@@ -18,6 +18,7 @@ import { getState } from './state';
 import { getAttrKeyFromEnumId, getStatDisplayName } from './enums';
 import { parseBuffById, parseEffectById, isEffectRelevantForDamage } from './effects';
 import { getPotentialStatBonuses } from './potentials';
+import { getBadgePotentialBonus, getBadgeSkillBonus } from './badges';
 import type { BuffSource, Position } from '../types';
 
 // =============================================================================
@@ -302,9 +303,10 @@ function collectPotentialBuffs(): BuffSource[] {
       if (!potential) continue;
 
       // Use local override if set, otherwise fall back to window.state level
-      const level = potentialLevelOverrides[potId] !== undefined
+      const baseLevel = potentialLevelOverrides[potId] !== undefined
         ? potentialLevelOverrides[potId]
         : (levels[potId] || 1);
+      const level = baseLevel > 0 ? baseLevel + getBadgePotentialBonus(position, potId) : 0;
       const charObj = window.state?.party?.[position];
       const sourceCharId = charObj && typeof charObj !== 'string' ? charObj.id : 0;
       const sourceCharName = sourceCharId
@@ -648,12 +650,15 @@ function formatBuffDescription(duration?: number, maxStacks?: number): string {
  * Resolve the current skill level for a skill ID from window.state.
  */
 function resolveSkillLevel(skillId: number): number {
-  if (!window.state?.skillLevels) return 1;
-
   // Check all positions for this skill ID
   for (const pos of ['master', 'assist1', 'assist2'] as const) {
-    const lvl = window.state.skillLevels[pos]?.[skillId];
-    if (lvl) return lvl;
+    const character = window.state?.party?.[pos];
+    const char = character && typeof character !== 'string' ? GameData.characters?.[Number(character.id)] as any : undefined;
+    if (char && [char.NormalAtkId, char.SkillId, char.AssistSkillId, char.UltimateId, char.AssistUltimateId].includes(skillId)) {
+      const lvl = window.state?.skillLevels?.[pos]?.[skillId] || 1;
+      const subtype = char?.NormalAtkId === skillId ? 1 : char?.SkillId === skillId ? 2 : char?.AssistSkillId === skillId ? 3 : 4;
+      return lvl + getBadgeSkillBonus(pos, subtype);
+    }
   }
   return 1;
 }

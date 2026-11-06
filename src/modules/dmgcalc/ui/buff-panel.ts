@@ -11,17 +11,20 @@
 
 import type { DmgCalcState, BuffSource } from '../types';
 import { getStatDisplayName } from '../core/enums';
-import { GameData } from '@/shared/game-data';
+import { GameData, getCharacterName } from '@/shared/game-data';
+import { createResponsiveImage } from '@/shared/dom';
 import { getAttrKeyFromEnumId } from '../core/enums';
+import { getBadgePotentialBonus } from '../core/badges';
 
 /** i18n helper — falls back to provided default */
 const t = (key: string, fallback: string) => window.i18n?.t(`dmgcalc.${key}`) || fallback;
+const escapeAttribute = (value: string): string => value.replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]!));
 
 // =============================================================================
 // MAIN EXPORT
 // =============================================================================
 
-export function renderBuffPanel(state: DmgCalcState): string {
+export function renderBuffPanel(state: DmgCalcState, options: { potentials?: boolean; notes?: boolean } = {}): string {
   const { buffs } = state;
 
   const skillBuffs = (buffs || []).filter(b => b.sourceType === 'assist-skill' || b.sourceType === 'assist-ult' || b.sourceType === 'talent');
@@ -29,8 +32,8 @@ export function renderBuffPanel(state: DmgCalcState): string {
   const lbBonuses = (buffs || []).filter(b => b.sourceType === 'talent-bonus');
 
   const skillSection = renderSkillBuffArea(skillBuffs, lbBonuses);
-  const potSection = renderPotentialArea(potentialStats);
-  const notesSection = renderNotesSection(state);
+  const potSection = options.potentials === false ? '' : renderPotentialArea(potentialStats);
+  const notesSection = options.notes === false ? '' : renderNotesSection(state);
 
   return `
     <div class="dmgcalc-panel dmgcalc-buffs-panel">
@@ -56,10 +59,10 @@ export function renderStatSummary(state: DmgCalcState): string {
   const EXCLUDE_STATS = new Set(['Def', 'Hp']);
 
   // Stats to always show even if 0
-  const ALWAYS_SHOW = new Set(['WEP', 'FEP', 'SEP', 'AEP', 'LEP', 'DEP', 'WEI', 'FEI', 'SEI', 'AEI', 'LEI', 'DEI']);
+  const ALWAYS_SHOW = new Set(['Penetrate', 'DefIgnore', 'WEP', 'FEP', 'SEP', 'AEP', 'LEP', 'DEP', 'WEI', 'FEI', 'SEI', 'AEI', 'LEI', 'DEI']);
 
   // Flat stats (displayed as integer, not percentage)
-  const FLAT_DISPLAY = new Set(['Atk', 'WEP', 'FEP', 'SEP', 'AEP', 'LEP', 'DEP']);
+  const FLAT_DISPLAY = new Set(['Atk', 'Penetrate', 'WEP', 'FEP', 'SEP', 'AEP', 'LEP', 'DEP']);
 
   // Flavor text for key stats
   const FLAVOR: Record<string, string> = {
@@ -159,7 +162,8 @@ function renderSkillBuffArea(skillBuffs: BuffSource[], lbBonuses: BuffSource[]):
   const sections = groups.map(([, group]) => {
     const items = group.buffs.map(b => {
       const effectText = formatStatEffects(b.statEffects);
-      return `<div class="buff-row"><span class="buff-row-name">${b.sourceName || b.name}</span><span class="buff-row-value">${effectText}</span></div>`;
+      const control = b.nonToggleable ? '' : `<input type="checkbox" data-action="toggle-buff" data-buff-id="${escapeAttribute(b.id)}" aria-label="${escapeAttribute(b.sourceName || b.name)}" ${b.active ? 'checked' : ''}>`;
+      return `<label class="buff-row">${control}<span class="buff-row-name">${b.sourceName || b.name}</span><span class="buff-row-value">${effectText}</span></label>`;
     }).join('');
 
     return `
@@ -199,8 +203,8 @@ function renderSkillBuffArea(skillBuffs: BuffSource[], lbBonuses: BuffSource[]):
 // POTENTIAL AREA
 // =============================================================================
 
-function renderPotentialArea(potentialStats: BuffSource[]): string {
-  const groups = groupBuffsByCharacter(potentialStats);
+export function renderPotentialArea(potentialStats: BuffSource[]): string {
+  const groups = groupBuffsByCharacter(potentialStats, true);
   if (groups.length === 0) return '';
 
   return groups.map(([, group]) => {
@@ -212,11 +216,26 @@ function renderPotentialArea(potentialStats: BuffSource[]): string {
       potGroups.get(pid)!.push(buff);
     }
 
+    const master = window.state?.party?.master;
+    const isMaster = master && typeof master !== 'string' && String(master.id) === String(group.charId);
+    const characterPotentials = GameData.charPotentials?.[group.charId];
+    const order = [
+      ...[...(characterPotentials?.[isMaster ? 'MasterSpecificPotentialIds' : 'AssistSpecificPotentialIds'] || [])].sort((a, b) => a - b),
+      ...[...(characterPotentials?.[isMaster ? 'MasterNormalPotentialIds' : 'AssistNormalPotentialIds'] || [])].sort((a, b) => a - b),
+      ...[...(characterPotentials?.CommonPotentialIds || [])].sort((a, b) => a - b),
+    ];
+    const rank = (id: number) => { const index = order.indexOf(id); return index < 0 ? 100000 : index; };
     let items = '';
-    for (const [potId, potBuffs] of potGroups) {
+    for (const [potId, potBuffs] of [...potGroups].sort(([a], [b]) => rank(a) - rank(b))) {
       if (potBuffs.length === 0) continue;
       const first = potBuffs[0]!;
-      const level = first.level || 1;
+      const effectiveLevel = first.level || 1;
+      const position = (['master', 'assist1', 'assist2'] as const).find(pos => {
+        const char = window.state?.party?.[pos];
+        return char && typeof char !== 'string' && Number(char.id) === group.charId;
+      });
+      const badgeBonus = position && potId ? getBadgePotentialBonus(position, potId) : 0;
+      const level = effectiveLevel;
       const potName = (first.sourceName || first.name).replace(/^.*-\s*/, '');
       const allEffects = potBuffs.flatMap(b => b.statEffects);
       const effectText = formatStatEffects(allEffects);
@@ -229,16 +248,18 @@ function renderPotentialArea(potentialStats: BuffSource[]): string {
           })()
         : '';
 
-      items += `<div class="buff-row"><span class="buff-row-name">${potName}</span>${stepper}<span class="buff-row-value">${effectText}</span></div>`;
+      const iconName = GameData.items?.[potId]?.Icon?.split('/').pop();
+      const icon = iconName ? createResponsiveImage(`assets/skill_icons/${iconName}_A.png`, escapeAttribute(potName), 'dmgcalc-potential-icon') : '<i class="fa-solid fa-sparkles" aria-hidden="true"></i>';
+      items += `<div class="buff-row dmgcalc-potential-row"><span class="dmgcalc-potential-art">${icon}</span><span class="buff-row-name">${escapeAttribute(potName)}${badgeBonus ? ` <small>배지 +${badgeBonus} · 적용 Lv.${effectiveLevel}</small>` : ''}</span>${stepper}<span class="buff-row-value">${effectText}</span></div>`;
     }
 
     return `
       <div class="buff-block">
         <div class="buff-block-header">
           <span class="buff-block-title">${group.charName} ${t('potential', '잠재력')}</span>
-          <span class="buff-block-count">${group.buffs.length}</span>
+          <span class="buff-block-count">${potGroups.size}</span>
         </div>
-        ${items}
+        ${items || `<p class="dmgcalc-help">${t('emptyPotentials', '선택된 잠재력이 없습니다.')}</p>`}
       </div>
     `;
   }).join('');
@@ -248,7 +269,7 @@ function renderPotentialArea(potentialStats: BuffSource[]): string {
 // NOTES (소리) — compact 2-column grid
 // =============================================================================
 
-function renderNotesSection(state: DmgCalcState): string {
+export function renderNotesSection(state: DmgCalcState): string {
   const noteOverrides = state.noteOverrides;
   const noteIds = Object.keys(noteOverrides);
   if (noteIds.length === 0) return '';
@@ -304,11 +325,12 @@ function renderNotesSection(state: DmgCalcState): string {
     }
 
     return `
-      <div class="note-row">
-        <span class="note-row-name">${noteName}</span>
+      <div class="note-row dmgcalc-note-card ${level > 0 ? 'is-active' : ''}">
+        <span class="dmgcalc-note-art">${subNoteSkills?.[noteId]?.Icon ? createResponsiveImage(`assets/common/${subNoteSkills[noteId].Icon.split('/').pop()}_S.png`, escapeAttribute(noteName), 'dmgcalc-note-icon') : '<i class="fa-solid fa-music" aria-hidden="true"></i>'}</span>
+        <span class="note-row-name">${escapeAttribute(noteName)}</span>
         <span class="lvl-stepper">
           <button class="disc-ctrl-btn" data-action="note-level-down" data-note-id="${noteId}" ${level <= 0 ? 'disabled' : ''}>-</button>
-          <span class="lvl-stepper-val ${level === 0 ? 'lvl-zero' : ''}">${level}</span>
+          <input type="number" class="lvl-stepper-val dmgcalc-note-level ${level === 0 ? 'lvl-zero' : ''}" data-note-id="${noteId}" value="${level}" min="0" max="99" step="1" inputmode="numeric" aria-label="${escapeAttribute(noteName)} 레벨">
           <button class="disc-ctrl-btn" data-action="note-level-up" data-note-id="${noteId}" ${level >= 99 ? 'disabled' : ''}>+</button>
         </span>
         <span class="note-row-effect">${effectDesc}</span>
@@ -337,7 +359,7 @@ interface BuffGroup {
   buffs: BuffSource[];
 }
 
-function groupBuffsByCharacter(buffs: BuffSource[]): [number, BuffGroup][] {
+function groupBuffsByCharacter(buffs: BuffSource[], includeEmpty = false): [number, BuffGroup][] {
   const map = new Map<number, BuffGroup>();
   for (const buff of buffs) {
     let group = map.get(buff.sourceCharId);
@@ -347,7 +369,16 @@ function groupBuffsByCharacter(buffs: BuffSource[]): [number, BuffGroup][] {
     }
     group.buffs.push(buff);
   }
-  return Array.from(map.entries());
+  const positions = ['master', 'assist1', 'assist2'] as const;
+  const ids = positions.flatMap(position => {
+    const char = window.state?.party?.[position];
+    if (!char || typeof char === 'string') return [];
+    const id = Number(char.id);
+    if (includeEmpty && !map.has(id)) map.set(id, { charId: id, charName: getCharacterName(String(id)), buffs: [] });
+    return [String(id)];
+  });
+  const rank = (id: number) => { const index = ids.indexOf(String(id)); return index < 0 ? 100000 : index; };
+  return Array.from(map.entries()).sort(([a], [b]) => rank(a) - rank(b));
 }
 
 function formatStatEffects(effects: { key: string; value: number; isFlat?: boolean }[]): string {

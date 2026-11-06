@@ -10,10 +10,14 @@
  */
 
 import { createResponsiveImage } from '@/shared/dom';
-import { getCharacterName } from '@/shared/game-data';
+import { GameData, getCharacterName } from '@/shared/game-data';
+import { PHASE_TO_LEVEL,DISC_MAX_LIMIT_BREAK,normalizeDiscLimitBreak } from '../constants';
 import { formatStatValue, getStatDisplayName } from '../core/enums';
 import { getState } from '../core/state';
 import type { DmgCalcState, DiscSlotId } from '../types';
+
+const t = (key: string) => window.i18n?.t(`dmgcalc.${key}`) || key;
+const escape = (value: string) => value.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
 
 // =============================================================================
 // MAIN EXPORT
@@ -34,151 +38,78 @@ export function renderBuildPanel(state: DmgCalcState): string {
 // PANEL 1: MASTER CHARACTER CARD
 // =============================================================================
 
-function renderCharacterCard(state: DmgCalcState): string {
-  const charId = state.masterCharId;
-  if (!charId) return '';
-
-  const charIdStr = String(charId);
-  const charName = getCharacterName(charIdStr);
-  const imagePath = `assets/char/avg1_${charIdStr}_002.png`;
-
-  // Pull key stats from the aggregated stats map
-  const atkStat = state.stats.get('Atk');
-  const critRateStat = state.stats.get('CritRate');
-  const critPowerStat = state.stats.get('CritPower');
-
-  const atkDisplay = atkStat ? formatStatValue('Atk', atkStat.total) : '—';
-  const critRateDisplay = critRateStat ? formatStatValue('CritRate', critRateStat.total) : '—';
-  const critPowerDisplay = critPowerStat ? formatStatValue('CritPower', critPowerStat.total) : '—';
-
-  return `
-    <div class="dmgcalc-panel">
-      <div class="dmgcalc-panel-title">Character</div>
-      <div class="char-card">
-        <div class="char-card-portrait">
-          ${createResponsiveImage(imagePath, charName, 'char-card-image')}
+export function renderCharacterCard(state: DmgCalcState): string {
+  const positions = ['master', 'assist1', 'assist2'] as const;
+  return `<div class="dmgcalc-party-grid">${positions.map(position => {
+    const char = window.state?.party?.[position];
+    const id = char && typeof char !== 'string' ? String(char.id) : position === 'master' && state.masterCharId ? String(state.masterCharId) : null;
+    const role = t(position);
+    const name = id ? getCharacterName(id) : t('emptyCharacter');
+    const phase = window.state?.characterLevelPhase?.[position] ?? 8;
+    const level = position === 'master' ? state.masterLevel : phase >= 8 ? 90 : PHASE_TO_LEVEL[phase] ?? 1;
+    return `<article class="dmgcalc-party-card ${position === 'master' ? 'is-master' : ''} ${id ? '' : 'is-empty'}" data-position="${position}">
+      <div class="dmgcalc-card-role"><i class="fa-solid ${position === 'master' ? 'fa-crown' : 'fa-user-group'}" aria-hidden="true"></i>${role}</div>
+      <div class="dmgcalc-party-identity">
+        <div class="dmgcalc-portrait" aria-label="${escape(role + ' · ' + name)}">
+          ${id ? createResponsiveImage(`assets/char/avg1_${id}_002.png`, escape(name), 'dmgcalc-party-portrait') : '<i class="fa-solid fa-user" aria-hidden="true"></i>'}
         </div>
-        <div class="char-card-info">
-          <div class="char-card-name">${charName}</div>
-          <div class="char-card-level">Lv.${state.masterLevel}</div>
-          <div class="lb-stepper">
-            <button data-action="lb-decrement" ${state.limitBreak <= 0 ? 'disabled' : ''}>&#8722;</button>
-            <span class="lb-stepper-value">LB ${state.limitBreak}</span>
-            <button data-action="lb-increment" ${state.limitBreak >= 5 ? 'disabled' : ''}>+</button>
-          </div>
+        <div class="dmgcalc-party-copy"><strong>${escape(name)}</strong><span>${id ? `Lv.${level}` : t('emptyCharacterHint')}</span>
         </div>
       </div>
-      <div class="char-card-stats">
-        <div class="char-stat">
-          <span class="char-stat-label">${getStatDisplayName('Atk')}</span>
-          <span class="char-stat-value">${atkDisplay}</span>
-        </div>
-        <div class="char-stat">
-          <span class="char-stat-label">${getStatDisplayName('CritRate')}</span>
-          <span class="char-stat-value">${critRateDisplay}</span>
-        </div>
-        <div class="char-stat">
-          <span class="char-stat-label">${getStatDisplayName('CritPower')}</span>
-          <span class="char-stat-value">${critPowerDisplay}</span>
-        </div>
-      </div>
-    </div>
-  `;
+      ${id ? (() => { const lb = position === 'master' ? state.limitBreak : state.supportLimitBreaks[position]; return `<div class="dmgcalc-card-controls"><span>${t('limitBreak')}</span><span class="lvl-stepper"><button class="disc-ctrl-btn" data-action="lb-decrement" data-position="${position}" ${lb <= 0 ? 'disabled' : ''}>−</button><span class="lvl-stepper-val">${lb}</span><button class="disc-ctrl-btn" data-action="lb-increment" data-position="${position}" ${lb >= 5 ? 'disabled' : ''}>+</button></span></div>`; })() : ''}
+    </article>`;
+  }).join('')}</div>
+  ${state.masterCharId ? `<div class="dmgcalc-key-stats">${['Atk', 'CritRate', 'CritPower'].map(key => `<div><span>${getStatDisplayName(key)}</span><strong>${formatStatValue(key, state.stats.get(key)?.total ?? 0)}</strong></div>`).join('')}</div>` : ''}`;
 }
 
-// =============================================================================
-// PANEL 2: DISC SUMMARY
-// =============================================================================
-
-function renderDiscSummary(): string {
-  const discsState = (window as any).discsState;
-  const dmgState = getState();
-
-  if (!discsState) {
-    return `
-      <div class="dmgcalc-panel">
-        <div class="dmgcalc-panel-title">Discs</div>
-        <div class="disc-summary-empty">No discs equipped</div>
+// Six visible slots: image selection above independent level / limit-break inputs.
+export function renderDiscSummary(): string {
+  const state = getState();
+  const discs = window.discsState;
+  return `<div class="dmgcalc-disc-groups">${(['main', 'sub'] as const).map(group => {
+    const groupLabel = t(group === 'main' ? 'mainDisc' : 'subDisc');
+    const slots = [1, 2, 3].map(number => `${group}${number}` as DiscSlotId);
+    return `<section class="dmgcalc-disc-group"><h3 class="dmgcalc-disc-group-title">${groupLabel}</h3><div class="dmgcalc-disc-grid">${slots.map(slot => {
+    const disc = discs?.selectedDiscs?.[slot];
+    const name = disc ? String(discs?.discNames?.[disc.Id] || disc.Id) : t('chooseDisc');
+    const label = `${t(slot.startsWith('main') ? 'mainDisc' : 'subDisc')} ${slot.slice(-1)}`;
+    const icon = disc ? GameData.items?.[disc.Id]?.Icon?.split('/').pop() : null;
+    const level = state.discLevels[slot];
+    const lb = normalizeDiscLimitBreak(state.discLimitBreaks[slot]);
+    return `<article class="dmgcalc-disc-card ${disc ? '' : 'is-empty'}">
+      <span class="dmgcalc-disc-slot-number">${slot.slice(-1)}</span>
+      <button class="dmgcalc-disc-select" data-action="calc-select-disc" data-slot="${slot}" aria-label="${escape(label + ' · ' + name)}">
+        <span class="dmgcalc-disc-art">${icon ? createResponsiveImage(`assets/disc_icons/${icon}.png`, escape(name), 'dmgcalc-disc-image') : '<i class="fa-solid fa-plus" aria-hidden="true"></i>'}</span>
+        <strong>${escape(name)}</strong>
+      </button>
+      <div class="dmgcalc-disc-settings">
+        <label><span>${t('level')}</span><input type="number" class="disc-level-input" data-slot="${slot}" value="${level}" min="1" max="90" ${disc ? '' : 'disabled'} aria-label="${escape(label + ' · ' + t('level'))}"></label>
+        <div class="dmgcalc-card-controls"><span>${t('limitBreak')}</span><span class="lvl-stepper"><button class="disc-ctrl-btn" data-action="disc-lb-down" data-slot="${slot}" ${!disc || lb <= 0 ? 'disabled' : ''}>−</button><span class="lvl-stepper-val">${lb}</span><button class="disc-ctrl-btn" data-action="disc-lb-up" data-slot="${slot}" ${!disc || lb >= DISC_MAX_LIMIT_BREAK ? 'disabled' : ''}>+</button></span></div>
       </div>
-    `;
-  }
-
-  const selectedDiscs = discsState.selectedDiscs || {};
-  const discNames = discsState.discNames || {};
-  const discLevel = dmgState.discLevel || 81;
-
-  const slotIds: DiscSlotId[] = ['main1', 'main2', 'main3', 'sub1', 'sub2', 'sub3'];
-  const slotLabels: Record<DiscSlotId, string> = {
-    main1: 'M1', main2: 'M2', main3: 'M3',
-    sub1: 'S1', sub2: 'S2', sub3: 'S3',
-  };
-
-  let hasAnyDisc = false;
-  let rows = '';
-
-  for (const slotId of slotIds) {
-    const disc = selectedDiscs[slotId];
-    if (!disc || !disc.Id) continue;
-
-    hasAnyDisc = true;
-    const name = discNames[disc.Id]?.toString() || `Disc ${disc.Id}`;
-    const lb = dmgState.discLimitBreaks?.[slotId] ?? 1;
-
-    rows += `
-      <div class="disc-slot-row">
-        <span class="disc-slot-label">${slotLabels[slotId]}</span>
-        <span class="disc-slot-name">${name}</span>
-        <span class="disc-slot-lb-ctrl">
-          <button class="disc-ctrl-btn" data-action="disc-lb-down" data-slot="${slotId}" ${lb <= 0 ? 'disabled' : ''}>-</button>
-          <span class="disc-slot-lb-value">LB${lb}</span>
-          <button class="disc-ctrl-btn" data-action="disc-lb-up" data-slot="${slotId}" ${lb >= 6 ? 'disabled' : ''}>+</button>
-        </span>
-      </div>
-    `;
-  }
-
-  if (!hasAnyDisc) {
-    return `
-      <div class="dmgcalc-panel">
-        <div class="dmgcalc-panel-title">Discs</div>
-        <div class="disc-summary-empty">No discs equipped</div>
-      </div>
-    `;
-  }
-
-  return `
-    <div class="dmgcalc-panel">
-      <div class="dmgcalc-panel-title">Discs</div>
-      <div class="disc-level-ctrl">
-        <span>Lv.</span>
-        <button class="disc-ctrl-btn" data-action="disc-level-down" ${discLevel <= 1 ? 'disabled' : ''}>-</button>
-        <input type="number" class="disc-level-input" data-action="disc-level-input" value="${discLevel}" min="1" max="90">
-        <button class="disc-ctrl-btn" data-action="disc-level-up" ${discLevel >= 90 ? 'disabled' : ''}>+</button>
-      </div>
-      <div class="disc-summary">
-        ${rows}
-      </div>
-    </div>
-  `;
+    </article>`;
+    }).join('')}</div></section>`;
+  }).join('')}</div>`;
 }
 
 // =============================================================================
 // PANEL 3: ENEMY CONFIG
 // =============================================================================
 
-function renderEnemyConfig(state: DmgCalcState): string {
+export function renderEnemyConfig(state: DmgCalcState): string {
   const t = (key: string, fallback: string) => window.i18n?.t(`dmgcalc.${key}`) || fallback;
   return `
     <div class="dmgcalc-panel">
       <div class="dmgcalc-panel-title">${t('enemy', 'Enemy')}</div>
       <div class="enemy-config">
         <div class="enemy-field">
-          <label>${t('def', 'DEF')}</label>
-          <input type="number" class="enemy-input" data-field="def" value="${state.enemy.def}">
+          <label for="dmgcalc-enemy-def">${t('def', 'DEF')}</label>
+          <input id="dmgcalc-enemy-def" type="number" class="enemy-input" data-field="def" value="${state.enemy.def}" min="0" ${state.enemyPresetId !== null ? 'disabled' : ''}>
         </div>
         <div class="enemy-field">
-          <label>${t('res', 'RES')}</label>
-          <input type="number" class="enemy-input" data-field="res" value="${state.enemy.res}">
+          <label for="dmgcalc-enemy-res">${t('res', 'RES')}</label>
+          ${state.enemyPresetId !== null
+            ? `<input id="dmgcalc-enemy-res" type="text" value="${t('automaticRes', '속성별 자동 적용')}" disabled>`
+            : `<input id="dmgcalc-enemy-res" type="number" class="enemy-input" data-field="res" value="${state.enemy.res}">`}
         </div>
         <div class="toughness-toggle">
           <span>${t('toughnessBroken', 'Toughness Broken')}</span>

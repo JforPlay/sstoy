@@ -20,6 +20,7 @@ import { GameData } from '../../../shared/game-data';
 import { getStatDisplayName, formatStatValue as formatStatValueFromEnums, getAttrKeyFromEnumId } from './enums';
 import { getPotentialStatBonuses } from './potentials';
 import { initializeBuffs } from './buffs';
+import { getBadgeStatSources } from './badges';
 
 // Re-export formatStatValue for convenience
 export { formatStatValueFromEnums as formatStatValue };
@@ -63,6 +64,8 @@ export function aggregateAllStats(
 
   // 6. Build rank ATK bonus
   aggregateBuildRankStats(stats);
+
+  for (const { key, source } of getBadgeStatSources()) addSource(stats, key, source);
 
   // 7. Calculate totals
   // NOTE: Active buffs are applied separately by applyBuffsToStats() in index.ts
@@ -326,8 +329,6 @@ function aggregateDiscStats(stats: Map<string, AggregatedStat>): void {
   // e.g., 21003 * 1000 + 8 * 100 + 80 = 21003880
 
   const dmgState = getState();
-  const discLevel = dmgState.discLevel || 81;
-  const discPhase = levelToPhase(discLevel);
 
   // Main discs
   const mainSlots = ['main1', 'main2', 'main3'] as const;
@@ -342,8 +343,8 @@ function aggregateDiscStats(stats: Map<string, AggregatedStat>): void {
     if (!groupId) continue;
 
     const lb = dmgState.discLimitBreaks?.[slotId] ?? window.discsState.discLimitBreaks?.[slotId] ?? 1;
-    const level = discLevel;
-    const phase = discPhase;
+    const level = dmgState.discLevels[slotId];
+    const phase = levelToPhase(level);
     // Key: groupId * 1000 + phase * 100 + level
     const attrKey = String(groupId * 1000 + phase * 100 + level);
     const attrData = attributes[attrKey];
@@ -371,8 +372,8 @@ function aggregateDiscStats(stats: Map<string, AggregatedStat>): void {
     const groupId = (disc as any).AttrBaseGroupId;
     if (!groupId) continue;
 
-    const level = discLevel;
-    const phase = discPhase;
+    const level = dmgState.discLevels[slotId];
+    const phase = levelToPhase(level);
     const attrKey = String(groupId * 1000 + phase * 100 + level);
     const attrData = attributes[attrKey];
     if (!attrData) continue;

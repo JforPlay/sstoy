@@ -6,11 +6,16 @@ export type SkillType = 'normalAtk' | 'skill' | 'ultimate';
 export type DiscSlotId = 'main1' | 'main2' | 'main3' | 'sub1' | 'sub2' | 'sub3';
 
 export interface DmgCalcState {
+  expandedSteps: number[];
+  badgeOptions: number[][];  // Selected CharGemAttrValue IDs, grouped by badge slot
+  enemyPresetId: number | null;
   masterCharId: number | null;
   masterLevel: number;        // from PHASE_TO_LEVEL[characterLevelPhase]
   limitBreak: number;         // 0-5, dmgcalc-owned stepper value
+  supportLimitBreaks: Record<'assist1' | 'assist2', number>;
   skillLevels: Record<SkillType, number>;
   discLevel: number;          // dmgcalc-owned disc level override (default 81)
+  discLevels: Record<DiscSlotId, number>;
   discLimitBreaks: Record<DiscSlotId, number>;  // per-slot LB overrides
   noteOverrides: Record<string, number>;  // noteId → level override (local)
   potentialLevelOverrides: Record<string, number>;  // potId → level override
@@ -22,6 +27,7 @@ export interface DmgCalcState {
 }
 
 export interface EnemyConfig {
+  elementalRes?: Record<number, number>;
   level: number;
   def: number;
   res: number;
@@ -66,6 +72,7 @@ export interface BuffSource {
 }
 
 export interface SkillDamageResult {
+  status?: 'referenced-hits' | 'missing-hit-data';
   skillName: string;
   skillIcon: string;
   skillType: SkillType;
@@ -97,6 +104,8 @@ export interface HitDamageCalculation {
 }
 
 export interface HitDamageEntry {
+  /** Original DamageBonusType: 1 = ATK, 3 = max HP (e.g. Seina Origin). */
+  damageBonusType?: number;
   id: number;
   displayName: string;
   skillPercent: number;

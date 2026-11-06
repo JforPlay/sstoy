@@ -53,6 +53,8 @@ const FILE_TO_PROPERTY_MAP: Record<string, keyof typeof GameData> = {
   'AffinityGift.json': 'affinityGifts',
   'Agent.json': 'agents',
   'CharGem.json': 'charGem',
+  'CharGemAttrValue.json': 'charGemAttrValue',
+  'CharGemSlotControl.json': 'charGemSlotControl',
 
   // Character Upgrade System
   'CharacterUpgrade.json': 'characterUpgrade',
@@ -114,6 +116,7 @@ const MANIFEST: DataManifest = {
 
   // Lazy-loaded files per feature
   lazy: {
+    damageBadges: ['data/CharGemAttrValue.json', 'data/CharGemSlotControl.json'],
     // Character builder features
     characterBuilder: [
       'data/CharacterDes.json',

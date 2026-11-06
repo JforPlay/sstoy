@@ -12,6 +12,7 @@
 import { GameData } from '@/shared/game-data';
 import { getAttrKeyFromEnumId } from './enums';
 import { getState } from './state';
+import { getBadgePotentialBonus } from './badges';
 import type { Position } from '../types';
 
 // =============================================================================
@@ -70,9 +71,10 @@ export function getPotentialStatBonuses(position: Position): PotentialStatSource
 
     // Use local override if set, otherwise fall back to window.state level
     const potentialLevelOverrides = getState().potentialLevelOverrides;
-    const level = potentialLevelOverrides[potId] !== undefined
+    const baseLevel = potentialLevelOverrides[potId] !== undefined
       ? potentialLevelOverrides[potId]
       : (levels[potId] || 1);
+    const level = baseLevel > 0 ? baseLevel + getBadgePotentialBonus(position, potId) : 0;
     const potName = resolvePotentialName(potId, position);
 
     // Parse Param1-Param10

@@ -1,0 +1,38 @@
+import { strict as assert } from 'node:assert';
+const { chromium } = await import(process.env.STELLA_PLAYWRIGHT_MODULE || 'playwright');
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+try {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('http://localhost:3000/app.html');
+  await page.getByText('데미지 계산기 BETA', { exact: true }).click();
+  await page.locator('[data-calc-section]').first().locator('summary').first().click();
+  await page.locator('[data-action=calc-ingame-preset]').click();
+  await page.locator('#ingame-code-import-input').fill('AAAAogAAAHMAAABrzbAB4YbBiAgMAGwAIAQQ');
+  await page.locator('[data-action=saveload-ingame-import]').click();
+  await page.locator('#ingame-code-modal').waitFor({ state: 'detached' });
+  await page.getByText('데미지 계산기 BETA', { exact: true }).click();
+  await page.locator('[data-calc-section]').nth(3).locator('summary').first().click();
+  await page.locator('.dmgcalc-badge-row').first().locator('summary').click();
+  await page.locator('[data-action=badge-group-open]').first().click();
+  const dialog = page.locator('#dmgcalc-badge-picker');
+  const columns = () => dialog.locator('.dmgcalc-badge-picker-grid').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length);
+  assert.equal(await columns(), 4);
+  assert.ok(await dialog.locator('[data-picker-id]').count() > 20);
+  await dialog.screenshot({ path: 'reports/badge-picker-desktop.png' });
+  await dialog.getByRole('searchbox').fill('SP');
+  assert.equal(await dialog.locator('[data-picker-id]:visible').count(), 2);
+  await dialog.getByRole('button', { name: '메인 SP 획득 효율', exact: true }).click();
+  assert.match(await page.locator('.dmgcalc-badge-row').first().innerText(), /메인 SP 획득 효율/);
+  await page.locator('.dmgcalc-badge-row').first().locator('summary').click();
+  await page.locator('[data-action=badge-group-open]').first().click();
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert.equal(await columns(), 2);
+  assert.equal(await dialog.evaluate(element => element.scrollWidth > element.clientWidth), false);
+  await dialog.screenshot({ path: 'reports/badge-picker-mobile.png' });
+  await page.keyboard.press('Escape');
+  assert.equal(await dialog.count(), 0);
+  assert.deepEqual(errors, []);
+  console.log('Badge option picker: 4/2 columns, full list, SP search/selection, mobile overflow and Escape passed.');
+} finally { await browser.close(); }

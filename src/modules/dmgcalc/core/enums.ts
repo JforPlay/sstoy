@@ -320,6 +320,7 @@ export function getStatFormatter(attrKey: string): (value: number) => string {
     attrKey === 'RuptureRate' ||
     attrKey === 'Evd' ||
     attrKey === 'CritResist' ||
+    attrKey === 'DefIgnore' ||
     attrKey.endsWith('CRITRATE')  // NORMALCRITRATE, SKILLCRITRATE, etc.
   ) {
     return (val: number) => (val / 100).toFixed(1) + '%';

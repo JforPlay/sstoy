@@ -201,6 +201,7 @@ function parseHitDamageParameter(
     damageType: hdData.DamageType ?? 1,
     elementType: hdData.ElementType ?? 0,
     energyCharge: hdData.EnergyCharge,
+    damageBonusType: hdData.DamageBonusType,
   };
 }
 

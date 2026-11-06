@@ -800,6 +800,8 @@ async function restoreBuildData(
     restoreNotesData(data.nt);
     refreshAllDisplays();
 
+    window.dispatchEvent(new CustomEvent('builder-data-changed'));
+
     const toastKey = options?.toastKey ?? 'saveload.buildLoaded';
     const toastFallback = options?.toastFallback ?? 'Build loaded successfully!';
     showToast(window.i18n?.t(toastKey) || toastFallback, 'success');

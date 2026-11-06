@@ -32,3 +32,8 @@ npm-debug.log*
 
 # others
 deprecated/
+
+# Full read-only client extraction; reproducible with export-combat-timings.py.
+reports/all-character-combat-timings.json
+reports/AllCharacterCombatTimings.json
+reports/combat-work/

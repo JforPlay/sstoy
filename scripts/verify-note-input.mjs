@@ -1,0 +1,31 @@
+import { strict as assert } from 'node:assert';
+const { chromium } = await import(process.env.STELLA_PLAYWRIGHT_MODULE || 'playwright');
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+try {
+  const page = await browser.newPage();
+  await page.goto('http://localhost:3000/app.html');
+  await page.getByText('데미지 계산기 BETA', { exact: true }).click();
+  await page.locator('[data-calc-section]').first().locator('summary').first().click();
+  await page.locator('[data-action=calc-ingame-preset]').click();
+  await page.locator('#ingame-code-import-input').fill('AAAAogAAAHMAAABrzbAB4YbBiAgMAGwAIAQQ');
+  await page.locator('[data-action=saveload-ingame-import]').click();
+  await page.locator('#ingame-code-modal').waitFor({ state: 'detached' });
+  await page.getByText('데미지 계산기 BETA', { exact: true }).click();
+  const notes = page.locator('[data-calc-section]').nth(2);
+  if (await notes.getAttribute('open') === null) await notes.locator('summary').first().click();
+  const input = page.locator('input.dmgcalc-note-level[data-note-id="90012"]');
+  await input.fill('45');
+  await input.press('Tab');
+  assert.equal(await input.inputValue(), '45');
+  const card = input.locator('xpath=../..');
+  assert.match(await card.innerText(), /4\.5%/);
+  await page.locator('[data-action=note-level-up][data-note-id="90012"]').click();
+  assert.equal(await input.inputValue(), '46');
+  await input.fill('100');
+  await input.press('Tab');
+  assert.equal(await input.inputValue(), '99');
+  await input.fill('45');
+  await input.press('Tab');
+  await card.screenshot({ path: 'reports/note-direct-input.png' });
+  console.log('Direct note entry, calculated effect, existing stepper and range clamp passed.');
+} finally { await browser.close(); }

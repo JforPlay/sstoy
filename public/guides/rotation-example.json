@@ -1,0 +1,36 @@
+{
+  "name": "세이나(기원)·호타루·틸리아",
+  "potentialPreset": "AAAAogAAAHMAAABrzbAB4YbBiAgMAGwAIAQQ",
+  "durationSeconds": 180,
+  "notes": "concertoMinimum",
+  "badgeOptions": [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],
+  "characters": [
+    { "id": 162, "limitBreak": 1 },
+    { "id": 115, "limitBreak": 0 },
+    { "id": 107, "limitBreak": 0 }
+  ],
+  "records": [
+    { "slot": "main1", "id": 214039, "level": 81, "limitBreak": 5 },
+    { "slot": "main2", "id": 214038, "level": 81, "limitBreak": 1 },
+    { "slot": "main3", "id": 214066, "level": 81, "limitBreak": 1 },
+    { "slot": "sub1", "id": 214051, "level": 81, "limitBreak": 1 },
+    { "slot": "sub2", "id": 214030, "level": 81, "limitBreak": 1 },
+    { "slot": "sub3", "id": 214005, "level": 81, "limitBreak": 1 }
+  ],
+  "concertos": [
+    { "groupId": 40661, "name": "별의 소원 섬광", "level": 5 },
+    { "groupId": 40391, "name": "광활한 푸른 하늘", "level": 5 },
+    { "groupId": 40381, "name": "파문의 춤사위", "level": 5 },
+    { "groupId": 40662, "name": "내일 개척", "level": 3 },
+    { "groupId": 40382, "name": "빛의 발걸음", "level": 3 },
+    { "groupId": 40392, "name": "끝없는 햇빛", "level": 1 }
+  ],
+  "provenance": {
+    "potentialPreset": "사용자 제공 코드",
+    "notesAndBadges": "사용자 확인: 협주 레벨 최소 음표, 세 캐릭터 배지 비움",
+    "recordIds": "사용자 제공 스크린샷과 원본 아이콘 대조. sub1 별이 향하는 곳은 사용자가 이름 확인",
+    "characterLimitBreaks": "사용자 확인: 세이나(기원)·호타루·틸리아 순서 1,0,0",
+    "concertoLevels": "사용자 최종 정정 555331. 별의 소원 섬광·광활한 푸른 하늘·파문의 춤사위·내일 개척·빛의 발걸음·끝없는 햇빛 순서",
+    "recordLevelsAndLimitBreaks": "레벨은 스크린샷의 Lv81, 돌파는 사용자 정정 511111"
+  }
+}

@@ -238,6 +238,7 @@ function parseDamageNumEntry(baseId: string, skillLevel: number, limitBreak: num
     damageType: hdData.DamageType ?? 1,
     elementType: hdData.ElementType ?? 0,
     energyCharge: hdData.EnergyCharge,
+    damageBonusType: hdData.DamageBonusType,
   };
 }
 
@@ -276,6 +277,7 @@ function parseSingleHitDamage(id: string): HitDamageEntry | null {
     damageType: hdData.DamageType ?? 1,
     elementType: hdData.ElementType ?? 0,
     energyCharge: hdData.EnergyCharge,
+    damageBonusType: hdData.DamageBonusType,
   };
 }
 

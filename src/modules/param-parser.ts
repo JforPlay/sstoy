@@ -42,7 +42,7 @@ import type {
   ParamParserState,
 } from '../types';
 
-import { parseElementTags } from '../shared';
+import { parseElementTags } from '../shared/dom';
 
 // =============================================================================
 // FILE TYPE MAPPING

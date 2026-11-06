@@ -1341,9 +1341,14 @@ export function openDiscSelector(slotId: DiscSlotId): void {
 
   // Initialize modal if needed
   if (!discModal) {
+    const element = document.getElementById('disc-modal');
+    const parent = element?.parentElement;
     discModal = new Modal('disc-modal');
+    // The calculator also opens this selector while the disc tab is hidden.
+    discModal.onOpen(() => { if (element) document.body.appendChild(element); });
     discModal.onClose(() => {
       discsState.currentSlot = null;
+      if (element && parent?.isConnected) parent.appendChild(element);
     });
   }
 
@@ -1566,6 +1571,7 @@ export function selectDiscOption(discId: string | number): void {
 
   closeDiscSelector();
   renderDiscs();
+  window.dispatchEvent(new CustomEvent('builder-data-changed'));
 
   const discName = discsState.discNames[disc.Id] || (window.i18n?.t('summary.disc') || 'Disc');
   const isMain = currentSlot.startsWith('main');

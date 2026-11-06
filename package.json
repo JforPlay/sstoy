@@ -10,7 +10,13 @@
     "typecheck": "tsc --noEmit",
     "clean": "rimraf dist",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "combat:audit": "node scripts/audit-combat-rules.mjs",
+    "combat:verify": "vitest run src/modules/dmgcalc/__tests__",
+    "combat:prepare": "node scripts/combat-workflow.mjs prepare",
+    "combat:check": "node scripts/combat-workflow.mjs verify",
+    "combat:finalize": "node scripts/combat-workflow.mjs finalize",
+    "combat:workflow-test": "node --test scripts/combat-workflow.test.mjs"
   },
   "devDependencies": {
     "@types/lz-string": "^1.3.34",

@@ -9,6 +9,12 @@
  */
 
 import type { DmgCalcState, SkillType, SkillDamageResult, HitResult } from '../types';
+import { getBadgeSkillBonus } from '../core/badges';
+import {normalizeBaseSkillLevel,SKILL_BASE_MAX_LEVEL} from '../constants';
+const t = (key: string, fallback: string): string => {
+  const value = window.i18n?.t(`dmgcalc.${key}`);
+  return value && value !== `dmgcalc.${key}` ? value : fallback;
+};
 
 // =============================================================================
 // CONSTANTS
@@ -56,15 +62,18 @@ function renderSkillCard(
   const color = SKILL_COLORS[type];
 
   const levelStepper = renderLevelStepper(type, level);
+  const bonus = getBadgeSkillBonus('master', { normalAtk: 1, skill: 2, ultimate: 4 }[type]);
+  const badgeLevel = bonus ? `<span class="skill-card-level">배지 +${bonus} · 적용 Lv.${level + bonus}</span>` : '';
+  const unresolved = result?.status === 'missing-hit-data';
 
-  if (!result) {
+  if (!result || unresolved) {
     return `
       <div class="skill-card skill-card--${type}" style="--skill-accent:${color};">
         <div class="skill-card-header">
           <div class="skill-card-icon-placeholder" style="background:${color};"></div>
           <div>
-            <div class="skill-card-name">${SKILL_LABELS[type]}</div>
-            ${levelStepper}
+            <div class="skill-card-name">${result?.skillName || t(`skillLabel_${type}`, SKILL_LABELS[type])}</div>
+            ${levelStepper}${badgeLevel}
           </div>
           <div class="skill-card-total">&mdash;</div>
         </div>
@@ -74,7 +83,7 @@ function renderSkillCard(
               <tr><th>Hit</th><th>DMG%</th><th>Base</th><th>Crit</th><th>Avg</th></tr>
             </thead>
             <tbody>
-              <tr><td colspan="5" class="hit-table-empty">No data</td></tr>
+              <tr><td colspan="5" class="hit-table-empty">${t('missingHitData', 'No damage reference found; no estimate is substituted.')}</td></tr>
             </tbody>
           </table>
         </div>
@@ -103,7 +112,7 @@ function renderSkillCard(
         ${iconHtml}
         <div>
           <div class="skill-card-name">${result.skillName}</div>
-          ${levelStepper}
+          ${levelStepper}${badgeLevel}
         </div>
         <div class="skill-card-total">${totalFormatted}</div>
       </div>
@@ -117,7 +126,7 @@ function renderSkillCard(
           </tbody>
           <tfoot>
             <tr class="hit-table-total">
-              <td>Total</td>
+              <td>${t('referenceTotal', 'Referenced hits')}</td>
               <td></td>
               <td>${totalBaseFormatted}</td>
               <td>${totalCritFormatted}</td>
@@ -138,11 +147,12 @@ function renderSkillCard(
  * Render a small inline stepper for adjusting skill level.
  */
 function renderLevelStepper(type: SkillType, level: number): string {
+  level=normalizeBaseSkillLevel(level);
   return `
     <div class="skill-card-level-stepper">
-      <button class="skill-level-btn" data-action="skill-level-down" data-skill-type="${type}" title="Decrease level">&minus;</button>
+      <button class="skill-level-btn" data-action="skill-level-down" data-skill-type="${type}" title="Decrease level" ${level<=1?'disabled':''}>&minus;</button>
       <span class="skill-card-level">Lv.${level}</span>
-      <button class="skill-level-btn" data-action="skill-level-up" data-skill-type="${type}" title="Increase level">+</button>
+      <button class="skill-level-btn" data-action="skill-level-up" data-skill-type="${type}" title="Increase level" ${level>=SKILL_BASE_MAX_LEVEL?'disabled':''}>+</button>
     </div>
   `;
 }

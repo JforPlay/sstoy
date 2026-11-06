@@ -2,6 +2,17 @@
  * Constants for Damage Calculator module
  */
 
+/** Actual record breakthroughs. The separate record-builder's melody levels
+ * are 1–6; calculator breakthroughs and DiscExtraAttribute.Break are 0–5. */
+export const DISC_MAX_LIMIT_BREAK = 5;
+export const SKILL_BASE_MAX_LEVEL = 10;
+export function normalizeBaseSkillLevel(value:number):number {
+  return Number.isFinite(value)?Math.max(1,Math.min(SKILL_BASE_MAX_LEVEL,Math.trunc(value))):1;
+}
+export function normalizeDiscLimitBreak(value:number):number {
+  return Number.isFinite(value)?Math.max(0,Math.min(DISC_MAX_LIMIT_BREAK,Math.trunc(value))):0;
+}
+
 // =============================================================================
 // STAT CATEGORIES
 // =============================================================================
@@ -12,7 +23,8 @@
  */
 export const STAT_CATEGORIES = {
   core: ['Atk', 'CritRate', 'CritPower'],
-  offense: ['HitRate', 'StrikeRate', 'RuptureRate'],
+  offense: ['HitRate', 'StrikeRate', 'RuptureRate', 'Penetrate', 'DefIgnore'],
+  critRate: ['NORMALCRITRATE', 'SKILLCRITRATE', 'ULTRACRITRATE', 'OTHERCRITRATE', 'MARKCRITRATE', 'SUMMONCRITRATE', 'PROJECTILECRITRATE'],
   elemental: ['WEE', 'FEE', 'SEE', 'AEE', 'LEE', 'DEE'],
   penetration: ['WEP', 'FEP', 'SEP', 'AEP', 'LEP', 'DEP'],
   resistIgnore: ['WEI', 'FEI', 'SEI', 'AEI', 'LEI', 'DEI'],
@@ -75,6 +87,11 @@ export const DAMAGE_TYPE_TO_CRIT_STAT: Record<number, string> = {
   7: 'SUMMONCRITPOWER'       // SUMMON → ID 81
 };
 
+export const DAMAGE_TYPE_TO_CRIT_RATE_STAT: Record<number, string> = {
+  1: 'NORMALCRITRATE', 2: 'SKILLCRITRATE', 3: 'ULTRACRITRATE',
+  4: 'OTHERCRITRATE', 5: 'MARKCRITRATE', 6: 'PROJECTILECRITRATE', 7: 'SUMMONCRITRATE'
+};
+
 /**
  * Maps damageType enum to damage taken stat keys (for enemy system)
  * Based on GameEnums.damageType → effectAttributeType mapping
@@ -97,11 +114,11 @@ export const DAMAGE_TYPE_TO_TAKEN_STAT: Record<number, string> = {
  * Maps elementType enum to element efficiency stat keys
  */
 export const ELEMENT_TYPE_TO_STAT: Record<number, string> = {
-  1: 'WEE',  // Physical (물리)
+  1: 'WEE',  // Water (물)
   2: 'FEE',  // Fire (불)
-  3: 'SEE',  // Ice (얼음)
-  4: 'AEE',  // Lightning (번개)
-  5: 'LEE',  // Wind (바람)
+  3: 'SEE',  // Earth (땅)
+  4: 'AEE',  // Wind (바람)
+  5: 'LEE',  // Light (빛)
   6: 'DEE'   // Dark (어둠)
 };
 
