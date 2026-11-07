@@ -98,6 +98,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
   const fps = 60, main = String(build.actors[0]!.id), hotaruId = '115', tiliaId = '107', kasimiraId = '108', grayId = '149';
   const party = build.actors.map(actor => String(actor.id));
   const cooldownBuffIds=new Set<number>();
+  const energyBuffIds=new Set<number>();
   const hasHotaru = party.includes(hotaruId), hasTilia = party.includes(tiliaId), hasKasimira = party.includes(kasimiraId);
   const hasGray = party.includes(grayId)&&main!==grayId;
   const contexts: Record<string, CombatLevelContext> = Object.fromEntries(build.actors.map(actor => [String(actor.id), actor.context]));
@@ -163,7 +164,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
         if(++count>10000) throw new Error('Runaway nested character proc events');
         const current=pendingProcs.shift()!, runtime=current.state;
         const result=dispatchCombatProcs(reviewedBreakthroughRules,procListeners,runtime.procs ?? {},{
-          ...current,context:listener=>({attacker:current.attacker,target:'boss',main,party,time:time(runtime),tags:current.tags,buffs:buffApi(runtime),
+          ...current,context:listener=>({attacker:current.attacker,target:typeof current.facts.procTarget==='string'?current.facts.procTarget:'boss',main,party,time:time(runtime),tags:current.tags,buffs:buffApi(runtime),
             facts:{eliteOrBoss:true,boss:true,lightCount:lightParty.length,
               allEarth:party.every(id=>tables.characters[Number(id)]?.EET===3),allFire:party.every(id=>tables.characters[Number(id)]?.EET===2),
               allWater:party.every(id=>tables.characters[Number(id)]?.EET===1),allDark:party.every(id=>tables.characters[Number(id)]?.EET===6),
@@ -173,7 +174,8 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
               hitTargetCount:1,waterMark:hasBuffTag(runtime,'boss','Water'),waterMark1:hasBuffTag(runtime,'boss','WaterMark1'),lightMark1:hasBuffTag(runtime,'boss','LightMark1'),
               earthMark1:hasBuffTag(runtime,'boss','EarthMark1'),windMark1:hasBuffTag(runtime,'boss','WindMark1'),fireMark:hasBuffTag(runtime,'boss','Fire'),
               coldOrFrozen:hasBuffTag(runtime,'boss','Cold')||hasBuffTag(runtime,'boss','Frozen'),
-              waterMark1OrColdOrFrozen:hasBuffTag(runtime,'boss','WaterMark1')||hasBuffTag(runtime,'boss','Cold')||hasBuffTag(runtime,'boss','Frozen'),...current.facts},
+              waterMark1OrColdOrFrozen:hasBuffTag(runtime,'boss','WaterMark1')||hasBuffTag(runtime,'boss','Cold')||hasBuffTag(runtime,'boss','Frozen'),
+              ...(supportAdapters[listener.actor]?.procFacts&&runtime.supportScripts?.[listener.actor]?supportAdapters[listener.actor]!.procFacts!(runtime.supportScripts[listener.actor]!):{}),...current.facts},
             groups:{friends:party,avatars:Object.entries(runtime.summons ?? {}).filter(([,summon])=>summon.owner===listener.actor&&summon.alive).map(([id])=>id),
               'owned-minions':Object.entries(runtime.summons ?? {}).filter(([,summon])=>summon.owner===listener.actor&&summon.alive).map(([id])=>id),'earth-players':party.filter(id=>tables.characters[Number(id)]?.EET===3),
               'fire-players':party.filter(id=>tables.characters[Number(id)]?.EET===2),
@@ -195,11 +197,11 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
   }
   const timing = (actor: number) => tables.timings.characters.find(character => character.id === actor)!;
   const comboCache = new Map<string, CompiledCombo>();
-  const getCombo = (actor: number, tag: string | number[], index = 0, attackSpeed = 1,bundleSource?:string): CompiledCombo => {
-    const key = JSON.stringify([actor,tag,index,attackSpeed,bundleSource]);
+  const getCombo = (actor: number, tag: string | number[], index = 0, attackSpeed = 1,bundleSource?:string,group?:string): CompiledCombo => {
+    const key = JSON.stringify([actor,tag,index,attackSpeed,bundleSource,group]);
     const cached = comboCache.get(key);
     if (cached) return cached;
-    const combo=resolveCombatCombo(timing(actor),tag,index,attackSpeed,fps,tables.timings.rules.Combat_HitboxContinuousDamageDetectInterval!,{source:bundleSource});
+    const combo=resolveCombatCombo(timing(actor),tag,index,attackSpeed,fps,tables.timings.rules.Combat_HitboxContinuousDamageDetectInterval!,{source:bundleSource,group});
     comboCache.set(key, combo);
     return combo;
   };
@@ -255,13 +257,17 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
     define('149:ultimate', grayId, 14940000, getCombo(149, gray.ultimateTag(options.cinematics)), 32);
   }
   for(const [actor,adapter] of Object.entries(supportAdapters)) for(const action of adapter.actions(options.cinematics)) {
-    let combo=getCombo(Number(actor),action.tag);
-    if(action.chain) combo=chainCombatCombos(action.chain.map(part=>{
+    let combo=getCombo(Number(actor),action.tag,0,1,undefined,action.group);
+    if(action.chain) combo=chainCombatCombos(action.chain.flatMap(part=>{
       const combo=getCombo(Number(actor),part.tag,part.index ?? 0);
       const entry:CombatTimelineEvent={skinId:Number(actor)*100+1,index:-1,type:0,name:part.enterEvent ?? '',
         tag:'',hitDamageId:0,startSeconds:0,endSeconds:0,damageDetectIntervalSeconds:0};
-      return {combo:part.enterEvent?{...combo,events:[{time:0,event:entry,occurrence:0},...combo.events]}:combo,
-        ...(part.until==='activation'?{until:combo.activationEnd}:{})};
+      if(part.repeatSeconds!==undefined){
+        const result:{combo:CompiledCombo;until:number}[]=[];let left=Math.ceil(part.repeatSeconds*fps)/fps;
+        while(left>1e-9){const until=Math.min(left,combo.duration);result.push({combo,until});left-=until;}return result;
+      }
+      return [{combo:part.enterEvent?{...combo,events:[{time:0,event:entry,occurrence:0},...combo.events]}:combo,
+        ...(part.until==='activation'?{until:combo.activationEnd}:{})}];
     }));
     if(action.reload) {
       const source=timing(Number(actor)),reloadGroup=source.reloadClips?.find(group=>group.default!=='0');
@@ -303,6 +309,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
       if (!context) throw new Error(`Missing buff source ${source}`);
       const definition = getCombatValue(id, tables.buffDefinitions, tables.buffValues, context);
       if((definition.Effects ?? []).some(effect=>getCombatValue(effect,tables.effects,tables.effectValues,context).EffectType===3))cooldownBuffIds.add(id);
+      if((definition.Effects ?? []).some(effect=>getCombatValue(effect,tables.effects,tables.effectValues,context).EffectType===37))energyBuffIds.add(id);
       // The resolved value row has a level-specific ID. Buff identity remains
       // the base Buff ID for remove/count and subsequent level resolution.
       const previous=state.buffs;
@@ -369,7 +376,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
     const weapon=state.weapons?.[id];
     if(!weapon)return;
     delete state.weapons![id];
-    if(supportAdapters[weapon.actor]?.weaponEnd)api.schedule({kind:'support-weapon-end',actor:weapon.actor,priority:0,data:{name:weapon.name}},0);
+    if(supportAdapters[weapon.actor]?.weaponEnd)api.schedule({kind:'support-weapon-end',actor:weapon.actor,priority:0,data:{name:weapon.name,id}},0);
     for(const child of weapon.children ?? [])cancelWeapon(state,api,child);
     for(const change of weapon.exit){
       for(const id of change.remove)buffApi(state).remove(change.target,id);
@@ -442,7 +449,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
     const snapshot = plan.snapshot ? areaOptions.entity===undefined?attributes(state, actor):summonAttributes(state,actor,areaOptions.entity) : undefined;
     if(snapshot)state.weapons[weaponId]!.snapshot=snapshot;
     const ownerAdapter=supportAdapters[actor];
-    if(ownerAdapter?.weaponBegin)api.schedule({kind:'support-weapon-begin',actor,priority:0,data:{name}},0);
+    if(ownerAdapter?.weaponBegin)api.schedule({kind:'support-weapon-begin',actor,priority:0,data:{name,id:weaponId}},0);
     const schedule=(event:Omit<RuntimeEvent,'sequence'|'tick'>,delay:number)=>api.schedule({...event,weaponId},delay);
     const collectSword=actor===main&&seinaMain&&contexts[main]!.potentials[516204]&&name==='AreaEffect_162_LeiDianZhongJian_Hold';
     const positioned=area && (collectSword || center!=='boss' || areaOptions.x!==undefined || areaOptions.z!==undefined);
@@ -642,7 +649,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
           if(!party.includes(target)) throw new Error(`Unknown projectile target ${target}`);
           const weapon=allWeapons.find(weapon=>weapon.name===name);
           if(!weapon) throw new Error(`Missing support projectile ${name}`);
-          const plan=planCombatWeapon(weapon,0,fps,undefined,allWeapons,tables.timings.rules);
+          const plan=planCombatWeapon(weapon,travelDistance??0,fps,undefined,allWeapons,tables.timings.rules);
           // A friendly delivery has no enemy impact. Native OnBulletFinish is
           // delivered separately after its actual projectile flight timer.
           api.schedule({kind:'support-projectile-end',actor,data:{name,target}},plan.duration);
@@ -713,6 +720,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
           &&state.pausedCooldowns?.[id]===undefined&&state.sp.ledger.pools[actor]!.value>=action.spCost;
       },
       chargeCount:key=>api.chargeCount(`${actor}:${key}`),
+      stopWeapon:id=>{if(state.weapons?.[id]?.actor===actor)cancelWeapon(state,api,id);},
       ultimateCooling(owner){const action=actionList.find(a=>a.id===`${owner}:ultimate`);return Boolean(action&&state.tick<(state.ready[action.cooldownKey??action.id]??0));},
       consumeCharge:key=>api.consumeCharge(`${actor}:${key}`),
       attribute:type=>readCombatAttribute(attributes(state,actor).attributes,type,tables.attributeLimits),
@@ -740,6 +748,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
           ...(!branch?{customController:String(row.ActionAIPath)}:{})};
       },
       independentLease(key,until){state.script[`lease:${actor}:${key}`]=until;},
+      onceDot(buff,hit,period){api.schedule({kind:'native-dot-start',actor,hitId:hit,data:{buff,period}},1/fps);},
       summon(entity,buffs){
         const snapshot=state.initialAttributes?.[actor];
         if(!snapshot)throw new Error(`Initial summon snapshot missing for ${actor}`);
@@ -813,7 +822,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
       resumeCooldown:(key='skill')=>api.resumeCooldown(`${actor}:${key}`),
       retainCooldownPercent:(percent,key='skill')=>api.retainCooldownPercent(`${actor}:${key}`,percent),
       schedule:(name,seconds,data={})=>api.schedule({kind:'support-script-event',actor,data:{...data,name}},seconds),
-      emitProc:(name,facts={})=>{proc(state,name,actor,[],actor,undefined,facts);},
+      emitProc:(name,facts={},participants={})=>{proc(state,name,participants.attacker??actor,[],actor,undefined,{...facts,...(participants.target?{procTarget:participants.target}:{})});},
       entityData(name){
         const source=timing(Number(actor));
         const candidates=[...(source.entities ?? []),...source.weapons.flatMap(weapon=>weapon.components
@@ -872,6 +881,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
     const hitContext=contexts[event.scalingActor ?? event.actor]!;
     const hit = resolveCombatHit(definition, hitContext);
     const hitInfo={actor:event.actor,damageType:hit.damageType,element:hit.element,slot:(definition as any).SkillSlotType ?? 0,tags:hit.tags,
+      ...(event.weaponId===undefined?{}:{weaponId:event.weaponId}),
       ...(typeof event.data?.weapon==='string'?{weapon:event.data.weapon}:{}),
       ...(typeof event.data?.tagUid==='number'?{tagUid:event.data.tagUid}:{})};
     const hitFacts={damageType:hit.damageType,element:hit.element,slot:hitInfo.slot};
@@ -880,10 +890,14 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
       // A native summon is not its owner: no player-only P5/P7/P42, record
       // hit counters, player SP, or support main-hit events are dispatched.
       const id=Number(entity),key=`${event.actor}#${id}`;
+      const minionAdapter=supportAdapters[event.actor],minionApi=supportApi(state,api,event.actor);
+      if(minionAdapter?.prepareMinionHit)state.supportScripts![event.actor]=minionAdapter.prepareMinionHit(state.supportScripts![event.actor]!,minionApi,id,hitInfo);
       const conditions=()=>hitConditions(state,event,hit,definition);
       let source=event.snapshot ?? summonAttributes(state,event.actor,id,hit.damageType,conditions);
       if(event.snapshot)source=collectCombatBuffAttributes(source.attributes,key,state.buffs,time(state),tables.buffDefinitions,tables.buffValues,
         tables.effects,tables.effectValues,contexts,{damageType:hit.damageType,conditions},source.scoped,true);
+      for(const extra of minionAdapter?.beforeMinionHit?.(state.supportScripts![event.actor]!,minionApi,id,hitInfo)??[])
+        source=addOnceCombatAttributes(source,getCombatValue(extra.id,tables.onceDefinitions,tables.onceValues,contexts[extra.source??event.actor]!),extra.count);
       for(const extra of proc(state,'before-player-or-minion-hit',event.actor,hit.tags,undefined,undefined,hitFacts))
         source=addOnceCombatAttributes(source,getCombatValue(extra.id,tables.onceDefinitions,tables.onceValues,contexts[extra.source]!),extra.count);
       for(const extra of proc(state,'before-own-or-minion-hit',event.actor,hit.tags,event.actor,undefined,hitFacts))
@@ -893,7 +907,6 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
       if(result.average>0){state.hitCounts ??={};const countKey=`${key}:${definition.Id}`;state.hitCounts[countKey]=(state.hitCounts[countKey] ?? 0)+1;}
       state.boss=damageRaidBoss(state.boss!,boss,result.average,readCombatAttribute(source.attributes,43,tables.attributeLimits),time(state),buffApi(state));
       state.boss=raidAbilityHit(state.boss,boss,hit.damageType,time(state),buffApi(state));
-      const minionAdapter=supportAdapters[event.actor];
       if(minionAdapter?.afterMinionHit){
         const context=supportApi(state,api,event.actor),crit=context.randomPercent()<=result.critChance*100;
         state.supportScripts![event.actor]=minionAdapter.afterMinionHit(state.supportScripts![event.actor]!,context,id,hitInfo,crit);
@@ -1115,6 +1128,20 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
         efficiency: index ? .75 + actor.supportSpBonus : 1 + actor.mainSpBonus };
     }),
     actions: actionList,
+    spRecipients(state){return scenario.actors.map(actor=>{
+      let additive=0,percent=0,absolute=0;
+      for(const buff of Object.values(state.buffs)){
+        if(buff.owner!==actor.id||!energyBuffIds.has(buff.id)||(buff.expires!==null&&buff.expires<=time(state)))continue;
+        const context=contexts[buff.source]!,definition=buff.valueId?tables.buffValues[buff.valueId]!:getCombatValue(buff.id,tables.buffDefinitions,tables.buffValues,context);
+        for(const id of definition.Effects??[]){const value=getCombatValue(id,tables.effects,tables.effectValues,context);
+          if(value.EffectType!==37||value.EffectTypeFirstSubtype!==(actor.main?1:0))continue;
+          if(Number(value.EffectTypeParam2||0)!==0)throw new Error(`Player energy conversion requires native source ${id}`);
+          const n=Number(value.EffectTypeParam1||0)*buff.stacks;
+          if(value.EffectTypeSecondSubtype===1)additive+=n;else if(value.EffectTypeSecondSubtype===2)percent+=n;else if(value.EffectTypeSecondSubtype===3)absolute+=n;
+        }
+      }
+      return {pool:actor.id,role:actor.main?'main' as const:'support' as const,efficiency:Math.max(0,(actor.efficiency+additive)*(1+percent)+absolute),alive:true,recoveryBlocked:false};
+    });},
     cooldown(state,action){
       if(!action.cooldown||action.flag===2)return action.cooldown;
       if(!base[action.actor]?.cooldowns?.length&&!Object.values(state.buffs).some(buff=>buff.owner===action.actor&&cooldownBuffIds.has(buff.id)))return action.cooldown;
@@ -1341,14 +1368,14 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
           break;
         case 'weapon-lifetime-end': {
           const weapon=state.weapons![event.weaponId!]!,adapter=supportAdapters[event.actor];
-          if(adapter?.weaponEnd)api.schedule({kind:'support-weapon-end',actor:event.actor,priority:0,data:{name:weapon.name}},0);
+          if(adapter?.weaponEnd)api.schedule({kind:'support-weapon-end',actor:event.actor,priority:0,data:{name:weapon.name,id:event.weaponId!}},0);
           for(const child of state.weapons?.[event.weaponId!]?.children ?? [])cancelWeapon(state,api,child);
           delete state.weapons![event.weaponId!];break;
         }
         case 'support-weapon-begin':
         case 'support-weapon-end': {
           const adapter=supportAdapters[event.actor],handler=event.kind==='support-weapon-begin'?adapter?.weaponBegin:adapter?.weaponEnd;
-          if(handler)state.supportScripts![event.actor]=handler(state.supportScripts![event.actor]!,supportApi(state,api,event.actor),String(event.data!.name));
+          if(handler)state.supportScripts![event.actor]=handler(state.supportScripts![event.actor]!,supportApi(state,api,event.actor),String(event.data!.name),Number(event.data!.id));
           break;
         }
         case 'script-cast': api.cast(String(event.data!.action),true);break;
@@ -1379,6 +1406,21 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
           if(picked&&event.data!.buff)buffApi(state).add(main,Number(event.data!.buff),event.actor);
           const adapter=supportAdapters[event.actor];
           if(adapter?.dropEnd)state.supportScripts![event.actor]=adapter.dropEnd(state.supportScripts![event.actor]!,supportApi(state,api,event.actor),String(event.data!.name),picked);
+          break;
+        }
+        case 'native-dot-start': {
+          const buff=Number(event.data!.buff),period=Number(event.data!.period),duration=supportApi(state,api,event.actor).buffDuration!(buff);
+          if(!buffApi(state).count('boss',buff))break;
+          const definition=tables.hits[event.hitId!]!,hit=resolveCombatHit(definition,contexts[event.actor]!);
+          const source=attributes(state,event.actor,hit.damageType),result=calculateResolvedCombatHit(definition,contexts[event.actor]!,source,attributes(state,'boss',hit.damageType),calculation);
+          const damage=Math.max(1,Math.floor(result.base/Math.max(1,Math.ceil(duration/period))));
+          for(let t=0;t<duration-1/fps;t+=period)api.schedule({kind:'native-dot-tick',actor:event.actor,data:{buff,damage,toughness:readCombatAttribute(source.attributes,43,tables.attributeLimits)}},t);
+          break;
+        }
+        case 'native-dot-tick': {
+          if(!buffApi(state).count('boss',Number(event.data!.buff)))break;
+          const damage=Number(event.data!.damage);api.damage(damage);
+          state.boss=damageRaidBoss(state.boss!,boss,damage,Number(event.data!.toughness),time(state),buffApi(state));
           break;
         }
         case 'support-script-event': {

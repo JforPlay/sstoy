@@ -1,0 +1,2829 @@
+{
+  "generatedAt": "2026-11-02T02:35:56.605Z",
+  "results": {
+    "28": {
+      "candidates": [
+        {
+          "name": "지원 대기 0/0초 · 궁 대기 4초 · 메인 대기 1초",
+          "policy": {
+            "hotaruHold": 0,
+            "tiliaHold": 0,
+            "ultimateHold": 4,
+            "mainHold": 1,
+            "supportsFirst": true
+          },
+          "damage": 11653138259.676,
+          "damageScore": 431597,
+          "improvement": 2612,
+          "casts": [
+            {
+              "time": 0,
+              "action": "107:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 0,
+              "action": "115:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 0,
+              "action": "162:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 9,
+              "action": "107:skill",
+              "sp": 45.269625,
+              "requiredSp": 0
+            },
+            {
+              "time": 10,
+              "action": "162:skill",
+              "sp": 87.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 14.15,
+              "action": "162:extra",
+              "sp": 129.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 18,
+              "action": "107:skill",
+              "sp": 77.87565,
+              "requiredSp": 0
+            },
+            {
+              "time": 20,
+              "action": "162:skill",
+              "sp": 169.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 25.683333333333334,
+              "action": "115:skill",
+              "sp": 120.469125,
+              "requiredSp": 0
+            },
+            {
+              "time": 27,
+              "action": "107:skill",
+              "sp": 127.519125,
+              "requiredSp": 0
+            },
+            {
+              "time": 30,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 33.55,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 35.9,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 36,
+              "action": "107:skill",
+              "sp": 142.2222,
+              "requiredSp": 0
+            },
+            {
+              "time": 45,
+              "action": "107:skill",
+              "sp": 187.491825,
+              "requiredSp": 0
+            },
+            {
+              "time": 45.9,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 45.9,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 50.05,
+              "action": "162:extra",
+              "sp": 151.3642,
+              "requiredSp": 0
+            },
+            {
+              "time": 51.36666666666667,
+              "action": "115:skill",
+              "sp": 221.71035,
+              "requiredSp": 0
+            },
+            {
+              "time": 54,
+              "action": "107:skill",
+              "sp": 41.208525,
+              "requiredSp": 0
+            },
+            {
+              "time": 55.9,
+              "action": "162:skill",
+              "sp": 200.5208,
+              "requiredSp": 0
+            },
+            {
+              "time": 60,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 63,
+              "action": "107:skill",
+              "sp": 76.752,
+              "requiredSp": 0
+            },
+            {
+              "time": 63.55,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 65.9,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 72,
+              "action": "107:skill",
+              "sp": 107.595525,
+              "requiredSp": 0
+            },
+            {
+              "time": 75.9,
+              "action": "115:ultimate",
+              "sp": 300,
+              "requiredSp": 300
+            },
+            {
+              "time": 75.9,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 78.95,
+              "action": "115:skill",
+              "sp": 14.320125,
+              "requiredSp": 0
+            },
+            {
+              "time": 80.05,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 81,
+              "action": "107:skill",
+              "sp": 147.57765,
+              "requiredSp": 0
+            },
+            {
+              "time": 85.9,
+              "action": "162:skill",
+              "sp": 184.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 89,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 90.58333333333333,
+              "action": "107:skill",
+              "sp": 3.495,
+              "requiredSp": 0
+            },
+            {
+              "time": 91.35,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 94.9,
+              "action": "162:extra",
+              "sp": 14.43,
+              "requiredSp": 0
+            },
+            {
+              "time": 97.25,
+              "action": "162:skill",
+              "sp": 24.05,
+              "requiredSp": 0
+            },
+            {
+              "time": 99.58333333333333,
+              "action": "107:skill",
+              "sp": 31.735125,
+              "requiredSp": 0
+            },
+            {
+              "time": 104.63333333333334,
+              "action": "115:skill",
+              "sp": 117.53385,
+              "requiredSp": 0
+            },
+            {
+              "time": 107.25,
+              "action": "162:skill",
+              "sp": 114.1095,
+              "requiredSp": 0
+            },
+            {
+              "time": 108.58333333333333,
+              "action": "107:skill",
+              "sp": 74.16525,
+              "requiredSp": 0
+            },
+            {
+              "time": 111.4,
+              "action": "162:extra",
+              "sp": 155.9842,
+              "requiredSp": 0
+            },
+            {
+              "time": 117.25,
+              "action": "162:skill",
+              "sp": 195.9008,
+              "requiredSp": 0
+            },
+            {
+              "time": 117.58333333333333,
+              "action": "107:skill",
+              "sp": 110.394225,
+              "requiredSp": 0
+            },
+            {
+              "time": 121.35,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 124.9,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 126.58333333333333,
+              "action": "107:skill",
+              "sp": 130.834125,
+              "requiredSp": 0
+            },
+            {
+              "time": 127.25,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 130.31666666666666,
+              "action": "115:skill",
+              "sp": 209.77875,
+              "requiredSp": 0
+            },
+            {
+              "time": 135.58333333333334,
+              "action": "107:skill",
+              "sp": 172.57875,
+              "requiredSp": 0
+            },
+            {
+              "time": 137.25,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 138.88333333333333,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 141.4,
+              "action": "162:extra",
+              "sp": 149.0542,
+              "requiredSp": 0
+            },
+            {
+              "time": 144.58333333333334,
+              "action": "107:skill",
+              "sp": 23.08065,
+              "requiredSp": 0
+            },
+            {
+              "time": 147.25,
+              "action": "162:skill",
+              "sp": 200.5208,
+              "requiredSp": 0
+            },
+            {
+              "time": 147.38333333333333,
+              "action": "115:ultimate",
+              "sp": 300,
+              "requiredSp": 300
+            },
+            {
+              "time": 151.35,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 151.83333333333334,
+              "action": "115:skill",
+              "sp": 20.4399,
+              "requiredSp": 0
+            },
+            {
+              "time": 153.58333333333334,
+              "action": "107:skill",
+              "sp": 65.614125,
+              "requiredSp": 0
+            },
+            {
+              "time": 154.9,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 157.25,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 162.58333333333334,
+              "action": "107:skill",
+              "sp": 92.93265,
+              "requiredSp": 0
+            },
+            {
+              "time": 167.25,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 171.4,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 171.58333333333334,
+              "action": "107:skill",
+              "sp": 136.439775,
+              "requiredSp": 0
+            },
+            {
+              "time": 177.25,
+              "action": "162:skill",
+              "sp": 184.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 177.51666666666668,
+              "action": "115:skill",
+              "sp": 113.419125,
+              "requiredSp": 0
+            }
+          ],
+          "counts": {
+            "107:skill": 20,
+            "115:skill": 8,
+            "162:skill": 18,
+            "115:normal:0": 22,
+            "115:normal:1": 21,
+            "115:normal:2": 21,
+            "115:normal:3": 21,
+            "162:normal:0": 21,
+            "162:normal:1": 21,
+            "162:normal:2": 20,
+            "162:normal:3": 13,
+            "162:extra": 11,
+            "115:exit": 6,
+            "162:ultimate:rapier": 5,
+            "107:ultimate": 3,
+            "115:ultimate": 2
+          },
+          "bossLevel": 48,
+          "sp": {
+            "107": {
+              "capacity": 1900000,
+              "value": 1713223.5,
+              "spent": 5700000,
+              "gained": 7413223.5,
+              "overflow": 19545.75
+            },
+            "115": {
+              "capacity": 3000000,
+              "value": 1261481.25,
+              "spent": 6000000,
+              "gained": 7261481.25,
+              "overflow": 171288
+            },
+            "162": {
+              "capacity": 2350000,
+              "value": 2109443,
+              "spent": 11750000,
+              "gained": 13859443,
+              "overflow": 375916
+            }
+          }
+        },
+        {
+          "name": "지원 대기 4/0초 · 궁 대기 4초 · 메인 대기 1초",
+          "policy": {
+            "hotaruHold": 4,
+            "tiliaHold": 0,
+            "ultimateHold": 4,
+            "mainHold": 1,
+            "supportsFirst": true
+          },
+          "damage": 11650591090.097998,
+          "damageScore": 431503,
+          "improvement": 2518,
+          "casts": [
+            {
+              "time": 0,
+              "action": "107:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 0,
+              "action": "115:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 0,
+              "action": "162:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 9,
+              "action": "107:skill",
+              "sp": 45.269625,
+              "requiredSp": 0
+            },
+            {
+              "time": 10,
+              "action": "162:skill",
+              "sp": 87.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 14.15,
+              "action": "162:extra",
+              "sp": 129.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 18,
+              "action": "107:skill",
+              "sp": 77.87565,
+              "requiredSp": 0
+            },
+            {
+              "time": 20,
+              "action": "162:skill",
+              "sp": 169.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 25.683333333333334,
+              "action": "115:skill",
+              "sp": 120.469125,
+              "requiredSp": 0
+            },
+            {
+              "time": 27,
+              "action": "107:skill",
+              "sp": 127.519125,
+              "requiredSp": 0
+            },
+            {
+              "time": 30,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 33.55,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 35.9,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 36,
+              "action": "107:skill",
+              "sp": 142.2222,
+              "requiredSp": 0
+            },
+            {
+              "time": 45,
+              "action": "107:skill",
+              "sp": 187.491825,
+              "requiredSp": 0
+            },
+            {
+              "time": 45.9,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 45.9,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 50.05,
+              "action": "162:extra",
+              "sp": 151.3642,
+              "requiredSp": 0
+            },
+            {
+              "time": 51.36666666666667,
+              "action": "115:skill",
+              "sp": 221.71035,
+              "requiredSp": 0
+            },
+            {
+              "time": 54,
+              "action": "107:skill",
+              "sp": 41.208525,
+              "requiredSp": 0
+            },
+            {
+              "time": 55.9,
+              "action": "162:skill",
+              "sp": 200.5208,
+              "requiredSp": 0
+            },
+            {
+              "time": 60,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 63,
+              "action": "107:skill",
+              "sp": 76.752,
+              "requiredSp": 0
+            },
+            {
+              "time": 63.55,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 65.9,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 72,
+              "action": "107:skill",
+              "sp": 107.595525,
+              "requiredSp": 0
+            },
+            {
+              "time": 75.9,
+              "action": "115:ultimate",
+              "sp": 300,
+              "requiredSp": 300
+            },
+            {
+              "time": 75.9,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 78.95,
+              "action": "115:skill",
+              "sp": 14.320125,
+              "requiredSp": 0
+            },
+            {
+              "time": 80.05,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 81,
+              "action": "107:skill",
+              "sp": 147.57765,
+              "requiredSp": 0
+            },
+            {
+              "time": 85.9,
+              "action": "162:skill",
+              "sp": 184.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 89,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 90.58333333333333,
+              "action": "107:skill",
+              "sp": 3.495,
+              "requiredSp": 0
+            },
+            {
+              "time": 91.35,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 94.9,
+              "action": "162:extra",
+              "sp": 14.43,
+              "requiredSp": 0
+            },
+            {
+              "time": 97.25,
+              "action": "162:skill",
+              "sp": 24.05,
+              "requiredSp": 0
+            },
+            {
+              "time": 99.58333333333333,
+              "action": "107:skill",
+              "sp": 31.735125,
+              "requiredSp": 0
+            },
+            {
+              "time": 107.25,
+              "action": "115:skill",
+              "sp": 130.834125,
+              "requiredSp": 0
+            },
+            {
+              "time": 107.25,
+              "action": "162:skill",
+              "sp": 114.1095,
+              "requiredSp": 0
+            },
+            {
+              "time": 108.58333333333333,
+              "action": "107:skill",
+              "sp": 74.16525,
+              "requiredSp": 0
+            },
+            {
+              "time": 111.4,
+              "action": "162:extra",
+              "sp": 155.9842,
+              "requiredSp": 0
+            },
+            {
+              "time": 117.25,
+              "action": "162:skill",
+              "sp": 195.9008,
+              "requiredSp": 0
+            },
+            {
+              "time": 117.58333333333333,
+              "action": "107:skill",
+              "sp": 110.394225,
+              "requiredSp": 0
+            },
+            {
+              "time": 121.35,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 124.9,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 126.58333333333333,
+              "action": "107:skill",
+              "sp": 130.834125,
+              "requiredSp": 0
+            },
+            {
+              "time": 127.25,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 132.93333333333334,
+              "action": "115:skill",
+              "sp": 224.53965,
+              "requiredSp": 0
+            },
+            {
+              "time": 135.58333333333334,
+              "action": "107:skill",
+              "sp": 172.57875,
+              "requiredSp": 0
+            },
+            {
+              "time": 137.25,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 138.88333333333333,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 141.4,
+              "action": "162:extra",
+              "sp": 149.0542,
+              "requiredSp": 0
+            },
+            {
+              "time": 144.58333333333334,
+              "action": "107:skill",
+              "sp": 23.08065,
+              "requiredSp": 0
+            },
+            {
+              "time": 147.25,
+              "action": "162:skill",
+              "sp": 200.5208,
+              "requiredSp": 0
+            },
+            {
+              "time": 147.38333333333333,
+              "action": "115:ultimate",
+              "sp": 300,
+              "requiredSp": 300
+            },
+            {
+              "time": 151.35,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 151.83333333333334,
+              "action": "115:skill",
+              "sp": 20.4399,
+              "requiredSp": 0
+            },
+            {
+              "time": 153.58333333333334,
+              "action": "107:skill",
+              "sp": 65.614125,
+              "requiredSp": 0
+            },
+            {
+              "time": 154.9,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 157.25,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 162.58333333333334,
+              "action": "107:skill",
+              "sp": 92.93265,
+              "requiredSp": 0
+            },
+            {
+              "time": 167.25,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 171.4,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 171.58333333333334,
+              "action": "107:skill",
+              "sp": 136.439775,
+              "requiredSp": 0
+            },
+            {
+              "time": 177.25,
+              "action": "162:skill",
+              "sp": 184.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 177.51666666666668,
+              "action": "115:skill",
+              "sp": 113.419125,
+              "requiredSp": 0
+            }
+          ],
+          "counts": {
+            "107:skill": 20,
+            "115:skill": 8,
+            "162:skill": 18,
+            "115:normal:0": 22,
+            "115:normal:1": 21,
+            "115:normal:2": 21,
+            "115:normal:3": 20,
+            "162:normal:0": 21,
+            "162:normal:1": 21,
+            "162:normal:2": 20,
+            "162:normal:3": 13,
+            "162:extra": 11,
+            "115:exit": 6,
+            "162:ultimate:rapier": 5,
+            "107:ultimate": 3,
+            "115:ultimate": 2
+          },
+          "bossLevel": 48,
+          "sp": {
+            "107": {
+              "capacity": 1900000,
+              "value": 1713223.5,
+              "spent": 5700000,
+              "gained": 7413223.5,
+              "overflow": 19545.75
+            },
+            "115": {
+              "capacity": 3000000,
+              "value": 1261481.25,
+              "spent": 6000000,
+              "gained": 7261481.25,
+              "overflow": 171288
+            },
+            "162": {
+              "capacity": 2350000,
+              "value": 2109443,
+              "spent": 11750000,
+              "gained": 13859443,
+              "overflow": 375916
+            }
+          }
+        },
+        {
+          "name": "지원 대기 4/1.5초 · 궁 대기 4초 · 메인 대기 1초",
+          "policy": {
+            "hotaruHold": 4,
+            "tiliaHold": 1.5,
+            "ultimateHold": 4,
+            "mainHold": 1,
+            "supportsFirst": true
+          },
+          "damage": 11633010334.782988,
+          "damageScore": 430852,
+          "improvement": 1867,
+          "casts": [
+            {
+              "time": 0,
+              "action": "107:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 0,
+              "action": "115:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 0,
+              "action": "162:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 10,
+              "action": "107:skill",
+              "sp": 48.794625,
+              "requiredSp": 0
+            },
+            {
+              "time": 10,
+              "action": "162:skill",
+              "sp": 87.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 14.15,
+              "action": "162:extra",
+              "sp": 129.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 20,
+              "action": "107:skill",
+              "sp": 91.3881,
+              "requiredSp": 0
+            },
+            {
+              "time": 20,
+              "action": "162:skill",
+              "sp": 169.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 25.683333333333334,
+              "action": "115:skill",
+              "sp": 120.469125,
+              "requiredSp": 0
+            },
+            {
+              "time": 30,
+              "action": "107:skill",
+              "sp": 142.2222,
+              "requiredSp": 0
+            },
+            {
+              "time": 30,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 33.55,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 35.9,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 39,
+              "action": "107:skill",
+              "sp": 164.253225,
+              "requiredSp": 0
+            },
+            {
+              "time": 45.9,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 45.9,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 48,
+              "action": "107:skill",
+              "sp": 14.4615,
+              "requiredSp": 0
+            },
+            {
+              "time": 50.05,
+              "action": "162:extra",
+              "sp": 151.3642,
+              "requiredSp": 0
+            },
+            {
+              "time": 51.36666666666667,
+              "action": "115:skill",
+              "sp": 221.71035,
+              "requiredSp": 0
+            },
+            {
+              "time": 55.9,
+              "action": "162:skill",
+              "sp": 200.5208,
+              "requiredSp": 0
+            },
+            {
+              "time": 57,
+              "action": "107:skill",
+              "sp": 61.085475,
+              "requiredSp": 0
+            },
+            {
+              "time": 60,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 63.55,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 65.9,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 66,
+              "action": "107:skill",
+              "sp": 76.752,
+              "requiredSp": 0
+            },
+            {
+              "time": 75.9,
+              "action": "107:skill",
+              "sp": 125.546625,
+              "requiredSp": 0
+            },
+            {
+              "time": 75.9,
+              "action": "115:ultimate",
+              "sp": 300,
+              "requiredSp": 300
+            },
+            {
+              "time": 75.9,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 78.95,
+              "action": "115:skill",
+              "sp": 14.320125,
+              "requiredSp": 0
+            },
+            {
+              "time": 80.05,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 85.9,
+              "action": "107:skill",
+              "sp": 168.1401,
+              "requiredSp": 0
+            },
+            {
+              "time": 85.9,
+              "action": "162:skill",
+              "sp": 184.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 89,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 91.35,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 94.9,
+              "action": "162:extra",
+              "sp": 14.43,
+              "requiredSp": 0
+            },
+            {
+              "time": 95.9,
+              "action": "107:skill",
+              "sp": 15.6825,
+              "requiredSp": 0
+            },
+            {
+              "time": 97.25,
+              "action": "162:skill",
+              "sp": 24.05,
+              "requiredSp": 0
+            },
+            {
+              "time": 104.9,
+              "action": "107:skill",
+              "sp": 57.397125,
+              "requiredSp": 0
+            },
+            {
+              "time": 107.25,
+              "action": "115:skill",
+              "sp": 130.834125,
+              "requiredSp": 0
+            },
+            {
+              "time": 107.25,
+              "action": "162:skill",
+              "sp": 114.1095,
+              "requiredSp": 0
+            },
+            {
+              "time": 111.4,
+              "action": "162:extra",
+              "sp": 155.9842,
+              "requiredSp": 0
+            },
+            {
+              "time": 113.9,
+              "action": "107:skill",
+              "sp": 88.24065,
+              "requiredSp": 0
+            },
+            {
+              "time": 117.25,
+              "action": "162:skill",
+              "sp": 195.9008,
+              "requiredSp": 0
+            },
+            {
+              "time": 121.35,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 122.9,
+              "action": "107:skill",
+              "sp": 130.834125,
+              "requiredSp": 0
+            },
+            {
+              "time": 124.9,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 127.25,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 131.9,
+              "action": "107:skill",
+              "sp": 154.62765,
+              "requiredSp": 0
+            },
+            {
+              "time": 132.93333333333334,
+              "action": "115:skill",
+              "sp": 224.53965,
+              "requiredSp": 0
+            },
+            {
+              "time": 137.25,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 138.88333333333333,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 140.9,
+              "action": "107:skill",
+              "sp": 12.62565,
+              "requiredSp": 0
+            },
+            {
+              "time": 141.4,
+              "action": "162:extra",
+              "sp": 149.0542,
+              "requiredSp": 0
+            },
+            {
+              "time": 147.25,
+              "action": "162:skill",
+              "sp": 200.5208,
+              "requiredSp": 0
+            },
+            {
+              "time": 147.38333333333333,
+              "action": "115:ultimate",
+              "sp": 300,
+              "requiredSp": 300
+            },
+            {
+              "time": 149.9,
+              "action": "107:skill",
+              "sp": 57.903225,
+              "requiredSp": 0
+            },
+            {
+              "time": 151.35,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 151.83333333333334,
+              "action": "115:skill",
+              "sp": 20.4399,
+              "requiredSp": 0
+            },
+            {
+              "time": 154.9,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 157.25,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 158.9,
+              "action": "107:skill",
+              "sp": 76.752,
+              "requiredSp": 0
+            },
+            {
+              "time": 167.25,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 167.9,
+              "action": "107:skill",
+              "sp": 119.182125,
+              "requiredSp": 0
+            },
+            {
+              "time": 171.4,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 176.9,
+              "action": "107:skill",
+              "sp": 150.539775,
+              "requiredSp": 0
+            },
+            {
+              "time": 177.25,
+              "action": "162:skill",
+              "sp": 184.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 177.51666666666668,
+              "action": "115:skill",
+              "sp": 113.419125,
+              "requiredSp": 0
+            }
+          ],
+          "counts": {
+            "107:skill": 20,
+            "115:skill": 8,
+            "162:skill": 18,
+            "115:normal:0": 22,
+            "115:normal:1": 21,
+            "115:normal:2": 21,
+            "115:normal:3": 20,
+            "162:normal:0": 21,
+            "162:normal:1": 21,
+            "162:normal:2": 20,
+            "162:normal:3": 13,
+            "162:extra": 11,
+            "115:exit": 6,
+            "162:ultimate:rapier": 5,
+            "107:ultimate": 3,
+            "115:ultimate": 2
+          },
+          "bossLevel": 48,
+          "sp": {
+            "107": {
+              "capacity": 1900000,
+              "value": 1713223.5,
+              "spent": 5700000,
+              "gained": 7413223.5,
+              "overflow": 19545.75
+            },
+            "115": {
+              "capacity": 3000000,
+              "value": 1261481.25,
+              "spent": 6000000,
+              "gained": 7261481.25,
+              "overflow": 171288
+            },
+            "162": {
+              "capacity": 2350000,
+              "value": 2109443,
+              "spent": 11750000,
+              "gained": 13859443,
+              "overflow": 375916
+            }
+          }
+        }
+      ],
+      "baseline": 428985,
+      "tested": 37,
+      "duration": 180,
+      "switchRate": 27000,
+      "options": {
+        "boss": 28,
+        "distance": 2,
+        "cinematics": true
+      },
+      "notes": {
+        "90012": 45,
+        "90015": 15,
+        "90016": 70,
+        "90017": 15,
+        "90022": 70
+      },
+      "buildRank": 36,
+      "technical": {
+        "once": 1350,
+        "maximum": 5400,
+        "description": "「연속 점프 공격」, 「뜨거운 도약」, 「분노의 스텝」의 공격을 회피하면 기술 점수 1350포인트를 획득한다. 최대 4회 발동할 수 있어 총 5400포인트를 획득할 수 있다."
+      },
+      "assumptions": [
+        "캐릭터 레벨 90 / 80 / 80 · 스킬 레벨 8 / 8 / 8",
+        "해당 돌파까지 개방되는 능력치 노드 모두 활성 · 레코드 Lv81 / 돌파 511111 · 협주 555331",
+        "음표는 협주 최소치 · 배지 옵션 없음 · 프리셋은 제공된 코드 사용",
+        "고정 거리의 단일 보스에 전부 명중하는 조건 · 회피/이동/피격 손실 제외",
+        "치명타는 확률 가중 기대값 · 60Hz 전투 시간 기준 · 연출 정지 시간 제외",
+        "기술 점수는 회피 성공 등 실제 플레이에 따라 별도 입력 · 후보 중 최고값이며 전역 최적 보장 아님",
+        "실제 전투 로그와 수치 대조 전인 예측 모델 · 고정소수점 반올림/장판 종료 프레임 차이 가능"
+      ]
+    },
+    "29": {
+      "candidates": [
+        {
+          "name": "지원 대기 2/0초 · 궁 대기 2초 · 메인 대기 1초",
+          "policy": {
+            "hotaruHold": 2,
+            "tiliaHold": 0,
+            "ultimateHold": 2,
+            "mainHold": 1,
+            "supportsFirst": true
+          },
+          "damage": 11082059860.429985,
+          "damageScore": 410446,
+          "improvement": 720,
+          "casts": [
+            {
+              "time": 0,
+              "action": "107:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 0,
+              "action": "115:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 0,
+              "action": "162:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 9,
+              "action": "107:skill",
+              "sp": 45.269625,
+              "requiredSp": 0
+            },
+            {
+              "time": 10,
+              "action": "162:skill",
+              "sp": 87.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 14.15,
+              "action": "162:extra",
+              "sp": 129.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 18,
+              "action": "107:skill",
+              "sp": 77.87565,
+              "requiredSp": 0
+            },
+            {
+              "time": 20,
+              "action": "162:skill",
+              "sp": 169.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 25.683333333333334,
+              "action": "115:skill",
+              "sp": 120.469125,
+              "requiredSp": 0
+            },
+            {
+              "time": 26.666666666666668,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 27,
+              "action": "107:skill",
+              "sp": 127.519125,
+              "requiredSp": 0
+            },
+            {
+              "time": 30.216666666666665,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 32.56666666666667,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 36,
+              "action": "107:skill",
+              "sp": 149.55015,
+              "requiredSp": 0
+            },
+            {
+              "time": 42.56666666666667,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 44.7,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 46.28333333333333,
+              "action": "107:skill",
+              "sp": 9.4434,
+              "requiredSp": 0
+            },
+            {
+              "time": 46.71666666666667,
+              "action": "162:extra",
+              "sp": 146.7442,
+              "requiredSp": 0
+            },
+            {
+              "time": 52.56666666666667,
+              "action": "115:skill",
+              "sp": 231.034725,
+              "requiredSp": 0
+            },
+            {
+              "time": 52.56666666666667,
+              "action": "162:skill",
+              "sp": 200.5208,
+              "requiredSp": 0
+            },
+            {
+              "time": 55.28333333333333,
+              "action": "107:skill",
+              "sp": 54.720975,
+              "requiredSp": 0
+            },
+            {
+              "time": 56.666666666666664,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 60.21666666666667,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 62.56666666666667,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 64.28333333333333,
+              "action": "107:skill",
+              "sp": 73.56975,
+              "requiredSp": 0
+            },
+            {
+              "time": 72.56666666666666,
+              "action": "115:ultimate",
+              "sp": 300,
+              "requiredSp": 300
+            },
+            {
+              "time": 72.56666666666666,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 73.28333333333333,
+              "action": "107:skill",
+              "sp": 115.999875,
+              "requiredSp": 0
+            },
+            {
+              "time": 76.71666666666667,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 77.01666666666667,
+              "action": "115:skill",
+              "sp": 22.031025,
+              "requiredSp": 0
+            },
+            {
+              "time": 82.28333333333333,
+              "action": "107:skill",
+              "sp": 147.357525,
+              "requiredSp": 0
+            },
+            {
+              "time": 82.56666666666666,
+              "action": "162:skill",
+              "sp": 184.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 88.33333333333333,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 91.28333333333333,
+              "action": "107:skill",
+              "sp": 184.6635,
+              "requiredSp": 0
+            },
+            {
+              "time": 91.88333333333334,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 94.23333333333333,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 95.11666666666666,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 100.28333333333333,
+              "action": "107:skill",
+              "sp": 31.409025,
+              "requiredSp": 0
+            },
+            {
+              "time": 104.23333333333333,
+              "action": "115:skill",
+              "sp": 134.359125,
+              "requiredSp": 0
+            },
+            {
+              "time": 104.23333333333333,
+              "action": "162:skill",
+              "sp": 118.7295,
+              "requiredSp": 0
+            },
+            {
+              "time": 108.38333333333334,
+              "action": "162:extra",
+              "sp": 160.6042,
+              "requiredSp": 0
+            },
+            {
+              "time": 109.28333333333333,
+              "action": "107:skill",
+              "sp": 76.58865,
+              "requiredSp": 0
+            },
+            {
+              "time": 114.23333333333333,
+              "action": "162:skill",
+              "sp": 200.5208,
+              "requiredSp": 0
+            },
+            {
+              "time": 118.28333333333333,
+              "action": "107:skill",
+              "sp": 119.182125,
+              "requiredSp": 0
+            },
+            {
+              "time": 118.33333333333333,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 121.88333333333334,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 124.23333333333333,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 127.28333333333333,
+              "action": "107:skill",
+              "sp": 133.50225,
+              "requiredSp": 0
+            },
+            {
+              "time": 129.91666666666666,
+              "action": "115:skill",
+              "sp": 228.06465,
+              "requiredSp": 0
+            },
+            {
+              "time": 134.23333333333332,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 136.28333333333333,
+              "action": "107:skill",
+              "sp": 180.70575,
+              "requiredSp": 0
+            },
+            {
+              "time": 137.33333333333334,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 138.38333333333333,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 144.23333333333332,
+              "action": "115:ultimate",
+              "sp": 300,
+              "requiredSp": 300
+            },
+            {
+              "time": 144.23333333333332,
+              "action": "162:skill",
+              "sp": 198.2108,
+              "requiredSp": 0
+            },
+            {
+              "time": 145.28333333333333,
+              "action": "107:skill",
+              "sp": 39.05445,
+              "requiredSp": 0
+            },
+            {
+              "time": 148.33333333333334,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 148.68333333333334,
+              "action": "115:skill",
+              "sp": 23.763525,
+              "requiredSp": 0
+            },
+            {
+              "time": 151.88333333333333,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 154.23333333333332,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 154.28333333333333,
+              "action": "107:skill",
+              "sp": 54.720975,
+              "requiredSp": 0
+            },
+            {
+              "time": 163.28333333333333,
+              "action": "107:skill",
+              "sp": 99.9906,
+              "requiredSp": 0
+            },
+            {
+              "time": 164.23333333333332,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 168.38333333333333,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 172.28333333333333,
+              "action": "107:skill",
+              "sp": 132.596625,
+              "requiredSp": 0
+            },
+            {
+              "time": 174.23333333333332,
+              "action": "162:skill",
+              "sp": 184.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 174.36666666666667,
+              "action": "115:skill",
+              "sp": 116.74275,
+              "requiredSp": 0
+            }
+          ],
+          "counts": {
+            "107:skill": 20,
+            "115:skill": 8,
+            "162:skill": 18,
+            "115:normal:0": 22,
+            "115:normal:1": 22,
+            "115:normal:2": 22,
+            "115:normal:3": 21,
+            "162:normal:0": 21,
+            "162:normal:1": 21,
+            "162:normal:2": 19,
+            "162:normal:3": 12,
+            "162:extra": 11,
+            "115:exit": 6,
+            "162:ultimate:rapier": 5,
+            "107:ultimate": 3,
+            "115:ultimate": 2
+          },
+          "bossLevel": 48,
+          "sp": {
+            "107": {
+              "capacity": 1900000,
+              "value": 1769526,
+              "spent": 5700000,
+              "gained": 7469526,
+              "overflow": 16696.5
+            },
+            "115": {
+              "capacity": 3000000,
+              "value": 1459951.5,
+              "spent": 6000000,
+              "gained": 7459951.5,
+              "overflow": 26271
+            },
+            "162": {
+              "capacity": 2350000,
+              "value": 2350000,
+              "spent": 11750000,
+              "gained": 14100000,
+              "overflow": 181630
+            }
+          }
+        },
+        {
+          "name": "지원 대기 2/1.5초 · 궁 대기 2초 · 메인 대기 1초",
+          "policy": {
+            "hotaruHold": 2,
+            "tiliaHold": 1.5,
+            "ultimateHold": 2,
+            "mainHold": 1,
+            "supportsFirst": true
+          },
+          "damage": 11081709544.695972,
+          "damageScore": 410433,
+          "improvement": 707,
+          "casts": [
+            {
+              "time": 0,
+              "action": "107:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 0,
+              "action": "115:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 0,
+              "action": "162:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 10,
+              "action": "107:skill",
+              "sp": 48.794625,
+              "requiredSp": 0
+            },
+            {
+              "time": 10,
+              "action": "162:skill",
+              "sp": 87.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 14.15,
+              "action": "162:extra",
+              "sp": 129.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 20,
+              "action": "107:skill",
+              "sp": 91.3881,
+              "requiredSp": 0
+            },
+            {
+              "time": 20,
+              "action": "162:skill",
+              "sp": 169.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 25.683333333333334,
+              "action": "115:skill",
+              "sp": 120.469125,
+              "requiredSp": 0
+            },
+            {
+              "time": 26.666666666666668,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 30,
+              "action": "107:skill",
+              "sp": 127.519125,
+              "requiredSp": 0
+            },
+            {
+              "time": 30.216666666666665,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 32.56666666666667,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 39,
+              "action": "107:skill",
+              "sp": 158.36265,
+              "requiredSp": 0
+            },
+            {
+              "time": 42.56666666666667,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 44.7,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 46.71666666666667,
+              "action": "162:extra",
+              "sp": 146.7442,
+              "requiredSp": 0
+            },
+            {
+              "time": 48,
+              "action": "107:skill",
+              "sp": 11.1759,
+              "requiredSp": 0
+            },
+            {
+              "time": 52.56666666666667,
+              "action": "115:skill",
+              "sp": 231.034725,
+              "requiredSp": 0
+            },
+            {
+              "time": 52.56666666666667,
+              "action": "162:skill",
+              "sp": 200.5208,
+              "requiredSp": 0
+            },
+            {
+              "time": 56.666666666666664,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 57,
+              "action": "107:skill",
+              "sp": 62.431875,
+              "requiredSp": 0
+            },
+            {
+              "time": 60.21666666666667,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 62.56666666666667,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 66,
+              "action": "107:skill",
+              "sp": 84.4629,
+              "requiredSp": 0
+            },
+            {
+              "time": 72.56666666666666,
+              "action": "115:ultimate",
+              "sp": 300,
+              "requiredSp": 300
+            },
+            {
+              "time": 72.56666666666666,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 75,
+              "action": "107:skill",
+              "sp": 125.546625,
+              "requiredSp": 0
+            },
+            {
+              "time": 76.71666666666667,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 77.01666666666667,
+              "action": "115:skill",
+              "sp": 22.031025,
+              "requiredSp": 0
+            },
+            {
+              "time": 82.56666666666666,
+              "action": "162:skill",
+              "sp": 184.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 84,
+              "action": "107:skill",
+              "sp": 163.366725,
+              "requiredSp": 0
+            },
+            {
+              "time": 88.33333333333333,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 91.88333333333334,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 93,
+              "action": "107:skill",
+              "sp": 184.6635,
+              "requiredSp": 0
+            },
+            {
+              "time": 94.23333333333333,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 95.11666666666666,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 102,
+              "action": "107:skill",
+              "sp": 44.012625,
+              "requiredSp": 0
+            },
+            {
+              "time": 104.23333333333333,
+              "action": "115:skill",
+              "sp": 134.359125,
+              "requiredSp": 0
+            },
+            {
+              "time": 104.23333333333333,
+              "action": "162:skill",
+              "sp": 118.7295,
+              "requiredSp": 0
+            },
+            {
+              "time": 108.38333333333334,
+              "action": "162:extra",
+              "sp": 160.6042,
+              "requiredSp": 0
+            },
+            {
+              "time": 111,
+              "action": "107:skill",
+              "sp": 78.35115,
+              "requiredSp": 0
+            },
+            {
+              "time": 114.23333333333333,
+              "action": "162:skill",
+              "sp": 200.5208,
+              "requiredSp": 0
+            },
+            {
+              "time": 118.33333333333333,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 120,
+              "action": "107:skill",
+              "sp": 119.182125,
+              "requiredSp": 0
+            },
+            {
+              "time": 121.88333333333334,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 124.23333333333333,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 129,
+              "action": "107:skill",
+              "sp": 144.73815,
+              "requiredSp": 0
+            },
+            {
+              "time": 129.91666666666666,
+              "action": "115:skill",
+              "sp": 228.06465,
+              "requiredSp": 0
+            },
+            {
+              "time": 134.23333333333332,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 137.33333333333334,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 138.38333333333333,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 138.91666666666666,
+              "action": "107:skill",
+              "sp": 1.7325,
+              "requiredSp": 0
+            },
+            {
+              "time": 144.23333333333332,
+              "action": "115:ultimate",
+              "sp": 300,
+              "requiredSp": 300
+            },
+            {
+              "time": 144.23333333333332,
+              "action": "162:skill",
+              "sp": 198.2108,
+              "requiredSp": 0
+            },
+            {
+              "time": 147.91666666666666,
+              "action": "107:skill",
+              "sp": 54.720975,
+              "requiredSp": 0
+            },
+            {
+              "time": 148.33333333333334,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 148.68333333333334,
+              "action": "115:skill",
+              "sp": 23.763525,
+              "requiredSp": 0
+            },
+            {
+              "time": 151.88333333333333,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 154.23333333333332,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 156.91666666666666,
+              "action": "107:skill",
+              "sp": 69.0411,
+              "requiredSp": 0
+            },
+            {
+              "time": 164.23333333333332,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 165.91666666666666,
+              "action": "107:skill",
+              "sp": 114.653475,
+              "requiredSp": 0
+            },
+            {
+              "time": 168.38333333333333,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 174.23333333333332,
+              "action": "162:skill",
+              "sp": 184.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 174.36666666666667,
+              "action": "115:skill",
+              "sp": 116.74275,
+              "requiredSp": 0
+            },
+            {
+              "time": 174.91666666666666,
+              "action": "107:skill",
+              "sp": 150.88245,
+              "requiredSp": 0
+            }
+          ],
+          "counts": {
+            "107:skill": 20,
+            "115:skill": 8,
+            "162:skill": 18,
+            "115:normal:0": 22,
+            "115:normal:1": 22,
+            "115:normal:2": 22,
+            "115:normal:3": 21,
+            "162:normal:0": 21,
+            "162:normal:1": 21,
+            "162:normal:2": 19,
+            "162:normal:3": 12,
+            "162:extra": 11,
+            "115:exit": 6,
+            "162:ultimate:rapier": 5,
+            "107:ultimate": 3,
+            "115:ultimate": 2
+          },
+          "bossLevel": 48,
+          "sp": {
+            "107": {
+              "capacity": 1900000,
+              "value": 1769526,
+              "spent": 5700000,
+              "gained": 7469526,
+              "overflow": 16696.5
+            },
+            "115": {
+              "capacity": 3000000,
+              "value": 1459951.5,
+              "spent": 6000000,
+              "gained": 7459951.5,
+              "overflow": 26271
+            },
+            "162": {
+              "capacity": 2350000,
+              "value": 2350000,
+              "spent": 11750000,
+              "gained": 14100000,
+              "overflow": 181630
+            }
+          }
+        },
+        {
+          "name": "지원 대기 4/0초 · 궁 대기 0초 · 메인 대기 0초",
+          "policy": {
+            "hotaruHold": 4,
+            "tiliaHold": 0,
+            "ultimateHold": 0,
+            "mainHold": 0,
+            "supportsFirst": true
+          },
+          "damage": 11077583622.988974,
+          "damageScore": 410280,
+          "improvement": 554,
+          "casts": [
+            {
+              "time": 0,
+              "action": "107:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 0,
+              "action": "115:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 0,
+              "action": "162:skill",
+              "sp": 0,
+              "requiredSp": 0
+            },
+            {
+              "time": 9,
+              "action": "107:skill",
+              "sp": 45.269625,
+              "requiredSp": 0
+            },
+            {
+              "time": 10,
+              "action": "162:skill",
+              "sp": 87.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 14.15,
+              "action": "162:extra",
+              "sp": 129.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 18,
+              "action": "107:skill",
+              "sp": 77.87565,
+              "requiredSp": 0
+            },
+            {
+              "time": 20,
+              "action": "162:skill",
+              "sp": 169.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 25.683333333333334,
+              "action": "115:skill",
+              "sp": 120.469125,
+              "requiredSp": 0
+            },
+            {
+              "time": 26.666666666666668,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 27,
+              "action": "107:skill",
+              "sp": 127.519125,
+              "requiredSp": 0
+            },
+            {
+              "time": 30.216666666666665,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 32.56666666666667,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 36,
+              "action": "107:skill",
+              "sp": 149.55015,
+              "requiredSp": 0
+            },
+            {
+              "time": 42.56666666666667,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 44.7,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 46.28333333333333,
+              "action": "107:skill",
+              "sp": 9.4434,
+              "requiredSp": 0
+            },
+            {
+              "time": 46.71666666666667,
+              "action": "162:extra",
+              "sp": 146.7442,
+              "requiredSp": 0
+            },
+            {
+              "time": 52.56666666666667,
+              "action": "115:skill",
+              "sp": 231.034725,
+              "requiredSp": 0
+            },
+            {
+              "time": 52.56666666666667,
+              "action": "162:skill",
+              "sp": 200.5208,
+              "requiredSp": 0
+            },
+            {
+              "time": 55.28333333333333,
+              "action": "107:skill",
+              "sp": 54.720975,
+              "requiredSp": 0
+            },
+            {
+              "time": 56.666666666666664,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 60.21666666666667,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 62.56666666666667,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 64.28333333333333,
+              "action": "107:skill",
+              "sp": 73.56975,
+              "requiredSp": 0
+            },
+            {
+              "time": 71.86666666666666,
+              "action": "115:ultimate",
+              "sp": 300,
+              "requiredSp": 300
+            },
+            {
+              "time": 72.56666666666666,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 73.28333333333333,
+              "action": "107:skill",
+              "sp": 115.999875,
+              "requiredSp": 0
+            },
+            {
+              "time": 76.31666666666666,
+              "action": "115:skill",
+              "sp": 23.793525,
+              "requiredSp": 0
+            },
+            {
+              "time": 76.71666666666667,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 82.28333333333333,
+              "action": "107:skill",
+              "sp": 147.357525,
+              "requiredSp": 0
+            },
+            {
+              "time": 82.56666666666666,
+              "action": "162:skill",
+              "sp": 184.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 88.33333333333333,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 91.28333333333333,
+              "action": "107:skill",
+              "sp": 184.6635,
+              "requiredSp": 0
+            },
+            {
+              "time": 91.88333333333334,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 94.23333333333333,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 95.11666666666666,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 100.28333333333333,
+              "action": "107:skill",
+              "sp": 31.409025,
+              "requiredSp": 0
+            },
+            {
+              "time": 104.23333333333333,
+              "action": "115:skill",
+              "sp": 136.121625,
+              "requiredSp": 0
+            },
+            {
+              "time": 104.23333333333333,
+              "action": "162:skill",
+              "sp": 118.7295,
+              "requiredSp": 0
+            },
+            {
+              "time": 108.38333333333334,
+              "action": "162:extra",
+              "sp": 160.6042,
+              "requiredSp": 0
+            },
+            {
+              "time": 109.28333333333333,
+              "action": "107:skill",
+              "sp": 76.58865,
+              "requiredSp": 0
+            },
+            {
+              "time": 114.23333333333333,
+              "action": "162:skill",
+              "sp": 200.5208,
+              "requiredSp": 0
+            },
+            {
+              "time": 118.28333333333333,
+              "action": "107:skill",
+              "sp": 119.182125,
+              "requiredSp": 0
+            },
+            {
+              "time": 118.33333333333333,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 121.88333333333334,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 124.23333333333333,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 127.28333333333333,
+              "action": "107:skill",
+              "sp": 133.50225,
+              "requiredSp": 0
+            },
+            {
+              "time": 129.91666666666666,
+              "action": "115:skill",
+              "sp": 229.82715,
+              "requiredSp": 0
+            },
+            {
+              "time": 134.23333333333332,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 136.28333333333333,
+              "action": "107:skill",
+              "sp": 180.70575,
+              "requiredSp": 0
+            },
+            {
+              "time": 137.33333333333334,
+              "action": "107:ultimate",
+              "sp": 190,
+              "requiredSp": 190
+            },
+            {
+              "time": 138.38333333333333,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 144.13333333333333,
+              "action": "115:ultimate",
+              "sp": 300,
+              "requiredSp": 300
+            },
+            {
+              "time": 144.23333333333332,
+              "action": "162:skill",
+              "sp": 198.2108,
+              "requiredSp": 0
+            },
+            {
+              "time": 145.28333333333333,
+              "action": "107:skill",
+              "sp": 39.05445,
+              "requiredSp": 0
+            },
+            {
+              "time": 148.33333333333334,
+              "action": "162:ultimate:rapier",
+              "sp": 235,
+              "requiredSp": 235
+            },
+            {
+              "time": 148.58333333333334,
+              "action": "115:skill",
+              "sp": 23.763525,
+              "requiredSp": 0
+            },
+            {
+              "time": 151.88333333333333,
+              "action": "162:extra",
+              "sp": 7.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 154.23333333333332,
+              "action": "162:skill",
+              "sp": 12.5,
+              "requiredSp": 0
+            },
+            {
+              "time": 154.28333333333333,
+              "action": "107:skill",
+              "sp": 54.720975,
+              "requiredSp": 0
+            },
+            {
+              "time": 163.28333333333333,
+              "action": "107:skill",
+              "sp": 99.9906,
+              "requiredSp": 0
+            },
+            {
+              "time": 164.23333333333332,
+              "action": "162:skill",
+              "sp": 102.5595,
+              "requiredSp": 0
+            },
+            {
+              "time": 168.38333333333333,
+              "action": "162:extra",
+              "sp": 144.4342,
+              "requiredSp": 0
+            },
+            {
+              "time": 172.28333333333333,
+              "action": "107:skill",
+              "sp": 132.596625,
+              "requiredSp": 0
+            },
+            {
+              "time": 174.23333333333332,
+              "action": "162:skill",
+              "sp": 184.3508,
+              "requiredSp": 0
+            },
+            {
+              "time": 174.26666666666668,
+              "action": "115:skill",
+              "sp": 115.151625,
+              "requiredSp": 0
+            }
+          ],
+          "counts": {
+            "107:skill": 20,
+            "115:skill": 8,
+            "162:skill": 18,
+            "115:normal:0": 22,
+            "115:normal:1": 22,
+            "115:normal:2": 22,
+            "115:normal:3": 21,
+            "162:normal:0": 21,
+            "162:normal:1": 21,
+            "162:normal:2": 19,
+            "162:normal:3": 12,
+            "162:extra": 11,
+            "115:exit": 6,
+            "162:ultimate:rapier": 5,
+            "107:ultimate": 3,
+            "115:ultimate": 2
+          },
+          "bossLevel": 48,
+          "sp": {
+            "107": {
+              "capacity": 1900000,
+              "value": 1769526,
+              "spent": 5700000,
+              "gained": 7469526,
+              "overflow": 16696.5
+            },
+            "115": {
+              "capacity": 3000000,
+              "value": 1459951.5,
+              "spent": 6000000,
+              "gained": 7459951.5,
+              "overflow": 26271
+            },
+            "162": {
+              "capacity": 2350000,
+              "value": 2350000,
+              "spent": 11750000,
+              "gained": 14100000,
+              "overflow": 181630
+            }
+          }
+        }
+      ],
+      "baseline": 409726,
+      "tested": 37,
+      "duration": 180,
+      "switchRate": 27000,
+      "options": {
+        "boss": 29,
+        "distance": 2,
+        "cinematics": true
+      },
+      "notes": {
+        "90012": 45,
+        "90015": 15,
+        "90016": 70,
+        "90017": 15,
+        "90022": 70
+      },
+      "buildRank": 36,
+      "technical": {
+        "once": 675,
+        "maximum": 5400,
+        "description": "보스 적이 「토네이도」를 포함한 스킬을 시전할 때마다 「토네이도」에게 명중되지 않으면 기술 점수 675포인트를 획득한다. 최대 8회 발동할 수 있어 총 5400포인트를 획득할 수 있다."
+      },
+      "assumptions": [
+        "캐릭터 레벨 90 / 80 / 80 · 스킬 레벨 8 / 8 / 8",
+        "해당 돌파까지 개방되는 능력치 노드 모두 활성 · 레코드 Lv81 / 돌파 511111 · 협주 555331",
+        "음표는 협주 최소치 · 배지 옵션 없음 · 프리셋은 제공된 코드 사용",
+        "고정 거리의 단일 보스에 전부 명중하는 조건 · 회피/이동/피격 손실 제외",
+        "치명타는 확률 가중 기대값 · 60Hz 전투 시간 기준 · 연출 정지 시간 제외",
+        "기술 점수는 회피 성공 등 실제 플레이에 따라 별도 입력 · 후보 중 최고값이며 전역 최적 보장 아님",
+        "실제 전투 로그와 수치 대조 전인 예측 모델 · 고정소수점 반올림/장판 종료 프레임 차이 가능"
+      ]
+    }
+  }
+}

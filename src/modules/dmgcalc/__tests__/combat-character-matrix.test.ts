@@ -25,6 +25,17 @@ if(!process.env.COMBAT_CHARACTER){
   const tables=await loadExampleCombatTables(read,party);
   const pool=await read('CharPotential'),fixture=JSON.parse(readFileSync('public/guides/rotation-example.json','utf8'));
   const ids=rolePotentialIds(pool[id],role as 'main'|'support'),cases=matrixCases(ids,tables.potentials);
+  // This native controller defines pair variants only. Keep invalid triples
+  // rejected by the runtime and test every legal pair instead of fabricating
+  // a nonexistent combined prefab.
+  if(id===117&&role==='support'){
+    for(const test of cases)if([511721,511722,511723].every(id=>test.potentials[id]))delete test.potentials[511723];
+    const pairBase=structuredClone(cases.at(-1)!);
+    for(const omitted of [511721,511722]){
+      const test=structuredClone(pairBase);delete test.potentials[omitted];test.potentials[511723]=1;
+      test.name=`지원 전용 조합: ${omitted} 제외`;cases.push(test);
+    }
+  }
   const policy={name:'ready',choose:(_s:CombatRuntimeState,legal:string[])=>legal.find(key=>key.includes('ultimate'))??legal[0]??null};
   function run(limitBreak:number,potentials:Record<number,number>,selectedParty=party){
     const live:LiveCombatInput={actors:selectedParty.map(actor=>({id:actor,level:90,ascension:8,limitBreak:actor===id?limitBreak:0,

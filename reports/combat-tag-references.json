@@ -1,0 +1,360 @@
+{
+  "warning": "Literal-reference audit, not a proof of event ordering or runtime coverage.",
+  "references": [
+    {
+      "character": 103,
+      "rule": "103:lb4",
+      "tag": "Ultra",
+      "evidence": [
+        "Parallel.cs"
+      ]
+    },
+    {
+      "character": 103,
+      "rule": "103:lb5",
+      "tag": "Ultra",
+      "evidence": [
+        "Parallel.cs"
+      ]
+    },
+    {
+      "character": 111,
+      "rule": "111:lb3",
+      "tag": "Skill",
+      "evidence": [
+        "ParallelScript.cs"
+      ]
+    },
+    {
+      "character": 112,
+      "rule": "112:lb1",
+      "tag": "UltraAtk",
+      "evidence": [
+        "Parallel.cs"
+      ]
+    },
+    {
+      "character": 112,
+      "rule": "112:lb5",
+      "tag": "NrmAtk",
+      "evidence": [
+        "Parallel.cs"
+      ]
+    },
+    {
+      "character": 113,
+      "rule": "113:lb3:on",
+      "tag": "MC",
+      "evidence": [
+        "ParallelScript.cs"
+      ]
+    },
+    {
+      "character": 113,
+      "rule": "113:lb3:on",
+      "tag": "SS",
+      "evidence": [
+        "ParallelScript.cs"
+      ]
+    },
+    {
+      "character": 113,
+      "rule": "113:lb4",
+      "tag": "NA",
+      "evidence": [
+        "ParallelScript.cs"
+      ]
+    },
+    {
+      "character": 114,
+      "rule": "114:lb4",
+      "tag": "Ultra",
+      "evidence": [
+        "ParallelScript.cs"
+      ]
+    },
+    {
+      "character": 116,
+      "rule": "116:lb1",
+      "tag": "116_SP",
+      "evidence": [
+        "Config.cs"
+      ]
+    },
+    {
+      "character": 116,
+      "rule": "116:lb5",
+      "tag": "116_SP",
+      "evidence": [
+        "Config.cs"
+      ]
+    },
+    {
+      "character": 117,
+      "rule": "117:lb2",
+      "tag": "117_Ultra_Hit",
+      "evidence": [
+        "Parallel.cs",
+        "Parallel_old.cs"
+      ]
+    },
+    {
+      "character": 117,
+      "rule": "117:lb3",
+      "tag": "117_Ultra_Hit",
+      "evidence": [
+        "Parallel.cs",
+        "Parallel_old.cs"
+      ]
+    },
+    {
+      "character": 118,
+      "rule": "118:lb2:single",
+      "tag": "118_Sup_Atk",
+      "evidence": [
+        "Parallel.cs"
+      ]
+    },
+    {
+      "character": 118,
+      "rule": "118:lb2:single",
+      "tag": "118_Main_Atk",
+      "evidence": [
+        "Parallel.cs"
+      ]
+    },
+    {
+      "character": 118,
+      "rule": "118:lb2:multi",
+      "tag": "118_Sup_Atk",
+      "evidence": [
+        "Parallel.cs"
+      ]
+    },
+    {
+      "character": 118,
+      "rule": "118:lb2:multi",
+      "tag": "118_Main_Atk",
+      "evidence": [
+        "Parallel.cs"
+      ]
+    },
+    {
+      "character": 119,
+      "rule": "119:lb4",
+      "tag": "119NrmAtk",
+      "evidence": [
+        "ParallelScript.cs",
+        "SkillScript_NormalAttack.cs"
+      ]
+    },
+    {
+      "character": 120,
+      "rule": "120:lb3",
+      "tag": "120_UltraHitTag",
+      "evidence": [
+        "Parallel.cs"
+      ]
+    },
+    {
+      "character": 123,
+      "rule": "123:lb1",
+      "tag": "123NrmUltraBoom",
+      "evidence": [
+        "Parallel.cs"
+      ]
+    },
+    {
+      "character": 125,
+      "rule": "125:lb1",
+      "tag": "Ultra_Catch",
+      "evidence": [
+        "Config.cs"
+      ]
+    },
+    {
+      "character": 125,
+      "rule": "125:lb3",
+      "tag": "125_Skill",
+      "evidence": [
+        "Config.cs"
+      ]
+    },
+    {
+      "character": 127,
+      "rule": "127:lb3",
+      "tag": "WaterTag1",
+      "evidence": [
+        "ParallelScript.cs"
+      ]
+    },
+    {
+      "character": 132,
+      "rule": "132:lb3",
+      "tag": "132_Ultra",
+      "evidence": [
+        "ParallelScript.cs",
+        "ParallelScript_MainControl.cs"
+      ]
+    },
+    {
+      "character": 133,
+      "rule": "133:lb2:count",
+      "tag": "133_TalentSkill",
+      "evidence": [
+        "Parallel.cs"
+      ]
+    },
+    {
+      "character": 133,
+      "rule": "133:lb3",
+      "tag": "133_TalentSkill",
+      "evidence": [
+        "Parallel.cs"
+      ]
+    },
+    {
+      "character": 133,
+      "rule": "133:lb5",
+      "tag": "133Hit",
+      "evidence": [
+        "Parallel.cs"
+      ]
+    },
+    {
+      "character": 137,
+      "rule": "137:lb1",
+      "tag": "137NrmAtk",
+      "evidence": [
+        "Config.cs"
+      ]
+    },
+    {
+      "character": 137,
+      "rule": "137:lb1",
+      "tag": "137UAVAllAtk",
+      "evidence": [
+        "Monster/_13700011Drone/Config_Drone.cs"
+      ]
+    },
+    {
+      "character": 141,
+      "rule": "141:lb2",
+      "tag": "141_Ultra_Hurt",
+      "evidence": [
+        "Config.cs",
+        "Config_MainControl.cs",
+        "Config_Support.cs"
+      ]
+    },
+    {
+      "character": 144,
+      "rule": "144:lb3",
+      "tag": "144_B2_Shadow",
+      "evidence": [
+        "Config.cs",
+        "Config_Support.cs"
+      ]
+    },
+    {
+      "character": 147,
+      "rule": "147:lb4",
+      "tag": "147NrmAtk",
+      "evidence": [
+        "ParallelScript.cs"
+      ]
+    },
+    {
+      "character": 147,
+      "rule": "147:lb4",
+      "tag": "147NrmAtkP1",
+      "evidence": [
+        "ParallelScript.cs"
+      ]
+    },
+    {
+      "character": 149,
+      "rule": "149:lb1",
+      "tag": "149_Skill",
+      "evidence": [
+        "Config.cs"
+      ]
+    },
+    {
+      "character": 149,
+      "rule": "149:lb3",
+      "tag": "149_Ultra",
+      "evidence": [
+        "Config.cs"
+      ]
+    },
+    {
+      "character": 155,
+      "rule": "155:lb1",
+      "tag": "155_Ultra",
+      "evidence": [
+        "ParallelScript.cs"
+      ]
+    },
+    {
+      "character": 155,
+      "rule": "155:lb2",
+      "tag": "155_Ultra",
+      "evidence": [
+        "ParallelScript.cs"
+      ]
+    },
+    {
+      "character": 156,
+      "rule": "156:lb2:hit",
+      "tag": "156UltraAtk",
+      "evidence": [
+        "Config.cs"
+      ]
+    },
+    {
+      "character": 156,
+      "rule": "156:lb4",
+      "tag": "SkillType",
+      "evidence": [
+        "Config.cs"
+      ]
+    },
+    {
+      "character": 162,
+      "rule": "162:lb2:rapier",
+      "tag": "QingSuper",
+      "evidence": [
+        "Config.cs"
+      ]
+    },
+    {
+      "character": 162,
+      "rule": "162:lb2:claymore",
+      "tag": "ZhongSuper",
+      "evidence": [
+        "Config.cs"
+      ]
+    },
+    {
+      "character": 162,
+      "rule": "162:lb5:rapier",
+      "tag": "QingAndQi",
+      "evidence": [
+        "Config.cs",
+        "Config_MainControl.cs"
+      ]
+    },
+    {
+      "character": 162,
+      "rule": "162:lb5:claymore",
+      "tag": "Zhong",
+      "evidence": [
+        "Config.cs",
+        "Config_MainControl.cs",
+        "Config_Support.cs"
+      ]
+    }
+  ],
+  "mismatches": []
+}

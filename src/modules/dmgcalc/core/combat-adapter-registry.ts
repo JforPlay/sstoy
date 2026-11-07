@@ -38,16 +38,24 @@ import {createSupport123} from './combat-support-123';
 import {createSupport125} from './combat-support-125';
 import {createMain119} from './combat-main-119';
 import {createMain155} from './combat-main-155';
+import {createMain111} from './combat-main-111';
+import {createSupport116} from './combat-support-116';
+import {createSupport117} from './combat-support-117';
+import {createSupport120} from './combat-support-120';
+import {createMain150} from './combat-main-150';
+import {createMain113} from './combat-main-113';
+import {createSupport135} from './combat-support-135';
+import {createSupport141} from './combat-support-141';
 
 /** Runtime registration and coverage audits use the same inventory. Presence
  * here means a connected adapter, not a claim of whole-game accuracy. */
 export interface SupportFactoryContext {parameter:(id:number)=>number;breakthrough:number;glimmerId:number;partyElements?:number[]}
 export interface MainFactoryContext extends SupportFactoryContext {ammo?:number;skillCooldown:(id:number)=>number}
 export const combatSupportFactories:Record<number,(potentials:Record<number,number>,context:SupportFactoryContext)=>SupportCombatAdapter<Record<string,unknown>>>={
-  112:createSupport112,118:createSupport118,123:createSupport123,125:createSupport125,126:createSupport126,127:createSupport127,130:createSupport130,158:createSupport158,160:createSupport160,132:createSupport132,133:createSupport133,134:createSupport134,137:createSupport137,139:createSupport139,140:createSupport140,
-  142:createSupport142,143:createSupport143,145:createSupport145,147:createSupport147,156:createSupport156,157:createSupport157,159:createSupport159,162:createSupport162,
+  112:createSupport112,116:createSupport116,117:createSupport117,118:createSupport118,120:createSupport120,123:createSupport123,125:createSupport125,126:createSupport126,127:createSupport127,130:createSupport130,158:createSupport158,160:createSupport160,132:createSupport132,133:createSupport133,134:createSupport134,135:createSupport135,137:createSupport137,139:createSupport139,140:createSupport140,
+  141:createSupport141,142:createSupport142,143:createSupport143,145:createSupport145,147:createSupport147,156:createSupport156,157:createSupport157,159:createSupport159,162:createSupport162,
 };
 export const legacyCombatSupports:readonly number[]=[107,108,115,149];
-export const combatMainFactories:Record<number,(potentials:Record<number,number>,context:MainFactoryContext)=>SupportCombatAdapter<Record<string,unknown>>>={110:createMain110,114:createMain114,119:createMain119,132:createMain132,133:createMain133,134:createMain134,137:createMain137,139:createMain139,140:createMain140,143:createMain143,144:createMain144,145:createMain145,149:createMain149,155:createMain155,156:createMain156,157:createMain157};
+export const combatMainFactories:Record<number,(potentials:Record<number,number>,context:MainFactoryContext)=>SupportCombatAdapter<Record<string,unknown>>>={110:createMain110,111:createMain111,113:createMain113,114:createMain114,119:createMain119,132:createMain132,133:createMain133,134:createMain134,137:createMain137,139:createMain139,140:createMain140,143:createMain143,144:createMain144,145:createMain145,149:createMain149,150:createMain150,155:createMain155,156:createMain156,157:createMain157};
 export const connectedCombatMains:readonly number[]=[103,162,...Object.keys(combatMainFactories).map(Number)].sort((a,b)=>a-b);
 export const connectedCombatSupports:readonly number[]=[...legacyCombatSupports,...Object.keys(combatSupportFactories).map(Number)].sort((a,b)=>a-b);

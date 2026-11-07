@@ -148,7 +148,7 @@ describe('live calculator input, not a fixed fixture', () => {
     expect(after.state.sp.ledger.pools['162']!.gained).toBeGreaterThan(before.state.sp.ledger.pools['162']!.gained);
   });
   it('does not substitute the example party for an unsupported selected character', () => {
-    const live = input(); live.actors[0]!.id = 111;
+    const live = input(); live.actors[0]!.id = 108;
     expect(() => createExampleCombatModel({ ...fixture, live }, tables, { boss: 28, distance: 2, cinematics: true })).toThrow(/예시 파티로 대체하지/);
   });
 });

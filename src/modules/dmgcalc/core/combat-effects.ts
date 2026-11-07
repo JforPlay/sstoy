@@ -112,7 +112,8 @@ export function collectCombatBuffAttributes(base: CombatAttributes, owner: strin
       // recovery/revert effects produce no HP delta there; never count them as ATK.
       // ADD_TAG carries a tag string (e.g. DarkAnZhuo), not a numeric
       // attribute. State/tag queries are handled separately by the runtime.
-      if (value.EffectType === 1 || value.EffectType===19 || value.EffectType===25 || value.EffectType===27) continue;
+      // Player energy efficiency has a separate runtime recipient channel.
+      if (value.EffectType === 1 || value.EffectType===19 || value.EffectType===25 || value.EffectType===27 || value.EffectType===37) continue;
       result = applyCombatAttributeEffect(result, value, buff.stacks);
     }
   }

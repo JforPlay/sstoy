@@ -1,0 +1,40 @@
+{
+  "revision": "144fc262c2d94c116c13cbe81ff4cb8f808b72ab",
+  "sources": [
+    {
+      "name": "Config",
+      "sha256": "844e5d054ca76dec521b70cc4fda3bed18ec1047560bac283ebcef59d4bbf77b"
+    },
+    {
+      "name": "Buff",
+      "sha256": "566889cd64b411780f67b519d0c4344f49d710a9a4e1f3b9c9181fbe09e252fe"
+    },
+    {
+      "name": "Effect",
+      "sha256": "5d6d49e39a1f487842d8b134f7a7933cb3197a243cd1b361f510d2e616cb84fa"
+    },
+    {
+      "name": "OnceAdditionalAttribute",
+      "sha256": "6d11fbc5e99d827bac242ca4ed59221e465a3e75183d6add3306c850887a8098"
+    },
+    {
+      "name": "ScriptParameter",
+      "sha256": "63cbff5f10aac9aa5aea696619cb78f33f877344e23ca67fb713d6743ad8b016"
+    },
+    {
+      "name": "AttributeLimit",
+      "sha256": "0d8e3312ca9add16e9440e88af52ae189b05e7608a1ebacbf8b4d5c8a5620be3"
+    },
+    {
+      "name": "AttributeSetLimit",
+      "sha256": "729504bf3e284b60721c8bbfcd2162677e94db6890d329169d2b480d10de7e02"
+    }
+  ],
+  "durationSeconds": 180,
+  "verifiedSample": {
+    "parameter": 16243002,
+    "potential": 516243,
+    "level": 6,
+    "spPerTick": 2.5
+  }
+}

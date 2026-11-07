@@ -1,0 +1,3610 @@
+{
+  "preset": "AAAAogAAAHMAAABrzbAB4YbBiAgMAGwAIAQQ",
+  "durationSeconds": 180,
+  "party": [
+    {
+      "position": "master",
+      "id": 162,
+      "name": "세이나(기원)",
+      "limitBreak": 1,
+      "energyRaw": {
+        "EnergyConvRatio": 7500,
+        "EnergyEfficiency": 10000,
+        "ChargingRate": 3,
+        "EnergyConsume": 3
+      },
+      "unlockedLimitBreakTalents": [
+        {
+          "id": 1620116,
+          "name": "묻혀진 과거",
+          "description": "「극성」 상태에서 세이나(기원)의 치명타 피해가 <color=#0abec5>&Param1&</color> 증가하고, 세이나(기원)가 피해를 입히면 「극성」을 획득한다. 해당 효과는 5분마다 최대 1회 발동한다.",
+          "data": {
+            "Id": 1620116,
+            "Index": 16,
+            "Title": "Talent.1620116.1",
+            "GroupId": 16201,
+            "Type": 1,
+            "SubType": 1,
+            "Sort": 1,
+            "Nodes": 10,
+            "Desc": "Talent.1620116.2",
+            "Param1": "OnceAdditionalAttributeValue,NoLevel,16296111,Value1,10KHdPct"
+          },
+          "attributeReferences": [
+            {
+              "reference": "OnceAdditionalAttributeValue,NoLevel,16296111,Value1,10KHdPct",
+              "data": {
+                "Id": 16296111,
+                "AttributeType1": 8,
+                "ParameterType1": 1,
+                "Value1": 1200
+              }
+            }
+          ]
+        }
+      ],
+      "potentials": [
+        {
+          "id": 516201,
+          "name": "유성 섬광",
+          "totalLevel": 1,
+          "baseLevel": 1,
+          "badgeLevels": 0,
+          "description": "메인 스킬 「폭풍섬·빛」의 장검 공격 횟수가 <color=#0abec5>4</color>회 증가하고, <color=#0abec5>9</color>개의 「섬광」을 발사해 각각 최대 HP <color=#0abec5>&Param1&</color>의 빛 속성 스킬 피해를 입힌다.",
+          "data": {
+            "Id": 516201,
+            "CharId": 162,
+            "Build": 1,
+            "BranchType": 1,
+            "MaxLevel": 1,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              180,
+              180,
+              180,
+              180,
+              180
+            ],
+            "GameBookId": 549,
+            "EffectGroupId": 16201,
+            "IsEffective": true,
+            "SpBg": "Icon/Potential/Sp_Potential_bg_01",
+            "SpFace": "Icon/Potential/Sp_Potential_char_162_01",
+            "BriefDesc": "Potential.516201.1",
+            "Desc": "Potential.516201.2",
+            "Param1": "HitDamage,DamageNum,162310005"
+          }
+        },
+        {
+          "id": 516202,
+          "name": "새벽의 광휘",
+          "totalLevel": 1,
+          "baseLevel": 1,
+          "badgeLevels": 0,
+          "description": "세이나(기원)가 「섬광」을 <color=#0abec5>&Param1&</color>개 발사할 때마다 특수 메인 스킬 「잔영섬광참」을 획득해, 장검을 휘둘러 생성한 거대한 검광으로 최대 HP <color=#0abec5>&Param2&x6</color>의 빛 속성 스킬 피해를 입힌다. ##빛 속성 표식#1015#을 발동할 수 있다. \u000b일반 공격 중 장검을 사용해 스퍼트 공격을 발동할 때 「섬광」 <color=#0abec5>3</color>개를 발사해 각각 최대 HP <color=#0abec5>&Param3&</color>의 빛 속성 스킬 피해를 입힌다.",
+          "data": {
+            "Id": 516202,
+            "CharId": 162,
+            "Build": 1,
+            "BranchType": 1,
+            "MaxLevel": 1,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              180,
+              180,
+              180,
+              180,
+              180
+            ],
+            "GameBookId": 550,
+            "EffectGroupId": 16202,
+            "IsEffective": true,
+            "SpBg": "Icon/Potential/Sp_Potential_bg_02",
+            "SpFace": "Icon/Potential/Sp_Potential_char_162_02",
+            "BriefDesc": "Potential.516202.1",
+            "Desc": "Potential.516202.2",
+            "Param1": "BuffValue,NoLevel,16202011,LaminatedNum,Fixed",
+            "Param2": "HitDamage,DamageNum,162310003",
+            "Param3": "HitDamage,DamageNum,162310009"
+          }
+        },
+        {
+          "id": 516205,
+          "name": "심판의 빛 도약",
+          "totalLevel": 6,
+          "baseLevel": 6,
+          "badgeLevels": 0,
+          "description": "세이나(기원)가 발사하는 「섬광」이 반사를 생성해 목표를 공격하여 최대 HP <color=#fb8037>&Param1&</color>의 빛 속성 스킬 피해를 입힌다. \u000b세이나(기원)의 장검 공격과 「섬광」이 입히는 &Param2_kr1& <color=#fb8037>&Param3&</color> 증가한다.",
+          "data": {
+            "Id": 516205,
+            "CharId": 162,
+            "Build": 1,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 553,
+            "EffectGroupId": 16205,
+            "IsEffective": true,
+            "Corner": 1,
+            "BriefDesc": "Potential.516205.1",
+            "Desc": "Potential.516205.2",
+            "Param1": "HitDamage,DamageNum,162310006",
+            "Param2": "OnceAdditionalAttribute,LevelUp,16205001,AttributeType1,Enum,EAT",
+            "Param3": "OnceAdditionalAttribute,LevelUp,16205001,Value1,10KHdPct"
+          }
+        },
+        {
+          "id": 516206,
+          "name": "각오·극섬광",
+          "totalLevel": 6,
+          "baseLevel": 6,
+          "badgeLevels": 0,
+          "description": "메인 스킬 「잔영섬광참」 시전 시 세이나(기원)의 필살기가 장검 형태로 변경된다. \u000b세이나(기원)의 장검 공격과 「섬광」이 ##반짝임#4029#을 보유한 목표에게 입히는 &Param1_kr1& <color=#fb8037>&Param2&</color> 증가한다.",
+          "data": {
+            "Id": 516206,
+            "CharId": 162,
+            "Build": 1,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 554,
+            "EffectGroupId": 16206,
+            "IsEffective": true,
+            "Corner": 2,
+            "BriefDesc": "Potential.516206.1",
+            "Desc": "Potential.516206.2",
+            "Param1": "OnceAdditionalAttribute,LevelUp,16206001,AttributeType1,Enum,EAT",
+            "Param2": "OnceAdditionalAttribute,LevelUp,16206001,Value1,10KHdPct"
+          }
+        },
+        {
+          "id": 516207,
+          "name": "유성의 물결",
+          "totalLevel": 6,
+          "baseLevel": 6,
+          "badgeLevels": 0,
+          "description": "「섬광」이 ##빛 속성 표식#1015#을 발동할 수 있고, &Param1&% 확률로 피해 범위가 증가한다. \u000b메인 스킬 시전 시 세이나(기원)의 &Param2_kr1& <color=#fb8037>&Param3&</color> 증가하고, 빛 속성 밸런스 캐릭터의 &Param4_kr1& <color=#fb8037>&Param5&</color> 증가한다. &Param6&초간 지속되며, 최대 &Param7&스택 중첩된다.",
+          "data": {
+            "Id": 516207,
+            "CharId": 162,
+            "Build": 1,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 555,
+            "EffectGroupId": 16207,
+            "IsEffective": true,
+            "Corner": 3,
+            "BriefDesc": "Potential.516207.1",
+            "Desc": "Potential.516207.2",
+            "Param1": "ScriptParameterValue,NoLevel,16207011,CommonData,10K",
+            "Param2": "Effect,LevelUp,16207001,EffectTypeFirstSubtype,Enum,EAT",
+            "Param3": "Effect,LevelUp,16207001,EffectTypeParam1,HdPct",
+            "Param4": "Effect,LevelUp,16207002,EffectTypeFirstSubtype,Enum,EAT",
+            "Param5": "Effect,LevelUp,16207002,EffectTypeParam1,HdPct",
+            "Param6": "BuffValue,NoLevel,16207011,Time,10K",
+            "Param7": "BuffValue,NoLevel,16207011,LaminatedNum,Fixed"
+          }
+        },
+        {
+          "id": 516211,
+          "name": "눈부신 태양",
+          "totalLevel": 3,
+          "baseLevel": 3,
+          "badgeLevels": 0,
+          "description": "세이나(기원)가 ##반짝임#4029#을 보유한 목표에게 입히는 &Param1_kr1& <color=#fb8037>&Param2&</color> 증가한다. \u000b세이나(기원)의 &Param3_kr1& <color=#fb8037>&Param4&</color> 증가한다.",
+          "data": {
+            "Id": 516211,
+            "CharId": 162,
+            "Build": 3,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 559,
+            "EffectGroupId": 16211,
+            "IsEffective": true,
+            "Corner": 1,
+            "EffectId1": 16211001,
+            "BriefDesc": "Potential.516211.1",
+            "Desc": "Potential.516211.2",
+            "Param1": "OnceAdditionalAttribute,LevelUp,16211001,AttributeType1,Enum,EAT",
+            "Param2": "OnceAdditionalAttribute,LevelUp,16211001,Value1,10KHdPct",
+            "Param3": "Effect,LevelUp,16211001,EffectTypeFirstSubtype,Enum,EAT",
+            "Param4": "Effect,LevelUp,16211001,EffectTypeParam1,Fixed"
+          }
+        },
+        {
+          "id": 516212,
+          "name": "뭇별의 광채",
+          "totalLevel": 6,
+          "baseLevel": 6,
+          "badgeLevels": 0,
+          "description": "팀 내 빛 속성 캐릭터 1명마다 세이나(기원)의 ##빛 속성 관통#2068#이 <color=#fb8037>&Param2&</color> 증가한다.",
+          "data": {
+            "Id": 516212,
+            "CharId": 162,
+            "Build": 3,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 560,
+            "EffectGroupId": 16212,
+            "IsEffective": true,
+            "Corner": 2,
+            "BriefDesc": "Potential.516212.1",
+            "Desc": "Potential.516212.2",
+            "Param1": "Effect,LevelUp,16212001,EffectTypeFirstSubtype,Enum,EAT",
+            "Param2": "Effect,LevelUp,16212001,EffectTypeParam1,Fixed"
+          }
+        },
+        {
+          "id": 516241,
+          "name": "적을 베는 하얀 섬광",
+          "totalLevel": 6,
+          "baseLevel": 6,
+          "badgeLevels": 0,
+          "description": "세이나(기원)가 장검 형태의 필살기 「극성섬광 파열참」을 시전하면 「섬광」을 7개 발사해, 1개마다 최대 HP <color=#fb8037>&Param1&</color>의 빛 속성 스킬 피해를 입힌다. \u000b세이나(기원)의 &Param2_kr1& <color=#fb8037>&Param3&</color> 증가한다.",
+          "data": {
+            "Id": 516241,
+            "CharId": 162,
+            "Build": 3,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 560,
+            "EffectGroupId": 16241,
+            "IsEffective": true,
+            "Corner": 1,
+            "EffectId1": 16241001,
+            "BriefDesc": "Potential.516241.1",
+            "Desc": "Potential.516241.2",
+            "Param1": "HitDamage,DamageNum,162400006",
+            "Param2": "Effect,LevelUp,16241001,EffectTypeFirstSubtype,Enum,EAT",
+            "Param3": "Effect,LevelUp,16241001,EffectTypeParam1,HdPct"
+          }
+        },
+        {
+          "id": 516243,
+          "name": "샛별",
+          "totalLevel": 6,
+          "baseLevel": 6,
+          "badgeLevels": 0,
+          "description": "세이나가 「극성」 상태일 때 자신의 &Param1_kr1& <color=#fb8037>&Param2&</color> 추가로 증가한다. 동시에 &Param3&초마다 SP를 <color=#fb8037>&Param4&</color> 회복한다.",
+          "data": {
+            "Id": 516243,
+            "CharId": 162,
+            "Build": 3,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 562,
+            "EffectGroupId": 16243,
+            "IsEffective": true,
+            "Corner": 3,
+            "BriefDesc": "Potential.516243.1",
+            "Desc": "Potential.516243.2",
+            "Param1": "Effect,LevelUp,16243001,EffectTypeFirstSubtype,Enum,EAT",
+            "Param2": "Effect,LevelUp,16243001,EffectTypeParam1,HdPct",
+            "Param3": "ScriptParameter,LevelUp,16243011,CommonData,10K",
+            "Param4": "ScriptParameter,LevelUp,16243002,CommonData,10K"
+          }
+        }
+      ],
+      "skills": [
+        {
+          "field": "NormalAtkId",
+          "id": 16210000,
+          "name": "백련 검술",
+          "description": "대검 「서광」과 장검 「여명」을 휘둘러 끊임없이 공격한다.\u000b1단계: 대검을 휘둘러 최대 HP <color=#fb8037>&Param1&x2</color>의 빛 속성 일반 공격 피해를 입힌다.\u000b2단계: 대검을 휘둘러 최대 HP <color=#fb8037>&Param2&x3</color>의 빛 속성 일반 공격 피해를 입힌다. \u000b3단계: 대검을 휘둘러 최대 HP <color=#fb8037>&Param3&x2</color>의 빛 속성 일반 공격 피해를 입힌다. \u000b4단계: 장검을 휘둘러 「섬광」 2개를 발사하며, 각각 최대 HP <color=#fb8037>&Param4&</color>의 빛 속성 스킬 피해를 입힌다. \u000b세이나(기원)와 목표가 멀리 떨어진 경우 일반 공격 시 장검을 사용해 스퍼트 공격을 발동해 최대 HP <color=#fb8037>&Param5&x3</color>의 빛 속성 스킬 피해를 입힌다. 해당 효과는 1.5초마다 최대 1회 발동한다. \u000b세이나(기원)의 일반 공격이 ##반짝임#4029#을 보유한 목표에게 피해를 입히면 목표가 보유한 ##반짝임#4029# 1스택마다 이번 피해의 &Param6& <color=#fb8037>&Param7&</color> 증가한다.",
+          "cooldownSeconds": null,
+          "ultimateEnergyRaw": null,
+          "energyGainLimitRaw": 59837,
+          "script": "AIScript.Character._16201.SkillScript_NormalAttack",
+          "hits": [
+            {
+              "parameter": "HitDamage,DamageNum,162100001",
+              "data": {
+                "Id": 162100001,
+                "levelTypeData": 3,
+                "LevelData": 5,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  1014643206,
+                  556843348,
+                  460568648
+                ],
+                "DamageBonusType": 3,
+                "SkillPercentAmend": [
+                  450000,
+                  510000,
+                  580000,
+                  780000,
+                  840000,
+                  900000,
+                  1030000,
+                  1080000,
+                  1140000,
+                  1250000,
+                  1340000,
+                  1420000,
+                  1500000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "EnergyCharge": 23500,
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 16210000,
+                "SkillSlotType": 5
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,162100002",
+              "data": {
+                "Id": 162100002,
+                "levelTypeData": 3,
+                "LevelData": 5,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  1014643206,
+                  556843348,
+                  460568648
+                ],
+                "DamageBonusType": 3,
+                "SkillPercentAmend": [
+                  460000,
+                  530000,
+                  600000,
+                  810000,
+                  880000,
+                  940000,
+                  1070000,
+                  1130000,
+                  1180000,
+                  1300000,
+                  1390000,
+                  1470000,
+                  1560000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "EnergyCharge": 23500,
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 16210000,
+                "SkillSlotType": 5
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,162100003",
+              "data": {
+                "Id": 162100003,
+                "levelTypeData": 3,
+                "LevelData": 5,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  1014643206,
+                  556843348,
+                  460568648
+                ],
+                "DamageBonusType": 3,
+                "SkillPercentAmend": [
+                  660000,
+                  760000,
+                  860000,
+                  1150000,
+                  1250000,
+                  1340000,
+                  1520000,
+                  1600000,
+                  1680000,
+                  1850000,
+                  1980000,
+                  2100000,
+                  2220000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "EnergyCharge": 35250,
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 16210000,
+                "SkillSlotType": 5
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,162100004",
+              "data": {
+                "Id": 162100004,
+                "levelTypeData": 3,
+                "LevelData": 5,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 2,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  1014643206,
+                  -583115216,
+                  -460925555
+                ],
+                "DamageBonusType": 3,
+                "SkillPercentAmend": [
+                  210000,
+                  250000,
+                  280000,
+                  370000,
+                  400000,
+                  430000,
+                  490000,
+                  520000,
+                  550000,
+                  600000,
+                  640000,
+                  680000,
+                  720000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "EnergyCharge": 43083,
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 16210000,
+                "SkillSlotType": 5
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,162100005",
+              "data": {
+                "Id": 162100005,
+                "levelTypeData": 3,
+                "LevelData": 5,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 2,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  1014643206,
+                  757024667,
+                  -460925555
+                ],
+                "DamageBonusType": 3,
+                "SkillPercentAmend": [
+                  300000,
+                  350000,
+                  390000,
+                  530000,
+                  570000,
+                  620000,
+                  700000,
+                  740000,
+                  770000,
+                  850000,
+                  910000,
+                  960000,
+                  1020000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "EnergyCharge": 14305,
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 16210000,
+                "SkillSlotType": 5
+              }
+            }
+          ],
+          "params": [
+            "HitDamage,DamageNum,162100001",
+            "HitDamage,DamageNum,162100002",
+            "HitDamage,DamageNum,162100003",
+            "HitDamage,DamageNum,162100004",
+            "HitDamage,DamageNum,162100005",
+            "OnceAdditionalAttribute,LevelUp,16290001,AttributeType1,Enum,EAT",
+            "OnceAdditionalAttribute,LevelUp,16290001,Value1,10KHdPct"
+          ]
+        },
+        {
+          "field": "SkillId",
+          "id": 16231000,
+          "name": "폭풍섬·빛",
+          "description": "빠르게 장검 「여명」을 휘둘러 최대 HP <color=#fb8037>&Param1&x5</color>의 빛 속성 범위 스킬 피해를 입힌다. 이후 대검 「서광」을 내리찍어 최대 HP <color=#fb8037>&Param2&</color>의 빛 속성 범위 일반 공격 피해를 입히는 동시에 「낙성」 1개를 생성해, 최대 HP <color=#fb8037>&Param3&</color>의 빛 속성 범위 일반 공격 피해를 입힌다. \u000b메인 스킬 「폭풍섬·빛」이 ##빛 속성 표식#1015#을 발동할 수 있고, ##광휘#4028#를 생성해 최대 HP &Param4&의 빛 속성 범위 표식 피해를 입힌다. ##반짝임#4029# 1스택을 부여한다.",
+          "cooldownSeconds": 10,
+          "ultimateEnergyRaw": null,
+          "energyGainLimitRaw": 208888,
+          "script": "AIScript.Character._16201.SkillScript_Skill_MainControl",
+          "hits": [
+            {
+              "parameter": "HitDamage,DamageNum,162310001",
+              "data": {
+                "Id": 162310001,
+                "levelTypeData": 3,
+                "LevelData": 2,
+                "MainOrSupport": 1,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 2,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  -1219492980,
+                  -460925555
+                ],
+                "DamageBonusType": 3,
+                "SkillPercentAmend": [
+                  360000,
+                  420000,
+                  470000,
+                  640000,
+                  690000,
+                  740000,
+                  840000,
+                  890000,
+                  930000,
+                  1020000,
+                  1090000,
+                  1160000,
+                  1230000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "EnergyCharge": 21215,
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 16231000,
+                "SkillSlotType": 2
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,162310002",
+              "data": {
+                "Id": 162310002,
+                "levelTypeData": 3,
+                "LevelData": 2,
+                "MainOrSupport": 1,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  -1219492980,
+                  556843348
+                ],
+                "DamageBonusType": 3,
+                "SkillPercentAmend": [
+                  640000,
+                  740000,
+                  840000,
+                  1130000,
+                  1220000,
+                  1310000,
+                  1490000,
+                  1560000,
+                  1640000,
+                  1800000,
+                  1930000,
+                  2050000,
+                  2160000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "EnergyCharge": 102812,
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 16231000,
+                "SkillSlotType": 2
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,162310008",
+              "data": {
+                "Id": 162310008,
+                "levelTypeData": 3,
+                "LevelData": 2,
+                "MainOrSupport": 1,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  -1219492980,
+                  556843348
+                ],
+                "DamageBonusType": 3,
+                "SkillPercentAmend": [
+                  230000,
+                  260000,
+                  300000,
+                  400000,
+                  430000,
+                  460000,
+                  520000,
+                  550000,
+                  580000,
+                  640000,
+                  680000,
+                  720000,
+                  760000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 16231000,
+                "SkillSlotType": 2
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,162000001",
+              "data": {
+                "Id": 162000001,
+                "levelTypeData": 4,
+                "DistanceType": 2,
+                "SourceType": 1,
+                "DamageType": 5,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  -722969706
+                ],
+                "DamageBonusType": 3,
+                "SkillPercentAmend": [
+                  210000,
+                  270000,
+                  330000,
+                  390000,
+                  450000,
+                  510000,
+                  580000,
+                  640000,
+                  700000,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              }
+            }
+          ],
+          "params": [
+            "HitDamage,DamageNum,162310001",
+            "HitDamage,DamageNum,162310002",
+            "HitDamage,DamageNum,162310008",
+            "HitDamage,DamageNum,162000001"
+          ]
+        },
+        {
+          "field": "UltimateId",
+          "id": 16240000,
+          "name": "극성섬광 파열참",
+          "description": "세이나(기원)의 필살기는 두 가지의 형태가 있어, 각각 대검 「서광」과 장검 「여명」을 사용해 공격하며, 기본적으로 대검 형태의 필살기로 전투에 진입한다. \u000b대검 형태: 공중으로 도약해 대검을 휘두르며 큰 범위에 최대 HP <color=#fb8037>&Param1&x5</color>, <color=#fb8037>&Param2&</color>의 빛 속성 일반 공격 피해를 입힌다. \u000b장검 형태: 빠르게 몸을 날려 고속으로 공격해 큰 범위에 최대 HP <color=#fb8037>&Param3&x7</color>의 빛 속성 스킬 피해를 입힌다. 이후 영역을 생성해 큰 범위에 최대 HP <color=#fb8037>&Param4&x7</color>의 빛 속성 스킬 피해를 입힌다. \u000b필살기 「극성섬광 파열참」 시전 시, 세이나(기원)가 「극성」을 획득해, &Param5_kr1& <color=#fb8037>&Param6&</color> 증가한다. &Param7&초간 지속된다. \u000b필살기 「극성섬광 파열참」이 ##빛 속성 표식#1015#을 발동할 수 있고 ##광휘#4028#를 생성해 최대 HP &Param8&의 빛 속성 범위 표식 피해를 입힌다. 또한 ##반짝임#4029# 1스택을 부여한다.",
+          "cooldownSeconds": 30,
+          "ultimateEnergyRaw": 2350000,
+          "energyGainLimitRaw": null,
+          "script": "AIScript.Character._16201.SkillScript_Ultra",
+          "hits": [
+            {
+              "parameter": "HitDamage,DamageNum,162400001",
+              "data": {
+                "Id": 162400001,
+                "levelTypeData": 3,
+                "LevelData": 4,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  -1219492980,
+                  556843348
+                ],
+                "DamageBonusType": 3,
+                "SkillPercentAmend": [
+                  2160000,
+                  2480000,
+                  2810000,
+                  3780000,
+                  4080000,
+                  4380000,
+                  4990000,
+                  5250000,
+                  5510000,
+                  6050000,
+                  6480000,
+                  6870000,
+                  7260000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 16240000,
+                "SkillSlotType": 4
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,162400002",
+              "data": {
+                "Id": 162400002,
+                "levelTypeData": 3,
+                "LevelData": 4,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  -1219492980,
+                  556843348
+                ],
+                "DamageBonusType": 3,
+                "SkillPercentAmend": [
+                  2700000,
+                  3110000,
+                  3510000,
+                  4730000,
+                  5100000,
+                  5480000,
+                  6240000,
+                  6560000,
+                  6890000,
+                  7560000,
+                  8100000,
+                  8590000,
+                  9070000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 16240000,
+                "SkillSlotType": 4
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,162400003",
+              "data": {
+                "Id": 162400003,
+                "levelTypeData": 3,
+                "LevelData": 4,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 2,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  -1219492980,
+                  1029436838,
+                  -460925555
+                ],
+                "DamageBonusType": 3,
+                "SkillPercentAmend": [
+                  540000,
+                  630000,
+                  710000,
+                  950000,
+                  1030000,
+                  1110000,
+                  1260000,
+                  1320000,
+                  1390000,
+                  1530000,
+                  1630000,
+                  1730000,
+                  1830000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 16240000,
+                "SkillSlotType": 4
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,162400004",
+              "data": {
+                "Id": 162400004,
+                "levelTypeData": 3,
+                "LevelData": 4,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 2,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  -1219492980,
+                  1029436838,
+                  -460925555
+                ],
+                "DamageBonusType": 3,
+                "SkillPercentAmend": [
+                  1090000,
+                  1250000,
+                  1420000,
+                  1910000,
+                  2060000,
+                  2210000,
+                  2520000,
+                  2650000,
+                  2780000,
+                  3050000,
+                  3270000,
+                  3460000,
+                  3660000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 16240000,
+                "SkillSlotType": 4
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,162000001",
+              "data": {
+                "Id": 162000001,
+                "levelTypeData": 4,
+                "DistanceType": 2,
+                "SourceType": 1,
+                "DamageType": 5,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  -722969706
+                ],
+                "DamageBonusType": 3,
+                "SkillPercentAmend": [
+                  210000,
+                  270000,
+                  330000,
+                  390000,
+                  450000,
+                  510000,
+                  580000,
+                  640000,
+                  700000,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              }
+            }
+          ],
+          "params": [
+            "HitDamage,DamageNum,162400001",
+            "HitDamage,DamageNum,162400002",
+            "HitDamage,DamageNum,162400003",
+            "HitDamage,DamageNum,162400004",
+            "Effect,LevelUp,16290003,EffectTypeFirstSubtype,Enum,EAT",
+            "Effect,LevelUp,16290003,EffectTypeParam1,HdPct",
+            "Buff,LevelUp,16290003,Time,10K",
+            "HitDamage,DamageNum,162000001"
+          ]
+        }
+      ]
+    },
+    {
+      "position": "assist1",
+      "id": 115,
+      "name": "호타루",
+      "limitBreak": 0,
+      "energyRaw": {
+        "EnergyConvRatio": 7500,
+        "EnergyEfficiency": 10000,
+        "ChargingRate": 3,
+        "EnergyConsume": 3
+      },
+      "unlockedLimitBreakTalents": [],
+      "potentials": [
+        {
+          "id": 511521,
+          "name": "휘검·겹쳐진 그림자",
+          "totalLevel": 1,
+          "baseLevel": 1,
+          "badgeLevels": 0,
+          "description": "팀 전체가 빛 속성 캐릭터일 때 지원 스킬 &Param1_kr3& 시전하면 「아발란체·비도」를 추가로 획득하며, 매 라운드 발사 후 공격 빈도가 증가한다.\u000b「아발란체·비도」가 피해를 입힐 때마다 이번 ##검격 형태#4031# 기간 중 「아발란체·비도」의 &Param4_kr1& <color=#0abec5>&Param5&</color> 증가하고, 입히는 &Param2_kr1& <color=#0abec5>&Param3&</color> 증가한다. 최대 &Param6&스택 중첩된다.",
+          "data": {
+            "Id": 511521,
+            "CharId": 115,
+            "Build": 1,
+            "BranchType": 2,
+            "MaxLevel": 1,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              180,
+              180,
+              180,
+              180,
+              180
+            ],
+            "GameBookId": 562,
+            "EffectGroupId": 11521,
+            "IsEffective": true,
+            "SpBg": "Icon/Potential/Sp_Potential_bg_01",
+            "SpFace": "Icon/Potential/Sp_Potential_char_115_01",
+            "BriefDesc": "Potential.511521.1",
+            "Desc": "Potential.511521.2",
+            "Param1": "Skill,NoLevel,11532001,Title,Text",
+            "Param2": "OnceAdditionalAttributeValue,NoLevel,11521011,AttributeType1,Enum,EAT",
+            "Param3": "OnceAdditionalAttribute,LevelUp,11521011,Value1,10KHdPct",
+            "Param4": "OnceAdditionalAttributeValue,NoLevel,11521011,AttributeType2,Enum,EAT",
+            "Param5": "OnceAdditionalAttribute,LevelUp,11521011,Value2,10KHdPct",
+            "Param6": "BuffValue,NoLevel,11521011,LaminatedNum,Fixed"
+          }
+        },
+        {
+          "id": 511522,
+          "name": "휘검·반딧불",
+          "totalLevel": 1,
+          "baseLevel": 1,
+          "badgeLevels": 0,
+          "description": "「아발란체·비도」가 피해를 입힐 때의 &Param1_kr1& <color=#0abec5>&Param2&</color> 증가한다. \u000b「아발란체·비도」가 피해를 입힐 때마다 공격력 <color=#0abec5>&Param3&</color>의 빛 속성 범위 스킬 피해를 추가로 입히고 ##빛 속성 표식: 광명#2016#을 부여한다.",
+          "data": {
+            "Id": 511522,
+            "CharId": 115,
+            "Build": 1,
+            "BranchType": 2,
+            "MaxLevel": 1,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              180,
+              180,
+              180,
+              180,
+              180
+            ],
+            "GameBookId": 563,
+            "EffectGroupId": 11522,
+            "IsEffective": true,
+            "SpBg": "Icon/Potential/Sp_Potential_bg_02",
+            "SpFace": "Icon/Potential/Sp_Potential_char_115_02",
+            "BriefDesc": "Potential.511522.1",
+            "Desc": "Potential.511522.2",
+            "Param1": "OnceAdditionalAttributeValue,NoLevel,11522011,AttributeType1,Enum,EAT",
+            "Param2": "OnceAdditionalAttributeValue,NoLevel,11522011,Value1,10KHdPct",
+            "Param3": "HitDamage,DamageNum,115122202"
+          }
+        },
+        {
+          "id": 511526,
+          "name": "성망의 추락",
+          "totalLevel": 6,
+          "baseLevel": 6,
+          "badgeLevels": 0,
+          "description": "빛 속성 메인 캐릭터가 스킬 피해를 입히면, 「아발란체·비도」 1자루를 생성해 목표를 타격하여 호타루 공격력 <color=#ec6d21>&Param2&</color>의 빛 속성 스킬 피해를 입히고, ##빛 속성 표식: 광명#2016#을 부여한다.\u000b해당 「아발란체·비도」가 피해를 입힐 때 목표가 보유한 ##빛의 장막#4029# 스택에 따라 동일 스택의 &Param3_kr1& <color=#ec6d21>&Param4&</color> 증가하는 효과를 부여한다. &Param5&초간 지속되며, 최대 &Param6&스택 중첩된다. \u000b해당 효과는 &Param7&초마다 최대 1회 발동하며, 호타루가 필드에 없어도 발동할 수 있다.",
+          "data": {
+            "Id": 511526,
+            "CharId": 115,
+            "Build": 1,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 552,
+            "EffectGroupId": 11526,
+            "IsEffective": true,
+            "Corner": 2,
+            "BriefDesc": "Potential.511526.1",
+            "Desc": "Potential.511526.2",
+            "Param1": "Skill,NoLevel,11532001,Title,Text",
+            "Param2": "HitDamage,DamageNum,115322601",
+            "Param3": "Effect,LevelUp,11526001,EffectTypeFirstSubtype,Enum,EAT",
+            "Param4": "Effect,LevelUp,11526001,EffectTypeParam1,HdPct",
+            "Param5": "BuffValue,NoLevel,11526011,Time,10K",
+            "Param6": "BuffValue,NoLevel,11526011,LaminatedNum,Fixed",
+            "Param7": "ScriptParameterValue,NoLevel,11526011,CommonData,10K"
+          }
+        },
+        {
+          "id": 511527,
+          "name": "검 끝에 피어난 꽃",
+          "totalLevel": 1,
+          "baseLevel": 1,
+          "badgeLevels": 0,
+          "description": "호타루가 ##검격 형태#4031# 종료 시 모든 ##아발란체#4032#를 조종해 자신 주변의 목표를 타격하여, ##아발란체#4032#마다 공격력 <color=#ec6d21>&Param1&x2</color>의 빛 속성 범위 스킬 피해를 입힌다. 또한 ##빛 속성 표식: 광명#2016#을 부여한다. \u000b해당 효과가 피해를 입힐 때마다 호타루의 &Param2_kr1& <color=#ec6d21>&Param3&</color> 증가한다. &Param4&초간 지속되며, 최대 &Param5&스택 중첩된다.",
+          "data": {
+            "Id": 511527,
+            "CharId": 115,
+            "Build": 1,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 553,
+            "EffectGroupId": 11527,
+            "IsEffective": true,
+            "Corner": 3,
+            "BriefDesc": "Potential.511527.1",
+            "Desc": "Potential.511527.2",
+            "Param1": "HitDamage,DamageNum,115322701",
+            "Param2": "Effect,LevelUp,11527001,EffectTypeFirstSubtype,Enum,EAT",
+            "Param3": "Effect,LevelUp,11527001,EffectTypeParam1,HdPct",
+            "Param4": "BuffValue,NoLevel,11527011,Time,10K",
+            "Param5": "BuffValue,NoLevel,11527011,LaminatedNum,Fixed"
+          }
+        },
+        {
+          "id": 511531,
+          "name": "절대적 빛의 가호",
+          "totalLevel": 2,
+          "baseLevel": 2,
+          "badgeLevels": 0,
+          "description": "필살기 &Param1_kr1& ##빛 속성 표식: 광명#2016#을 부여할 수 있다. \u000b필살기를 시전하면 빛 속성 메인 캐릭터가 호타루 기본 최대 HP <color=#ec6d21>&Param2&</color>의 보호막을 획득한다. &Param3&초간 지속된다.",
+          "data": {
+            "Id": 511531,
+            "CharId": 115,
+            "Build": 3,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 557,
+            "EffectGroupId": 11531,
+            "IsEffective": true,
+            "Corner": 1,
+            "BriefDesc": "Potential.511531.1",
+            "Desc": "Potential.511531.2",
+            "Param1": "Skill,NoLevel,11540000,Title,Text",
+            "Param2": "Shield,LevelUp,11531001,ReferenceScale,10KHdPct",
+            "Param3": "ShieldValue,NoLevel,11531011,Time,10K"
+          }
+        },
+        {
+          "id": 511533,
+          "name": "순결의 영역",
+          "totalLevel": 6,
+          "baseLevel": 6,
+          "badgeLevels": 0,
+          "description": "팀 전체가 빛 속성 캐릭터일 때, 팀 전체의 &Param3_kr1& <color=#ec6d21>&Param1&</color> 증가한다. \u000b호타루가 필드에 있을 때 팀 전체의 &Param3_kr1& <color=#ec6d21>&Param2&</color> 추가로 증가한다.",
+          "data": {
+            "Id": 511533,
+            "CharId": 115,
+            "Build": 3,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 559,
+            "EffectGroupId": 11533,
+            "IsEffective": true,
+            "Corner": 3,
+            "BriefDesc": "Potential.511533.1",
+            "Desc": "Potential.511533.2",
+            "Param1": "Effect,LevelUp,11533001,EffectTypeParam1,HdPct",
+            "Param2": "Effect,LevelUp,11533002,EffectTypeParam1,HdPct",
+            "Param3": "Effect,LevelUp,11533001,EffectTypeFirstSubtype,Enum,EAT"
+          }
+        }
+      ],
+      "skills": [
+        {
+          "field": "AssistNormalAtkId",
+          "id": 11512000,
+          "cooldownSeconds": null,
+          "ultimateEnergyRaw": null,
+          "energyGainLimitRaw": null,
+          "script": "AIScript.Character._11501.SkillScript_NormalAttack_Support",
+          "hits": [],
+          "params": []
+        },
+        {
+          "field": "AssistSkillId",
+          "id": 11532001,
+          "name": "성휘 사냥",
+          "description": "호타루가 ##검격 형태#4031#에 진입해, 16초간 지속된다. \u000b##검격 형태#4031# 기간 중 ##아발란체#4032# 2개가 「아발란체·대검」으로 합쳐지고, 나머지 ##아발란체#4032# 2개가 「아발란체·비도」로 변형된다. \u000b호타루가 「아발란체·대검」을 휘둘러 목표를 공격한다. \u000b1단계: 공격력 <color=#fb8037>&Param1&</color>의 빛 속성 일반 공격 피해 \u000b2단계: 공격력 <color=#fb8037>&Param2&</color>의 빛 속성 일반 공격 피해 \u000b3단계: 공격력 <color=#fb8037>&Param3&</color>의 빛 속성 일반 공격 피해 \u000b4단계: 공격력 <color=#fb8037>&Param4&x5</color>의 빛 속성 일반 공격 피해 \u000b##검격 형태#4031# 기간 중 3초마다 자동으로 모든 「아발란체·비도」를 발사해 목표를 공격하여 경로 위 목표에게 공격력 <color=#fb8037>&Param5&</color>의 빛 속성 스킬 피해를 입힌다. \u000b「아발란체·대검」과 「아발란체·비도」가 피해를 입히면 ##빛 속성 표식: 광명#2016#을 부여한다.",
+          "cooldownSeconds": 24,
+          "ultimateEnergyRaw": null,
+          "energyGainLimitRaw": null,
+          "script": "AIScript.Character._11501.SkillScript_Skill_Enter_Support",
+          "hits": [
+            {
+              "parameter": "HitDamage,DamageNum,115120001",
+              "data": {
+                "Id": 115120001,
+                "levelTypeData": 3,
+                "LevelData": 2,
+                "MainOrSupport": 2,
+                "DistanceType": 2,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  579926532,
+                  -1289054857
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  900000,
+                  1040000,
+                  1170000,
+                  1580000,
+                  1710000,
+                  1830000,
+                  2090000,
+                  2190000,
+                  2300000,
+                  2520000,
+                  2700000,
+                  2880000,
+                  3060000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillSlotType": 5
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,115120002",
+              "data": {
+                "Id": 115120002,
+                "levelTypeData": 3,
+                "LevelData": 2,
+                "MainOrSupport": 2,
+                "DistanceType": 2,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  579926532,
+                  -1289054857
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  900000,
+                  1040000,
+                  1170000,
+                  1580000,
+                  1710000,
+                  1830000,
+                  2090000,
+                  2190000,
+                  2300000,
+                  2520000,
+                  2700000,
+                  2880000,
+                  3060000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillSlotType": 5
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,115120003",
+              "data": {
+                "Id": 115120003,
+                "levelTypeData": 3,
+                "LevelData": 2,
+                "MainOrSupport": 2,
+                "DistanceType": 2,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  579926532,
+                  -1289054857
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  900000,
+                  1040000,
+                  1170000,
+                  1580000,
+                  1710000,
+                  1830000,
+                  2090000,
+                  2190000,
+                  2300000,
+                  2520000,
+                  2700000,
+                  2880000,
+                  3060000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillSlotType": 5
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,115120004",
+              "data": {
+                "Id": 115120004,
+                "levelTypeData": 3,
+                "LevelData": 2,
+                "MainOrSupport": 2,
+                "DistanceType": 2,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  579926532,
+                  -1289054857
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  660000,
+                  760000,
+                  860000,
+                  1160000,
+                  1250000,
+                  1340000,
+                  1530000,
+                  1610000,
+                  1690000,
+                  1850000,
+                  1980000,
+                  2110000,
+                  2240000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillSlotType": 5
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,115120005",
+              "data": {
+                "Id": 115120005,
+                "levelTypeData": 3,
+                "LevelData": 2,
+                "MainOrSupport": 2,
+                "DistanceType": 2,
+                "SourceType": 1,
+                "DamageType": 2,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  -1747286272,
+                  -1289054857,
+                  -269834541
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  480000,
+                  550000,
+                  620000,
+                  840000,
+                  910000,
+                  970000,
+                  1110000,
+                  1160000,
+                  1220000,
+                  1340000,
+                  1430000,
+                  1530000,
+                  1620000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillSlotType": 5
+              }
+            }
+          ],
+          "params": [
+            "HitDamage,DamageNum,115120001",
+            "HitDamage,DamageNum,115120002",
+            "HitDamage,DamageNum,115120003",
+            "HitDamage,DamageNum,115120004",
+            "HitDamage,DamageNum,115120005"
+          ]
+        },
+        {
+          "field": "AssistUltimateId",
+          "id": 11540000,
+          "name": "몰아치는 별빛",
+          "description": "##아발란체#4032#가 그랜드 캐논 2대로 합체되어 전방에 연속으로 3회 사격하며 매회 공격력 <color=#fb8037>&Param1&x2</color>의 빛 속성 필살기 피해를 입히고, 대검으로 다시 합체되어 전방을 참격하며 공격력 <color=#fb8037>&Param2&</color>, <color=#fb8037>&Param3&</color>의 빛 속성 필살기 피해를 입힌다. \u000b「몰아치는 별빛」 종료 시 호타루의 스킬 쿨타임을 제거한다.",
+          "cooldownSeconds": 40,
+          "ultimateEnergyRaw": 3000000,
+          "energyGainLimitRaw": null,
+          "script": "AIScript.Character._11501.SkillScript_Ultra",
+          "hits": [
+            {
+              "parameter": "HitDamage,DamageNum,115400001",
+              "data": {
+                "Id": 115400001,
+                "levelTypeData": 3,
+                "LevelData": 4,
+                "DistanceType": 2,
+                "SourceType": 1,
+                "DamageType": 3,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  1692410173
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  2720000,
+                  3130000,
+                  3530000,
+                  4760000,
+                  5140000,
+                  5520000,
+                  6280000,
+                  6610000,
+                  6930000,
+                  7580000,
+                  8130000,
+                  8670000,
+                  9220000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillSlotType": 4
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,115400002",
+              "data": {
+                "Id": 115400002,
+                "levelTypeData": 3,
+                "LevelData": 4,
+                "DistanceType": 2,
+                "SourceType": 1,
+                "DamageType": 3,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  1692410173
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  7170000,
+                  8250000,
+                  9320000,
+                  12550000,
+                  13550000,
+                  14550000,
+                  16560000,
+                  17420000,
+                  18280000,
+                  20000000,
+                  21440000,
+                  22870000,
+                  24310000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillSlotType": 4
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,115400003",
+              "data": {
+                "Id": 115400003,
+                "levelTypeData": 3,
+                "LevelData": 4,
+                "DistanceType": 2,
+                "SourceType": 1,
+                "DamageType": 3,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  1692410173
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  5860000,
+                  6730000,
+                  7610000,
+                  10250000,
+                  11070000,
+                  11890000,
+                  13530000,
+                  14230000,
+                  14930000,
+                  16340000,
+                  17510000,
+                  18680000,
+                  19850000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillSlotType": 4
+              }
+            }
+          ],
+          "params": [
+            "HitDamage,DamageNum,115400001",
+            "HitDamage,DamageNum,115400002",
+            "HitDamage,DamageNum,115400003"
+          ]
+        }
+      ]
+    },
+    {
+      "position": "assist2",
+      "id": 107,
+      "name": "틸리아",
+      "limitBreak": 0,
+      "energyRaw": {
+        "EnergyConvRatio": 7500,
+        "EnergyEfficiency": 10000,
+        "ChargingRate": 2,
+        "EnergyConsume": 4
+      },
+      "unlockedLimitBreakTalents": [],
+      "potentials": [
+        {
+          "id": 510722,
+          "name": "이어지는 스펙트럼",
+          "totalLevel": 1,
+          "baseLevel": 1,
+          "badgeLevels": 0,
+          "description": "「성광의 방패」가 피해를 입히면 지원 스킬 쿨타임이 <color=#0abec5>&Param2&</color>초 감소한다. 해당 지원 스킬을 시전할 때마다 최대 &Param3&회 발동한다.",
+          "data": {
+            "Id": 510722,
+            "CharId": 107,
+            "Build": 1,
+            "BranchType": 2,
+            "MaxLevel": 1,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              180,
+              180,
+              180,
+              180,
+              180
+            ],
+            "GameBookId": 563,
+            "EffectGroupId": 10722,
+            "IsEffective": true,
+            "SpBg": "Icon/Potential/Sp_Potential_bg_02",
+            "SpFace": "Icon/Potential/Sp_Potential_char_107_02",
+            "BriefDesc": "Potential.510722.1",
+            "Desc": "Potential.510722.2",
+            "Param1": "Skill,NoLevel,10732000,Title,Text",
+            "Param2": "ScriptParameterValue,NoLevel,10722011,CommonData,10K",
+            "Param3": "ScriptParameterValue,NoLevel,10722012,CommonData,10K"
+          }
+        },
+        {
+          "id": 510723,
+          "name": "완벽한 회전",
+          "totalLevel": 1,
+          "baseLevel": 1,
+          "badgeLevels": 0,
+          "description": "「성광의 방패」가 메인 캐릭터를 향해 날아간 후, 다시 튕긴다. \u000b「성광의 방패」가 메인 캐릭터를 명중시키면 틸리아 공격력 <color=#0abec5>&Param2&</color>의 빛 속성 범위 스킬 피해를 입히고 주변 목표가 받는 스킬 피해가 <color=#0abec5>&Param3&</color> 증가한다. &Param4&초간 지속되며, 최대 &Param5&스택 중첩된다.",
+          "data": {
+            "Id": 510723,
+            "CharId": 107,
+            "Build": 2,
+            "BranchType": 2,
+            "MaxLevel": 1,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              180,
+              180,
+              180,
+              180,
+              180
+            ],
+            "GameBookId": 549,
+            "EffectGroupId": 10723,
+            "IsEffective": true,
+            "SpBg": "Icon/Potential/Sp_Potential_bg_03",
+            "SpFace": "Icon/Potential/Sp_Potential_char_107_03",
+            "BriefDesc": "Potential.510723.1",
+            "Desc": "Potential.510723.2",
+            "Param1": "Skill,NoLevel,10732000,Title,Text",
+            "Param2": "HitDamage,DamageNum,107322301",
+            "Param3": "EffectValue,NoLevel,10723011,EffectTypeParam1,HdPct",
+            "Param4": "BuffValue,NoLevel,10723011,Time,10K",
+            "Param5": "BuffValue,NoLevel,10723011,LaminatedNum,Fixed",
+            "Param6": "EffectValue,NoLevel,10723011,EffectTypeFirstSubtype,Enum,EAT"
+          }
+        },
+        {
+          "id": 510725,
+          "name": "강적 제압",
+          "totalLevel": 6,
+          "baseLevel": 6,
+          "badgeLevels": 0,
+          "description": "「성광의 방패」가 기절 면역 상태의 목표를 명중시키면 공격력 <color=#ec6d21>&Param2&</color>의 빛 속성 범위 스킬 피해를 입히고, 대상이 받는 빛 속성 피해를 <color=#ec6d21>&Param3&</color> 증가시킨다. &Param4&초간 지속된다.",
+          "data": {
+            "Id": 510725,
+            "CharId": 107,
+            "Build": 1,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 551,
+            "EffectGroupId": 10725,
+            "IsEffective": true,
+            "Corner": 1,
+            "BriefDesc": "Potential.510725.1",
+            "Desc": "Potential.510725.2",
+            "Param1": "Skill,NoLevel,10732000,Title,Text",
+            "Param2": "HitDamage,DamageNum,107322501",
+            "Param3": "Effect,LevelUp,10725001,EffectTypeParam1,HdPct",
+            "Param4": "BuffValue,NoLevel,10725011,Time,10K",
+            "Param5": "BuffValue,NoLevel,10725011,LaminatedNum,Fixed",
+            "Param6": "Effect,LevelUp,10725001,EffectTypeFirstSubtype,Enum,EAT"
+          }
+        },
+        {
+          "id": 510730,
+          "name": "약점 노출",
+          "totalLevel": 1,
+          "baseLevel": 1,
+          "badgeLevels": 0,
+          "description": "「성광의 방패」가 현재 HP가 <color=#ec6d21>&Param2&</color>보다 낮은 목표에게 공격력 &Param3&의 빛 속성 범위 스킬 피해를 추가로 입히고, 대상이 받는 스킬 피해를 &Param4& 증가시킨다. &Param5&초간 지속되며, 최대 &Param6&스택 중첩된다. \u000b해당 효과는 &Param8&초마다 최대 1회 발동한다.",
+          "data": {
+            "Id": 510730,
+            "CharId": 107,
+            "Build": 2,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 556,
+            "EffectGroupId": 10730,
+            "IsEffective": true,
+            "Corner": 3,
+            "BriefDesc": "Potential.510730.1",
+            "Desc": "Potential.510730.2",
+            "Param1": "Skill,NoLevel,10732000,Title,Text",
+            "Param2": "ScriptParameter,LevelUp,10730001,CommonData,10KPct",
+            "Param3": "HitDamage,DamageNum,107322301",
+            "Param4": "EffectValue,NoLevel,10723011,EffectTypeParam1,HdPct",
+            "Param5": "BuffValue,NoLevel,10723011,Time,10K",
+            "Param6": "BuffValue,NoLevel,10723011,LaminatedNum,Fixed",
+            "Param7": "EffectValue,NoLevel,10723011,EffectTypeFirstSubtype,Enum,EAT",
+            "Param8": "ScriptParameterValue,NoLevel,10730012,CommonData,10K"
+          }
+        },
+        {
+          "id": 510733,
+          "name": "빛나는 깃발",
+          "totalLevel": 2,
+          "baseLevel": 2,
+          "badgeLevels": 0,
+          "description": "메인 캐릭터의 방어가 <color=#ec6d21>&Param1&</color> 증가한다.",
+          "data": {
+            "Id": 510733,
+            "CharId": 107,
+            "Build": 3,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 559,
+            "EffectGroupId": 10733,
+            "IsEffective": true,
+            "Corner": 3,
+            "BriefDesc": "Potential.510733.1",
+            "Desc": "Potential.510733.2",
+            "Param1": "Effect,LevelUp,10733001,EffectTypeParam1,Fixed",
+            "Param2": "Effect,LevelUp,10733001,EffectTypeFirstSubtype,Enum,EAT"
+          }
+        },
+        {
+          "id": 510742,
+          "name": "기사의 맹세·성스러운 백악 갑옷",
+          "totalLevel": 2,
+          "baseLevel": 2,
+          "badgeLevels": 0,
+          "description": "필살기 「&Param1&」가 피해를 입히면 메인 캐릭터가 틸리아 최대 HP의 <color=#ec6d21>&Param2&</color>에 해당하는 보호막을 획득한다. &Param3&초간 지속된다.",
+          "data": {
+            "Id": 510742,
+            "CharId": 107,
+            "Build": 3,
+            "BranchType": 3,
+            "MaxLevel": 3,
+            "ScoreGroupId": 401,
+            "BuildScore": [
+              60,
+              120,
+              180,
+              240,
+              300,
+              360,
+              420,
+              480,
+              540
+            ],
+            "GameBookId": 561,
+            "EffectGroupId": 10742,
+            "IsEffective": true,
+            "Corner": 2,
+            "BriefDesc": "Potential.510742.1",
+            "Desc": "Potential.510742.2",
+            "Param1": "Skill,NoLevel,10740000,Title,Text",
+            "Param2": "Shield,LevelUp,10742001,ReferenceScale,10KHdPct",
+            "Param3": "Shield,LevelUp,10742001,Time,10K"
+          }
+        }
+      ],
+      "skills": [
+        {
+          "field": "AssistNormalAtkId",
+          "id": 10710000,
+          "name": "호위대 근접전형",
+          "description": "방패와 장창을 능숙하게 사용해 목표를 공격한다. \u000b1단계: 공격력 <color=#fb8037>&Param1&</color>의 빛 속성 일반 공격 피해 \u000b2단계: 공격력 <color=#fb8037>&Param2&</color>의 빛 속성 일반 공격 피해 \u000b3단계: 공격력 <color=#fb8037>&Param3&</color>의 빛 속성 일반 공격 피해 \u000b4단계: 공격력 <color=#fb8037>&Param4&</color>의 빛 속성 일반 공격 피해",
+          "cooldownSeconds": null,
+          "ultimateEnergyRaw": null,
+          "energyGainLimitRaw": 145800,
+          "script": "AIScript.Character._10701.SkillScript_NormalAttack",
+          "hits": [
+            {
+              "parameter": "HitDamage,DamageNum,107100001",
+              "data": {
+                "Id": 107100001,
+                "levelTypeData": 3,
+                "LevelData": 5,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  2073692314
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  145000,
+                  160000,
+                  174000,
+                  218000,
+                  232000,
+                  247000,
+                  276000,
+                  290000,
+                  305000,
+                  334000,
+                  348000,
+                  363000,
+                  377000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "EnergyCharge": 40500,
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 10710000,
+                "SkillSlotType": 5
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,107100002",
+              "data": {
+                "Id": 107100002,
+                "levelTypeData": 3,
+                "LevelData": 5,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  2073692314
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  126000,
+                  138000,
+                  151000,
+                  189000,
+                  201000,
+                  214000,
+                  239000,
+                  252000,
+                  264000,
+                  290000,
+                  302000,
+                  315000,
+                  327000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "EnergyCharge": 40500,
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 10710000,
+                "SkillSlotType": 5
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,107100003",
+              "data": {
+                "Id": 107100003,
+                "levelTypeData": 3,
+                "LevelData": 5,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  2073692314
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  205000,
+                  226000,
+                  246000,
+                  308000,
+                  328000,
+                  349000,
+                  390000,
+                  410000,
+                  431000,
+                  472000,
+                  492000,
+                  513000,
+                  533000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "EnergyCharge": 32400,
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 10710000,
+                "SkillSlotType": 5
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,107100004",
+              "data": {
+                "Id": 107100004,
+                "levelTypeData": 3,
+                "LevelData": 5,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 1,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  2073692314
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  205000,
+                  226000,
+                  246000,
+                  308000,
+                  328000,
+                  349000,
+                  390000,
+                  410000,
+                  431000,
+                  472000,
+                  492000,
+                  513000,
+                  533000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "EnergyCharge": 32400,
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 10710000,
+                "SkillSlotType": 5
+              }
+            }
+          ],
+          "params": [
+            "HitDamage,DamageNum,107100001",
+            "HitDamage,DamageNum,107100002",
+            "HitDamage,DamageNum,107100003",
+            "HitDamage,DamageNum,107100004"
+          ]
+        },
+        {
+          "field": "AssistSkillId",
+          "id": 10732000,
+          "name": "정의의 중재",
+          "description": "「성광의 방패」를 던져 최대 6회 튕기며 공격력 <color=#fb8037>&Param1&</color>의 빛 속성 스킬 피해를 입히고, &Param2&초간 기절 상태로 만든다. 동시에 ##빛 속성 표식: 광명#2016#을 부여한다. \u000b스킬이 피해를 입히면 팀 전체의 &Param3_kr1& <color=#ec6d21>&Param4&</color> 증가한다. &Param5&초간 지속된다.",
+          "cooldownSeconds": 12,
+          "ultimateEnergyRaw": null,
+          "energyGainLimitRaw": null,
+          "script": "AIScript.Character._10701.SkillScript_Zhiyuan_Skill",
+          "hits": [
+            {
+              "parameter": "HitDamage,DamageNum,107320001",
+              "data": {
+                "Id": 107320001,
+                "levelTypeData": 3,
+                "LevelData": 2,
+                "MainOrSupport": 2,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 2,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  1909904870
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  410000,
+                  450000,
+                  490000,
+                  610000,
+                  650000,
+                  690000,
+                  770000,
+                  810000,
+                  850000,
+                  940000,
+                  980000,
+                  1020000,
+                  1060000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 10732000,
+                "SkillSlotType": 2
+              }
+            }
+          ],
+          "params": [
+            "HitDamage,DamageNum,107320001",
+            "BuffValue,NoLevel,10795011,Time,10K",
+            "Effect,LevelUp,10795002,EffectTypeFirstSubtype,Enum,EAT",
+            "Effect,LevelUp,10795002,EffectTypeParam1,HdPct",
+            "Buff,LevelUp,10795012,Time,10K",
+            "Effect,LevelUp,10795003,EffectTypeParam4,Fixed",
+            "Effect,LevelUp,10795003,EffectTypeParam1,HdPct",
+            "Effect,LevelUp,10795003,EffectTypeFirstSubtype,Enum,EAT",
+            "Effect,LevelUp,10795003,EffectTypeParam6,HdPct"
+          ]
+        },
+        {
+          "field": "AssistUltimateId",
+          "id": 10740000,
+          "name": "영광의 제재",
+          "description": "수직으로 지면을 강하게 내리쳐 공격력 <color=#fb8037>&Param1&</color>만큼 큰 범위의 빛 속성 필살기 피해를 입힌다. 또한 결계를 생성해 1초마다 공격력 <color=#fb8037>&Param2&</color>의 빛 속성 범위 스킬 피해를 입히며 ##빛 속성 표식: 광명#2016#을 부여한다. 8초간 지속된다.",
+          "cooldownSeconds": 20,
+          "ultimateEnergyRaw": 1900000,
+          "energyGainLimitRaw": null,
+          "script": "AIScript.Character._10701.SkillScript_Ultra",
+          "hits": [
+            {
+              "parameter": "HitDamage,DamageNum,107400001",
+              "data": {
+                "Id": 107400001,
+                "levelTypeData": 3,
+                "LevelData": 4,
+                "DistanceType": 1,
+                "SourceType": 1,
+                "DamageType": 3,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  1070936202
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  3350000,
+                  3690000,
+                  4020000,
+                  5030000,
+                  5360000,
+                  5700000,
+                  6370000,
+                  6700000,
+                  7040000,
+                  7710000,
+                  8040000,
+                  8380000,
+                  8710000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillSlotType": 4
+              }
+            },
+            {
+              "parameter": "HitDamage,DamageNum,107400002",
+              "data": {
+                "Id": 107400002,
+                "levelTypeData": 3,
+                "LevelData": 4,
+                "MainOrSupport": 1,
+                "DistanceType": 2,
+                "SourceType": 1,
+                "DamageType": 2,
+                "EffectType": 1,
+                "ElementType": 5,
+                "DamageTag": [
+                  457667586,
+                  -73673520
+                ],
+                "DamageBonusType": 1,
+                "SkillPercentAmend": [
+                  180000,
+                  198000,
+                  216000,
+                  269000,
+                  287000,
+                  305000,
+                  341000,
+                  359000,
+                  377000,
+                  413000,
+                  431000,
+                  449000,
+                  467000
+                ],
+                "SkillAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "EnergyCharge": 23100,
+                "TalentPercentAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "TalentAbsAmend": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "SkillId": 10731000,
+                "SkillSlotType": 2
+              }
+            }
+          ],
+          "params": [
+            "HitDamage,DamageNum,107400001",
+            "HitDamage,DamageNum,107400002"
+          ]
+        }
+      ]
+    }
+  ],
+  "scoringConfiguration": {
+    "source": "C:\\Users\\User\\Documents\\github\\sstoy-origin\\sstoy\\public\\data\\Config.json",
+    "sha256": "844e5d054ca76dec521b70cc4fda3bed18ec1047560bac283ebcef59d4bbf77b",
+    "durationSeconds": 180,
+    "sourceRule": "PlayerScoreBossData.DamageToScore: floor(cumulativeDamage / SwitchRate), plus technical score",
+    "levels": [
+      {
+        "id": 1,
+        "group": 1001,
+        "switchRate": 10000
+      },
+      {
+        "id": 2,
+        "group": 1003,
+        "switchRate": 9800
+      },
+      {
+        "id": 3,
+        "group": 1002,
+        "switchRate": 10000
+      },
+      {
+        "id": 4,
+        "group": 1004,
+        "switchRate": 10267
+      },
+      {
+        "id": 5,
+        "group": 1005,
+        "switchRate": 10267
+      },
+      {
+        "id": 6,
+        "group": 1006,
+        "switchRate": 12714
+      },
+      {
+        "id": 7,
+        "group": 1006,
+        "switchRate": 12714
+      },
+      {
+        "id": 8,
+        "group": 1002,
+        "switchRate": 10000
+      },
+      {
+        "id": 9,
+        "group": 1002,
+        "switchRate": 10000
+      },
+      {
+        "id": 10,
+        "group": 1006,
+        "switchRate": 12714
+      },
+      {
+        "id": 11,
+        "group": 1006,
+        "switchRate": 12714
+      },
+      {
+        "id": 12,
+        "group": 1001,
+        "switchRate": 10000
+      },
+      {
+        "id": 13,
+        "group": 1001,
+        "switchRate": 10000
+      },
+      {
+        "id": 14,
+        "group": 1008,
+        "switchRate": 16952
+      },
+      {
+        "id": 15,
+        "group": 1007,
+        "switchRate": 16952
+      },
+      {
+        "id": 16,
+        "group": 1008,
+        "switchRate": 16952
+      },
+      {
+        "id": 17,
+        "group": 1008,
+        "switchRate": 16952
+      },
+      {
+        "id": 18,
+        "group": 1010,
+        "switchRate": 15554
+      },
+      {
+        "id": 19,
+        "group": 1009,
+        "switchRate": 17888
+      },
+      {
+        "id": 20,
+        "group": 1011,
+        "switchRate": 17888
+      },
+      {
+        "id": 21,
+        "group": 1012,
+        "switchRate": 17888
+      },
+      {
+        "id": 22,
+        "group": 1013,
+        "switchRate": 20124
+      },
+      {
+        "id": 23,
+        "group": 1013,
+        "switchRate": 20124
+      },
+      {
+        "id": 24,
+        "group": 1014,
+        "switchRate": 22807
+      },
+      {
+        "id": 25,
+        "group": 1014,
+        "switchRate": 22807
+      },
+      {
+        "id": 26,
+        "group": 1015,
+        "switchRate": 25000
+      },
+      {
+        "id": 27,
+        "group": 1015,
+        "switchRate": 25000
+      },
+      {
+        "id": 998,
+        "group": 1015,
+        "switchRate": 25000
+      },
+      {
+        "id": 999,
+        "group": 1015,
+        "switchRate": 25000
+      },
+      {
+        "id": 9991,
+        "group": 1001,
+        "switchRate": 10000
+      },
+      {
+        "id": 9992,
+        "group": 1001,
+        "switchRate": 10000
+      },
+      {
+        "id": 9993,
+        "group": 1001,
+        "switchRate": 10000
+      },
+      {
+        "id": 9994,
+        "group": 1001,
+        "switchRate": 10000
+      }
+    ]
+  },
+  "combatTimingSource": "reports/combat-timings.json",
+  "combatTimingSummary": [
+    {
+      "id": 162,
+      "timelines": 20,
+      "animationMatched": 16
+    },
+    {
+      "id": 115,
+      "timelines": 49,
+      "animationMatched": 38
+    },
+    {
+      "id": 107,
+      "timelines": 18,
+      "animationMatched": 15
+    }
+  ],
+  "records": [
+    {
+      "slot": "main1",
+      "id": 214039,
+      "level": 81,
+      "limitBreak": 5,
+      "name": "여름 서식지",
+      "data": {
+        "Id": 214039,
+        "EET": 5,
+        "Tags": [
+          801,
+          803,
+          802
+        ],
+        "Visible": true,
+        "Available": true,
+        "DiscBg": "Disc/4039/4039",
+        "StrengthenGroupId": 41,
+        "AttrBaseGroupId": 21100,
+        "AttrExtraGroupId": 301,
+        "PromoteGroupId": 402,
+        "TransformItemId": 224039,
+        "MaxStarTransformItem": [
+          24,
+          200
+        ],
+        "ReadReward": [
+          2,
+          30
+        ],
+        "MainSkillGroupId": 4039,
+        "SecondarySkillGroupId1": 40391,
+        "SecondarySkillGroupId2": 40392,
+        "SubNoteSkillGroupId": 4039,
+        "SkillScript": "AIScript.Disc.Disc_214039"
+      },
+      "melody": {
+        "Id": 403906,
+        "GroupId": 4039,
+        "Level": 6,
+        "EffectId": [
+          4039006,
+          4039026
+        ],
+        "Name": "MainSkill.403906.1",
+        "Icon": "Icon/DiscSkill/DiscSkill_214039",
+        "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+        "Desc": "MainSkill.403906.2",
+        "Param1": "12%",
+        "Param2": "6%",
+        "Param3": "10",
+        "Param4": "5",
+        "description": "빛 속성 메인 캐릭터의 일반 공격과 스킬 피해가 <color=#ec6d21>{1}</color> 증가한다. \u000b빛 속성 메인 캐릭터의 필살기 지속 시간 동안 임의의 캐릭터가 ##빛 속성 표식#1015#을 발동하면 팀 전체의 빛 속성 피해가 <color=#ec6d21>{2}</color> 증가한다. {3}초간 지속되며, 최대 {4}스택 중첩된다."
+      },
+      "concertos": [
+        {
+          "Id": 4039105,
+          "GroupId": 40391,
+          "Level": 5,
+          "NeedSubNoteSkills": "{\"90022\":70,\"90016\":70}",
+          "Score": 600,
+          "EffectId": [
+            4039105,
+            4039125
+          ],
+          "Name": "SecondarySkill.4039105.1",
+          "Icon": "Icon/DiscSkill/DiscSkill_4",
+          "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+          "Desc": "SecondarySkill.4039105.2",
+          "Param1": "15%",
+          "Param2": "7.5%",
+          "Param3": "10",
+          "Param4": "3",
+          "name": "광활한 푸른 하늘",
+          "description": "팀 내 빛 속성 캐릭터의 스킬 피해가 <color=#ec6d21>{1}</color> 증가한다. \u000b빛 속성 캐릭터가 스킬을 시전하면 해당 효과가 <color=#ec6d21>{2}</color> 추가로 증가한다. {3}초간 지속되며, 최대 {4}스택 중첩된다.",
+          "requirements": {
+            "90016": 70,
+            "90022": 70
+          }
+        },
+        {
+          "Id": 4039201,
+          "GroupId": 40392,
+          "Level": 1,
+          "NeedSubNoteSkills": "{\"90022\":15,\"90017\":15,\"90015\":15}",
+          "Score": 120,
+          "Name": "SecondarySkill.4039201.1",
+          "Icon": "Icon/DiscSkill/DiscSkill_4",
+          "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+          "Desc": "SecondarySkill.4039201.2",
+          "Param1": "6",
+          "Param2": "1%",
+          "Param3": "10",
+          "name": "끝없는 햇빛",
+          "description": "빛 속성 캐릭터가 스킬 피해를 입히면 빛 속성 메인 캐릭터가 「회절」 1스택을 획득하며, 최대 {1}스택 중첩된다. \u000b빛 속성 메인 캐릭터가 스킬을 시전하면 팀 내 빛 속성 캐릭터의 스킬 피해가 「회절」 중첩 스택×<color=#ec6d21>{2}</color>만큼 증가한다. {3}초간 지속되며, 종료 후 「회절」의 중첩 스택이 제거된다.",
+          "requirements": {
+            "90015": 15,
+            "90017": 15,
+            "90022": 15
+          }
+        }
+      ]
+    },
+    {
+      "slot": "main2",
+      "id": 214038,
+      "level": 81,
+      "limitBreak": 1,
+      "name": "파도빛 유랑",
+      "data": {
+        "Id": 214038,
+        "EET": 5,
+        "Tags": [
+          801,
+          807,
+          803
+        ],
+        "Visible": true,
+        "Available": true,
+        "DiscBg": "Disc/4038/4038",
+        "StrengthenGroupId": 41,
+        "AttrBaseGroupId": 21061,
+        "AttrExtraGroupId": 301,
+        "PromoteGroupId": 402,
+        "TransformItemId": 224038,
+        "MaxStarTransformItem": [
+          24,
+          200
+        ],
+        "ReadReward": [
+          2,
+          30
+        ],
+        "AVGReadReward": [
+          2,
+          30
+        ],
+        "MainSkillGroupId": 4038,
+        "SecondarySkillGroupId1": 40381,
+        "SecondarySkillGroupId2": 40382,
+        "SubNoteSkillGroupId": 4038,
+        "SkillScript": "AIScript.Disc.Disc_214038"
+      },
+      "melody": {
+        "Id": 403802,
+        "GroupId": 4038,
+        "Level": 2,
+        "EffectId": [
+          4038002,
+          4038022
+        ],
+        "Name": "MainSkill.403802.1",
+        "Icon": "Icon/DiscSkill/DiscSkill_214038",
+        "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+        "Desc": "MainSkill.403802.2",
+        "Param1": "18%",
+        "Param2": "3%",
+        "Param3": "15",
+        "Param4": "9",
+        "description": "팀 전체의 빛 속성 피해가 <color=#ec6d21>{1}</color> 증가한다. \u000b빛 속성 메인 캐릭터가 목표에게 필살기 피해를 입히면 해당 목표가 받는 빛 속성 피해가 <color=#ec6d21>{2}</color> 증가한다. {3}초간 지속되며, 최대 {4}스택 중첩된다."
+      },
+      "concertos": [
+        {
+          "Id": 4038105,
+          "GroupId": 40381,
+          "Level": 5,
+          "NeedSubNoteSkills": "{\"90022\":70,\"90016\":70}",
+          "Score": 600,
+          "EffectId": [
+            4038105,
+            4038125,
+            4038145,
+            4038165
+          ],
+          "Name": "SecondarySkill.4038105.1",
+          "Icon": "Icon/DiscSkill/DiscSkill_4",
+          "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+          "Desc": "SecondarySkill.4038105.2",
+          "Param1": "25%",
+          "Param2": "22.5%",
+          "Param3": "6",
+          "name": "파문의 춤사위",
+          "description": "빛 속성 메인 캐릭터의 일반 공격과 스킬 피해가 <color=#ec6d21>{1}</color> 증가한다. \u000b빛 속성 메인 캐릭터가 스킬 피해를 입히면 해당 효과가 추가로 <color=#ec6d21>{2}</color> 증가한다. {3}초간 지속된다.",
+          "requirements": {
+            "90016": 70,
+            "90022": 70
+          }
+        },
+        {
+          "Id": 4038203,
+          "GroupId": 40382,
+          "Level": 3,
+          "NeedSubNoteSkills": "{\"90022\":45,\"90016\":45,\"90012\":45}",
+          "Score": 360,
+          "Name": "SecondarySkill.4038203.1",
+          "Icon": "Icon/DiscSkill/DiscSkill_14",
+          "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+          "Desc": "SecondarySkill.4038203.2",
+          "Param1": "30",
+          "Param2": "27%",
+          "Param3": "10",
+          "name": "빛의 발걸음",
+          "description": "빛 속성 메인 캐릭터가 스킬 피해를 {1}회 입히면 팀 전체의 빛 속성 피해가 <color=#ec6d21>{2}</color> 증가한다. {3}초간 지속된다.",
+          "requirements": {
+            "90012": 45,
+            "90016": 45,
+            "90022": 45
+          }
+        }
+      ]
+    },
+    {
+      "slot": "main3",
+      "id": 214066,
+      "level": 81,
+      "limitBreak": 1,
+      "name": "앞길을 밝히는 샛별",
+      "data": {
+        "Id": 214066,
+        "EET": 5,
+        "Tags": [
+          817,
+          803,
+          812
+        ],
+        "Visible": true,
+        "Available": true,
+        "DiscBg": "Disc/4066/4066",
+        "StrengthenGroupId": 41,
+        "AttrBaseGroupId": 21061,
+        "AttrExtraGroupId": 301,
+        "PromoteGroupId": 403,
+        "TransformItemId": 224066,
+        "MaxStarTransformItem": [
+          24,
+          200
+        ],
+        "ReadReward": [
+          2,
+          30
+        ],
+        "AVGReadReward": [
+          2,
+          30
+        ],
+        "MainSkillGroupId": 4066,
+        "SecondarySkillGroupId1": 40661,
+        "SecondarySkillGroupId2": 40662,
+        "SubNoteSkillGroupId": 4066,
+        "SkillScript": "AIScript.Disc.Disc_214066"
+      },
+      "melody": {
+        "Id": 406602,
+        "GroupId": 4066,
+        "Level": 2,
+        "Name": "MainSkill.406602.1",
+        "Icon": "Icon/DiscSkill/DiscSkill_214066",
+        "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+        "Desc": "MainSkill.406602.2",
+        "Param1": "18%",
+        "Param2": "18%",
+        "Param3": "5",
+        "Param4": "18%",
+        "Param5": "8",
+        "description": "팀 전체의 HP가 <color=#ec6d21>{1}</color> 증가한다. \u000b메인 캐릭터가 처음으로 ##빛 속성 표식#1015#을 발동한 후, 「별의 소원」을 1스택 획득한다. \u000b「별의 소원」을 보유한 캐릭터가 목표에게 스킬 피해를 입히면, 목표가 받는 빛 속성 스킬 피해가 <color=#ec6d21>{2}</color> 증가한다. {3}초간 지속된다. \u000b빛 속성 메인 캐릭터가 표식을 발동해 ##광휘#4028#를 생성하면 자신의 치명타율이 <color=#ec6d21>{4}</color> 증가한다. {5}초간 지속된다."
+      },
+      "concertos": [
+        {
+          "Id": 4066105,
+          "GroupId": 40661,
+          "Level": 5,
+          "NeedSubNoteSkills": "{\"90022\":70,\"90016\":70}",
+          "Score": 600,
+          "Name": "SecondarySkill.4066105.1",
+          "Icon": "Icon/DiscSkill/DiscSkill_4",
+          "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+          "Desc": "SecondarySkill.4066105.2",
+          "Param1": "30%",
+          "Param2": "5",
+          "Param3": "37.5%",
+          "name": "별의 소원 섬광",
+          "description": "밸런스 캐릭터가 처음으로 목표에게 ##빛 속성 표식#1015#을 부여한 후, 메인 캐릭터가 「별의 소원」을 1스택 획득한다. \u000b「별의 소원」을 보유한 캐릭터가 목표에게 일반 공격 피해를 입히면 목표가 받는 빛 속성 일반 공격 피해가 <color=#ec6d21>{1}</color> 증가한다. {2}초간 지속된다. \u000b「별의 소원」이 추가 효과를 획득해, 스택마다 자신의 빛 속성 스킬 피해와 빛 속성 일반 공격 피해가 <color=#ec6d21>{3}</color> 증가한다.",
+          "requirements": {
+            "90016": 70,
+            "90022": 70
+          }
+        },
+        {
+          "Id": 4066203,
+          "GroupId": 40662,
+          "Level": 3,
+          "NeedSubNoteSkills": "{\"90022\":45,\"90012\":45,\"90016\":45}",
+          "Score": 360,
+          "Name": "SecondarySkill.4066203.1",
+          "Icon": "Icon/DiscSkill/DiscSkill_3",
+          "IconBg": "Icon/DiscSkill/db_DiscSkill_3",
+          "Desc": "SecondarySkill.4066203.2",
+          "Param1": "25%",
+          "Param2": "12",
+          "Param3": "5%",
+          "name": "내일 개척",
+          "description": "서포터 캐릭터가 처음으로 목표에게 ##빛 속성 표식#1015#을 부여한 후, 메인 캐릭터가 「별의 소원」을 1스택 획득한다. \u000b빛 속성 캐릭터가 스킬을 시전하면 빛 속성 메인 캐릭터의 치명타 피해가 <color=#ec6d21>{1}</color> 증가한다. {2}초간 지속된다. \u000b「별의 소원」이 추가 효과를 획득해, 스택마다 빛 속성 메인 캐릭터가 입히는 스킬 치명타 피해가 <color=#ec6d21>{3}</color> 증가한다.",
+          "requirements": {
+            "90012": 45,
+            "90016": 45,
+            "90022": 45
+          }
+        }
+      ]
+    },
+    {
+      "slot": "sub1",
+      "id": 214051,
+      "level": 81,
+      "limitBreak": 1,
+      "name": "별이 향하는 곳",
+      "data": {
+        "Id": 214051,
+        "EET": 5,
+        "Tags": [
+          801,
+          807,
+          823
+        ],
+        "Visible": true,
+        "Available": true,
+        "DiscBg": "Disc/4051/4051",
+        "StrengthenGroupId": 41,
+        "AttrBaseGroupId": 21061,
+        "AttrExtraGroupId": 301,
+        "PromoteGroupId": 401,
+        "TransformItemId": 224051,
+        "MaxStarTransformItem": [
+          24,
+          200
+        ],
+        "ReadReward": [
+          2,
+          30
+        ],
+        "AVGReadReward": [
+          2,
+          30
+        ],
+        "MainSkillGroupId": 4051,
+        "SecondarySkillGroupId1": 40511,
+        "SecondarySkillGroupId2": 40512,
+        "SubNoteSkillGroupId": 4051,
+        "SkillScript": "AIScript.Disc.Disc_214051"
+      },
+      "melody": null,
+      "concertos": []
+    },
+    {
+      "slot": "sub2",
+      "id": 214030,
+      "level": 81,
+      "limitBreak": 1,
+      "name": "오후의 틈새",
+      "data": {
+        "Id": 214030,
+        "EET": 5,
+        "Tags": [
+          801,
+          803,
+          807
+        ],
+        "Visible": true,
+        "Available": true,
+        "DiscBg": "Disc/4030/4030",
+        "StrengthenGroupId": 41,
+        "AttrBaseGroupId": 21091,
+        "AttrExtraGroupId": 301,
+        "PromoteGroupId": 402,
+        "TransformItemId": 224030,
+        "MaxStarTransformItem": [
+          24,
+          200
+        ],
+        "ReadReward": [
+          2,
+          30
+        ],
+        "MainSkillGroupId": 4030,
+        "SecondarySkillGroupId1": 40301,
+        "SecondarySkillGroupId2": 40302,
+        "SubNoteSkillGroupId": 4030
+      },
+      "melody": null,
+      "concertos": []
+    },
+    {
+      "slot": "sub3",
+      "id": 214005,
+      "level": 81,
+      "limitBreak": 1,
+      "name": "맑은 하늘의 꽃",
+      "data": {
+        "Id": 214005,
+        "EET": 1,
+        "Tags": [
+          801,
+          802,
+          803
+        ],
+        "Visible": true,
+        "Available": true,
+        "DiscBg": "Disc/4005/4005",
+        "StrengthenGroupId": 41,
+        "AttrBaseGroupId": 21088,
+        "AttrExtraGroupId": 301,
+        "PromoteGroupId": 401,
+        "TransformItemId": 224005,
+        "MaxStarTransformItem": [
+          24,
+          200
+        ],
+        "ReadReward": [
+          2,
+          30
+        ],
+        "AVGReadReward": [
+          2,
+          30
+        ],
+        "MainSkillGroupId": 4005,
+        "SecondarySkillGroupId1": 40051,
+        "SecondarySkillGroupId2": 40052,
+        "SubNoteSkillGroupId": 4005
+      },
+      "melody": null,
+      "concertos": []
+    }
+  ],
+  "concertoDisplayOrder": [
+    {
+      "groupId": 40661,
+      "name": "별의 소원 섬광",
+      "level": 5
+    },
+    {
+      "groupId": 40391,
+      "name": "광활한 푸른 하늘",
+      "level": 5
+    },
+    {
+      "groupId": 40381,
+      "name": "파문의 춤사위",
+      "level": 5
+    },
+    {
+      "groupId": 40662,
+      "name": "내일 개척",
+      "level": 3
+    },
+    {
+      "groupId": 40382,
+      "name": "빛의 발걸음",
+      "level": 3
+    },
+    {
+      "groupId": 40392,
+      "name": "끝없는 햇빛",
+      "level": 1
+    }
+  ],
+  "minimumNotesForRequestedConcertos": {
+    "90012": 45,
+    "90015": 15,
+    "90016": 70,
+    "90017": 15,
+    "90022": 70
+  },
+  "noteConfiguration": "사용자 지정: 협주 최소 요구 음표를 최종 음표로 사용",
+  "badgeConfiguration": [
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "absentFromPreset": [
+    "record selection and levels",
+    "notes",
+    "concerto",
+    "skill levels",
+    "character stats and limit breaks",
+    "target boss"
+  ],
+  "unresolved": [
+    "runtime speed, scripted hits, animation locks and cancellation flag semantics",
+    "normal-chain and ultimate-form transitions",
+    "energy gain and support charging rules",
+    "conditional potential/mark/concerto triggers",
+    "boss phase/resistance changes",
+    "damage-to-score ratio units, rounding and technical score aggregation"
+  ],
+  "finalScore": null
+}
