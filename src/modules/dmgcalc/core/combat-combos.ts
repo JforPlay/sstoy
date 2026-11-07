@@ -15,6 +15,9 @@ export function resolveCombatCombo(source:CombatComboSource,tag:string|number[],
     // Older three-character fixtures did not preserve bundle provenance.
     else if(aliases.every(alias=>!alias.source))aliases=aliases.slice(0,1);
   }
+  // Native groups can serialize the identical alias twice. Only exact
+  // duplicates are equivalent; distinct groups/clips remain an error.
+  aliases=[...new Map(aliases.map(alias=>[JSON.stringify(alias),alias])).values()];
   if(aliases.length!==1)throw new Error(`${aliases.length?'Ambiguous':'Missing'} combat combo ${source.id}/${JSON.stringify(tag)}/${index}`);
   const alias=aliases[0]!,timeline=source.timelines.find(timeline=>timeline.pathId===alias.clips[index]);
   if(!timeline)throw new Error(`Missing combat clip ${source.id}/${JSON.stringify(tag)}/${index}`);

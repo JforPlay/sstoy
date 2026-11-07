@@ -1,5 +1,6 @@
 import type {RecordRuleBuffs} from './combat-record-rules';
 import type {CompiledCombo} from './combat-timeline';
+export interface SupportAreaOptions {scalingActor?:string}
 export interface SupportAreaOptions {entity?:number;duration?:number;x?:number;z?:number;angle?:number;scale?:number;growth?:{interval:number;step:number;maximum:number};disableBuffs?:boolean;hitInterval?:number;moveSpeed?:number;hitId?:number;enemyEnterBuffs?:number[];additionalAttributes?:{id:number;count:number}[]}
 export interface SupportCombatHit {actor:string;damageType:number;element:number;slot:number;tags:number[];weapon?:string;tagUid?:number}
 export interface CombatGameplayTrigger {normal:boolean;dodge:boolean;skill:boolean;ultimate:boolean}
@@ -17,6 +18,7 @@ export interface SupportCombatApi {
   stopAreasByTag?(tag:string):void;
   areaRadius(name:string):number;
   projectile(name:string,target?:string,travelDistance?:number,options?:SupportAreaOptions):void;
+  projectileAs?(source:string,name:string,distance?:number):void;
   projectileAt?(name:string,target:{x:number;z:number},origin?:{x:number;z:number}):void;
   drop(name:string,position:{x:number;z:number;y?:number},buffId?:number):void;
   activeAreas?(tag:string):number;
@@ -33,7 +35,7 @@ export interface SupportCombatApi {
   shield(id:number,target:string,extraSeconds?:number):void;
   removeShield?(id:number,target:string):void;
   hasShieldTag(owner:string,tag:string):boolean;
-  hit(id:number,removeBuffsAfterHit?:{owner:string;id:number}[]):void;
+  hit(id:number,removeBuffsAfterHit?:{owner:string;id:number}[],feature?:Record<string,unknown>):void;
   toughnessDamage(percent:number):void;
   bossHasToughness():boolean;
   bossBroken?():boolean;
@@ -49,6 +51,7 @@ export interface SupportCombatApi {
   actorsByElement(element:number):string[];
   actorInfo(actor:string):{element:number;job:number};
   ultimateReady():boolean;
+  ultimateCooling?(actor:string):boolean;
   cast(key:string):void;
   hasBuffTag(owner:string,tag:string):boolean;
   activeAction():string|null;
@@ -106,6 +109,10 @@ export interface SupportCombatAdapter<State> {
   afterMinionHit?(state:State,api:SupportCombatApi,entity:number,hit:SupportCombatHit,crit:boolean):State;
   partyHit?(state:State,api:SupportCombatApi,hit:SupportCombatHit):State;
   beforePartyHit?(state:State,api:SupportCombatApi,hit:SupportCombatHit):{id:number;count:number;source?:string}[];
+  preparePartyHit?(state:State,api:SupportCombatApi,hit:SupportCombatHit):State;
+  beforePartySettlement?(state:State,api:SupportCombatApi,hit:SupportCombatHit):State;
+  partyCrit?(state:State,api:SupportCombatApi,hit:SupportCombatHit):State;
+  projectileModifiers?(state:State,api:SupportCombatApi,source:string,name:string,distance:number):{attributes:{id:number;count:number;source:string}[];speedMultiplier:number};
   mainHit?(state:State,api:SupportCombatApi):State;
   tick?(state:State,api:SupportCombatApi):State;
   custom?(state:State,api:SupportCombatApi,name:string,data?:Record<string,number|string>):State;

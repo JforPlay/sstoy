@@ -13,4 +13,10 @@ describe('native combo namespaces',()=>{
   it('refuses a different summon namespace rather than silently selecting main animations',()=>{
     expect(()=>resolveCombatCombo(data,'Atk1',0,1,60,.1,{source:'char_15601_combos_penguindoll.unity3d'})).toThrow(/Missing combat combo/);
   });
+  it('accepts only byte-equivalent duplicate aliases, not different clips',()=>{
+    const alias=data.comboAliases.find(a=>a.tag==='Atk1'&&a.source==='char_13701_combos.unity3d')!;
+    const duplicate={...data,comboAliases:[alias,{...alias}]};
+    expect(()=>resolveCombatCombo(duplicate,'Atk1',0,1,60,.1)).not.toThrow();
+    expect(()=>resolveCombatCombo({...duplicate,comboAliases:[alias,{...alias,clips:['different']}]},'Atk1',0,1,60,.1)).toThrow(/Ambiguous/);
+  });
 });

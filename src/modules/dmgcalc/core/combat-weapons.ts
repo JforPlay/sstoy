@@ -82,6 +82,20 @@ export function planCombatWeapon(weapon: ExtractedCombatWeapon, distance: number
   const tick = (value: number) => Math.ceil((value - 1e-9) * fps) / fps;
   const component = (type: string) => weapon.components.find(component => component.type === type)?.data;
   const curved=component('AdventureBezier3DBullet');
+  const boomerang=component('AdventureBoomerang');
+  if(boomerang){
+    const speed=combatFixed(boomerang.speed),turn=tick(combatFixed(boomerang.maxBeginStageTime))+1/fps;
+    if(speed<=0)throw new Error(`Invalid boomerang speed ${weapon.name}`);
+    const reach=speed*turn,radius=combatFixed(boomerang.catchRadius),snapshot=!boomerang.useOwnerActorInfo;
+    const duration=boomerang.canWhirl?turn+tick(Math.max(0,reach-radius)/speed):turn;
+    const impacts:WeaponImpact[]=[],hitId=hitOverride??boomerang.hitDamageId;
+    if(hitId&&distance<=reach){
+      const feature=boomerang.hitFeatureData??{},featureFlags=boomerang.hitFlags??0;
+      impacts.push({time:Math.max(1/fps,tick(distance/speed)),hitId,feature,featureFlags,snapshot});
+      if(boomerang.canWhirl&&boomerang.clearHitRecordWhenWhirl)impacts.push({time:turn+Math.max(1/fps,tick((reach-distance)/speed)),hitId,feature,featureFlags,snapshot});
+    }
+    return {duration,snapshot,impacts};
+  }
   if(curved){
     if(rules.AssumeBezier3DFirstContact!==1)throw new Error(`3D guided projectile ${weapon.name} requires an explicit first-contact assumption`);
     const flight=combatFixed(curved.flyTime),delay=combatFixed(curved.delayMove),life=combatFixed(curved.lifeTime);

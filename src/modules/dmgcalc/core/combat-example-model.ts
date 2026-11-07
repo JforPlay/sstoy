@@ -423,6 +423,15 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
         feature: data.hitFeatureData, featureFlags: data.hitFlags ?? 0 }, Math.max(1 / fps, options.distance / speed) * (index + 1)));
       return;
     }
+    const projectileAttributes:{id:number;count:number;source:string}[]=[];
+    if(weapon.components.some(c=>/^Adventure.*(Bullet|Projectile)$/.test(c.type))){
+      let speed=1;
+      for(const [id,listener] of Object.entries(supportAdapters)){
+        const modification=listener.projectileModifiers?.(state.supportScripts![id]!,supportApi(state,api,id),actor,name,distance ?? options.distance);
+        if(modification){projectileAttributes.push(...modification.attributes);speed*=modification.speedMultiplier;}
+      }
+      if(speed!==1)weapon={...weapon,components:weapon.components.map(c=>c.type==='AdventureBullet'?{...c,data:{...c.data,moveSpeed:combatFixed(c.data.moveSpeed)*speed}}:c)};
+    }
     const plan = planCombatWeapon(weapon, distance ?? options.distance, fps, override, allWeapons,
       {...tables.timings.rules,SingleEnemyMainRebound:1,AssumeContinuousRotateContact:1,AssumeBezier3DFirstContact:1});
     const weaponId=(state.weaponSequence ?? 0)+1;state.weaponSequence=weaponId;
@@ -459,7 +468,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
     const bossInArea=!geometry || geometry.contains({x:options.distance,z:0},0);
     for (const impact of plan.impacts.filter(impact=>(!geometry||geometry.contains({x:options.distance,z:0},impact.time))
       &&(!landing||landing.contains({x:options.distance,z:0},impact.time)))) schedule({ kind: 'impact', actor, snapshot: impact.snapshot ? snapshot : undefined,
-      hitId: impact.hitId, feature: impact.feature, featureFlags: impact.featureFlags, additionalAttributes:areaOptions.additionalAttributes, data: { weapon: name,
+      hitId: impact.hitId, scalingActor:areaOptions.scalingActor, feature: impact.feature, featureFlags: impact.featureFlags, additionalAttributes:[...(areaOptions.additionalAttributes??[]),...projectileAttributes], data: { weapon: name,
         ...(areaOptions.entity===undefined?{}:{minionEntity:areaOptions.entity}),
         ...(impact.sharedImmunity?{immunityGroup:impact.sharedImmunity.group,immunityDuration:impact.sharedImmunity.duration}:{}) } }, impact.time);
     if (actor === kasimiraId && name === 'Bullet_108_B2_Skill') schedule({ kind: '108:bomb-finish', actor }, plan.duration);
@@ -644,6 +653,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
       projectileAt(name,target,origin={x:0,z:0}){
         spawnWeapon(state,api,actor,name,undefined,Math.hypot(target.x-origin.x,target.z-origin.z),false,'boss',target);
       },
+      projectileAs(source,name,distance){spawnWeapon(state,api,source,name,undefined,distance,false,'boss',{scalingActor:actor});},
       drop(name,position,buffId){
         const weapon=allWeapons.find(weapon=>weapon.name===name),data=weapon?.components.find(component=>component.type==='DropEntity')?.data;
         if(!weapon||!data)throw new Error(`Missing native drop ${name}`);
@@ -703,6 +713,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
           &&state.pausedCooldowns?.[id]===undefined&&state.sp.ledger.pools[actor]!.value>=action.spCost;
       },
       chargeCount:key=>api.chargeCount(`${actor}:${key}`),
+      ultimateCooling(owner){const action=actionList.find(a=>a.id===`${owner}:ultimate`);return Boolean(action&&state.tick<(state.ready[action.cooldownKey??action.id]??0));},
       consumeCharge:key=>api.consumeCharge(`${actor}:${key}`),
       attribute:type=>readCombatAttribute(attributes(state,actor).attributes,type,tables.attributeLimits),
       initialAttribute:type=>{
@@ -764,7 +775,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
         api.schedule({kind:'shield-change',actor:shield.source,data:{id,owner:target,source:shield.source,added:0}},0);
       },
       hasShieldTag:(owner,tag)=>hasCombatShieldTag(state.shields ?? {},owner,combatTagHash(tag),time(state),tables.shieldDefinitions),
-      hit:(id,removeBuffsAfterHit)=>api.schedule({kind:'impact',actor,hitId:id,priority:0,removeBuffsAfterHit},0),
+      hit:(id,removeBuffsAfterHit,feature)=>api.schedule({kind:'impact',actor,hitId:id,priority:0,removeBuffsAfterHit,feature,featureFlags:feature?0x20:0},0),
       hitAs:(source,id)=>api.schedule({kind:'impact',actor:source,scalingActor:actor,hitId:id,priority:0},0),
       toughnessDamage:percent=>{state.boss=damageRaidToughness(state.boss!,boss,Math.max(0,percent)*
         (readCombatAttribute(state.boss!.attributes,42,tables.attributeLimits)||boss.toughness),time(state),buffApi(state));},
@@ -919,7 +930,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
       return;
     }
     const conditions = () => hitConditions(state,event,hit,definition);
-    const onceAttributes:{id:number;count:number;source:string}[]=(event.additionalAttributes ?? []).map(effect=>({...effect,source:event.actor}));
+    const onceAttributes:{id:number;count:number;source:string}[]=(event.additionalAttributes ?? []).map(effect=>({...effect,source:effect.source??event.actor}));
     const once = event.actor === main && seinaMain ? seina.beforeHit(seinaApi(state, api), hit.tags)
       : event.actor === hotaruId ? hotaru.beforeHit(hotaruApi(state, api), hit.tags)
       : event.actor === tiliaId ? tilia.beforeHit(tiliaApi(state, api), hit.tags) : [];
@@ -951,6 +962,8 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
     for(const additional of adapter?.beforeHit?.(state.supportScripts![event.actor]!,supportApi(state,api,event.actor),hit.tags) ?? []) {
       onceAttributes.push({...additional,source:event.actor});
     }
+    for(const [actor,listener] of Object.entries(supportAdapters))if(listener.preparePartyHit)
+      state.supportScripts![actor]=listener.preparePartyHit(state.supportScripts![actor]!,supportApi(state,api,actor),hitInfo);
     for(const [actor,listener] of Object.entries(supportAdapters)) for(const additional of listener.beforePartyHit?.(state.supportScripts![actor]!,supportApi(state,api,actor),hitInfo) ?? []) {
       onceAttributes.push({...additional,source:additional.source ?? actor});
     }
@@ -959,6 +972,8 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
     // already selected in BeforeHit survive without re-running their gates.
     onceAttributes.push(...proc(state,'before-own-settlement',event.actor,hit.tags,event.actor,undefined,hitFacts));
     onceAttributes.push(...proc(state,'before-party-settlement',event.actor,hit.tags,undefined,undefined,hitFacts));
+    for(const [actor,listener] of Object.entries(supportAdapters))if(listener.beforePartySettlement)
+      state.supportScripts![actor]=listener.beforePartySettlement(state.supportScripts![actor]!,supportApi(state,api,actor),hitInfo);
     let source=event.snapshot ?? attributes(state,event.actor,hit.damageType,conditions);
     if(event.snapshot) source=collectCombatBuffAttributes(source.attributes,event.actor,state.buffs,time(state),tables.buffDefinitions,
       tables.buffValues,tables.effects,tables.effectValues,contexts,{damageType:hit.damageType,conditions},source.scoped,true);
@@ -969,7 +984,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
     // The native crit event occurs after GetBothAllInfo, before RealDamage /
     // ReceiveDamage. Keep this hit's captured attributes, but update resources
     // and buffs before damage-post listeners see the hit.
-    const needsCriticalEvent=Boolean(adapter?.crit)||procListeners.some(listener=>(reviewedBreakthroughRules[listener.character] ?? []).some(rule=>
+    const needsCriticalEvent=Boolean(adapter?.crit)||Object.values(supportAdapters).some(listener=>listener.partyCrit)||procListeners.some(listener=>(reviewedBreakthroughRules[listener.character] ?? []).some(rule=>
       listener.breakthrough>=(rule.breakthrough ?? 0)&&(rule.event==='party-crit'||rule.event==='own-crit'&&listener.actor===event.actor)));
     if(needsCriticalEvent) {
       const context=supportApi(state,api,event.actor);
@@ -977,6 +992,8 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
         proc(state,'own-crit',event.actor,hit.tags,event.actor,undefined,hitFacts);
         proc(state,'party-crit',event.actor,hit.tags,undefined,undefined,hitFacts);
         if(adapter?.crit)state.supportScripts![event.actor]=adapter.crit(state.supportScripts![event.actor]!,context,hitInfo);
+        for(const [actor,listener] of Object.entries(supportAdapters))if(listener.partyCrit)
+          state.supportScripts![actor]=listener.partyCrit(state.supportScripts![actor]!,supportApi(state,api,actor),hitInfo);
       }
     }
     api.damage(result.average);

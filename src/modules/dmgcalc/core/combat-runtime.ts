@@ -32,7 +32,7 @@ export interface RuntimeEvent {
   weaponId?:number;
   priority?:number;
   removeBuffsAfterHit?:{owner:string;id:number}[];
-  additionalAttributes?:{id:number;count:number}[];
+  additionalAttributes?:{id:number;count:number;source?:string}[];
   addBuffsAfterHit?:{owner:string;id:number}[];
   hitId?: number; energy?: number; skillKey?: string | null; data?: Record<string, number | string>;
   snapshot?: ResolvedCombatAttributes;
