@@ -14,7 +14,7 @@ function setup() {
   const context=(_listener:CombatProcListener):Omit<CombatProcContext,'actor'|'event'|'breakthrough'>=>({
     attacker:'main',target:'boss',main:'main',party:['main','support1','support2'],time:100,tags:[],facts:{...facts},
     groups:{avatars:['avatar'],friends:['main','support1','support2','minion'],'owned-minions':['minion'],
-      'dark-players':['main'],'fire-players':['support1'],'wind-players':['support2']},
+      'dark-players':['main'],'fire-players':['support1'],'wind-players':['support2'],'earth-players':['support1']},
     buffs:{add:(actor,id)=>{added.push(`${actor}:${id}`);},remove:(actor,id)=>{removed.push(`${actor}:${id}`);},count:()=>0},
     parameter:()=>1,randomPercent:()=>0,
   });

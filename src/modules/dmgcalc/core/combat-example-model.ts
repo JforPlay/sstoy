@@ -395,6 +395,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
     if(areaOptions.duration!==undefined) weapon={...weapon,components:weapon.components.map(component=>component.type==='AreaEffectEntity'
       ? {...component,data:{...component.data,duration:areaOptions.duration}} : component)};
     if(areaOptions.disableBuffs) weapon={...weapon,components:weapon.components.filter(component=>component.type!=='AreaEffect_BuffComponent')};
+    if(areaOptions.disableGeneratedAreas) weapon={...weapon,components:weapon.components.filter(component=>component.type!=='AreaEffect_GenerateAreaEffectComponent')};
     if(areaOptions.hitInterval!==undefined) weapon={...weapon,components:weapon.components.map(component=>component.type==='AreaEffect_AttackComponent'
       ? {...component,data:{...component.data,hitInterval:areaOptions.hitInterval}} : component)};
     if(areaOptions.moveSpeed!==undefined) weapon={...weapon,components:weapon.components.map(component=>component.type==='AreaEffect_MoveComponent'

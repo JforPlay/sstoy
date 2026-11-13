@@ -2,8 +2,30 @@ import {describe,it,expect} from 'vitest';
 import {createMain119} from '../core/combat-main-119';
 import {planCombatWeapon} from '../core/combat-weapons';
 import {combatTagHash as hash} from '../core/combat-tags';
-import {mockApi,profile,tables} from './combat-four-helpers';
+import {mockApi,profile,tables,fixture} from './combat-four-helpers';
+import {createCombatRuntime} from '../core/combat-runtime';
+import {withNormalDodgeCancel} from '../core/combat-normal-cancel';
+import {optimizeExampleCycles} from '../core/combat-optimizer';
 describe('나노하 메인 원본 실행',()=>{
+  it('계산기 탐색에서 일반 운용과 캔슬 후보를 비교하고 상위 후보를 재실행',()=>{
+    const live={actors:[119,157,142].map(id=>({id,level:90,ascension:8,limitBreak:0,potentials:{},skillSlots:{1:8,2:8,4:8,5:8}})),
+      records:fixture.records,notes:{},badgeOptions:Array.from({length:9},()=>[0,0,0,0])};
+    const result=optimizeExampleCycles({...fixture,durationSeconds:3,live},tables,{boss:29,distance:2,cinematics:false});
+    expect(result.tested).toBe(185);
+    expect(result.candidates.length).toBeGreaterThan(0);
+    expect(result.candidates[0]!.damageScore).toBeGreaterThanOrEqual(result.baseline);
+    expect(result.candidates.every(candidate=>Number.isFinite(candidate.damage))).toBe(true);
+  },30000);
+  it('원본 콤보로 회피 캔슬 후보를 실행하고 같은 입력을 재현',()=>{
+    const p=profile(119,'main',{});
+    const model=createCombatRuntime(withNormalDodgeCancel(p.scenario,1));
+    const first=model.advance(model.initial(),12).state;
+    const second=model.advance(model.initial(),12).state;
+    expect(first.counts['119:dodge']).toBeGreaterThan(0);
+    expect(first.damage).toBeGreaterThan(0);
+    expect(second.damage).toBe(first.damage);
+    expect(second.counts).toEqual(first.counts);
+  });
   it('P13 회피 충전 증가와 시전 버프',()=>{
     const a=createMain119({511913:1}),api=mockApi(119);expect(a.actions(true).find(a=>a.kind==='dodge')!.charges).toBe(2);
     a.cast!(a.initialize(api),api,'dodge');expect(api.buffs.count(api.actor,11951311)).toBe(1);

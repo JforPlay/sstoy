@@ -29,6 +29,7 @@ import {createMain140} from './combat-main-140';
 import {createMain145} from './combat-main-145';
 import {createSupport130} from './combat-support-130';
 import {createSupport160} from './combat-support-160';
+import {createSupport161} from './combat-support-161';
 import {createMain110} from './combat-main-110';
 import {createSupport158} from './combat-support-158';
 import {createMain144} from './combat-main-144';
@@ -52,6 +53,7 @@ import {createSupport141} from './combat-support-141';
 export interface SupportFactoryContext {parameter:(id:number)=>number;breakthrough:number;glimmerId:number;partyElements?:number[]}
 export interface MainFactoryContext extends SupportFactoryContext {ammo?:number;skillCooldown:(id:number)=>number}
 export const combatSupportFactories:Record<number,(potentials:Record<number,number>,context:SupportFactoryContext)=>SupportCombatAdapter<Record<string,unknown>>>={
+  161:createSupport161,
   112:createSupport112,116:createSupport116,117:createSupport117,118:createSupport118,120:createSupport120,123:createSupport123,125:createSupport125,126:createSupport126,127:createSupport127,130:createSupport130,158:createSupport158,160:createSupport160,132:createSupport132,133:createSupport133,134:createSupport134,135:createSupport135,137:createSupport137,139:createSupport139,140:createSupport140,
   141:createSupport141,142:createSupport142,143:createSupport143,145:createSupport145,147:createSupport147,156:createSupport156,157:createSupport157,159:createSupport159,162:createSupport162,
 };

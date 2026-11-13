@@ -368,6 +368,17 @@ export const character160BreakthroughRules:readonly CombatProcRule[] = [
   {id:'160:lb5',event:'own-hit',breakthrough:5,when:c=>fact(c,'damageType')===2,effects:[{kind:'add-buff',id:16096511,recipient:'target'}]},
 ];
 
+/** 11/13 client ParallelScript: note the legacy m2/m4 field names do not
+ * match their final talent levels. Keep the actual initialized buff IDs. */
+export const character161BreakthroughRules:readonly CombatProcRule[] = [
+  {id:'161:lb1',event:'player-earth-buff-added',breakthrough:1,effects:[{kind:'add-buff',id:16196111,recipient:'target'}]},
+  {id:'161:lb2',event:'own-hit',breakthrough:2,when:c=>fact(c,'damageType')===1,effects:[{kind:'add-buff',id:16196212}]},
+  {id:'161:lb3',event:'own-skill-cast',breakthrough:3,effects:[{kind:'add-buff',id:16196311,recipient:'group:earth-players'}]},
+  {id:'161:lb4:party',event:'earth-mark-triggered',breakthrough:4,effects:[{kind:'add-buff',id:16196211,recipient:'party'}]},
+  {id:'161:lb4:self',event:'earth-mark-triggered',breakthrough:4,effects:[{kind:'add-buff',id:16196411}]},
+  {id:'161:lb5',event:'before-own-hit',breakthrough:5,when:c=>fact(c,'damageType')===1&&fact(c,'eliteOrBoss')===true,effects:[{kind:'once',id:16196511}]},
+];
+
 export const character137BreakthroughRules:readonly CombatProcRule[] = [
   {id:'137:lb1',event:'own-hit',breakthrough:1,when:c=>c.tags.some(tag=>[combatTagHash('137NrmAtk'),combatTagHash('137UAVAllAtk')].includes(tag)),effects:[{kind:'add-buff',id:13796111,recipient:'target'}]},
   {id:'137:lb2',event:'player-wind-mark-triggered',breakthrough:2,effects:[{kind:'add-buff',id:13796211}]},
@@ -403,6 +414,6 @@ export const reviewedBreakthroughRules:Readonly<Record<number,readonly CombatPro
   141:character141BreakthroughRules,142:character142BreakthroughRules,143:character143BreakthroughRules,144:character144BreakthroughRules,145:character145BreakthroughRules,
   133:character133BreakthroughRules,135:character135BreakthroughRules,147:character147BreakthroughRules,150:character150BreakthroughRules,
   155:character155BreakthroughRules,156:character156BreakthroughRules,157:character157BreakthroughRules,158:character158BreakthroughRules,
-  159:character159BreakthroughRules,160:character160BreakthroughRules,
+  159:character159BreakthroughRules,160:character160BreakthroughRules,161:character161BreakthroughRules,
   137:character137BreakthroughRules,162:character162BreakthroughRules,
 };

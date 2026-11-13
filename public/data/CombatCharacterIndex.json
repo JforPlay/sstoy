@@ -469,6 +469,17 @@
       "readWarnings": 0,
       "schemaRecoveries": 0
     },
+    "161": {
+      "id": 161,
+      "nameKey": "Character.161.1",
+      "name": "스구하",
+      "path": "combat/161.json",
+      "sha256": "4754b145f34f1410570680ec1ff4eede0d1f7f7ce7af3ec8ae5f838c75c1e9d8",
+      "timelines": 18,
+      "missingBundles": [],
+      "readWarnings": 0,
+      "schemaRecoveries": 0
+    },
     "162": {
       "id": 162,
       "nameKey": "Character.162.1",

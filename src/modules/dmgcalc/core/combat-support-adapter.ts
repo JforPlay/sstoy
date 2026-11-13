@@ -1,6 +1,6 @@
 import type {RecordRuleBuffs} from './combat-record-rules';
 import type {CompiledCombo} from './combat-timeline';
-export interface SupportAreaOptions {scalingActor?:string}
+export interface SupportAreaOptions {scalingActor?:string;disableGeneratedAreas?:boolean}
 export interface SupportAreaOptions {entity?:number;duration?:number;x?:number;z?:number;angle?:number;scale?:number;growth?:{interval:number;step:number;maximum:number};disableBuffs?:boolean;hitInterval?:number;moveSpeed?:number;hitId?:number;enemyEnterBuffs?:number[];additionalAttributes?:{id:number;count:number}[]}
 export interface SupportCombatHit {actor:string;damageType:number;element:number;slot:number;tags:number[];weapon?:string;weaponId?:number;tagUid?:number}
 export interface CombatGameplayTrigger {normal:boolean;dodge:boolean;skill:boolean;ultimate:boolean}

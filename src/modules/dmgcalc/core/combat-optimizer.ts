@@ -4,8 +4,10 @@ import { evaluateCombatPolicies, type CombatPolicy } from './combat-policy-searc
 import type { CombatRuntimeState } from './combat-runtime';
 import { combatBuffCount } from './combat-buffs';
 import type { LiveCombatInput } from './combat-live-build';
+import { createCombatRuntime } from './combat-runtime';
+import { withNormalDodgeCancel } from './combat-normal-cancel';
 
-export interface CyclePolicy { hotaruHold: number; tiliaHold: number; ultimateHold: number; mainHold: number; supportsFirst: boolean; longSkillHold?:boolean;transform?:'tank'|'cannon' }
+export interface CyclePolicy { hotaruHold: number; tiliaHold: number; ultimateHold: number; mainHold: number; supportsFirst: boolean; longSkillHold?:boolean;transform?:'tank'|'cannon'; normalCancelEvery?: number }
 export interface CycleCast { time: number; action: string; sp: number; requiredSp: number }
 export interface CycleCandidate {
   name: string; policy: CyclePolicy; damage: number; damageScore: number; improvement: number;
@@ -20,7 +22,7 @@ export interface CycleSearchResult {
 }
 
 export function makeCyclePolicy(config: CyclePolicy, main: string, supports: string[]): CombatPolicy<CombatRuntimeState> {
-  return { name: `지원 대기 ${config.hotaruHold}/${config.tiliaHold}초 · 궁 대기 ${config.ultimateHold}초 · 메인 대기 ${config.mainHold}초${config.longSkillHold?' · 길게 유지':''}${config.transform?` · ${config.transform==='tank'?'탱크':'기관포'} 변신`:''}`,
+  return { name: `지원 대기 ${config.hotaruHold}/${config.tiliaHold}초 · 궁 대기 ${config.ultimateHold}초 · 메인 대기 ${config.mainHold}초${config.longSkillHold?' · 길게 유지':''}${config.transform?` · ${config.transform==='tank'?'탱크':'기관포'} 변신`:''}${config.normalCancelEvery?` · 평타 ${config.normalCancelEvery}동작 후 회피 캔슬`:''}`,
     choose(state, legal, time) {
       const mainReady = legal.some(id=>id.startsWith(`${main}:skill`))?0:Math.max(0, (state.ready[`${main}:skill`] ?? 0) / 60 - time);
       const nearEnd = time > 172;
@@ -68,9 +70,17 @@ export function optimizeExampleCycles(example: CombatBuildExample, tables: Examp
     for(const config of [...configurations])configurations.push({...config,transform:'cannon'});
     for(const config of configurations)config.transform ??='tank';
   }
+  // Explore cancel timing against all existing support/ultimate policies, not
+  // just the winning non-cancel policy: SP and buff alignment can change.
+  if (profile.scenario.actions.some(action => action.actor === main && action.flag === 16)) {
+    for (const config of [...configurations]) for (const every of [1, 2, 3, 4])
+      configurations.push({ ...config, normalCancelEvery: every });
+  }
   const results: { config: CyclePolicy; result: ReturnType<typeof evaluateCombatPolicies<CombatRuntimeState>>[number] }[] = [];
+  const modelFor = (config: CyclePolicy) => config.normalCancelEvery
+    ? createCombatRuntime(withNormalDodgeCancel(profile.scenario, config.normalCancelEvery)) : profile.model;
   for (const [index, config] of configurations.entries()) {
-    const result = evaluateCombatPolicies(profile.model, [makeCyclePolicy(config, main, supports)], example.durationSeconds, 60, profile.boss.switchRate, 1)[0]!;
+    const result = evaluateCombatPolicies(modelFor(config), [makeCyclePolicy(config, main, supports)], example.durationSeconds, 60, profile.boss.switchRate, 1)[0]!;
     results.push({ config, result });
     progress?.(index + 1, configurations.length);
   }
@@ -78,20 +88,21 @@ export function optimizeExampleCycles(example: CombatBuildExample, tables: Examp
   const unique = new Set<string>();
   const candidates: CycleCandidate[] = [];
   for (const entry of results.sort((a, b) => b.result.damage - a.result.damage)) {
-    const key = JSON.stringify(entry.result.trace);
+    const key = JSON.stringify([entry.result.trace, entry.result.damage]);
     if (unique.has(key)) continue;
     unique.add(key);
     // Replay the selected candidates to attach actual SP immediately before
     // each cast. This is also a second legality check, not a generated timeline.
-    let state = profile.model.initial();
+    const model = modelFor(entry.config);
+    let state = model.initial();
     const casts: CycleCast[] = [];
     for (const cast of entry.result.trace) {
-      state = profile.model.advance(state, cast.time).state;
+      state = model.advance(state, cast.time).state;
       const action = profile.scenario.actions.find(action => action.id === cast.action)!;
       casts.push({ ...cast, sp: state.sp.ledger.pools[action.actor]!.value / 10000, requiredSp: action.spCost / 10000 });
-      state = profile.model.cast(state, cast.action, cast.time).state;
+      state = model.cast(state, cast.action, cast.time).state;
     }
-    state = profile.model.advance(state, example.durationSeconds).state;
+    state = model.advance(state, example.durationSeconds).state;
     if (Math.abs(state.damage - entry.result.damage) > .01) throw new Error('Cycle replay disagrees with search');
     candidates.push({ name: entry.result.name, policy: entry.config, damage: entry.result.damage, damageScore: entry.result.damageScore,
       improvement: entry.result.damageScore - baseline, casts, counts: state.counts, bossLevel: state.boss!.level, sp: state.sp.ledger.pools });
@@ -116,6 +127,7 @@ export function optimizeExampleCycles(example: CombatBuildExample, tables: Examp
       ...(profile.scenario.actors.some(actor=>actor.id==='133')?['회전 무기는 보스 접촉 유지 가정 · 원본 재타격 제한 간격 적용',
         '3D 곡선 유도탄은 비행 구간 종료 뒤 첫 타격 판정에 명중하는 조건']:[]),
       '치명타는 확률 가중 기대값 · 60Hz 전투 시간 기준 · 연출 정지 시간 제외',
+      '원본 회피가 연결된 메인은 평타 1~4동작 후 회피 캔슬도 비교 · 원본 취소 창·충전·쿨타임 적용 · 이동 캔슬 및 저스트 회피 성공은 가정하지 않음',
       `확률형 추가 효과와 공격 변형은 재현용 난수 시드 ${options.randomSeed ?? 108162}의 단일 표본 · 실제 전투 난수 및 평균 점수와 다를 수 있음`,
       '기술 점수는 회피 성공 등 실제 플레이에 따라 별도 입력 · 후보 중 최고값이며 전역 최적 보장 아님',
       '실제 전투 로그와 수치 대조 전인 예측 모델 · 고정소수점 반올림/장판 종료 프레임 차이 가능',
