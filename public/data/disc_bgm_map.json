@@ -2107,5 +2107,43 @@
     "CharId": [
       162
     ]
+  },
+  "214068": {
+    "VoFile": "outfit_4068",
+    "StateId": 667673885,
+    "StateIdInHeader": false,
+    "Wems": [
+      393665531
+    ],
+    "WemsExist": [
+      393665531
+    ],
+    "VoLoop1": 139.655,
+    "VoBegin2": null,
+    "VoLoop2": 16.551,
+    "VoName1": "DiscIP.214068.1",
+    "VoName2": "DiscIP.214068.2",
+    "CharId": [
+      161
+    ]
+  },
+  "214069": {
+    "VoFile": "outfit_4069",
+    "StateId": 667673884,
+    "StateIdInHeader": false,
+    "Wems": [
+      499473542
+    ],
+    "WemsExist": [
+      499473542
+    ],
+    "VoLoop1": 90.697,
+    "VoBegin2": null,
+    "VoLoop2": 11.162,
+    "VoName1": "DiscIP.214069.1",
+    "VoName2": "DiscIP.214069.2",
+    "CharId": [
+      161
+    ]
   }
 }
