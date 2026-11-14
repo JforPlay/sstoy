@@ -149,6 +149,6 @@ describe('live calculator input, not a fixed fixture', () => {
   });
   it('does not substitute the example party for an unsupported selected character', () => {
     const live = input(); live.actors[0]!.id = 108;
-    expect(() => createExampleCombatModel({ ...fixture, live }, tables, { boss: 28, distance: 2, cinematics: true })).toThrow(/예시 파티로 대체하지/);
+    expect(() => createExampleCombatModel({ ...fixture, live }, tables, { boss: 28, distance: 2, cinematics: true })).toThrow(/계산을 지원하지 않는 여행가/);
   });
 });

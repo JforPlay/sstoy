@@ -80,7 +80,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
       partyElements:build.actors.map(member=>tables.characters[member.id]!.EET!)});
   }
   if ((!seinaMain && !supportAdapters[String(build.actors[0]?.id)]) || build.actors.slice(1).some(actor => !legacyCombatSupports.includes(actor.id) && !supportAdapters[String(actor.id)])) {
-    throw new Error('선택한 여행가의 전투 규칙을 연결하는 중입니다. 예시 파티로 대체하지 않고, 연결되지 않은 규칙을 무시해서 계산하지 않습니다.');
+    throw new Error('아직 계산을 지원하지 않는 여행가가 있습니다.');
   }
   if (example.live) {
     const supported: Record<number, number[]> = {
@@ -93,10 +93,10 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
     for (const actor of build.actors) {
       const allowed=supportAdapters[String(actor.id)]?.potentials ?? supported[actor.id]!;
       const unknown = Object.keys(actor.context.potentials).map(Number).filter(id => !allowed.includes(id));
-      if (unknown.length) throw new Error(`여행가 ${actor.id}의 잠재력 ${unknown.join(', ')} 전투 규칙이 아직 연결되지 않았습니다. 선택을 무시하지 않고 계산을 중단했습니다.`);
+      if (unknown.length) throw new Error(`여행가 ${actor.id}: 미지원 잠재력 ${unknown.join(', ')}`);
     }
     if(seinaMain&&build.actors[0]!.context.potentials[516203]&&options.distance>=2.8)
-      throw new Error('세이나(기원)의 돌진 일반 공격이 필요한 거리에서는 이 잠재력을 검증하지 못했습니다. 2.8 미만 거리에서 계산할 수 있습니다.');
+      throw new Error('세이나(기원)의 이 잠재력은 거리 2.8 미만에서 계산할 수 있습니다.');
   }
   const fps = 60, main = String(build.actors[0]!.id), hotaruId = '115', tiliaId = '107', kasimiraId = '108', grayId = '149';
   const party = build.actors.map(actor => String(actor.id));
@@ -110,7 +110,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
   contexts.boss = contexts[main]!;
   const base = Object.fromEntries(build.actors.map(actor => [String(actor.id), actor.base]));
   const boss = raidBossProfile(options.boss, tables.bossTables, tables.timings.rules);
-  if (![100023, 100024, 100025, 100026].includes(boss.ability)) throw new Error(`보스 특수 효과 ${boss.ability}의 전투 규칙이 아직 연결되지 않았습니다.`);
+  if (![100023, 100024, 100025, 100026].includes(boss.ability)) throw new Error(`미지원 보스 효과: ${boss.ability}`);
   const calculation = combatCalculationRules(tables.config, tables.attributeLimits, tables.attributeSetLimits);
   const seina = createSeinaRules(contexts[main]!.potentials, contexts[main]!.limitBreak, tables.timings.rules.BuffId_Glimmer!);
   // Shared breakthrough hooks are dispatched once below. Individual adapters

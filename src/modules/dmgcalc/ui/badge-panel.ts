@@ -70,7 +70,7 @@ export function renderBadgePanel(state: DmgCalcState): string {
       </fieldset>`;
     }).join('')}</section>`;
     }).join('')}</div>
-    <p class="dmgcalc-help">80 배지의 스킬 레벨과 90 배지의 선택한 잠재력 레벨 상승을 적용합니다. 미획득 잠재력을 새로 획득시키지는 않습니다. SP 획득 효율은 180초 사이클의 에너지 수급에 적용합니다. 지원의 일반 능력치는 메인 능력치에 합산하지 않습니다.</p>
+    <p class="dmgcalc-help">80 배지: 스킬 레벨 상승 · 90 배지: 보유 잠재력 레벨 상승<br>능력치는 각 캐릭터에, SP 획득 효율은 사이클 계산에 적용됩니다.</p>
   </div>`;
 }
 
