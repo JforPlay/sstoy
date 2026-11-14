@@ -3,6 +3,7 @@ import type { ExampleCombatTables } from './combat-example-model';
 /** The simulator and its regression tests deliberately load the same tables. */
 export async function loadExampleCombatTables(read: (name: string) => Promise<any>, characterIds?: number[]): Promise<ExampleCombatTables> {
   const names = {
+    recordRules:'CombatRecords',
     badges: 'CharGemAttrValue',
     actorScales:'CombatActorScales',
     characters: 'Character', attributes: 'Attribute', discs: 'Disc', discExtra: 'DiscExtraAttribute',

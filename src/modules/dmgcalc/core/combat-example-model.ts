@@ -22,6 +22,8 @@ import {addCombatShield,expireCombatShields,combatShieldTotal,extendCombatShield
 import { createGraySupportRules, type GrayApi } from './combat-gray';
 import type { CombatConditionContext, ConditionActor } from './combat-conditions';
 import { createRecordRules, type RecordRuleBuffs } from './combat-record-rules';
+import {createCombatDiscRuntime,type NativeRecordData,type DiscEvent} from './combat-disc-runtime';
+import {combatDiscHandlers} from './combat-disc-handlers';
 import { raidBossProfile, createRaidBossState, tickRaidBoss, damageRaidBoss,damageRaidToughness, initializeRaidAbility, raidAbilityCast, raidAbilityHit, raidAbilityMark } from './combat-boss';
 import { addCombatBuff, removeCombatBuff, combatBuffCount, expireCombatBuffs, type CombatBuffDefinition } from './combat-buffs';
 import { getCombatValue, type ValueMetadata, type CombatLevelContext } from './rotation-values';
@@ -40,6 +42,7 @@ interface CharacterTimings {
   comboAliases: { tag: string; source?:string;group?:string;keys: number[]; skillType: number; clips: string[];clipMode?:number;eventGroups?:string[] }[];
 }
 export interface ExampleCombatTables extends CombatBuildTables {
+  recordRules?:Record<number,NativeRecordData>;
   actorScales?:Record<number,number>;
   skills: Record<number, any>; hits: Record<number, CombatHitDefinition>;
   buffDefinitions: Record<number, ValueMetadata>; buffValues: Record<number, CombatBuffDefinition>;
@@ -139,9 +142,16 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
   };
   const selections = example.live?.records ?? example.records;
   const mainRecords = selections.slice(0, 3);
-  if (mainRecords.some(record => record.id && ![214039, 214038, 214066].includes(record.id))) throw new Error('선택한 메인 레코드의 전투 중 효과가 아직 연결되지 않았습니다. 다른 레코드로 대체하지 않았습니다.');
   const melody = (id: number) => { const record = mainRecords.find(record => record.id === id); return record ? record.limitBreak + 1 : 0; };
   const concertos = contexts[main]!.concertos;
+  // Native GetSkillLevel also resolves a main melody's selected stage ID.
+  // Several newer record attributes use levelTypeData=6 with that ID rather
+  // than a secondary-skill group. The selected stage is active at level one.
+  for(const selection of mainRecords){
+    const skill=tables.recordRules?.[selection.id]?.main.find(row=>row.Level===selection.limitBreak+1);
+    if(skill)for(const context of Object.values(contexts))context.concertos={...context.concertos,[skill.Id]:1};
+  }
+  const nativeRecords=createCombatDiscRuntime(tables.recordRules??{},selections,concertos,combatDiscHandlers,[214038,214039,214066]);
   const records = createRecordRules({ summer: melody(214039), waves: melody(214038), star: melody(214066),
     flash: concertos[40661] ?? 0, sky: concertos[40391] ?? 0, dance: concertos[40381] ?? 0,
     tomorrow: concertos[40662] ?? 0, footsteps: concertos[40382] ?? 0, sunlight: concertos[40392] ?? 0 },
@@ -318,6 +328,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
       // A refused addition at the stack/instance/group limit raises no native
       // ACTOR_GET_BUFF event. Do not grant wish stacks or listener procs for it.
       if(state.buffs===previous) return;
+      queueRecordEvent(state,{kind:'buff',actor:source,owner,buff:id,buffTags:Object.entries(tables.buffDefinitions[id]??{}).filter(([key])=>key.startsWith('BuffTag')).map(([,value])=>Number(value))});
       if (lightMark1BuffIds.has(id) && state.records && party.includes(source)) state.records = records.applyLightMark(state.records, buffApi(state), source);
       if (hasTilia && lightMark1BuffIds.has(id) && source === tiliaId) tilia.onOwnMarkApplied(buffApi(state), tiliaId);
       if(lightMark1BuffIds.has(id) && source===tiliaId) proc(state,'own-light-mark-applied',source,[],tiliaId);
@@ -341,15 +352,53 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
         }
       }
     },
-    remove(owner, id) { state.buffs = removeCombatBuff(state.buffs, owner, id); },
+    remove(owner, id) {
+      const had=combatBuffCount(state.buffs,owner,id,time(state));
+      state.buffs = removeCombatBuff(state.buffs, owner, id);
+      if(had)queueRecordEvent(state,{kind:'remove',actor:owner.split('#')[0]!,owner,buff:id});
+    },
     count(owner, id) { return combatBuffCount(state.buffs, owner, id, time(state)); },
   });
   const attributes = (state: CombatRuntimeState, actor: string, damageType?: number, conditions?: CombatConditionFacts): ResolvedCombatAttributes => {
-    const source = actor === 'boss' ? { attributes: state.boss!.attributes, scoped: [] } : base[actor]!;
+    let source:ResolvedCombatAttributes = actor === 'boss' ? { attributes: state.boss!.attributes, scoped: [] } : base[actor]!;
+    if(nativeRecords.enabled&&actor!=='boss')for(const id of nativeRecords.staticEffects(actor,recordConditions(state,actor),tables.effects,tables.effectValues))
+      source=applyCombatAttributeEffect(source,getCombatValue(id,tables.effects,tables.effectValues,contexts[actor]!));
     const resolved=collectCombatBuffAttributes(source.attributes, actor, state.buffs, time(state), tables.buffDefinitions, tables.buffValues,
       tables.effects, tables.effectValues, contexts, damageType === undefined ? undefined : { damageType,conditions }, source.scoped);
     return source.cooldowns?.length?{...resolved,cooldowns:[...source.cooldowns,...(resolved.cooldowns ?? [])]}:resolved;
   };
+  function queueRecordEvent(state:CombatRuntimeState,event:DiscEvent){
+    if(!nativeRecords.enabled)return;
+    if(event.buff&&!event.buffTags)event={...event,buffTags:Object.entries(tables.buffDefinitions[event.buff]??{}).filter(([key])=>key.startsWith('BuffTag')).map(([,value])=>Number(value))};
+    const pending=JSON.parse(String(state.script['records:events']??'[]')) as DiscEvent[];
+    pending.push(event);state.script['records:events']=JSON.stringify(pending);
+  }
+  function recordConditions(state:CombatRuntimeState,actor:string,event?:DiscEvent):CombatConditionContext{
+    const buffs=(owner:string)=>Object.values(state.buffs).filter(buff=>buff.owner===owner&&(buff.expires===null||buff.expires>time(state))).map(buff=>({id:buff.id,group:Number((tables.buffDefinitions[buff.id] as any)?.GroupId??0),stacks:buff.stacks,
+      tags:Object.entries(tables.buffDefinitions[buff.id]??{}).filter(([key])=>key.startsWith('BuffTag')).map(([,value])=>Number(value))}));
+    const actors:ConditionActor[]=party.map(id=>({id,player:true,main:id===main,hp:1,hpFraction:1,element:tables.characters[Number(id)]!.EET??0,job:tables.characters[Number(id)]!.Class??0,faction:0,active:id===main||Boolean(state.motions[id]),broken:false,spPercent:0,buffs:buffs(id)}));
+    actors.push({id:'boss',player:false,main:false,hp:state.boss?.hp??1,hpFraction:state.boss?state.boss.hp/state.boss.maxHp:1,element:0,job:0,faction:0,active:true,broken:Boolean(state.boss&&state.boss.brokenUntil>time(state)),spPercent:0,buffs:buffs('boss'),monsterEpic:2});
+    const summons=Object.entries(state.summons??{}).filter(([,s])=>s.alive).map(([id,s])=>({actor:id,owner:s.owner,friendly:true}));
+    for(const summon of summons){const owner=actors.find(a=>a.id===summon.owner)!;actors.push({...owner,id:summon.actor,player:false,main:false,buffs:buffs(summon.actor)});}
+    return {owner:actor,source:actor,enemy:'boss',actors,summons,
+      ...(event?.hit?{hit:{id:0,damageType:event.hit.damageType,slot:event.hit.slot,elements:[event.hit.element],distanceType:0,tags:event.hit.tags}}:{}),
+      ...(event?.slot?{skill:{id:0,slot:event.slot}}:{}),
+      ...(event?.buff?{buff:buffs(event.owner??actor).find(b=>b.id===event.buff)??{id:event.buff,group:0,stacks:0,tags:Object.entries(tables.buffDefinitions[event.buff]??{}).filter(([key])=>key.startsWith('BuffTag')).map(([,value])=>Number(value))}}:{}),
+      ...(event?.kind==='mark'?{mark:{element:event.element??0,tag:0}}:{}),distance:(from,to)=>from===to?0:options.distance};
+  }
+  function recordEvent(state:CombatRuntimeState,api:CombatRuntimeApi,event:DiscEvent){
+    if(!nativeRecords.enabled)return {once:[],attributes:[]};
+    const actor=event.actor.split('#')[0]!,context=supportApi(state,api,actor);
+    const result=nativeRecords.process(state,event,context,recordConditions(state,event.entity??event.actor,event),tables.effects,tables.effectValues);
+    let guard=0;
+    while(state.script['records:events']&&state.script['records:events']!=='[]'){
+      if(++guard>1000)throw new Error('레코드 버프 이벤트가 순환합니다.');
+      const pending=JSON.parse(String(state.script['records:events'])) as DiscEvent[];state.script['records:events']='[]';
+      for(const next of pending){const source=next.actor.split('#')[0]!;
+        nativeRecords.process(state,next,supportApi(state,api,source),recordConditions(state,next.actor,next),tables.effects,tables.effectValues);}
+    }
+    return result;
+  }
   function summonAttributes(state:CombatRuntimeState,actor:string,entity:number,damageType?:number,conditions?:CombatConditionFacts){
     const key=`${actor}#${entity}`,summon=state.summons?.[key];
     if(!summon)throw new Error(`Missing native summon ${key}`);
@@ -756,8 +805,9 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
         state.summons ??={};const key=`${actor}#${entity}`;
         state.summons[key]={owner:actor,entity,alive:true,attributes:snapshot};
         for(const id of buffs)buffApi(state).add(key,id,actor);
+        recordEvent(state,api,{kind:'summon',actor,owner:actor,entity:key});
       },
-      despawn(entity){const key=`${actor}#${entity}`,summon=state.summons?.[key];if(summon)state.summons![key]={...summon,alive:false};},
+      despawn(entity){const key=`${actor}#${entity}`,summon=state.summons?.[key];if(summon){state.summons![key]={...summon,alive:false};recordEvent(state,api,{kind:'despawn',actor,owner:actor,entity:key});}},
       summonAttribute:(entity,type)=>readCombatAttribute(summonAttributes(state,actor,entity).attributes,type,tables.attributeLimits,false),
       minionHit:(entity,id)=>api.schedule({kind:'impact',actor,hitId:id,data:{minionEntity:entity}},0),
       independentAllowed(tag,elapsed,skill,source,speed=1){
@@ -808,7 +858,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
         state.script.randomSeed=random.seed;return random.percent;
       },
       actorsByElement:element=>party.filter(id=>tables.characters[Number(id)]?.EET===element),
-      actorInfo:id=>({element:tables.characters[Number(id)]!.EET ?? 0,job:tables.characters[Number(id)]!.Class ?? 0}),
+      actorInfo:id=>({element:tables.characters[Number(id.split('#')[0])]?.EET ?? 0,job:tables.characters[Number(id.split('#')[0])]?.Class ?? 0}),
       ultimateReady(){
         const pool=state.sp.ledger.pools[actor]!,action=actionList.find(action=>action.id===`${actor}:ultimate`)!;
         return pool.value>=action.spCost && state.tick>=(state.ready[action.cooldownKey ?? action.id] ?? 0);
@@ -903,11 +953,22 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
         source=addOnceCombatAttributes(source,getCombatValue(extra.id,tables.onceDefinitions,tables.onceValues,contexts[extra.source]!),extra.count);
       for(const extra of proc(state,'before-own-or-minion-hit',event.actor,hit.tags,event.actor,undefined,hitFacts))
         source=addOnceCombatAttributes(source,getCombatValue(extra.id,tables.onceDefinitions,tables.onceValues,contexts[extra.source]!),extra.count);
-      const result=calculateResolvedCombatHit(definition,hitContext,source,attributes(state,'boss',hit.damageType,conditions),calculation,false);
+      const nativeBefore=recordEvent(state,api,{kind:'before',actor:event.actor,owner:event.actor,entity:key,hit:hitInfo});
+      let target=attributes(state,'boss',hit.damageType,conditions);
+      for(const extra of nativeBefore.once){
+        const value=getCombatValue(extra.id,tables.onceDefinitions,tables.onceValues,contexts[extra.source]!);
+        if(extra.target)target=addOnceCombatAttributes(target,value,extra.count);else source=addOnceCombatAttributes(source,value,extra.count);
+      }
+      for(const extra of nativeBefore.attributes){
+        const value=getCombatValue(extra.id,tables.effects,tables.effectValues,contexts[event.actor]!);
+        if(extra.target==='boss')target=applyCombatAttributeEffect(target,value);else if(extra.target===key)source=applyCombatAttributeEffect(source,value);
+      }
+      const result=calculateResolvedCombatHit(definition,hitContext,source,target,calculation,false);
       api.damage(result.average);
       if(result.average>0){state.hitCounts ??={};const countKey=`${key}:${definition.Id}`;state.hitCounts[countKey]=(state.hitCounts[countKey] ?? 0)+1;}
       state.boss=damageRaidBoss(state.boss!,boss,result.average,readCombatAttribute(source.attributes,43,tables.attributeLimits),time(state),buffApi(state));
       state.boss=raidAbilityHit(state.boss,boss,hit.damageType,time(state),buffApi(state));
+      recordEvent(state,api,{kind:'hit',actor:event.actor,owner:event.actor,entity:key,hit:hitInfo});
       if(minionAdapter?.afterMinionHit){
         const context=supportApi(state,api,event.actor),crit=context.randomPercent()<=result.critChance*100;
         state.supportScripts![event.actor]=minionAdapter.afterMinionHit(state.supportScripts![event.actor]!,context,id,hitInfo,crit);
@@ -993,7 +1054,12 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
       tables.buffValues,tables.effects,tables.effectValues,contexts,{damageType:hit.damageType,conditions},source.scoped,true);
     for(const additional of onceAttributes) source=addOnceCombatAttributes(source,
       getCombatValue(additional.id,tables.onceDefinitions,tables.onceValues,contexts[additional.source]!),additional.count);
-    const target = attributes(state, 'boss', hit.damageType,conditions);
+    const nativeBefore=recordEvent(state,api,{kind:'before',actor:event.actor,hit:hitInfo});
+    for(const extra of nativeBefore.once.filter(extra=>!extra.target))source=addOnceCombatAttributes(source,getCombatValue(extra.id,tables.onceDefinitions,tables.onceValues,contexts[extra.source]!),extra.count);
+    for(const extra of nativeBefore.attributes.filter(extra=>extra.target===event.actor))source=applyCombatAttributeEffect(source,getCombatValue(extra.id,tables.effects,tables.effectValues,contexts[event.actor]!));
+    let target = attributes(state, 'boss', hit.damageType,conditions);
+    for(const extra of nativeBefore.once.filter(extra=>extra.target))target=addOnceCombatAttributes(target,getCombatValue(extra.id,tables.onceDefinitions,tables.onceValues,contexts[extra.source]!),extra.count);
+    for(const extra of nativeBefore.attributes.filter(extra=>extra.target==='boss'))target=applyCombatAttributeEffect(target,getCombatValue(extra.id,tables.effects,tables.effectValues,contexts[event.actor]!));
     const result = calculateResolvedCombatHit(definition, hitContext, source, target, calculation);
     // The native crit event occurs after GetBothAllInfo, before RealDamage /
     // ReceiveDamage. Keep this hit's captured attributes, but update resources
@@ -1038,6 +1104,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
         spawnWeapon(state, api, main, 'AreaEffect_162_LightTrigger_Boom', undefined, 0);
         state.script.lastMark = time(state);
         state.records = records.triggerLightMark(state.records!, buffApi(state), main, true);
+        recordEvent(state,api,{kind:'mark',actor:main,element:5,variant:1});
         seina.onMarkTrigger(seinaApi(state, api));
         state.seina=seina.onMarkSword(state.seina!,seinaApi(state,api));
         if (hasTilia) state.tilia = tilia.lightMarkTriggered(state.tilia!, tiliaApi(state, api));
@@ -1078,6 +1145,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
       }
     }
     state.records = records.hit(state.records!, buffApi(state), event.actor, 'boss', hit.damageType, (definition as any).SkillSlotType ?? 0);
+    recordEvent(state,api,{kind:'hit',actor:event.actor,hit:hitInfo});
     applyHitFeatures(state,event);
     for(const buff of event.addBuffsAfterHit ?? [])buffApi(state).add(buff.owner,buff.id,event.actor);
     for(const buff of event.removeBuffsAfterHit ?? []) buffApi(state).remove(buff.owner,buff.id);
@@ -1173,6 +1241,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
       state.shields={};
       state.weapons={};state.weaponSequence=0;
       state.records = records.initial(buffApi(state));
+      recordEvent(state,api,{kind:'init',actor:main});
       if(seinaMain) state.seina = seina.initialize(seinaApi(state, api));
       if (hasHotaru) state.hotaru = hotaru.initialize(hotaruApi(state, api));
       if (hasTilia) state.tilia = tilia.initialize(tiliaApi(state, api));
@@ -1236,10 +1305,12 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
     },
     onChargeConsumed(state,action,api){
       if(action.flag!==4)return;
+      recordEvent(state,api,{kind:'charge',actor:action.actor,slot:2});
       for(const [actor,listener] of Object.entries(supportAdapters))if(listener.partySkillChargeConsumed)
         state.supportScripts![actor]=listener.partySkillChargeConsumed(state.supportScripts![actor]!,supportApi(state,api,actor),action.actor);
     },
     onCast(state, action, api) {
+      recordEvent(state,api,{kind:'cast',actor:action.actor,slot:action.id.includes('ultimate')?4:action.flag===4?2:action.flag===2?5:1});
       const ultimate = action.id.includes('ultimate');
       if (ultimate && hasTilia && action.actor === main) tilia.onMainUltimate(tiliaApi(state, api));
       if(ultimate && action.actor===main) proc(state,'main-ultimate',action.actor);
@@ -1277,6 +1348,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
       else if (action.id === '108:skill') state.kasimira = kasimira.cast(state.kasimira!, kasimiraApi(state, api));
     },
     onActionEnd(state, action, interrupted, api) {
+      if(!interrupted)recordEvent(state,api,{kind:'end',actor:action.actor,slot:action.id.includes('ultimate')?4:action.flag===4?2:5,spCapacity:state.sp.ledger.pools[action.actor]?.capacity});
       const adapter=supportAdapters[action.actor];
       if(adapter?.end) state.supportScripts![action.actor]=adapter.end(state.supportScripts![action.actor]!,supportApi(state,api,action.actor),action.id.slice(action.actor.length+1),interrupted);
       if (action.id === '115:skill') hotaru.onEntryEnd(hotaruApi(state, api));
@@ -1306,6 +1378,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
         case 'directional-finish-area':spawnWeapon(state,api,event.actor,String(event.data!.name),undefined,0,false,'boss',{x:Number(event.data!.x),z:Number(event.data!.z)});break;
         case 'shield-change': {
           const data=event.data!,id=Number(data.id),owner=String(data.owner),source=String(data.source),added=Boolean(data.added);
+          if(added)recordEvent(state,api,{kind:'shield',actor:owner.split('#')[0]!,owner,buff:id});
           const tags=Object.entries(tables.shieldDefinitions[id] ?? {}).filter(([key])=>key.startsWith('ShieldTag')).map(([,value])=>Number(value));
           for(const [actor,adapter] of Object.entries(supportAdapters)) if(adapter.shieldChanged) state.supportScripts![actor]=adapter.shieldChanged(
             state.supportScripts![actor]!,supportApi(state,api,actor),{id,owner,source,tags},added);
@@ -1319,7 +1392,9 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
               if (hitId) api.schedule({ kind: 'impact', actor: grayId, hitId }, 0);
             }
           }
+          for(const buff of Object.values(state.buffs))if(buff.expires!==null&&buff.expires<=time(state))queueRecordEvent(state,{kind:'remove',actor:buff.source.split('#')[0]!,owner:buff.owner,buff:buff.id,count:buff.stacks});
           state.buffs = expireCombatBuffs(state.buffs, time(state));
+          recordEvent(state,api,{kind:'tick',actor:main});
           const previousShields=state.shields ?? {};
           state.shields=expireCombatShields(previousShields,time(state));
           for(const [key,shield] of Object.entries(previousShields)) if(!state.shields[key]) api.schedule({kind:'shield-change',actor:shield.source,
@@ -1431,6 +1506,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
         }
         case 'support-mark-triggered': {
           const element=Number(event.data!.element),tags=String(event.data!.tags ?? '').split(',').filter(Boolean).map(Number);
+          recordEvent(state,api,{kind:'mark',actor:event.actor,element,variant:Number(event.data!.variant??1)});
           if(event.data!.own) {
             const name=({1:'water',2:'fire',3:'earth',4:'wind',5:'light',6:'dark'} as Record<number,string>)[element]!;
             if(element===5){
@@ -1500,6 +1576,7 @@ export function createExampleCombatModel(example: CombatBuildExample, tables: Ex
           }
           else if (combo.type === 2 && combo.bulletPrefab?.m_PathID !== '0') {
             const adapter=supportAdapters[event.actor];
+            recordEvent(state,api,{kind:'ammo',actor:event.actor,count:combo.reduceAmmoCount??0});
             if(adapter?.shot)state.supportScripts![event.actor]=adapter.shot(state.supportScripts![event.actor]!,supportApi(state,api,event.actor),combo.reduceAmmoCount ?? 0);
             const weapon = allWeapons.find(weapon => weapon.pathId === combo.bulletPrefab?.m_PathID);
             if (!weapon) throw new Error(`Missing combo projectile ${combo.bulletPrefab?.m_PathID}`);
