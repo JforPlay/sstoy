@@ -6,6 +6,7 @@ import { combatBuffCount } from './combat-buffs';
 import type { LiveCombatInput } from './combat-live-build';
 import { createCombatRuntime } from './combat-runtime';
 import { withNormalDodgeCancel } from './combat-normal-cancel';
+import {MAX_SEARCH_WORKERS} from './combat-search-limits';
 
 export interface CyclePolicy { hotaruHold: number; tiliaHold: number; ultimateHold: number; mainHold: number; supportsFirst: boolean; longSkillHold?:boolean;transform?:'tank'|'cannon'; normalCancelEvery?: number }
 export interface CycleCast { time: number; action: string; sp: number; requiredSp: number }
@@ -58,7 +59,7 @@ export function makeCyclePolicy(config: CyclePolicy, main: string, supports: str
  */
 export function optimizeExampleCycles(example: CombatBuildExample, tables: ExampleCombatTables, options: ExampleCombatOptions,
   progress?: (done: number, total: number) => void,partition={index:0,count:1}): CycleSearchResult {
-  if(!Number.isInteger(partition.count)||partition.count<1||partition.count>4||!Number.isInteger(partition.index)||partition.index<0||partition.index>=partition.count)throw new Error('Invalid search partition');
+  if(!Number.isInteger(partition.count)||partition.count<1||partition.count>MAX_SEARCH_WORKERS||!Number.isInteger(partition.index)||partition.index<0||partition.index>=partition.count)throw new Error('Invalid search partition');
   const profile = createExampleCombatModel(example, tables, options);
   const main = profile.scenario.actors.find(actor => actor.main)!.id;
   const supports = profile.scenario.actors.filter(actor => !actor.main).map(actor => actor.id);

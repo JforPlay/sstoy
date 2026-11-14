@@ -76,7 +76,7 @@ export function handleCycleAction(action: string, element: HTMLElement): boolean
     try { input = currentInput(); } catch (error) { ui.error = error instanceof Error ? error.message : String(error); refresh(); return true; }
     lastInputSignature = JSON.stringify(input);
     ui.busy = true; ui.done = 0; ui.total=0; ui.error = ''; ui.result = null; ui.candidate = 0; ui.technicalCount = 0;
-    searchJob=startCycleSearchPool(()=>new Worker(new URL('../combat-worker.ts',import.meta.url),{type:'module'}),searchWorkerCount(navigator.hardwareConcurrency),
+    searchJob=startCycleSearchPool(()=>new Worker(new URL('../combat-worker.ts',import.meta.url),{type:'module'}),searchWorkerCount(navigator.hardwareConcurrency,import.meta.env.DEV),
       {base:document.baseURI,input,options:{boss:ui.boss,distance:2,cinematics:ui.cinematics,searchDepth:ui.searchDepth}},
       {progress:(done,total)=>{ui.done=done;ui.total=total;refresh();},
         result:result=>{ui.result=result;ui.busy=false;searchJob=null;refresh();},

@@ -1,13 +1,26 @@
 import {describe,it,expect,vi} from 'vitest';
 import {searchWorkerCount,startCycleSearchPool} from '../core/combat-search-pool';
-function setup(){
+function setup(count=2){
   const workers:{onmessage:((event:{data:any})=>void)|null;onerror:((event:{message:string})=>void)|null;postMessage:ReturnType<typeof vi.fn>;terminate:ReturnType<typeof vi.fn>}[]=[];
   const factory=()=>{const worker={onmessage:null,onerror:null,postMessage:vi.fn(),terminate:vi.fn()};workers.push(worker);return worker as unknown as Worker;};
   const callbacks={progress:vi.fn(),result:vi.fn(),error:vi.fn()};
-  const job=startCycleSearchPool(factory,2,{input:'test'},callbacks);
+  const job=startCycleSearchPool(factory,count,{input:'test'},callbacks);
   return {workers,callbacks,job};
 }
 describe('사이클 병렬 작업 관리',()=>{
+  it('로컬은 10개 작업으로 나누고 모든 결과를 합산',()=>{
+    expect(searchWorkerCount(4,true)).toBe(10);
+    expect(searchWorkerCount(16,true)).toBe(10);
+    const {workers,callbacks}=setup(10);
+    expect(workers).toHaveLength(10);
+    workers.forEach((worker,index)=>{
+      expect(worker.postMessage).toHaveBeenCalledWith({input:'test',partition:{index,count:10}});
+      worker.onmessage!({data:{type:'result',result:{baseline:1,duration:180,switchRate:1,input:{},options:{},tested:9,candidates:[]}}});
+    });
+    expect(callbacks.result).toHaveBeenCalledTimes(1);
+    expect(callbacks.result.mock.calls[0]![0].tested).toBe(90);
+    expect(callbacks.error).not.toHaveBeenCalled();
+  });
   it('기기에 따라 두 작업 또는 네 작업을 자동 사용',()=>{
     expect(searchWorkerCount(16)).toBe(4);expect(searchWorkerCount(6)).toBe(4);
     expect(searchWorkerCount(4)).toBe(2);expect(searchWorkerCount(2)).toBe(2);

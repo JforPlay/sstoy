@@ -1,10 +1,12 @@
 import {mergeCycleSearchResults} from './combat-search-results';
 import type {CycleSearchResult} from './combat-optimizer';
-export function searchWorkerCount(cores:number):number{
+import {MAX_SEARCH_WORKERS} from './combat-search-limits';
+export function searchWorkerCount(cores:number,local=false):number{
+  if(local)return MAX_SEARCH_WORKERS;
   return Number.isFinite(cores)&&cores>=6?4:2;
 }
 export function startCycleSearchPool(factory:()=>Worker,count:number,payload:unknown,callbacks:{progress:(done:number,total:number)=>void;result:(result:CycleSearchResult)=>void;error:(message:string)=>void}):{cancel:()=>void}{
-  if(!Number.isInteger(count)||count<1||count>4)throw new Error('Invalid worker count');
+  if(!Number.isInteger(count)||count<1||count>MAX_SEARCH_WORKERS)throw new Error('Invalid worker count');
   const workers:Worker[]=[],progress=Array.from({length:count},()=>({done:0,total:0})),results:CycleSearchResult[]=[];
   let closed=false,completed=0;
   const cancel=()=>{closed=true;for(const worker of workers)worker.terminate();};
