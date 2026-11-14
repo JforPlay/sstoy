@@ -38,6 +38,11 @@
 .dmgcalc-party-copy > span { color: var(--text-muted); font-size: .75rem; }
 .dmgcalc-card-controls { display: flex; align-items: center; justify-content: space-between; gap: .3rem; font-size: .75rem; color: var(--text-secondary); }
 .dmgcalc-party-card > .dmgcalc-card-controls { border-top: 1px solid var(--border); margin-top: .9rem; padding-top: .7rem; }
+.dmgcalc-skill-levels { display: grid; gap: .45rem; margin-top: .75rem; }
+.dmgcalc-skill-levels strong { color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.dmgcalc-skill-bonus { color: var(--primary-color); font-size: .7rem; }
+.dmgcalc-skill-input { width: 3rem; min-width: 0; padding: .2rem; text-align: center; font: inherit; color: var(--text-primary); background: var(--surface-light); border: 1px solid var(--border); border-radius: 4px; }
+.dmgcalc-skill-total { margin-top: -.3rem; text-align: right; font-size: .7rem; color: var(--text-muted); }
 .dmgcalc-key-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; margin: 1rem 0 1.5rem; }
 .dmgcalc-key-stats > div { display: flex; align-items: center; justify-content: space-between; gap: .5rem; border-radius: 8px; background: var(--surface-light); padding: .8rem 1rem; }
 .dmgcalc-key-stats span { color: var(--text-secondary); font-size: .75rem; }

@@ -12,6 +12,8 @@ import { renderCharacterCard, renderDiscSummary } from '../ui/build-panel';
 import { renderNotesSection, renderPotentialArea } from '../ui/buff-panel';
 import { renderBadgePanel } from '../ui/badge-panel';
 import type { BuffSource } from '../types';
+import {partySkillLevel,setPartySkillLevel} from '../core/party-skill-levels';
+import {captureCombatInput} from '../core/combat-input';
 
 const json = (name: string) => JSON.parse(readFileSync(new URL(`../../../../public/data/${name}.json`, import.meta.url), 'utf8'));
 
@@ -29,6 +31,45 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('badge data and aggregation', () => {
+  it('edits all party skill levels, clamps base levels and sends them to the calculator',()=>{
+    GameData.characters=json('Character');
+    vi.stubGlobal('window',{GameData,state:{party:{master:{id:103},assist1:{id:115},assist2:{id:107}},skillLevels:{master:{},assist1:{},assist2:{}}}});
+    setPartySkillLevel('master','normalAtk',9);
+    setPartySkillLevel('assist1','skill',10);
+    setPartySkillLevel('assist2','ultimate',7);
+    expect(partySkillLevel('master','normalAtk')).toBe(9);
+    expect(partySkillLevel('assist1','skill')).toBe(10);
+    expect(partySkillLevel('assist2','ultimate')).toBe(7);
+    const input=captureCombatInput(getState(),window.state,{},GameData.characters);
+    expect(input.actors[0]!.skillSlots[2]).toBe(9);
+    expect(input.actors[1]!.skillSlots[4]).toBe(10);
+    expect(input.actors[2]!.skillSlots[5]).toBe(7);
+    expect(window.state.skillLevels.master[Number(GameData.characters['103']!.NormalAtkId)]).toBe(9);
+    setPartySkillLevel('assist1','skill',16);
+    expect(partySkillLevel('assist1','skill')).toBe(10);
+    setPartySkillLevel('assist2','ultimate',0);
+    expect(partySkillLevel('assist2','ultimate')).toBe(1);
+    const html=renderCharacterCard(getState());
+    expect(html.match(/class="dmgcalc-skill-input"/g)).toHaveLength(9);
+    expect(html.match(/data-action="party-skill-up"/g)).toHaveLength(9);
+  });
+  it('shows all three character skill levels and the support badge bonus in step one',()=>{
+    GameData.characters=json('Character');
+    const character=GameData.characters['115']!;
+    vi.stubGlobal('window',{GameData,state:{party:{master:{id:103},assist1:{id:115},assist2:{id:107}},skillLevels:{assist1:{[Number(character.AssistNormalAtkId)]:7,[Number(character.AssistSkillId)]:9,[Number(character.UltimateId)]:10}}}});
+    const option=Object.values(GameData.charGemAttrValue).find((row:any)=>row.AttrType===7&&row.AttrTypeFirstSubtype===3&&Number(row.Value)===3) as any;
+    expect(option).toBeTruthy();
+    getState().badgeOptions[4]![0]=option.Id;
+    const html=renderCharacterCard(getState());
+    expect(html.match(/data-skill-level=/g)).toHaveLength(9);
+    const support=html.match(/<article[^>]*data-position="assist1"[\s\S]*?<\/article>/)![0];
+    expect(support).toContain('Lv.7');
+    expect(support).toContain('Lv.12');
+    expect(support).toContain('9 + 배지 3');
+    expect(support).toContain('Lv.10');
+    const second=html.match(/<article[^>]*data-position="assist2"[\s\S]*?<\/article>/)![0];
+    expect(second.match(/Lv\.8/g)).toHaveLength(3);
+  });
   it('opens an option-type picker without changing the four equipped affixes per badge', () => {
     const html = renderBadgePanel(getState());
     expect(html.match(/data-action="badge-group-open"/g)).toHaveLength(36);

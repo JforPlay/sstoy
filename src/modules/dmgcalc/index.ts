@@ -17,6 +17,7 @@ import { PHASE_TO_LEVEL, ELEMENT_TYPE_TO_STAT } from './constants';
 
 // Core
 import { getState, resetState, updateEnemy, setLimitBreak, toggleBuff, setStats, setBuffs, setResult, setBuildInfo, setSkillLevel, setDiscLevel, setDiscLimitBreak, setNoteLevel, setStatOverride, clearStatOverride } from './core/state';
+import {partySkillLevel,setPartySkillLevel,type SkillPosition} from './core/party-skill-levels';
 import { aggregateAllStats, getStat } from './core/stats';
 import { getSkillData, aggregateSlotDmgFromEffects } from './core/skills';
 import { collectAllBuffs } from './core/buffs';
@@ -565,6 +566,15 @@ function setupEventDelegation(container: HTMLElement): void {
         break;
       }
 
+      case 'party-skill-up':
+      case 'party-skill-down': {
+        const position=actionEl.dataset.position as SkillPosition,type=actionEl.dataset.skillType as SkillType;
+        if(['master','assist1','assist2'].includes(position)&&['normalAtk','skill','ultimate'].includes(type)){
+          setPartySkillLevel(position,type,partySkillLevel(position,type)+(action==='party-skill-up'?1:-1));
+          fullRender();
+        }
+        break;
+      }
       case 'skill-level-up': {
         const st = actionEl.dataset.skillType as SkillType;
         if (st) {
@@ -674,6 +684,11 @@ function setupEventDelegation(container: HTMLElement): void {
   container.addEventListener('change', (e: Event) => {
     const target = e.target as HTMLElement;
     if (handleCycleSetting(target)) return;
+    if(target instanceof HTMLInputElement&&target.classList.contains('dmgcalc-skill-input')){
+      const position=target.dataset.position as SkillPosition,type=target.dataset.skillType as SkillType;
+      if(target.value.trim()&&['master','assist1','assist2'].includes(position)&&['normalAtk','skill','ultimate'].includes(type))setPartySkillLevel(position,type,Number(target.value));
+      fullRender();return;
+    }
     if (target instanceof HTMLInputElement && target.classList.contains('dmgcalc-note-level')) {
       const noteId = target.dataset.noteId;
       if (noteId) {
