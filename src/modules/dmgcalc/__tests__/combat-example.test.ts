@@ -26,11 +26,11 @@ describe('full example combat integration', () => {
     expect(result!.state.counts['107:ultimate']).toBeGreaterThan(0);
     expect(result!.damage).toBeGreaterThan(0);
   });
-  it('searches deliberate holds and replays the top three with legal SP', async () => {
+  it('searches expanded holds and replays the top five with legal SP', async () => {
     const tables = await loadExampleCombatTables(read);
     const result = optimizeExampleCycles(example, tables, { boss: 27, distance: 2, cinematics: true });
-    expect(result.tested).toBe(37);
-    expect(result.candidates).toHaveLength(3);
+    expect(result.tested).toBe(90);
+    expect(result.candidates).toHaveLength(5);
     expect(result.candidates[0]!.damageScore).toBeGreaterThanOrEqual(result.baseline);
     for (const candidate of result.candidates) {
       for (const cast of candidate.casts) {
@@ -39,6 +39,8 @@ describe('full example combat integration', () => {
       }
       expect(candidate.casts.filter(cast => cast.action.startsWith('115:')).length).toBeGreaterThan(0);
       expect(candidate.casts.filter(cast => cast.action.startsWith('107:')).length).toBeGreaterThan(0);
+      expect(candidate.actions.some(action=>action.automatic&&action.flag===2)).toBe(true);
+      expect(candidate.actions.every(action=>action.end>=action.time&&action.end<=180)).toBe(true);
     }
   }, 120000);
 });

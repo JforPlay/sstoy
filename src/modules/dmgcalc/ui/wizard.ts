@@ -6,6 +6,7 @@ import { renderBadgePanel } from './badge-panel';
 import { renderCyclePanel } from './cycle-panel';
 import { getEnemyPresets, hasEnemyLoadError } from '../core/enemies';
 import type { DmgCalcState } from '../types';
+import {calculatorDraftStatus} from '../core/draft';
 
 const t = (key: string) => window.i18n?.t(`dmgcalc.${key}`) || key;
 const escape = (value: string) => value.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
@@ -59,6 +60,7 @@ function renderStep(state: DmgCalcState, step: number): string {
 
 export function renderWizard(state: DmgCalcState): string {
   return `<div class="dmgcalc-container-inner dmgcalc-wizard">
+    <div class="dmgcalc-actions"><button class="btn btn-secondary" data-action="calc-draft-save"><i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> 임시 저장</button><button class="btn btn-secondary" data-action="calc-draft-restore">임시 저장 불러오기</button><span class="dmgcalc-help" role="status">${escape(calculatorDraftStatus())}</span></div>
     <div class="dmgcalc-sections" aria-label="${t('setupSteps')}">${STEPS.map((key, index) => {
       const step = index + 1;
       return `<details class="dmgcalc-section" data-calc-section="${step}" ${state.expandedSteps.includes(step) ? 'open' : ''}>

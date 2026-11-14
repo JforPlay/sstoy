@@ -52,7 +52,7 @@ export interface ExampleCombatTables extends CombatBuildTables {
   timings: { rules: Record<string, number>; characters: CharacterTimings[] };
   bossTables: Record<string, any>;
 }
-export interface ExampleCombatOptions { boss: number; distance: number; cinematics: boolean; actorLevels?: number[]; skillLevels?: number[]; randomSeed?: number }
+export interface ExampleCombatOptions { boss: number; distance: number; cinematics: boolean; actorLevels?: number[]; skillLevels?: number[]; randomSeed?: number; searchDepth?:'standard'|'deep' }
 export function createExampleCombatModel(example: CombatBuildExample, tables: ExampleCombatTables, options: ExampleCombatOptions) {
   const build = prepareCombatBuild(example, tables, options.actorLevels, options.skillLevels);
   const seinaMain=build.actors[0]?.id===162;

@@ -149,6 +149,8 @@
 .dmgcalc-cycle-lane > div { position: relative; height: 22px; border-bottom: 1px solid var(--border); background: repeating-linear-gradient(90deg, transparent 0, transparent calc(33.333% - 1px), var(--border) calc(33.333% - 1px), var(--border) 33.333%); }
 .dmgcalc-cycle-lane i { position: absolute; width: 3px; height: 12px; bottom: 0; background: var(--primary-color); }
 .dmgcalc-cycle-lane i.is-ultimate { height: 21px; background: var(--accent); }
+.dmgcalc-cycle-lane i.is-automatic { height: 5px; opacity: .5; }
+.dmgcalc-cycle-lane i.is-dodge { height: 10px; background: var(--danger-color, #e69caf); }
 .dmgcalc-cycle-scale { display: flex; justify-content: space-between; margin-left: 112px; color: var(--text-muted); font-size: .65rem; }
 .dmgcalc-cycle-table { max-height: 340px; overflow: auto; margin-top: 1rem; }
 .dmgcalc-cycle-table table { width: 100%; border-collapse: collapse; font-size: .8rem; font-variant-numeric: tabular-nums; white-space: nowrap; }

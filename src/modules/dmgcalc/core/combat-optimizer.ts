@@ -1,7 +1,7 @@
 import { createExampleCombatModel, type ExampleCombatOptions, type ExampleCombatTables } from './combat-example-model';
 import type { CombatBuildExample } from './combat-build';
 import { evaluateCombatPolicies, type CombatPolicy } from './combat-policy-search';
-import type { CombatRuntimeState } from './combat-runtime';
+import type { CombatRuntimeState,CombatActionLog } from './combat-runtime';
 import { combatBuffCount } from './combat-buffs';
 import type { LiveCombatInput } from './combat-live-build';
 import { createCombatRuntime } from './combat-runtime';
@@ -13,6 +13,8 @@ export interface CycleCandidate {
   name: string; policy: CyclePolicy; damage: number; damageScore: number; improvement: number;
   casts: CycleCast[]; counts: Record<string, number>; bossLevel: number;
   sp: CombatRuntimeState['sp']['ledger']['pools'];
+  actions:CombatActionLog[];
+  strategyIndex:number;
 }
 export interface CycleSearchResult {
   input?: LiveCombatInput;
@@ -55,7 +57,8 @@ export function makeCyclePolicy(config: CyclePolicy, main: string, supports: str
  * Every candidate is replayed for the whole 180 seconds at the client logic rate.
  */
 export function optimizeExampleCycles(example: CombatBuildExample, tables: ExampleCombatTables, options: ExampleCombatOptions,
-  progress?: (done: number, total: number) => void): CycleSearchResult {
+  progress?: (done: number, total: number) => void,partition={index:0,count:1}): CycleSearchResult {
+  if(!Number.isInteger(partition.count)||partition.count<1||partition.count>4||!Number.isInteger(partition.index)||partition.index<0||partition.index>=partition.count)throw new Error('Invalid search partition');
   const profile = createExampleCombatModel(example, tables, options);
   const main = profile.scenario.actors.find(actor => actor.main)!.id;
   const supports = profile.scenario.actors.filter(actor => !actor.main).map(actor => actor.id);
@@ -63,6 +66,17 @@ export function optimizeExampleCycles(example: CombatBuildExample, tables: Examp
   for (const hotaruHold of [0, 2, 4, 6]) for (const tiliaHold of [0, 1.5, 3]) for (const ultimateHold of [0, 2, 4]) {
     configurations.push({ hotaruHold, tiliaHold, ultimateHold, mainHold: ultimateHold ? 1 : 0, supportsFirst: true });
   }
+  // Compare both actor priorities; support order also matters for mark/buff
+  // applications on the same tick. Keep the previous 37 as a strict subset.
+  for(const config of configurations.slice(1))configurations.push({...config,supportsFirst:false});
+  for(const hotaruHold of [1,3,8])for(const tiliaHold of [0,2,6])for(const ultimateHold of [0,3])
+    configurations.push({hotaruHold,tiliaHold,ultimateHold,mainHold:2,supportsFirst:true});
+  if(options.searchDepth==='deep'){
+    for(const hotaruHold of [0,1,2,4,6,8])for(const tiliaHold of [0,1,2,3,4,6])for(const ultimateHold of [0,2,4,6])
+      for(const supportsFirst of [false,true])configurations.push({hotaruHold,tiliaHold,ultimateHold,mainHold:ultimateHold?3:0,supportsFirst});
+  }
+  const uniqueConfigs=new Set<string>();
+  for(let index=0;index<configurations.length;){const key=JSON.stringify(configurations[index]);if(uniqueConfigs.has(key))configurations.splice(index,1);else{uniqueConfigs.add(key);index++;}}
   if(profile.scenario.actions.some(action=>action.id.endsWith('-hold'))){
     for(const config of [...configurations])configurations.push({...config,longSkillHold:true});
   }
@@ -76,24 +90,26 @@ export function optimizeExampleCycles(example: CombatBuildExample, tables: Examp
     for (const config of [...configurations]) for (const every of [1, 2, 3, 4])
       configurations.push({ ...config, normalCancelEvery: every });
   }
-  const results: { config: CyclePolicy; result: ReturnType<typeof evaluateCombatPolicies<CombatRuntimeState>>[number] }[] = [];
-  const modelFor = (config: CyclePolicy) => config.normalCancelEvery
-    ? createCombatRuntime(withNormalDodgeCancel(profile.scenario, config.normalCancelEvery)) : profile.model;
-  for (const [index, config] of configurations.entries()) {
+  const results: { config: CyclePolicy; index:number; result: ReturnType<typeof evaluateCombatPolicies<CombatRuntimeState>>[number] }[] = [];
+  const modelFor = (config: CyclePolicy,recordActions=false) => createCombatRuntime({...(
+    config.normalCancelEvery?withNormalDodgeCancel(profile.scenario, config.normalCancelEvery):profile.scenario),recordActions});
+  const assigned=configurations.map((config,index)=>({config,index})).filter(row=>row.index%partition.count===partition.index);
+  progress?.(0,assigned.length);
+  for (const [completed,{index,config}] of assigned.entries()) {
     const result = evaluateCombatPolicies(modelFor(config), [makeCyclePolicy(config, main, supports)], example.durationSeconds, 60, profile.boss.switchRate, 1)[0]!;
-    results.push({ config, result });
-    progress?.(index + 1, configurations.length);
+    results.push({ config,index, result });
+    progress?.(completed + 1, assigned.length);
   }
-  const baseline = results[0]!.result.damageScore;
+  const baseline = results.find(row=>row.index===0)?.result.damageScore ?? evaluateCombatPolicies(modelFor(configurations[0]!),[makeCyclePolicy(configurations[0]!,main,supports)],example.durationSeconds,60,profile.boss.switchRate,1)[0]!.damageScore;
   const unique = new Set<string>();
   const candidates: CycleCandidate[] = [];
-  for (const entry of results.sort((a, b) => b.result.damage - a.result.damage)) {
+  for (const entry of results.sort((a, b) => b.result.damage - a.result.damage||a.index-b.index)) {
     const key = JSON.stringify([entry.result.trace, entry.result.damage]);
     if (unique.has(key)) continue;
     unique.add(key);
     // Replay the selected candidates to attach actual SP immediately before
     // each cast. This is also a second legality check, not a generated timeline.
-    const model = modelFor(entry.config);
+    const model = modelFor(entry.config,true);
     let state = model.initial();
     const casts: CycleCast[] = [];
     for (const cast of entry.result.trace) {
@@ -105,11 +121,12 @@ export function optimizeExampleCycles(example: CombatBuildExample, tables: Examp
     state = model.advance(state, example.durationSeconds).state;
     if (Math.abs(state.damage - entry.result.damage) > .01) throw new Error('Cycle replay disagrees with search');
     candidates.push({ name: entry.result.name, policy: entry.config, damage: entry.result.damage, damageScore: entry.result.damageScore,
-      improvement: entry.result.damageScore - baseline, casts, counts: state.counts, bossLevel: state.boss!.level, sp: state.sp.ledger.pools });
-    if (candidates.length === 3) break;
+      improvement: entry.result.damageScore - baseline, casts, counts: state.counts, bossLevel: state.boss!.level, sp: state.sp.ledger.pools,
+      actions:(state.actionLog??[]).map(row=>({...row,end:Math.min(row.end,example.durationSeconds)})),strategyIndex:entry.index });
+    if (candidates.length === 5) break;
   }
   const control = tables.bossTables.technical[tables.bossTables.levels[options.boss].NonDamageScoreGet];
-  return { candidates, baseline, tested: configurations.length, duration: example.durationSeconds, switchRate: profile.boss.switchRate, options, input: example.live,
+  return { candidates, baseline, tested: assigned.length, duration: example.durationSeconds, switchRate: profile.boss.switchRate, options, input: example.live,
     notes: profile.build.notes, buildRank: profile.build.rank,
     technical: { once: control.OnceScore, maximum: control.MaxLimit,
       description: String(tables.bossTables.technicalText[control.Desc] ?? control.Desc)

@@ -16,6 +16,19 @@ const scenario = (): CombatScenario => ({ fps: 60,
   },
 });
 describe('fixed-clock combat runtime', () => {
+  it('records actual interruption time and pre-spend SP without changing simulation',()=>{
+    const data=scenario();data.recordActions=true;
+    data.actions.push({...action('main-dodge','main'),flag:16,spCost:10000});
+    const model=createCombatRuntime(data);let s=model.initial();s.sp.ledger.pools.main!.value=20000;
+    const original=model.cast(s,'main-skill',0).state;
+    s=model.advance(original,.25).state;s=model.cast(s,'main-dodge',.25).state;
+    expect(s.actionLog).toMatchObject([{action:'main-skill',time:0,end:.25,interrupted:true},
+      {action:'main-dodge',time:.25,sp:2,requiredSp:1}]);
+    expect(original.actionLog![0]!.interrupted).toBe(false);
+    expect(original.actionLog).toHaveLength(1);
+    const disabled=createCombatRuntime({...data,recordActions:false});
+    expect(disabled.cast(disabled.initial(),'main-skill',0).state.actionLog).toBeUndefined();
+  });
   it('checks the actual skill ID for a CertainSkillId interruption window',()=>{
     const data=scenario();
     data.actions[0]={...data.actions[0]!,combo:{...combo,phases:[{time:0,execute:64,break:64,executeSkills:[42],breakSkills:[42]}]}};

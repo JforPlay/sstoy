@@ -41,7 +41,9 @@ export interface RuntimeEvent {
   featureFlags?: number;
 }
 interface ActorMotion { action: string; token: number; started: number; ends: number; combo: CompiledCombo }
+export interface CombatActionLog {time:number;end:number;actor:string;action:string;automatic:boolean;flag:number;interrupted:boolean;sp:number;requiredSp:number}
 export interface CombatRuntimeState {
+  actionLog?:CombatActionLog[];
   tick: number; sequence: number; token: number; sp: CombatHitSpState;
   motions: Record<string, ActorMotion>; ready: Record<string, number>;
   /** Remaining logic ticks, independent of the wall clock while recovery is
@@ -103,6 +105,7 @@ export interface CombatRuntimeApi {
   interrupt(actor:string):void;
 }
 export interface CombatScenario {
+  recordActions?:boolean;
   fps: number;
   actors: CombatActorSpec[];
   actions: CombatAction[];
@@ -318,6 +321,10 @@ export function createCombatRuntime(scenario: CombatScenario): RotationModel<Com
   const endMotion = (state: CombatRuntimeState, actor: string, interrupted: boolean) => {
     const motion = state.motions[actor];
     if (!motion) return;
+    if(state.actionLog){
+      const index=state.actionLog.map(row=>row.actor===actor).lastIndexOf(true);
+      state.actionLog=state.actionLog.map((row,i)=>i===index?{...row,end:state.tick/scenario.fps,interrupted}:row);
+    }
     const action = actions.get(motion.action)!;
     delete state.motions[actor];
     const key=action.cooldownKey ?? action.id,charge=state.chargeRecovery?.[key];
@@ -328,6 +335,7 @@ export function createCombatRuntime(scenario: CombatScenario): RotationModel<Com
     scenario.onActionEnd?.(state, action, interrupted, apiFor(state));
   };
   const begin = (state: CombatRuntimeState, action: CombatAction,interruptMotion=false) => {
+    const beforeSp=state.sp.ledger.pools[action.actor]!.value;
     if (!allowed(state, action,interruptMotion)) throw new Error(`Illegal action ${action.id} at ${state.tick / scenario.fps}s`);
     endMotion(state, action.actor, true);
     const token = ++state.token;
@@ -352,6 +360,8 @@ export function createCombatRuntime(scenario: CombatScenario): RotationModel<Com
     const api = apiFor(state);
     scenario.onCast?.(state, action, api);
     const combo = scenario.comboFor?.(state, action,api) ?? action.combo;
+    if(scenario.recordActions)state.actionLog=[...(state.actionLog??[]),{time:state.tick/scenario.fps,end:state.tick/scenario.fps+combo.duration,
+      actor:action.actor,action:action.id,automatic:Boolean(action.automatic),flag:action.flag,interrupted:false,sp:beforeSp/10000,requiredSp:action.spCost/10000}];
     state.motions[action.actor] = { action: action.id, token, started: state.tick, ends: state.tick + ticks(combo.duration), combo };
     for (const event of combo.events) {
       api.schedule({ kind: 'combo', actor: action.actor, action: action.id, token,
@@ -374,6 +384,12 @@ export function createCombatRuntime(scenario: CombatScenario): RotationModel<Com
       if (event.kind === 'action-end') {
         const action=actions.get(event.action!)!,next=scenario.continuation?.(state,action,apiFor(state));
         if(next){
+          if(state.actionLog){
+            const index=state.actionLog.map(row=>row.actor===event.actor).lastIndexOf(true);
+            state.actionLog=state.actionLog.map((row,i)=>i===index?{...row,end:state.tick/scenario.fps}:row);
+            state.actionLog=[...state.actionLog,{time:state.tick/scenario.fps,end:state.tick/scenario.fps+next.duration,
+              actor:action.actor,action:`${action.id}:continuation`,automatic:true,flag:action.flag,interrupted:false,sp:state.sp.ledger.pools[action.actor]!.value/10000,requiredSp:0}];
+          }
           // A native chained combo is still the same skill invocation: no
           // additional SP, charge, cast proc or cooldown restart.
           const token=++state.token,api=apiFor(state);

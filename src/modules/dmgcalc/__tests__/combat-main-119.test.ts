@@ -6,15 +6,27 @@ import {mockApi,profile,tables,fixture} from './combat-four-helpers';
 import {createCombatRuntime} from '../core/combat-runtime';
 import {withNormalDodgeCancel} from '../core/combat-normal-cancel';
 import {optimizeExampleCycles} from '../core/combat-optimizer';
+import {mergeCycleSearchResults} from '../core/combat-search-results';
 describe('나노하 메인 원본 실행',()=>{
+  it('정밀 탐색은 확장 탐색보다 더 많은 대기 조합을 비교',()=>{
+    const live={actors:[119,157,142].map(id=>({id,level:90,ascension:8,limitBreak:0,potentials:{},skillSlots:{1:8,2:8,4:8,5:8}})),
+      records:fixture.records,notes:{},badgeOptions:Array.from({length:9},()=>[0,0,0,0])};
+    const result=optimizeExampleCycles({...fixture,durationSeconds:.25,live},tables,{boss:29,distance:2,cinematics:false,searchDepth:'deep'});
+    expect(result.tested).toBeGreaterThan(450);
+    expect(result.candidates[0]!.actions.length).toBeGreaterThan(0);
+  },30000);
   it('계산기 탐색에서 일반 운용과 캔슬 후보를 비교하고 상위 후보를 재실행',()=>{
     const live={actors:[119,157,142].map(id=>({id,level:90,ascension:8,limitBreak:0,potentials:{},skillSlots:{1:8,2:8,4:8,5:8}})),
       records:fixture.records,notes:{},badgeOptions:Array.from({length:9},()=>[0,0,0,0])};
     const result=optimizeExampleCycles({...fixture,durationSeconds:3,live},tables,{boss:29,distance:2,cinematics:false});
-    expect(result.tested).toBe(185);
+    expect(result.tested).toBe(450);
     expect(result.candidates.length).toBeGreaterThan(0);
     expect(result.candidates[0]!.damageScore).toBeGreaterThanOrEqual(result.baseline);
     expect(result.candidates.every(candidate=>Number.isFinite(candidate.damage))).toBe(true);
+    const parallel=mergeCycleSearchResults([0,1,2,3].map(index=>optimizeExampleCycles({...fixture,durationSeconds:3,live},tables,{boss:29,distance:2,cinematics:false},undefined,{index,count:4})));
+    expect(parallel.tested).toBe(result.tested);
+    expect(parallel.baseline).toBe(result.baseline);
+    expect(parallel.candidates).toEqual(result.candidates);
   },30000);
   it('원본 콤보로 회피 캔슬 후보를 실행하고 같은 입력을 재현',()=>{
     const p=profile(119,'main',{});

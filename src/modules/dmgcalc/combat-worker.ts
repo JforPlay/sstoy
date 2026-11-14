@@ -5,7 +5,7 @@ import type { ExampleCombatOptions } from './core/combat-example-model';
 import type { LiveCombatInput } from './core/combat-live-build';
 import type { CombatBuildExample } from './core/combat-build';
 
-self.onmessage = async (event: MessageEvent<{ base: string; options: ExampleCombatOptions; input: LiveCombatInput }>) => {
+self.onmessage = async (event: MessageEvent<{ base: string; options: ExampleCombatOptions; input: LiveCombatInput;partition?:{index:number;count:number} }>) => {
   try {
     const read = async (path: string) => {
       const response = await fetch(new URL(assetURL(path), event.data.base));
@@ -19,7 +19,7 @@ self.onmessage = async (event: MessageEvent<{ base: string; options: ExampleComb
       badgeOptions: input.badgeOptions, characters: input.actors.map(actor => ({ id: actor.id, limitBreak: actor.limitBreak })),
       records: input.records, concertos: [], live: input };
     const result = optimizeExampleCycles(example, tables, event.data.options,
-      (done, total) => self.postMessage({ type: 'progress', done, total }));
+      (done, total) => self.postMessage({ type: 'progress', done, total }),event.data.partition);
     self.postMessage({ type: 'result', result });
   } catch (error) {
     self.postMessage({ type: 'error', message: error instanceof Error ? error.message : String(error) });

@@ -467,7 +467,7 @@ function collectNotesData(): NotesBuildData | null {
   };
 }
 
-function collectBuildData(): BuildData {
+export function collectBuildData(): BuildData {
   return {
     v: '1.0',
     t: Date.now(),
@@ -776,7 +776,7 @@ async function applyIngameCodePayload(payload: IngameCodePayload): Promise<void>
   });
 }
 
-async function restoreBuildData(
+export async function restoreBuildData(
   data: BuildData | undefined,
   options?: { toastKey?: string; toastFallback?: string }
 ): Promise<void> {

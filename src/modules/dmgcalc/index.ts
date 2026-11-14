@@ -29,6 +29,9 @@ import { loadEnemyPresets, selectEnemyPreset } from './core/enemies';
 import { renderDmgCalc } from './ui/renderer';
 import { handleCycleAction, handleCycleSetting } from './ui/cycle-panel';
 import { openBadgeOptionPicker } from './ui/badge-panel';
+import {collectBuildData,restoreBuildData} from '../app-saveload';
+import {saveCalculatorDraft,readCalculatorDraft,applyCalculatorDraft,type CalculatorDraft} from './core/draft';
+import {showToast} from '@/shared';
 
 // Types
 import type { SkillType, SkillDamageResult, HitResult, EnemyConfig, DiscSlotId } from './types';
@@ -43,6 +46,28 @@ let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 let dataLoaded = false;
 let lastBuildSignature = '';
 let lastNoteSourceSignature = '';
+let draftChecked=false;
+let restoringDraft=false;
+let pendingDraft:CalculatorDraft|null=null;
+const readDraft=()=>{try{return readCalculatorDraft(localStorage);}catch{return null;}};
+
+function saveDraft(notify=false):void{
+  if(restoringDraft)return;
+  if(!getState().masterCharId){if(notify)showToast('먼저 메인 여행가를 선택해 주세요.','error');return;}
+  const master=window.state?.party?.master;
+  if(!master||typeof master==='string'||Number(master.id)!==getState().masterCharId)return;
+  try{saveCalculatorDraft(localStorage,getState(),collectBuildData(),{...window.state.characterLevelPhase});if(notify)showToast('계산기 설정을 임시 저장했습니다.','success');}
+  catch{if(notify)showToast('임시 저장에 실패했습니다. 브라우저 저장 공간을 확인해 주세요.','error');}
+}
+async function restoreDraft(draft:CalculatorDraft):Promise<void>{
+  restoringDraft=true;
+  try{
+    await restoreBuildData(draft.build,{toastFallback:'계산기 임시 저장을 불러왔습니다.'});
+    Object.assign(window.state.characterLevelPhase,draft.phases);
+    resetState();lastBuildSignature='';lastNoteSourceSignature='';pendingDraft=draft;
+  }catch{showToast('임시 저장을 불러오지 못했습니다. 저장 데이터와 여행가 설정을 확인해 주세요.','error');
+  }finally{restoringDraft=false;}
+}
 
 const SKILL_TYPES: SkillType[] = ['normalAtk', 'skill', 'ultimate'];
 
@@ -60,6 +85,7 @@ export function init(): void {
  * Called when switching to the dmgcalc tab or when the build changes.
  */
 export async function render(): Promise<void> {
+  if(restoringDraft)return;
   const container = document.getElementById('dmgcalc-container');
   if (!container) return;
 
@@ -72,6 +98,14 @@ export async function render(): Promise<void> {
       await loadLanguageData(langInfo.gameLang, ['UIText.json']);
     }
     dataLoaded = true;
+  }
+  if(!draftChecked){
+    draftChecked=true;
+    const draft=readDraft();
+    const master=window.state?.party?.master;
+    if(draft&&(!master||typeof master==='string'))await restoreDraft(draft);
+    else if(draft&&JSON.stringify(collectBuildData().c)===JSON.stringify(draft.build.c))pendingDraft=draft;
+    window.addEventListener('pagehide',()=>saveDraft());
   }
 
   if (!eventsAttached) {
@@ -156,6 +190,7 @@ export async function render(): Promise<void> {
 
   // Initialize potential level overrides from window.state
   initializePotentialLevelOverrides();
+  if(pendingDraft){applyCalculatorDraft(getState(),pendingDraft);pendingDraft=null;}
 
   // Full aggregation
   fullRecalculate(charId, level);
@@ -244,6 +279,7 @@ function quickRender(): void {
   if (!container) return;
 
   lightRecalculate();
+  saveDraft();
   container.innerHTML = renderDmgCalc(getState());
 }
 
@@ -256,6 +292,7 @@ function fullRender(): void {
 
   const state = getState();
   if (state.masterCharId) fullRecalculate(state.masterCharId, state.masterLevel);
+  saveDraft();
   container.innerHTML = renderDmgCalc(getState());
 }
 
@@ -462,6 +499,13 @@ function setupEventDelegation(container: HTMLElement): void {
     if (action && handleCycleAction(action, actionEl)) return;
 
     switch (action) {
+      case 'calc-draft-save':saveDraft(true);quickRender();break;
+      case 'calc-draft-restore': {
+        const draft=readDraft();
+        if(draft)void restoreDraft(draft).then(()=>render());
+        else showToast('불러올 임시 저장이 없습니다.','error');
+        break;
+      }
       case 'badge-group-open':
         openBadgeOptionPicker(Number(actionEl.dataset.slot), Number(actionEl.dataset.index), id => {
           if (setBadgeOption(Number(actionEl.dataset.slot), Number(actionEl.dataset.index), id)) fullRender();
